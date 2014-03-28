@@ -40,7 +40,10 @@ Depois, execute o seguinte comando:
 	editor-texto-preferido ~/.bashrc
 
 E adicione o seguinte trecho no final do arquivo e o salve:
-	[[ -s "usr/local/rvm/scripts/rvm" ]] && . "usr/local/rvm/scripts/rvm" 
+
+```bash
+[[ -s "usr/local/rvm/scripts/rvm" ]] && . "usr/local/rvm/scripts/rvm"
+```
 
 Agora, *sempre que você for usar o RVM*, você ŕecisa permitir que o RVM use o Shell
 no modo login:
