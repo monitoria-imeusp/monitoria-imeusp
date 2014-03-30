@@ -45,7 +45,7 @@ E adicione o seguinte trecho no final do arquivo e o salve:
 [[ -s "usr/local/rvm/scripts/rvm" ]] && . "usr/local/rvm/scripts/rvm"
 ```
 
-Agora, *sempre que você for usar o RVM*, você ŕecisa permitir que o RVM use o Shell
+Agora, *sempre que você for usar o RVM*, você precisa permitir que o RVM use o Shell
 no modo login:
 
 ```bash
@@ -68,13 +68,7 @@ Faça log out e depois faça login novamente para as alterações acima terem ef
 
 ### Adicionando uma instalação do ruby ao RVM
 
-Primeiramente, lembre de permitir que o rvm possa usar o shell no modo login:
-
-```bash
-/bin/bash --login
-```
-
-E então:
+Primeiramente, instale o ruby (versão 2.1.1):
 
 ```bash
 rvm install ruby
