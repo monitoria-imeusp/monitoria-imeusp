@@ -63,6 +63,9 @@ group :cucumber do
   gem 'poltergeist', '~> 1.5.0'
 end
 
+# Use devise for login sessions
+gem 'devise'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 
