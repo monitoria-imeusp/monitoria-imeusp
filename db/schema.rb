@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140402184007) do
+ActiveRecord::Schema.define(version: 20140404184217) do
 
   create_table "admins", force: true do |t|
     t.string   "email",                  default: "", null: false
@@ -30,5 +30,15 @@ ActiveRecord::Schema.define(version: 20140402184007) do
 
   add_index "admins", ["email"], name: "index_admins_on_email", unique: true
   add_index "admins", ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true
+
+  create_table "professors", force: true do |t|
+    t.string   "name"
+    t.string   "password"
+    t.string   "nusp"
+    t.string   "department"
+    t.string   "email"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
 end
