@@ -1,3 +1,4 @@
 log/development.log
 *~
 tmp
+*.sublime-workspace
