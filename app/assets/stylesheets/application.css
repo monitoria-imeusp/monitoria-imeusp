@@ -24,9 +24,8 @@ div.shell {
 }
 
 div.content {
-  width: 85%;
-  margin: auto;
-  padding: 1em 2em;
+  width: 90%;
+  padding: 1em 0em;
   min-height: 400px;
 }
 
@@ -34,4 +33,13 @@ h1.pagetop {
   padding: 0.5em 1em;
   border-bottom: 2px solid #b55;
   border-top: 2px solid #b55;
+}
+
+h2 {
+  margin-left: 2em;
+}
+
+p {
+  margin-left: 4em;
+  font-size: 18px;
 }
