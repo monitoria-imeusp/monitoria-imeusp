@@ -1,11 +1,16 @@
 class ProfessorsController < ApplicationController
     def new
+        @professor = Professor.new
     end
 
     def create
         @professor = Professor.new(professor_params)
-        @professor.save
-        redirect_to @professor
+        
+        if @professor.save
+            redirect_to @professor
+        else
+            render 'new'
+        end
     end
 
     def show
@@ -14,6 +19,20 @@ class ProfessorsController < ApplicationController
 
     def index
         @professors = Professor.all
+    end
+
+    def edit
+        @professor = Professor.find(params[:id])
+    end
+
+    def update
+        @professor = Professor.find(params[:id])
+
+        if @professor.update(params[:professor].permit(:name, :nusp, :department, :password, :email))
+            redirect_to @professor
+        else
+            render 'edit'
+        end
     end
 
     private

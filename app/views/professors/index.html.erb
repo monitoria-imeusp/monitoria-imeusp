@@ -16,6 +16,8 @@
             <td><%= professor.email %></td>
             <td><%= professor.department %></td>
             <td><%= professor.password %></td>
+            <td><%= link_to 'Show', professor %></td>
+            <td><%= link_to 'Edit', edit_professor_path(professor) %></td>
         </tr>
     <% end %>
 </table>
