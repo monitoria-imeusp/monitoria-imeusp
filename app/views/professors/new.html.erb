@@ -1,0 +1,35 @@
+<%= form_for :professor, url: professors_path do |f| %>
+  <p>
+    <%= f.label :name, "Nome" %><br>
+    <%= f.text_field :name %>
+  </p>
+ 
+  <p>
+    <%= f.label :nusp, "Número USP" %><br>
+    <%= f.text_field :nusp %>
+  </p>
+ 
+  <p>
+    <%= f.label :department, "Departamento" %><br>
+    <%= f.select :department, [["MAC", "mac"], ["MAE", "mae"], ["MAP", "map"], ["MAT", "mat"]] %>
+  </p>
+ 
+  <p>
+    <%= f.label :password , "Senha" %><br>
+    <%= f.password_field :password %>
+  </p>
+ 
+  <p>
+    <%= f.label :password_confirmation , "Confirme a senha" %><br>
+    <%= f.password_field :password_confirmation %>
+  </p>
+
+  <p>
+    <%= f.label :email, "Email" %><br>
+    <%= f.email_field :email %>
+  </p>
+ 
+  <p>
+    <%= f.submit "Cadastrar" %>
+  </p>
+<% end %>

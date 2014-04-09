@@ -1,4 +1,7 @@
 log/development.log
 *~
-tmp
+tmp/*
+*.swp
+coverage/*
+log/*
 *.sublime-workspace
