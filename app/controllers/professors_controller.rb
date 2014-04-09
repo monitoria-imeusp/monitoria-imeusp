@@ -1,4 +1,6 @@
 class ProfessorsController < ApplicationController
+    before_action :authenticate_admin!, :except => [:show, :index]
+
     def new
         @professor = Professor.new
     end
