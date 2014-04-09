@@ -1,25 +1,30 @@
 <p>
-  <strong>Nome:</strong>
-  <%= @professor.name %>
+  	<strong>Nome:</strong>
+  	<%= @professor.name %>
 </p>
  
 <p>
-  <strong>Nusp:</strong>
-  <%= @professor.nusp %>
+  	<strong>Nusp:</strong>
+  	<%= @professor.nusp %>
 </p>
 
 <p>
-  <strong>Email:</strong>
-  <%= @professor.email %>
+  	<strong>Email:</strong>
+  	<%= @professor.email %>
 </p>
  
 <p>
-  <strong>Departamento:</strong>
-  <%= @professor.department %>
+  	<strong>Departamento:</strong>
+  	<%= @professor.department %>
 </p>
  
-<p>
-<strong>Password:</strong>
-  <%= @professor.password %>
-</p>
- 
+<% if admin_signed_in? %>
+	<p>
+		<strong>Senha NÃO-ENCRIPTADA:</strong>
+  		<%= @professor.password %>
+	</p>
+
+	<p>
+		<%= link_to 'Editar', edit_professor_path(@professor) %>
+	</p>
+<% end %>

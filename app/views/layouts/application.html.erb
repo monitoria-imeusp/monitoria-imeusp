@@ -27,7 +27,9 @@
     <div class="shell">
       <h1 class="pagetop">Sistema de monitoria</h1>
       <span>
+        <%= link_to "Lista de Professores", professors_path %>
         <% if admin_signed_in? %>
+          <%= link_to "Novo Professor", new_professor_path %>
           <%= current_admin.email %> (<%= link_to "Logout", destroy_admin_session_path, method: :delete %>)
         <% else %>
           <%= link_to "Login", new_admin_session_path %>
