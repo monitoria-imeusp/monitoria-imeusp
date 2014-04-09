@@ -10,8 +10,28 @@
  * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
  * file per style scope.
  *
- *= boilerplate/main.css 
+ *= boilerplate/main.css
  *= boilerplate/normalize.css
  *= require_tree .
  *= require_self
  */
+
+div.shell {
+  margin: auto;
+  width: 800px;
+  min-height: 600px;
+  padding: 0.1em;
+}
+
+div.content {
+  width: 85%;
+  margin: auto;
+  padding: 1em 2em;
+  min-height: 400px;
+}
+
+h1.pagetop {
+  padding: 0.5em 1em;
+  border-bottom: 2px solid #b55;
+  border-top: 2px solid #b55;
+}

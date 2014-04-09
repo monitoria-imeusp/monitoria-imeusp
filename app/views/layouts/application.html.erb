@@ -23,7 +23,20 @@
 
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>
-    <%= yield %>
+
+    <div class="shell">
+      <h1 class="pagetop">Sistema de monitoria</h1>
+      <span>
+        <% if admin_signed_in? %>
+          <%= current_admin.email %> (<%= link_to "Logout", destroy_admin_session_path, method: :delete %>)
+        <% else %>
+          <%= link_to "Login", new_admin_session_path %>
+        <% end %>
+      </span>
+      <div class="content">
+        <%= yield %>
+      </div>
+    <div>
 
   </body>
 </html>
