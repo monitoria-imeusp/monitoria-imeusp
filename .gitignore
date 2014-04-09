@@ -1,2 +1,6 @@
 log/development.log
 *~
+tmp/*
+*.swp
+coverage/*
+log/*
