@@ -31,8 +31,11 @@
         <% if admin_signed_in? %>
           <%= link_to "Novo Professor", new_professor_path %>
           <%= current_admin.email %> (<%= link_to "Logout", destroy_admin_session_path, method: :delete %>)
+        <% elsif professor_signed_in? %>
+          <%= current_professor.email %> (<%= link_to "Logout", destroy_professor_session_path, method: :delete %>)
         <% else %>
-          <%= link_to "Login", new_admin_session_path %>
+          <%= link_to "Login Professor", new_professor_session_path %>
+          <%= link_to "Admin Login", new_admin_session_path %>
         <% end %>
       </span>
       <div class="content">
