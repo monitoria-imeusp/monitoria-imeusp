@@ -9,7 +9,7 @@ Feature: Forgot the password
         When I click the "Forgot your password?" link
         And I fill the "Email" field with "kazuo@ime.usp.br"
         And I press the "Send me reset password instructions" button
-        Then I should see "You will receive an email with instructions on how to reset your password in a few minutes."
+        Then I should see "Dentro de minutos, você receberá um email com as instruções de reinicialização da sua senha."
     
     Scenario: Clicking forgot password with wrong email
         Given I'm at the login page
@@ -17,8 +17,8 @@ Feature: Forgot the password
         When I click the "Forgot your password?" link
         And I fill the "Email" field with "kazuo233@ime.usp.br"
         And I press the "Send me reset password instructions" button
-        Then I should see "1 error prohibited this admin from being saved:"
-        And I should see "Email not found"
+        Then I should see "Não foi possível salvar admin: 1 erro"
+        And I should see "Email não encontrado"
     
     Scenario: Clicking forgot password with empty email
         Given I'm at the login page
@@ -26,5 +26,5 @@ Feature: Forgot the password
         When I click the "Forgot your password?" link
         And I fill the "Email" field with ""
         And I press the "Send me reset password instructions" button
-        Then I should see "1 error prohibited this admin from being saved:"
-        And I should see "Email can't be blank"
+        Then I should see "Não foi possível salvar admin: 1 erro"
+        And I should see "Email translation missing: pt-BR.activerecord.errors.models.admin.attributes.email.blank"

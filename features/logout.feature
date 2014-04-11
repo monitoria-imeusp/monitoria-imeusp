@@ -10,4 +10,4 @@ Feature: Logout
         And I fill the "Password" field with "admin123"
         And I press the "Sign in" button
         And I click the "Logout" link
-        Then I should see "Signed out successfully."
+        Then I should see "Logout efetuado com sucesso."

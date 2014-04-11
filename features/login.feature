@@ -9,7 +9,7 @@ Feature: Login
         When I fill the "Email" field with "kazuo@ime.usp.br"
         And I fill the "Password" field with "admin123"
         And I press the "Sign in" button
-        Then I should see "Signed in successfully."
+        Then I should see "Login efetuado com sucesso."
 
     Scenario: After exitting the page and entering it again
         Given I'm at the login page
