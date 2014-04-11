@@ -5,7 +5,6 @@ class ProfessorsController < ApplicationController
 
     def create
         @professor = Professor.new(professor_params)
-        
         if @professor.save
             redirect_to @professor
         else
@@ -14,7 +13,11 @@ class ProfessorsController < ApplicationController
     end
 
     def show
-        @professor = Professor.find(params[:id])
+        if Professor.exists?(params[:id])
+            @professor = Professor.find(params[:id])
+        else
+            redirect_to professors_path
+        end
     end
 
     def index
@@ -22,13 +25,21 @@ class ProfessorsController < ApplicationController
     end
 
     def edit
-        @professor = Professor.find(params[:id])
+        if Professor.exists?(params[:id])
+            @professor = Professor.find(params[:id])
+        else
+            redirect_to professors_path
+        end
     end
 
     def update
+        if not Professor.exists? params[:id]
+            # TODO alert failure
+            redirect_to professors_path
+            return
+        end
         @professor = Professor.find(params[:id])
-
-        if @professor.update(params[:professor].permit(:name, :nusp, :department, :password, :email))
+        if @professor.update(professor_params)
             redirect_to @professor
         else
             render 'edit'
