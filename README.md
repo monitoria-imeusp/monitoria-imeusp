@@ -87,7 +87,22 @@ Certifique-se que está tudo certo com o comando:
 ruby -v
 ```
 
-### Coisas antigas do README
+## Configurando o servidor
+
+Inicializar o banco de dados:
+
+```bash
+rake db:setup
+```
+
+E para os testes:
+
+```bash
+rake db:migrate RAILS_ENV=test
+rspec
+```
+
+## Coisas antigas do README
 
 Deixei aqui algumas informações do Jack que não precisei usar, mas podem vir a ser relevantes.
 
