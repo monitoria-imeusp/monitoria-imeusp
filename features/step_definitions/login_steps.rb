@@ -6,7 +6,6 @@ Given(/^There is an admin user with email "(.*?)" and password "(.*?)"$/) do |em
       Admin.create(email: email, password: password)
 end
 
-
 When(/^I fill the "(.*?)" field with "(.*?)"$/) do |field_name, value|
      fill_in field_name, :with => value
 end
