@@ -16,6 +16,9 @@ When(/^I press the "(.*?)" button$/) do |button_name|
 end
 
 Then(/^I should see "(.*?)"$/) do |text|
-     page.save_screenshot("/tmp/picture.png")
      page.should have_text(text)
+end
+
+When(/^I click the "(.*?)" link$/) do |link|
+    click_link(link)
 end

@@ -3,7 +3,6 @@ Feature: Invalid login
     As an administrator
     I want to fail the login
 
-    @javascript
     Scenario: Invalid email
         Given I'm at the login page
         And There is an admin user with email "kazuo@ime.usp.br" and password "admin123"
@@ -12,11 +11,10 @@ Feature: Invalid login
         And I press the "Sign in" button
         Then I should see "Invalid email or password."
     
-    @javascript
-    Scenario: Not email
+    Scenario: Invalid Password
         Given I'm at the login page
         And There is an admin user with email "kazuo@ime.usp.br" and password "admin123"
-        When I fill the "Email" field with "kazuoime.br"
-        And I fill the "Password" field with "admin123"
+        When I fill the "Email" field with "kazuo@ime.usp.br"
+        And I fill the "Password" field with "admin1234"
         And I press the "Sign in" button
-        Then I should see "Please enter an email address."
+        Then I should see "Invalid email or password."
