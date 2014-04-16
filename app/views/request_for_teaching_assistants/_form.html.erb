@@ -1,0 +1,45 @@
+<%= form_for(@request_for_teaching_assistant) do |f| %>
+  <% if @request_for_teaching_assistant.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@request_for_teaching_assistant.errors.count, "error") %> prohibited this request_for_teaching_assistant from being saved:</h2>
+
+      <ul>
+      <% @request_for_teaching_assistant.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :professor_id, 'Professor' %><br>
+    <%= f.number_field :professor_id %>
+  </div>
+  <div class="field">
+    <%= f.label :subject, 'Disciplina' %><br>
+    <%= f.text_field :subject %>
+  </div>
+  <div class="field">
+    <%= f.label :requestedNumber, 'Número de monitores solicitados' %><br>
+    <%= f.number_field :requestedNumber %>
+  </div>
+  <div class="field">
+    <%= f.label :priority, 'Prioridade' %><br>
+    <%= f.number_field :priority %>
+  </div>
+  <div class="field">
+    <%= f.label :student_assistance, 'Atendimento aos alunos' %><br>
+    <%= f.check_box :student_assistance %>
+  </div>
+  <div class="field">
+    <%= f.label :work_correction, 'Correção de trabalhos' %><br>
+    <%= f.check_box :work_correction %>
+  </div>
+  <div class="field">
+    <%= f.label :test_oversight, 'Fiscalização de provas' %><br>
+    <%= f.check_box :test_oversight %>
+  </div>
+  <div class="actions">
+    <%= f.submit 'Enviar solicitação de monitor' %>
+  </div>
+<% end %>

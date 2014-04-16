@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :request_for_teaching_assistants
+
   get 'home/index'
 
   devise_for :admins

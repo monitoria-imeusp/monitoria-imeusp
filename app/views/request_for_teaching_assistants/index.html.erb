@@ -1,0 +1,37 @@
+<h1>Pedidos de monitor</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Professor</th>
+      <th>Discilpina</th>
+      <th>Número de monitores solicitados</th>
+      <th>Prioridade</th>
+      <th>Atendimento aos alunos</th>
+      <th>Correção de trabalhos</th>
+      <th>Fiscalização de provas</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @request_for_teaching_assistants.each do |request_for_teaching_assistant| %>
+      <tr>
+        <td><%= request_for_teaching_assistant.professor_id %></td>
+        <td><%= request_for_teaching_assistant.subject %></td>
+        <td><%= request_for_teaching_assistant.requestedNumber %></td>
+        <td><%= request_for_teaching_assistant.priority %></td>
+        <td><%= request_for_teaching_assistant.student_assistance %></td>
+        <td><%= request_for_teaching_assistant.work_correction %></td>
+        <td><%= request_for_teaching_assistant.test_oversight %></td>
+        <td><%= link_to 'Ver', request_for_teaching_assistant %></td>
+        <td><%= link_to 'Modificar', edit_request_for_teaching_assistant_path(request_for_teaching_assistant) %></td>
+        <td><%= link_to 'Remover', request_for_teaching_assistant, method: :delete, data: { confirm: 'Você tem certeza?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'Novo pedido de monitor', new_request_for_teaching_assistant_path %>
