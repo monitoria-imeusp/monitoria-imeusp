@@ -41,3 +41,11 @@ end
 Then(/^I should not see "(.*?)"$/) do |text|
      page.should_not have_text(text)
 end
+
+Given(/^I'm at the professor login page$/) do
+  visit new_professor_session_path
+end
+
+Given(/^There is a professor with name "(.*?)" and password "(.*?)" nusp "(.*?)" department "(.*?)" and email "(.*?)"$/) do |name, password, nusp, department, email|
+  Professor.create(name: name , password: password, nusp: nusp, department: department, email: email)
+end
