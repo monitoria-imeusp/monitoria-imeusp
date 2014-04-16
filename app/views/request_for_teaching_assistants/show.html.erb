@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Professor:</strong>
+  <%= @request_for_teaching_assistant.professor_id %>
+</p>
+
+<p>
+  <strong>Disciplina:</strong>
+  <%= @request_for_teaching_assistant.subject %>
+</p>
+
+<p>
+  <strong>Número de monitores solicitados:</strong>
+  <%= @request_for_teaching_assistant.requestedNumber %>
+</p>
+
+<p>
+  <strong>Prioridade:</strong>
+  <%= @request_for_teaching_assistant.priority %>
+</p>
+
+<p>
+  <strong>Atendimento aos alunos:</strong>
+  <%= @request_for_teaching_assistant.student_assistance %>
+</p>
+
+<p>
+  <strong>Correção de trabalhos:</strong>
+  <%= @request_for_teaching_assistant.work_correction %>
+</p>
+
+<p>
+  <strong>Fiscalização de provas:</strong>
+  <%= @request_for_teaching_assistant.test_oversight %>
+</p>
+
+<%= link_to 'Modificar', edit_request_for_teaching_assistant_path(@request_for_teaching_assistant) %> |
+<%= link_to 'Voltar', request_for_teaching_assistants_path %>
