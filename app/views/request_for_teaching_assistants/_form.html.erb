@@ -25,7 +25,11 @@
   </div>
   <div class="field">
     <%= f.label :priority, 'Prioridade' %><br>
-    <%= f.number_field :priority %>
+    <% priorityOptions.each do | option | %>
+      <%= f.radio_button :priority, option[1] %>
+      <%= f.label option[0] %>
+      </br>
+    <% end %>
   </div>
   <div class="field">
     <%= f.label :student_assistance, 'Atendimento aos alunos' %><br>
