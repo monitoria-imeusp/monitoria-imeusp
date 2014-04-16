@@ -6,9 +6,6 @@
         <th>Nº USP</th>
         <th>E-Mail</th>
         <th>Departamento</th>
-        <% if admin_signed_in? %>
-            <th>Senha</th>
-        <% end %>
     </tr>
 
     <% @professors.each do |professor| %>
@@ -18,7 +15,6 @@
             <td><%= professor.email %></td>
             <td><%= professor.department %></td>
             <% if admin_signed_in? %>
-                <td><%= professor.password %></td>
                 <td><%= link_to 'Editar', edit_professor_path(professor) %></td>
             <% end %>
             <td><%= link_to 'Visualizar', professor %></td>
