@@ -1,5 +1,6 @@
 class RequestForTeachingAssistantsController < ApplicationController
   before_action :set_request_for_teaching_assistant, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_professor!
 
   # GET /request_for_teaching_assistants
   # GET /request_for_teaching_assistants.json
