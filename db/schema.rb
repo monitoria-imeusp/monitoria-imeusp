@@ -31,14 +31,18 @@ ActiveRecord::Schema.define(version: 20140425184959) do
   add_index "admins", ["email"], name: "index_admins_on_email", unique: true
   add_index "admins", ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true
 
+  create_table "courses", force: true do |t|
+    t.string   "name"
+    t.string   "course_code"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "professors", force: true do |t|
     t.string   "name"
     t.string   "nusp"
     t.string   "department"
     t.string   "email"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.boolean  "super_professor",        default: false
     t.string   "encrypted_password",     default: "",    null: false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
@@ -48,6 +52,9 @@ ActiveRecord::Schema.define(version: 20140425184959) do
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.boolean  "super_professor",        default: false
   end
 
   create_table "request_for_teaching_assistants", force: true do |t|
