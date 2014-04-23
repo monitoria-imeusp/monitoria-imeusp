@@ -20,6 +20,10 @@ class RequestForTeachingAssistantsController < ApplicationController
 
   # GET /request_for_teaching_assistants/1/edit
   def edit
+    if (not @request_for_teaching_assistant) or
+        (@request_for_teaching_assistant.professor_id != current_professor.id)
+      redirect_to request_for_teaching_assistants_path
+    end
   end
 
   # POST /request_for_teaching_assistants
@@ -65,7 +69,9 @@ class RequestForTeachingAssistantsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_request_for_teaching_assistant
-      @request_for_teaching_assistant = RequestForTeachingAssistant.find(params[:id])
+      if RequestForTeachingAssistant.exists?(params[:id])
+        @request_for_teaching_assistant = RequestForTeachingAssistant.find(params[:id])
+      end
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
