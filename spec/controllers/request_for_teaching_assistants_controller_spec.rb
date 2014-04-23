@@ -23,7 +23,15 @@ describe RequestForTeachingAssistantsController do
   # This should return the minimal set of attributes required to create a valid
   # RequestForTeachingAssistant. As you add validations to RequestForTeachingAssistant, be sure to
   # adjust the attributes here as well.
-  let(:valid_attributes) { { "professor_id" => "1" } }
+  let(:valid_attributes) { {
+      "professor_id" => "1",
+      "subject" => "MAC0122semespaço",
+      "requestedNumber" => 1,
+      "priority" => 0,
+      "student_assistance" => true,
+      "work_correction" => true,
+      "test_oversight" => true
+    } }
 
   # This should return the minimal set of values that should be in the session
   # in order to pass any filters (e.g. authentication) defined in

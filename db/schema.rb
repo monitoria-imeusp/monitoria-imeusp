@@ -50,4 +50,16 @@ ActiveRecord::Schema.define(version: 20140416180817) do
     t.boolean  "super_professor",        default: false
   end
 
+  create_table "request_for_teaching_assistants", force: true do |t|
+    t.integer  "professor_id"
+    t.string   "subject"
+    t.integer  "requestedNumber"
+    t.integer  "priority"
+    t.boolean  "student_assistance"
+    t.boolean  "work_correction"
+    t.boolean  "test_oversight"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
 end
