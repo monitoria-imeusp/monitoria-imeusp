@@ -25,6 +25,9 @@ class CoursesController < ApplicationController
         end
     end
 
+    def index
+        @courses = Course.all
+    end
 
     private
         def course_params

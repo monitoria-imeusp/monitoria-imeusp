@@ -1,0 +1,16 @@
+<h1>Listando Disciplinas</h1>
+
+<table>
+    <tr>
+        <th>Nome da disciplina</th>
+        <th>Código da Disciplina</th>
+    </tr>
+
+    <% @courses.each do |course| %>
+        <tr>
+            <td><%= course.name %></td>
+            <td><%= course.course_code %></td>
+            <td><%= link_to 'Visualizar', course %></td>
+        </tr>
+    <% end %>
+</table>
