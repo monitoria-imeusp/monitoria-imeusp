@@ -1,12 +1,14 @@
 require 'spec_helper'
 
 describe ProfessorsController do
+
   before do
     @professor = mock_model(Professor)
     @id = "42"
   end
 
   describe 'new' do
+	login_professor
     before :each do
       Professor.should_receive(:new).and_return(nil)
       get :new
