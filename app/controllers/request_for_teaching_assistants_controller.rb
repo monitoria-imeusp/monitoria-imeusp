@@ -5,7 +5,11 @@ class RequestForTeachingAssistantsController < ApplicationController
   # GET /request_for_teaching_assistants
   # GET /request_for_teaching_assistants.json
   def index
-    @request_for_teaching_assistants = RequestForTeachingAssistant.all
+    @request_for_teaching_assistants = (RequestForTeachingAssistant.all.map do
+      |request| request
+    end).keep_if do |request|
+      request.professor_id == current_professor.id
+    end
   end
 
   # GET /request_for_teaching_assistants/1
@@ -60,10 +64,15 @@ class RequestForTeachingAssistantsController < ApplicationController
   # DELETE /request_for_teaching_assistants/1
   # DELETE /request_for_teaching_assistants/1.json
   def destroy
-    @request_for_teaching_assistant.destroy
-    respond_to do |format|
-      format.html { redirect_to request_for_teaching_assistants_url }
-      format.json { head :no_content }
+    if (not @request_for_teaching_assistant) or
+        (@request_for_teaching_assistant.professor_id != current_professor.id)
+      redirect_to request_for_teaching_assistants_path
+    else
+      @request_for_teaching_assistant.destroy
+      respond_to do |format|
+        format.html { redirect_to request_for_teaching_assistants_url }
+        format.json { head :no_content }
+      end
     end
   end
 
