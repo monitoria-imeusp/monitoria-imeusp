@@ -29,6 +29,28 @@ class CoursesController < ApplicationController
         @courses = Course.all
     end
 
+    def edit
+        if Course.exists?(params[:id])
+            @course = Course.find(params[:id])
+        else
+            redirect_to courses_path
+        end
+    end
+
+    def update
+        if not Course.exists? params[:id]
+            # TODO alert failure
+            redirect_to course_path
+            return
+        end
+        @course = Course.find(params[:id])
+        if @course.update(course_params)
+            redirect_to @course
+        else
+            render 'edit'
+        end
+    end
+
     private
         def course_params
             params.require(:course).permit(:name, :course_code)

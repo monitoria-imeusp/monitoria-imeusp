@@ -11,6 +11,9 @@
             <td><%= course.name %></td>
             <td><%= course.course_code %></td>
             <td><%= link_to 'Visualizar', course %></td>
+            <% if admin_signed_in? || current_professor.super_professor? %>
+                <td><%= link_to 'Editar', edit_course_path(course) %></td>
+            <% end %>
         </tr>
     <% end %>
 </table>
