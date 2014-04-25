@@ -1,5 +1,5 @@
 class CoursesController < ApplicationController
-    before_action :authenticate_admin! || :authenticate_professor, :except => [:show, :index]
+    before_action :authenticate! , :except => [:show, :index]
 
     def new
         @course = Course.new
@@ -54,6 +54,14 @@ class CoursesController < ApplicationController
 
         redirect_to courses_path
     end
+
+    protected 
+
+        def authenticate!
+            unless admin_signed_in? or (professor_signed_in? and current_professor.super_professor?)
+                redirect_to courses_path
+            end
+        end
 
     private
         def course_params
