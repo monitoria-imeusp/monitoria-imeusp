@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140416180817) do
+ActiveRecord::Schema.define(version: 20140425184959) do
 
   create_table "admins", force: true do |t|
     t.string   "email",                  default: "", null: false
@@ -55,9 +55,9 @@ ActiveRecord::Schema.define(version: 20140416180817) do
     t.string   "subject"
     t.integer  "requestedNumber"
     t.integer  "priority"
-    t.boolean  "student_assistance"
-    t.boolean  "work_correction"
-    t.boolean  "test_oversight"
+    t.boolean  "student_assistance", default: false
+    t.boolean  "work_correction",    default: false
+    t.boolean  "test_oversight",     default: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
