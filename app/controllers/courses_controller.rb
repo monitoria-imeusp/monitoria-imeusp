@@ -1,8 +1,5 @@
 class CoursesController < ApplicationController
-    before_action :authenticate_professor!, :except => [:show, :index]
-    before_action do
-        redirect_to :new_professor_session_path unless current_professor.super_professor?
-    end
+    before_action :authenticate_admin! || :authenticate_professor, :except => [:show, :index]
 
     def new
         @course = Course.new
@@ -49,6 +46,13 @@ class CoursesController < ApplicationController
         else
             render 'edit'
         end
+    end
+
+    def destroy
+        @course = Course.find(params[:id])
+        @course.destroy
+
+        redirect_to courses_path
     end
 
     private
