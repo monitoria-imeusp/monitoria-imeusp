@@ -27,3 +27,18 @@ Feature: Course deletion
         And I click the "Remover" link
         And I should not see "labxp"
         And I should not see "mac0342"
+
+    Scenario: Professor cannot remove a course
+        Given I'm at the professor login page
+        And There is a professor with name "arnaldo" and password "12345678" nusp "1111111" department "MAC" and email "kira@usp.br"
+        When I fill the "Nusp" field with "1111111"
+        And I fill the "Password" field with "12345678"
+        And I press the "Sign in" button
+        And There is a course with name "labxp" and code "mac0342"
+        And I click the "Lista de Disciplina" link
+        And I should not see "Remover"
+
+    Scenario: Any person trying to remove a course
+        Given I'm at the home page
+        And I click the "Lista de Disciplina" link
+        And I should not see "Remover"
