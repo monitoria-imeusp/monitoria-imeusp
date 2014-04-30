@@ -2,10 +2,7 @@
 
 FactoryGirl.define do
   factory :professor do
-    name "MyString"
-    password "MyString"
-    nusp "MyString"
-    department "MyString"
-    email "MyString"
+    email 'professor@professor.com'
+    password 'password'
   end
 end
