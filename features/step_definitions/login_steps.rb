@@ -10,8 +10,6 @@ Given(/^I'm at the home page$/) do
   visit root_path
 end
 
-
-
 Given(/^There is an admin user with email "(.*?)" and password "(.*?)"$/) do |email, password|
       Admin.create(email: email, password: password)
 end
@@ -73,3 +71,6 @@ Given(/^There is a super_professor with name "(.*?)" and password "(.*?)" nusp "
   Professor.create(name: name , password: password, nusp: nusp, department: department, email: email, super_professor: true)
 end
 
+When(/^There is a course with name "(.*?)" and code "(.*?)"$/) do |name, code|
+  Course.create(name: name, course_code: code)
+end
