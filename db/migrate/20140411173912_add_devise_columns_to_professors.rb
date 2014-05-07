@@ -29,7 +29,6 @@ class AddDeviseColumnsToProfessors < ActiveRecord::Migration
       # t.datetime :locked_at
 
 
-      t.timestamps
   	end
   end
 end

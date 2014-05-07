@@ -36,6 +36,9 @@ ActiveRecord::Schema.define(version: 20140416180817) do
     t.string   "nusp"
     t.string   "department"
     t.string   "email"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.boolean  "super_professor",        default: false
     t.string   "encrypted_password",     default: "",    null: false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
@@ -45,9 +48,6 @@ ActiveRecord::Schema.define(version: 20140416180817) do
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.boolean  "super_professor",        default: false
   end
 
 end
