@@ -7,7 +7,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
 
-    <title>Base Rails App</title>
+    <title>Monitoria IME-USP</title>
 
     <link type="text/plain" rel="author" href="humans.txt" />
     <%= javascript_include_tag :modernizr %>
@@ -21,7 +21,28 @@
 
   <body>
 
-    <%= yield %>
+    <p class="notice"><%= notice %></p>
+    <p class="alert"><%= alert %></p>
+
+    <div class="shell">
+      <h1 class="pagetop">Sistema de monitoria</h1>
+      <span>
+        <%= link_to "Lista de Professores", professors_path %>
+        <% if admin_signed_in? %>
+          <%= link_to "Novo Professor", new_professor_path %>
+          <%= current_admin.email %> (<%= link_to "Logout", destroy_admin_session_path, method: :delete %>)
+        <% elsif professor_signed_in? %>
+          <%= current_professor.email %> (<%= link_to "Logout", destroy_professor_session_path, method: :delete %>)
+          <%= link_to "Pedidos de monitoria", request_for_teaching_assistants_path %>
+        <% else %>
+          <%= link_to "Login Professor", new_professor_session_path %>
+          <%= link_to "Admin Login", new_admin_session_path %>
+        <% end %>
+      </span>
+      <div class="content">
+        <%= yield %>
+      </div>
+    <div>
 
   </body>
 </html>

@@ -1,0 +1,25 @@
+<p>
+  	<strong>Nome:</strong>
+  	<%= @professor.name %>
+</p>
+ 
+<p>
+  	<strong>Nusp:</strong>
+  	<%= @professor.nusp %>
+</p>
+
+<p>
+  	<strong>Email:</strong>
+  	<%= @professor.email %>
+</p>
+ 
+<p>
+  	<strong>Departamento:</strong>
+  	<%= @professor.department %>
+</p>
+ 
+<% if admin_signed_in? %>
+	<p>
+		<%= link_to 'Editar', edit_professor_path(@professor) %>
+	</p>
+<% end %>

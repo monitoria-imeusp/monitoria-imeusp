@@ -1,0 +1,23 @@
+<h1>Listando Professores</h1>
+
+<table>
+    <tr>
+        <th>Nome</th>
+        <th>Nº USP</th>
+        <th>E-Mail</th>
+        <th>Departamento</th>
+    </tr>
+
+    <% @professors.each do |professor| %>
+        <tr>
+            <td><%= professor.name %></td>
+            <td><%= professor.nusp %></td>
+            <td><%= professor.email %></td>
+            <td><%= professor.department %></td>
+            <% if admin_signed_in? %>
+                <td><%= link_to 'Editar', edit_professor_path(professor) %></td>
+            <% end %>
+            <td><%= link_to 'Visualizar', professor %></td>
+        </tr>
+    <% end %>
+</table>

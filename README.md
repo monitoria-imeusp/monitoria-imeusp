@@ -1,5 +1,7 @@
-1) Instalação dos prerrequisitos :
-- Antes de se intalar o rvm, é necessário que a máquina tenha os seguintes programas:
+## Instalação dos prerrequisitos :
+
+Antes de se intalar o rvm, é necessário que a máquina tenha os seguintes programas:
+
 	- bash (versão 3.2.25 ou superior)
 	- awk
 	- sed
@@ -12,49 +14,97 @@
 	- gunzip
 	- bunzip2
 
-- Para saber se a máquina tem os programas ácima, digite no terminal:
-	for name in {bash,awk,sed,grep,ls,cp,tar,curl,gunzip,bunzip2} ; do which $name ;  done
+Para saber se a máquina tem os programas acima, digite no terminal:
 
+```bash
+for name in {bash,awk,sed,grep,ls,cp,tar,curl,gunzip,bunzip2} ; do which $name ;  done
+```
 
-2) Instalação do ambiente Ruby
-- Instalação do rvm (ruby version manager)
-	\curl -sSL https://get.rvm.io | sudo bash -s stable
+## Instalação do ambiente Ruby
 
-- A instalação do rvm criou um grupo e é necesário adicionar ao grupo todos os usuários que
-usarão a rvm na máquina
+### Instalação do rvm (ruby version manager)
+
+```bash
+\curl -sSL https://get.rvm.io | sudo bash -s stable
+```
+
+A instalação do rvm criou um grupo e é necesário adicionar ao grupo todos os usuários que
+usarão a rvm na máquina. No caso, **basta adicionar o seu usuário normal**.
 Para fazer isso digite:
-	sudo adduser [username] rvm
 
-- Execute o seguinte comando:
-	sudo editor-texto-preferido .bashrc
+```bash
+sudo adduser [username] rvm
+```
 
-- Depois disso adicione o seguinte trecho no final do arquivo e o salve:
-	[[ -s "usr/local/rvm/scripts/rvm" ]] && . "usr/local/rvm/scripts/rvm" 
+Depois, execute o seguinte comando:
+	editor-texto-preferido ~/.bashrc
 
-- Permitir que o rvm possa fazer login no shell:
-	/bin/bash --login
+E adicione o seguinte trecho no final do arquivo e o salve:
 
-- Pra ter certeza que tudo funcionou digite:
-	type rvm | head -n1
+```bash
+[[ -s "usr/local/rvm/scripts/rvm" ]] && . "usr/local/rvm/scripts/rvm"
+```
+
+Agora, *sempre que você for usar o RVM*, você precisa permitir que o RVM use o Shell
+no modo login:
+
+```bash
+/bin/bash --login
+# ou simplesmente
+bash --login
+```
+
+Pra ter certeza que tudo funcionou digite:
+
+```bash
+type rvm | head -n1
+```
+
 Você deverá ver a seguinte mensagem: "rvm is a function"
-Caso o comando não dê certo digite-o em uma nova janela ou aba) do terminal
-
+Caso o comando não dê certo digite-o em uma nova janela ou aba do terminal.
 
 Faça log out e depois faça login novamente para as alterações acima terem efeito.
 
 
-- Instalação do ruby
-	rvm install ruby
+### Adicionando uma instalação do ruby ao RVM
 
-- Defina a versão do ruby que você vai usar com o comando:
-	rvm --default use d.c.m
-OBS: d.c.m pode ser por exemplo 2.1.1 .
+Primeiramente, instale o ruby (versão 2.1.1):
 
-- Permitir que o rvm possa fazer login no shell:
-	/bin/bash --login
+```bash
+rvm install ruby
+```
 
-- Certifique-se que está tudo certo com o comando:
-	ruby -v
+Agora, defina a versão do ruby que você vai usar com o comando abaixo. Nós vamos
+usar a versão 2.1.1.
+
+```bash
+rvm --default use 2.1.1
+```
+
+Certifique-se que está tudo certo com o comando:
+
+```bash
+ruby -v
+```
+
+## Configurando o servidor
+
+Inicializar o banco de dados:
+
+```bash
+rake db:setup
+```
+
+E para os testes:
+
+```bash
+rake db:migrate RAILS_ENV=test
+rspec
+```
+
+## Coisas antigas do README
+
+Deixei aqui algumas informações do Jack que não precisei usar, mas podem vir a ser relevantes.
 
 - Instalação da versão 4.1 release candidate do Rails (recomendação do Manzo). (essa etapa pode demorar):
 	gem install rails --pre
