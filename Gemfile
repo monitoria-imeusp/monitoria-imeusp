@@ -3,9 +3,6 @@ source 'https://rubygems.org'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.1.0.rc2'
 
-# Use sqlite3 as the database for Active Record
-gem 'sqlite3'
-
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.1'
 
@@ -45,6 +42,9 @@ group :test do
 end
 
 group :development, :test do
+  # Use sqlite3 as the database for Active Record
+  gem 'sqlite3'
+
   # Test framework
   gem 'rspec-rails', '~> 2.14.0'
 
@@ -53,6 +53,12 @@ group :development, :test do
 
   # JavaScript unit tests
   gem "konacha", "~> 3.2.0"
+end
+
+group :production do
+  gem 'pg'
+  gem 'rails_12factor'
+  ruby '2.1.1'
 end
 
 # Acceptance tests
