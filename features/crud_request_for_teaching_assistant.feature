@@ -16,7 +16,7 @@ Feature: CRUD Request for Teaching Assistant
     And I should see "Novo pedido de Monitoria"
     And I fill the "Disciplina" field with "MAC0300"
     And I fill the "Número de monitores solicitados" field with "2"
-    And I select the " Extremamente necessário, mas não imprescindível " option
+    And I select the priority option "Extremamente necessário, mas não imprescindível"
     And I mark the "Correção de trabalhos" checkbox
     And I mark the "Fiscalização de provas" checkbox
     And I press the "Enviar solicitação de monitor" button
@@ -27,3 +27,57 @@ Feature: CRUD Request for Teaching Assistant
     And I should see "Atendimento aos alunos: false"
     And I should see "Correção de trabalhos: true"
     And I should see "Fiscalização de provas: true"
+
+    Scenario: Valid professor editing a request
+        Given I'm at the professor login page
+        And there is a professor with name "Bob" and password "prof-123" nusp "123" department "MAC" and email "bob@bob.bob"
+        And there is a request for teaching assistant with professor "Bob" and subject "MAC0110" and requestedNumber "4" and priority "Extremamente necessário, mas não imprescindível" and student_assistance "false" and work_correction "true" and test_oversight "true"
+        When I fill the "Nusp" field with "123"
+        And I fill the "Password" field with "prof-123"
+        And I press the "Sign in" button
+        And I should see "Pedidos de monitoria"
+        And I should see "Editar"
+        And I click the "Editar" link
+        And I should see "Editando Pedido de Monitoria"
+        And I fill the "Disciplina" field with "MAC0122"
+        And I fill the "Número de monitores solicitados" field with "12"
+        And I select the priority option "Imprescindível"
+        And I mark the "Atendimento aos alunos" checkbox
+        And I unmark the "Correção de trabalhos" checkbox
+        And I unmark the "Fiscalização de provas" checkbox
+        And I press the "Enviar solicitação de monitor" button
+        Then I should see "Pedido de Monitoria atualizado com sucesso."
+        And I should see "Disciplina: MAC0122"
+        And I should see "Número de monitores solicitados: 12"
+        And I should see "Prioridade: Imprescindível"
+        And I should see "Atendimento aos alunos: Sim"
+        And I should see "Correção de trabalhos: Não"
+        And I should see "Fiscalização de provas: Não"
+
+    Scenario: Valid professor deleting a request
+        Given I'm at the professor login page
+        And there is a professor with name "Bob" and password "prof-123" nusp "123" department "MAC" and email "bob@bob.bob"
+        And there is a request for teaching assistant with professor "Bob" and subject "MAC0110" and requestedNumber "4" and priority "Extremamente necessário, mas não imprescindível" and student_assistance "false" and work_correction "true" and test_oversight "true"
+        When I fill the "Nusp" field with "123"
+        And I fill the "Password" field with "prof-123"
+        And I press the "Sign in" button
+        And I should see "Pedidos de monitoria"
+        And I should see "Remover"
+        And I click the "Remover" link
+        And I should see "Você tem certeza"
+        And I confirm the alert
+        Then I should not see "MAC0122"
+
+    Scenario: A professor can't see the request of another professor
+        Given I'm at the professor login page
+        And there is a professor with name "Bob" and password "prof-123" nusp "123" department "MAC" and email "bob@bob.bob"
+        And there is a professor with name "Mandel" and password "prof-123" nusp "1234" department "MAC" and email "kira@bob.bob"
+        And there is a request for teaching assistant with professor "Bob" and subject "MAC0110" and requestedNumber "4" and priority "Extremamente necessário, mas não imprescindível" and student_assistance "false" and work_correction "true" and test_oversight "true"
+        And there is a request for teaching assistant with professor "Mandel" and subject "MAC0122" and requestedNumber "2" and priority "Extremamente necessário, mas não imprescindível" and student_assistance "false" and work_correction "true" and test_oversight "true"
+        When I fill the "Nusp" field with "123"
+        And I fill the "Password" field with "prof-123"
+        And I press the "Sign in" button
+        And I should see "Pedidos de monitoria"
+        Then I should see "MAC0110"
+        And I should not see "MAC0122"
+

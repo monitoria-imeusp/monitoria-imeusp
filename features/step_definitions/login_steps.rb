@@ -58,3 +58,22 @@ When(/^I mark the "(.*?)" checkbox$/) do |checkbox|
   check(checkbox)
 end
 
+When(/^I select the priority option "(.*?)"$/) do |radio_button_string|
+    RequestForTeachingAssistantsHelper.priorityOptions.each do |priority_option|
+        if priority_option[0] == radio_button_string
+            choose("request_for_teaching_assistant_priority_" + priority_option[1])
+        end
+    end
+end
+
+Given(/^there is a request for teaching assistant with professor "(.*?)" and subject "(.*?)" and requestedNumber "(.*?)" and priority "(.*?)" and student_assistance "(.*?)" and work_correction "(.*?)" and test_oversight "(.*?)"$/) do |professor_name, subject, requestedNumber, priority, student_assistance, work_correction, test_oversight|
+    RequestForTeachingAssistant.create(professor_id: Professor.find_by(name: professor_name).id, subject: subject, requestedNumber: requestedNumber, priority: priority, student_assistance: student_assistance, work_correction: work_correction, test_oversight: test_oversight)
+end
+
+When(/^I unmark the "(.*?)" checkbox$/) do |checkbox|
+  check(checkbox)
+end
+
+When(/^I confirm the alert$/) do
+    page.driver.browser.switch_to.alert.accept
+end
