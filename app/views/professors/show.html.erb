@@ -15,13 +15,13 @@
  
 <p>
   	<strong>Departamento:</strong>
-  	<%= @professor.department %>
+  	<%= @professor.department.upcase %>
 </p>
  
 <% if admin_signed_in? %>
     <p>
-        <strong>SuperProfessor</strong>
-        <%= @professor.super_professor %>
+        <strong>SuperProfessor:</strong>
+        <%= show_yes_or_no @professor.super_professor %>
 	</p>
 	<p>
 		<%= link_to 'Editar', edit_professor_path(@professor) %>

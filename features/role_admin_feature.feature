@@ -20,7 +20,7 @@ Feature: Accessing the page
         Then I should see "Nome: tanto faz"
         And I should see "Nusp: 12345"
         And I should see "Email: email@email.com"
-        And I should see "Departamento: mac"
+        And I should see "Departamento: MAC"
         And I should see "Editar"
 
     Scenario: Verify if non-admins can't create a professors
