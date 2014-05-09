@@ -2,6 +2,14 @@ Given(/^I'm at the login page$/) do
       visit new_admin_session_path
 end
 
+Then(/^I try the create course URL$/) do
+  visit new_course_path
+end
+
+Given(/^I'm at the home page$/) do
+  visit root_path
+end
+
 Given(/^There is an admin user with email "(.*?)" and password "(.*?)"$/) do |email, password|
       Admin.create(email: email, password: password)
 end
@@ -58,3 +66,11 @@ When(/^I mark the "(.*?)" checkbox$/) do |checkbox|
   check(checkbox)
 end
 
+
+Given(/^There is a super_professor with name "(.*?)" and password "(.*?)" nusp "(.*?)" department "(.*?)" and email "(.*?)"$/) do |name, password, nusp, department, email|
+  Professor.create(name: name , password: password, nusp: nusp, department: department, email: email, super_professor: true)
+end
+
+When(/^There is a course with name "(.*?)" and code "(.*?)"$/) do |name, code|
+  Course.create(name: name, course_code: code)
+end

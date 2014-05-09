@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   root 'home#index'
 
   resources :professors
+  resources :courses  
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
