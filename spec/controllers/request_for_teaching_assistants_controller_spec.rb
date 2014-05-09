@@ -28,7 +28,7 @@ describe RequestForTeachingAssistantsController do
   let(:valid_attributes) { {
     "professor_id" => "1",
     "subject" => "MAC0122semespaço",
-    "requestedNumber" => 1,
+    "requested_number" => 1,
     "priority" => 0,
     "student_assistance" => true,
     "work_correction" => false,
@@ -38,7 +38,7 @@ describe RequestForTeachingAssistantsController do
   let(:not_owned_attributes) { {
     "professor_id" => "2",
     "subject" => "MAC0424",
-    "requestedNumber" => 2,
+    "requested_number" => 2,
     "priority" => 2,
     "student_assistance" => true,
     "work_correction" => false,

@@ -86,7 +86,7 @@ class RequestForTeachingAssistantsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def request_for_teaching_assistant_params
-      params.require(:request_for_teaching_assistant).permit(:professor_id, :subject, :requestedNumber, :priority, :student_assistance, :work_correction, :test_oversight)
+      params.require(:request_for_teaching_assistant).permit(:professor_id, :subject, :requested_number, :priority, :student_assistance, :work_correction, :test_oversight)
     end
 
 end
