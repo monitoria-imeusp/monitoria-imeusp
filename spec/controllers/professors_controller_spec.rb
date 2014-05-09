@@ -1,6 +1,7 @@
 require 'spec_helper'
 
 describe ProfessorsController do
+
   before do
     @professor = mock_model(Professor)
     @id = "42"

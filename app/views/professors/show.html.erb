@@ -19,6 +19,10 @@
 </p>
  
 <% if admin_signed_in? %>
+    <p>
+        <strong>SuperProfessor</strong>
+        <%= @professor.super_professor %>
+	</p>
 	<p>
 		<%= link_to 'Editar', edit_professor_path(@professor) %>
 	</p>

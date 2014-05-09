@@ -1,0 +1,16 @@
+<%= form_for :course, url: courses_path do |f| %>
+
+  <p>
+    <%= f.label :name, "Nome da Disciplina" %><br>
+    <%= f.text_field :name %>
+  </p>
+
+  <p>
+    <%= f.label :course_code, "Código da Disciplina" %><br>
+    <%= f.text_field :course_code %>
+    </p>
+
+  <p>
+    <%= f.submit "Cadastrar" %>
+  </p>
+<% end %>

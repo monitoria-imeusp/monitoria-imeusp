@@ -1,0 +1,14 @@
+language: ruby
+rvm:
+  - ruby-2.1.1
+
+before_script:
+  - "bundle exec rake db:migrate RAILS_ENV=test"
+
+notifications:
+  email:
+    recipients:
+      - kazuo256@gmail.com
+    on_success: change
+    on_failure: always
+

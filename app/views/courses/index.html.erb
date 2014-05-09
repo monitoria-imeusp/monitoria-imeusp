@@ -1,0 +1,20 @@
+<h1>Listando Disciplinas</h1>
+
+<table>
+    <tr>
+        <th>Nome da disciplina</th>
+        <th>Código da Disciplina</th>
+    </tr>
+
+    <% @courses.each do |course| %>
+        <tr>
+            <td><%= course.name %></td>
+            <td><%= course.course_code %></td>
+            <td><%= link_to 'Visualizar', course %></td>
+            <% if admin_signed_in? || (current_professor.present? && current_professor.super_professor?) %>
+                <td><%= link_to 'Editar', edit_course_path(course) %></td>
+                <td><%= link_to 'Remover', course_path(course), method: :delete %></td>
+            <% end %>
+        </tr>
+    <% end %>
+</table>

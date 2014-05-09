@@ -32,8 +32,13 @@
   </p>
  
   <p>
-    <%= f.submit %>
+    <%= f.label :super_professor, "Permissão Superprofessor" %><br>
+    <%= f.check_box :super_professor %>
+  </p>
+
+  <p>
+    <%= f.submit "Salvar"%>
   </p>
 <% end %>
  
-<%= link_to 'Back', professors_path %>
+<%= link_to 'Voltar', professors_path %>
