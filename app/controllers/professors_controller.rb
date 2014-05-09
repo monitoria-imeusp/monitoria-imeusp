@@ -52,24 +52,8 @@ class ProfessorsController < ApplicationController
         end
     end
 
-    def resource_class
-        devise_mapping.to
-    end
-
-    def devise_mapping
-          Devise.mappings[:professor]
-    end
-
-    def resource_name
-          devise_mapping.name
-    end
-
     private
         def professor_params
             params.require(:professor).permit(:name, :nusp, :password, :department, :email, :super_professor)
-        end
-
-        def needs_password?(professor, params)
-            professor.nusp != params[:professor][:nusp] || params[:professor][:password].present?
         end
 end
