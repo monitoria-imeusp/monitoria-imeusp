@@ -11,5 +11,7 @@ class CreateRequestForTeachingAssistants < ActiveRecord::Migration
 
       t.timestamps
     end
+
+    rename_column :request_for_teaching_assistants, :requestedNumber, :requested_number
   end
 end
