@@ -31,7 +31,7 @@ Feature: CRUD Request for Teaching Assistant
     Scenario: Valid professor editing a request
         Given I'm at the professor login page
         And there is a professor with name "Bob" and password "prof-123" nusp "123" department "MAC" and email "bob@bob.bob"
-        And there is a request for teaching assistant with professor "Bob" and subject "MAC0110" and requestedNumber "4" and priority "Extremamente necessário, mas não imprescindível" and student_assistance "false" and work_correction "true" and test_oversight "true"
+        And there is a request for teaching assistant with professor "Bob" and subject "MAC0110" and requested_number "4" and priority "Extremamente necessário, mas não imprescindível" and student_assistance "false" and work_correction "true" and test_oversight "true"
         When I fill the "Nusp" field with "123"
         And I fill the "Password" field with "prof-123"
         And I press the "Sign in" button
@@ -59,7 +59,7 @@ Feature: CRUD Request for Teaching Assistant
     Scenario: Valid professor deleting a request
         Given I'm at the professor login page
         And there is a professor with name "Bob" and password "prof-123" nusp "123" department "MAC" and email "bob@bob.bob"
-        And there is a request for teaching assistant with professor "Bob" and subject "MAC0110" and requestedNumber "4" and priority "Extremamente necessário, mas não imprescindível" and student_assistance "false" and work_correction "true" and test_oversight "true"
+        And there is a request for teaching assistant with professor "Bob" and subject "MAC0110" and requested_number "4" and priority "Extremamente necessário, mas não imprescindível" and student_assistance "false" and work_correction "true" and test_oversight "true"
         When I fill the "Nusp" field with "123"
         And I fill the "Password" field with "prof-123"
         And I press the "Sign in" button
@@ -74,8 +74,8 @@ Feature: CRUD Request for Teaching Assistant
         Given I'm at the professor login page
         And there is a professor with name "Bob" and password "prof-123" nusp "123" department "MAC" and email "bob@bob.bob"
         And there is a professor with name "Mandel" and password "prof-123" nusp "1234" department "MAC" and email "kira@bob.bob"
-        And there is a request for teaching assistant with professor "Bob" and subject "MAC0110" and requestedNumber "4" and priority "Extremamente necessário, mas não imprescindível" and student_assistance "false" and work_correction "true" and test_oversight "true"
-        And there is a request for teaching assistant with professor "Mandel" and subject "MAC0122" and requestedNumber "2" and priority "Extremamente necessário, mas não imprescindível" and student_assistance "false" and work_correction "true" and test_oversight "true"
+        And there is a request for teaching assistant with professor "Bob" and subject "MAC0110" and requested_number "4" and priority "Extremamente necessário, mas não imprescindível" and student_assistance "false" and work_correction "true" and test_oversight "true"
+        And there is a request for teaching assistant with professor "Mandel" and subject "MAC0122" and requested_number "2" and priority "Extremamente necessário, mas não imprescindível" and student_assistance "false" and work_correction "true" and test_oversight "true"
         When I fill the "Nusp" field with "123"
         And I fill the "Password" field with "prof-123"
         And I press the "Sign in" button
