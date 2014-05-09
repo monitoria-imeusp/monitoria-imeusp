@@ -25,7 +25,7 @@
         <td><%= request_for_teaching_assistant.work_correction %></td>
         <td><%= request_for_teaching_assistant.test_oversight %></td>
         <td><%= link_to 'Ver', request_for_teaching_assistant %></td>
-        <td><%= link_to 'Modificar', edit_request_for_teaching_assistant_path(request_for_teaching_assistant) %></td>
+        <td><%= link_to 'Editar', edit_request_for_teaching_assistant_path(request_for_teaching_assistant) %></td>
         <td><%= link_to 'Remover', request_for_teaching_assistant, method: :delete, data: { confirm: 'Você tem certeza?' } %></td>
       </tr>
     <% end %>

@@ -22,18 +22,18 @@
 
 <p>
   <strong>Atendimento aos alunos:</strong>
-  <%= @request_for_teaching_assistant.student_assistance %>
+  <%= show_yes_or_no(@request_for_teaching_assistant.student_assistance) %>
 </p>
 
 <p>
   <strong>Correção de trabalhos:</strong>
-  <%= @request_for_teaching_assistant.work_correction %>
+  <%= show_yes_or_no(@request_for_teaching_assistant.work_correction) %>
 </p>
 
 <p>
   <strong>Fiscalização de provas:</strong>
-  <%= @request_for_teaching_assistant.test_oversight %>
+  <%= show_yes_or_no(@request_for_teaching_assistant.test_oversight) %>
 </p>
 
-<%= link_to 'Modificar', edit_request_for_teaching_assistant_path(@request_for_teaching_assistant) %> |
+<%= link_to 'Editar', edit_request_for_teaching_assistant_path(@request_for_teaching_assistant) %> |
 <%= link_to 'Voltar', request_for_teaching_assistants_path %>

@@ -5,3 +5,4 @@ tmp/*
 coverage/*
 log/*
 *.sublime-workspace
+db/schema.rb

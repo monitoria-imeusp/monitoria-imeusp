@@ -61,6 +61,7 @@ group :cucumber do
   gem 'cucumber-rails'
   gem 'database_cleaner'
   gem 'poltergeist', '~> 1.5.0'
+  gem 'selenium-webdriver'
 end
 
 # Use devise for login sessions

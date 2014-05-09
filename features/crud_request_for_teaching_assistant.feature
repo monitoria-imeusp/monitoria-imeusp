@@ -20,13 +20,13 @@ Feature: CRUD Request for Teaching Assistant
     And I mark the "Correção de trabalhos" checkbox
     And I mark the "Fiscalização de provas" checkbox
     And I press the "Enviar solicitação de monitor" button
-    Then I should see "Request for teaching assistant was successfully created"
+    Then I should see "Pedido de Monitoria feito com sucesso"
     And I should see "Disciplina: MAC0300"
     And I should see "Número de monitores solicitados: 2"
     And I should see "Prioridade: Extremamente necessário, mas não imprescindível"
-    And I should see "Atendimento aos alunos: false"
-    And I should see "Correção de trabalhos: true"
-    And I should see "Fiscalização de provas: true"
+    And I should see "Atendimento aos alunos: Não"
+    And I should see "Correção de trabalhos: Sim"
+    And I should see "Fiscalização de provas: Sim"
 
     Scenario: Valid professor editing a request
         Given I'm at the professor login page
@@ -36,6 +36,7 @@ Feature: CRUD Request for Teaching Assistant
         And I fill the "Password" field with "prof-123"
         And I press the "Sign in" button
         And I should see "Pedidos de monitoria"
+        And I click the "Pedidos de monitoria" link
         And I should see "Editar"
         And I click the "Editar" link
         And I should see "Editando Pedido de Monitoria"
@@ -54,6 +55,7 @@ Feature: CRUD Request for Teaching Assistant
         And I should see "Correção de trabalhos: Não"
         And I should see "Fiscalização de provas: Não"
 
+    @javascript
     Scenario: Valid professor deleting a request
         Given I'm at the professor login page
         And there is a professor with name "Bob" and password "prof-123" nusp "123" department "MAC" and email "bob@bob.bob"
@@ -62,9 +64,9 @@ Feature: CRUD Request for Teaching Assistant
         And I fill the "Password" field with "prof-123"
         And I press the "Sign in" button
         And I should see "Pedidos de monitoria"
+        And I click the "Pedidos de monitoria" link
         And I should see "Remover"
         And I click the "Remover" link
-        And I should see "Você tem certeza"
         And I confirm the alert
         Then I should not see "MAC0122"
 
@@ -78,6 +80,7 @@ Feature: CRUD Request for Teaching Assistant
         And I fill the "Password" field with "prof-123"
         And I press the "Sign in" button
         And I should see "Pedidos de monitoria"
-        Then I should see "MAC0110"
+        Then I click the "Pedidos de monitoria" link
+        And I should see "MAC0110"
         And I should not see "MAC0122"
 
