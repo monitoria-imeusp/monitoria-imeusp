@@ -40,6 +40,19 @@ h2 {
 }
 
 p, form, a {
-  margin-left: 4em;
   font-size: 18px;
+}
+
+p, form {
+  margin-left: 4em;
+}
+
+a {
+  text-decoration: none;
+  font-weight: bold;
+}
+
+a:hover {
+  color: #b55;
+  background-color: #fff;
 }
