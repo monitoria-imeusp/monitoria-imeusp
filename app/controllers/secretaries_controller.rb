@@ -1,5 +1,6 @@
 class SecretariesController < ApplicationController
-  before_action :set_secretary, only: [:show, :edit, :update, :destroy]
+    before_action :set_secretary, only: [:show, :edit, :update, :destroy]
+    before_action :authenticate_admin!, :except => [:show, :index]
 
   # GET /secretaries
   # GET /secretaries.json
@@ -28,7 +29,7 @@ class SecretariesController < ApplicationController
 
     respond_to do |format|
       if @secretary.save
-        format.html { redirect_to @secretary, notice: 'Secretary was successfully created.' }
+        format.html { redirect_to @secretary, notice: 'Secretária foi criada com sucesso.' }
         format.json { render action: 'show', status: :created, location: @secretary }
       else
         format.html { render action: 'new' }
@@ -42,7 +43,7 @@ class SecretariesController < ApplicationController
   def update
     respond_to do |format|
       if @secretary.update(secretary_params)
-        format.html { redirect_to @secretary, notice: 'Secretary was successfully updated.' }
+        format.html { redirect_to @secretary, notice: 'Secretária foi atualizada com sucesso.' }
         format.json { render action: 'show', status: :ok, location: @secretary }
       else
         format.html { render action: 'edit' }

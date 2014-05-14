@@ -1,12 +1,11 @@
-<h1>Listing secretaries</h1>
+<h1>Lista de Secretárias</h1>
 
 <table>
   <thead>
     <tr>
       <th>Nusp</th>
-      <th>Name</th>
+      <th>Nome</th>
       <th>Email</th>
-      <th>Password</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -17,15 +16,14 @@
         <td><%= secretary.nusp %></td>
         <td><%= secretary.name %></td>
         <td><%= secretary.email %></td>
-        <td><%= secretary.password %></td>
-        <td><%= link_to 'Show', secretary %></td>
-        <td><%= link_to 'Edit', edit_secretary_path(secretary) %></td>
-        <td><%= link_to 'Destroy', secretary, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Visualizar', secretary %></td>
+        <% if admin_signed_in? %>
+                <td><%= link_to 'Editar', edit_secretary_path(secretary) %></td>        
+                <td><%= link_to 'Remover', secretary, method: :delete, data: { confirm: 'Tem certeza?' } %></td>
+        <% end %>
       </tr>
     <% end %>
   </tbody>
 </table>
 
 <br>
-
-<%= link_to 'New Secretary', new_secretary_path %>
