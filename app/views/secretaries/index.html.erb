@@ -1,0 +1,31 @@
+<h1>Listing secretaries</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Nusp</th>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Password</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @secretaries.each do |secretary| %>
+      <tr>
+        <td><%= secretary.nusp %></td>
+        <td><%= secretary.name %></td>
+        <td><%= secretary.email %></td>
+        <td><%= secretary.password %></td>
+        <td><%= link_to 'Show', secretary %></td>
+        <td><%= link_to 'Edit', edit_secretary_path(secretary) %></td>
+        <td><%= link_to 'Destroy', secretary, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Secretary', new_secretary_path %>

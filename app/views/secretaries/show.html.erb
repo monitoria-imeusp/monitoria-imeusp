@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Nusp:</strong>
+  <%= @secretary.nusp %>
+</p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @secretary.name %>
+</p>
+
+<p>
+  <strong>Email:</strong>
+  <%= @secretary.email %>
+</p>
+
+<p>
+  <strong>Password:</strong>
+  <%= @secretary.password %>
+</p>
+
+<%= link_to 'Edit', edit_secretary_path(@secretary) %> |
+<%= link_to 'Back', secretaries_path %>
