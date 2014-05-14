@@ -8,6 +8,6 @@ Feature: Logout
         And There is an admin user with email "kazuo@ime.usp.br" and password "admin123"
         When I fill the "Email" field with "kazuo@ime.usp.br"
         And I fill the "Password" field with "admin123"
-        And I press the "Sign in" button
+        And I press the "Entrar" button
         And I click the "Logout" link
         Then I should see "Logout efetuado com sucesso."
