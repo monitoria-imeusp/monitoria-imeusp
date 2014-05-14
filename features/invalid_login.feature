@@ -5,7 +5,7 @@ Feature: Invalid login
 
     Scenario: Invalid email
         Given I'm at the login page
-        And There is an admin user with email "kazuo@ime.usp.br" and password "admin123"
+        And there is an admin user with email "kazuo@ime.usp.br" and password "admin123"
         When I fill the "E-mail" field with "kazuo@ime.br"
         And I fill the "Senha" field with "admin123"
         And I press the "Entrar" button
@@ -13,7 +13,7 @@ Feature: Invalid login
 
     Scenario: Invalid Senha
         Given I'm at the login page
-        And There is an admin user with email "kazuo@ime.usp.br" and password "admin123"
+        And there is an admin user with email "kazuo@ime.usp.br" and password "admin123"
         When I fill the "E-mail" field with "kazuo@ime.usp.br"
         And I fill the "Senha" field with "admin1234"
         And I press the "Entrar" button

@@ -5,7 +5,7 @@ Feature: Forgot the password
 
     Scenario: Clicking forgot password
         Given I'm at the login page
-        And There is an admin user with email "kazuo@ime.usp.br" and password "admin123"
+        And there is an admin user with email "kazuo@ime.usp.br" and password "admin123"
         When I click the "Esqueceu sua senha?" link
         And I fill the "Email" field with "kazuo@ime.usp.br"
         And I press the "Send me reset password instructions" button
@@ -13,7 +13,7 @@ Feature: Forgot the password
 
     Scenario: Clicking forgot password with wrong email
         Given I'm at the login page
-        And There is an admin user with email "kazuo@ime.usp.br" and password "admin123"
+        And there is an admin user with email "kazuo@ime.usp.br" and password "admin123"
         When I click the "Esqueceu sua senha?" link
         And I fill the "Email" field with "kazuo233@ime.usp.br"
         And I press the "Send me reset password instructions" button
@@ -22,7 +22,7 @@ Feature: Forgot the password
 
     Scenario: Clicking forgot password with empty email
         Given I'm at the login page
-        And There is an admin user with email "kazuo@ime.usp.br" and password "admin123"
+        And there is an admin user with email "kazuo@ime.usp.br" and password "admin123"
         When I click the "Esqueceu sua senha?" link
         And I fill the "Email" field with ""
         And I press the "Send me reset password instructions" button

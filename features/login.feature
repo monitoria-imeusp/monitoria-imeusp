@@ -5,7 +5,7 @@ Feature: Login
 
     Scenario: Valid credentials
         Given I'm at the login page
-        And There is an admin user with email "kazuo@ime.usp.br" and password "admin123"
+        And there is an admin user with email "kazuo@ime.usp.br" and password "admin123"
         When I fill the "E-mail" field with "kazuo@ime.usp.br"
         And I fill the "Senha" field with "admin123"
         And I press the "Entrar" button
@@ -13,7 +13,7 @@ Feature: Login
 
     Scenario: After exitting the page and entering it again
         Given I'm at the login page
-        And There is an admin user with email "kazuo@ime.usp.br" and password "admin123"
+        And there is an admin user with email "kazuo@ime.usp.br" and password "admin123"
         When I fill the "E-mail" field with "kazuo@ime.usp.br"
         And I fill the "Senha" field with "admin123"
         And I press the "Entrar" button

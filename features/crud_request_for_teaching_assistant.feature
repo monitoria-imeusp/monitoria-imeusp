@@ -9,8 +9,8 @@ Feature: CRUD Request for Teaching Assistant
     When I fill the "Número USP" field with "123"
     And I fill the "Senha" field with "prof-123"
     And I press the "Entrar" button
-    And I should see "Pedidos de monitoria"
-    And I click the "Pedidos de monitoria" link
+    And I should see "Pedidos de Monitoria"
+    And I click the "Pedidos de Monitoria" link
     And I should see "Novo pedido de monitor"
     And I click the "Novo pedido de monitor" link
     And I should see "Novo pedido de Monitoria"
@@ -35,8 +35,8 @@ Feature: CRUD Request for Teaching Assistant
         When I fill the "Número USP" field with "123"
         And I fill the "Senha" field with "prof-123"
         And I press the "Entrar" button
-        And I should see "Pedidos de monitoria"
-        And I click the "Pedidos de monitoria" link
+        And I should see "Pedidos de Monitoria"
+        And I click the "Pedidos de Monitoria" link
         And I should see "Editar"
         And I click the "Editar" link
         And I should see "Editando Pedido de Monitoria"
@@ -64,8 +64,8 @@ Feature: CRUD Request for Teaching Assistant
         When I fill the "Número USP" field with "123"
         And I fill the "Senha" field with "prof-123"
         And I press the "Entrar" button
-        And I should see "Pedidos de monitoria"
-        Then I click the "Pedidos de monitoria" link
+        And I should see "Pedidos de Monitoria"
+        Then I click the "Pedidos de Monitoria" link
         And I should see "MAC0110"
         And I should not see "MAC0122"
 

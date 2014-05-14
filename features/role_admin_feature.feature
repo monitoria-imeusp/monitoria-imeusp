@@ -5,7 +5,7 @@ Feature: Accessing the page
 
     Scenario: Create a new professor
         Given I'm at the login page
-        And There is an admin user with email "kazuo@ime.usp.br" and password "admin123"
+        And there is an admin user with email "kazuo@ime.usp.br" and password "admin123"
         When I fill the "E-mail" field with "kazuo@ime.usp.br"
         And I fill the "Senha" field with "admin123"
         And I press the "Entrar" button
@@ -29,8 +29,8 @@ Feature: Accessing the page
 
     Scenario: Verify if the admin can edit professors
         Given I'm at the login page
-        And There is an admin user with email "kazuo@ime.usp.br" and password "admin123"
-        And There is a professor with email "email@email.com" and password "12345678"
+        And there is an admin user with email "kazuo@ime.usp.br" and password "admin123"
+        And there is a professor with email "email@email.com" and password "12345678"
         When I fill the "E-mail" field with "kazuo@ime.usp.br"
         And I fill the "Senha" field with "admin123"
         And I press the "Entrar" button
@@ -39,5 +39,5 @@ Feature: Accessing the page
 
     Scenario: Verify if other users can't edit professors
         Given I'm at the list_professors page
-        And There is a professor with email "email@email.com" and password "12345"
+        And there is a professor with email "email@email.com" and password "12345"
         Then I should not see "Editar"

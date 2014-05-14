@@ -45,10 +45,43 @@ describe RequestForTeachingAssistantsController do
     "test_oversight" => false
   } }
 
+  let(:not_owned_other_department_attributes) { {
+    "professor_id" => "3",
+    "subject" => "MAE0424",
+    "requested_number" => 2,
+    "priority" => 2,
+    "student_assistance" => true,
+    "work_correction" => false,
+    "test_oversight" => false
+  } }
+
   let(:valid_professor) { {
     "id" => 1,
     "password" => "prof-123",
-    "email" => "prof@ime.usp.br"
+    "email" => "prof@ime.usp.br",
+    "department" => "MAC"
+  } }
+
+  let(:another_professor_same_department) { {
+    "id" => 2,
+    "password" => "prof-123",
+    "email" => "prof2@ime.usp.br",
+    "department" => "MAC"
+  } }
+
+  let(:another_professor_another_department) { {
+    "id" => 3,
+    "password" => "prof-123",
+    "email" => "prof3@ime.usp.br",
+    "department" => "MAT"
+  } }
+
+  let(:super_professor_same_department) { {
+    "id" => 4,
+    "password" => "prof-123",
+    "email" => "super@ime.usp.br",
+    "department" => "MAC",
+    "super_professor" => true
   } }
 
   # This should return the minimal set of values that should be in the session
@@ -58,6 +91,8 @@ describe RequestForTeachingAssistantsController do
 
   before :each do
     professor = Professor.create! valid_professor
+    professor2 = Professor.create! another_professor_same_department
+    professor3 = Professor.create! another_professor_another_department
     sign_in :professor, professor
   end
 
@@ -216,5 +251,25 @@ describe RequestForTeachingAssistantsController do
       end
     end
   end
+ 
+  describe "filters for request for teaching assistant" do
+    
+    it "filters the requests of other professors" do 
+      request_for_teaching_assistant = RequestForTeachingAssistant.create! valid_attributes
+      RequestForTeachingAssistant.create! not_owned_attributes
+      get :index, {}
+      assigns(:request_for_teaching_assistants).should eq([request_for_teaching_assistant])
+    end
 
+    it "filters the requests of the whole department" do 
+      super_professor = Professor.create! super_professor_same_department
+      sign_in :professor, super_professor
+      shown_requests = []
+      shown_requests.push(RequestForTeachingAssistant.create! valid_attributes)
+      shown_requests.push(RequestForTeachingAssistant.create! not_owned_attributes)
+      RequestForTeachingAssistant.create! not_owned_other_department_attributes
+      get :index, {}
+      assigns(:request_for_teaching_assistants).should eq(shown_requests)
+    end
+  end
 end

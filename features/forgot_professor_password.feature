@@ -5,7 +5,7 @@ Feature: Forgot the password professor
 
     Scenario: Clicking forgot password
         Given I'm at the professor login page
-        And There is a professor with name "mandel" and password "12345678" nusp "1111111" department "MAC" and email "devil@usp.br"
+        And there is a professor with name "mandel" and password "12345678" nusp "1111111" department "MAC" and email "devil@usp.br"
         When I click the "Esqueceu sua senha?" link
         And I fill the "Email" field with "devil@usp.br"
         And I press the "Send me reset password instructions" button
@@ -13,7 +13,7 @@ Feature: Forgot the password professor
 
     Scenario: Clicking forgot password with wrong email
         Given I'm at the professor login page
-        And There is a professor with name "mandel" and password "12345678" nusp "1111111" department "MAC" and email "devil@usp.br"
+        And there is a professor with name "mandel" and password "12345678" nusp "1111111" department "MAC" and email "devil@usp.br"
         When I click the "Esqueceu sua senha?" link
         And I fill the "Email" field with "devi@usp.br"
         And I press the "Send me reset password instructions" button
@@ -22,7 +22,7 @@ Feature: Forgot the password professor
 
     Scenario: Clicking forgot password with empty email
         Given I'm at the professor login page
-        And There is a professor with name "mandel" and password "12345678" nusp "1111111" department "MAC" and email "devil@usp.br"
+        And there is a professor with name "mandel" and password "12345678" nusp "1111111" department "MAC" and email "devil@usp.br"
         When I click the "Esqueceu sua senha?" link
         And I fill the "Email" field with ""
         And I press the "Send me reset password instructions" button

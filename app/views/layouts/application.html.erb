@@ -37,7 +37,7 @@
           <%= current_admin.email %> (<%= link_to "Logout", destroy_admin_session_path, method: :delete %>)
         <% elsif professor_signed_in? %>
           <%= current_professor.email %> (<%= link_to "Logout", destroy_professor_session_path, method: :delete %>)
-          <%= link_to "Pedidos de monitoria", request_for_teaching_assistants_path %>
+          <%= link_to "Pedidos de Monitoria", request_for_teaching_assistants_path %>
         <% else %>
           <%= link_to "Login Professor", new_professor_session_path %>
           <%= link_to "Admin Login", new_admin_session_path %>

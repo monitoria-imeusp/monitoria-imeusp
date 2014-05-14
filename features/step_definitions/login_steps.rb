@@ -12,7 +12,7 @@ Given(/^I'm at the home page$/) do
   visit root_path
 end
 
-Given(/^There is an admin user with email "(.*?)" and password "(.*?)"$/) do |email, password|
+Given(/^there is an admin user with email "(.*?)" and password "(.*?)"$/) do |email, password|
       Admin.create(email: email, password: password)
 end
 
@@ -40,7 +40,7 @@ When(/^I select "(.*?)" on the "(.*?)"$/) do |option, box|
     select(option, :from => box)
 end
 
-Given(/^There is a professor with email "(.*?)" and password "(.*?)"$/) do |email, password|
+Given(/^there is a professor with email "(.*?)" and password "(.*?)"$/) do |email, password|
     Professor.create(email: email, password: password)
 end
 
@@ -56,7 +56,7 @@ Given(/^I'm at the professor login page$/) do
   visit new_professor_session_path
 end
 
-Given(/^[Tt]here is a professor with name "(.*?)" and password "(.*?)" nusp "(.*?)" department "(.*?)" and email "(.*?)"$/) do |name, password, nusp, department, email|
+Given(/^there is a professor with name "(.*?)" and password "(.*?)" nusp "(.*?)" department "(.*?)" and email "(.*?)"$/) do |name, password, nusp, department, email|
   Professor.create(name: name , password: password, nusp: nusp, department: department, email: email)
 end
 
@@ -92,10 +92,10 @@ When(/^I should see "(.*?)" in the alert$/) do |text|
       page.driver.alert_messages == text
 end
 
-Given(/^There is a super_professor with name "(.*?)" and password "(.*?)" nusp "(.*?)" department "(.*?)" and email "(.*?)"$/) do |name, password, nusp, department, email|
+Given(/^there is a super_professor with name "(.*?)" and password "(.*?)" nusp "(.*?)" department "(.*?)" and email "(.*?)"$/) do |name, password, nusp, department, email|
   Professor.create(name: name , password: password, nusp: nusp, department: department, email: email, super_professor: true)
 end
 
-When(/^There is a course with name "(.*?)" and code "(.*?)"$/) do |name, code|
+When(/^there is a course with name "(.*?)" and code "(.*?)"$/) do |name, code|
   Course.create(name: name, course_code: code)
 end
