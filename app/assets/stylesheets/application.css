@@ -18,7 +18,7 @@
 
 div.shell {
   margin: auto;
-  width: 800px;
+  width: 1024px;
   min-height: 600px;
   padding: 0.1em;
 }
@@ -33,6 +33,7 @@ h1.pagetop {
   padding: 0.5em 1em;
   border-bottom: 2px solid #b55;
   border-top: 2px solid #b55;
+  font-size: 3em;
 }
 
 h2 {
@@ -40,6 +41,19 @@ h2 {
 }
 
 p, form, a {
-  margin-left: 4em;
   font-size: 18px;
+}
+
+p, form {
+  margin-left: 4em;
+}
+
+a {
+  text-decoration: none;
+  font-weight: bold;
+}
+
+a:hover {
+  color: #b55;
+  background-color: #fff;
 }

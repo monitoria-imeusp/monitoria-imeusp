@@ -6,9 +6,9 @@ Feature: CRUD Request for Teaching Assistant
   Scenario: Valid professor creating a new request
     Given I'm at the professor login page
     And there is a professor with name "Bob" and password "prof-123" nusp "123" department "MAC" and email "bob@bob.bob"
-    When I fill the "Nusp" field with "123"
-    And I fill the "Password" field with "prof-123"
-    And I press the "Sign in" button
+    When I fill the "Número USP" field with "123"
+    And I fill the "Senha" field with "prof-123"
+    And I press the "Entrar" button
     And I should see "Pedidos de monitoria"
     And I click the "Pedidos de monitoria" link
     And I should see "Novo pedido de monitor"
@@ -32,9 +32,9 @@ Feature: CRUD Request for Teaching Assistant
         Given I'm at the professor login page
         And there is a professor with name "Bob" and password "prof-123" nusp "123" department "MAC" and email "bob@bob.bob"
         And there is a request for teaching assistant with professor "Bob" and subject "MAC0110" and requested_number "4" and priority "Extremamente necessário, mas não imprescindível" and student_assistance "false" and work_correction "true" and test_oversight "true"
-        When I fill the "Nusp" field with "123"
-        And I fill the "Password" field with "prof-123"
-        And I press the "Sign in" button
+        When I fill the "Número USP" field with "123"
+        And I fill the "Senha" field with "prof-123"
+        And I press the "Entrar" button
         And I should see "Pedidos de monitoria"
         And I click the "Pedidos de monitoria" link
         And I should see "Editar"
@@ -61,9 +61,9 @@ Feature: CRUD Request for Teaching Assistant
         And there is a professor with name "Mandel" and password "prof-123" nusp "1234" department "MAC" and email "kira@bob.bob"
         And there is a request for teaching assistant with professor "Bob" and subject "MAC0110" and requested_number "4" and priority "Extremamente necessário, mas não imprescindível" and student_assistance "false" and work_correction "true" and test_oversight "true"
         And there is a request for teaching assistant with professor "Mandel" and subject "MAC0122" and requested_number "2" and priority "Extremamente necessário, mas não imprescindível" and student_assistance "false" and work_correction "true" and test_oversight "true"
-        When I fill the "Nusp" field with "123"
-        And I fill the "Password" field with "prof-123"
-        And I press the "Sign in" button
+        When I fill the "Número USP" field with "123"
+        And I fill the "Senha" field with "prof-123"
+        And I press the "Entrar" button
         And I should see "Pedidos de monitoria"
         Then I click the "Pedidos de monitoria" link
         And I should see "MAC0110"
