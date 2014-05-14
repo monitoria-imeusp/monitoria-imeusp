@@ -1,36 +1,36 @@
 <h1>Editando Professor</h1>
- 
+
 <%= form_for :professor, url: professor_path(@professor), method: :patch do |f| %>
   <p>
     <%= f.label :name, "Nome" %><br>
     <%= f.text_field :name %>
   </p>
- 
+
   <p>
     <%= f.label :nusp, "Número USP" %><br>
     <%= f.text_field :nusp %>
   </p>
- 
+
   <p>
     <%= f.label :department, "Departamento" %><br>
     <%= f.select :department, [["MAC", "mac"], ["MAE", "mae"], ["MAP", "map"], ["MAT", "mat"]] %>
   </p>
- 
+
   <p>
     <%= f.label :password , "Senha" %><br>
     <%= f.password_field :password %>
   </p>
- 
+
   <p>
     <%= f.label :password_confirmation , "Confirme a senha" %><br>
     <%= f.password_field :password_confirmation %>
   </p>
 
   <p>
-    <%= f.label :email, "Email" %><br>
+    <%= f.label :email, "E-mail" %><br>
     <%= f.email_field :email %>
   </p>
- 
+
   <p>
     <%= f.label :super_professor, "Permissão SuperProfessor" %><br>
     <%= f.check_box :super_professor %>
@@ -40,5 +40,5 @@
     <%= f.submit "Salvar"%>
   </p>
 <% end %>
- 
+
 <%= link_to 'Voltar', professors_path %>

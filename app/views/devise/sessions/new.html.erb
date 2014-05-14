@@ -2,18 +2,21 @@
 
 <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
   <% if resource_name == :admin %>
-  	<div><%= f.label :email %><br />
+  	<div><%= f.label :email, "E-mail" %><br />
   	<%= f.email_field :email, autofocus: true %></div>
   <% else %>
-  	<div><%= f.label :nusp %><br />
+  	<div><%= f.label :nusp, "Número USP" %><br />
   	<%= f.text_field :nusp, autofocus: true %></div>
   <% end %>
 
-  <div><%= f.label :password %><br />
+  <div><%= f.label :password, "Senha" %><br />
     <%= f.password_field :password, autocomplete: "off" %></div>
 
   <% if devise_mapping.rememberable? -%>
-    <div><%= f.check_box :remember_me %> <%= f.label :remember_me %></div>
+    <div>
+      <%= f.check_box :remember_me %>
+      <%= f.label :remember_me, "Lembrar de mim" %>
+    </div>
   <% end -%>
 
   <div><%= f.submit "Entrar" %></div>

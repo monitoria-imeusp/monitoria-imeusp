@@ -2,22 +2,22 @@
   	<strong>Nome:</strong>
   	<%= @professor.name %>
 </p>
- 
+
 <p>
-  	<strong>Nusp:</strong>
+  	<strong>Número USP:</strong>
   	<%= @professor.nusp %>
 </p>
 
 <p>
-  	<strong>Email:</strong>
+  	<strong>E-mail:</strong>
   	<%= @professor.email %>
 </p>
- 
+
 <p>
   	<strong>Departamento:</strong>
   	<%= @professor.department.upcase %>
 </p>
- 
+
 <% if admin_signed_in? %>
     <p>
         <strong>SuperProfessor:</strong>
