@@ -9,7 +9,7 @@ Feature: Secretary creation
         When I fill the "E-mail" field with "kazuo@ime.usp.br"
         And I fill the "Senha" field with "admin123"
         And I press the "Entrar" button
-        And I click the "Nova Secretária" link
+        And I click the "Novo Funcionário" link
         And I fill the "Número USP" field with "1234567"
         And I fill the "Nome" field with "Marcia"
         And I fill the "Email" field with "marcia@ime.usp.br"
@@ -27,7 +27,7 @@ Feature: Secretary creation
         When I fill the "Número USP" field with "1111111"
         And I fill the "Senha" field with "12345678"
         And I press the "Entrar" button
-        And I should not see "Nova Secretária"
+        And I should not see "Novo Funcionário"
         Then I try the create secretary URL
         Then I should see "Para continuar, faça login ou registre-se."
 

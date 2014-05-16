@@ -34,7 +34,7 @@ Feature: Accessing the page
         When I fill the "E-mail" field with "kazuo@ime.usp.br"
         And I fill the "Senha" field with "admin123"
         And I press the "Entrar" button
-        And I click the "Lista de Professores" link
+        And I click the "Professores" link
         Then I should see "Editar"
 
     Scenario: Verify if other users can't edit professors

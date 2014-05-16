@@ -10,7 +10,7 @@ Feature: Secretary edit
         And I fill the "Senha" field with "admin123"
         And I press the "Entrar" button
         And there is a secretary with name "Marcia" and password "12345678" nusp "1111111" and email "marcia@ime.usp.br"
-        And I click the "Lista de Secretárias" link
+        And I click the "Funcionários" link
         And I click the "Editar" link
         And I fill the "Número USP" field with "2222222"
         And I fill the "Nome" field with "João"
@@ -30,11 +30,11 @@ Feature: Secretary edit
         And I fill the "Senha" field with "12345678"
         And I press the "Entrar" button
         And there is a secretary with name "Marcia" and password "12345678" nusp "1111111" and email "marcia@ime.usp.br"
-        And I click the "Lista de Secretárias" link
+        And I click the "Funcionários" link
         And I should not see "Editar"
 
     Scenario: Any person trying to edit a secretary
         Given I'm at the home page
         And there is a secretary with name "Marcia" and password "12345678" nusp "1111111" and email "marcia@ime.usp.br"
-        And I click the "Lista de Secretárias" link
+        And I click the "Funcionários" link
         And I should not see "Editar"
