@@ -104,6 +104,6 @@ When(/^there is a course with name "(.*?)" and code "(.*?)"$/) do |name, code|
   Course.create(name: name, course_code: code)
 end
 
-When(/^There is a secretary with name "(.*?)" and password "(.*?)" nusp "(.*?)" and email "(.*?)"$/) do |name, password, nusp, email|
+When(/^there is a secretary with name "(.*?)" and password "(.*?)" nusp "(.*?)" and email "(.*?)"$/) do |name, password, nusp, email|
   Secretary.create(name: name, nusp: nusp, email: email, password: password)
 end

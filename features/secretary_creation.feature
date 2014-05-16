@@ -5,10 +5,10 @@ Feature: Secretary creation
 
     Scenario: Admin creating a secretary
         Given I'm at the login page
-        And There is an admin user with email "kazuo@ime.usp.br" and password "admin123"
-        When I fill the "Email" field with "kazuo@ime.usp.br"
-        And I fill the "Password" field with "admin123"
-        And I press the "Sign in" button
+        And there is an admin user with email "kazuo@ime.usp.br" and password "admin123"
+        When I fill the "E-mail" field with "kazuo@ime.usp.br"
+        And I fill the "Senha" field with "admin123"
+        And I press the "Entrar" button
         And I click the "Nova Secretária" link
         And I fill the "Número USP" field with "1234567"
         And I fill the "Nome" field with "Marcia"
@@ -23,10 +23,10 @@ Feature: Secretary creation
 
     Scenario: Professor cannot create a secretary
         Given I'm at the professor login page
-        And There is a professor with name "arnaldo" and password "12345678" nusp "1111111" department "MAC" and email "kira@usp.br"
-        When I fill the "Nusp" field with "1111111"
-        And I fill the "Password" field with "12345678"
-        And I press the "Sign in" button
+        And there is a professor with name "arnaldo" and password "12345678" nusp "1111111" department "MAC" and email "kira@usp.br"
+        When I fill the "Número USP" field with "1111111"
+        And I fill the "Senha" field with "12345678"
+        And I press the "Entrar" button
         And I should not see "Nova Secretária"
         Then I try the create secretary URL
         Then I should see "Para continuar, faça login ou registre-se."
