@@ -29,10 +29,21 @@ div.content {
   min-height: 400px;
 }
 
-h1.pagetop {
-  padding: 0.5em 1em;
+div.pagetop {
+  padding: .7em 1em;
+  margin-top: 2em;
   border-bottom: 2px solid #b55;
   border-top: 2px solid #b55;
+  background-color: #ddd;
+}
+
+.pagetop > h1, ul {
+  margin-left: auto;
+  margin-right: auto;
+  width: 1024px;
+}
+
+.pagetop > h1 {
   font-size: 3em;
 }
 
@@ -48,12 +59,28 @@ p, form {
   margin-left: 4em;
 }
 
-a {
+.pagetop > ul > li > a:link, a:visited {
+  display: block;
+  width: 80%;
   text-decoration: none;
+  text-align: center;
+  color: #666;
+  margin-left: auto;
+  margin-right: auto;
   font-weight: bold;
+  padding: 1px 1em;
 }
 
-a:hover {
+.pagetop > ul > li > a:hover, a:active {
   color: #b55;
-  background-color: #fff;
+  background-color: #ddd;
+}
+
+.pagetop > ul {
+  list-style-type: none;
+  overflow: hidden;
+}
+
+.pagetop > ul > li {
+  float: left;
 }
