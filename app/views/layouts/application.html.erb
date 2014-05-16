@@ -20,31 +20,54 @@
   </head>
 
   <body>
-
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
-
-    <div class="shell">
-      <h1 class="pagetop">Sistema de monitoria</h1>
-      <span>
-        <%= link_to "Lista de Professores", professors_path %>
-        <%= link_to "Lista de Disciplinas", courses_path %>
-        <%= link_to "Lista de Secretárias", secretaries_path %>
+    <div class="pagetop">
+      <h1>Sistema de monitoria</h1>
+      <ul>
+        <li>
+          <%= link_to "Professores", professors_path %>
+        </li>
+        <li>
+          <%= link_to "Disciplinas", courses_path %>
+        </li>
+        <li>
+        <%= link_to "Funcionários", secretaries_path %>
+        </li>
         <% if admin_signed_in? || (current_professor.present? && current_professor.super_professor?) %>
-          <%= link_to "Nova Disciplina", new_course_path %>
+          <li>
+            <%= link_to "Nova Disciplina", new_course_path %>
+          </li>
         <% end %>
         <% if admin_signed_in? %>
-          <%= link_to "Novo Professor", new_professor_path %>
-          <%= link_to "Nova Secretária", new_secretary_path %>
-          <%= current_admin.email %> (<%= link_to "Logout", destroy_admin_session_path, method: :delete %>)
+          <li>
+            <%= link_to "Novo Professor", new_professor_path %>
+          </li>
+          <li>
+            <%= link_to "Novo Funcionário", new_secretary_path %>
+          </li>
+          <li>
+            <%= link_to ("Logout"), destroy_admin_session_path, method: :delete %>
+          </li>
         <% elsif professor_signed_in? %>
-          <%= current_professor.email %> (<%= link_to "Logout", destroy_professor_session_path, method: :delete %>)
-          <%= link_to "Pedidos de Monitoria", request_for_teaching_assistants_path %>
+          <li>
+            <%= current_professor.email %> (<%= link_to "Logout", destroy_professor_session_path, method: :delete %>)
+            <%= link_to "Pedidos de Monitoria", request_for_teaching_assistants_path %>
+          </li>
         <% else %>
-          <%= link_to "Login Professor", new_professor_session_path %>
-          <%= link_to "Admin Login", new_admin_session_path %>
+          <li>
+            <%= link_to "Login Professor", new_professor_session_path %>
+          </li>
+          <li>
+            <%= link_to "Admin Login", new_admin_session_path %>
+          </li>
         <% end %>
-      </span>
+      </ul>
+    </div>
+    <div class="shell">
+      <% if admin_signed_in? %>
+        <p> (<%=current_admin.email%>) </p>
+      <% end %>
+      <p class="notice"><%= notice %></p>
+      <p class="alert"><%= alert %></p>
       <div class="content">
         <%= yield %>
       </div>
