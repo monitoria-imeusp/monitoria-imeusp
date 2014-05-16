@@ -45,11 +45,13 @@
             <%= link_to "Novo Funcionário", new_secretary_path %>
           </li>
           <li>
-            <%= link_to ("Logout"), destroy_admin_session_path, method: :delete %>
+            <%= link_to "Logout", destroy_admin_session_path, method: :delete %>
           </li>
         <% elsif professor_signed_in? %>
           <li>
-            <%= current_professor.email %> (<%= link_to "Logout", destroy_professor_session_path, method: :delete %>)
+            <%= link_to "Logout", destroy_professor_session_path, method: :delete %>
+          </li>
+          <li>
             <%= link_to "Pedidos de Monitoria", request_for_teaching_assistants_path %>
           </li>
         <% else %>
@@ -64,7 +66,9 @@
     </div>
     <div class="shell">
       <% if admin_signed_in? %>
-        <p> (<%=current_admin.email%>) </p>
+        (<%=current_admin.email%>)
+      <% elsif professor_signed_in? %>
+        (<%= current_professor.email %>)
       <% end %>
       <p class="notice"><%= notice %></p>
       <p class="alert"><%= alert %></p>
