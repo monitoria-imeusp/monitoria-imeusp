@@ -39,10 +39,17 @@
         <% if admin_signed_in? %>
           <p>
             Acessando como
-            <%=current_admin.email%>
+            <b><%=current_admin.email%></b>
           </p>
         <% elsif professor_signed_in? %>
-          (<%= current_professor.email %>)
+          <p>
+            Acessando como
+            <b><%= current_professor.email %></b>
+          </p>
+        <% else %>
+          <p>
+            Você ainda não fez acesso
+          </p>
         <% end %>
         <ul>
           <% if admin_signed_in? || (current_professor.present? && current_professor.super_professor?) %>
@@ -62,10 +69,10 @@
             </li>
           <% elsif professor_signed_in? %>
             <li>
-              <%= link_to "Logout", destroy_professor_session_path, method: :delete %>
+              <%= link_to "Pedidos de Monitoria", request_for_teaching_assistants_path %>
             </li>
             <li>
-              <%= link_to "Pedidos de Monitoria", request_for_teaching_assistants_path %>
+              <%= link_to "Logout", destroy_professor_session_path, method: :delete %>
             </li>
           <% else %>
             <li>

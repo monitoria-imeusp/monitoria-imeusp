@@ -48,35 +48,44 @@ div.pagetop {
 
 div.sidebar {
   float: right;
-  background-color: #ddd;
   margin: 1em 0em;
   width: 20%;
-  min-height: 100%;
-  border: 2px solid #b55;
-  border-radius: 12px;
+  min-height: 600px;
+  height: 100%;
 }
 
 .sidebar > p {
   margin-left: 1em;
+  margin-right: 1em;
+  padding-top: 2em;
+  text-align: center;
+}
+
+.sidebar > ul {
+  list-style-type: none;
+  padding-left: 20px;
+  line-height: 1.4;
+
 }
 
 .sidebar > ul > li > a:link, a:visited {
   text-decoration: none;
-  color: #333;
   font-weight: bold;
+  color: #368;
 }
 
 .sidebar > ul > li > a:hover, a:active {
   color: #b55;
-  background-color: #aad;
+  background-color: #fff;
 }
 
 h2 {
   margin-left: 2em;
 }
 
-p, form, a {
+p, form, a, a:hover {
   font-size: 18px;
+  background-color: #fff;
 }
 
 .content > p, form {
@@ -96,8 +105,9 @@ p, form, a {
 }
 
 .pagetop > ul > li > a:hover, a:active {
-  color: #b55;
-  background-color: #ddd;
+  color: #368;
+  background-color: #fff;
+  text-decoration: underline;
 }
 
 .pagetop > ul {
