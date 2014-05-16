@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  
+
   get 'home/index'
 
   devise_for :admins
@@ -13,8 +13,12 @@ Rails.application.routes.draw do
 
   resources :request_for_teaching_assistants
   resources :professors
+
   resources :courses  
   resources :secretaries
+
+  resources :students
+  resources :request_for_teaching_assistants
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

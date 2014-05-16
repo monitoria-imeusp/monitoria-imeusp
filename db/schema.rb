@@ -90,4 +90,25 @@ ActiveRecord::Schema.define(version: 20140523171732) do
     t.string   "last_sign_in_ip"
   end
 
+  create_table "students", force: true do |t|
+    t.string   "name"
+    t.string   "password"
+    t.string   "nusp"
+    t.integer  "gender"
+    t.string   "rg"
+    t.string   "cpf"
+    t.string   "adress"
+    t.string   "complement"
+    t.string   "district"
+    t.string   "zipcode"
+    t.string   "city"
+    t.string   "state"
+    t.string   "tel"
+    t.string   "cel"
+    t.string   "email"
+    t.boolean  "has_bank_account", default: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
 end
