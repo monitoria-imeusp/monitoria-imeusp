@@ -34,7 +34,6 @@ div.pagetop {
   margin-top: 2em;
   border-bottom: 2px solid #b55;
   border-top: 2px solid #b55;
-  background-color: #ddd;
 }
 
 .pagetop > h1, ul {
@@ -47,19 +46,53 @@ div.pagetop {
   font-size: 3em;
 }
 
+div.sidebar {
+  float: right;
+  margin: 1em 0em;
+  width: 20%;
+  min-height: 600px;
+  height: 100%;
+}
+
+.sidebar > p {
+  margin-left: 1em;
+  margin-right: 1em;
+  padding-top: 2em;
+  text-align: center;
+}
+
+.sidebar > ul {
+  list-style-type: none;
+  padding-left: 20px;
+  line-height: 1.4;
+
+}
+
+.sidebar > ul > li > a:link, a:visited {
+  text-decoration: none;
+  font-weight: bold;
+  color: #368;
+}
+
+.sidebar > ul > li > a:hover, a:active {
+  color: #b55;
+  background-color: #fff;
+}
+
 h2 {
   margin-left: 2em;
 }
 
-p, form, a {
+p, form, a, a:hover {
   font-size: 18px;
+  background-color: #fff;
 }
 
-p, form {
+.content > p, form {
   margin-left: 4em;
 }
 
-.pagetop > ul > li > a:link, a:visited {
+.pagetop > ul > li > a:link, .pagetop > ul > li > a:visited {
   display: block;
   width: 80%;
   text-decoration: none;
@@ -72,8 +105,9 @@ p, form {
 }
 
 .pagetop > ul > li > a:hover, a:active {
-  color: #b55;
-  background-color: #ddd;
+  color: #368;
+  background-color: #fff;
+  text-decoration: underline;
 }
 
 .pagetop > ul {

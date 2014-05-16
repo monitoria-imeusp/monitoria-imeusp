@@ -32,46 +32,60 @@
         <li>
         <%= link_to "Funcionários", secretaries_path %>
         </li>
-        <% if admin_signed_in? || (current_professor.present? && current_professor.super_professor?) %>
-          <li>
-            <%= link_to "Nova Disciplina", new_course_path %>
-          </li>
-        <% end %>
-        <% if admin_signed_in? %>
-          <li>
-            <%= link_to "Novo Professor", new_professor_path %>
-          </li>
-          <li>
-            <%= link_to "Novo Funcionário", new_secretary_path %>
-          </li>
-          <li>
-            <%= link_to "Logout", destroy_admin_session_path, method: :delete %>
-          </li>
-        <% elsif professor_signed_in? %>
-          <li>
-            <%= link_to "Logout", destroy_professor_session_path, method: :delete %>
-          </li>
-          <li>
-            <%= link_to "Pedidos de Monitoria", request_for_teaching_assistants_path %>
-          </li>
-        <% else %>
-          <li>
-            <%= link_to "Login Professor", new_professor_session_path %>
-          </li>
-          <li>
-            <%= link_to "Admin Login", new_admin_session_path %>
-          </li>
-        <% end %>
       </ul>
     </div>
     <div class="shell">
-      <% if admin_signed_in? %>
-        (<%=current_admin.email%>)
-      <% elsif professor_signed_in? %>
-        (<%= current_professor.email %>)
-      <% end %>
-      <p class="notice"><%= notice %></p>
-      <p class="alert"><%= alert %></p>
+      <div class="sidebar">
+        <% if admin_signed_in? %>
+          <p>
+            Acessando como
+            <b><%=current_admin.email%></b>
+          </p>
+        <% elsif professor_signed_in? %>
+          <p>
+            Acessando como
+            <b><%= current_professor.email %></b>
+          </p>
+        <% else %>
+          <p>
+            Você ainda não fez acesso
+          </p>
+        <% end %>
+        <ul>
+          <% if admin_signed_in? || (current_professor.present? && current_professor.super_professor?) %>
+            <li>
+              <%= link_to "Nova Disciplina", new_course_path %>
+            </li>
+          <% end %>
+          <% if admin_signed_in? %>
+            <li>
+              <%= link_to "Novo Professor", new_professor_path %>
+            </li>
+            <li>
+              <%= link_to "Novo Funcionário", new_secretary_path %>
+            </li>
+            <li>
+              <%= link_to "Logout", destroy_admin_session_path, method: :delete %>
+            </li>
+          <% elsif professor_signed_in? %>
+            <li>
+              <%= link_to "Pedidos de Monitoria", request_for_teaching_assistants_path %>
+            </li>
+            <li>
+              <%= link_to "Logout", destroy_professor_session_path, method: :delete %>
+            </li>
+          <% else %>
+            <li>
+              <%= link_to "Login Professor", new_professor_session_path %>
+            </li>
+            <li>
+              <%= link_to "Admin Login", new_admin_session_path %>
+            </li>
+          <% end %>
+        </ul>
+        <p class="notice"><%= notice %></p>
+        <p class="alert"><%= alert %></p>
+      </div>
       <div class="content">
         <%= yield %>
       </div>
