@@ -2,9 +2,9 @@
 
 FactoryGirl.define do
   factory :secretary do
-    nusp "MyString"
-    name "MyString"
-    email "MyString"
-    password "MyString"
+    nusp "1234999"
+    name "Secretaria"
+    email "secretaria@ime.usp.br"
+    password "12345678"
   end
 end
