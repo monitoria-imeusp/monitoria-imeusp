@@ -80,8 +80,8 @@ When(/^I select the priority option "(.*?)"$/) do |radio_button_string|
     end
 end
 
-Given(/^there is a request for teaching assistant with professor "(.*?)" and subject "(.*?)" and requested_number "(.*?)" and priority "(.*?)" and student_assistance "(.*?)" and work_correction "(.*?)" and test_oversight "(.*?)"$/) do |professor_name, subject, requested_number, priority, student_assistance, work_correction, test_oversight|
-    RequestForTeachingAssistant.create(professor_id: Professor.where(name: professor_name).take.id, subject: subject, requested_number: requested_number, priority: priority, student_assistance: student_assistance, work_correction: work_correction, test_oversight: test_oversight)
+Given(/^there is a request for teaching assistant with professor "(.*?)" and course "(.*?)" and requested_number "(.*?)" and priority "(.*?)" and student_assistance "(.*?)" and work_correction "(.*?)" and test_oversight "(.*?)"$/) do |professor_name, course_code, requested_number, priority, student_assistance, work_correction, test_oversight|
+    RequestForTeachingAssistant.create(professor_id: Professor.where(name: professor_name).take.id, course_id: Course.find_by({:course_code => course_code}).id, requested_number: requested_number, priority: priority, student_assistance: student_assistance, work_correction: work_correction, test_oversight: test_oversight)
 end
 
 When(/^I unmark the "(.*?)" checkbox$/) do |checkbox|

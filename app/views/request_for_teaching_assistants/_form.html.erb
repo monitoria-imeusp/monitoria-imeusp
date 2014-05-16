@@ -12,6 +12,8 @@
   <% end %>
 
   <div class="field">
+      <%= f.label :course_id, "Disciplina" %><br>
+      <%= f.select :course_id, course_options %><br>
   </div>
   <div class="field">
     <%= f.label :requested_number, 'Número de monitores solicitados' %><br>

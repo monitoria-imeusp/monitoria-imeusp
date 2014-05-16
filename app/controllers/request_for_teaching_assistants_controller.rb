@@ -34,8 +34,9 @@ class RequestForTeachingAssistantsController < ApplicationController
   # POST /request_for_teaching_assistants.json
   def create
     params[:request_for_teaching_assistant][:professor_id] = current_professor.id
+    puts request_for_teaching_assistant_params
     @request_for_teaching_assistant = RequestForTeachingAssistant.new(request_for_teaching_assistant_params)
-
+    
     respond_to do |format|
       if @request_for_teaching_assistant.save
         format.html { redirect_to @request_for_teaching_assistant, notice: 'Pedido de Monitoria feito com sucesso.' }
@@ -86,7 +87,7 @@ class RequestForTeachingAssistantsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def request_for_teaching_assistant_params
-      params.require(:request_for_teaching_assistant).permit(:professor_id, :subject, :requested_number, :priority, :student_assistance, :work_correction, :test_oversight)
+      params.require(:request_for_teaching_assistant).permit(:professor_id, :subject, :requested_number, :priority, :student_assistance, :work_correction, :test_oversight, :course_id)
     end
 
 end
