@@ -107,3 +107,7 @@ end
 When(/^there is a secretary with name "(.*?)" and password "(.*?)" nusp "(.*?)" and email "(.*?)"$/) do |name, password, nusp, email|
   Secretary.create(name: name, nusp: nusp, email: email, password: password)
 end
+
+Given(/^I'm at the secretary login page$/) do
+  visit new_secretary_session_path
+end
