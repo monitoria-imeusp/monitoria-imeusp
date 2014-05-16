@@ -31,9 +31,7 @@ div.content {
 
 div.pagetop {
   padding: .7em 1em;
-  margin-top: 2em;
   border-bottom: 2px solid #b55;
-  border-top: 2px solid #b55;
 }
 
 .pagetop > h1, ul {
