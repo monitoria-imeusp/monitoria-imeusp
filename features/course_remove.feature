@@ -10,7 +10,7 @@ Feature: Course deletion
         And I fill the "Senha" field with "admin123"
         And I press the "Entrar" button
         And there is a course with name "labxp" and code "mac0342"
-        And I click the "Lista de Disciplina" link
+        And I click the "Disciplinas" link
         And I click the "Remover" link
         And I should not see "labxp"
         And I should not see "mac0342"
@@ -23,7 +23,7 @@ Feature: Course deletion
         And I fill the "Senha" field with "12345678"
         And I press the "Entrar" button
         And there is a course with name "labxp" and code "mac0342"
-        And I click the "Lista de Disciplina" link
+        And I click the "Disciplinas" link
         And I click the "Remover" link
         And I should not see "labxp"
         And I should not see "mac0342"
@@ -35,10 +35,10 @@ Feature: Course deletion
         And I fill the "Senha" field with "12345678"
         And I press the "Entrar" button
         And there is a course with name "labxp" and code "mac0342"
-        And I click the "Lista de Disciplina" link
+        And I click the "Disciplinas" link
         And I should not see "Remover"
 
     Scenario: Any person trying to remove a course
         Given I'm at the home page
-        And I click the "Lista de Disciplina" link
+        And I click the "Disciplinas" link
         And I should not see "Remover"
