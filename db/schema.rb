@@ -59,7 +59,6 @@ ActiveRecord::Schema.define(version: 20140516194553) do
 
   create_table "request_for_teaching_assistants", force: true do |t|
     t.integer  "professor_id"
-    t.string   "subject"
     t.integer  "requested_number"
     t.integer  "priority"
     t.boolean  "student_assistance", default: false
@@ -67,7 +66,10 @@ ActiveRecord::Schema.define(version: 20140516194553) do
     t.boolean  "test_oversight",     default: false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "course_id"
   end
+
+  add_index "request_for_teaching_assistants", ["course_id"], name: "index_request_for_teaching_assistants_on_course_id"
 
   create_table "secretaries", force: true do |t|
     t.string   "nusp"
