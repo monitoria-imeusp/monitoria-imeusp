@@ -1,5 +1,24 @@
-<h1>New secretary</h1>
+<%= form_for :secretary, url: secretaries_path do |f| %>
+  <p>
+    <%= f.label :nusp, "Número USP" %><br>
+    <%= f.text_field :nusp %>
+  </p>
 
-<%= render 'form' %>
+  <p>
+    <%= f.label :name, "Nome" %><br>
+    <%= f.text_field :name %>
+  </p>
 
-<%= link_to 'Back', secretaries_path %>
+  <p>
+    <%= f.label :email, "Email" %><br>
+    <%= f.email_field :email %>
+  </p>
+
+  <p>
+    <%= f.label :password , "Senha" %><br>
+    <%= f.password_field :password %>
+  </p>
+  <p>
+    <%= f.submit "Cadastrar" %>
+  </p>
+<% end %>
