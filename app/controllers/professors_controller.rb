@@ -41,6 +41,10 @@ class ProfessorsController < ApplicationController
             return
         end
         @professor = Professor.find(params[:id])
+        if params[:professor][:password].blank? && params[:professor][:password_confirmation].blank?
+            params[:professor].delete(:password)
+            params[:professor].delete(:password_confirmation)
+        end
         if @professor.update(professor_params)
             redirect_to @professor
         else
@@ -50,6 +54,6 @@ class ProfessorsController < ApplicationController
 
     private
         def professor_params
-            params.require(:professor).permit(:name, :nusp, :password, :department, :email)
+            params.require(:professor).permit(:name, :nusp, :password, :department, :email, :super_professor)
         end
 end

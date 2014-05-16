@@ -1,5 +1,15 @@
+include RequestForTeachingAssistantsHelper
+
 Given(/^I'm at the login page$/) do
       visit new_admin_session_path
+end
+
+Then(/^I try the create course URL$/) do
+  visit new_course_path
+end
+
+Given(/^I'm at the home page$/) do
+  visit root_path
 end
 
 Given(/^There is an admin user with email "(.*?)" and password "(.*?)"$/) do |email, password|
@@ -58,3 +68,34 @@ When(/^I mark the "(.*?)" checkbox$/) do |checkbox|
   check(checkbox)
 end
 
+When(/^I select the priority option "(.*?)"$/) do |radio_button_string|
+    RequestForTeachingAssistantsHelper.priorityOptions.each do |priority_option|
+        if priority_option[0] == radio_button_string
+            choose("request_for_teaching_assistant_priority_" + priority_option[1].to_s)
+        end
+    end
+end
+
+Given(/^there is a request for teaching assistant with professor "(.*?)" and subject "(.*?)" and requested_number "(.*?)" and priority "(.*?)" and student_assistance "(.*?)" and work_correction "(.*?)" and test_oversight "(.*?)"$/) do |professor_name, subject, requested_number, priority, student_assistance, work_correction, test_oversight|
+    RequestForTeachingAssistant.create(professor_id: Professor.where(name: professor_name).take.id, subject: subject, requested_number: requested_number, priority: priority, student_assistance: student_assistance, work_correction: work_correction, test_oversight: test_oversight)
+end
+
+When(/^I unmark the "(.*?)" checkbox$/) do |checkbox|
+  uncheck(checkbox)
+end
+
+When(/^I confirm the alert$/) do
+    page.driver.browser.switch_to.alert.accept
+end
+
+When(/^I should see "(.*?)" in the alert$/) do |text|
+      page.driver.alert_messages == text
+end
+
+Given(/^There is a super_professor with name "(.*?)" and password "(.*?)" nusp "(.*?)" department "(.*?)" and email "(.*?)"$/) do |name, password, nusp, department, email|
+  Professor.create(name: name , password: password, nusp: nusp, department: department, email: email, super_professor: true)
+end
+
+When(/^There is a course with name "(.*?)" and code "(.*?)"$/) do |name, code|
+  Course.create(name: name, course_code: code)
+end

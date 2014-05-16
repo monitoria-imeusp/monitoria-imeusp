@@ -38,7 +38,7 @@ class RequestForTeachingAssistantsController < ApplicationController
 
     respond_to do |format|
       if @request_for_teaching_assistant.save
-        format.html { redirect_to @request_for_teaching_assistant, notice: 'Request for teaching assistant was successfully created.' }
+        format.html { redirect_to @request_for_teaching_assistant, notice: 'Pedido de Monitoria feito com sucesso.' }
         format.json { render action: 'show', status: :created, location: @request_for_teaching_assistant }
       else
         format.html { render action: 'new' }
@@ -52,7 +52,7 @@ class RequestForTeachingAssistantsController < ApplicationController
   def update
     respond_to do |format|
       if @request_for_teaching_assistant.update(request_for_teaching_assistant_params)
-        format.html { redirect_to @request_for_teaching_assistant, notice: 'Request for teaching assistant was successfully updated.' }
+        format.html { redirect_to @request_for_teaching_assistant, notice: 'Pedido de Monitoria atualizado com sucesso.' }
         format.json { render action: 'show', status: :ok, location: @request_for_teaching_assistant }
       else
         format.html { render action: 'edit' }
@@ -75,7 +75,7 @@ class RequestForTeachingAssistantsController < ApplicationController
       end
     end
   end
-
+    
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_request_for_teaching_assistant
@@ -86,6 +86,7 @@ class RequestForTeachingAssistantsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def request_for_teaching_assistant_params
-      params.require(:request_for_teaching_assistant).permit(:professor_id, :subject, :requestedNumber, :priority, :student_assistance, :work_correction, :test_oversight)
+      params.require(:request_for_teaching_assistant).permit(:professor_id, :subject, :requested_number, :priority, :student_assistance, :work_correction, :test_oversight)
     end
+
 end

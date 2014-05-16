@@ -2,23 +2,27 @@
   	<strong>Nome:</strong>
   	<%= @professor.name %>
 </p>
- 
+
 <p>
-  	<strong>Nusp:</strong>
+  	<strong>Número USP:</strong>
   	<%= @professor.nusp %>
 </p>
 
 <p>
-  	<strong>Email:</strong>
+  	<strong>E-mail:</strong>
   	<%= @professor.email %>
 </p>
- 
+
 <p>
   	<strong>Departamento:</strong>
-  	<%= @professor.department %>
+  	<%= @professor.department.upcase %>
 </p>
- 
+
 <% if admin_signed_in? %>
+    <p>
+        <strong>SuperProfessor:</strong>
+        <%= show_yes_or_no @professor.super_professor %>
+	</p>
 	<p>
 		<%= link_to 'Editar', edit_professor_path(@professor) %>
 	</p>
