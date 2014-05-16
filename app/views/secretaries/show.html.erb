@@ -15,10 +15,6 @@
   <%= @secretary.email %>
 </p>
 
-<p>
-  <strong>Senha:</strong>
-  <%= @secretary.password %>
-</p>
 <% if admin_signed_in? %>
     <p>
 		<%= link_to 'Editar', edit_secretary_path(@secretary) %>
