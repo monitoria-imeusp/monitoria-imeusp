@@ -8,6 +8,10 @@ Then(/^I try the create course URL$/) do
   visit new_course_path
 end
 
+Then(/^I try the create secretary URL$/) do
+  visit new_secretary_path
+end
+
 Given(/^I'm at the home page$/) do
   visit root_path
 end
