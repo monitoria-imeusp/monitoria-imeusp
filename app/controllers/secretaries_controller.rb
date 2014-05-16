@@ -1,6 +1,6 @@
 class SecretariesController < ApplicationController
-    before_action :set_secretary, only: [:show, :edit, :update, :destroy]
-    before_action :authenticate_admin!, :except => [:show, :index]
+  before_action :set_secretary, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_admin!, :except => [:show, :index]
 
   # GET /secretaries
   # GET /secretaries.json
