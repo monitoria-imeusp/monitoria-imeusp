@@ -46,6 +46,11 @@
             Acessando como
             <b><%= current_professor.email %></b>
           </p>
+        <% elsif secretary_signed_in? %>
+          <p>
+            Acessando como
+            <b><%= current_secretary.email %></b>
+          </p>
         <% else %>
           <p>
             Você ainda não fez acesso
@@ -74,10 +79,17 @@
             <li>
               <%= link_to "Logout", destroy_professor_session_path, method: :delete %>
             </li>
+		  <% elsif secretary_signed_in? %>
+		    <li>
+              <%= link_to "Logout", destroy_secretary_session_path, method: :delete %>
+		    </li>
           <% else %>
             <li>
               <%= link_to "Login Professor", new_professor_session_path %>
             </li>
+		    <li>
+		      <%= link_to "Login Secretária", new_secretary_session_path %>
+		    </li>
             <li>
               <%= link_to "Admin Login", new_admin_session_path %>
             </li>
