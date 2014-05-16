@@ -1,20 +1,20 @@
 Rails.application.routes.draw do
-  resources :secretaries
-
-  resources :request_for_teaching_assistants
-
+  
   get 'home/index'
 
   devise_for :admins
   devise_for :professors, :controllers => { :professors => "professors" }
+  devise_for :secretaries, :controllers => { :secretaries => "secretaries" }
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
   root 'home#index'
 
+  resources :request_for_teaching_assistants
   resources :professors
   resources :courses  
+  resources :secretaries
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
