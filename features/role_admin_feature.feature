@@ -30,11 +30,12 @@ Feature: Accessing the page
     Scenario: Verify if the admin can edit professors
         Given I'm at the login page
         And there is an admin user with email "kazuo@ime.usp.br" and password "admin123"
-        And there is a professor with email "email@email.com" and password "12345678"
+        And there is a professor with name "Bob" and email "email@email.com" password "12345678" department "MAC"
         When I fill the "E-mail" field with "kazuo@ime.usp.br"
         And I fill the "Senha" field with "admin123"
         And I press the "Entrar" button
         And I click the "Professores" link
+        And I click the "Bob" link
         Then I should see "Editar"
 
     Scenario: Verify if other users can't edit professors

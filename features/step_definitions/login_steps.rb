@@ -61,8 +61,12 @@ Given(/^I'm at the professor login page$/) do
   visit new_professor_session_path
 end
 
+Given(/^there is a professor with name "(.*?)" and email "(.*?)" password "(.*?)" department "(.*?)"$/) do |name, email, password, department|
+  Professor.create(name: name, email: email, password: password, department: department)
+end
+
 Given(/^there is a professor with name "(.*?)" and password "(.*?)" nusp "(.*?)" department "(.*?)" and email "(.*?)"$/) do |name, password, nusp, department, email|
-  Professor.create(name: name , password: password, nusp: nusp, department: department, email: email)
+  Professor.create(name: name, password: password, nusp: nusp, department: department, email: email)
 end
 
 When(/^I select the "(.*?)" option$/) do |option|
