@@ -1,27 +1,19 @@
-<h1>Listando Professores</h1>
+<h1>Professores</h1>
 
 <table>
     <tr>
         <th>Nome</th>
-        <th>Nº USP</th>
-        <th>E-Mail</th>
+        <th>E-mail</th>
         <th>Departamento</th>
-        <% if admin_signed_in? %>
-            <th>Super Professor</th>
-        <% end %>
     </tr>
 
+    <% i = 0 %>
     <% @professors.each do |professor| %>
-        <tr>
-            <td><%= professor.name %></td>
-            <td><%= professor.nusp %></td>
+        <tr <%= "class=odd" if i%2 == 1 %> >
+            <td><%= link_to professor.name, professor %></td>
             <td><%= professor.email %></td>
-            <td><%= professor.department %></td>
-            <% if admin_signed_in? %>
-                <td><%= professor.super_professor%></td>
-                <td><%= link_to 'Editar', edit_professor_path(professor) %></td>
-            <% end %>
-            <td><%= link_to 'Visualizar', professor %></td>
+            <td><%= professor.department.upcase %></td>
+        <% i = i+1 %>
         </tr>
     <% end %>
 </table>
