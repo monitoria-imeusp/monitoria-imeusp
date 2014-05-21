@@ -7,13 +7,11 @@
         <th>Departamento</th>
     </tr>
 
-    <% i = 0 %>
     <% @professors.each do |professor| %>
-        <tr <%= "class=odd" if i%2 == 1 %> >
+        <tr>
             <td><%= link_to professor.name, professor %></td>
             <td><%= professor.email %></td>
             <td><%= professor.department.upcase %></td>
-        <% i = i+1 %>
         </tr>
     <% end %>
 </table>
