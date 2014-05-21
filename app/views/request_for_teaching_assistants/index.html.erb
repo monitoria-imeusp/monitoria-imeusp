@@ -21,9 +21,9 @@
         <td><%= request_for_teaching_assistant.course.course_code %></td>
         <td><%= request_for_teaching_assistant.requested_number %></td>
         <td><%= request_for_teaching_assistant.priority %></td>
-        <td><%= request_for_teaching_assistant.student_assistance %></td>
-        <td><%= request_for_teaching_assistant.work_correction %></td>
-        <td><%= request_for_teaching_assistant.test_oversight %></td>
+        <td><%= show_yes_or_no(request_for_teaching_assistant.student_assistance) %></td>
+        <td><%= show_yes_or_no(request_for_teaching_assistant.work_correction) %></td>
+        <td><%= show_yes_or_no(request_for_teaching_assistant.test_oversight) %></td>
         <td><%= link_to 'Ver', request_for_teaching_assistant %></td>
         <td><%= link_to 'Editar', edit_request_for_teaching_assistant_path(request_for_teaching_assistant) %></td>
         <td><%= link_to 'Remover', request_for_teaching_assistant, method: :delete, data: { confirm: 'Você tem certeza?' } %></td>
