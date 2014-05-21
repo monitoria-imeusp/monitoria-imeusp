@@ -74,3 +74,66 @@ Feature: CRUD Request for Teaching Assistant
         And I should see "MAC0110"
         And I should not see "MAC0122"
 
+    Scenario: Invalid Course
+        Given I'm at the professor login page
+        And there is a professor with name "Bob" and password "prof-123" nusp "123" department "MAC" and email "bob@bob.bob"
+        When I fill the "Número USP" field with "123"
+        And I fill the "Senha" field with "prof-123"
+        And I press the "Entrar" button
+        And I should see "Pedidos de Monitoria"
+        And I click the "Pedidos de Monitoria" link
+        And I click the "Novo pedido de monitor" link
+        And I fill the "Número de monitores solicitados" field with "2"
+        And I select the priority option "Extremamente necessário, mas não imprescindível"
+        And I press the "Enviar solicitação de monitor" button
+        Then I should see "Selecione uma disciplina"
+    
+    Scenario: Empty number of teaching assistants
+        Given I'm at the professor login page
+        And there is a professor with name "Bob" and password "prof-123" nusp "123" department "MAC" and email "bob@bob.bob"
+        And there is a course with name "Mascarenhas" and code "MAC0110"
+        When I fill the "Número USP" field with "123"
+        And I fill the "Senha" field with "prof-123"
+        And I press the "Entrar" button
+        And I should see "Pedidos de Monitoria"
+        And I click the "Pedidos de Monitoria" link
+        And I click the "Novo pedido de monitor" link
+        And I select "Mascarenhas" on the "Disciplina"
+        And I select the priority option "Extremamente necessário, mas não imprescindível"
+        And I press the "Enviar solicitação de monitor" button
+        Then I should see "Peça pelo menos um monitor"
+    
+    
+    Scenario: Zero or less teaching assistants
+        Given I'm at the professor login page
+        And there is a professor with name "Bob" and password "prof-123" nusp "123" department "MAC" and email "bob@bob.bob"
+        And there is a course with name "Mascarenhas" and code "MAC0110"
+        When I fill the "Número USP" field with "123"
+        And I fill the "Senha" field with "prof-123"
+        And I press the "Entrar" button
+        And I should see "Pedidos de Monitoria"
+        And I click the "Pedidos de Monitoria" link
+        And I click the "Novo pedido de monitor" link
+        And I select "Mascarenhas" on the "Disciplina"
+        And I fill the "Número de monitores solicitados" field with "0"
+        And I select the priority option "Extremamente necessário, mas não imprescindível"
+        And I press the "Enviar solicitação de monitor" button
+        Then I should see "Peça pelo menos um monitor"
+        And I fill the "Número de monitores solicitados" field with "-2"
+        And I press the "Enviar solicitação de monitor" button
+        And I should see "Peça pelo menos um monitor"
+    
+    Scenario: Without priority
+        Given I'm at the professor login page
+        And there is a professor with name "Bob" and password "prof-123" nusp "123" department "MAC" and email "bob@bob.bob"
+        And there is a course with name "Mascarenhas" and code "MAC0110"
+        When I fill the "Número USP" field with "123"
+        And I fill the "Senha" field with "prof-123"
+        And I press the "Entrar" button
+        And I should see "Pedidos de Monitoria"
+        And I click the "Pedidos de Monitoria" link
+        And I click the "Novo pedido de monitor" link
+        And I select "Mascarenhas" on the "Disciplina"
+        And I fill the "Número de monitores solicitados" field with "3"
+        And I press the "Enviar solicitação de monitor" button
+        Then I should see "Escolha uma prioridade"
