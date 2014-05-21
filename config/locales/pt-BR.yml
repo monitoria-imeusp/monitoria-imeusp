@@ -25,3 +25,15 @@ pt-BR:
     errors:
       messages:
         record_invalid: "Entrada inválida"
+    errors:
+      models:
+        request_for_teaching_assistant:
+          attributes:
+            course_id:
+              blank: "Selecione uma disciplina"
+            requested_number:
+              inclusion: "Peça pelo menos um monitor"
+              blank: ""
+            priority:
+              inclusion: "Escolha uma prioridade"
+              blank: ""

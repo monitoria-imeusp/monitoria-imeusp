@@ -1,11 +1,14 @@
 <%= form_for(@request_for_teaching_assistant) do |f| %>
   <% if @request_for_teaching_assistant.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@request_for_teaching_assistant.errors.count, "error") %> prohibited this request_for_teaching_assistant from being saved:</h2>
-
+      <h2>Alguns erros impediram de fazer a requisição:</h2>
       <ul>
-      <% @request_for_teaching_assistant.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
+      <% @request_for_teaching_assistant.errors.messages.each do |error_map| %>
+        <% error_map[1].each do |msg| %>
+          <% if not msg.empty? %>
+            <li><%= msg %></li>
+          <% end %>
+        <% end %>
       <% end %>
       </ul>
     </div>
