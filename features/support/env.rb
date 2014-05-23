@@ -11,8 +11,10 @@ SimpleCov.coverage_dir 'coverage/cucumber'
 require 'cucumber/rails'
 
 require 'capybara/poltergeist'
+
+require'capybara-webkit'
 #Capybara.default_driver = :poltergeist
-Capybara.javascript_driver = :selenium
+Capybara.javascript_driver = :webkit
 
 # Capybara defaults to CSS3 selectors rather than XPath.
 # If you'd prefer to use XPath, just uncomment this line and adjust any
