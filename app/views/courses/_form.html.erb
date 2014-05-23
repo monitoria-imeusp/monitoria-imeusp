@@ -1,0 +1,17 @@
+<%= form_for(@course) do |f| %>
+
+  <div>
+    <%= f.label :name, "Nome da Disciplina" %><br>
+    <%= f.text_field :name %>
+  </div>
+
+  <div class="field">
+      <%= f.label :department_id, "Sigla da Disciplina" %><br>
+      <%= f.select :department_id, department_options %>
+      <%= f.text_field :course_code %>
+  </div>
+  
+  <p>
+    <%= f.submit "Cadastrar" %>
+    </p>
+<% end %>
