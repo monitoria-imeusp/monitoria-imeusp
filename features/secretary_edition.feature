@@ -16,6 +16,7 @@ Feature: Secretary edit
         And I fill the "Nome" field with "João"
         And I fill the "Email" field with "joao@ime.usp.br"
         And I fill the "Senha" field with "87654321"
+        And I fill the "Confirme a senha" field with "87654321"
         And I press the "Salvar" button
         Then I should see "Secretária foi atualizada com sucesso."
         And I should see "Número USP: 2222222"
