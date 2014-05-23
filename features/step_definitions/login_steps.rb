@@ -111,3 +111,7 @@ end
 Given(/^I'm at the secretary login page$/) do
   visit new_secretary_session_path
 end
+
+When(/^I write on the "(.*?)" text area "(.*?)"$/) do |text_area_name, text|
+     fill_in text_area_name, :with => text
+end

@@ -35,5 +35,10 @@
   <%= show_yes_or_no(@request_for_teaching_assistant.test_oversight) %>
 </p>
 
+<p>
+  <strong>Observações:</strong>
+  <%= (@request_for_teaching_assistant.observation) %>
+</p>
+
 <%= link_to 'Editar', edit_request_for_teaching_assistant_path(@request_for_teaching_assistant) %> |
 <%= link_to 'Voltar', request_for_teaching_assistants_path %>

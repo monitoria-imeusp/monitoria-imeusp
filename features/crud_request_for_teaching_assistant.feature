@@ -20,6 +20,7 @@ Feature: CRUD Request for Teaching Assistant
     And I select the priority option "Extremamente necessário, mas não imprescindível"
     And I mark the "Correção de trabalhos" checkbox
     And I mark the "Fiscalização de provas" checkbox
+    And I write on the "Observações" text area "teste observações"
     And I press the "Enviar solicitação de monitor" button
     Then I should see "Pedido de Monitoria feito com sucesso"
     And I should see "Disciplina: Mascarenhas"
@@ -28,6 +29,7 @@ Feature: CRUD Request for Teaching Assistant
     And I should see "Atendimento aos alunos: Não"
     And I should see "Correção de trabalhos: Sim"
     And I should see "Fiscalização de provas: Sim"
+    And I should see "Observações: teste observações"
 
     Scenario: Valid professor editing a request
         Given I'm at the professor login page
@@ -49,6 +51,7 @@ Feature: CRUD Request for Teaching Assistant
         And I mark the "Atendimento aos alunos" checkbox
         And I unmark the "Correção de trabalhos" checkbox
         And I unmark the "Fiscalização de provas" checkbox
+        And I write on the "Observações" text area "teste observações"
         And I press the "Enviar solicitação de monitor" button
         Then I should see "Pedido de Monitoria atualizado com sucesso."
         And I should see "Disciplina: Coisas"
@@ -57,6 +60,7 @@ Feature: CRUD Request for Teaching Assistant
         And I should see "Atendimento aos alunos: Sim"
         And I should see "Correção de trabalhos: Não"
         And I should see "Fiscalização de provas: Não"
+        And I should see "Observações: teste observações"
 
     Scenario: A professor can't see the request of another professor
         Given I'm at the professor login page

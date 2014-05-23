@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140516194553) do
+ActiveRecord::Schema.define(version: 20140523171732) do
 
   create_table "admins", force: true do |t|
     t.string   "email",                  default: "", null: false
@@ -67,6 +67,7 @@ ActiveRecord::Schema.define(version: 20140516194553) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "course_id"
+    t.text     "observation",        default: ""
   end
 
   add_index "request_for_teaching_assistants", ["course_id"], name: "index_request_for_teaching_assistants_on_course_id"

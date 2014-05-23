@@ -32,7 +32,8 @@ describe RequestForTeachingAssistantsController do
     "priority" => 0,
     "student_assistance" => true,
     "work_correction" => false,
-    "test_oversight" => true
+    "test_oversight" => true,
+    "observation" => "teste"
   } }
 
   let(:not_owned_attributes) { {
@@ -42,7 +43,8 @@ describe RequestForTeachingAssistantsController do
     "priority" => 2,
     "student_assistance" => true,
     "work_correction" => false,
-    "test_oversight" => false
+    "test_oversight" => false,
+    "observation" => "teste"
   } }
 
   let(:not_owned_other_department_attributes) { {
@@ -52,7 +54,8 @@ describe RequestForTeachingAssistantsController do
     "priority" => 2,
     "student_assistance" => true,
     "work_correction" => false,
-    "test_oversight" => false
+    "test_oversight" => false,
+    "observation" => "teste"
   } }
 
   let(:valid_professor) { {
