@@ -73,3 +73,7 @@ if Rails.env.development?
   end
   Secretary.create(name: "Marcia", nusp: "99999", email: "marcia@ime.usp.br", password: "changeme!")
 end
+Department.create(code: 'MAC')
+Department.create(code: 'MAE')
+Department.create(code: 'MAP')
+Department.create(code: 'MAT')
