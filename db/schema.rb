@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140528173124) do
+ActiveRecord::Schema.define(version: 20140530181825) do
 
   create_table "admins", force: true do |t|
     t.string   "email",                  default: "", null: false
@@ -36,12 +36,20 @@ ActiveRecord::Schema.define(version: 20140528173124) do
     t.string   "course_code"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "department_id"
   end
+
+  create_table "departments", force: true do |t|
+    t.string   "code"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "departments", ["code"], name: "index_departments_on_code", unique: true
 
   create_table "professors", force: true do |t|
     t.string   "name"
     t.string   "nusp"
-    t.string   "department"
     t.string   "email"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -55,6 +63,7 @@ ActiveRecord::Schema.define(version: 20140528173124) do
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
+    t.integer  "department_id"
   end
 
   create_table "request_for_teaching_assistants", force: true do |t|
@@ -106,14 +115,14 @@ ActiveRecord::Schema.define(version: 20140528173124) do
     t.string   "tel"
     t.string   "cel"
     t.string   "email"
-    t.boolean  "has_bank_account",       default: false
+    t.boolean  "has_bank_account"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "encrypted_password",     default: "",    null: false
+    t.string   "encrypted_password",     default: "", null: false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          default: 0,     null: false
+    t.integer  "sign_in_count",          default: 0,  null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
