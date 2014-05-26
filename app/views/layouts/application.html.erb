@@ -32,6 +32,11 @@
         <li>
         <%= link_to "Funcionários", secretaries_path %>
         </li>
+        <% if admin_signed_in? || professor_signed_in? %>
+          <li>
+            <%= link_to "Alunos", students_path %>
+          </li>
+        <% end %>
       </ul>
     </div>
     <div class="shell">
@@ -57,6 +62,9 @@
           </p>
         <% end %>
         <ul>
+          <li>
+            <%= link_to "Novo Aluno", new_student_path %>
+          </li>
           <% if admin_signed_in? || (current_professor.present? && current_professor.super_professor?) %>
             <li>
               <%= link_to "Nova Disciplina", new_course_path %>

@@ -1,0 +1,21 @@
+<h1>Listando Alunos</h1>
+
+<table>
+	<tr> 
+		<th>Nome</th>
+		<th>Nusp</th>
+	</tr>
+
+	<% @students.each do |student| %>
+		<tr>
+			<td><%= student.name %></td>
+      <td><%= student.nusp %></td>
+      <td><%= link_to 'Visualizar', student %></td>
+      <% if admin_signed_in? %>
+					<td><%= link_to 'Remover', student_path(student), method: :delete %></td>
+      <% end %>
+
+    </tr>
+
+	<% end %>
+</table>

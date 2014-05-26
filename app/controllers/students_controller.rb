@@ -1,4 +1,6 @@
 class StudentsController < ApplicationController
+    before_action :authenticate!,  :only => [:index]
+
 
     def new
         @student = Student.new
@@ -55,6 +57,12 @@ class StudentsController < ApplicationController
     end
 
     protected 
+
+    def authenticate!
+        unless admin_signed_in? or professor_signed_in?
+            redirect_to students_path
+        end
+    end
 
     private
         def student_params

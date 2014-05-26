@@ -1,4 +1,4 @@
-<%= form_for :professor, url: professors_path do |f| %>
+<%= form_for :student, url: students_path do |f| %>
 
   <p>
     <%= f.label :name, "Nome" %><br>
@@ -17,7 +17,7 @@
 
   <p>
     <%= f.label :gender, "Gênero" %><br>
-    <% gender_options.each do | option | %>
+    <% genderOptions.each do | option | %>
       <%= f.radio_button :gender, option[1] %>
       <%= f.label option[0] %>
       </br>
@@ -81,7 +81,7 @@
 
  <p>
     <%= f.label :has_bank_account, 'Possui conta BB?' %><br>
-    <% yes_or_no.each do | option | %>
+    <% yesOrNo.each do | option | %>
       <%= f.radio_button :has_bank_account, option[1] %>
       <%= f.label option[0] %>
       </br>

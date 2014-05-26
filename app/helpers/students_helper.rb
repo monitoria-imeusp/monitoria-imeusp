@@ -4,14 +4,14 @@ module StudentsHelper
       boolean_value ? 'Sim' : 'Não'
   end
 
-  def yes_or_no
+  def yesOrNo
   	[
   		['Sim', 0],
   		['Não', 1]
   	]
   end
 
-  def gender_options
+  def genderOptions
   	[
   		['Feminino', 0],
   		['Masculino', 1]
