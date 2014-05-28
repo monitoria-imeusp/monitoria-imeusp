@@ -14,67 +14,73 @@
 
 <% if professor_signed_in? || admin_signed_in? %>
  	<p>
- 		<strong> NUsp:</strong>
+ 		<strong> Número USP:</strong>
  		<%= @student.nusp %>
  	</p>
 
  	<p>
   	<strong>RG:</strong>
   	<%= @student.rg %>
-</p>
+  </p>
 
-<p>
-  	<strong>CPF:</strong>
-  	<%= @student.cpf %>
-</p>
+  <p>
+    	<strong>CPF:</strong>
+    	<%= @student.cpf %>
+  </p>
 
-<p>
-  	<strong>Endereço:</strong>
-  	<%= @student.adress %>
-</p>
+  <p>
+    	<strong>Endereço:</strong>
+    	<%= @student.adress %>
+  </p>
 
-<p>
-  	<strong>Complemento:</strong>
-  	<%= @student.complement %>
-</p>
+  <p>
+    	<strong>Complemento:</strong>
+    	<%= @student.complement %>
+  </p>
 
-<p>
-  	<strong>Bairro:</strong>
-  	<%= @student.district %>
-</p>
-<p>
-  	<strong>CEP:</strong>
-  	<%= @student.zipcode %>
-</p>
+  <p>
+    	<strong>Bairro:</strong>
+    	<%= @student.district %>
+  </p>
+  <p>
+    	<strong>CEP:</strong>
+    	<%= @student.zipcode %>
+  </p>
 
-<p>
-  	<strong>Cidade:</strong>
-  	<%= @student.city %>
-</p>
+  <p>
+    	<strong>Cidade:</strong>
+    	<%= @student.city %>
+  </p>
 
-<p>
-  	<strong>Estado:</strong>
-  	<%= @student.state %>
-</p>
+  <p>
+    	<strong>Estado:</strong>
+    	<%= @student.state %>
+  </p>
 
-<p>
-  	<strong>Telefone:</strong>
-  	<%= @student.tel %>
-</p>
+  <p>
+    	<strong>Telefone:</strong>
+    	<%= @student.tel %>
+  </p>
 
-<p>
-  	<strong>Celular:</strong>
-  	<%= @student.cel %>
-</p>
+  <p>
+    	<strong>Celular:</strong>
+    	<%= @student.cel %>
+  </p>
 
-<p>
-  	<strong>Email:</strong>
-  	<%= @student.email %>
-</p>
+  <p>
+    	<strong>E-mail:</strong>
+    	<%= @student.email %>
+  </p>
 
-<p>
-  	<strong>Possuí conta:</strong>
-  	<%= @student.has_bank_account %>
-</p>
+  <p>
+    	<strong>Possui conta:</strong>
+    	<%= @student.has_bank_account %>
+  </p>
+
+  <% if admin_signed_in? %>
+    <p>
+      <%= link_to 'Remover', student_path(@student), method: :delete %>
+    </p>
+  <% end %>
+
 <%end%>
- 
