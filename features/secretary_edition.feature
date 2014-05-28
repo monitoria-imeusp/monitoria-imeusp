@@ -18,7 +18,7 @@ Feature: Secretary edit
         And I fill the "Senha" field with "87654321"
         And I fill the "Confirme a senha" field with "87654321"
         And I press the "Salvar" button
-        Then I should see "Secretária foi atualizada com sucesso."
+        Then I should see "Funcionário(a) foi atualizado(a) com sucesso."
         And I should see "Número USP: 2222222"
         And I should see "Nome: João"
         And I should see "Email: joao@ime.usp.br"

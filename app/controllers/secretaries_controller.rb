@@ -29,7 +29,7 @@ class SecretariesController < ApplicationController
 
     respond_to do |format|
       if @secretary.save
-        format.html { redirect_to @secretary, notice: 'Secretária foi criada com sucesso.' }
+        format.html { redirect_to @secretary, notice: 'Funcionário(a) foi criado(a) com sucesso.' }
         format.json { render action: 'show', status: :created, location: @secretary }
       else
         format.html { render action: 'new' }
@@ -47,7 +47,7 @@ class SecretariesController < ApplicationController
 	end
     respond_to do |format|
       if @secretary.update(secretary_params)
-        format.html { redirect_to @secretary, notice: 'Secretária foi atualizada com sucesso.' }
+        format.html { redirect_to @secretary, notice: 'Funcionário(a) foi atualizado(a) com sucesso.' }
         format.json { render action: 'show', status: :ok, location: @secretary }
       else
         format.html { render action: 'edit' }
