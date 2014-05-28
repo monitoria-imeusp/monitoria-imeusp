@@ -5,11 +5,12 @@ Feature: Filtering requests for teaching assistant
 
     Scenario: Another professor from the same department
         Given I'm at the professor login page
+        And there is a department with code "MAC"
         And there is a super_professor with name "Bob" and password "prof-123" nusp "123" department "MAC" and email "bob@bob.bob"
         And there is a professor with name "Bob2" and password "prof-123" nusp "1234" department "MAC" and email "bob2@bob.bob"
-        And there is a course with name "Mascarenhas" and code "MAC0110"
-        And there is a course with name "Coisas" and code "MAC0112"
-        And there is a course with name "Coisas2" and code "MAC0113"
+        And there is a course with name "Mascarenhas" and code "MAC0110" and department "MAC"
+        And there is a course with name "Coisas" and code "MAC0112" and department "MAC"
+        And there is a course with name "Coisas2" and code "MAC0113" and department "MAC"
         And there is a request for teaching assistant with professor "Bob2" and course "MAC0110" and requested_number "2" and priority "1" and student_assistance "true" and work_correction "true" and test_oversight "true"
         And there is a request for teaching assistant with professor "Bob2" and course "MAC0112" and requested_number "4" and priority "1" and student_assistance "true" and work_correction "true" and test_oversight "true"
         And there is a request for teaching assistant with professor "Bob" and course "MAC0113" and requested_number "20" and priority "1" and student_assistance "true" and work_correction "true" and test_oversight "true"
@@ -23,11 +24,13 @@ Feature: Filtering requests for teaching assistant
 
     Scenario: Another professor from another department
         Given I'm at the professor login page
+        And there is a department with code "MAC"
+        And there is a department with code "MAE"
         And there is a super_professor with name "Bob" and password "prof-123" nusp "123" department "MAC" and email "bob@bob.bob"
         And there is a professor with name "Bob2" and password "prof-123" nusp "1234" department "MAE" and email "bob2@bob.bob"
-        And there is a course with name "Mascarenhas" and code "MAE0110"
-        And there is a course with name "Coisas" and code "MAE0112"
-        And there is a course with name "Coisas2" and code "MAC0113"
+        And there is a course with name "Mascarenhas" and code "MAE0110" and department "MAE"
+        And there is a course with name "Coisas" and code "MAE0112" and department "MAE"
+        And there is a course with name "Coisas2" and code "MAC0113" and department "MAC"
         And there is a request for teaching assistant with professor "Bob2" and course "MAE0110" and requested_number "2" and priority "1" and student_assistance "true" and work_correction "true" and test_oversight "true"
         And there is a request for teaching assistant with professor "Bob2" and course "MAE0112" and requested_number "4" and priority "1" and student_assistance "true" and work_correction "true" and test_oversight "true"
         And there is a request for teaching assistant with professor "Bob" and course "MAC0113" and requested_number "20" and priority "1" and student_assistance "true" and work_correction "true" and test_oversight "true"

@@ -1,4 +1,17 @@
 <%= form_for(@course) do |f| %>
+  <script type="text/javascript">
+    function department_selected(ev) {
+        select_box = document.getElementById("course_department_id")
+        idx = select_box.value;
+        if (idx == "") {
+            department_name_str = ""
+        } else {
+            department_name_str = select_box.options[idx].text;
+        }
+        department_name_field = document.getElementById("department_name")
+        department_name_field.innerHTML = department_name_str;
+    }
+  </script> 
 
   <div>
     <%= f.label :name, "Nome da Disciplina" %><br>
@@ -6,11 +19,15 @@
   </div>
 
   <div class="field">
-      <%= f.label :department_id, "Sigla da Disciplina" %><br>
-      <%= f.select :department_id, department_options %>
+      <%= f.label :department_id, "Departamento" %><br>
+      <%= f.select :department_id, department_options, {}, {:onchange => 'department_selected(event)'} %>
+  </div>
+  <div>
+      <%= f.label :course_code, "Sigla" %><br>
+      <span id="department_name">
+      </span>
       <%= f.text_field :course_code %>
   </div>
-  
   <p>
     <%= f.submit "Cadastrar" %>
     </p>

@@ -11,6 +11,7 @@ describe CoursesController do
 
 
 	before do
+        Department.create! {{"code" => "MAC"}}
 		@course = mock_model(Course)
 		@id = '50'
 	end

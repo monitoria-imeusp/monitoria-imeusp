@@ -4,5 +4,6 @@ FactoryGirl.define do
   factory :course do
     name "MyString"
     course_code "MyString"
+    department_id 1
   end
 end

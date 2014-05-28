@@ -120,8 +120,8 @@ Given(/^there is a super_professor with name "(.*?)" and password "(.*?)" nusp "
   Professor.create(name: name , password: password, nusp: nusp, department: department, email: email, super_professor: true)
 end
 
-When(/^there is a course with name "(.*?)" and code "(.*?)"$/) do |name, code|
-  Course.create(name: name, course_code: code)
+When(/^there is a course with name "(.*?)" and code "(.*?)" and department "(.*?)"$/) do |name, code, department|
+  Course.create(name: name, course_code: code, department_id: Department.find_by({:code => department}).id)
 end
 
 When(/^there is a secretary with name "(.*?)" and password "(.*?)" nusp "(.*?)" and email "(.*?)"$/) do |name, password, nusp, email|
@@ -144,3 +144,6 @@ Given(/^I'm at the student login page$/) do
   visit new_student_session_path
 end
 
+Given(/^there is a department with code "(.*?)"$/) do |code|
+      Department.create(code: code)
+end
