@@ -16,7 +16,7 @@ Feature: Secretary creation
         And I fill the "Senha" field with "12345678"
         And I fill the "Confirme a senha" field with "12345678"
         And I press the "Cadastrar" button
-        Then I should see "Secretária foi criada com sucesso."
+        Then I should see "Funcionário(a) foi criado(a) com sucesso."
         And I should see "Número USP: 1234567"
         And I should see "Nome: Marcia"
         And I should see "Email: marcia@ime.usp.br"

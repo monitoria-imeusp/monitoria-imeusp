@@ -11,9 +11,9 @@ Feature: Secretary remove
         And I press the "Entrar" button
         And there is a secretary with name "Marcia" and password "12345678" nusp "1111111" and email "marcia@ime.usp.br"
         And I click the "Funcionários" link
+        And I click the "Marcia" link
         And I click the "Remover" link
         And I should not see "Marcia"
-        And I should not see "1111111"
         And I should not see "marcia@ime.usp.br"
 
     Scenario: Professor cannot remove a secretary
@@ -24,10 +24,12 @@ Feature: Secretary remove
         And I press the "Entrar" button
         And there is a secretary with name "Marcia" and password "12345678" nusp "1111111" and email "marcia@ime.usp.br"
         And I click the "Funcionários" link
+        And I click the "Marcia" link
         And I should not see "Remover"
 
     Scenario: Any person trying to remove a secretary
         Given I'm at the home page
         And there is a secretary with name "Marcia" and password "12345678" nusp "1111111" and email "marcia@ime.usp.br"
         And I click the "Funcionários" link
+        And I click the "Marcia" link
         And I should not see "Remover"
