@@ -87,6 +87,17 @@ Certifique-se que está tudo certo com o comando:
 ruby -v
 ```
 
+Instale as gemas:
+
+```bash
+bundle install
+```
+
+Pode ser preciso instalar os seguintes pacotes em um Ubuntu:
+
+-libqt4-dev
+-libqtwebkit-dev
+
 ## Configurando o servidor
 
 Inicializar o banco de dados:
