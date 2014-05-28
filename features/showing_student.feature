@@ -25,4 +25,4 @@ Feature: Seeing information
     	And I click the "Alunos" link
 		And I click the "Visualizar" link
     	And I should see "Nome: carlinhos"
-    	And I should not see "RG: 123"    	    	
+    	And I should see "RG: 123"    	    	
