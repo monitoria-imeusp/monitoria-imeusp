@@ -11,6 +11,7 @@ Feature: Edit Professor
         And I fill the "Senha" field with "admin123"
         And I press the "Entrar" button
         When I click the "Professores" link
+        And I click the "Bob" link
         And I click the "Editar" link
         And I fill the "Nome" field with "Gold"
         And I fill the "Número USP" field with "12345"
@@ -32,6 +33,7 @@ Feature: Edit Professor
         And I fill the "Senha" field with "admin123"
         And I press the "Entrar" button
         When I click the "Professores" link
+        And I click the "Bob" link
         And I click the "Editar" link
         And I fill the "Nome" field with "Gold"
         And I fill the "Número USP" field with "12345"

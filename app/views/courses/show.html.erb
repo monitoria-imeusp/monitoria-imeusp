@@ -1,15 +1,17 @@
+
+<p>
+    <strong>Código da Disciplina:</strong>
+    <%= @course.course_code %>
+</p>
+
 <p>
   	<strong>Nome da Disciplina:</strong>
   	<%= @course.name %>
-</p>
- 
-<p>
-  	<strong>Código da Disciplina:</strong>
-    <%= @course.course_code %>
 </p>
 
 <% if admin_signed_in? || (current_professor.present? && current_professor.super_professor?) %>
     <p>
         <%= link_to 'Editar', edit_course_path(@course) %>
+        <%= link_to 'Remover', course_path(@course), method: :delete %>
     </p>
 <% end %>
