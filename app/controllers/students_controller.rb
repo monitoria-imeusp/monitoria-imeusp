@@ -1,6 +1,7 @@
 class StudentsController < ApplicationController
-    before_action :authenticate!,  :except => [:index, :show]
-
+    before_action :authenticate_new!,  :only => [:new, :create]
+    before_action :authenticate_edit!,  :only => [:edit, :update]
+    before_action :authenticate_delete!,  :only => [:destroy]
 
     def new
         @student = Student.new
@@ -62,9 +63,21 @@ class StudentsController < ApplicationController
 
     protected 
 
-    def authenticate!
-        unless admin_signed_in? or professor_signed_in?
+    def authenticate_new!
+        if admin_signed_in? or professor_signed_in? or secretary_signed_in? or student_signed_in?
             redirect_to students_path
+        end
+    end
+
+    def authenticate_edit!
+        unless student_signed_in? and (current_student.id == params[:id])?
+            redirect_to students_path
+        end
+    end
+
+    def authenticate_delete!
+        unless admin_signed_in? or secretary_signed_in?
+           redirect_to students_path 
         end
     end
 
