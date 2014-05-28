@@ -11,6 +11,7 @@ Feature: Secretary edit
         And I press the "Entrar" button
         And there is a secretary with name "Marcia" and password "12345678" nusp "1111111" and email "marcia@ime.usp.br"
         And I click the "Funcionários" link
+        And I click the "Marcia" link
         And I click the "Editar" link
         And I fill the "Número USP" field with "2222222"
         And I fill the "Nome" field with "João"
@@ -23,6 +24,7 @@ Feature: Secretary edit
         And I should see "Nome: João"
         And I should see "Email: joao@ime.usp.br"
         And I should see "Editar"
+        And I should see "Remover"
 
     Scenario: Professor cannot edit a secretary
         Given I'm at the professor login page
@@ -32,10 +34,14 @@ Feature: Secretary edit
         And I press the "Entrar" button
         And there is a secretary with name "Marcia" and password "12345678" nusp "1111111" and email "marcia@ime.usp.br"
         And I click the "Funcionários" link
+        And I click the "Marcia" link
         And I should not see "Editar"
+        And I should not see "Remover"
 
     Scenario: Any person trying to edit a secretary
         Given I'm at the home page
         And there is a secretary with name "Marcia" and password "12345678" nusp "1111111" and email "marcia@ime.usp.br"
         And I click the "Funcionários" link
+        And I click the "Marcia" link
         And I should not see "Editar"
+        And I should not see "Remover"

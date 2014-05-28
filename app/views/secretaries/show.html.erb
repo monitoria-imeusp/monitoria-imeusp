@@ -1,13 +1,13 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Número USP:</strong>
-  <%= @secretary.nusp %>
+  <strong>Nome:</strong>
+  <%= @secretary.name %>
 </p>
 
 <p>
-  <strong>Nome:</strong>
-  <%= @secretary.name %>
+  <strong>Número USP:</strong>
+  <%= @secretary.nusp %>
 </p>
 
 <p>
@@ -16,7 +16,8 @@
 </p>
 
 <% if admin_signed_in? %>
-    <p>
+  <p>
 		<%= link_to 'Editar', edit_secretary_path(@secretary) %>
-	</p>
+    <%= link_to 'Remover', @secretary, method: :delete, data: { confirm: 'Tem certeza?' } %>
+  </p>
 <% end %>
