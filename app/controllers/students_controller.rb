@@ -1,5 +1,5 @@
 class StudentsController < ApplicationController
-    before_action :authenticate!,  :only => [:index]
+    before_action :authenticate!,  :except => [:index, :show]
 
 
     def new
