@@ -11,6 +11,7 @@ Feature: Course edit
         And I press the "Entrar" button
         And there is a course with name "labxp" and code "mac0342"
         And I click the "Disciplinas" link
+        And I click the "mac0342" link
         And I click the "Editar" link
         And I fill the "Nome da Disciplina" field with "labXp"
         And I fill the "Código da Disciplina" field with "mac342"
@@ -26,6 +27,7 @@ Feature: Course edit
         And I press the "Entrar" button
         And there is a course with name "labxp" and code "mac0342"
         And I click the "Disciplinas" link
+        And I click the "mac0342" link
         And I click the "Editar" link
         And I fill the "Nome da Disciplina" field with "labXp"
         And I fill the "Código da Disciplina" field with "mac342"

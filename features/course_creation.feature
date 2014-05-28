@@ -39,9 +39,9 @@ Feature: Course creation
         And I press the "Entrar" button
         And I should not see "Nova Disciplina"
         Then I try the create course URL
-        Then I should see "Listando Disciplinas"
+        Then I should see "Disciplinas"
 
     Scenario: Any person trying to create a course
         Given I'm at the home page
         Then I try the create course URL
-        Then I should see "Listando Disciplinas"
+        Then I should see "Disciplinas"

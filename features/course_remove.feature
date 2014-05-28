@@ -11,6 +11,7 @@ Feature: Course deletion
         And I press the "Entrar" button
         And there is a course with name "labxp" and code "mac0342"
         And I click the "Disciplinas" link
+        And I click the "mac0342" link
         And I click the "Remover" link
         And I should not see "labxp"
         And I should not see "mac0342"
@@ -24,6 +25,7 @@ Feature: Course deletion
         And I press the "Entrar" button
         And there is a course with name "labxp" and code "mac0342"
         And I click the "Disciplinas" link
+        And I click the "mac0342" link
         And I click the "Remover" link
         And I should not see "labxp"
         And I should not see "mac0342"
