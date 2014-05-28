@@ -42,6 +42,10 @@ class StudentsController < ApplicationController
             return
         end
         @student = Student.find(params[:id])
+        if params[:student][:password].blank? && params[:student][:password_confirmation].blank?
+            params[:student].delete(:password)
+            params[:student].delete(:password_confirmation)
+        end
         if @student.update(student_params)
             redirect_to @student
         else
@@ -66,6 +70,6 @@ class StudentsController < ApplicationController
 
     private
         def student_params
-            params.require(:student).permit(:name, :password, :nusp, :gender, :rg, :cpf, :adress, :complement, :district, :zipcode, :city, :state, :tel, :cel, :email, :has_bank_account)
+            params.require(:student).permit(:name, :password, :password_confirmation, :nusp, :gender, :rg, :cpf, :adress, :complement, :district, :zipcode, :city, :state, :tel, :cel, :email, :has_bank_account)
         end
 end
