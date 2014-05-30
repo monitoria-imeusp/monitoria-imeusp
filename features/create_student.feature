@@ -8,6 +8,7 @@ Feature: Student register
         When I click the "Novo Aluno" link
         And I fill the "Nome" field with "Carlinhos"
         And I fill the "Senha" field with "12345678"
+        And I fill the "Confirme a senha" field with "12345678"
         And I fill the "NºUSP" field with "012345"
         And I select the gender option "Masculino"
         And I fill the "RG" field with "123"
@@ -31,6 +32,7 @@ Feature: Student register
         When I click the "Novo Aluno" link
         And I fill the "Nome" field with "Carlinhos"
         And I fill the "Senha" field with "12345678"
+        And I fill the "Confirme a senha" field with "12345678"
         And I fill the "NºUSP" field with "01245"
         And I select the gender option "Masculino"
         And I fill the "RG" field with "123"
@@ -48,3 +50,27 @@ Feature: Student register
         And I press the "Cadastrar" button
         Then I should not see "Nome: Carlinhos"
         And I should not see "Sexo: Masculino"
+
+    Scenario: Admin cannot create a student account while logged 
+        Given I'm at the login page
+        And there is an admin user with email "kazuo@ime.usp.br" and password "admin123"
+        When I fill the "E-mail" field with "kazuo@ime.usp.br"
+        And I fill the "Senha" field with "admin123"
+        And I press the "Entrar" button
+        Then I should not see "Novo Aluno"
+
+    Scenario: Professor cannot create a student account while logged 
+        Given I'm at the professor login page
+        And there is a professor with name "arnaldo" and password "12345678" nusp "1111111" department "MAC" and email "kira@usp.br"
+        When I fill the "Número USP" field with "1111111"
+        And I fill the "Senha" field with "12345678"
+        And I press the "Entrar" button
+        Then I should not see "Novo Aluno"
+
+    Scenario: Secretary cannot create a student account while logged 
+        Given I'm at the secretary login page
+        And there is a secretary with name "Marcia" and password "12345678" nusp "1111111" and email "marcia@ime.usp.br"
+        When I fill the "Número USP" field with "1111111"
+        And I fill the "Senha" field with "12345678"
+        And I press the "Entrar" button
+        Then I should not see "Novo Aluno"
