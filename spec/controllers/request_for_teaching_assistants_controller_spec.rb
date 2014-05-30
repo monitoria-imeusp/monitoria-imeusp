@@ -62,28 +62,28 @@ describe RequestForTeachingAssistantsController do
     "id" => 1,
     "password" => "prof-123",
     "email" => "prof@ime.usp.br",
-    "department" => "MAC"
+    "department_id" => 1
   } }
 
   let(:another_professor_same_department) { {
     "id" => 2,
     "password" => "prof-123",
     "email" => "prof2@ime.usp.br",
-    "department" => "MAC"
+    "department_id" => 1
   } }
 
   let(:another_professor_another_department) { {
     "id" => 3,
     "password" => "prof-123",
     "email" => "prof3@ime.usp.br",
-    "department" => "MAT"
+    "department_id" => 2
   } }
 
   let(:super_professor_same_department) { {
     "id" => 4,
     "password" => "prof-123",
     "email" => "super@ime.usp.br",
-    "department" => "MAC",
+    "department_id" => 1,
     "super_professor" => true
   } }
 
