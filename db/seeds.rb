@@ -71,4 +71,5 @@ if Rails.env.development?
   ].each do |course|
     Course.create(course)
   end
+  Secretary.create(name: "Marcia", nusp: "99999", email: "marcia@ime.usp.br", password: "changeme!")
 end
