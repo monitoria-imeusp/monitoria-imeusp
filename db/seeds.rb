@@ -5,4 +5,70 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+
 Admin.create(email: 'kazuo@ime.usp.br', password: 'admin123')
+
+if Rails.env.development?
+  [
+    {
+      name: "Nina S. T. Hirata",
+      nusp: "33333",
+      department: "MAC",
+      email: "nina@ime.usp.br",
+      super_professor: true,
+      password: "changeme!"
+    },
+    {
+      name: "Kunio Okuda",
+      nusp: "22222",
+      department: "MAC",
+      email: "kunio@ime.usp.br",
+      super_professor: true,
+      password: "changeme!"
+    },
+    {
+      name: "Zara Issa Abud",
+      nusp: "11111",
+      department: "MAT",
+      email: "zara@ime.usp.br",
+      super_professor: true,
+      password: "changeme!"
+    },
+    {
+      name: "Siméon Denis Poisson",
+      nusp: "10101",
+      department: "MAE",
+      email: "poisson@1781.old",
+      password: "changeme!"
+    },
+    {
+      name: "George Bernard Dantzig",
+      nusp: "20202",
+      department: "MAP",
+      email: "dantzig@1914.old",
+      password: "changeme!"
+    }
+  ].each do |prof|
+    Professor.create(prof)
+  end
+  [
+    {
+      name: "Introdução à Ciência da Computação",
+      course_code: "MAC0110"
+    },
+    {
+      name: "Cálculo I",
+      course_code: "MAT0111"
+    },
+    {
+      name: "Introdução à Probabilidade e Estatística I",
+      course_code: "MAE0121"
+    },
+    {
+      name: "Laboratório de Matemática Aplicada",
+      course_code: "MAP0131"
+    }
+  ].each do |course|
+    Course.create(course)
+  end
+end
