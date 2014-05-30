@@ -1,0 +1,47 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Aluno:</strong>
+  <%= @candidature.student.name %>
+</p>
+
+<p>
+  <strong>1ª opção de curso:</strong>
+  <%= Course.find(@candidature.course1_id).name %>
+</p>
+
+<p>
+  <strong>2ª opção de curso:</strong>
+  <%= Course.find(@candidature.course2_id).name %>
+</p>
+
+<p>
+  <strong>3ª opção de curso:</strong>
+  <%= Course.find(@candidature.course3_id).name %>
+</p>
+
+<p>
+  <strong>Disponibilidade para o período diurno:</strong>
+  <% if @candidature.avaliability_daytime %>
+	  Sim
+  <% else %>
+	  Não
+  <% end %>
+</p>
+
+<p>
+  <strong>Disponibilidade para o período noturno:</strong>
+  <% if @candidature.avaliability_night_time %>
+	  Sim
+  <% else %>
+	  Não
+  <% end %>
+</p>
+
+<p>
+  <strong>Preferência pelo período:</strong>
+  <%= @candidature.time_period_preference %>
+</p>
+
+<%= link_to 'Editar', edit_candidature_path(@candidature) %> |
+<%= link_to 'Voltar', candidatures_path %>

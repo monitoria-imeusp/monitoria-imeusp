@@ -1,0 +1,31 @@
+<h1>Listing candidatures</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Aluno</th>
+      <th>Curso: 1ª opção</th>
+      <th>Curso: 2ª opção</th>
+      <th>Curso: 3ª opção</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @candidatures.each do |candidature| %>
+      <tr>
+        <td><%= candidature.student.name %></td>
+        <td><%= Course.find(candidature.course1_id).name %></td>
+        <td><%= Course.find(candidature.course2_id).name %></td>
+        <td><%= Course.find(candidature.course3_id).name %></td>
+        <td><%= link_to 'Show', candidature %></td>
+        <td><%= link_to 'Edit', edit_candidature_path(candidature) %></td>
+        <td><%= link_to 'Destroy', candidature, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Candidature', new_candidature_path %>
