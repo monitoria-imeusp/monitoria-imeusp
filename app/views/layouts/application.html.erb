@@ -35,7 +35,7 @@
         <li>
         <%= link_to "Funcionários", secretaries_path %>
         </li>
-        <% if admin_signed_in? || professor_signed_in? || student_signed_in? %>
+        <% if admin_signed_in? || professor_signed_in? || student_signed_in? || secretary_signed_in? %>
           <li>
             <%= link_to "Alunos", students_path %>
           </li>
@@ -70,9 +70,11 @@
           </p>
         <% end %>
         <ul>
-          <li>
-            <%= link_to "Novo Aluno", new_student_path %>
-          </li>
+          <% if current_student.present? %>
+            <li>
+              <%= link_to "Editar Perfil", edit_student_path(current_student) %>
+            </li>
+          <% end %>
           <% if admin_signed_in? || (current_professor.present? && current_professor.super_professor?) %>
             <li>
               <%= link_to "Nova Disciplina", new_course_path %>
@@ -104,6 +106,9 @@
               <%= link_to "Logout", destroy_student_session_path, method: :delete %>
             </li>      
           <% else %>
+            <li>
+              <%= link_to "Novo Aluno", new_student_path %>
+            </li>
             <li>
               <%= link_to "Login Aluno", new_student_session_path %>
             </li>

@@ -70,7 +70,7 @@ class StudentsController < ApplicationController
     end
 
     def authenticate_edit!
-        unless student_signed_in? and (current_student.id == params[:id])?
+        unless student_signed_in? and (current_student.id == params[:id].to_i) 
             redirect_to students_path
         end
     end
