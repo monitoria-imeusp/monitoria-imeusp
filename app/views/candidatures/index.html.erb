@@ -16,8 +16,8 @@
       <tr>
         <td><%= candidature.student.name %></td>
         <td><%= Course.find(candidature.course1_id).name %></td>
-        <td><%= Course.find(candidature.course2_id).name %></td>
-        <td><%= Course.find(candidature.course3_id).name %></td>
+        <td><%= candidature.course2_id != 0 ? Course.find(candidature.course2_id).name : "" %></td>
+        <td><%= candidature.course3_id != 0 ? Course.find(candidature.course3_id).name : "" %></td>
         <td><%= link_to 'Show', candidature %></td>
         <td><%= link_to 'Edit', edit_candidature_path(candidature) %></td>
         <td><%= link_to 'Destroy', candidature, method: :delete, data: { confirm: 'Are you sure?' } %></td>
