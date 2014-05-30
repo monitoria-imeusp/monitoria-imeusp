@@ -10,32 +10,35 @@
       </ul>
     </div>
   <% end %>
-
   <div class="field">
-    <%= f.label :avaliability_daytime %><br>
+    <%= f.label :course1_id, "Primeiro curso:" %><br>
+    <%= f.collection_select :course1_id, Course.order(:name), :id, :name, include_blank: true %>
+  </div>
+  <div class="field">
+    <%= f.label :course2_id, "Segundo curso:" %><br>
+    <%= f.collection_select :course2_id, Course.order(:name), :id, :name, include_blank: true %>
+  </div>
+  <div class="field">
+    <%= f.label :course3_id, "Terceiro curso:" %><br>
+    <%= f.collection_select :course3_id, Course.order(:name), :id, :name, include_blank: true %>
+  </div>
+  <div class="field">
+    <%= f.label :avaliability_daytime, "Disponibilidade para trabalhar de dia:" %><br>
     <%= f.check_box :avaliability_daytime %>
   </div>
   <div class="field">
-    <%= f.label :avaliability_night_time %><br>
+    <%= f.label :avaliability_night_time, "Disponibilidade para trabalhar de noite:" %><br>
     <%= f.check_box :avaliability_night_time %>
   </div>
   <div class="field">
-    <%= f.label :time_period_preference %><br>
-    <%= f.text_field :time_period_preference %>
-  </div>
-  <div class="field">
-    <%= f.label :course1_id %><br>
-    <%= f.number_field :course1_id %>
-  </div>
-  <div class="field">
-    <%= f.label :course2_id %><br>
-    <%= f.number_field :course2_id %>
-  </div>
-  <div class="field">
-    <%= f.label :course3_id %><br>
-    <%= f.number_field :course3_id %>
+    <%= f.label :time_period_preference, "Preferência por horário:" %><br>
+    <% daytimePreference.each do | option | %>
+      <%= f.radio_button :time_period_preference, option[1] %>
+      <%= f.label option[0] %>
+      </br>
+    <% end %>
   </div>
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit "Enviar candidatura de monitoria" %>
   </div>
 <% end %>
