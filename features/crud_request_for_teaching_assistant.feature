@@ -42,7 +42,8 @@ Feature: CRUD Request for Teaching Assistant
         And I press the "Entrar" button
         And I should see "Pedidos de Monitoria"
         And I click the "Pedidos de Monitoria" link
-        And I should see "Editar"
+        And I should see "MAC0110"
+        And I click the "Ver" link
         And I click the "Editar" link
         And I should see "Editando Pedido de Monitoria"
         And I select "Coisas" on the "Disciplina"
@@ -91,7 +92,7 @@ Feature: CRUD Request for Teaching Assistant
         And I select the priority option "Extremamente necessário, mas não imprescindível"
         And I press the "Enviar solicitação de monitor" button
         Then I should see "Selecione uma disciplina"
-    
+
     Scenario: Empty number of teaching assistants
         Given I'm at the professor login page
         And there is a professor with name "Bob" and password "prof-123" nusp "123" department "MAC" and email "bob@bob.bob"
@@ -106,8 +107,8 @@ Feature: CRUD Request for Teaching Assistant
         And I select the priority option "Extremamente necessário, mas não imprescindível"
         And I press the "Enviar solicitação de monitor" button
         Then I should see "Peça pelo menos um monitor"
-    
-    
+
+
     Scenario: Zero or less teaching assistants
         Given I'm at the professor login page
         And there is a professor with name "Bob" and password "prof-123" nusp "123" department "MAC" and email "bob@bob.bob"
@@ -126,7 +127,7 @@ Feature: CRUD Request for Teaching Assistant
         And I fill the "Número de monitores solicitados" field with "-2"
         And I press the "Enviar solicitação de monitor" button
         And I should see "Peça pelo menos um monitor"
-    
+
     Scenario: Without priority
         Given I'm at the professor login page
         And there is a professor with name "Bob" and password "prof-123" nusp "123" department "MAC" and email "bob@bob.bob"
@@ -141,7 +142,7 @@ Feature: CRUD Request for Teaching Assistant
         And I fill the "Número de monitores solicitados" field with "3"
         And I press the "Enviar solicitação de monitor" button
         Then I should see "Escolha uma prioridade"
-    
+
     Scenario: Check request assistant table
         Given I'm at the professor login page
         And there is a professor with name "Bob" and password "prof-123" nusp "123" department "MAC" and email "bob@bob.bob"
@@ -154,7 +155,10 @@ Feature: CRUD Request for Teaching Assistant
         Then I click the "Pedidos de Monitoria" link
         And I should see "MAC0110"
         And I should see "1"
-        And I should see "Não Sim Sim"
+        And I click the "Ver" link
+        And I should see "Atendimento aos alunos: Não"
+        And I should see "Correção de trabalhos: Sim"
+        And I should see "Fiscalização de provas: Sim"
 
     @javascript
     Scenario: Valid professor deleting a request
@@ -167,7 +171,7 @@ Feature: CRUD Request for Teaching Assistant
         And I press the "Entrar" button
         And I should see "Pedidos de Monitoria"
         Then I click the "Pedidos de Monitoria" link
-        And I should see "Remover"
+        And I click the "Ver" link
         And I click the "Remover" link
         And I should see "Você tem certeza?" in the alert
         And I confirm the alert

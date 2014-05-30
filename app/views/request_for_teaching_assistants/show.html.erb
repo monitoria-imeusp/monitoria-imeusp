@@ -40,5 +40,6 @@
   <%= (@request_for_teaching_assistant.observation) %>
 </p>
 
-<%= link_to 'Editar', edit_request_for_teaching_assistant_path(@request_for_teaching_assistant) %> |
+<%= link_to 'Editar', edit_request_for_teaching_assistant_path(@request_for_teaching_assistant) %>
+<%= link_to 'Remover', @request_for_teaching_assistant, method: :delete, data: { confirm: 'Você tem certeza?' } %>
 <%= link_to 'Voltar', request_for_teaching_assistants_path %>
