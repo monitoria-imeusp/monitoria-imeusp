@@ -4,7 +4,7 @@ FactoryGirl.define do
   factory :student do
     name "MyString"
     password "MyString"
-    nusp "MyString"
+    nusp "111111111"
     gender 1
     rg "MyString"
     cpf "MyString"
@@ -14,9 +14,9 @@ FactoryGirl.define do
     zipcode "MyString"
     city "MyString"
     state "MyString"
-    tel "MyString"
-    cel "MyString"
-    email "MyString"
+    tel "0111111111"
+    cel "0111111111"
+    email "email@email.com"
     has_bank_account false
   end
 end
