@@ -34,7 +34,6 @@ class RequestForTeachingAssistantsController < ApplicationController
   # POST /request_for_teaching_assistants.json
   def create
     params[:request_for_teaching_assistant][:professor_id] = current_professor.id
-    puts request_for_teaching_assistant_params
     @request_for_teaching_assistant = RequestForTeachingAssistant.new(request_for_teaching_assistant_params)
     
     respond_to do |format|
