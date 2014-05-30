@@ -8,7 +8,8 @@ class RequestForTeachingAssistantsController < ApplicationController
     @request_for_teaching_assistants = (RequestForTeachingAssistant.all.map do
       |request| request
     end).keep_if do |request|
-      request.professor_id == current_professor.id or (current_professor.super_professor and current_professor.department == Professor.find_by({:id => request.professor_id}).department)
+      request.professor_id == current_professor.id or 
+          (current_professor.super_professor and current_professor.department == request.course.department)
     end
   end
 
