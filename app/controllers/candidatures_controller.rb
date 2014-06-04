@@ -5,9 +5,13 @@ class CandidaturesController < ApplicationController
   # GET /candidatures
   # GET /candidatures.json
   def index
-	  @students = Student.all
-	  @courses = Course.all
-    @candidatures = Candidature.all
+    if professor_signed_in? and current_professor.super_professor
+      @candidatures_filtered = Candidature.all
+    elsif student_signed_in?
+      @candidatures_filtered = Candidature.where("student_id = ?", current_student.id)
+    else
+      redirect_to root_path
+    end
   end
 
   # GET /candidatures/1

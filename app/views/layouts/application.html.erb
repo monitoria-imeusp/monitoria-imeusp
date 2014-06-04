@@ -35,11 +35,6 @@
         <li>
         <%= link_to "Funcionários", secretaries_path %>
         </li>
-        <% if student_signed_in?%>
-          <li>
-            <%= link_to "Candidaturas", candidatures_path %>
-          </li>
-        <% end %>
         <% if admin_signed_in? || professor_signed_in? || student_signed_in? || secretary_signed_in? %>
           <li>
             <%= link_to "Alunos", students_path %>
@@ -100,6 +95,9 @@
               <%= link_to "Pedidos de Monitoria", request_for_teaching_assistants_path %>
             </li>
             <li>
+               <%= if current_professor.super_professor then link_to "Candidaturas", candidatures_path end %>
+            </li>
+            <li>
               <%= link_to "Logout", destroy_professor_session_path, method: :delete %>
             </li>
           <% elsif secretary_signed_in? %>
@@ -107,6 +105,9 @@
               <%= link_to "Logout", destroy_secretary_session_path, method: :delete %>
             </li>
           <% elsif student_signed_in? %>
+            <li>
+               <%= link_to "Candidaturas", candidatures_path %>
+            </li>
             <li>
               <%= link_to "Logout", destroy_student_session_path, method: :delete %>
             </li>      
@@ -120,9 +121,9 @@
             <li>
               <%= link_to "Login Professor", new_professor_session_path %>
             </li>
-      	    <li>
-      	      <%= link_to "Login Secretária", new_secretary_session_path %>
-  		      </li>
+            <li>
+              <%= link_to "Login Secretária", new_secretary_session_path %>
+            </li>
             <li>
               <%= link_to "Admin Login", new_admin_session_path %>
             </li>

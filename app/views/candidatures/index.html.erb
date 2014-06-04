@@ -12,7 +12,7 @@
   </thead>
 
   <tbody>
-    <% @candidatures.each do |candidature| %>
+    <% @candidatures_filtered.each do |candidature| %>
       <tr>
         <td><%= candidature.student.name %></td>
         <td><%= Course.find(candidature.course1_id).name %></td>
