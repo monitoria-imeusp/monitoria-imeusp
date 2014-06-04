@@ -35,13 +35,15 @@ describe CandidaturesController do
 
   @student = login_student
 
+  before :each do
+    valid_attributes["student_id"] = @student.id
+  end
+
   describe "GET index" do
     it "assigns all candidatures as @candidatures" do
       candidature = Candidature.create! valid_attributes
       get :index, {}, valid_session
-      assigns(:students).should eq([@student])
-      assigns(:courses).should eq([])
-      assigns(:candidatures).should eq([candidature])
+      assigns(:candidatures_filtered).should eq([candidature])
     end
   end
 
