@@ -23,17 +23,24 @@ describe CandidaturesController do
   # This should return the minimal set of attributes required to create a valid
   # Candidature. As you add validations to Candidature, be sure to
   # adjust the attributes here as well.
-  let(:valid_attributes) { { "avaliability_daytime" => "false" } }
+  let(:valid_attributes) {{
+      "time_period_preference" => "Indiferente",
+      "course1_id" => 1
+  }}
 
   # This should return the minimal set of values that should be in the session
   # in order to pass any filters (e.g. authentication) defined in
   # CandidaturesController. Be sure to keep this updated too.
   let(:valid_session) { {} }
 
+  @student = login_student
+
   describe "GET index" do
     it "assigns all candidatures as @candidatures" do
       candidature = Candidature.create! valid_attributes
       get :index, {}, valid_session
+      assigns(:students).should eq([@student])
+      assigns(:courses).should eq([])
       assigns(:candidatures).should eq([candidature])
     end
   end
@@ -73,6 +80,7 @@ describe CandidaturesController do
         post :create, {:candidature => valid_attributes}, valid_session
         assigns(:candidature).should be_a(Candidature)
         assigns(:candidature).should be_persisted
+        assigns(:candidature).student_id.should eq(@student.id)
       end
 
       it "redirects to the created candidature" do
@@ -85,14 +93,15 @@ describe CandidaturesController do
       it "assigns a newly created but unsaved candidature as @candidature" do
         # Trigger the behavior that occurs when invalid params are submitted
         Candidature.any_instance.stub(:save).and_return(false)
-        post :create, {:candidature => { "avaliability_daytime" => "invalid value" }}, valid_session
+        post :create, {:candidature => {}}, valid_session
         assigns(:candidature).should be_a_new(Candidature)
+        assigns(:candidature).student_id.should eq(@student.id)
       end
 
       it "re-renders the 'new' template" do
         # Trigger the behavior that occurs when invalid params are submitted
         Candidature.any_instance.stub(:save).and_return(false)
-        post :create, {:candidature => { "avaliability_daytime" => "invalid value" }}, valid_session
+        post :create, {:candidature => {}}, valid_session
         response.should render_template("new")
       end
     end
@@ -145,9 +154,10 @@ describe CandidaturesController do
   describe "DELETE destroy" do
     it "destroys the requested candidature" do
       candidature = Candidature.create! valid_attributes
-      expect {
-        delete :destroy, {:id => candidature.to_param}, valid_session
-      }.to change(Candidature, :count).by(-1)
+      Candidature.should_receive(:find).with(candidature.id.to_s).and_return(candidature)
+      candidature.should_receive(:destroy)
+      delete :destroy, {:id => candidature.to_param}, valid_session
+      assigns(:candidature).should eq(candidature)
     end
 
     it "redirects to the candidatures list" do

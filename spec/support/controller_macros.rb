@@ -21,9 +21,12 @@ module ControllerMacros
   end
 
   def login_student
+    @student = 1
     before(:each) do
       @request.env["devise.mapping"] = Devise.mappings[:student]
-      sign_in FactoryGirl.create(:student)
+      @student = FactoryGirl.create(:student)
+      sign_in @student
     end
+    return @student
   end
 end
