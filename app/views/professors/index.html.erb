@@ -12,11 +12,6 @@
             <td><%= link_to professor.name, professor %></td>
             <td><%= professor.email %></td>
             <td><%= professor.department.code %></td>
-            <% if admin_signed_in? %>
-                <td><%= professor.super_professor%></td>
-                <td><%= link_to 'Editar', edit_professor_path(professor) %></td>
-            <% end %>
-            <td><%= link_to 'Visualizar', professor %></td>
         </tr>
     <% end %>
 </table>
