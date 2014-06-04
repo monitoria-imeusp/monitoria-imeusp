@@ -139,3 +139,8 @@ end
 When(/^there is a student with name "(.*?)" and password "(.*?)" and nusp "(.*?)" and gender "(.*?)" and rg "(.*?)" and cpf "(.*?)" and address "(.*?)" and district "(.*?)" and zipcode "(.*?)" and city "(.*?)" and state "(.*?)" and tel "(.*?)" and cel "(.*?)" and email "(.*?)" and has_bank_account "(.*?)"$/) do |name, password, nusp, gender, rg, cpf, adress, district, zipcode, city, state, tel, cel, email, has_bank_account|
   Student.create(name: name, password: password, nusp: nusp, gender: gender, rg: rg, cpf: cpf, adress: adress, city: city, district: district, zipcode: zipcode, city: city, state: state, tel: tel, cel: cel, email: email, has_bank_account: has_bank_account)
 end
+
+Given(/^I'm at the student login page$/) do
+  visit new_student_session_path
+end
+

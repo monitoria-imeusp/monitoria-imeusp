@@ -12,9 +12,9 @@
   	<%end%>
 </p>
 
-<% if professor_signed_in? || admin_signed_in? %>
+<% if professor_signed_in? || admin_signed_in? || secretary_signed_in? %>
  	<p>
- 		<strong> Número USP:</strong>
+ 		<strong>Número USP:</strong>
  		<%= @student.nusp %>
  	</p>
 
@@ -77,7 +77,7 @@
     	<%= @student.has_bank_account %>
   </p>
 
-  <% if admin_signed_in? %>
+  <% if admin_signed_in? || secretary_signed_in? %>
     <p>
       <%= link_to 'Remover', student_path(@student), method: :delete %>
     </p>

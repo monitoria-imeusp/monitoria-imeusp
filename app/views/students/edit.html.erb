@@ -1,6 +1,6 @@
 <h1>Editando Aluno</h1>
 
-<%= form_for :student, url: student_path(@student) method: :patch do |f| %>
+<%= form_for :student, url: student_path(@student), method: :patch do |f| %>
   <p>
     <%= f.label :name, "Nome" %><br>
     <%= f.text_field :name %>
@@ -9,6 +9,11 @@
   <p>
     <%= f.label :password, "Senha" %><br>
     <%= f.password_field :password %>
+  </p>
+
+  <p>
+    <%= f.label :password_confirmation, "Confirme a senha" %><br>
+    <%= f.password_field :password_confirmation %>
   </p>
 
   <p>

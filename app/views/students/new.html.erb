@@ -7,9 +7,12 @@
 
   <p>
     <%= f.label :password, "Senha" %><br>
-    <%= f.text_field :password %>
+    <%= f.password_field :password %>
   </p>
-
+  <p>
+    <%= f.label :password_confirmation , "Confirme a senha" %><br>
+    <%= f.password_field :password_confirmation %>
+  </p>
   <p>
     <%= f.label :nusp, "NºUSP" %><br>
     <%= f.text_field :nusp %>
