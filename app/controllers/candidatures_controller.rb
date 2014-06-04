@@ -5,8 +5,8 @@ class CandidaturesController < ApplicationController
   # GET /candidatures
   # GET /candidatures.json
   def index
-	@students = Student.all
-	@courses = Course.all
+	  @students = Student.all
+	  @courses = Course.all
     @candidatures = Candidature.all
   end
 

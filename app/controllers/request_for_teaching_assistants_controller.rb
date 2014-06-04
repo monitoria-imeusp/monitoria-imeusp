@@ -17,7 +17,7 @@ class RequestForTeachingAssistantsController < ApplicationController
   # GET /request_for_teaching_assistants/1.json
   def show
 	  course_id = RequestForTeachingAssistant.find(params[:id]).course.id
-	  @candidatures_for_this_request = Candidature.where("course1_id = ?", course_id)
+	  @candidatures_for_this_request = Candidature.where("course1_id = ? or course2_id = ? or course3_id = ?", course_id, course_id, course_id)
   end
 
   # GET /request_for_teaching_assistants/new
