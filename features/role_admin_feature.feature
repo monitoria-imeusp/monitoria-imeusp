@@ -36,7 +36,7 @@ Feature: Accessing the page
         And I fill the "Senha" field with "admin123"
         And I press the "Entrar" button
         And I click the "Professores" link
-        And I click the "Bob" link
+        And I click the "mqz" link
         Then I should see "Editar"
 
     Scenario: Verify if other users can't edit professors

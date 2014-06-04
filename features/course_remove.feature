@@ -12,7 +12,7 @@ Feature: Course deletion
         And I fill the "Senha" field with "admin123"
         And I press the "Entrar" button
         And I click the "Disciplinas" link
-        And I click the "mac0342" link
+        And I click the "MAC0342" link
         And I click the "Remover" link
         And I should not see "labxp"
         And I should not see "mac0342"
@@ -27,7 +27,7 @@ Feature: Course deletion
         And I fill the "Senha" field with "12345678"
         And I press the "Entrar" button
         And I click the "Disciplinas" link
-        And I click the "mac0342" link
+        And I click the "MAC0342" link
         And I click the "Remover" link
         And I should not see "labxp"
         And I should not see "mac0342"

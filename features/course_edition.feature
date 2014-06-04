@@ -12,7 +12,7 @@ Feature: Course edit
         And I press the "Entrar" button
         And there is a course with name "labxp" and code "MAC0342" and department "MAC"
         And I click the "Disciplinas" link
-        And I click the "mac0342" link
+        And I click the "MAC0342" link
         And I click the "Editar" link
         And I fill the "Nome da Disciplina" field with "labXp"
         And I fill the "Sigla" field with "MAC342"
@@ -29,7 +29,7 @@ Feature: Course edit
         And I fill the "Senha" field with "12345678"
         And I press the "Entrar" button
         And I click the "Disciplinas" link
-        And I click the "mac0342" link
+        And I click the "MAC0342" link
         And I click the "Editar" link
         And I fill the "Nome da Disciplina" field with "labXp"
         And I fill the "Sigla" field with "MAC0342"
