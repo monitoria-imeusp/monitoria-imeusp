@@ -36,7 +36,7 @@ class CandidaturesController < ApplicationController
 
     respond_to do |format|
       if @candidature.save
-        format.html { redirect_to @candidature, notice: 'Candidature was successfully created.' }
+        format.html { redirect_to @candidature, notice: 'Candidatura criada com sucesso.' }
         format.json { render action: 'show', status: :created, location: @candidature }
       else
         format.html { render action: 'new' }
@@ -50,7 +50,7 @@ class CandidaturesController < ApplicationController
   def update
     respond_to do |format|
       if @candidature.update(candidature_params)
-        format.html { redirect_to @candidature, notice: 'Candidature was successfully updated.' }
+        format.html { redirect_to @candidature, notice: 'Candidatura atualizada com sucesso.' }
         format.json { render action: 'show', status: :ok, location: @candidature }
       else
         format.html { render action: 'edit' }
