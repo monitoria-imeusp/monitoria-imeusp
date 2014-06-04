@@ -1,6 +1,6 @@
 class CandidaturesController < ApplicationController
   before_action :set_candidature, only: [:show, :edit, :update, :destroy]
-  #before_action :authenticate_student!, only: [:new, :edit, :destroy]
+  before_action :authenticate_student!, only: [:edit, :destroy]
 
   # GET /candidatures
   # GET /candidatures.json
@@ -27,7 +27,7 @@ class CandidaturesController < ApplicationController
   # POST /candidatures
   # POST /candidatures.json
   def create
-	params[:candidature][:student_id] = 1 #current_student.id
+	params[:candidature][:student_id] = current_student.id
     @candidature = Candidature.new(candidature_params)
 
     respond_to do |format|
