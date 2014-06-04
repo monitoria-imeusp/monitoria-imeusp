@@ -1,20 +1,3 @@
 <h1>Editando Disciplina</h1>
 
-<%= form_for :course, url: course_path(@course), method: :patch do |f| %>
-
-  <p>
-    <%= f.label :course_code, "Código da Disciplina" %><br>
-    <%= f.text_field :course_code %>
-  </p>
-
-  <p>
-    <%= f.label :name, "Nome da Disciplina" %><br>
-    <%= f.text_field :name %>
-  </p>
-
-  <p>
-    <%= f.submit "Salvar"%>
-  </p>
-<% end %>
-
-<%= link_to 'Voltar', courses_path %>
+<%= render 'form' %>

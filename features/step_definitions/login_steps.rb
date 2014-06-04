@@ -45,10 +45,6 @@ When(/^I select "(.*?)" on the "(.*?)"$/) do |option, box|
     select(option, :from => box)
 end
 
-Given(/^there is a professor with email "(.*?)" and password "(.*?)"$/) do |email, password|
-    Professor.create(email: email, password: password)
-end
-
 Given(/^I'm at the list_professors page$/) do
       visit professors_path
 end
@@ -66,7 +62,11 @@ Given(/^there is a professor with name "(.*?)" and email "(.*?)" password "(.*?)
 end
 
 Given(/^there is a professor with name "(.*?)" and password "(.*?)" nusp "(.*?)" department "(.*?)" and email "(.*?)"$/) do |name, password, nusp, department, email|
-  Professor.create(name: name, password: password, nusp: nusp, department: department, email: email)
+  d = Department.find_by("code" => department)
+  if not d
+      d = Department.create! {{"code" => department}}
+  end
+  Professor.create(name: name , password: password, nusp: nusp, department_id: d.id, email: email)
 end
 
 When(/^I select the "(.*?)" option$/) do |option|
@@ -117,11 +117,15 @@ When(/^I should see "(.*?)" in the alert$/) do |text|
 end
 
 Given(/^there is a super_professor with name "(.*?)" and password "(.*?)" nusp "(.*?)" department "(.*?)" and email "(.*?)"$/) do |name, password, nusp, department, email|
-  Professor.create(name: name , password: password, nusp: nusp, department: department, email: email, super_professor: true)
+  d = Department.find_by("code" => department)
+  if not d
+      d = Department.create! {{"code" => department}}
+  end
+  Professor.create(name: name , password: password, nusp: nusp, department_id: d.id, email: email, super_professor: true)
 end
 
-When(/^there is a course with name "(.*?)" and code "(.*?)"$/) do |name, code|
-  Course.create(name: name, course_code: code)
+When(/^there is a course with name "(.*?)" and code "(.*?)" and department "(.*?)"$/) do |name, code, department|
+  Course.create(name: name, course_code: code, department_id: Department.find_by({:code => department}).id)
 end
 
 When(/^there is a secretary with name "(.*?)" and password "(.*?)" nusp "(.*?)" and email "(.*?)"$/) do |name, password, nusp, email|
@@ -144,3 +148,6 @@ Given(/^I'm at the student login page$/) do
   visit new_student_session_path
 end
 
+Given(/^there is a department with code "(.*?)"$/) do |code|
+      Department.create(code: code)
+end

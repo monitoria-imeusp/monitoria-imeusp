@@ -6,6 +6,7 @@ Feature: Edit Professor
     Scenario: Valid Admin editing a professor
         Given there is an admin user with email "kazuo@ime.usp.br" and password "admin123"
         And there is a professor with name "Bob" and password "prof-123" nusp "123" department "MAC" and email "bob@bob.bob"
+        And there is a department with code "MAE"
         And I'm at the login page
         And I fill the "E-mail" field with "kazuo@ime.usp.br"
         And I fill the "Senha" field with "admin123"
@@ -28,6 +29,7 @@ Feature: Edit Professor
     Scenario: Valid Admin editing a professor and changing the password
         Given there is an admin user with email "kazuo@ime.usp.br" and password "admin123"
         And there is a professor with name "Bob" and password "prof-123" nusp "123" department "MAC" and email "bob@bob.bob"
+        And there is a department with code "MAE"
         And I'm at the login page
         And I fill the "E-mail" field with "kazuo@ime.usp.br"
         And I fill the "Senha" field with "admin123"
