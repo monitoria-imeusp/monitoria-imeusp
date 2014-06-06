@@ -119,6 +119,7 @@ describe RequestForTeachingAssistantsController do
     professor3 = Professor.create! another_professor_another_department
     Department.create! {{"id" => 1, "code" => "MAC"}}
     Department.create! {{"id" => 2, "code" => "MAE"}}
+    Course.create! valid_course_attributes
     sign_in :professor, professor
   end
 
@@ -281,7 +282,6 @@ describe RequestForTeachingAssistantsController do
   describe "filters for request for teaching assistant" do
     
     it "filters the requests of other professors" do 
-      Course.create! valid_course_attributes
       Course.create! valid_second_course_attributes
       request_for_teaching_assistant = RequestForTeachingAssistant.create! valid_attributes
       RequestForTeachingAssistant.create! not_owned_attributes
@@ -290,7 +290,6 @@ describe RequestForTeachingAssistantsController do
     end
 
     it "filters the requests of the whole department" do 
-      Course.create! valid_course_attributes
       Course.create! valid_second_course_attributes
       Course.create! valid_third_course_attributes
       super_professor = Professor.create! super_professor_same_department

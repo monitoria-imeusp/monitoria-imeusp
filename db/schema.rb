@@ -48,6 +48,7 @@ ActiveRecord::Schema.define(version: 20140530185253) do
     t.string   "course_code"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "department_id"
   end
 
   create_table "departments", force: true do |t|
@@ -61,7 +62,6 @@ ActiveRecord::Schema.define(version: 20140530185253) do
   create_table "professors", force: true do |t|
     t.string   "name"
     t.string   "nusp"
-    t.string   "department"
     t.string   "email"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -75,6 +75,7 @@ ActiveRecord::Schema.define(version: 20140530185253) do
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
+    t.integer  "department_id"
   end
 
   create_table "request_for_teaching_assistants", force: true do |t|
