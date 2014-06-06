@@ -3,20 +3,20 @@ require 'spec_helper'
 describe StudentsController do
 
   let(:valid_attributes) { {
-  "name" => "carlinhos",
-  "nusp" => "123456",
-  "gender" => "0",
-  "rg" => "4523654",
-  "password" => "Yeieieieie",
-  "cpf" => "651651561",
-  "adress" => "rua do nada sem número",
-  "district" => "nerdlandia",
-  "zipcode" => "3256874",
-  "city" => "feliz feliz",
-  "state" => "felizlandia",
-  "tel" => "0123456789",
-  "cel" => "0123456789",
-  "email" => "easy@facil.com"
+    "name" => "carlinhos",
+    "nusp" => "123456",
+    "gender" => "0",
+    "rg" => "4523654",
+    "password" => "Yeieieieie",
+    "cpf" => "651651561",
+    "adress" => "rua do nada sem número",
+    "district" => "nerdlandia",
+    "zipcode" => "3256874",
+    "city" => "feliz feliz",
+    "state" => "felizlandia",
+    "cel" => "0123456789",
+    "tel" => "0123456789",
+    "email" => "easy@facil.com"
   } }
 
   before do
@@ -53,9 +53,13 @@ describe StudentsController do
       context 'succeeds to save' do
         before :each do
           @student.should_receive(:save).and_return(true)
-          post :create, @params
+          @student.should_receive(:authenticatable_salt)
+          post :create, { :student => valid_attributes }
         end
-        it { should redirect_to @student }
+        it {
+          assigns(:student).should be(@student)
+        }
+        #it { should redirect_to Student.last }
       end
     end
 

@@ -3,7 +3,7 @@ Feature: Create a candidature
 	As a student
 	I want to create a candidature
 
-	Scenario: Student creating a course
+	Scenario: Student creating a candidature
         Given I'm at the student login page
         And there is a student with name "carlinhos" and password "12345678" and nusp "123456" and gender "1" and rg "123" and cpf "321" and address "matao" and district "butanta" and zipcode "000" and city "sp" and state "sp" and tel "0123456789" and cel "1234567890" and email "eu@usp.br" and has_bank_account "true"
         And there is a course with name "labxp" and code "MAC0342"
