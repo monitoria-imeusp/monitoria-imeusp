@@ -163,6 +163,12 @@ Given(/^there is a department with code "(.*?)"$/) do |code|
       Department.create(code: code)
 end
 
-Given(/^there is an candidature with student "(.*?)" and first option "(.*?)" and second option "(.*?)" and third option "(.*?)" and availability for daytime "(.*?)" and availability for night time "(.*?)" and period preference "(.*?)"$/) do |name, course1, course2, course3, avaliability_daytime, avaliability_night_time, time_period_preference|
-  Candidature.create(student_id: Student.where(name: name).take.id, course1_id: Course.where(name: course1).take.id, course2_id: Course.where(name: course2).take.id, avaliability_daytime: avaliability_daytime, avaliability_night_time: avaliability_night_time, time_period_preference: time_period_preference)
+Given(/^there is an candidature with student "(.*?)" and first option "(.*?)" and second option "(.*?)" and third option "(.*?)" and availability for daytime "(.*?)" and availability for night time "(.*?)" and period preference "(.*?)"$/) do |student, course1, course2, course3, av_daytime, av_nighttime, period|
+  Candidature.create(
+      student_id: Student.where(name: student).take.id, 
+      course1_id: Course.where(name: course1).take.id, 
+      course2_id: Course.where(name: course2).take.id, 
+      avaliability_daytime: av_daytime, 
+      avaliability_night_time: av_nighttime, 
+      time_period_preference: period)
 end

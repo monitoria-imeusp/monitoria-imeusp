@@ -5,7 +5,7 @@ class CandidaturesController < ApplicationController
   # GET /candidatures
   # GET /candidatures.json
   def index
-    if admin_signed_in? or (professor_signed_in? and current_professor.super_professor)
+    if admin_signed_in? or (professor_signed_in? and current_professor.super_professor) or secretary_signed_in?
       @candidatures_filtered = Candidature.all
     elsif student_signed_in?
       @candidatures_filtered = Candidature.where("student_id = ?", current_student.id)

@@ -107,6 +107,9 @@
             <li>
               <%= link_to "Logout", destroy_secretary_session_path, method: :delete %>
             </li>
+            <li>
+               <%= link_to "Candidaturas", candidatures_path %>
+            </li>
           <% elsif student_signed_in? %>
             <li>
                <%= link_to "Candidaturas", candidatures_path %>

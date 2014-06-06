@@ -50,6 +50,14 @@ ActiveRecord::Schema.define(version: 20140530185253) do
     t.datetime "updated_at"
   end
 
+  create_table "departments", force: true do |t|
+    t.string   "code"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "departments", ["code"], name: "index_departments_on_code", unique: true
+
   create_table "professors", force: true do |t|
     t.string   "name"
     t.string   "nusp"
