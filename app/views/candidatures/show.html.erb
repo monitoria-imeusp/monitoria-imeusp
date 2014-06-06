@@ -44,7 +44,7 @@
 
 <p>
   <strong>Preferência pelo período:</strong>
-  <%= @candidature.time_period_preference %>
+  <%= daytimePreference()[@candidature.time_period_preference.to_i][0] %>
 </p>
 
 <%= link_to 'Editar', edit_candidature_path(@candidature) %> |
