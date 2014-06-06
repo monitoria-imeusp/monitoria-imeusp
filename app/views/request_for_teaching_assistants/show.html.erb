@@ -2,7 +2,7 @@
 
 <p>
   <strong>Professor:</strong>
-  <%= @request_for_teaching_assistant.professor_id %>
+  <%= Professor.find(@request_for_teaching_assistant.professor_id).name %>
 </p>
 
 <p>
@@ -43,3 +43,21 @@
 <%= link_to 'Editar', edit_request_for_teaching_assistant_path(@request_for_teaching_assistant) %>
 <%= link_to 'Remover', @request_for_teaching_assistant, method: :delete, data: { confirm: 'Você tem certeza?' } %>
 <%= link_to 'Voltar', request_for_teaching_assistants_path %>
+
+<table>
+  <thead>
+    <tr>
+      <th>Alunos que se candidataram para essa disciplina</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+	<% @candidatures_for_this_request.each do |candidature| %>
+	  <tr>
+		<td><%= candidature.student.name %></td>
+		<td><%= link_to 'Ver candidatura', candidature %></td>
+	  </tr>
+	<% end %>
+  </tbody>
+</table>
