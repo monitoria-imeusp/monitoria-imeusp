@@ -80,5 +80,45 @@ if Rails.env.development?
   ].each do |course|
     Course.create(course)
   end
+
+  [
+    {
+      name: "Will",
+      nusp: "000000",
+      gender: "1",
+      rg: "123",
+      cpf: "321",
+      adress: "R. Matão",
+      district: "Butantã",
+      zipcode: "000",
+      city: "São Paulo",
+      state: "São Paulo",
+      tel: "1111111111",
+      cel: "11122233344",
+      email: "kazuo@ime.usp.br",
+      has_bank_account: "true",
+      password: "changeme!"
+    },
+    {
+      name: "Jackção",
+      nusp: "242424",
+      gender: "0",
+      rg: "456",
+      cpf: "654",
+      adress: "R. Matão",
+      district: "Butantã",
+      zipcode: "000",
+      city: "São Paulo",
+      state: "São Paulo",
+      tel: "1111111111",
+      cel: "11122233344",
+      email: "jacks@ime.usp.br",
+      has_bank_account: "false",
+      password: "changeme!"
+    }
+  ].each do |student|
+    Student.create(student)
+  end
+
   Secretary.create(name: "Marcia", nusp: "99999", email: "marcia@ime.usp.br", password: "changeme!")
 end
