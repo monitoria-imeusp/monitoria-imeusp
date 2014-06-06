@@ -2,7 +2,7 @@
 
 <p>
   <strong>Professor:</strong>
-  <%= @request_for_teaching_assistant.professor_id %>
+  <%= Professor.find(@request_for_teaching_assistant.professor_id).name %>
 </p>
 
 <p>

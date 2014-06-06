@@ -17,7 +17,7 @@
     <% @request_for_teaching_assistants.each do |request_for_teaching_assistant| %>
       <tr>
         <td><%= link_to 'Ver', request_for_teaching_assistant %></td>
-        <td><%= request_for_teaching_assistant.professor_id %></td>
+        <td><%= Professor.find(request_for_teaching_assistant.professor_id).name %></td>
         <td><%= request_for_teaching_assistant.course.course_code %></td>
         <td><%= request_for_teaching_assistant.requested_number %></td>
         <td><%= priorityOptions[request_for_teaching_assistant.priority][0] %></td>
