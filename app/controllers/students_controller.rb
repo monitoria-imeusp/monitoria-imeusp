@@ -2,6 +2,8 @@ class StudentsController < ApplicationController
     before_action :authenticate_new!,  :only => [:new, :create]
     before_action :authenticate_edit!,  :only => [:edit, :update]
     before_action :authenticate_delete!,  :only => [:destroy]
+    before_action :authenticate_index!, :only => [:index]
+    before_action :authenticate_show!, :only => [:show]
 
     def new
         @student = Student.new
@@ -10,6 +12,7 @@ class StudentsController < ApplicationController
     def create
         @student = Student.new(student_params)
         if @student.save
+            sign_in  @student, :bypass => true
             redirect_to @student
         else
             render 'new'
@@ -48,6 +51,7 @@ class StudentsController < ApplicationController
             params[:student].delete(:password_confirmation)
         end
         if @student.update(student_params)
+            sign_in  @student, :bypass => true
             redirect_to @student
         else
             render 'edit'
@@ -69,8 +73,14 @@ class StudentsController < ApplicationController
         end
     end
 
+    def authenticate_index!
+        unless admin_signed_in? or professor_signed_in? or secretary_signed_in?
+            redirect_to root_path
+        end
+    end
+
     def authenticate_edit!
-        unless student_signed_in? and (current_student.id == params[:id].to_i) 
+        unless student_signed_in? and (current_student.id == params[:id].to_i)
             redirect_to students_path
         end
     end
@@ -78,6 +88,12 @@ class StudentsController < ApplicationController
     def authenticate_delete!
         unless admin_signed_in? or secretary_signed_in?
            redirect_to students_path 
+        end
+    end
+
+    def authenticate_show!
+        unless admin_signed_in? or professor_signed_in? or secretary_signed_in? or (student_signed_in? and (current_student.id == params[:id].to_i))
+            redirect_to root_path
         end
     end
 
