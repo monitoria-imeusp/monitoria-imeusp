@@ -9,7 +9,7 @@ describe StudentsController do
     "rg" => "4523654",
     "password" => "Yeieieieie",
     "cpf" => "651651561",
-    "adress" => "rua do nada sem número",
+    "address" => "rua do nada sem número",
     "district" => "nerdlandia",
     "zipcode" => "3256874",
     "city" => "feliz feliz",

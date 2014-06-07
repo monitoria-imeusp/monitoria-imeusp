@@ -117,8 +117,8 @@ describe CandidaturesController do
         # specifies that the Candidature created on the previous line
         # receives the :update_attributes message with whatever params are
         # submitted in the request.
-        Candidature.any_instance.should_receive(:update).with({ "avaliability_daytime" => "false" })
-        put :update, {:id => candidature.to_param, :candidature => { "avaliability_daytime" => "false" }}, valid_session
+        Candidature.any_instance.should_receive(:update).with({ "daytime_availability" => "false" })
+        put :update, {:id => candidature.to_param, :candidature => { "daytime_availability" => "false" }}, valid_session
       end
 
       it "assigns the requested candidature as @candidature" do
@@ -139,7 +139,7 @@ describe CandidaturesController do
         candidature = Candidature.create! valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
         Candidature.any_instance.stub(:save).and_return(false)
-        put :update, {:id => candidature.to_param, :candidature => { "avaliability_daytime" => "invalid value" }}, valid_session
+        put :update, {:id => candidature.to_param, :candidature => { "daytime_availability" => "invalid value" }}, valid_session
         assigns(:candidature).should eq(candidature)
       end
 
@@ -147,7 +147,7 @@ describe CandidaturesController do
         candidature = Candidature.create! valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
         Candidature.any_instance.stub(:save).and_return(false)
-        put :update, {:id => candidature.to_param, :candidature => { "avaliability_daytime" => "invalid value" }}, valid_session
+        put :update, {:id => candidature.to_param, :candidature => { "daytime_availability" => "invalid value" }}, valid_session
         response.should render_template("edit")
       end
     end

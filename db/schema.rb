@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140607021708) do
+ActiveRecord::Schema.define(version: 20140607193058) do
 
   create_table "admins", force: true do |t|
     t.string   "email",                  default: "", null: false
@@ -33,7 +33,7 @@ ActiveRecord::Schema.define(version: 20140607021708) do
 
   create_table "candidatures", force: true do |t|
     t.boolean  "daytime_availability"
-    t.boolean  "night_availability"
+    t.boolean  "nighttime_availability"
     t.string   "time_period_preference"
     t.integer  "course1_id"
     t.integer  "course2_id"

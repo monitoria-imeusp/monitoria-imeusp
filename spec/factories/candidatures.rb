@@ -2,8 +2,8 @@
 
 FactoryGirl.define do
   factory :candidature do
-    avaliability_daytime false
-    avaliability_night_time false
+    daytime_availability false
+    nighttime_availability false
     time_period_preference "MyString"
     course1_id 1
     course2_id 1

@@ -26,8 +26,8 @@
 
 <p>
   <strong><%= t('activerecord.attributes.candidature.avaliability_daytime') + ':' %></strong>
-  <% if @candidature.avaliability_daytime %>
-    Sim
+  <% if @candidature.daytime_availability %>
+	  Sim
   <% else %>
     Não
   <% end %>
@@ -35,8 +35,8 @@
 
 <p>
   <strong><%= t('activerecord.attributes.candidature.avaliability_night_time') + ':' %></strong>
-  <% if @candidature.avaliability_night_time %>
-    Sim
+  <% if @candidature.nighttime_availability %>
+	  Sim
   <% else %>
     Não
   <% end %>
