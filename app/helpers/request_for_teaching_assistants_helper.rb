@@ -6,10 +6,10 @@ module RequestForTeachingAssistantsHelper
       ['Importante, porém posso abrir mão do auxílio de um monitor', 2]
     ]
   end  
-  
+
   def course_options
     (Course.all.map do |course|
-        [course.name, course.id]
+      [course.name, course.id]
     end).unshift ["", ""]
   end
 end

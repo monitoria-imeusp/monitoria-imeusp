@@ -41,10 +41,10 @@ class SecretariesController < ApplicationController
   # PATCH/PUT /secretaries/1
   # PATCH/PUT /secretaries/1.json
   def update
-	if params[:secretary][:password].blank? && params[:secretary][:password_confirmation].blank?
-	  params[:secretary].delete(:password)
-	  params[:secretary].delete(:password_confirmation)
-	end
+    if params[:secretary][:password].blank? && params[:secretary][:password_confirmation].blank?
+      params[:secretary].delete(:password)
+      params[:secretary].delete(:password_confirmation)
+    end
     respond_to do |format|
       if @secretary.update(secretary_params)
         format.html { redirect_to @secretary, notice: 'Funcionário(a) foi atualizado(a) com sucesso.' }
@@ -67,13 +67,13 @@ class SecretariesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_secretary
-      @secretary = Secretary.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_secretary
+    @secretary = Secretary.find(params[:id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def secretary_params
-      params.require(:secretary).permit(:nusp, :name, :email, :password, :password_confirmation)
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def secretary_params
+    params.require(:secretary).permit(:nusp, :name, :email, :password, :password_confirmation)
+  end
 end

@@ -17,7 +17,7 @@
 
 <% if admin_signed_in? %>
   <p>
-		<%= link_to 'Editar', edit_secretary_path(@secretary) %>
+    <%= link_to 'Editar', edit_secretary_path(@secretary) %>
     <%= link_to 'Remover', @secretary, method: :delete, data: { confirm: 'Tem certeza?' } %>
   </p>
 <% end %>

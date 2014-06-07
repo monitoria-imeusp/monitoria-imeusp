@@ -1,4 +1,4 @@
-<h1>Listando Candidaturas</h1>
+<h1>Lista de Candidaturas</h1>
 
 <table>
   <thead>
@@ -20,7 +20,7 @@
         <td><%= candidature.course3_id != nil ? Course.find(candidature.course3_id).name : "" %></td>
         <td><%= link_to 'Mostrar', candidature %></td>
         <td><%= link_to 'Editar', edit_candidature_path(candidature) %></td>
-        <td><%= link_to 'Remover', candidature, method: :delete, data: { confirm: 'Você tem certeza?' } %></td>
+        <td><%= link_to 'Remover', candidature, method: :delete, data: { confirm: 'Tem certeza?' } %></td>
       </tr>
     <% end %>
   </tbody>

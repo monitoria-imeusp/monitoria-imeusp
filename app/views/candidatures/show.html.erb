@@ -6,44 +6,44 @@
 </p>
 
 <p>
-  <strong>1ª opção de curso:</strong>
+  <strong>Curso: 1ª opção:</strong>
   <%= Course.find(@candidature.course1_id).name %>
 </p>
 
 <p>
-  <strong>2ª opção de curso:</strong>
+  <strong>Curso: 2ª opção:</strong>
   <% if @candidature.course2_id != nil%>
     <%= Course.find(@candidature.course2_id).name %>
   <% end %>
 </p>
 
 <p>
-  <strong>3ª opção de curso:</strong>
+  <strong>Curso: 3ª opção:</strong>
   <% if @candidature.course3_id != nil%>
     <%= Course.find(@candidature.course3_id).name %>
   <% end %>
 </p>
 
 <p>
-  <strong>Disponibilidade para o período diurno:</strong>
+  <strong>Disponibilidade para trabalhar de dia:</strong>
   <% if @candidature.avaliability_daytime %>
-	  Sim
+    Sim
   <% else %>
-	  Não
+    Não
   <% end %>
 </p>
 
 <p>
-  <strong>Disponibilidade para o período noturno:</strong>
+  <strong>Disponibilidade para trabalhar de noite:</strong>
   <% if @candidature.avaliability_night_time %>
-	  Sim
+    Sim
   <% else %>
-	  Não
+    Não
   <% end %>
 </p>
 
 <p>
-  <strong>Preferência pelo período:</strong>
+  <strong>Preferência de trabalhar no período:</strong>
   <%= daytimePreference()[@candidature.time_period_preference.to_i][0] %>
 </p>
 

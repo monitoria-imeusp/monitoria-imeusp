@@ -1,7 +1,7 @@
 <%= form_for(@secretary) do |f| %>
   <% if @secretary.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@secretary.errors.count, "error") %> prohibited this secretary from being saved:</h2>
+      <h2><%= pluralize(@secretary.errors.count, "error") %> impediu esse funcionário de ser salvo:</h2>
 
       <ul>
       <% @secretary.errors.full_messages.each do |msg| %>
@@ -12,11 +12,11 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :nusp %><br>
+    <%= f.label :nusp, "Número USP" %><br>
     <%= f.text_field :nusp %>
   </div>
   <div class="field">
-    <%= f.label :name %><br>
+    <%= f.label :name, "Nome" %><br>
     <%= f.text_field :name %>
   </div>
   <div class="field">
@@ -24,10 +24,16 @@
     <%= f.text_field :email %>
   </div>
   <div class="field">
-    <%= f.label :password %><br>
+    <%= f.label :password, "Senha" %><br>
     <%= f.text_field :password %>
   </div>
+  <div class="field">
+    <%= f.label :password_confirmation, "Confirme a senha" %><br>
+    <%= f.text_field :password_confirmation %>
+  </div>
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit, "Enviar" %>
   </div>
 <% end %>
+
+<%= form_for :secretary, url: secretaries_path do |f| %>

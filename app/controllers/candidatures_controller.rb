@@ -70,13 +70,13 @@ class CandidaturesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_candidature
-      @candidature = Candidature.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_candidature
+    @candidature = Candidature.find(params[:id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def candidature_params
-      params.require(:candidature).permit(:avaliability_daytime, :avaliability_night_time, :time_period_preference, :course1_id, :course2_id, :course3_id, :student_id)
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def candidature_params
+    params.require(:candidature).permit(:avaliability_daytime, :avaliability_night_time, :time_period_preference, :course1_id, :course2_id, :course3_id, :student_id)
+  end
 end

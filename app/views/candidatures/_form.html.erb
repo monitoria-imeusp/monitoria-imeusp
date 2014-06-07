@@ -1,7 +1,7 @@
 <%= form_for(@candidature) do |f| %>
   <% if @candidature.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@candidature.errors.count, "error") %> prohibited this candidature from being saved:</h2>
+      <h2><%= pluralize(@candidature.errors.count, "error") %> impediu essa candidatura de ser salva:</h2>
 
       <ul>
       <% @candidature.errors.full_messages.each do |msg| %>
@@ -11,15 +11,15 @@
     </div>
   <% end %>
   <div class="field">
-    <%= f.label :course1_id, "Primeiro curso:" %><br>
+    <%= f.label :course1_id, "Curso: 1ª opção:" %><br>
     <%= f.collection_select :course1_id, Course.order(:name), :id, :name, include_blank: true %>
   </div>
   <div class="field">
-    <%= f.label :course2_id, "Segundo curso:" %><br>
+    <%= f.label :course1_id, "Curso: 2ª opção:" %><br>
     <%= f.collection_select :course2_id, Course.order(:name), :id, :name, include_blank: true %>
   </div>
   <div class="field">
-    <%= f.label :course3_id, "Terceiro curso:" %><br>
+    <%= f.label :course1_id, "Curso: 3ª opção:" %><br>
     <%= f.collection_select :course3_id, Course.order(:name), :id, :name, include_blank: true %>
   </div>
   <div class="field">
@@ -31,7 +31,7 @@
     <%= f.check_box :avaliability_night_time %>
   </div>
   <div class="field">
-    <%= f.label :time_period_preference, "Preferência por horário:" %><br>
+    <%= f.label :time_period_preference, "Preferência de trabalhar no período:" %><br>
     <% daytimePreference.each do | option | %>
       <%= f.radio_button :time_period_preference, option[1] %>
       <%= f.label option[0] %>
@@ -39,6 +39,6 @@
     <% end %>
   </div>
   <div class="actions">
-    <%= f.submit "Enviar candidatura de monitoria" %>
+    <%= f.submit "Enviar" %>
   </div>
 <% end %>

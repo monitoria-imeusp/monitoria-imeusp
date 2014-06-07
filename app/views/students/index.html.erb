@@ -1,13 +1,13 @@
 <h1>Alunos</h1>
 
 <table>
-	<tr>
-		<th>Nome</th>
-	</tr>
+  <tr>
+    <th>Nome</th>
+  </tr>
 
-	<% @students.each do |student| %>
-		<tr>
+  <% @students.each do |student| %>
+    <tr>
       <td><%= link_to student.name, student %></td>
     </tr>
-	<% end %>
+  <% end %>
 </table>

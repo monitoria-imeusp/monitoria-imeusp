@@ -1,32 +1,6 @@
-<h1>Editando Secretária</h1>
+<h1>Edição de Funcionário</h1>
 
-<%= form_for :secretary, url: secretary_path(@secretary), method: :patch do |f| %>
-  <p>
-    <%= f.label :nusp, "Número USP" %><br>
-    <%= f.text_field :nusp %>
-  </p>
+<%= render 'form' %>
 
-  <p>
-    <%= f.label :name, "Nome" %><br>
-    <%= f.text_field :name %>
-  </p>
-
-  <p>
-    <%= f.label :email, "Email" %><br>
-    <%= f.email_field :email %>
-  </p>
-
-  <p>
-    <%= f.label :password , "Senha" %><br>
-    <%= f.password_field :password %>
-  </p>
-  <p>
-    <%= f.label :password_confirmation , "Confirme a senha" %><br>
-    <%= f.password_field :password_confirmation %>
-  </p>
-  <p>
-    <%= f.submit "Salvar"%>
-  </p>
-<% end %>
-
+<%= link_to 'Ver', @secretary %> |
 <%= link_to 'Voltar', secretaries_path %>

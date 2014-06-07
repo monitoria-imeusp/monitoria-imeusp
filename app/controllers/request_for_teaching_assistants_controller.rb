@@ -9,15 +9,15 @@ class RequestForTeachingAssistantsController < ApplicationController
       |request| request
     end).keep_if do |request|
       request.professor_id == current_professor.id or 
-          (current_professor.super_professor and current_professor.department == request.course.department)
+        (current_professor.super_professor and current_professor.department == request.course.department)
     end
   end
 
   # GET /request_for_teaching_assistants/1
   # GET /request_for_teaching_assistants/1.json
   def show
-	  course_id = RequestForTeachingAssistant.find(params[:id]).course.id
-	  @candidatures_for_this_request = Candidature.where("course1_id = ? or course2_id = ? or course3_id = ?", course_id, course_id, course_id)
+    course_id = RequestForTeachingAssistant.find(params[:id]).course.id
+    @candidatures_for_this_request = Candidature.where("course1_id = ? or course2_id = ? or course3_id = ?", course_id, course_id, course_id)
   end
 
   # GET /request_for_teaching_assistants/new
@@ -28,7 +28,7 @@ class RequestForTeachingAssistantsController < ApplicationController
   # GET /request_for_teaching_assistants/1/edit
   def edit
     if (not @request_for_teaching_assistant) or
-        (@request_for_teaching_assistant.professor_id != current_professor.id)
+      (@request_for_teaching_assistant.professor_id != current_professor.id)
       redirect_to request_for_teaching_assistants_path
     end
   end
@@ -38,7 +38,7 @@ class RequestForTeachingAssistantsController < ApplicationController
   def create
     params[:request_for_teaching_assistant][:professor_id] = current_professor.id
     @request_for_teaching_assistant = RequestForTeachingAssistant.new(request_for_teaching_assistant_params)
-    
+
     respond_to do |format|
       if @request_for_teaching_assistant.save
         format.html { redirect_to @request_for_teaching_assistant, notice: 'Pedido de Monitoria feito com sucesso.' }
@@ -68,7 +68,7 @@ class RequestForTeachingAssistantsController < ApplicationController
   # DELETE /request_for_teaching_assistants/1.json
   def destroy
     if (not @request_for_teaching_assistant) or
-        (@request_for_teaching_assistant.professor_id != current_professor.id)
+      (@request_for_teaching_assistant.professor_id != current_professor.id)
       redirect_to request_for_teaching_assistants_path
     else
       @request_for_teaching_assistant.destroy
@@ -78,18 +78,18 @@ class RequestForTeachingAssistantsController < ApplicationController
       end
     end
   end
-    
-  private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_request_for_teaching_assistant
-      if RequestForTeachingAssistant.exists?(params[:id])
-        @request_for_teaching_assistant = RequestForTeachingAssistant.find(params[:id])
-      end
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def request_for_teaching_assistant_params
-      params.require(:request_for_teaching_assistant).permit(:professor_id, :subject, :requested_number, :priority, :student_assistance, :work_correction, :test_oversight, :course_id, :observation)
+  private
+  # Use callbacks to share common setup or constraints between actions.
+  def set_request_for_teaching_assistant
+    if RequestForTeachingAssistant.exists?(params[:id])
+      @request_for_teaching_assistant = RequestForTeachingAssistant.find(params[:id])
     end
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def request_for_teaching_assistant_params
+    params.require(:request_for_teaching_assistant).permit(:professor_id, :subject, :requested_number, :priority, :student_assistance, :work_correction, :test_oversight, :course_id, :observation)
+  end
 
 end

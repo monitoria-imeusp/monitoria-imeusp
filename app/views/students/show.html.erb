@@ -1,85 +1,85 @@
 <p>
-  	<strong>Nome:</strong>
-  	<%= @student.name %>
+  <strong>Nome:</strong>
+  <%= @student.name %>
 </p>
 
 <p>
-  	<strong>Sexo:</strong>
-  	<% if (@student.gender == 0) %>
-  		<%="Feminino"%>
-  	<%else%>
-  		<%="Masculino"%>
-  	<%end%>
+  <strong>Sexo:</strong>
+  <% if (@student.gender == 0) %>
+    <%="Feminino"%>
+  <%else%>
+    <%="Masculino"%>
+  <%end%>
 </p>
 
 <% if professor_signed_in? || admin_signed_in? || secretary_signed_in? %>
- 	<p>
- 		<strong>Número USP:</strong>
- 		<%= @student.nusp %>
- 	</p>
-
- 	<p>
-  	<strong>RG:</strong>
-  	<%= @student.rg %>
+  <p>
+    <strong>Número USP:</strong>
+    <%= @student.nusp %>
   </p>
 
   <p>
-    	<strong>CPF:</strong>
-    	<%= @student.cpf %>
+    <strong>RG:</strong>
+    <%= @student.rg %>
   </p>
 
   <p>
-    	<strong>Endereço:</strong>
-    	<%= @student.adress %>
+    <strong>CPF:</strong>
+    <%= @student.cpf %>
   </p>
 
   <p>
-    	<strong>Complemento:</strong>
-    	<%= @student.complement %>
+    <strong>Endereço:</strong>
+    <%= @student.adress %>
   </p>
 
   <p>
-    	<strong>Bairro:</strong>
-    	<%= @student.district %>
-  </p>
-  <p>
-    	<strong>CEP:</strong>
-    	<%= @student.zipcode %>
+    <strong>Complemento:</strong>
+    <%= @student.complement %>
   </p>
 
   <p>
-    	<strong>Cidade:</strong>
-    	<%= @student.city %>
+    <strong>Bairro:</strong>
+    <%= @student.district %>
+  </p>
+  <p>
+    <strong>CEP:</strong>
+    <%= @student.zipcode %>
   </p>
 
   <p>
-    	<strong>Estado:</strong>
-    	<%= @student.state %>
+    <strong>Cidade:</strong>
+    <%= @student.city %>
   </p>
 
   <p>
-    	<strong>Telefone:</strong>
-    	<%= @student.tel %>
+    <strong>Estado:</strong>
+    <%= @student.state %>
   </p>
 
   <p>
-    	<strong>Celular:</strong>
-    	<%= @student.cel %>
+    <strong>Telefone residencial:</strong>
+    <%= @student.tel %>
   </p>
 
   <p>
-    	<strong>E-mail:</strong>
-    	<%= @student.email %>
+    <strong>Celular:</strong>
+    <%= @student.cel %>
   </p>
 
   <p>
-    	<strong>Possui conta:</strong>
-    	<%= @student.has_bank_account %>
+    <strong>Email:</strong>
+    <%= @student.email %>
+  </p>
+
+  <p>
+    <strong>Possui conta no Banco do Brasil:</strong>
+    <%= @student.has_bank_account %>
   </p>
 
   <% if admin_signed_in? || secretary_signed_in? %>
     <p>
-      <%= link_to 'Remover', student_path(@student), method: :delete %>
+      <%= link_to 'Remover', student_path(@student), method: :delete, data: { confirm: 'Tem certeza?' } %>
     </p>
   <% end %>
 
