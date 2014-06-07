@@ -15,11 +15,11 @@
     <%= f.collection_select :course1_id, Course.order(:name), :id, :name, include_blank: true %>
   </div>
   <div class="field">
-    <%= f.label :course1_id, "Curso: 2ª opção:" %><br>
+    <%= f.label :course2_id, "Curso: 2ª opção:" %><br>
     <%= f.collection_select :course2_id, Course.order(:name), :id, :name, include_blank: true %>
   </div>
   <div class="field">
-    <%= f.label :course1_id, "Curso: 3ª opção:" %><br>
+    <%= f.label :course3_id, "Curso: 3ª opção:" %><br>
     <%= f.collection_select :course3_id, Course.order(:name), :id, :name, include_blank: true %>
   </div>
   <div class="field">

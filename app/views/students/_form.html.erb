@@ -1,98 +1,93 @@
 <%= form_for(@student) do |f| %>
-  <p>
+  <% if @student.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@student.errors.count, "error") %> impediu esse funcionário de ser salvo:</h2>
+
+      <ul>
+      <% @student.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
     <%= f.label :name, "Nome" %><br>
     <%= f.text_field :name %>
-  </p>
-
-  <p>
+  </div>
+  <div class="field">
     <%= f.label :password, "Senha" %><br>
     <%= f.password_field :password %>
-  </p>
-
-  <p>
+  </div>
+  <div class="field">
     <%= f.label :password_confirmation, "Confirme a senha" %><br>
     <%= f.password_field :password_confirmation %>
-  </p>
-
-  <p>
+  </div>
+  <div class="field">
     <%= f.label :nusp, "Número USP" %><br>
     <%= f.text_field :nusp %>
-  </p>
-
-  <p>
+  </div>
+  <div class="field">
     <%= f.label :gender, "Sexo" %><br>
     <% genderOptions.each do | option | %>
       <%= f.radio_button :gender, option[1] %>
       <%= f.label option[0] %>
       </br>
     <% end %>
-  </p>
-
-  <p>
+  </div>
+  <div class="field">
     <%= f.label :rg, "RG" %><br>
     <%= f.text_field :rg %>
-  </p>
-
-  <p>
+  </div>
+  <div class="field">
     <%= f.label :cpf, "CPF" %><br>
     <%= f.text_field :cpf %>
-  </p>
-
-  <p>
+  </div>
+  <div class="field">
     <%= f.label :adress, "Endereço" %><br>
     <%= f.text_field :adress %>
-  </p>
-
-  <p>
+  </div>
+  <div class="field">
     <%= f.label :complement, "Complemento" %><br>
     <%= f.text_field :complement %>
-  </p>
-
-  <p>
+  </div>
+  <div class="field">
     <%= f.label :district, "Bairro" %><br>
     <%= f.text_field :district %>
-  </p>
-
-  <p>
+  </div>
+  <div class="field">
     <%= f.label :zipcode, "CEP" %><br>
     <%= f.text_field :zipcode %>
-  </p>
-
-  <p>
+  </div>
+  <div class="field">
     <%= f.label :city, "Cidade" %><br>
     <%= f.text_field :city %>
-  </p>
-
-  <p>
+  </div>
+  <div class="field">
     <%= f.label :state, "Estado" %><br>
     <%= f.text_field :state %>
-  </p>
-
-  <p>
+  </div>
+  <div class="field">
     <%= f.label :tel, "Telefone residencial" %><br>
     <%= f.text_field :tel %>
-  </p>
-
-  <p>
+  </div>
+  <div class="field">
     <%= f.label :cel, "Celular" %><br>
     <%= f.text_field :cel %>
-  </p>
-
-  <p>
+  </div>
+  <div class="field">
     <%= f.label :email %><br>
     <%= f.text_field :email %>
-  </p>
-
- <p>
+  </div>
+ <div class="field">
     <%= f.label :has_bank_account, 'Possui conta no Banco do Brasil?' %><br>
     <% yesOrNo.each do | option | %>
       <%= f.radio_button :has_bank_account, option[1] %>
       <%= f.label option[0] %>
       </br>
     <% end %>
-  </p>
-
-  <p>
+  </div>
+  <div class="field">
     <%= f.submit "Enviar" %>
-  </p>
+  </div>
 <% end %>

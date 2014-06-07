@@ -1,40 +1,45 @@
-<%= form_for :professor, url: professors_path do |f| %>
-  <p>
+<%= form_for(@professor) do |f| %>
+  <% if @professor.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@professor.errors.count, "error") %> impediu esse professor de ser salvo:</h2>
+
+      <ul>
+      <% @professor.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
     <%= f.label :name, "Nome" %><br>
     <%= f.text_field :name %>
-  </p>
-
-  <p>
+  </div>
+  <div class="field">
     <%= f.label :nusp, "Número USP" %><br>
     <%= f.text_field :nusp %>
-  </p>
-
-  <p>
+  </div>
+  <div class="field">
     <%= f.label :department_id, "Departamento" %><br>
     <%= f.select :department_id, department_options %>
-  </p>
-
-  <p>
+  </div>
+  <div class="field">
     <%= f.label :password , "Senha" %><br>
     <%= f.password_field :password %>
-  </p>
-
-  <p>
+  </div>
+  <div class="field">
     <%= f.label :password_confirmation , "Confirme a senha" %><br>
     <%= f.password_field :password_confirmation %>
-  </p>
-
-  <p>
+  </div>
+  <div class="field">
     <%= f.label :email %><br>
     <%= f.email_field :email %>
-  </p>
-
-  <p>
+  </div>
+  <div class="field">
     <%= f.label :super_professor, "Permissão de SuperProfessor" %><br>
     <%= f.check_box :super_professor %>
-  </p>
-
-  <p>
+  </div>
+  <div class="field">
     <%= f.submit "Enviar" %>
-  </p>
+  </div>
 <% end %>
