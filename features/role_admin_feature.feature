@@ -7,7 +7,7 @@ Feature: Accessing the page
         Given I'm at the login page
         And there is a department with code "MAC"
         And there is an admin user with email "kazuo@ime.usp.br" and password "admin123"
-        When I fill the "E-mail" field with "kazuo@ime.usp.br"
+        When I fill the "Email" field with "kazuo@ime.usp.br"
         And I fill the "Senha" field with "admin123"
         And I press the "Entrar" button
         And I click the "Novo Professor" link
@@ -16,11 +16,11 @@ Feature: Accessing the page
         And I select "MAC" on the "Departamento"
         And I fill the "Senha" field with "12345678"
         And I fill the "Confirme a senha" field with "12345678"
-        And I fill the "E-mail" field with "email@email.com"
-        And I press the "Cadastrar" button
+        And I fill the "Email" field with "email@email.com"
+        And I press the "Enviar" button
         Then I should see "Nome: tanto faz"
         And I should see "Número USP: 12345"
-        And I should see "E-mail: email@email.com"
+        And I should see "Email: email@email.com"
         And I should see "Departamento: MAC"
         And I should see "Editar"
 
@@ -32,7 +32,7 @@ Feature: Accessing the page
         Given I'm at the login page
         And there is an admin user with email "kazuo@ime.usp.br" and password "admin123"
         And there is a professor with name "mqz" and password "12345678" nusp "1111111" department "MAC" and email "music@usp.br"
-        When I fill the "E-mail" field with "kazuo@ime.usp.br"
+        When I fill the "Email" field with "kazuo@ime.usp.br"
         And I fill the "Senha" field with "admin123"
         And I press the "Entrar" button
         And I click the "Professores" link

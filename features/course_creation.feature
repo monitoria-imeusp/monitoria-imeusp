@@ -8,7 +8,7 @@ Feature: Course creation
         Given I'm at the login page
         And there is an admin user with email "kazuo@ime.usp.br" and password "admin123"
         And there is a department with code "MAC"
-        When I fill the "E-mail" field with "kazuo@ime.usp.br"
+        When I fill the "Email" field with "kazuo@ime.usp.br"
         And I fill the "Senha" field with "admin123"
         And I press the "Entrar" button
         And I click the "Nova Disciplina" link
@@ -16,7 +16,7 @@ Feature: Course creation
         And I select "MAC" on the "Departamento"
         And I should see "MAC"
         And I fill the "Sigla" field with "0315"
-        And I press the "Cadastrar" button
+        And I press the "Enviar" button
         Then I should see "Nome da Disciplina: proglin"
         And I should see "Código da Disciplina: MAC0315"
         And I should see "Editar"
@@ -33,7 +33,7 @@ Feature: Course creation
         And I fill the "Nome da Disciplina" field with "proglin"
         And I select "MAC" on the "Departamento"
         And I fill the "Sigla" field with "0315"
-        And I press the "Cadastrar" button
+        And I press the "Enviar" button
         Then I should see "Nome da Disciplina: proglin"
         And I should see "Código da Disciplina: MAC0315"
         And I should see "Editar"

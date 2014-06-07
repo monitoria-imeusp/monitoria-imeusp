@@ -8,7 +8,7 @@ Feature: Course deletion
         And there is a department with code "MAC"
         And there is an admin user with email "kazuo@ime.usp.br" and password "admin123"
         And there is a course with name "labxp" and code "MAC0342" and department "MAC"
-        When I fill the "E-mail" field with "kazuo@ime.usp.br"
+        When I fill the "Email" field with "kazuo@ime.usp.br"
         And I fill the "Senha" field with "admin123"
         And I press the "Entrar" button
         And I click the "Disciplinas" link

@@ -6,7 +6,7 @@ Feature: Secretary remove
     Scenario: Admin removing a secretary
     	Given I'm at the login page
         And there is an admin user with email "kazuo@ime.usp.br" and password "admin123"
-        When I fill the "E-mail" field with "kazuo@ime.usp.br"
+        When I fill the "Email" field with "kazuo@ime.usp.br"
         And I fill the "Senha" field with "admin123"
         And I press the "Entrar" button
         And there is a secretary with name "Marcia" and password "12345678" nusp "1111111" and email "marcia@ime.usp.br"

@@ -6,7 +6,7 @@ Feature: Secretary edit
     Scenario: Admin editing a secretary
     	Given I'm at the login page
         And there is an admin user with email "kazuo@ime.usp.br" and password "admin123"
-        When I fill the "E-mail" field with "kazuo@ime.usp.br"
+        When I fill the "Email" field with "kazuo@ime.usp.br"
         And I fill the "Senha" field with "admin123"
         And I press the "Entrar" button
         And there is a secretary with name "Marcia" and password "12345678" nusp "1111111" and email "marcia@ime.usp.br"
@@ -18,7 +18,7 @@ Feature: Secretary edit
         And I fill the "Email" field with "joao@ime.usp.br"
         And I fill the "Senha" field with "87654321"
         And I fill the "Confirme a senha" field with "87654321"
-        And I press the "Salvar" button
+        And I press the "Enviar" button
         Then I should see "Funcionário(a) foi atualizado(a) com sucesso."
         And I should see "Número USP: 2222222"
         And I should see "Nome: João"

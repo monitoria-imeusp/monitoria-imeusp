@@ -6,7 +6,7 @@ Feature: Secretary creation
     Scenario: Admin creating a secretary
         Given I'm at the login page
         And there is an admin user with email "kazuo@ime.usp.br" and password "admin123"
-        When I fill the "E-mail" field with "kazuo@ime.usp.br"
+        When I fill the "Email" field with "kazuo@ime.usp.br"
         And I fill the "Senha" field with "admin123"
         And I press the "Entrar" button
         And I click the "Novo Funcionário" link
@@ -15,7 +15,7 @@ Feature: Secretary creation
         And I fill the "Email" field with "marcia@ime.usp.br"
         And I fill the "Senha" field with "12345678"
         And I fill the "Confirme a senha" field with "12345678"
-        And I press the "Cadastrar" button
+        And I press the "Enviar" button
         Then I should see "Funcionário(a) foi criado(a) com sucesso."
         And I should see "Número USP: 1234567"
         And I should see "Nome: Marcia"

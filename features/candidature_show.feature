@@ -14,7 +14,7 @@ Feature: Candidature visualization
 		And there is a course with name "Introdução à Ciência da Computação" and code "MAC0110" and department "MAC"
 
 		And there is an candidature with student "Rogerio" and first option "Cálculo I" and second option "Introdução à Ciência da Computação" and third option "" and availability for daytime "true" and availability for night time "false" and period preference "2"
-        When I fill the "E-mail" field with "kazuo@ime.usp.br"
+        When I fill the "Email" field with "kazuo@ime.usp.br"
         And I fill the "Senha" field with "admin123"
         And I press the "Entrar" button
         And I click the "Candidaturas" link

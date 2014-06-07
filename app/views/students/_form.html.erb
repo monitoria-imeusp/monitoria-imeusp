@@ -1,4 +1,4 @@
-<%= form_for :student, url: student_path(@student), method: :patch do |f| %>
+<%= form_for(@student) do |f| %>
   <p>
     <%= f.label :name, "Nome" %><br>
     <%= f.text_field :name %>

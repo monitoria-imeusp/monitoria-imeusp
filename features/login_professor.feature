@@ -18,5 +18,5 @@ Feature: Login Professor
         And I fill the "Senha" field with "12345678"
         And I press the "Entrar" button
         And I'm at the login page
-        Then I should see "Sistema de monitoria"
+        Then I should see "Sistema de Monitoria"
         And I should see "devil@usp.br"

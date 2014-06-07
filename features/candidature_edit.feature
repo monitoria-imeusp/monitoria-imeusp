@@ -16,11 +16,11 @@ Feature: Upddating a candidature
         And I press the "Entrar" button
         And I click the "Candidaturas" link
         And I click the "Editar" link
-        And I select "labxp" on the "Primeiro curso:"
-        And I select "concorrente" on the "Segundo curso:"
+		And I select "labxp" on the "Curso: 1ª opção:"
+		And I select "concorrente" on the "Curso: 2ª opção:"
         And I mark the "Disponibilidade para trabalhar de dia:" checkbox
         And I select the preference option "Diurno"
-        And I press the "Enviar candidatura de monitoria" button
+        And I press the "Enviar" button
         Then I should see "Candidatura atualizada com sucesso."
         And I should see "Aluno: carlinhos"
 
@@ -37,8 +37,8 @@ Feature: Upddating a candidature
         And I press the "Entrar" button
         And I click the "Candidaturas" link
         And I click the "Editar" link
-        And I select "concorrente" on the "Segundo curso:"
+		And I select "concorrente" on the "Curso: 2ª opção:"
         And I mark the "Disponibilidade para trabalhar de dia:" checkbox
         And I select the preference option "Diurno"
-        And I press the "Enviar candidatura de monitoria" button
+        And I press the "Enviar" button
         Then I should not see "Candidatura criada com sucesso."

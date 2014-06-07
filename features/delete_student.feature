@@ -6,7 +6,7 @@ Feature: delete a student
 	Scenario: Admin deletes a student
 		Given I'm at the login page
     	And there is an admin user with email "kazuo@ime.usp.br" and password "admin123"
-    	When I fill the "E-mail" field with "kazuo@ime.usp.br"
+    	When I fill the "Email" field with "kazuo@ime.usp.br"
     	And I fill the "Senha" field with "admin123"
     	And I press the "Entrar" button
     	And there is a student with name "carlinhos" and password "12345678" and nusp "123456" and gender "1" and rg "123" and cpf "321" and address "matao" and district "butanta" and zipcode "000" and city "sp" and state "sp" and tel "0123456789" and cel "1234567890" and email "eu@usp.br" and has_bank_account "true"

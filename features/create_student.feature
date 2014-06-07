@@ -9,7 +9,7 @@ Feature: Student register
         And I fill the "Nome" field with "Carlinhos"
         And I fill the "Senha" field with "12345678"
         And I fill the "Confirme a senha" field with "12345678"
-        And I fill the "NºUSP" field with "012345"
+        And I fill the "Número USP" field with "012345"
         And I select the gender option "Masculino"
         And I fill the "RG" field with "123"
         And I fill the "CPF" field with "321"
@@ -20,10 +20,10 @@ Feature: Student register
         And I fill the "Cidade" field with "Sao Paulo"
         And I fill the "Estado" field with "Sao Paulo"
         And I fill the "Telefone residencial" field with "0123456789"
-        And I fill the "Telefone celular" field with "0123456789"
-        And I fill the "Endereço eletrônico" field with "eu@usp.br"
+        And I fill the "Celular" field with "0123456789"
+        And I fill the "Email" field with "eu@usp.br"
         And I select the count option "Sim"
-        And I press the "Cadastrar" button
+        And I press the "Enviar" button
         Then I should see "Nome: Carlinhos"
         And I should see "Sexo: Masculino"
     
@@ -33,7 +33,7 @@ Feature: Student register
         And I fill the "Nome" field with "Carlinhos"
         And I fill the "Senha" field with "12345678"
         And I fill the "Confirme a senha" field with "12345678"
-        And I fill the "NºUSP" field with "01245"
+        And I fill the "Número USP" field with "01245"
         And I select the gender option "Masculino"
         And I fill the "RG" field with "123"
         And I fill the "CPF" field with "321"
@@ -44,17 +44,17 @@ Feature: Student register
         And I fill the "Cidade" field with "Sao Paulo"
         And I fill the "Estado" field with "Sao Paulo"
         And I fill the "Telefone residencial" field with "012346789"
-        And I fill the "Telefone celular" field with "012456789"
-        And I fill the "Endereço eletrônico" field with "eu@usp.br"
+        And I fill the "Celular" field with "012456789"
+        And I fill the "Email" field with "eu@usp.br"
         And I select the count option "Sim"
-        And I press the "Cadastrar" button
+        And I press the "Enviar" button
         Then I should not see "Nome: Carlinhos"
         And I should not see "Sexo: Masculino"
 
     Scenario: Admin cannot create a student account while logged 
         Given I'm at the login page
         And there is an admin user with email "kazuo@ime.usp.br" and password "admin123"
-        When I fill the "E-mail" field with "kazuo@ime.usp.br"
+        When I fill the "Email" field with "kazuo@ime.usp.br"
         And I fill the "Senha" field with "admin123"
         And I press the "Entrar" button
         Then I should not see "Novo Aluno"

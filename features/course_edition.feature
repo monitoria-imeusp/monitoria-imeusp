@@ -7,7 +7,7 @@ Feature: Course edit
     	Given I'm at the login page
         And there is an admin user with email "kazuo@ime.usp.br" and password "admin123"
         And there is a department with code "MAC"
-        When I fill the "E-mail" field with "kazuo@ime.usp.br"
+        When I fill the "Email" field with "kazuo@ime.usp.br"
         And I fill the "Senha" field with "admin123"
         And I press the "Entrar" button
         And there is a course with name "labxp" and code "MAC0342" and department "MAC"
@@ -16,7 +16,7 @@ Feature: Course edit
         And I click the "Editar" link
         And I fill the "Nome da Disciplina" field with "labXp"
         And I fill the "Sigla" field with "MAC342"
-        And I press the "Cadastrar" button
+        And I press the "Enviar" button
         Then I should see "Nome da Disciplina: labXp"
         And I should see "Código da Disciplina: MAC342"
 
@@ -33,7 +33,7 @@ Feature: Course edit
         And I click the "Editar" link
         And I fill the "Nome da Disciplina" field with "labXp"
         And I fill the "Sigla" field with "MAC0342"
-        And I press the "Cadastrar" button
+        And I press the "Enviar" button
         Then I should see "Nome da Disciplina: labXp"
         And I should see "Código da Disciplina: MAC0342"
 

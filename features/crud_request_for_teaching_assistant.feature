@@ -13,16 +13,16 @@ Feature: CRUD Request for Teaching Assistant
     And I press the "Entrar" button
     And I should see "Pedidos de Monitoria"
     And I click the "Pedidos de Monitoria" link
-    And I should see "Novo pedido de monitor"
-    And I click the "Novo pedido de monitor" link
-    And I should see "Novo pedido de Monitoria"
+    And I should see "Novo pedido por monitor"
+    And I click the "Novo pedido por monitor" link
+    And I should see "Novo Pedido por Monitor"
     And I select "Mascarenhas" on the "Disciplina"
     And I fill the "Número de monitores solicitados" field with "2"
     And I select the priority option "Extremamente necessário, mas não imprescindível"
     And I mark the "Correção de trabalhos" checkbox
     And I mark the "Fiscalização de provas" checkbox
     And I write on the "Observações" text area "teste observações"
-    And I press the "Enviar solicitação de monitor" button
+    And I press the "Enviar" button
     Then I should see "Pedido de Monitoria feito com sucesso"
     And I should see "Disciplina: Mascarenhas"
     And I should see "Número de monitores solicitados: 2"
@@ -47,7 +47,7 @@ Feature: CRUD Request for Teaching Assistant
         And I should see "MAC0110"
         And I click the "Ver" link
         And I click the "Editar" link
-        And I should see "Editando Pedido de Monitoria"
+        And I should see "Edição de Pedido por Monitor"
         And I select "Coisas" on the "Disciplina"
         And I fill the "Número de monitores solicitados" field with "12"
         And I select the priority option "Imprescindível"
@@ -55,7 +55,7 @@ Feature: CRUD Request for Teaching Assistant
         And I unmark the "Correção de trabalhos" checkbox
         And I unmark the "Fiscalização de provas" checkbox
         And I write on the "Observações" text area "teste observações"
-        And I press the "Enviar solicitação de monitor" button
+        And I press the "Enviar" button
         Then I should see "Pedido de Monitoria atualizado com sucesso."
         And I should see "Disciplina: Coisas"
         And I should see "Número de monitores solicitados: 12"
@@ -91,10 +91,10 @@ Feature: CRUD Request for Teaching Assistant
         And I press the "Entrar" button
         And I should see "Pedidos de Monitoria"
         And I click the "Pedidos de Monitoria" link
-        And I click the "Novo pedido de monitor" link
+        And I click the "Novo pedido por monitor" link
         And I fill the "Número de monitores solicitados" field with "2"
         And I select the priority option "Extremamente necessário, mas não imprescindível"
-        And I press the "Enviar solicitação de monitor" button
+        And I press the "Enviar" button
         Then I should see "Selecione uma disciplina"
 
     Scenario: Empty number of teaching assistants
@@ -107,10 +107,10 @@ Feature: CRUD Request for Teaching Assistant
         And I press the "Entrar" button
         And I should see "Pedidos de Monitoria"
         And I click the "Pedidos de Monitoria" link
-        And I click the "Novo pedido de monitor" link
+        And I click the "Novo pedido por monitor" link
         And I select "Mascarenhas" on the "Disciplina"
         And I select the priority option "Extremamente necessário, mas não imprescindível"
-        And I press the "Enviar solicitação de monitor" button
+        And I press the "Enviar" button
         Then I should see "Peça pelo menos um monitor"
 
 
@@ -124,14 +124,14 @@ Feature: CRUD Request for Teaching Assistant
         And I press the "Entrar" button
         And I should see "Pedidos de Monitoria"
         And I click the "Pedidos de Monitoria" link
-        And I click the "Novo pedido de monitor" link
+        And I click the "Novo pedido por monitor" link
         And I select "Mascarenhas" on the "Disciplina"
         And I fill the "Número de monitores solicitados" field with "0"
         And I select the priority option "Extremamente necessário, mas não imprescindível"
-        And I press the "Enviar solicitação de monitor" button
+        And I press the "Enviar" button
         Then I should see "Peça pelo menos um monitor"
         And I fill the "Número de monitores solicitados" field with "-2"
-        And I press the "Enviar solicitação de monitor" button
+        And I press the "Enviar" button
         And I should see "Peça pelo menos um monitor"
 
     Scenario: Without priority
@@ -144,10 +144,10 @@ Feature: CRUD Request for Teaching Assistant
         And I press the "Entrar" button
         And I should see "Pedidos de Monitoria"
         And I click the "Pedidos de Monitoria" link
-        And I click the "Novo pedido de monitor" link
+        And I click the "Novo pedido por monitor" link
         And I select "Mascarenhas" on the "Disciplina"
         And I fill the "Número de monitores solicitados" field with "3"
-        And I press the "Enviar solicitação de monitor" button
+        And I press the "Enviar" button
         Then I should see "Escolha uma prioridade"
 
     Scenario: Check request assistant table
