@@ -21,7 +21,7 @@ require 'spec_helper'
 describe SecretariesController do
 
   context 'when logged in as admin' do
-	login_admin
+    login_admin
 
     # This should return the minimal set of attributes required to create a valid
     # Secretary. As you add validations to Secretary, be sure to

@@ -24,8 +24,8 @@ describe CandidaturesController do
   # Candidature. As you add validations to Candidature, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) {{
-      "time_period_preference" => "Indiferente",
-      "course1_id" => 1
+    "time_period_preference" => "Indiferente",
+    "course1_id" => 1
   }}
 
   # This should return the minimal set of values that should be in the session

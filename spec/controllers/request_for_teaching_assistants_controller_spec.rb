@@ -48,26 +48,26 @@ describe RequestForTeachingAssistantsController do
   } }
 
   let(:valid_course_attributes) {{
-      "name" => "Mascarenhas",
-      "id" => 1,
-      "course_code" => "MAC110",
-      "department_id" => "1"
+    "name" => "Mascarenhas",
+    "id" => 1,
+    "course_code" => "MAC110",
+    "department_id" => "1"
   }}
 
   let(:valid_second_course_attributes) {{
-      "name" => "Mascarenhas2",
-      "id" => 2,
-      "course_code" => "MAC111",
-      "department_id" => "1"
+    "name" => "Mascarenhas2",
+    "id" => 2,
+    "course_code" => "MAC111",
+    "department_id" => "1"
   }}
 
   let(:valid_third_course_attributes) {{
-      "name" => "Mascarenhas3",
-      "id" => 3,
-      "course_code" => "MAE200",
-      "department_id" => "2"
+    "name" => "Mascarenhas3",
+    "id" => 3,
+    "course_code" => "MAE200",
+    "department_id" => "2"
   }}
-  
+
   let(:not_owned_other_department_attributes) { {
     "professor_id" => "3",
     "course_id" => "3",
@@ -278,9 +278,9 @@ describe RequestForTeachingAssistantsController do
       end
     end
   end
- 
+
   describe "filters for request for teaching assistant" do
-    
+
     it "filters the requests of other professors" do 
       Course.create! valid_second_course_attributes
       request_for_teaching_assistant = RequestForTeachingAssistant.create! valid_attributes

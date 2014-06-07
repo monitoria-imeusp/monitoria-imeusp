@@ -2,6 +2,6 @@
 
 FactoryGirl.define do
   factory :department do
-      code "MAC"
+    code "MAC"
   end
 end

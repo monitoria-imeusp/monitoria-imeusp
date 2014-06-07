@@ -1,9 +1,9 @@
 class AddDeviseColumnsToSecretary < ActiveRecord::Migration
   def change
-  	change_table :secretaries do |t|
-  	  ## Database authenticatable
-  	  t.string :encrypted_password, null: false, default: ""
-  	  ## Recoverable
+    change_table :secretaries do |t|
+      ## Database authenticatable
+      t.string :encrypted_password, null: false, default: ""
+      ## Recoverable
       t.string   :reset_password_token
       t.datetime :reset_password_sent_at
 
@@ -29,6 +29,6 @@ class AddDeviseColumnsToSecretary < ActiveRecord::Migration
       # t.datetime :locked_at
 
 
-  	end
+    end
   end
 end
