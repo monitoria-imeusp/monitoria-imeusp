@@ -14,16 +14,16 @@
   </script> 
 
   <div>
-    <%= f.label :name, "Nome da Disciplina" %><br>
+    <%= f.label :name, t('activerecord.attributes.course.name') %><br>
     <%= f.text_field :name %>
   </div>
 
   <div class="field">
-      <%= f.label :department_id, "Departamento" %><br>
+      <%= f.label :department_id, t('activerecord.attributes.department.department') %><br>
       <%= f.select :department_id, department_options, {}, {:onchange => 'department_selected(event)'} %>
   </div>
   <div>
-      <%= f.label :course_code, "Sigla" %><br>
+      <%= f.label :course_code, t('activerecord.attributes.course.course_code') %><br>
       <span id="department_name">
       </span>
       <%= f.text_field :course_code %>

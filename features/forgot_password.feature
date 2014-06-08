@@ -27,4 +27,4 @@ Feature: Forgot the password
         And I fill the "Email" field with ""
         And I press the "Enviar o email com instruções para obter nova senha" button
         Then I should see "Não foi possível salvar admin: 1 erro"
-        And I should see "Email translation missing: pt-BR.activerecord.errors.models.admin.attributes.email.blank"
+        And I should see "Email não pode ficar em branco"

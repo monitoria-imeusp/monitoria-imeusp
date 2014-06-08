@@ -95,7 +95,7 @@ Feature: CRUD Request for Teaching Assistant
         And I fill the "Número de monitores solicitados" field with "2"
         And I select the priority option "Extremamente necessário, mas não imprescindível"
         And I press the "Enviar" button
-        Then I should see "Selecione uma disciplina"
+        Then I should see "Disciplina não pode ficar em branco"
 
     Scenario: Empty number of teaching assistants
         Given I'm at the professor login page
@@ -111,7 +111,7 @@ Feature: CRUD Request for Teaching Assistant
         And I select "Mascarenhas" on the "Disciplina"
         And I select the priority option "Extremamente necessário, mas não imprescindível"
         And I press the "Enviar" button
-        Then I should see "Peça pelo menos um monitor"
+        Then I should see "Número de monitores solicitados não pode ficar em branco"
 
 
     Scenario: Zero or less teaching assistants
@@ -129,10 +129,10 @@ Feature: CRUD Request for Teaching Assistant
         And I fill the "Número de monitores solicitados" field with "0"
         And I select the priority option "Extremamente necessário, mas não imprescindível"
         And I press the "Enviar" button
-        Then I should see "Peça pelo menos um monitor"
+        Then I should see "Número de monitores solicitados não está incluído na lista"
         And I fill the "Número de monitores solicitados" field with "-2"
         And I press the "Enviar" button
-        And I should see "Peça pelo menos um monitor"
+        And I should see "Número de monitores solicitados não está incluído na lista"
 
     Scenario: Without priority
         Given I'm at the professor login page
@@ -148,7 +148,7 @@ Feature: CRUD Request for Teaching Assistant
         And I select "Mascarenhas" on the "Disciplina"
         And I fill the "Número de monitores solicitados" field with "3"
         And I press the "Enviar" button
-        Then I should see "Escolha uma prioridade"
+        Then I should see "Prioridade"
 
     Scenario: Check request assistant table
         Given I'm at the professor login page

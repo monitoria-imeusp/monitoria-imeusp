@@ -1,31 +1,31 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Aluno:</strong>
+  <strong><%= t('activerecord.attributes.student.student') + ':' %></strong>
   <%= @candidature.student.name %>
 </p>
 
 <p>
-  <strong>Curso: 1ª opção:</strong>
+  <strong><%= t('activerecord.attributes.candidature.course1_id') + ':' %></strong>
   <%= Course.find(@candidature.course1_id).name %>
 </p>
 
 <p>
-  <strong>Curso: 2ª opção:</strong>
+  <strong><%= t('activerecord.attributes.candidature.course2_id') + ':' %></strong>
   <% if @candidature.course2_id != nil%>
     <%= Course.find(@candidature.course2_id).name %>
   <% end %>
 </p>
 
 <p>
-  <strong>Curso: 3ª opção:</strong>
+  <strong><%= t('activerecord.attributes.candidature.course3_id') + ':' %></strong>
   <% if @candidature.course3_id != nil%>
     <%= Course.find(@candidature.course3_id).name %>
   <% end %>
 </p>
 
 <p>
-  <strong>Disponibilidade para trabalhar de dia:</strong>
+  <strong><%= t('activerecord.attributes.candidature.avaliability_daytime') + ':' %></strong>
   <% if @candidature.avaliability_daytime %>
     Sim
   <% else %>
@@ -34,7 +34,7 @@
 </p>
 
 <p>
-  <strong>Disponibilidade para trabalhar de noite:</strong>
+  <strong><%= t('activerecord.attributes.candidature.avaliability_night_time') + ':' %></strong>
   <% if @candidature.avaliability_night_time %>
     Sim
   <% else %>
@@ -43,7 +43,7 @@
 </p>
 
 <p>
-  <strong>Preferência de trabalhar no período:</strong>
+  <strong><%= t('activerecord.attributes.candidature.time_period_preference') + ':' %></strong>
   <%= daytimePreference()[@candidature.time_period_preference.to_i][0] %>
 </p>
 

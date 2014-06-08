@@ -1,7 +1,7 @@
 <%= form_for(@candidature) do |f| %>
   <% if @candidature.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@candidature.errors.count, "error") %> impediu essa candidatura de ser salva:</h2>
+      <h2><%= pluralize(@candidature.errors.count, "erro impediu", "erros impediram") %> essa candidatura de ser salva:</h3>
 
       <ul>
       <% @candidature.errors.full_messages.each do |msg| %>
@@ -11,27 +11,27 @@
     </div>
   <% end %>
   <div class="field">
-    <%= f.label :course1_id, "Curso: 1ª opção:" %><br>
+    <%= f.label :course1_id, t('activerecord.attributes.candidature.course1_id') %><br>
     <%= f.collection_select :course1_id, Course.order(:name), :id, :name, include_blank: true %>
   </div>
   <div class="field">
-    <%= f.label :course2_id, "Curso: 2ª opção:" %><br>
+    <%= f.label :course2_id, t('activerecord.attributes.candidature.course2_id') %><br>
     <%= f.collection_select :course2_id, Course.order(:name), :id, :name, include_blank: true %>
   </div>
   <div class="field">
-    <%= f.label :course3_id, "Curso: 3ª opção:" %><br>
+    <%= f.label :course3_id, t('activerecord.attributes.candidature.course3_id') %><br>
     <%= f.collection_select :course3_id, Course.order(:name), :id, :name, include_blank: true %>
   </div>
   <div class="field">
-    <%= f.label :avaliability_daytime, "Disponibilidade para trabalhar de dia:" %><br>
+    <%= f.label :avaliability_daytime, t('activerecord.attributes.candidature.avaliability_daytime') %><br>
     <%= f.check_box :avaliability_daytime %>
   </div>
   <div class="field">
-    <%= f.label :avaliability_night_time, "Disponibilidade para trabalhar de noite:" %><br>
+    <%= f.label :avaliability_night_time, t('activerecord.attributes.candidature.avaliability_night_time') %><br>
     <%= f.check_box :avaliability_night_time %>
   </div>
   <div class="field">
-    <%= f.label :time_period_preference, "Preferência de trabalhar no período:" %><br>
+    <%= f.label :time_period_preference, t('activerecord.attributes.candidature.time_period_preference') %><br>
     <% daytimePreference.each do | option | %>
       <%= f.radio_button :time_period_preference, option[1] %>
       <%= f.label option[0] %>

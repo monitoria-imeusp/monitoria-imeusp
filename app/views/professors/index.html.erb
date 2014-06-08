@@ -2,9 +2,9 @@
 
 <table>
     <tr>
-        <th>Nome</th>
-        <th>Email</th>
-        <th>Departamento</th>
+		<th><%= t('activerecord.attributes.professor.name') %></th>
+		<th><%= t('activerecord.attributes.professor.email') %></th>
+		<th><%= t('activerecord.attributes.department.department') %></th>
     </tr>
 
     <% @professors.each do |professor| %>

@@ -15,7 +15,7 @@ Feature: Course creation
         And I fill the "Nome da Disciplina" field with "proglin"
         And I select "MAC" on the "Departamento"
         And I should see "MAC"
-        And I fill the "Sigla" field with "0315"
+        And I fill the "Código da Disciplina" field with "0315"
         And I press the "Enviar" button
         Then I should see "Nome da Disciplina: proglin"
         And I should see "Código da Disciplina: MAC0315"
@@ -32,7 +32,7 @@ Feature: Course creation
         And I click the "Nova Disciplina" link
         And I fill the "Nome da Disciplina" field with "proglin"
         And I select "MAC" on the "Departamento"
-        And I fill the "Sigla" field with "0315"
+        And I fill the "Código da Disciplina" field with "0315"
         And I press the "Enviar" button
         Then I should see "Nome da Disciplina: proglin"
         And I should see "Código da Disciplina: MAC0315"

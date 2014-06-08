@@ -1,26 +1,26 @@
 <p>
-  <strong>Nome:</strong>
+  <strong><%= t('activerecord.attributes.professor.name') + ':' %></strong>
   <%= @professor.name %>
 </p>
 
 <p>
-  <strong>Número USP:</strong>
+  <strong><%= t('activerecord.attributes.professor.nusp') + ':' %></strong>
   <%= @professor.nusp %>
 </p>
 
 <p>
-  <strong>Email:</strong>
+  <strong><%= t('activerecord.attributes.professor.email') + ':' %></strong>
   <%= @professor.email %>
 </p>
 
 <p>
-  <strong>Departamento:</strong>
+  <strong><%= t('activerecord.attributes.department.department') + ':' %></strong>
   <%= @professor.department.code %>
 </p>
 
 <% if admin_signed_in? %>
     <p>
-        <strong>SuperProfessor:</strong>
+        <strong><%= t('activerecord.attributes.professor.super_professor') + ':' %></strong>
         <%= show_yes_or_no @professor.super_professor %>
     </p>
     <p>

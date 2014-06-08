@@ -4,6 +4,7 @@ FactoryGirl.define do
   factory :professor do
     email 'professor@professor.com'
     password 'password'
+    nusp '1234567'
     department_id 1
   end
 end

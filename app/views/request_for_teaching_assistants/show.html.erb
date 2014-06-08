@@ -1,42 +1,42 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Professor:</strong>
+  <strong><%= t('activerecord.attributes.professor.professor') + ':' %></strong>
   <%= Professor.find(@request_for_teaching_assistant.professor_id).name %>
 </p>
 
 <p>
-<strong>Disciplina:</strong>
+  <strong><%= t('activerecord.attributes.request_for_teaching_assistant.subject') + ':' %></strong>
   <%= @request_for_teaching_assistant.course.name %>
 </p>
 
 <p>
-  <strong>Número de monitores solicitados:</strong>
+  <strong><%= t('activerecord.attributes.request_for_teaching_assistant.requested_number') + ':' %></strong>
   <%= @request_for_teaching_assistant.requested_number %>
 </p>
 
 <p>
-  <strong>Prioridade:</strong>
+  <strong><%= t('activerecord.attributes.request_for_teaching_assistant.priority') + ':' %></strong>
   <%= priorityOptions()[@request_for_teaching_assistant.priority][0] %>
 </p>
 
 <p>
-  <strong>Atendimento aos alunos:</strong>
+  <strong><%= t('activerecord.attributes.request_for_teaching_assistant.student_assistance') + ':' %></strong>
   <%= show_yes_or_no(@request_for_teaching_assistant.student_assistance) %>
 </p>
 
 <p>
-  <strong>Correção de trabalhos:</strong>
+  <strong><%= t('activerecord.attributes.request_for_teaching_assistant.work_correction') + ':' %></strong>
   <%= show_yes_or_no(@request_for_teaching_assistant.work_correction) %>
 </p>
 
 <p>
-  <strong>Fiscalização de provas:</strong>
+  <strong><%= t('activerecord.attributes.request_for_teaching_assistant.test_oversight') + ':' %></strong>
   <%= show_yes_or_no(@request_for_teaching_assistant.test_oversight) %>
 </p>
 
 <p>
-  <strong>Observações:</strong>
+  <strong><%= t('activerecord.attributes.request_for_teaching_assistant.observation') + ':' %></strong>
   <%= (@request_for_teaching_assistant.observation) %>
 </p>
 

@@ -83,6 +83,7 @@ describe RequestForTeachingAssistantsController do
     "id" => 1,
     "password" => "prof-123",
     "email" => "prof@ime.usp.br",
+    "nusp" => "1234567",
     "department_id" => 1
   } }
 
@@ -90,6 +91,7 @@ describe RequestForTeachingAssistantsController do
     "id" => 2,
     "password" => "prof-123",
     "email" => "prof2@ime.usp.br",
+    "nusp" => "7654321",
     "department_id" => 1
   } }
 
@@ -97,6 +99,7 @@ describe RequestForTeachingAssistantsController do
     "id" => 3,
     "password" => "prof-123",
     "email" => "prof3@ime.usp.br",
+    "nusp" => "7777777",
     "department_id" => 2
   } }
 
@@ -105,6 +108,7 @@ describe RequestForTeachingAssistantsController do
     "password" => "prof-123",
     "email" => "super@ime.usp.br",
     "department_id" => 1,
+    "nusp" => "1111111",
     "super_professor" => true
   } }
 

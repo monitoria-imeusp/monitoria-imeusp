@@ -15,7 +15,7 @@ Feature: Course edit
         And I click the "MAC0342" link
         And I click the "Editar" link
         And I fill the "Nome da Disciplina" field with "labXp"
-        And I fill the "Sigla" field with "MAC342"
+        And I fill the "Código da Disciplina" field with "MAC342"
         And I press the "Enviar" button
         Then I should see "Nome da Disciplina: labXp"
         And I should see "Código da Disciplina: MAC342"
@@ -32,7 +32,7 @@ Feature: Course edit
         And I click the "MAC0342" link
         And I click the "Editar" link
         And I fill the "Nome da Disciplina" field with "labXp"
-        And I fill the "Sigla" field with "MAC0342"
+        And I fill the "Código da Disciplina" field with "MAC0342"
         And I press the "Enviar" button
         Then I should see "Nome da Disciplina: labXp"
         And I should see "Código da Disciplina: MAC0342"
