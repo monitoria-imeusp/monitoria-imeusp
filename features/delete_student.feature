@@ -16,7 +16,7 @@ Feature: delete a student
     	And I should not see "carlinhos"
 
         
-    Scenario: Admin deletes a student
+    Scenario: Secretary deletes a student
         Given I'm at the secretary login page
         And there is a secretary with name "Marcia" and password "12345678" nusp "1111111" and email "marcia@ime.usp.br"
         When I fill the "Número USP" field with "1111111"
