@@ -126,14 +126,14 @@ GEM
       bundler (>= 1.3.0, < 2.0)
       railties (= 4.1.0.rc2)
       sprockets-rails (~> 2.0.0)
+    rails-i18n (4.0.2)
+      i18n (~> 0.6)
+      rails (>= 4.0)
     rails_12factor (0.0.2)
       rails_serve_static_assets
       rails_stdout_logging
     rails_serve_static_assets (0.0.2)
     rails_stdout_logging (0.0.3)
-    rails-i18n (4.0.2)
-      i18n (~> 0.6)
-      rails (>= 4.0)
     railties (4.1.0.rc2)
       actionpack (= 4.1.0.rc2)
       activesupport (= 4.1.0.rc2)
@@ -223,11 +223,8 @@ DEPENDENCIES
   pg
   poltergeist (~> 1.5.0)
   rails (= 4.1.0.rc2)
-<<<<<<< HEAD
-  rails_12factor
-=======
   rails-i18n
->>>>>>> dev
+  rails_12factor
   rspec-rails (~> 2.14.0)
   sass-rails (~> 4.0.1)
   sdoc
