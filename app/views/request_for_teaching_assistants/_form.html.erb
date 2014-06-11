@@ -1,7 +1,7 @@
 <%= form_for(@request_for_teaching_assistant) do |f| %>
   <% if @request_for_teaching_assistant.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@request_for_teaching_assistant.errors.count, "error") %> prohibited this request_for_teaching_assistant from being saved:</h2>
+      <h2><%= pluralize(@request_for_teaching_assistant.errors.count, "erro impediu", "erros impediram") %> esse pedido por monitor de ser salvo:</h3>
 
       <ul>
       <% @request_for_teaching_assistant.errors.full_messages.each do |msg| %>
@@ -12,15 +12,15 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :subject, 'Disciplina' %><br>
-    <%= f.text_field :subject %>
+      <%= f.label :course_id, t('activerecord.attributes.request_for_teaching_assistant.course_id') %><br>
+      <%= f.select :course_id, course_options %><br>
   </div>
   <div class="field">
-    <%= f.label :requested_number, 'Número de monitores solicitados' %><br>
+    <%= f.label :requested_number, t('activerecord.attributes.request_for_teaching_assistant.requested_number') %><br>
     <%= f.number_field :requested_number %>
   </div>
   <div class="field">
-    <%= f.label :priority, 'Prioridade' %><br>
+    <%= f.label :priority, t('activerecord.attributes.request_for_teaching_assistant.priority') %><br>
     <% priorityOptions.each do | option | %>
       <%= f.radio_button :priority, option[1] %>
       <%= f.label option[0] %>
@@ -28,18 +28,22 @@
     <% end %>
   </div>
   <div class="field">
-    <%= f.label :student_assistance, 'Atendimento aos alunos' %><br>
+    <%= f.label :student_assistance, t('activerecord.attributes.request_for_teaching_assistant.student_assistance') %><br>
     <%= f.check_box :student_assistance %>
   </div>
   <div class="field">
-    <%= f.label :work_correction, 'Correção de trabalhos' %><br>
+    <%= f.label :work_correction, t('activerecord.attributes.request_for_teaching_assistant.work_correction') %><br>
     <%= f.check_box :work_correction %>
   </div>
   <div class="field">
-    <%= f.label :test_oversight, 'Fiscalização de provas' %><br>
+    <%= f.label :test_oversight, t('activerecord.attributes.request_for_teaching_assistant.test_oversight') %><br>
     <%= f.check_box :test_oversight %>
   </div>
+  <div class="field">
+    <%= f.label :observation, t('activerecord.attributes.request_for_teaching_assistant.observation') %><br>
+    <%= f.text_area :observation %>
+  </div>
   <div class="actions">
-    <%= f.submit 'Enviar solicitação de monitor' %>
+    <%= f.submit "Enviar" %>
   </div>
 <% end %>

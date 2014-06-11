@@ -20,8 +20,75 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 pt-BR:
-  hello: "Olá"
+  hello: 'Olá'
   activerecord:
-    errors:
-      messages:
-        record_invalid: "Entrada inválida"
+    attributes:
+      professor:
+        name: 'Nome'
+        nusp: 'Número USP'
+        email: 'Email'
+        super_professor: 'Permissão de SuperProfessor'
+        password: 'Senha'
+        password_confirmation: 'Confirme a senha'
+      request_for_teaching_assistant:
+        course_id: 'Disciplina'
+        professor_id: 'ID do Professor'
+        subject: 'Disciplina'
+        requested_number: 'Número de monitores solicitados'
+        priority: 'Prioridade'
+        student_assistance: 'Atendimento aos alunos'
+        work_correction: 'Correção de trabalhos'
+        test_oversight: 'Fiscalização de provas'
+        observation: 'Observações'
+      course:
+        name: 'Nome da Disciplina'
+        course_code: 'Código da Disciplina'
+      secretary:
+        nusp: 'Número USP'
+        name: 'Nome'
+        email: 'Email'
+        password: 'Senha'
+        password_confirmation: 'Confirme a senha'
+      student:
+        student: 'Aluno'
+        name: 'Nome'
+        nusp: 'Número USP'
+        gender: 'Sexo'
+        rg: 'RG'
+        cpf: 'CPF'
+        adress: 'Endereço'
+        complement: 'Complemento'
+        district: 'Bairro'
+        zipcode: 'CEP'
+        city: 'Cidade'
+        state: 'Estado'
+        tel: 'Telefone residencial'
+        cel: 'Celular'
+        email: 'Email'
+        has_bank_account: 'Possui conta no Banco do Brasil'
+        password: 'Senha'
+        password_confirmation: 'Confirme a senha'
+      candidature:
+        avaliability_daytime: 'Disponibilidade para trabalhar de dia'
+        avaliability_night_time: 'Disponibilidade para trabalhar de noite'
+        time_period_preference: 'Preferência de trabalhar no período'
+        course1_id: 'Curso: 1ª opção'
+        course2_id: 'Curso: 2ª opção'
+        course3_id: 'Curso: 3ª opção'
+      department:
+        department: 'Departamento'
+  errors:
+    messages:
+      record_invalid: 'Entrada inválida'
+  errors:
+    models:
+      request_for_teaching_assistant:
+        attributes:
+          course_id:
+            blank: 'Selecione uma disciplina'
+          requested_number:
+            inclusion: 'Peça pelo menos um monitor'
+            blank: ''
+          priority:
+            inclusion: 'Escolha uma prioridade'
+            blank: ''

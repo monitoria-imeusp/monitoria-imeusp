@@ -1,40 +1,5 @@
-<%= form_for :professor, url: professors_path do |f| %>
-  <p>
-    <%= f.label :name, "Nome" %><br>
-    <%= f.text_field :name %>
-  </p>
+<h1>Cadastro de Professor</h1>
 
-  <p>
-    <%= f.label :nusp, "Número USP" %><br>
-    <%= f.text_field :nusp %>
-  </p>
+<%= render 'form' %>
 
-  <p>
-    <%= f.label :department, "Departamento" %><br>
-    <%= f.select :department, [["MAC", "mac"], ["MAE", "mae"], ["MAP", "map"], ["MAT", "mat"]] %>
-  </p>
-
-  <p>
-    <%= f.label :password , "Senha" %><br>
-    <%= f.password_field :password %>
-  </p>
-
-  <p>
-    <%= f.label :password_confirmation , "Confirme a senha" %><br>
-    <%= f.password_field :password_confirmation %>
-  </p>
-
-  <p>
-    <%= f.label :email, "E-mail" %><br>
-    <%= f.email_field :email %>
-  </p>
-
-  <p>
-    <%= f.label :super_professor, "Permissão Superprofessor" %><br>
-    <%= f.check_box :super_professor %>
-  </p>
-
-  <p>
-    <%= f.submit "Cadastrar" %>
-  </p>
-<% end %>
+<%= link_to 'Voltar', professors_path %>

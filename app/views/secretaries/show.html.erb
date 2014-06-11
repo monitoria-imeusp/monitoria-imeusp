@@ -1,0 +1,23 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong><%= t('activerecord.attributes.secretary.name') + ':' %></strong>
+  <%= @secretary.name %>
+</p>
+
+<p>
+  <strong><%= t('activerecord.attributes.secretary.nusp') + ':' %></strong>
+  <%= @secretary.nusp %>
+</p>
+
+<p>
+  <strong><%= t('activerecord.attributes.secretary.email') + ':' %></strong>
+  <%= @secretary.email %>
+</p>
+
+<% if admin_signed_in? %>
+  <p>
+    <%= link_to 'Editar', edit_secretary_path(@secretary) %>
+    <%= link_to 'Remover', @secretary, method: :delete, data: { confirm: 'Tem certeza?' } %>
+  </p>
+<% end %>

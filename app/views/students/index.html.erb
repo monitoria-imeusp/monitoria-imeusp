@@ -1,0 +1,13 @@
+<h1>Alunos</h1>
+
+<table>
+  <tr>
+    <th><%= t('activerecord.attributes.student.name') %></th>
+  </tr>
+
+  <% @students.each do |student| %>
+    <tr>
+      <td><%= link_to student.name, student %></td>
+    </tr>
+  <% end %>
+</table>

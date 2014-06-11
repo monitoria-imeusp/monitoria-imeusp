@@ -5,8 +5,9 @@ Feature: Accessing the page
 
     Scenario: Create a new professor
         Given I'm at the login page
-        And There is an admin user with email "kazuo@ime.usp.br" and password "admin123"
-        When I fill the "E-mail" field with "kazuo@ime.usp.br"
+        And there is a department with code "MAC"
+        And there is an admin user with email "kazuo@ime.usp.br" and password "admin123"
+        When I fill the "Email" field with "kazuo@ime.usp.br"
         And I fill the "Senha" field with "admin123"
         And I press the "Entrar" button
         And I click the "Novo Professor" link
@@ -15,11 +16,11 @@ Feature: Accessing the page
         And I select "MAC" on the "Departamento"
         And I fill the "Senha" field with "12345678"
         And I fill the "Confirme a senha" field with "12345678"
-        And I fill the "E-mail" field with "email@email.com"
-        And I press the "Cadastrar" button
+        And I fill the "Email" field with "email@email.com"
+        And I press the "Enviar" button
         Then I should see "Nome: tanto faz"
         And I should see "Número USP: 12345"
-        And I should see "E-mail: email@email.com"
+        And I should see "Email: email@email.com"
         And I should see "Departamento: MAC"
         And I should see "Editar"
 
@@ -29,15 +30,16 @@ Feature: Accessing the page
 
     Scenario: Verify if the admin can edit professors
         Given I'm at the login page
-        And There is an admin user with email "kazuo@ime.usp.br" and password "admin123"
-        And There is a professor with email "email@email.com" and password "12345678"
-        When I fill the "E-mail" field with "kazuo@ime.usp.br"
+        And there is an admin user with email "kazuo@ime.usp.br" and password "admin123"
+        And there is a professor with name "mqz" and password "12345678" nusp "1111111" department "MAC" and email "music@usp.br"
+        When I fill the "Email" field with "kazuo@ime.usp.br"
         And I fill the "Senha" field with "admin123"
         And I press the "Entrar" button
-        And I click the "Lista de Professores" link
+        And I click the "Professores" link
+        And I click the "mqz" link
         Then I should see "Editar"
 
     Scenario: Verify if other users can't edit professors
         Given I'm at the list_professors page
-        And There is a professor with email "email@email.com" and password "12345"
+        And there is a professor with name "mqz" and password "12345678" nusp "1111111" department "MAC" and email "music@usp.br"
         Then I should not see "Editar"

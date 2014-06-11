@@ -1,0 +1,37 @@
+<%= form_for(@secretary) do |f| %>
+  <% if @secretary.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@secretary.errors.count, "erro impediu", "erros impediram") %> esse funcionário de ser salvo:</h3>
+
+      <ul>
+      <% @secretary.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :nusp, t('activerecord.attributes.secretary.nusp') %><br>
+    <%= f.text_field :nusp %>
+  </div>
+  <div class="field">
+    <%= f.label :name, t('activerecord.attributes.secretary.name') %><br>
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :email, t('activerecord.attributes.secretary.email') %><br>
+    <%= f.text_field :email %>
+  </div>
+  <div class="field">
+    <%= f.label :password, t('activerecord.attributes.secretary.password') %><br>
+    <%= f.password_field :password %>
+  </div>
+  <div class="field">
+    <%= f.label :password_confirmation, t('activerecord.attributes.secretary.password_confirmation') %><br>
+    <%= f.password_field :password_confirmation %>
+  </div>
+  <div class="actions">
+    <%= f.submit "Enviar" %>
+  </div>
+<% end %>

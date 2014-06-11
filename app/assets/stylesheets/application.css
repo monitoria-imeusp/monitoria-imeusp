@@ -16,6 +16,51 @@
  *= require_self
  */
 
+/*********************************************************/
+
+h2 {
+  margin-left: 2em;
+}
+
+p, form, a, a:hover, a:visited, a:active, td, th {
+  font-size: 18px;
+  background-color: inherit;
+}
+
+a, a:visited {
+  text-decoration: none;
+  color: #368;
+}
+
+a:hover, a:active, a:focus {
+  text-decoration: underline;
+  color: #b55;
+}
+
+table {
+  width: 80%;
+  text-align: center;
+}
+
+td, th {
+  padding: 4px 8px;
+}
+
+th {
+  border-bottom: 2px solid #666;
+  background-color: #bcc;
+}
+
+tr {
+  background-color: #dee;
+}
+
+tr:hover {
+  background-color: #eff;
+}
+
+/*********************************************************/
+
 div.shell {
   margin: auto;
   width: 1024px;
@@ -23,37 +68,94 @@ div.shell {
   padding: 0.1em;
 }
 
+/*********************************************************/
+
 div.content {
   width: 90%;
   padding: 1em 0em;
   min-height: 400px;
 }
 
-h1.pagetop {
-  padding: 0.5em 1em;
-  border-bottom: 2px solid #b55;
-  border-top: 2px solid #b55;
-  font-size: 3em;
-}
-
-h2 {
-  margin-left: 2em;
-}
-
-p, form, a {
-  font-size: 18px;
-}
-
-p, form {
+.content > p, form {
   margin-left: 4em;
 }
 
-a {
-  text-decoration: none;
-  font-weight: bold;
+/*********************************************************/
+
+div.pagetop {
+  padding: .7em 1em;
+  border-bottom: 2px solid #b55;
 }
 
-a:hover {
+.pagetop > h1, ul {
+  margin-left: auto;
+  margin-right: auto;
+  width: 1024px;
+}
+
+.pagetop > h1 {
+  font-size: 3em;
+}
+
+.pagetop > ul > li > a:link, .pagetop > ul > li > a:visited {
+  display: block;
+  width: 80%;
+  text-decoration: none;
+  text-align: center;
+  color: #666;
+  margin-left: auto;
+  margin-right: auto;
+  font-weight: bold;
+  padding: 1px 1em;
+}
+
+.pagetop > ul > li > a:hover, a:active {
+  color: #b55;
+  background-color: #fff;
+  text-decoration: underline;
+}
+
+.pagetop > ul {
+  list-style-type: none;
+  overflow: hidden;
+}
+
+.pagetop > ul > li {
+  float: left;
+}
+
+/*********************************************************/
+
+div.sidebar {
+  float: right;
+  margin: 1em 0em;
+  width: 20%;
+  min-height: 600px;
+  height: 100%;
+  border-left: 2px solid #888;
+}
+
+.sidebar > p {
+  margin-left: 1em;
+  margin-right: 1em;
+  padding-top: 2em;
+  text-align: center;
+}
+
+.sidebar > ul {
+  list-style-type: none;
+  padding-left: 20px;
+  line-height: 1.4;
+
+}
+
+.sidebar > ul > li > a:link, .sidebar > ul > li > a:visited {
+  text-decoration: none;
+  font-weight: bold;
+  color: #368;
+}
+
+.sidebar > ul > li > a:hover, .sidebar > ul > li > a:active {
   color: #b55;
   background-color: #fff;
 }

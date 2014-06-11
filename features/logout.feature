@@ -5,8 +5,8 @@ Feature: Logout
 
     Scenario: Successful Logout
         Given I'm at the login page
-        And There is an admin user with email "kazuo@ime.usp.br" and password "admin123"
-        When I fill the "E-mail" field with "kazuo@ime.usp.br"
+        And there is an admin user with email "kazuo@ime.usp.br" and password "admin123"
+        When I fill the "Email" field with "kazuo@ime.usp.br"
         And I fill the "Senha" field with "admin123"
         And I press the "Entrar" button
         And I click the "Logout" link

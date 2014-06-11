@@ -1,0 +1,21 @@
+<h1>Funcionários</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th><%= t('activerecord.attributes.secretary.name') %></th>
+      <th><%= t('activerecord.attributes.secretary.email') %></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @secretaries.each do |secretary| %>
+      <tr>
+        <td><%= link_to secretary.name, secretary %></td>
+        <td><%= secretary.email %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>

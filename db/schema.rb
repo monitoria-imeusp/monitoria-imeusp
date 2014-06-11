@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140514171239) do
+ActiveRecord::Schema.define(version: 20140530185253) do
 
   create_table "admins", force: true do |t|
     t.string   "email",                  default: "", null: false
@@ -31,17 +31,37 @@ ActiveRecord::Schema.define(version: 20140514171239) do
   add_index "admins", ["email"], name: "index_admins_on_email", unique: true
   add_index "admins", ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true
 
+  create_table "candidatures", force: true do |t|
+    t.boolean  "avaliability_daytime"
+    t.boolean  "avaliability_night_time"
+    t.string   "time_period_preference"
+    t.integer  "course1_id"
+    t.integer  "course2_id"
+    t.integer  "course3_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "student_id"
+  end
+
   create_table "courses", force: true do |t|
     t.string   "name"
     t.string   "course_code"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "department_id"
   end
+
+  create_table "departments", force: true do |t|
+    t.string   "code"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "departments", ["code"], name: "index_departments_on_code", unique: true
 
   create_table "professors", force: true do |t|
     t.string   "name"
     t.string   "nusp"
-    t.string   "department"
     t.string   "email"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -55,11 +75,11 @@ ActiveRecord::Schema.define(version: 20140514171239) do
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
+    t.integer  "department_id"
   end
 
   create_table "request_for_teaching_assistants", force: true do |t|
     t.integer  "professor_id"
-    t.string   "subject"
     t.integer  "requested_number"
     t.integer  "priority"
     t.boolean  "student_assistance", default: false
@@ -67,6 +87,58 @@ ActiveRecord::Schema.define(version: 20140514171239) do
     t.boolean  "test_oversight",     default: false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "course_id"
+    t.text     "observation",        default: ""
+  end
+
+  add_index "request_for_teaching_assistants", ["course_id"], name: "index_request_for_teaching_assistants_on_course_id"
+
+  create_table "secretaries", force: true do |t|
+    t.string   "nusp"
+    t.string   "name"
+    t.string   "email"
+    t.string   "password"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "encrypted_password",     default: "", null: false
+    t.string   "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.integer  "sign_in_count",          default: 0,  null: false
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.string   "current_sign_in_ip"
+    t.string   "last_sign_in_ip"
+  end
+
+  create_table "students", force: true do |t|
+    t.string   "name"
+    t.string   "password"
+    t.string   "nusp"
+    t.integer  "gender"
+    t.string   "rg"
+    t.string   "cpf"
+    t.string   "adress"
+    t.string   "complement"
+    t.string   "district"
+    t.string   "zipcode"
+    t.string   "city"
+    t.string   "state"
+    t.string   "tel"
+    t.string   "cel"
+    t.string   "email"
+    t.boolean  "has_bank_account",       default: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "encrypted_password",     default: "",    null: false
+    t.string   "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.integer  "sign_in_count",          default: 0,     null: false
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.string   "current_sign_in_ip"
+    t.string   "last_sign_in_ip"
   end
 
 end

@@ -1,16 +1,5 @@
-<%= form_for :course, url: courses_path do |f| %>
+<h1>Cadastro de Disciplina</h1>
 
-  <p>
-    <%= f.label :name, "Nome da Disciplina" %><br>
-    <%= f.text_field :name %>
-  </p>
+<%= render 'form' %>
 
-  <p>
-    <%= f.label :course_code, "Código da Disciplina" %><br>
-    <%= f.text_field :course_code %>
-    </p>
-
-  <p>
-    <%= f.submit "Cadastrar" %>
-  </p>
-<% end %>
+<%= link_to 'Voltar', courses_path %>

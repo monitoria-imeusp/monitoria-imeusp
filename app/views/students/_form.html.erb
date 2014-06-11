@@ -1,0 +1,93 @@
+<%= form_for(@student) do |f| %>
+  <% if @student.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@student.errors.count, "erro impediu", "erros impediram") %> esse aluno de ser salvo:</h3>
+
+      <ul>
+      <% @student.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name, t('activerecord.attributes.student.name') %><br>
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :password, t('activerecord.attributes.student.password') %><br>
+    <%= f.password_field :password %>
+  </div>
+  <div class="field">
+    <%= f.label :password_confirmation, t('activerecord.attributes.student.password_confirmation') %><br>
+    <%= f.password_field :password_confirmation %>
+  </div>
+  <div class="field">
+    <%= f.label :nusp, t('activerecord.attributes.student.nusp') %><br>
+    <%= f.text_field :nusp %>
+  </div>
+  <div class="field">
+    <%= f.label :gender, t('activerecord.attributes.student.gender') %><br>
+    <% genderOptions.each do | option | %>
+      <%= f.radio_button :gender, option[1] %>
+      <%= f.label option[0] %>
+      </br>
+    <% end %>
+  </div>
+  <div class="field">
+    <%= f.label :rg, t('activerecord.attributes.student.rg') %><br>
+    <%= f.text_field :rg %>
+  </div>
+  <div class="field">
+    <%= f.label :cpf, t('activerecord.attributes.student.cpf') %><br>
+    <%= f.text_field :cpf %>
+  </div>
+  <div class="field">
+    <%= f.label :adress, t('activerecord.attributes.student.adress') %><br>
+    <%= f.text_field :adress %>
+  </div>
+  <div class="field">
+    <%= f.label :complement, t('activerecord.attributes.student.complement') %><br>
+    <%= f.text_field :complement %>
+  </div>
+  <div class="field">
+    <%= f.label :district, t('activerecord.attributes.student.district') %><br>
+    <%= f.text_field :district %>
+  </div>
+  <div class="field">
+    <%= f.label :zipcode, t('activerecord.attributes.student.zipcode') %><br>
+    <%= f.text_field :zipcode %>
+  </div>
+  <div class="field">
+    <%= f.label :city, t('activerecord.attributes.student.city') %><br>
+    <%= f.text_field :city %>
+  </div>
+  <div class="field">
+    <%= f.label :state, t('activerecord.attributes.student.state') %><br>
+    <%= f.text_field :state %>
+  </div>
+  <div class="field">
+    <%= f.label :tel, t('activerecord.attributes.student.tel') %><br>
+    <%= f.text_field :tel %>
+  </div>
+  <div class="field">
+    <%= f.label :cel, t('activerecord.attributes.student.cel') %><br>
+    <%= f.text_field :cel %>
+  </div>
+  <div class="field">
+    <%= f.label :email %><br>
+    <%= f.text_field :email %>
+  </div>
+ <div class="field">
+    <%= f.label :has_bank_account, t('activerecord.attributes.student.has_bank_account') %><br>
+    <% yesOrNo.each do | option | %>
+      <%= f.radio_button :has_bank_account, option[1] %>
+      <%= f.label option[0] %>
+      </br>
+    <% end %>
+  </div>
+  <div class="field">
+    <%= f.submit "Enviar" %>
+  </div>
+<% end %>

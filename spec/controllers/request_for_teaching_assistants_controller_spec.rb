@@ -27,28 +27,89 @@ describe RequestForTeachingAssistantsController do
   # adjust the attributes here as well.
   let(:valid_attributes) { {
     "professor_id" => "1",
-    "subject" => "MAC0122semespaço",
+    "course_id" => "1",
     "requested_number" => 1,
     "priority" => 0,
     "student_assistance" => true,
     "work_correction" => false,
-    "test_oversight" => true
+    "test_oversight" => true,
+    "observation" => "teste"
   } }
 
   let(:not_owned_attributes) { {
     "professor_id" => "2",
-    "subject" => "MAC0424",
+    "course_id" => "2",
     "requested_number" => 2,
     "priority" => 2,
     "student_assistance" => true,
     "work_correction" => false,
-    "test_oversight" => false
+    "test_oversight" => false,
+    "observation" => "teste"
+  } }
+
+  let(:valid_course_attributes) {{
+    "name" => "Mascarenhas",
+    "id" => 1,
+    "course_code" => "MAC110",
+    "department_id" => "1"
+  }}
+
+  let(:valid_second_course_attributes) {{
+    "name" => "Mascarenhas2",
+    "id" => 2,
+    "course_code" => "MAC111",
+    "department_id" => "1"
+  }}
+
+  let(:valid_third_course_attributes) {{
+    "name" => "Mascarenhas3",
+    "id" => 3,
+    "course_code" => "MAE200",
+    "department_id" => "2"
+  }}
+
+  let(:not_owned_other_department_attributes) { {
+    "professor_id" => "3",
+    "course_id" => "3",
+    "requested_number" => 2,
+    "priority" => 2,
+    "student_assistance" => true,
+    "work_correction" => false,
+    "test_oversight" => false,
+    "observation" => "teste"
   } }
 
   let(:valid_professor) { {
     "id" => 1,
     "password" => "prof-123",
-    "email" => "prof@ime.usp.br"
+    "email" => "prof@ime.usp.br",
+    "nusp" => "1234567",
+    "department_id" => 1
+  } }
+
+  let(:another_professor_same_department) { {
+    "id" => 2,
+    "password" => "prof-123",
+    "email" => "prof2@ime.usp.br",
+    "nusp" => "7654321",
+    "department_id" => 1
+  } }
+
+  let(:another_professor_another_department) { {
+    "id" => 3,
+    "password" => "prof-123",
+    "email" => "prof3@ime.usp.br",
+    "nusp" => "7777777",
+    "department_id" => 2
+  } }
+
+  let(:super_professor_same_department) { {
+    "id" => 4,
+    "password" => "prof-123",
+    "email" => "super@ime.usp.br",
+    "department_id" => 1,
+    "nusp" => "1111111",
+    "super_professor" => true
   } }
 
   # This should return the minimal set of values that should be in the session
@@ -58,6 +119,11 @@ describe RequestForTeachingAssistantsController do
 
   before :each do
     professor = Professor.create! valid_professor
+    professor2 = Professor.create! another_professor_same_department
+    professor3 = Professor.create! another_professor_another_department
+    Department.create! {{"id" => 1, "code" => "MAC"}}
+    Department.create! {{"id" => 2, "code" => "MAE"}}
+    Course.create! valid_course_attributes
     sign_in :professor, professor
   end
 
@@ -217,4 +283,27 @@ describe RequestForTeachingAssistantsController do
     end
   end
 
+  describe "filters for request for teaching assistant" do
+
+    it "filters the requests of other professors" do 
+      Course.create! valid_second_course_attributes
+      request_for_teaching_assistant = RequestForTeachingAssistant.create! valid_attributes
+      RequestForTeachingAssistant.create! not_owned_attributes
+      get :index, {}
+      assigns(:request_for_teaching_assistants).should eq([request_for_teaching_assistant])
+    end
+
+    it "filters the requests of the whole department" do 
+      Course.create! valid_second_course_attributes
+      Course.create! valid_third_course_attributes
+      super_professor = Professor.create! super_professor_same_department
+      sign_in :professor, super_professor
+      shown_requests = []
+      shown_requests.push(RequestForTeachingAssistant.create! valid_attributes)
+      shown_requests.push(RequestForTeachingAssistant.create! not_owned_attributes)
+      RequestForTeachingAssistant.create! not_owned_other_department_attributes
+      get :index, {}
+      assigns(:request_for_teaching_assistants).should eq(shown_requests)
+    end
+  end
 end

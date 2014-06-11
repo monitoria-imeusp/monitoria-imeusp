@@ -1,0 +1,86 @@
+<p>
+  <strong><%= t('activerecord.attributes.student.name') + ':' %></strong>
+  <%= @student.name %>
+</p>
+
+<p>
+  <strong><%= t('activerecord.attributes.student.gender') + ':' %></strong>
+  <% if (@student.gender == 0) %>
+    <%="Feminino"%>
+  <%else%>
+    <%="Masculino"%>
+  <%end%>
+</p>
+
+<% if professor_signed_in? || admin_signed_in? || secretary_signed_in? %>
+  <p>
+    <strong><%= t('activerecord.attributes.student.nusp') + ':' %></strong>
+    <%= @student.nusp %>
+  </p>
+
+  <p>
+    <strong><%= t('activerecord.attributes.student.rg') + ':' %></strong>
+    <%= @student.rg %>
+  </p>
+
+  <p>
+    <strong><%= t('activerecord.attributes.student.cpf') + ':' %></strong>
+    <%= @student.cpf %>
+  </p>
+
+  <p>
+    <strong><%= t('activerecord.attributes.student.adress') + ':' %></strong>
+    <%= @student.adress %>
+  </p>
+
+  <p>
+    <strong><%= t('activerecord.attributes.student.complement') + ':' %></strong>
+    <%= @student.complement %>
+  </p>
+
+  <p>
+    <strong><%= t('activerecord.attributes.student.district') + ':' %></strong>
+    <%= @student.district %>
+  </p>
+  <p>
+    <strong><%= t('activerecord.attributes.student.cep') + ':' %></strong>
+    <%= @student.zipcode %>
+  </p>
+
+  <p>
+    <strong><%= t('activerecord.attributes.student.city') + ':' %></strong>
+    <%= @student.city %>
+  </p>
+
+  <p>
+    <strong><%= t('activerecord.attributes.student.state') + ':' %></strong>
+    <%= @student.state %>
+  </p>
+
+  <p>
+    <strong><%= t('activerecord.attributes.student.tel') + ':' %></strong>
+    <%= @student.tel %>
+  </p>
+
+  <p>
+    <strong><%= t('activerecord.attributes.student.cel') + ':' %></strong>
+    <%= @student.cel %>
+  </p>
+
+  <p>
+    <strong><%= t('activerecord.attributes.student.email') + ':' %></strong>
+    <%= @student.email %>
+  </p>
+
+  <p>
+    <strong><%= t('activerecord.attributes.student.has_bank_account') + ':' %></strong>
+    <%= show_yes_or_no @student.has_bank_account %>
+  </p>
+
+  <% if admin_signed_in? || secretary_signed_in? %>
+    <p>
+      <%= link_to 'Remover', student_path(@student), method: :delete, data: { confirm: 'Tem certeza?' } %>
+    </p>
+  <% end %>
+
+<%end%>
