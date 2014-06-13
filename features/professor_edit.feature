@@ -3,7 +3,7 @@ Feature: Edit Professor
     As an administrator
     I want to edit a professor
 
-    Scenario: Valid Admin editing a professor
+    Background:
         Given there is an admin user with email "kazuo@ime.usp.br" and password "admin123"
         And there is a professor with name "Bob" and password "prof-123" nusp "123" department "MAC" and email "bob@bob.bob"
         And there is a department with code "MAE"
@@ -11,6 +11,8 @@ Feature: Edit Professor
         And I fill the "Email" field with "kazuo@ime.usp.br"
         And I fill the "Senha" field with "admin123"
         And I press the "Entrar" button
+
+    Scenario: Valid Admin editing a professor
         When I click the "Professores" link
         And I click the "Bob" link
         And I click the "Editar" link
@@ -27,13 +29,6 @@ Feature: Edit Professor
         And I should see "SuperProfessor: Sim"
 
     Scenario: Valid Admin editing a professor and changing the password
-        Given there is an admin user with email "kazuo@ime.usp.br" and password "admin123"
-        And there is a professor with name "Bob" and password "prof-123" nusp "123" department "MAC" and email "bob@bob.bob"
-        And there is a department with code "MAE"
-        And I'm at the login page
-        And I fill the "Email" field with "kazuo@ime.usp.br"
-        And I fill the "Senha" field with "admin123"
-        And I press the "Entrar" button
         When I click the "Professores" link
         And I click the "Bob" link
         And I click the "Editar" link
@@ -54,13 +49,7 @@ Feature: Edit Professor
 
 
     Scenario: Professor does not exist
-        Given I'm at the login page
-        And there is an admin user with email "kazuo@ime.usp.br" and password "admin123"
-        And there is a professor with name "Bob" and password "prof-123" nusp "123" department "MAC" and email "bob@bob.bob"
-        And there is a professor with name "Gold" and password "changeme!" nusp "321" department "MAC" and email "gold@bob.bob"
-        When I fill the "Email" field with "kazuo@ime.usp.br"
-        And I fill the "Senha" field with "admin123"
-        And I press the "Entrar" button
-        And I'm at the "professors/1000/edit" page
-        Then I should see "Bob"
+        When there is a professor with name "Gold" and password "changeme!" nusp "321" department "MAC" and email "gold@bob.bob"
+        Then I'm at the "professors/1000/edit" page
+        And I should see "Bob"
         And I should see "Gold"
