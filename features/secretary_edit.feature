@@ -3,13 +3,15 @@ Feature: Secretary edit
     As an admin
     I want to edit a secretary
 
+    Background: 
+        Given there is a secretary with name "Marcia" and password "12345678" nusp "1111111" and email "marcia@ime.usp.br"
+
     Scenario: Admin editing a secretary
     	Given I'm at the login page
         And there is an admin user with email "kazuo@ime.usp.br" and password "admin123"
         When I fill the "Email" field with "kazuo@ime.usp.br"
         And I fill the "Senha" field with "admin123"
         And I press the "Entrar" button
-        And there is a secretary with name "Marcia" and password "12345678" nusp "1111111" and email "marcia@ime.usp.br"
         And I click the "Funcionários" link
         And I click the "Marcia" link
         And I click the "Editar" link
@@ -32,7 +34,6 @@ Feature: Secretary edit
         When I fill the "Número USP" field with "1111111"
         And I fill the "Senha" field with "12345678"
         And I press the "Entrar" button
-        And there is a secretary with name "Marcia" and password "12345678" nusp "1111111" and email "marcia@ime.usp.br"
         And I click the "Funcionários" link
         And I click the "Marcia" link
         And I should not see "Editar"
@@ -40,7 +41,6 @@ Feature: Secretary edit
 
     Scenario: Any person trying to edit a secretary
         Given I'm at the home page
-        And there is a secretary with name "Marcia" and password "12345678" nusp "1111111" and email "marcia@ime.usp.br"
         And I click the "Funcionários" link
         And I click the "Marcia" link
         And I should not see "Editar"
