@@ -5,4 +5,5 @@ class RequestForTeachingAssistant < ActiveRecord::Base
   validates :priority, presence: true, inclusion: { in: 0..2 }
   validates :course_id, presence: true
   belongs_to :course
+  belongs_to :professor
 end
