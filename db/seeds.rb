@@ -56,6 +56,7 @@ if Rails.env.development?
   ].each do |prof|
     Professor.create(prof)
   end
+  
   [
     {
       name: "Introdução à Ciência da Computação",

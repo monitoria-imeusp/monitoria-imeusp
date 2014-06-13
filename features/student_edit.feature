@@ -10,10 +10,10 @@ Feature: edit a student
         When I fill the "Número USP" field with "123456"
         And I fill the "Senha" field with "12345678"
         And I press the "Entrar" button
-        
 
     Scenario: Student edits his or hers profile
-        When I click the "Editar Perfil" link
+    	And I click the "Meu Perfil" link
+        And I click the "Editar" link
         And I fill the "Nome" field with "Carlinhos"
         And I fill the "Senha" field with "12345678"
         And I fill the "Confirme a senha" field with "12345678"
@@ -23,7 +23,8 @@ Feature: edit a student
         And I should see "Masculino"
 
     Scenario: Student fails to edit his or hers profile
-        When I click the "Editar Perfil" link
+        And I click the "Meu Perfil" link
+        And I click the "Editar" link
         And I fill the "Nome" field with "Carlinhos"
         And I fill the "Senha" field with "12345678"
         And I select the gender option "Masculino"

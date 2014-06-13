@@ -2,8 +2,8 @@ module StudentsHelper
 
   def yesOrNo
     [
-      ['Sim', 0],
-      ['Não', 1]
+      ['Sim', true],
+      ['Não', false]
     ]
   end
 
