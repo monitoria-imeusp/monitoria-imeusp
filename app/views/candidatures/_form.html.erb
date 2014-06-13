@@ -23,11 +23,11 @@
     <%= f.collection_select :course3_id, Course.order(:name), :id, :name, include_blank: true %>
   </div>
   <div class="field">
-    <%= f.label :daytime_availability, "Disponibilidade para trabalhar de dia:" %><br>
+    <%= f.label :daytime_availability, t('activerecord.attributes.candidature.daytime_availability') %><br>
     <%= f.check_box :daytime_availability %>
   </div>
   <div class="field">
-    <%= f.label :nighttime_availability, "Disponibilidade para trabalhar de noite:" %><br>
+    <%= f.label :nighttime_availability, t('activerecord.attributes.candidature.nighttime_availability') %><br>
     <%= f.check_box :nighttime_availability %>
   </div>
   <div class="field">
