@@ -10,6 +10,3 @@ Feature: Listing professors
 		And I click the "Professores" link
 		Then I should see "Bob"
 		Then I should see "Gold"
-
-	
-		
