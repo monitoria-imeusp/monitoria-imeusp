@@ -34,17 +34,10 @@ class StudentsController < ApplicationController
   def edit
     if Student.exists?(params[:id])
       @student = Student.find(params[:id])
-    else
-      redirect_to students_path
     end
   end
 
   def update
-    if not Student.exists? params[:id]
-      # TODO alert failure
-      redirect_to student_path
-      return
-    end
     @student = Student.find(params[:id])
     if params[:student][:password].blank? && params[:student][:password_confirmation].blank?
       params[:student].delete(:password)
@@ -81,7 +74,7 @@ class StudentsController < ApplicationController
 
   def authenticate_edit!
     unless student_signed_in? and (current_student.id == params[:id].to_i)
-      redirect_to students_path
+      redirect_to root_path
     end
   end
 

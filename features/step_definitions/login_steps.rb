@@ -176,3 +176,20 @@ Given(/^there is an candidature with student "(.*?)" and first option "(.*?)" an
     nighttime_availability: av_nighttime, 
     time_period_preference: period)
 end
+
+When(/^I try to access the "(.*?)" page with id "(.*?)" to "(.*?)"$/) do |page_name, id, action|
+    if action != 'show'
+        visit('/' + page_name + '/' + id.to_s + '/' + action)
+    else
+        visit('/' + page_name + '/' + id.to_s)
+    end
+end
+
+When(/^I try to update the student with id "(.*?)"$/) do |id|
+    page.driver.put('/students/' + id.to_s)
+end
+
+Then(/^I wait$/) do
+    sleep 1
+end
+
