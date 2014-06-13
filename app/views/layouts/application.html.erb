@@ -72,7 +72,7 @@
         <ul>
           <% if current_student.present? %>
             <li>
-              <%= link_to "Meu perfil", current_student %>
+              <%= link_to "Meu Perfil", current_student %>
             </li>
           <% end %>
           <% if admin_signed_in? || (current_professor.present? && current_professor.super_professor?) %>
