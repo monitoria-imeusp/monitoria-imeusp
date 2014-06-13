@@ -120,7 +120,7 @@ describe StudentsController do
         it "can not edit a student" do
           another_student = Student.create! valid_attributes
           get :edit, {:id => another_student.to_param}
-          response.should redirect_to(students_path)
+          response.should redirect_to(root_path)
         end
       end
     end
@@ -188,7 +188,7 @@ describe StudentsController do
         it "can not edit a student" do
           another_student = Student.create! valid_attributes
           get :edit, {:id => another_student.to_param}
-          response.should redirect_to(students_path)
+          response.should redirect_to(root_path)
         end
       end
     end
@@ -241,7 +241,7 @@ describe StudentsController do
         it "can not edit a student" do
           another_student = Student.create! valid_attributes
           get :edit, {:id => another_student.to_param}
-          response.should redirect_to(students_path)
+          response.should redirect_to(root_path)
         end
       end
     end
@@ -310,7 +310,7 @@ describe StudentsController do
         it "can not edit a student" do
           another_student = Student.create! valid_attributes
           get :edit, {:id => another_student.to_param}
-          response.should redirect_to(students_path)
+          response.should redirect_to(root_path)
         end
       end
     end
@@ -332,7 +332,7 @@ describe StudentsController do
         it "can not edit an account of another student" do
           another_student = Student.create! another_valid_attributes
           get :edit, {:id => another_student.to_param}
-          response.should redirect_to(students_path)
+          response.should redirect_to(root_path)
         end
       end
     end
