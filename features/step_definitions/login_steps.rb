@@ -2,6 +2,10 @@ include RequestForTeachingAssistantsHelper
 include StudentsHelper
 include CandidaturesHelper
 
+Given (/^I'm at the "(.*?)" page$/) do |page|
+  visit page
+end
+
 Given(/^I'm at the login page$/) do
   visit new_admin_session_path
 end
