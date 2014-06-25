@@ -15,7 +15,7 @@
   <%= @secretary.email %>
 </p>
 
-<% if secretary_signed_in? and current_secretary = @secretary %>
+<% if secretary_signed_in? and current_secretary == @secretary %>
   <p>
     <%= link_to 'Editar', edit_secretary_path(@secretary) %>
   </p>
