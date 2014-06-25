@@ -60,6 +60,9 @@ group :development, :test do
 
   # JavaScript unit tests
   gem "konacha", "~> 3.2.0"
+
+  # Use mailcatcher in development to fake email sending
+  gem 'mailcatcher'
 end
 
 group :production do
@@ -94,3 +97,4 @@ gem 'rails-i18n'
 
 # Use debugger
 # gem 'debugger', group: [:development, :test]
+
