@@ -20,7 +20,7 @@ Feature: Secretary creation
         And I should see "Número USP: 1234567"
         And I should see "Nome: Marcia"
         And I should see "Email: marcia@ime.usp.br"
-        And I should see "Editar"
+        And I should not see "Editar"
 
     Scenario: Professor cannot create a secretary
         Given I'm at the professor login page
