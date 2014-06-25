@@ -74,6 +74,10 @@
             <li>
               <%= link_to "Meu Perfil", current_student %>
             </li>
+          <% elsif current_secretary.present? %>
+            <li>
+              <%= link_to "Meu Perfil", current_secretary %>
+            </li>
           <% end %>
           <% if admin_signed_in? || (current_professor.present? && current_professor.super_professor?) %>
             <li>

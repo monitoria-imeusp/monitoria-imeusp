@@ -1,6 +1,7 @@
 class SecretariesController < ApplicationController
   before_action :set_secretary, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate_admin!, :except => [:show, :index]
+  before_action :authenticate_admin!, :only => [:new, :create, :destroy]
+  before_action :authenticate_edit!,  :only => [:edit, :update]
 
   # GET /secretaries
   # GET /secretaries.json
@@ -47,6 +48,7 @@ class SecretariesController < ApplicationController
     end
     respond_to do |format|
       if @secretary.update(secretary_params)
+        sign_in  @secretary, :bypass => true
         format.html { redirect_to @secretary, notice: 'Funcionário(a) foi atualizado(a) com sucesso.' }
         format.json { render action: 'show', status: :ok, location: @secretary }
       else
@@ -63,6 +65,14 @@ class SecretariesController < ApplicationController
     respond_to do |format|
       format.html { redirect_to secretaries_url }
       format.json { head :no_content }
+    end
+  end
+
+  protected
+
+  def authenticate_edit!
+    unless secretary_signed_in? and (current_secretary.id == params[:id].to_i)
+      redirect_to root_path
     end
   end
 

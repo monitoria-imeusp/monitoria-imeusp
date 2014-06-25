@@ -15,9 +15,13 @@
   <%= @secretary.email %>
 </p>
 
-<% if admin_signed_in? %>
+<% if secretary_signed_in? and current_secretary = @secretary %>
   <p>
     <%= link_to 'Editar', edit_secretary_path(@secretary) %>
+  </p>
+<% end %>
+<% if admin_signed_in? %>
+  <p>
     <%= link_to 'Remover', @secretary, method: :delete, data: { confirm: 'Tem certeza?' } %>
   </p>
 <% end %>
