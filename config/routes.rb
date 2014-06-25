@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   resources :candidatures
 
   get 'home/index'
+  get 'home/dump'
 
   devise_for :admins
   devise_for :professors, :controllers => { :professors => "professors" }
