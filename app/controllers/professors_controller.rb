@@ -1,5 +1,6 @@
 class ProfessorsController < ApplicationController
-  before_action :authenticate_admin!, :except => [:show, :index]
+  before_action :authenticate_admin!, :only => [:new, :create, :destroy]
+  before_action :authenticate_edit!,  :only => [:edit, :update]
 
   def new
     @professor = Professor.new
@@ -46,9 +47,18 @@ class ProfessorsController < ApplicationController
       params[:professor].delete(:password_confirmation)
     end
     if @professor.update(professor_params)
+      sign_in  @professor, :bypass => true
       redirect_to @professor
     else
       render 'edit'
+    end
+  end
+
+  protected
+
+  def authenticate_edit!
+    unless professor_signed_in? and (current_professor.id == params[:id].to_i)
+      redirect_to root_path
     end
   end
 

@@ -23,7 +23,9 @@
         <strong><%= t('activerecord.attributes.professor.super_professor') + ':' %></strong>
         <%= show_yes_or_no @professor.super_professor %>
     </p>
-    <p>
+<% end %>
+<% if professor_signed_in? and current_professor == @professor %>
+  <p>
       <%= link_to 'Editar', edit_professor_path(@professor) %>
-    </p>
+  </p>
 <% end %>
