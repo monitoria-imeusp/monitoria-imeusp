@@ -123,6 +123,7 @@ describe SecretariesController do
     # Secretary. As you add validations to Secretary, be sure to
     # adjust the attributes here as well.
     let(:valid_attributes) { { "nusp" => "MyString", "email" => "secretaria@ime.usp.br", "password" => "12345678" } }
+    let(:other_valid_attributes) { { "nusp" => "9999999", "email" => "secret@ime.usp.br", "password" => "12345678" } }
     before :each do
       @secretary = Secretary.create! valid_attributes
       sign_in @secretary
@@ -171,8 +172,9 @@ describe SecretariesController do
         end
 
         it "redirects to the secretary" do
-          put :update, {:id => @secretary.to_param, :secretary => valid_attributes}
-          response.should redirect_to(@secretary)
+          secretary = Secretary.create! other_valid_attributes
+          put :update, {:id => secretary.to_param, :secretary => valid_attributes}
+          response.should redirect_to(root_path)
         end
       end
 
