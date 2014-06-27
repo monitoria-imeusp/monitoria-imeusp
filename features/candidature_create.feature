@@ -15,8 +15,8 @@ Feature: Create a candidature
         And I press the "Entrar" button
         And I click the "Candidaturas" link
         And I click the "Nova Candidatura" link
-		And I select "labxp" on the "Curso: 1ª opção"
-		And I select "concorrente" on the "Curso: 2ª opção"
+		And I select "MAC0342 - labxp" on the "Curso: 1ª opção"
+		And I select "MAC0438 - concorrente" on the "Curso: 2ª opção"
         And I mark the "Disponibilidade para trabalhar de dia" checkbox
         And I select the preference option "Diurno"
         And I press the "Enviar" button
@@ -35,7 +35,7 @@ Feature: Create a candidature
         And I press the "Entrar" button
         And I click the "Candidaturas" link
         And I click the "Nova Candidatura" link
-		And I select "concorrente" on the "Curso: 2ª opção"
+		And I select "MAC0438 - concorrente" on the "Curso: 2ª opção"
         And I mark the "Disponibilidade para trabalhar de dia" checkbox
         And I select the preference option "Diurno"
         And I press the "Enviar" button

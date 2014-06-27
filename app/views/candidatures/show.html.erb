@@ -7,20 +7,23 @@
 
 <p>
   <strong><%= t('activerecord.attributes.candidature.course1_id') + ':' %></strong>
-  <%= Course.find(@candidature.course1_id).name %>
+  <% course = Course.find(@candidature.course1_id) %>
+  <%= course.course_code + " - " + course.name %>
 </p>
 
 <p>
   <strong><%= t('activerecord.attributes.candidature.course2_id') + ':' %></strong>
   <% if @candidature.course2_id != nil%>
-    <%= Course.find(@candidature.course2_id).name %>
+    <% course = Course.find(@candidature.course2_id) %>
+    <%= course.course_code + " - " + course.name %>
   <% end %>
 </p>
 
 <p>
   <strong><%= t('activerecord.attributes.candidature.course3_id') + ':' %></strong>
   <% if @candidature.course3_id != nil%>
-    <%= Course.find(@candidature.course3_id).name %>
+    <% course = Course.find(@candidature.course3_id) %>
+    <%= course.course_code + " - " + course.name %>
   <% end %>
 </p>
 

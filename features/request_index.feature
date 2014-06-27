@@ -17,8 +17,8 @@ Feature: Index of the Requests for Teaching Assistant
         And I press the "Entrar" button
         And I should see "Pedidos de Monitoria"
         Then I click the "Pedidos de Monitoria" link
-        And I should see "MAC0110"
-        And I should not see "MAC0122"
+        And I should see "MAC0110 - Mascarenhas"
+        And I should not see "MAC0122 - Coisas"
         And I should see "1"
         And I click the "Ver" link
         And I should see "Atendimento aos alunos: Não"

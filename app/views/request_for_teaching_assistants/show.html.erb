@@ -7,7 +7,7 @@
 
 <p>
   <strong><%= t('activerecord.attributes.request_for_teaching_assistant.subject') + ':' %></strong>
-  <%= @request_for_teaching_assistant.course.name %>
+  <%= @request_for_teaching_assistant.course.course_code + " - " + @request_for_teaching_assistant.course.name %>
 </p>
 
 <p>

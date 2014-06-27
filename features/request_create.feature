@@ -19,7 +19,7 @@ Feature: Creating Request for Teaching Assistant
 
     Scenario: Valid professor creating a new request
         Then I should see "Novo Pedido por Monitor"
-        And I select "Mascarenhas" on the "Disciplina"
+        And I select "MAC0300 - Mascarenhas" on the "Disciplina"
         And I fill the "Número de monitores solicitados" field with "2"
         And I select the priority option "Extremamente necessário, mas não imprescindível"
         And I mark the "Correção de trabalhos" checkbox
@@ -27,7 +27,7 @@ Feature: Creating Request for Teaching Assistant
         And I write on the "Observações" text area "teste observações"
         And I press the "Enviar" button
         Then I should see "Pedido de Monitoria feito com sucesso"
-        And I should see "Disciplina: Mascarenhas"
+        And I should see "Disciplina: MAC0300 - Mascarenhas"
         And I should see "Número de monitores solicitados: 2"
         And I should see "Prioridade: Extremamente necessário, mas não imprescindível"
         And I should see "Atendimento aos alunos: Não"
@@ -43,13 +43,13 @@ Feature: Creating Request for Teaching Assistant
     
     
     Scenario: Empty number of teaching assistants
-        When I select "Mascarenhas" on the "Disciplina"
+        When I select "MAC0300 - Mascarenhas" on the "Disciplina"
         And I select the priority option "Extremamente necessário, mas não imprescindível"
         And I press the "Enviar" button
         Then I should see "Número de monitores solicitados não pode ficar em branco"
     
     Scenario: Zero or less teaching assistants
-        When I select "Mascarenhas" on the "Disciplina"
+        When I select "MAC0300 - Mascarenhas" on the "Disciplina"
         And I fill the "Número de monitores solicitados" field with "0"
         And I select the priority option "Extremamente necessário, mas não imprescindível"
         And I press the "Enviar" button
@@ -59,7 +59,7 @@ Feature: Creating Request for Teaching Assistant
         And I should see "Número de monitores solicitados não está incluído na lista"
 
     Scenario: Without priority
-        When I select "Mascarenhas" on the "Disciplina"
+        When I select "MAC0300 - Mascarenhas" on the "Disciplina"
         And I fill the "Número de monitores solicitados" field with "3"
         And I press the "Enviar" button
         Then I should see "Prioridade"

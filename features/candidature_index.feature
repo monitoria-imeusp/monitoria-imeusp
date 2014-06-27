@@ -19,8 +19,8 @@ Feature: Candidature table visualization
         And I press the "Entrar" button
         And I click the "Candidaturas" link
 		Then I should see "Rogerio"
-		And I should see "Cálculo I"
-		And I should see "Introdução à Ciência da Computação"
+		And I should see "MAT0111 - Cálculo I"
+		And I should see "MAC0110 - Introdução à Ciência da Computação"
 		And I should see "Ver"
 		And I should see "Editar"
 		And I should see "Remover"
@@ -46,9 +46,9 @@ Feature: Candidature table visualization
         And I press the "Entrar" button
         And I click the "Candidaturas" link
 		Then I should see "Rogerio"
-		And I should see "Cálculo I"
+		And I should see "MAT0111 - Cálculo I"
 		And I should see "Caio"
-		And I should see "Introdução à Ciência da Computação"
+		And I should see "MAC0110 - Introdução à Ciência da Computação"
 		And I should see "Ver"
 		And I should see "Editar"
 		And I should see "Remover"
@@ -75,9 +75,9 @@ Feature: Candidature table visualization
         And I press the "Entrar" button
         And I click the "Candidaturas" link
 		Then I should see "Rogerio"
-        And I should see "Cálculo I"
+        And I should see "MAT0111 - Cálculo I"
 		And I should see "Caio"
-        And I should see "Introdução à Ciência da Computação"
+        And I should see "MAC0110 - Introdução à Ciência da Computação"
 		And I should see "Ver"
 		And I should see "Editar"
 		And I should see "Remover"
@@ -102,7 +102,7 @@ Feature: Candidature table visualization
         And I press the "Entrar" button
         And I click the "Candidaturas" link
 		Then I should see "Rogerio"
-        And I should see "Cálculo I"
+        And I should see "MAT0111 - Cálculo I"
 		And I should not see "Caio"
         And I should not see "Estatística Concorrente"
 		And I should see "Ver"

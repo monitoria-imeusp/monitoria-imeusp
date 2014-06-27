@@ -103,6 +103,7 @@
             <% if current_professor.super_professor then %>
               <li>
               <%= link_to "Candidaturas", candidatures_path %>
+              <br>
               <%= link_to "Dump do banco de dados", { action: "dump", controller: "home" } %>
               </li>
             <% end %>
