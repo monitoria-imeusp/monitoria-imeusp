@@ -23,6 +23,10 @@ pt-BR:
   hello: 'Olá'
   activerecord:
     attributes:
+      admin:
+        email: 'Email'
+        password: 'Senha'
+        password_confirmation: 'Confirme a senha'
       professor:
         name: 'Nome'
         nusp: 'Número USP'
