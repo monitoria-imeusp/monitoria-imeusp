@@ -93,13 +93,19 @@
             <li>
               <%= link_to "Logout", destroy_admin_session_path, method: :delete %>
             </li>
+            <li>
+              <%= link_to "Dump do banco de dados", { action: "dump", controller: "home" } %>
+            </li>
           <% elsif professor_signed_in? %>
             <li>
               <%= link_to "Pedidos de Monitoria", request_for_teaching_assistants_path %>
             </li>
-            <li>
-               <%= if current_professor.super_professor then link_to "Candidaturas", candidatures_path end %>
-            </li>
+            <% if current_professor.super_professor then %>
+              <li>
+              <%= link_to "Candidaturas", candidatures_path %>
+              <%= link_to "Dump do banco de dados", { action: "dump", controller: "home" } %>
+              </li>
+            <% end %>
             <li>
               <%= link_to "Logout", destroy_professor_session_path, method: :delete %>
             </li>
@@ -109,6 +115,9 @@
             </li>
             <li>
                <%= link_to "Candidaturas", candidatures_path %>
+            </li>
+            <li>
+              <%= link_to "Dump do banco de dados", { action: "dump", controller: "home" } %>
             </li>
           <% elsif student_signed_in? %>
             <li>
