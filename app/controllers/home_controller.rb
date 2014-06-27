@@ -1,4 +1,6 @@
 class HomeController < ApplicationController
+  before_action :authenticate_dump!, :only => [:dump]
+
   def index
   end
 
@@ -10,6 +12,14 @@ class HomeController < ApplicationController
       @dump_successful = true
     else
       @dump_successful = false
+    end
+  end
+
+  protected
+
+  def authenticate_dump!
+    unless admin_signed_in? or (professor_signed_in? and current_professor.super_professor) or secretary_signed_in? 
+      redirect_to root_path
     end
   end
 end
