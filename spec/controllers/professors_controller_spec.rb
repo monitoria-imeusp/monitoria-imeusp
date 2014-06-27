@@ -7,6 +7,10 @@ describe ProfessorsController do
     @id = "42"
   end
 
+  let(:valid_attributes) { { "nusp" => "MyString", "email" => "professor@ime.usp.br", "password" => "12345678", "department_id" => 1 } }
+  let(:other_valid_attributes) { { "nusp" => "9999999", "email" => "prof@ime.usp.br", "password" => "12345678", "department_id" => 1 } }
+
+
   context 'when logged in as admin' do
     login_admin
 
@@ -70,62 +74,21 @@ describe ProfessorsController do
       it { should render_template :index }
     end
 
-    describe 'edit' do
-      context 'professor does exist' do
-        before :each do
-          Professor.should_receive(:exists?).with(@id).and_return(true)
-          Professor.should_receive(:find).with(@id).and_return(true)
-          get :edit, id: @id
-        end
-        it { should render_template :edit }
-      end
-
-      context "professor does not exist"  do
-        before :each do
-          Professor.should_receive(:exists?).with(@id).and_return(false)
-          get :edit, id: @id
-        end
-        it { should redirect_to professors_path }
+    describe "edit" do
+      it "assigns the requested professor as @professor" do
+        professor = Professor.create! valid_attributes
+        get :edit, {:id => professor.to_param}
+        response.should redirect_to(root_path)
       end
     end
 
-    describe 'update' do
-      context 'a professor that does not exist' do
-        before :each do
-          Professor.should_receive(:exists?).with(@id).and_return(false)
-          put :update, id: @id, professor: { id: @id }
-        end
-        it { should redirect_to professors_path }
-      end
-
-      context 'a professor that does exist' do
-        before do
-          Professor.should_receive(:exists?).with(@id).and_return(true)
-          Professor.should_receive(:find).with(@id).and_return(@professor)
-        end
-
-        context 'but fails to update' do
-          before :each do
-            @professor.should_receive(:update).with(any_args).and_return(false)
-            put :update, id: @id, professor: { id: @id }
-          end
-          it { should render_template :edit }
-        end
-
-        context 'and succeeds to update' do
-          before :each do
-            @professor.should_receive(:update).with(any_args).and_return(true)
-            put :update, id: @id, professor: { id: @id }
-          end
-          it { should redirect_to @professor }
-        end
-      end
-
-    end
   end
 
   context 'when logged in as professor' do
-    login_professor
+    before :each do
+      @professor = Professor.create! valid_attributes
+      sign_in @professor
+    end
 
     describe 'index' do
       before :each do
@@ -153,6 +116,54 @@ describe ProfessorsController do
         it { should redirect_to professors_path }
       end
     end
+
+    describe "GET edit" do
+      it "assigns the requested professor as @professor" do
+        get :edit, {:id => @professor.to_param}
+        assigns(:professor).should eq(@professor)
+      end
+    end
+
+    describe "PUT update" do
+      describe "with valid params" do
+        it "updates the requested professor" do
+          # Assuming there are no other secretaries in the database, this
+          # specifies that the professor created on the previous line
+          # receives the :update_attributes message with whatever params are
+          # submitted in the request.
+          Professor.any_instance.should_receive(:update).with({ "nusp" => "MyString" })
+          put :update, {:id => @professor.to_param, :professor => { "nusp" => "MyString" }}
+        end
+
+        it "assigns the requested professor as @professor" do
+          put :update, {:id => @professor.to_param, :professor => valid_attributes}
+          assigns(:professor).should eq(@professor)
+        end
+
+        it "redirects to the professor" do
+          professor = Professor.create! other_valid_attributes
+          put :update, {:id => professor.to_param, :professor => valid_attributes}
+          response.should redirect_to(root_path)
+        end
+      end
+
+      describe "with invalid params" do
+        it "assigns the professor as @professor" do
+          # Trigger the behavior that occurs when invalid params are submitted
+          Professor.any_instance.stub(:save).and_return(false)
+          put :update, {:id => @professor.to_param, :professor => { "nusp" => "invalid value" }}
+          assigns(:professor).should eq(@professor)
+        end
+
+        it "re-renders the 'edit' template" do
+          # Trigger the behavior that occurs when invalid params are submitted
+          Professor.any_instance.stub(:save).and_return(false)
+          put :update, {:id => @professor.to_param, :professor => { "nusp" => "invalid value" }}
+          response.should render_template("edit")
+        end
+      end
+    end
+
 
   end
 end
