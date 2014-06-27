@@ -22,13 +22,13 @@ Feature: Accessing the page
         And I should see "Número USP: 12345"
         And I should see "Email: email@email.com"
         And I should see "Departamento: MAC"
-        And I should see "Editar"
+        And I should not see "Editar"
 
     Scenario: Verify if non-admins can't create a professors
         Given I'm at the create_professors page
         Then I should see "Para continuar, faça login ou registre-se."
 
-    Scenario: Verify if the admin can edit professors
+    Scenario: Verify if the admin can't edit professors
         Given I'm at the login page
         And there is an admin user with email "kazuo@ime.usp.br" and password "admin123"
         And there is a professor with name "mqz" and password "12345678" nusp "1111111" department "MAC" and email "music@usp.br"
@@ -37,7 +37,7 @@ Feature: Accessing the page
         And I press the "Entrar" button
         And I click the "Professores" link
         And I click the "mqz" link
-        Then I should see "Editar"
+        Then I should not see "Editar"
 
     Scenario: Verify if other users can't edit professors
         Given I'm at the list_professors page
