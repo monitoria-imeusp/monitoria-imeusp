@@ -31,7 +31,7 @@ pt-BR:
         name: 'Nome'
         nusp: 'Número USP'
         email: 'Email'
-        super_professor: 'Permissão de SuperProfessor'
+        professor_rank: 'Nível de acesso'
         password: 'Senha'
         password_confirmation: 'Confirme a senha'
       request_for_teaching_assistant:
