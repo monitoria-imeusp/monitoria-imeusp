@@ -8,6 +8,8 @@ class ProfessorsController < ApplicationController
 
   def create
     @professor = Professor.new(professor_params)
+    generated_password = Devise.friendly_token.first(8)
+    @professor.password = generated_password
     if @professor.save
       redirect_to @professor
     else
@@ -64,6 +66,7 @@ class ProfessorsController < ApplicationController
 
   private
   def professor_params
-    params.require(:professor).permit(:name, :nusp, :password, :password_confirmation, :department_id, :email, :professor_rank)
+    params.require(:professor).permit(:name, :nusp,:email,
+      :department_id, :professor_rank)
   end
 end
