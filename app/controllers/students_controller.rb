@@ -11,6 +11,8 @@ class StudentsController < ApplicationController
 
   def create
     @student = Student.new(student_params)
+    @generated_password = Devise.friendly_token.first(8)
+    @student.password = @generated_password
     if @student.save
       sign_in  @student, :bypass => true
       redirect_to @student
@@ -92,6 +94,10 @@ class StudentsController < ApplicationController
 
     private
         def student_params
-            params.require(:student).permit(:name, :password, :password_confirmation, :nusp, :gender, :rg, :cpf, :address, :complement, :district, :zipcode, :city, :state, :tel, :cel, :email, :has_bank_account)
+            params.require(:student).permit(:name, :password, :password_confirmation
+              :nusp, :gender, :rg, :cpf, 
+              :address, :complement, :district, :zipcode, :city, :state, 
+              :tel, :cel, :email, 
+              :has_bank_account)
         end
 end
