@@ -23,7 +23,7 @@ Feature: Student register
         And I fill the "Celular" field with "0123456789"
         And I fill the "Email" field with "eu@usp.br"
         And I select the count option "Sim"
-        And I press the "Enviar" button
+        And I press the "Salvar" button
         Then I should see "Nome: Carlinhos"
         And I should see "Sexo: Masculino"
     
@@ -47,7 +47,7 @@ Feature: Student register
         And I fill the "Celular" field with "012456789"
         And I fill the "Email" field with "eu@usp.br"
         And I select the count option "Sim"
-        And I press the "Enviar" button
+        And I press the "Salvar" button
         Then I should not see "Nome: Carlinhos"
         And I should not see "Sexo: Masculino"
 

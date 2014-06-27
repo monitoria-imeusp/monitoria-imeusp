@@ -1,9 +1,9 @@
-Feature: Candidature visualization
-    In order to see a candidature
-    As a superprofessor or admin or student or secretary
-    I want to see the candidature
+Feature: Candidature table visualization
+    In order to see the candidatures
+    As a superprofessor, admin, student or secretary
+    I want to see the candidatures
 
-    Scenario: Admin seeing a candidature
+    Scenario: Admin seeing candidatures
         Given I'm at the login page
         And there is an admin user with email "kazuo@ime.usp.br" and password "admin123"
         And there is a department with code "MAC"
@@ -26,7 +26,7 @@ Feature: Candidature visualization
 		And I should see "Remover"
 		And I should not see "Nova Candidatura"
 
-    Scenario: Superprofessor seeing a candidature
+    Scenario: Superprofessor seeing candidatures
         Given I'm at the professor login page
         And there is a super_professor with name "mandel" and password "12345678" nusp "1111111" department "MAC" and email "devil@usp.br"
         And there is a student with name "Rogerio" and password "12345678" and nusp "123456" and gender "1" and rg "123" and cpf "321" and address "matao" and district "butanta" and zipcode "000" and city "sp" and state "sp" and tel "0123456789" and cel "1234567890" and email "eu@usp.br" and has_bank_account "true"
@@ -54,7 +54,7 @@ Feature: Candidature visualization
 		And I should see "Remover"
 		And I should not see "Nova Candidatura"
     
-    Scenario: Secretary seeing a candidature
+    Scenario: Secretary seeing candidatures
         Given I'm at the secretary login page
         And there is a secretary with name "sec" and password "12345678" nusp "1111" and email "a@a.com"
         And there is a student with name "Rogerio" and password "12345678" and nusp "123456" and gender "1" and rg "123" and cpf "321" and address "matao" and district "butanta" and zipcode "000" and city "sp" and state "sp" and tel "0123456789" and cel "1234567890" and email "eu@usp.br" and has_bank_account "true"
@@ -82,7 +82,8 @@ Feature: Candidature visualization
 		And I should see "Editar"
 		And I should see "Remover"
     
-    Scenario: Student seeing a candidature
+    
+    Scenario: Student seeing candidatures
         Given I'm at the student login page
         And there is a student with name "Rogerio" and password "12345678" and nusp "123456" and gender "1" and rg "123" and cpf "321" and address "matao" and district "butanta" and zipcode "000" and city "sp" and state "sp" and tel "0123456789" and cel "1234567890" and email "eu@usp.br" and has_bank_account "true"
         And there is a student with name "Caio" and password "12345678" and nusp "123457" and gender "1" and rg "1234" and cpf "421" and address "matao2" and district "butanta" and zipcode "000" and city "sp" and state "sp" and tel "0123456789" and cel "1234567890" and email "eu2@usp.br" and has_bank_account "true"

@@ -1,13 +1,9 @@
 module StudentsHelper
 
-  def show_yes_or_no(boolean_value)
-    boolean_value ? 'Sim' : 'Não'
-  end
-
   def yesOrNo
     [
-      ['Sim', 0],
-      ['Não', 1]
+      ['Sim', true],
+      ['Não', false]
     ]
   end
 

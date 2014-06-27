@@ -25,23 +25,14 @@
 </p>
 
 <p>
-  <strong><%= t('activerecord.attributes.candidature.avaliability_daytime') + ':' %></strong>
-  <% if @candidature.avaliability_daytime %>
-    Sim
-  <% else %>
-    Não
-  <% end %>
+  <strong><%= t('activerecord.attributes.candidature.daytime_availability') + ':' %></strong>
+  <%= show_yes_or_no(@candidature.daytime_availability) %>
 </p>
 
 <p>
-  <strong><%= t('activerecord.attributes.candidature.avaliability_night_time') + ':' %></strong>
-  <% if @candidature.avaliability_night_time %>
-    Sim
-  <% else %>
-    Não
-  <% end %>
+  <strong><%= t('activerecord.attributes.candidature.nighttime_availability') + ':' %></strong>
+  <%= show_yes_or_no(@candidature.nighttime_availability) %>
 </p>
-
 <p>
   <strong><%= t('activerecord.attributes.candidature.time_period_preference') + ':' %></strong>
   <%= daytimePreference()[@candidature.time_period_preference.to_i][0] %>

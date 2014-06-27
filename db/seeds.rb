@@ -56,6 +56,7 @@ if Rails.env.development?
   ].each do |prof|
     Professor.create(prof)
   end
+  
   [
     {
       name: "Introdução à Ciência da Computação",
@@ -88,7 +89,7 @@ if Rails.env.development?
       gender: "1",
       rg: "123",
       cpf: "321",
-      adress: "R. Matão",
+      address: "R. Matão",
       district: "Butantã",
       zipcode: "000",
       city: "São Paulo",
@@ -105,7 +106,7 @@ if Rails.env.development?
       gender: "0",
       rg: "456",
       cpf: "654",
-      adress: "R. Matão",
+      address: "R. Matão",
       district: "Butantã",
       zipcode: "000",
       city: "São Paulo",

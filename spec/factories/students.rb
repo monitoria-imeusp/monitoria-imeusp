@@ -8,7 +8,7 @@ FactoryGirl.define do
     gender 1
     rg "MyString"
     cpf "MyString"
-    adress "MyString"
+    address "MyString"
     complement "MyString"
     district "MyString"
     zipcode "MyString"
