@@ -6,6 +6,10 @@ class Professor < ActiveRecord::Base
   validates :nusp, presence: true
 
   def super_professor?
-	return professor_rank > 0
+		return professor_rank > 0
+  end
+
+	def hiper_professor?
+		return professor_rank == 2
   end
 end

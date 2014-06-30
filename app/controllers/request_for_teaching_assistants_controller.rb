@@ -92,7 +92,7 @@ class RequestForTeachingAssistantsController < ApplicationController
 
   def professor_can_see?(professor, request)
     return (
-      request.professor == professor || 
+      request.professor == professor || professor.hiper_professor? ||
       (
         professor.super_professor? &&
         professor.department == request.course.department
