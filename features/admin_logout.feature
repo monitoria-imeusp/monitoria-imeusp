@@ -9,5 +9,5 @@ Feature: Logout
         When I fill the "Email" field with "kazuo@ime.usp.br"
         And I fill the "Senha" field with "admin123"
         And I press the "Entrar" button
-        And I click the "Logout" link
-        Then I should see "Logout efetuado com sucesso."
+        And I click the "Sair" link
+        Then I should see "Sessão encerrada com sucesso."

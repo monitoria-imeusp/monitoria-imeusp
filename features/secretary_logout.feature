@@ -9,5 +9,5 @@ Feature: Secretary logout
         When I fill the "Número USP" field with "1111111"
         And I fill the "Senha" field with "12345678"
         And I press the "Entrar" button
-        And I click the "Logout" link
-        Then I should see "Logout efetuado com sucesso."
+        And I click the "Sair" link
+        Then I should see "Sessão encerrada com sucesso."
