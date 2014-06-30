@@ -14,13 +14,15 @@ Rails.application.routes.draw do
 
   # You can have the root of your site routed with "root"
   root 'home#index'
+  get '/sistema' => 'home#sys'
+  get '/prof' => 'home#prof'
 
   resources :admins
 
   resources :request_for_teaching_assistants
   resources :professors
 
-  resources :courses  
+  resources :courses
   resources :secretaries
 
   resources :students

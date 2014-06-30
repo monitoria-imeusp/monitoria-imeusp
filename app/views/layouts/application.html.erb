@@ -103,7 +103,7 @@
                <%= link_to "Candidaturas", candidatures_path %>
             </li>
             <li>
-              <%= link_to "Logout", destroy_admin_session_path, method: :delete %>
+              <%= link_to "Sair", destroy_admin_session_path, method: :delete %>
             </li>
             <li>
               <%= link_to "Dump do banco de dados", { action: "dump", controller: "home" } %>
@@ -120,11 +120,11 @@
               </li>
             <% end %>
             <li>
-              <%= link_to "Logout", destroy_professor_session_path, method: :delete %>
+              <%= link_to "Sair", destroy_professor_session_path, method: :delete %>
             </li>
           <% elsif secretary_signed_in? %>
             <li>
-              <%= link_to "Logout", destroy_secretary_session_path, method: :delete %>
+              <%= link_to "Sair", destroy_secretary_session_path, method: :delete %>
             </li>
             <li>
                <%= link_to "Candidaturas", candidatures_path %>
@@ -137,23 +137,14 @@
                <%= link_to "Candidaturas", candidatures_path %>
             </li>
             <li>
-              <%= link_to "Logout", destroy_student_session_path, method: :delete %>
-            </li>      
+              <%= link_to "Sair", destroy_student_session_path, method: :delete %>
+            </li>
           <% else %>
             <li>
-              <%= link_to "Novo Aluno", new_student_path %>
+              <%= link_to "Cadastrar-se", new_student_path %>
             </li>
             <li>
-              <%= link_to "Login Aluno", new_student_session_path %>
-            </li>
-            <li>
-              <%= link_to "Login Professor", new_professor_session_path %>
-            </li>
-            <li>
-              <%= link_to "Login Funcionário", new_secretary_session_path %>
-            </li>
-            <li>
-              <%= link_to "Login Admin", new_admin_session_path %>
+              <%= link_to "Fazer acesso", new_student_session_path %>
             </li>
           <% end %>
         </ul>

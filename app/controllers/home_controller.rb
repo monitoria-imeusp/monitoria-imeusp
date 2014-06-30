@@ -15,10 +15,17 @@ class HomeController < ApplicationController
     end
   end
 
+  def sys
+  end
+
+  def prof
+    redirect_to new_professor_session_path
+  end
+
   protected
 
   def authenticate_dump!
-    unless admin_signed_in? or (professor_signed_in? and current_professor.super_professor) or secretary_signed_in? 
+    unless admin_signed_in? or (professor_signed_in? and current_professor.super_professor) or secretary_signed_in?
       redirect_to root_path
     end
   end
