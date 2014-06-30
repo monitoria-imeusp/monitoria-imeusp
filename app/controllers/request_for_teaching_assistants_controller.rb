@@ -94,7 +94,7 @@ class RequestForTeachingAssistantsController < ApplicationController
     return (
       request.professor == professor || 
       (
-        professor.super_professor && 
+        professor.super_professor? &&
         professor.department == request.course.department
       )
     )

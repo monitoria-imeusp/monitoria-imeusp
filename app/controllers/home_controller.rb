@@ -25,7 +25,7 @@ class HomeController < ApplicationController
   protected
 
   def authenticate_dump!
-    unless admin_signed_in? or (professor_signed_in? and current_professor.super_professor) or secretary_signed_in?
+    unless admin_signed_in? or (professor_signed_in? and current_professor.super_professor?) or secretary_signed_in? 
       redirect_to root_path
     end
   end
