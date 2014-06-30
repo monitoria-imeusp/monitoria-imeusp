@@ -23,10 +23,60 @@ describe CandidaturesController do
   # This should return the minimal set of attributes required to create a valid
   # Candidature. As you add validations to Candidature, be sure to
   # adjust the attributes here as well.
+
+ let(:valid_course_attributes) {{
+    "id" => 1,
+    "name" => "Mascarenhas",
+    "course_code" => "MAC110",
+    "department_id" => "1"
+  }}
+
+  let(:valid_second_course_attributes) {{
+    "id" => 2,
+    "name" => "Mascarenhas2",
+    "course_code" => "MAC111",
+    "department_id" => "1"
+  }}
+
+  let(:valid_third_course_attributes) {{
+    "id" => 3,
+    "name" => "Mascarenhas3",
+    "course_code" => "MAE200",
+    "department_id" => "2"
+  }}
+
   let(:valid_attributes) {{
     "time_period_preference" => "Indiferente",
     "course1_id" => 1
   }}
+
+  let(:valid_second_candidature_attributes) {{
+    "time_period_preference" => "Indiferente",
+    "course1_id" => 2
+  }}
+
+  let(:valid_third_candidature_attributes) {{
+    "time_period_preference" => "Indiferente",
+    "course1_id" => 3
+  }}
+
+  let(:kunio) { {
+    "id" => 1,
+    "password" => "prof-123",
+    "email" => "kunio@ime.usp.br",
+    "department_id" => 1,
+    "nusp" => "2222222",
+    "professor_rank" => 1
+  } }
+
+  let(:zara) { {
+    "id" => 2,
+    "password" => "prof-123",
+    "email" => "zara@ime.usp.br",
+    "department_id" => 2,
+    "nusp" => "3333333",
+    "professor_rank" => 2
+  } }
 
   # This should return the minimal set of values that should be in the session
   # in order to pass any filters (e.g. authentication) defined in
@@ -36,14 +86,42 @@ describe CandidaturesController do
   @student = login_student
 
   before :each do
+    Department.create! {{"id" => 1, "code" => "MAC"}}
+    Department.create! {{"id" => 2, "code" => "MAE"}}
     valid_attributes["student_id"] = @student.id
+    Course.create! valid_course_attributes
+    Course.create! valid_second_course_attributes
+    Course.create! valid_third_course_attributes
   end
 
   describe "GET index" do
-    it "assigns all candidatures as @candidatures" do
-      candidature = Candidature.create! valid_attributes
+    it "student assigns his candidatures as @candidatures" do
+      shown_candidatures = []
+      shown_candidatures.push(Candidature.create! valid_attributes)
+      Candidature.create! valid_second_candidature_attributes
+      Candidature.create! valid_third_candidature_attributes
       get :index, {}, valid_session
-      assigns(:candidatures_filtered).should eq([candidature])
+      assigns(:candidatures_filtered).should eq(shown_candidatures)
+    end
+    it "super professor assigns candidatures of his department as @candidatures" do
+      shown_candidatures = []
+      shown_candidatures.push(Candidature.create! valid_attributes)
+      shown_candidatures.push(Candidature.create! valid_second_candidature_attributes)
+      Candidature.create! valid_third_candidature_attributes
+      super_professor = Professor.create! kunio
+      sign_in :professor, super_professor
+      get :index, {}, valid_session
+      assigns(:candidatures_filtered).should eq(shown_candidatures)
+    end
+    it "hiper professor assigns all candidatures as @candidatures" do
+      shown_candidatures = []
+      shown_candidatures.push(Candidature.create! valid_attributes)
+      shown_candidatures.push(Candidature.create! valid_second_candidature_attributes)
+      shown_candidatures.push(Candidature.create! valid_third_candidature_attributes)
+      hiper_professor = Professor.create! zara
+      sign_in :professor, hiper_professor
+      get :index, {}, valid_session
+      assigns(:candidatures_filtered).should eq(shown_candidatures)
     end
   end
 
