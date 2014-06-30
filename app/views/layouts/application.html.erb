@@ -112,7 +112,7 @@
             <li>
               <%= link_to "Pedidos de Monitoria", request_for_teaching_assistants_path %>
             </li>
-            <% if current_professor.super_professor then %>
+            <% if current_professor.super_professor? then %>
               <li>
               <%= link_to "Candidaturas", candidatures_path %>
               <br>

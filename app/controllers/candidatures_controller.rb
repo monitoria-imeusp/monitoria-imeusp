@@ -5,8 +5,12 @@ class CandidaturesController < ApplicationController
   # GET /candidatures
   # GET /candidatures.json
   def index
-    if admin_signed_in? or (professor_signed_in? and current_professor.super_professor) or secretary_signed_in?
+    if admin_signed_in? or (professor_signed_in? and current_professor.hiper_professor?) or secretary_signed_in?
       @candidatures_filtered = Candidature.all
+    elsif professor_signed_in? and current_professor.super_professor?
+      @candidatures_filtered = (Candidature.all.map do |candidature| candidature end).keep_if do |candidature| 
+        candidature_of_department?(current_professor, candidature)
+      end
     elsif student_signed_in?
       @candidatures_filtered = Candidature.where("student_id = ?", current_student.id)
     else
@@ -76,7 +80,28 @@ class CandidaturesController < ApplicationController
   end
 
     # Never trust parameters from the scary internet, only allow the white list through.
-    def candidature_params
-      params.require(:candidature).permit(:daytime_availability, :nighttime_availability, :time_period_preference, :course1_id, :course2_id, :course3_id, :student_id)
+  def candidature_params
+    params.require(:candidature).permit(:daytime_availability, :nighttime_availability, :time_period_preference, :course1_id, :course2_id, :course3_id, :student_id)
+  end
+
+  def candidature_of_department?(professor, candidature)
+    course1 = Course.where(id: candidature.course1_id).take
+    if(course1.department == professor.department)
+      return true
     end
+    if(candidature.course2_id != nil)
+      course2 = Course.where(id: candidature.course2_id).take
+      if(course2.department == professor.department)
+        return true
+      end
+    end
+    if(candidature.course3_id != nil)
+      course3 = Course.where(id: candidature.course3_id).take
+      if(course3.department == professor.department)
+        return true
+      end
+    end
+    return false
+  end
+
 end

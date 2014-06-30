@@ -47,6 +47,17 @@ describe RequestForTeachingAssistantsController do
     "observation" => "teste"
   } }
 
+  let(:other_department_attributes) { {
+    "professor_id" => "3",
+    "course_id" => "3",
+    "requested_number" => 2,
+    "priority" => 2,
+    "student_assistance" => true,
+    "work_correction" => false,
+    "test_oversight" => false,
+    "observation" => "teste"
+  } }
+
   let(:valid_course_attributes) {{
     "name" => "Mascarenhas",
     "id" => 1,
@@ -109,7 +120,16 @@ describe RequestForTeachingAssistantsController do
     "email" => "super@ime.usp.br",
     "department_id" => 1,
     "nusp" => "1111111",
-    "super_professor" => true
+    "professor_rank" => 1
+  } }
+
+  let(:zara) { {
+    "id" => 5,
+    "password" => "prof-123",
+    "email" => "zara@ime.usp.br",
+    "department_id" => 1,
+    "nusp" => "1726354",
+    "professor_rank" => 2
   } }
 
   # This should return the minimal set of values that should be in the session
@@ -302,8 +322,23 @@ describe RequestForTeachingAssistantsController do
       shown_requests.push(RequestForTeachingAssistant.create! valid_attributes)
       shown_requests.push(RequestForTeachingAssistant.create! not_owned_attributes)
       RequestForTeachingAssistant.create! not_owned_other_department_attributes
+      RequestForTeachingAssistant.create! other_department_attributes
       get :index, {}
       assigns(:request_for_teaching_assistants).should eq(shown_requests)
     end
+
+    it "filters the requests of the all department" do
+      Course.create! valid_second_course_attributes
+      Course.create! valid_third_course_attributes
+      hiper_professor = Professor.create! zara
+      sign_in :professor, hiper_professor
+      shown_requests = []
+      shown_requests.push(RequestForTeachingAssistant.create! valid_attributes)
+      shown_requests.push(RequestForTeachingAssistant.create! not_owned_attributes)
+      shown_requests.push(RequestForTeachingAssistant.create! other_department_attributes)
+      get :index, {}
+      assigns(:request_for_teaching_assistants).should eq(shown_requests)
+    end
+
   end
 end

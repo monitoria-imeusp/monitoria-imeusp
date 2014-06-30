@@ -20,7 +20,7 @@ if Rails.env.development?
       nusp: "33333",
       department: Department.find_by(:code => "MAC"),
       email: "nina@ime.usp.br",
-      super_professor: true,
+      professor_rank: 1,
       password: "changeme!"
     },
     {
@@ -28,7 +28,7 @@ if Rails.env.development?
       nusp: "22222",
       department: Department.find_by(:code => "MAC"),
       email: "kunio@ime.usp.br",
-      super_professor: true,
+      professor_rank: 1,
       password: "changeme!"
     },
     {
@@ -36,7 +36,7 @@ if Rails.env.development?
       nusp: "11111",
       department: Department.find_by(:code => "MAT"),
       email: "zara@ime.usp.br",
-      super_professor: true,
+      professor_rank: 2,
       password: "changeme!"
     },
     {

@@ -20,8 +20,8 @@
 
 <% if admin_signed_in? %>
     <p>
-        <strong><%= t('activerecord.attributes.professor.super_professor') + ':' %></strong>
-        <%= show_yes_or_no @professor.super_professor %>
+        <strong><%= t('activerecord.attributes.professor.professor_rank') + ':' %></strong>
+        <%= professorRankOptions()[@professor.professor_rank][0] %>
     </p>
 <% end %>
 <% if professor_signed_in? and current_professor == @professor %>

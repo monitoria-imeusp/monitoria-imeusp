@@ -11,7 +11,7 @@ Given(/^there is a professor with name "(.*?)" and password "(.*?)" nusp "(.*?)"
   if not d
     d = Department.create! {{"code" => department}}
   end
-  Professor.create(name: name , password: password, nusp: nusp, department_id: d.id, email: email)
+  Professor.create(name: name , password: password, nusp: nusp, department_id: d.id, email: email, professor_rank: 0)
 end
 
 Given(/^there is a request for teaching assistant with professor "(.*?)" and course "(.*?)" and requested_number "(.*?)" and priority "(.*?)" and student_assistance "(.*?)" and work_correction "(.*?)" and test_oversight "(.*?)"$/) do |professor_name, course_code, requested_number, priority, student_assistance, work_correction, test_oversight|
@@ -23,7 +23,15 @@ Given(/^there is a super_professor with name "(.*?)" and password "(.*?)" nusp "
   if not d
     d = Department.create! {{"code" => department}}
   end
-  Professor.create(name: name , password: password, nusp: nusp, department_id: d.id, email: email, super_professor: true)
+  Professor.create(name: name , password: password, nusp: nusp, department_id: d.id, email: email, professor_rank: 1)
+end
+
+Given(/^there is a hiper_professor with name "(.*?)" and password "(.*?)" nusp "(.*?)" department "(.*?)" and email "(.*?)"$/) do |name, password, nusp, department, email|
+  d = Department.find_by("code" => department)
+  if not d
+    d = Department.create! {{"code" => department}}
+  end
+  Professor.create(name: name , password: password, nusp: nusp, department_id: d.id, email: email, professor_rank: 2)
 end
 
 When(/^there is a secretary with name "(.*?)" and password "(.*?)" nusp "(.*?)" and email "(.*?)"$/) do |name, password, nusp, email|
