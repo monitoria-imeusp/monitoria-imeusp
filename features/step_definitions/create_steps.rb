@@ -23,7 +23,7 @@ Given(/^there is a super_professor with name "(.*?)" and password "(.*?)" nusp "
   if not d
     d = Department.create! {{"code" => department}}
   end
-  Professor.create(name: name , password: password, nusp: nusp, department_id: d.id, email: email, super_professor: true)
+  Professor.create(name: name , password: password, nusp: nusp, department_id: d.id, email: email, professor_rank: 1)
 end
 
 When(/^there is a secretary with name "(.*?)" and password "(.*?)" nusp "(.*?)" and email "(.*?)"$/) do |name, password, nusp, email|
