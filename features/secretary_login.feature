@@ -9,6 +9,6 @@ Feature: Login Secretary
         When I fill the "Número USP" field with "1111111"
         And I fill the "Senha" field with "12345678"
         And I press the "Entrar" button
-        Then I should see "Login efetuado com sucesso."
+        Then I should see "Acesso efetuado com sucesso."
         And I should see "Sistema de Monitoria"
         And I should see "secretaria@ime.usp.br"

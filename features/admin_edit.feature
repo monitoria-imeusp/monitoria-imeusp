@@ -7,7 +7,7 @@ Feature: Editing the admin
 		Given there is an admin user with email "kazuo@ime.usp.br" and password "admin123"
 
 	Scenario: Admin edits its own information
-		When I'm at the home page
+		Given I'm at the system access page
 		And I click the "Login Admin" link
         Then I fill the "Email" field with "kazuo@ime.usp.br"
         And I fill the "Senha" field with "admin123"

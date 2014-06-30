@@ -9,7 +9,7 @@ Feature: Login
         When I fill the "Email" field with "kazuo@ime.usp.br"
         And I fill the "Senha" field with "admin123"
         And I press the "Entrar" button
-        Then I should see "Login efetuado com sucesso."
+        Then I should see "Acesso efetuado com sucesso."
 
     Scenario: After exitting the page and entering it again
         Given I'm at the login page
