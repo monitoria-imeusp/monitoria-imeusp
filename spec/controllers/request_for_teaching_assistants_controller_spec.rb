@@ -109,7 +109,7 @@ describe RequestForTeachingAssistantsController do
     "email" => "super@ime.usp.br",
     "department_id" => 1,
     "nusp" => "1111111",
-    "super_professor" => true
+    "professor_rank" => 1
   } }
 
   # This should return the minimal set of values that should be in the session
