@@ -2,6 +2,6 @@
 
 <p>Você pode confirmar email através do link abaixo:</p>
 
-<p>Sua senha de acesso é: <strong><%= @resource.password%></strong> </p>
-
 <p><%= link_to 'Confirmar meu cadastro', confirmation_url(@resource, confirmation_token: @token), target: "_blank" %></p>
+
+<p>Sua senha de acesso é: <strong><%= @resource.password%></strong> </p>
