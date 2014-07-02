@@ -7,6 +7,7 @@ Feature: Secretary edit
         Given there is a secretary with name "Marcia" and password "12345678" nusp "1111111" and email "marcia@ime.usp.br"
 
     Scenario: Admin can not edit a secretary
+        When I'm ready to receive email
     	Given I'm at the login page
         And there is an admin user with email "kazuo@ime.usp.br" and password "admin123"
         When I fill the "Email" field with "kazuo@ime.usp.br"

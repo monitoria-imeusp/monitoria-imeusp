@@ -44,10 +44,6 @@ class ProfessorsController < ApplicationController
       return
     end
     @professor = Professor.find(params[:id])
-    if params[:professor][:password].blank? && params[:professor][:password_confirmation].blank?
-      params[:professor].delete(:password)
-      params[:professor].delete(:password_confirmation)
-    end
     if @professor.update(professor_params)
       sign_in  @professor, :bypass => true
       redirect_to @professor
