@@ -12,8 +12,8 @@ Feature: Candidature table visualization
         And there is a course with name "Cálculo I" and code "MAT0111" and department "MAT"
         And there is a course with name "Estatística Concorrente" and code "MAE0438" and department "MAE"
         And there is a course with name "Introdução à Ciência da Computação" and code "MAC0110" and department "MAC"
-        And there is an candidature with student "Rogerio" and first option "Cálculo I" and second option "Introdução à Ciência da Computação" and third option "" and availability for daytime "true" and availability for night time "false" and period preference "2" and transcript file "exemplo.pdf"
-        And there is an candidature with student "Caio" and first option "Estatística Concorrente" and second option "Cálculo I" and third option "" and availability for daytime "false" and availability for night time "true" and period preference "1" and transcript file "exemplo.pdf"
+        And there is an candidature with student "Rogerio" and first option "Cálculo I" and second option "Introdução à Ciência da Computação" and third option "" and availability for daytime "true" and availability for night time "false" and period preference "2"
+        And there is an candidature with student "Caio" and first option "Introdução à Ciência da Computação" and second option "Estatística Concorrente" and third option "" and availability for daytime "false" and availability for night time "true" and period preference "1" and transcript file "exemplo.pdf"
 
     Scenario: Admin seeing all candidatures
         Given I'm at the login page
@@ -32,7 +32,7 @@ Feature: Candidature table visualization
 		And I should see "Remover"
 		And I should not see "Nova Candidatura"
 
-    Scenario: Hiperprofessor seeing candidatures of his department
+    Scenario: Hiperprofessor seeing all candidatures
         Given I'm at the professor login page
         And there is a hiper_professor with name "zara" and password "12345678" nusp "2222222" department "MAE" and email "zara@usp.br"
         When I fill the "Número USP" field with "2222222"
@@ -56,11 +56,11 @@ Feature: Candidature table visualization
         And I fill the "Senha" field with "12345678"
         And I press the "Entrar" button
         And I click the "Candidaturas" link
-		Then I should see "Rogerio"
-		And I should see "MAT0111 - Cálculo I"
-		And I should see "MAC0110 - Introdução à Ciência da Computação"
-        Then I should not see "Caio"
-        And I should not see "MAE0438 - Estatística Concorrente"
+		Then I should see "Caio"
+        And I should see "MAC0110 - Introdução à Ciência da Computação"
+		And I should see "MAE0438 - Estatística Concorrente"
+        Then I should not see "Rogerio"
+        And I should not see "MAT0111 - Cálculo I"
 		And I should see "Ver"
 		And I should see "Editar"
 		And I should see "Remover"
