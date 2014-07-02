@@ -1,7 +1,5 @@
 Rails.application.routes.draw do
 
-  resources :candidatures
-
   get 'home/index'
   get 'home/dump'
 
@@ -17,6 +15,7 @@ Rails.application.routes.draw do
   get '/sistema' => 'home#sys'
   get '/prof' => 'home#prof'
 
+
   resources :admins
 
   resources :request_for_teaching_assistants
@@ -29,6 +28,12 @@ Rails.application.routes.draw do
 
   resources :students
   resources :request_for_teaching_assistants
+
+  resources :candidatures
+
+  resources :candidatures do
+      get :download
+  end
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

@@ -41,6 +41,7 @@ ActiveRecord::Schema.define(version: 20140702172121) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "student_id"
+    t.text     "observation",            default: ""
     t.string   "transcript_file_path"
     t.text     "observation",            default: ""
   end

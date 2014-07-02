@@ -99,6 +99,12 @@ class CandidaturesController < ApplicationController
       end
   end
 
+  def download transcript_file_path
+    send_data pdf,
+      :filename => transcript_file_path,
+      :type => "application/pdf"
+  end
+
   # Use callbacks to share common setup or constraints between actions.
   def set_candidature
     @candidature = Candidature.find(params[:id])
