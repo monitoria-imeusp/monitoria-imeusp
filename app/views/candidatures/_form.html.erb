@@ -38,6 +38,10 @@
       </br>
     <% end %>
   </div>
+  <div class="field">
+    <%= f.label :observation, t('activerecord.attributes.candidature.observation') %><br>
+    <%= f.text_area :observation %>
+  </div>
   <div class="actions">
     <%= f.submit "Enviar" %>
   </div>
