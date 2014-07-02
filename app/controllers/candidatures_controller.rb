@@ -36,6 +36,7 @@ class CandidaturesController < ApplicationController
   # POST /candidatures.json
   def create
     params[:candidature][:student_id] = current_student.id
+    upload
     @candidature = Candidature.new(candidature_params)
 
     respond_to do |format|
@@ -77,6 +78,16 @@ class CandidaturesController < ApplicationController
   end
 
   private
+  def upload
+      uploaded_io = params[:candidature][:transcript_file_path]
+      nusp = current_student.nusp
+      new_name = (Time.now.strftime '%Y%m%d_' + nusp)
+      File.open(Rails.root.join('public', 'uploads', 'transcripts', new_name), 'wb') do |file|
+                file.write(uploaded_io.read)
+      end
+      params[:candidature][:transcript_file_path] = Rails.root.join('public', 'uploads', 'transcripts', new_name).to_s
+  end
+
   # Use callbacks to share common setup or constraints between actions.
   def set_candidature
     @candidature = Candidature.find(params[:id])
@@ -84,7 +95,7 @@ class CandidaturesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
   def candidature_params
-    params.require(:candidature).permit(:daytime_availability, :nighttime_availability, :time_period_preference, :course1_id, :course2_id, :course3_id, :student_id, :observation)
+    params.require(:candidature).permit(:daytime_availability, :nighttime_availability, :time_period_preference, :course1_id, :course2_id, :course3_id, :student_id, :observation, :transcript_file_path)
   end
 
   def candidature_of_department?(professor, candidature)

@@ -80,6 +80,7 @@ pt-BR:
         course2_id: 'Curso: 2ª opção'
         course3_id: 'Curso: 3ª opção'
         observation: 'Observações'
+        transcript_file_path: 'Histórico Escolar'
       department:
         department: 'Departamento'
   errors:
