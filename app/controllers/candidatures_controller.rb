@@ -36,19 +36,24 @@ class CandidaturesController < ApplicationController
   # POST /candidatures.json
   def create
     params[:candidature][:student_id] = current_student.id
-    upload
-    @candidature = Candidature.new(candidature_params)
-
-    respond_to do |format|
-      if @candidature.save
-        BackupMailer.new_candidature(@candidature).deliver
-        format.html { redirect_to @candidature, notice: 'Candidatura criada com sucesso.' }
-        format.json { render action: 'show', status: :created, location: @candidature }
-      else
-        format.html { render action: 'new' }
-        format.json { render json: @candidature.errors, status: :unprocessable_entity }
+    uploaded = upload
+      @candidature = Candidature.new(candidature_params)
+        respond_to do |format|
+          if uploaded
+            if @candidature.save
+              BackupMailer.new_candidature(@candidature).deliver
+              format.html { redirect_to @candidature, notice: 'Candidatura criada com sucesso.' }
+              format.json { render action: 'show', status: :created, location: @candidature }
+            else
+              format.html { render action: 'new' }
+              format.json { render json: @candidature.errors, status: :unprocessable_entity }
+            end
+          else
+            @candidature.errors.add :transcript_file_path, "precisa ser um arquivo pdf"
+            format.html { render action: 'new' }
+            format.json { render json: @candidature.errors, status: :unprocessable_entity }
+          end
       end
-    end
   end
 
   # PATCH/PUT /candidatures/1
@@ -81,11 +86,17 @@ class CandidaturesController < ApplicationController
   def upload
       uploaded_io = params[:candidature][:transcript_file_path]
       nusp = current_student.nusp
-      new_name = (Time.now.strftime '%Y%m%d_' + nusp)
-      File.open(Rails.root.join('public', 'uploads', 'transcripts', new_name), 'wb') do |file|
-                file.write(uploaded_io.read)
+      new_name = (Time.now.strftime '%Y%m%d_' + nusp) + ".pdf"
+      path = Rails.root.join('public', 'uploads', 'transcripts', new_name)
+      params[:candidature][:transcript_file_path] = path.to_s
+      if uploaded_io and  uploaded_io.content_type == "application/pdf"
+          File.open(path, 'wb') do |file|
+                    file.write(uploaded_io.read)
+          end
+          true
+      else
+          false
       end
-      params[:candidature][:transcript_file_path] = Rails.root.join('public', 'uploads', 'transcripts', new_name).to_s
   end
 
   # Use callbacks to share common setup or constraints between actions.
