@@ -5,3 +5,5 @@ tmp/*
 coverage/*
 log/*
 *.sublime-workspace
+!dumpfiles/.keep
+dumpfiles/*
