@@ -27,10 +27,10 @@
           <%= link_to "Página principal", "/" %>
         </li>
         <li>
-          <%= link_to "Professores", professors_path %>
+          <%= link_to "Disciplinas", courses_path %>
         </li>
         <li>
-          <%= link_to "Disciplinas", courses_path %>
+          <%= link_to "Professores", professors_path %>
         </li>
         <li>
         <%= link_to "Funcionários", secretaries_path %>
@@ -74,6 +74,18 @@
             <li>
               <%= link_to "Meu Perfil", current_student %>
             </li>
+          <% elsif current_secretary.present? %>
+            <li>
+              <%= link_to "Meu Perfil", current_secretary %>
+            </li>
+          <% elsif current_professor.present? %>
+            <li>
+              <%= link_to "Meu Perfil", current_professor %>
+            </li>
+          <% elsif current_admin.present? %>
+            <li>
+              <%= link_to "Meu Perfil", current_admin %>
+            </li>
           <% end %>
           <% if admin_signed_in? || (current_professor.present? && current_professor.super_professor?) %>
             <li>
@@ -91,7 +103,7 @@
                <%= link_to "Candidaturas", candidatures_path %>
             </li>
             <li>
-              <%= link_to "Logout", destroy_admin_session_path, method: :delete %>
+              <%= link_to "Sair", destroy_admin_session_path, method: :delete %>
             </li>
             <li>
               <%= link_to "Dump do banco de dados", { action: "dump", controller: "home" } %>
@@ -100,18 +112,19 @@
             <li>
               <%= link_to "Pedidos de Monitoria", request_for_teaching_assistants_path %>
             </li>
-            <% if current_professor.super_professor then %>
+            <% if current_professor.super_professor? then %>
               <li>
               <%= link_to "Candidaturas", candidatures_path %>
+              <br>
               <%= link_to "Dump do banco de dados", { action: "dump", controller: "home" } %>
               </li>
             <% end %>
             <li>
-              <%= link_to "Logout", destroy_professor_session_path, method: :delete %>
+              <%= link_to "Sair", destroy_professor_session_path, method: :delete %>
             </li>
           <% elsif secretary_signed_in? %>
             <li>
-              <%= link_to "Logout", destroy_secretary_session_path, method: :delete %>
+              <%= link_to "Sair", destroy_secretary_session_path, method: :delete %>
             </li>
             <li>
                <%= link_to "Candidaturas", candidatures_path %>
@@ -124,23 +137,14 @@
                <%= link_to "Candidaturas", candidatures_path %>
             </li>
             <li>
-              <%= link_to "Logout", destroy_student_session_path, method: :delete %>
-            </li>      
+              <%= link_to "Sair", destroy_student_session_path, method: :delete %>
+            </li>
           <% else %>
             <li>
-              <%= link_to "Novo Aluno", new_student_path %>
+              <%= link_to "Cadastrar-se", new_student_path %>
             </li>
             <li>
-              <%= link_to "Login Aluno", new_student_session_path %>
-            </li>
-            <li>
-              <%= link_to "Login Professor", new_professor_session_path %>
-            </li>
-            <li>
-              <%= link_to "Login Funcionário", new_secretary_session_path %>
-            </li>
-            <li>
-              <%= link_to "Login Admin", new_admin_session_path %>
+              <%= link_to "Fazer acesso", new_student_session_path %>
             </li>
           <% end %>
         </ul>

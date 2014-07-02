@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   get 'home/index'
   get 'home/dump'
 
-  devise_for :admins
+  devise_for :admins, :controllers => { :admins => "admins" }
   devise_for :professors, :controllers => { :professors => "professors" }
   devise_for :secretaries, :controllers => { :secretaries => "secretaries" }
   devise_for :students, :controllers => { :students => "students" }
@@ -14,11 +14,15 @@ Rails.application.routes.draw do
 
   # You can have the root of your site routed with "root"
   root 'home#index'
+  get '/sistema' => 'home#sys'
+  get '/prof' => 'home#prof'
+
+  resources :admins
 
   resources :request_for_teaching_assistants
   resources :professors
 
-  resources :courses  
+  resources :courses
   resources :secretaries
 
   resources :students

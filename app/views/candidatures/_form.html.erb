@@ -12,15 +12,15 @@
   <% end %>
   <div class="field">
     <%= f.label :course1_id, t('activerecord.attributes.candidature.course1_id') %><br>
-    <%= f.collection_select :course1_id, Course.order(:name), :id, :name, include_blank: true %>
+    <%= f.select :course1_id, course_options %><br>
   </div>
   <div class="field">
     <%= f.label :course2_id, t('activerecord.attributes.candidature.course2_id') %><br>
-    <%= f.collection_select :course2_id, Course.order(:name), :id, :name, include_blank: true %>
+    <%= f.select :course2_id, course_options %><br>
   </div>
   <div class="field">
     <%= f.label :course3_id, t('activerecord.attributes.candidature.course3_id') %><br>
-    <%= f.collection_select :course3_id, Course.order(:name), :id, :name, include_blank: true %>
+    <%= f.select :course3_id, course_options %><br>
   </div>
   <div class="field">
     <%= f.label :daytime_availability, t('activerecord.attributes.candidature.daytime_availability') %><br>
@@ -37,6 +37,10 @@
       <%= f.label option[0] %>
       </br>
     <% end %>
+  </div>
+  <div class="field">
+    <%= f.label :observation, t('activerecord.attributes.candidature.observation') %><br>
+    <%= f.text_area :observation %>
   </div>
   <div class="actions">
     <%= f.submit "Enviar" %>

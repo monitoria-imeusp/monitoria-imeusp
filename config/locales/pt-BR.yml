@@ -23,11 +23,15 @@ pt-BR:
   hello: 'Olá'
   activerecord:
     attributes:
+      admin:
+        email: 'Email'
+        password: 'Senha'
+        password_confirmation: 'Confirme a senha'
       professor:
         name: 'Nome'
         nusp: 'Número USP'
         email: 'Email'
-        super_professor: 'Permissão de SuperProfessor'
+        professor_rank: 'Nível de acesso'
         password: 'Senha'
         password_confirmation: 'Confirme a senha'
       request_for_teaching_assistant:
@@ -75,6 +79,7 @@ pt-BR:
         course1_id: 'Curso: 1ª opção'
         course2_id: 'Curso: 2ª opção'
         course3_id: 'Curso: 3ª opção'
+        observation: 'Observações'
       department:
         department: 'Departamento'
   errors:

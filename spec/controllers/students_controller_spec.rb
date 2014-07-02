@@ -16,7 +16,8 @@ describe StudentsController do
     "state" => "felizlandia",
     "cel" => "0123456789",
     "tel" => "0123456789",
-    "email" => "easy@facil.com"
+    "email" => "easy@facil.com",
+    "confirmed_at" => Time.now
   } }
 
   let(:another_valid_attributes) { {
@@ -88,7 +89,7 @@ describe StudentsController do
       it { should render_template(:new) }
     end
 
-    describe 'create' do      
+    describe 'create' do
 
       context 'succeeds to save' do
         before :each do
@@ -105,8 +106,8 @@ describe StudentsController do
         before :each do
           post :create, {:student => invalid_attributes}
         end
-        it { 
-          should render_template :new 
+        it {
+          should render_template :new
         }
         it{
           assigns(:student).should be_a_new(Student)
@@ -135,8 +136,8 @@ describe StudentsController do
           @another_student =Student.create! valid_attributes
           get :show, {:id => @another_student.to_param}
         end
-        it { 
-          should render_template :show 
+        it {
+          should render_template :show
         }
         it {
           assigns(:student).should eq(@another_student)
@@ -221,8 +222,8 @@ describe StudentsController do
           @another_student =Student.create! valid_attributes
           get :show, {:id => @another_student.to_param}
         end
-        it { 
-          should render_template :show 
+        it {
+          should render_template :show
         }
         it {
           assigns(:student).should eq(@another_student)
@@ -257,8 +258,8 @@ describe StudentsController do
           @another_student =Student.create! valid_attributes
           get :show, {:id => @another_student.to_param}
         end
-        it { 
-          should render_template :show 
+        it {
+          should render_template :show
         }
         it {
           assigns(:student).should eq(@another_student)

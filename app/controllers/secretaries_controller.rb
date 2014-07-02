@@ -1,6 +1,7 @@
 class SecretariesController < ApplicationController
   before_action :set_secretary, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate_admin!, :except => [:show, :index]
+  before_action :authenticate_admin!, :only => [:new, :create, :destroy]
+  before_action :authenticate_edit!,  :only => [:edit, :update]
 
   # GET /secretaries
   # GET /secretaries.json
@@ -26,6 +27,8 @@ class SecretariesController < ApplicationController
   # POST /secretaries.json
   def create
     @secretary = Secretary.new(secretary_params)
+    generated_password = Devise.friendly_token.first(8)
+    @secretary.password = generated_password
 
     respond_to do |format|
       if @secretary.save
@@ -41,12 +44,13 @@ class SecretariesController < ApplicationController
   # PATCH/PUT /secretaries/1
   # PATCH/PUT /secretaries/1.json
   def update
-    if params[:secretary][:password].blank? && params[:secretary][:password_confirmation].blank?
-      params[:secretary].delete(:password)
-      params[:secretary].delete(:password_confirmation)
-    end
+    #if params[:secretary][:password].blank? && params[:secretary][:password_confirmation].blank?
+     # params[:secretary].delete(:password)
+      #params[:secretary].delete(:password_confirmation)
+    #end
     respond_to do |format|
       if @secretary.update(secretary_params)
+        sign_in  @secretary, :bypass => true
         format.html { redirect_to @secretary, notice: 'Funcionário(a) foi atualizado(a) com sucesso.' }
         format.json { render action: 'show', status: :ok, location: @secretary }
       else
@@ -66,6 +70,14 @@ class SecretariesController < ApplicationController
     end
   end
 
+  protected
+
+  def authenticate_edit!
+    unless secretary_signed_in? and (current_secretary.id == params[:id].to_i)
+      redirect_to root_path
+    end
+  end
+
   private
   # Use callbacks to share common setup or constraints between actions.
   def set_secretary
@@ -74,6 +86,6 @@ class SecretariesController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def secretary_params
-    params.require(:secretary).permit(:nusp, :name, :email, :password, :password_confirmation)
+    params.require(:secretary).permit(:nusp, :name, :email)
   end
 end

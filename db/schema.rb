@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140607193058) do
+ActiveRecord::Schema.define(version: 20140702172121) do
 
   create_table "admins", force: true do |t|
     t.string   "email",                  default: "", null: false
@@ -41,6 +41,7 @@ ActiveRecord::Schema.define(version: 20140607193058) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "student_id"
+    t.text     "observation",            default: ""
   end
 
   create_table "courses", force: true do |t|
@@ -65,17 +66,21 @@ ActiveRecord::Schema.define(version: 20140607193058) do
     t.string   "email"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "super_professor",        default: false
-    t.string   "encrypted_password",     default: "",    null: false
+    t.string   "encrypted_password",     default: "", null: false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          default: 0,     null: false
+    t.integer  "sign_in_count",          default: 0,  null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
     t.integer  "department_id"
+    t.string   "confirmation_token"
+    t.datetime "confirmed_at"
+    t.datetime "confirmation_sent_at"
+    t.string   "unconfirmed_email"
+    t.integer  "professor_rank",         default: 0
   end
 
   create_table "request_for_teaching_assistants", force: true do |t|
@@ -109,6 +114,10 @@ ActiveRecord::Schema.define(version: 20140607193058) do
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
+    t.string   "confirmation_token"
+    t.datetime "confirmed_at"
+    t.datetime "confirmation_sent_at"
+    t.string   "unconfirmed_email"
   end
 
   create_table "students", force: true do |t|
@@ -127,18 +136,22 @@ ActiveRecord::Schema.define(version: 20140607193058) do
     t.string   "tel"
     t.string   "cel"
     t.string   "email"
-    t.boolean  "has_bank_account",       default: false
+    t.boolean  "has_bank_account"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "encrypted_password",     default: "",    null: false
+    t.string   "encrypted_password",     default: "", null: false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          default: 0,     null: false
+    t.integer  "sign_in_count",          default: 0,  null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
+    t.string   "confirmation_token"
+    t.datetime "confirmed_at"
+    t.datetime "confirmation_sent_at"
+    t.string   "unconfirmed_email"
   end
 
 end

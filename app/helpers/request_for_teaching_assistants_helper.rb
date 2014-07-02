@@ -9,7 +9,7 @@ module RequestForTeachingAssistantsHelper
 
   def course_options
     (Course.all.map do |course|
-      [course.name, course.id]
+      [course.course_code + " - " + course.name, course.id]
     end).unshift ["", ""]
   end
 end

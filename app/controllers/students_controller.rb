@@ -92,6 +92,10 @@ class StudentsController < ApplicationController
 
     private
         def student_params
-            params.require(:student).permit(:name, :password, :password_confirmation, :nusp, :gender, :rg, :cpf, :address, :complement, :district, :zipcode, :city, :state, :tel, :cel, :email, :has_bank_account)
+            params.require(:student).permit(:name, :password, :password_confirmation,
+              :nusp, :gender, :rg, :cpf, 
+              :address, :complement, :district, :zipcode, :city, :state, 
+              :tel, :cel, :email, 
+              :has_bank_account)
         end
 end

@@ -19,7 +19,7 @@ Feature: Edit Request for Teaching Assistant
         And I click the "Ver" link
         And I click the "Editar" link
         And I should see "Edição de Pedido por Monitor"
-        And I select "Coisas" on the "Disciplina"
+        And I select "MAC0122 - Coisas" on the "Disciplina"
         And I fill the "Número de monitores solicitados" field with "12"
         And I select the priority option "Imprescindível"
         And I mark the "Atendimento aos alunos" checkbox
@@ -28,7 +28,7 @@ Feature: Edit Request for Teaching Assistant
         And I write on the "Observações" text area "teste observações"
         And I press the "Enviar" button
         Then I should see "Pedido de Monitoria atualizado com sucesso."
-        And I should see "Disciplina: Coisas"
+        And I should see "Disciplina: MAC0122 - Coisas"
         And I should see "Número de monitores solicitados: 12"
         And I should see "Prioridade: Imprescindível"
         And I should see "Atendimento aos alunos: Sim"

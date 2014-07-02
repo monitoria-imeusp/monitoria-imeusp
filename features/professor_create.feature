@@ -12,37 +12,24 @@ Feature: Creating professor
         And I press the "Entrar" button
 
 	Scenario: Valid data
+        And I'm ready to receive email
         Then I click the "Novo Professor" link
         And I fill the "Nome" field with "Gold"
         And I fill the "Número USP" field with "12345"
         And I select "MAE" on the "Departamento"
-        And I fill the "Senha" field with "12345678"
-        And I fill the "Confirme a senha" field with "12345678"
         And I fill the "Email" field with "gold@troll.com"
-        And I mark the "Permissão de SuperProfessor" checkbox
+        And I select the professor rank option "Membro da comissão de monitoria"
         And I press the "Enviar" button
-        Then I should see "Nome: Gold"
-
-    Scenario: Wrong password confirmation
-        Then I click the "Novo Professor" link
-        And I fill the "Nome" field with "Gold"
-        And I fill the "Número USP" field with "12345"
-        And I select "MAE" on the "Departamento"
-        And I fill the "Senha" field with "12345678"
-        And I fill the "Confirme a senha" field with "12345679"
-        And I fill the "Email" field with "gold@troll.com"
-        And I mark the "Permissão de SuperProfessor" checkbox
-        And I press the "Enviar" button
-        Then I should see "Confirme a senha não é igual a Senha"
+        And I click the "Sair" link
+        When I confirm the professor account with email "gold@troll.com" and sign in
+        Then I should see "Acesso efetuado com sucesso."
 
     Scenario: Don't select departament
         Then I click the "Novo Professor" link
         And I fill the "Nome" field with "Gold"
         And I fill the "Número USP" field with "12345"
-        And I fill the "Senha" field with "12345678"
-        And I fill the "Confirme a senha" field with "12345678"
         And I fill the "Email" field with "gold@troll.com"
-        And I mark the "Permissão de SuperProfessor" checkbox
+        And I select the professor rank option "Membro da comissão de monitoria"
         And I press the "Enviar" button
         Then I should see "Department não pode ficar em branco"
 
@@ -50,10 +37,8 @@ Feature: Creating professor
         Then I click the "Novo Professor" link
         And I fill the "Nome" field with "Gold"
         And I select "MAE" on the "Departamento"
-        And I fill the "Senha" field with "12345678"
-        And I fill the "Confirme a senha" field with "12345678"
         And I fill the "Email" field with "gold@troll.com"
-        And I mark the "Permissão de SuperProfessor" checkbox
+        And I select the professor rank option "Membro da comissão de monitoria"
         And I press the "Enviar" button
         Then I should see "Número USP não pode ficar em branco"
 
@@ -62,8 +47,6 @@ Feature: Creating professor
         And I fill the "Nome" field with "Gold"
         And I fill the "Número USP" field with "12345"
         And I select "MAE" on the "Departamento"
-        And I fill the "Senha" field with "12345678"
-        And I fill the "Confirme a senha" field with "12345678"
-        And I mark the "Permissão de SuperProfessor" checkbox
+        And I select the professor rank option "Membro da comissão de monitoria"
         And I press the "Enviar" button
         Then I should see "Email não pode ficar em branco"

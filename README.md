@@ -25,7 +25,7 @@ for name in {bash,awk,sed,grep,ls,cp,tar,curl,gunzip,bunzip2} ; do which $name ;
 ### Instalação do rvm (ruby version manager)
 
 ```bash
-\curl -sSL https://get.rvm.io | sudo bash -s stable
+\curl -sSL https://get.rvm.io | bash -s stable
 ```
 
 A instalação do rvm criou um grupo e é necesário adicionar ao grupo todos os usuários que
@@ -97,6 +97,7 @@ Pode ser preciso instalar os seguintes pacotes em um Ubuntu:
 
 -libqt4-dev
 -libqtwebkit-dev
+-postgresql
 
 ## Configurando o servidor
 

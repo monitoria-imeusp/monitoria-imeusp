@@ -6,5 +6,6 @@ FactoryGirl.define do
     password 'password'
     nusp '1234567'
     department_id 1
+    confirmed_at Time.now
   end
 end

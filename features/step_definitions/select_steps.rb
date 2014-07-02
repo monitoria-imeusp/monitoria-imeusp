@@ -1,6 +1,7 @@
 include RequestForTeachingAssistantsHelper
 include StudentsHelper
 include CandidaturesHelper
+include ProfessorsHelper
 
 When(/^I select the "(.*?)" option$/) do |option|
   choose(option, visible: false)
@@ -34,6 +35,14 @@ When(/^I select the preference option "(.*?)"$/) do |radio_button_string|
   CandidaturesHelper.daytimePreference.each do |preference_options|
     if preference_options[0] == radio_button_string
       choose ("candidature_time_period_preference_" + preference_options[1].to_s)
+    end
+  end
+end
+
+When(/^I select the professor rank option "(.*?)"$/) do |radio_button_string|
+  ProfessorsHelper.professorRankOptions.each do |professor_rank_options|
+    if professor_rank_options[0] == radio_button_string
+      choose ("professor_professor_rank_" + professor_rank_options[1].to_s)
     end
   end
 end

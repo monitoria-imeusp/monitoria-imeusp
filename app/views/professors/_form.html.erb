@@ -24,21 +24,19 @@
     <%= f.select :department_id, department_options %>
   </div>
   <div class="field">
-    <%= f.label :password, t('activerecord.attributes.professor.password') %><br>
-    <%= f.password_field :password %>
-  </div>
-  <div class="field">
-    <%= f.label :password_confirmation, t('activerecord.attributes.professor.password_confirmation') %><br>
-    <%= f.password_field :password_confirmation %>
-  </div>
-  <div class="field">
     <%= f.label :email, t('activerecord.attributes.professor.email') %><br>
     <%= f.email_field :email %>
   </div>
-  <div class="field">
-    <%= f.label :super_professor, t('activerecord.attributes.professor.super_professor') %><br>
-    <%= f.check_box :super_professor %>
-  </div>
+  <% if admin_signed_in? %>
+    <div class="field">
+    <%= f.label :professor_rank, t('activerecord.attributes.professor.professor_rank') %><br>
+    <% professorRankOptions.each do | option | %>
+      <%= f.radio_button :professor_rank, option[1] %>
+      <%= f.label option[0] %>
+      </br>
+    <% end %>
+    </div>
+  <% end %>
   <div class="field">
     <%= f.submit "Enviar" %>
   </div>

@@ -1,0 +1,9 @@
+<p>
+  <strong><%= t('activerecord.attributes.admin.email') + ':' %></strong>
+  <%= @admin.email %>
+</p>
+<% if admin_signed_in? %>
+  <p>
+      <%= link_to 'Editar', edit_admin_path(@admin) %>
+  </p>
+<% end %>

@@ -18,5 +18,6 @@ FactoryGirl.define do
     cel "0111111111"
     email "email@email.com"
     has_bank_account false
+    confirmed_at Time.now
   end
 end

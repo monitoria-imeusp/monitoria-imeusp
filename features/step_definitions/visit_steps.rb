@@ -18,6 +18,10 @@ Given(/^I'm at the home page$/) do
   visit root_path
 end
 
+Given(/^I'm at the system access page$/) do
+  visit "/sistema"
+end
+
 Given(/^I'm at the create_professors page$/) do
   visit new_professor_path
 end
