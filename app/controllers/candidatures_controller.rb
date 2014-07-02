@@ -81,7 +81,7 @@ class CandidaturesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
   def candidature_params
-    params.require(:candidature).permit(:daytime_availability, :nighttime_availability, :time_period_preference, :course1_id, :course2_id, :course3_id, :student_id)
+    params.require(:candidature).permit(:daytime_availability, :nighttime_availability, :time_period_preference, :course1_id, :course2_id, :course3_id, :student_id, :observation)
   end
 
   def candidature_of_department?(professor, candidature)
