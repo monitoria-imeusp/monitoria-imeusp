@@ -15,6 +15,7 @@ Feature: Upddating a candidature
         And I fill the "Senha" field with "12345678"
         And I press the "Entrar" button
         And I click the "Candidaturas" link
+        And I click the "Ver" link
         And I click the "Editar" link
 		And I select "MAC0342 - labxp" on the "Curso: 1ª opção"
 		And I select "MAC0438 - concorrente" on the "Curso: 2ª opção"
@@ -44,6 +45,7 @@ Feature: Upddating a candidature
         And I fill the "Senha" field with "12345678"
         And I press the "Entrar" button
         And I click the "Candidaturas" link
+        And I click the "Ver" link
         And I click the "Editar" link
 		And I select "MAC0438 - concorrente" on the "Curso: 2ª opção"
         And I mark the "Disponibilidade para trabalhar de dia" checkbox
