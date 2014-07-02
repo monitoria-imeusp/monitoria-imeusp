@@ -5,6 +5,7 @@ describe ProfessorsController do
   before do
     @professor = mock_model(Professor)
     @id = "42"
+    @generated_password = "RANDPASS"
   end
 
   let(:valid_attributes) { { "nusp" => "MyString", "email" => "professor@ime.usp.br", "password" => "12345678", "department_id" => 1 } }
@@ -28,6 +29,8 @@ describe ProfessorsController do
       before do
         @params = { professor: { name: 'teste' } }
         Professor.should_receive(:new).with(any_args).and_return(@professor)
+        Devise.should_receive(:friendly_token).and_return(@generated_password)
+        @professor.should_receive(:password=).with(@generated_password)
       end
 
       context 'fails to save' do
