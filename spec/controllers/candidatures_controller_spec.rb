@@ -66,7 +66,8 @@ describe CandidaturesController do
     "email" => "kunio@ime.usp.br",
     "department_id" => 1,
     "nusp" => "2222222",
-    "professor_rank" => 1
+    "professor_rank" => 1, 
+    "confirmed_at" => Time.now
   } }
 
   let(:zara) { {
@@ -75,7 +76,8 @@ describe CandidaturesController do
     "email" => "zara@ime.usp.br",
     "department_id" => 2,
     "nusp" => "3333333",
-    "professor_rank" => 2
+    "professor_rank" => 2,
+    "confirmed_at" => Time.now
   } }
 
   # This should return the minimal set of values that should be in the session

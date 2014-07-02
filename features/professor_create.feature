@@ -20,9 +20,9 @@ Feature: Creating professor
         And I fill the "Email" field with "gold@troll.com"
         And I select the professor rank option "Membro da comissão de monitoria"
         And I press the "Enviar" button
-        And I click the "Logout" link
+        And I click the "Sair" link
         When I confirm the professor account with email "gold@troll.com" and sign in
-        Then I should see "Login efetuado com sucesso."
+        Then I should see "Acesso efetuado com sucesso."
 
     Scenario: Don't select departament
         Then I click the "Novo Professor" link

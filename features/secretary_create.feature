@@ -15,9 +15,9 @@ Feature: Secretary creation
         And I fill the "Nome" field with "Marcia"
         And I fill the "Email" field with "marcia@ime.usp.br"
         And I press the "Enviar" button
-        And I click the "Logout" link
+        And I click the "Sair" link
         And I confirm the secretary account with email "marcia@ime.usp.br" and sign in
-        Then I should see "Login efetuado com sucesso."
+        Then I should see "Acesso efetuado com sucesso."
 
     Scenario: Professor cannot create a secretary
         Given I'm at the professor login page

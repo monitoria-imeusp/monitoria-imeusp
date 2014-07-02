@@ -30,7 +30,7 @@ Feature: Edit Professor
         And I select "MAE" on the "Departamento"
         And I fill the "Email" field with "gold@troll.com"
         And I press the "Enviar" button
-        And I click the "Logout" link
+        And I click the "Sair" link
         And I confirm the professor edition with nusp "12345" and password "prof-123" and email "gold@troll.com" and sign in
         And I click the "Meu Perfil" link
         Then I should see "Nome: Gold"

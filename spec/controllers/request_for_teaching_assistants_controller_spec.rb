@@ -123,7 +123,7 @@ describe RequestForTeachingAssistantsController do
     "email" => "super@ime.usp.br",
     "department_id" => 1,
     "nusp" => "1111111",
-    "professor_rank" => 1
+    "professor_rank" => 1,
     "confirmed_at" => Time.now
   } }
 
@@ -133,7 +133,7 @@ describe RequestForTeachingAssistantsController do
     "email" => "zara@ime.usp.br",
     "department_id" => 1,
     "nusp" => "1726354",
-    "professor_rank" => 2
+    "professor_rank" => 2,
     "confirmed_at" => Time.now
   } }
 

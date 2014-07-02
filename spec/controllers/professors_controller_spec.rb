@@ -8,8 +8,8 @@ describe ProfessorsController do
     @generated_password = "RANDPASS"
   end
 
-  let(:valid_attributes) { { "nusp" => "MyString", "email" => "professor@ime.usp.br", "password" => "12345678", "department_id" => 1 } }
-  let(:other_valid_attributes) { { "nusp" => "9999999", "email" => "prof@ime.usp.br", "password" => "12345678", "department_id" => 1 } }
+  let(:valid_attributes) { { "nusp" => "MyString", "email" => "professor@ime.usp.br", "password" => "12345678", "department_id" => 1, "confirmed_at" => Time.now } }
+  let(:other_valid_attributes) { { "nusp" => "9999999", "email" => "prof@ime.usp.br", "password" => "12345678", "department_id" => 1, "confirmed_at" => Time.now } }
 
 
   context 'when logged in as admin' do

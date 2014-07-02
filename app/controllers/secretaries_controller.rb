@@ -44,10 +44,10 @@ class SecretariesController < ApplicationController
   # PATCH/PUT /secretaries/1
   # PATCH/PUT /secretaries/1.json
   def update
-    if params[:secretary][:password].blank? && params[:secretary][:password_confirmation].blank?
-      params[:secretary].delete(:password)
-      params[:secretary].delete(:password_confirmation)
-    end
+    #if params[:secretary][:password].blank? && params[:secretary][:password_confirmation].blank?
+     # params[:secretary].delete(:password)
+      #params[:secretary].delete(:password_confirmation)
+    #end
     respond_to do |format|
       if @secretary.update(secretary_params)
         sign_in  @secretary, :bypass => true
