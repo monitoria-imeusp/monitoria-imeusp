@@ -3,7 +3,7 @@ Feature: Secretary edit
     As an admin
     I want to edit a secretary
 
-    Background: 
+    Background:
         Given there is a secretary with name "Marcia" and password "12345678" nusp "1111111" and email "marcia@ime.usp.br"
 
     Scenario: Admin can not edit a secretary

@@ -38,4 +38,3 @@ Feature: Edit Professor
         Then I should see "Email: gold@troll.com"
         Then I should see "Departamento: MAE"
 
-
