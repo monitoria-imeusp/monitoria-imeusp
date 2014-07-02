@@ -19,6 +19,7 @@ Feature: Edit Professor
 
     Scenario: Professor editing itself
         Then I'm at the professor login page
+        When I'm ready to receive email
         And I fill the "Número USP" field with "123"
         And I fill the "Senha" field with "prof-123"
         And I press the "Entrar" button
@@ -29,28 +30,11 @@ Feature: Edit Professor
         And I select "MAE" on the "Departamento"
         And I fill the "Email" field with "gold@troll.com"
         And I press the "Enviar" button
+        And I click the "Sair" link
+        And I confirm the professor edition with nusp "12345" and password "prof-123" and email "gold@troll.com" and sign in
+        And I click the "Meu Perfil" link
         Then I should see "Nome: Gold"
-        And I should see "Número USP: 12345"
-        And I should see "Email: gold@troll.com"
-        And I should see "Departamento: MAE"
-
-    Scenario: Professor editing itself and changing the password
-        Then I'm at the professor login page
-        And I fill the "Número USP" field with "123"
-        And I fill the "Senha" field with "prof-123"
-        And I press the "Entrar" button
-        When I click the "Meu Perfil" link
-        And I click the "Editar" link
-        And I fill the "Nome" field with "Gold"
-        And I fill the "Número USP" field with "12345"
-        And I select "MAE" on the "Departamento"
-        And I fill the "Email" field with "gold@troll.com"
-        And I fill the "Senha" field with "00000000"
-        And I fill the "Confirme a senha" field with "00000000"
-        And I press the "Enviar" button
-        Then I should see "Nome: Gold"
-        And I should see "Número USP: 12345"
-        And I should see "Email: gold@troll.com"
-        And I should see "Departamento: MAE"
-
+        Then I should see "Número USP: 12345"
+        Then I should see "Email: gold@troll.com"
+        Then I should see "Departamento: MAE"
 

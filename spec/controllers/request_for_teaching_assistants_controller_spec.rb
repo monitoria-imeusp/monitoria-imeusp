@@ -95,7 +95,8 @@ describe RequestForTeachingAssistantsController do
     "password" => "prof-123",
     "email" => "prof@ime.usp.br",
     "nusp" => "1234567",
-    "department_id" => 1
+    "department_id" => 1,
+    "confirmed_at" => Time.now
   } }
 
   let(:another_professor_same_department) { {
@@ -103,7 +104,8 @@ describe RequestForTeachingAssistantsController do
     "password" => "prof-123",
     "email" => "prof2@ime.usp.br",
     "nusp" => "7654321",
-    "department_id" => 1
+    "department_id" => 1,
+    "confirmed_at" => Time.now
   } }
 
   let(:another_professor_another_department) { {
@@ -111,7 +113,8 @@ describe RequestForTeachingAssistantsController do
     "password" => "prof-123",
     "email" => "prof3@ime.usp.br",
     "nusp" => "7777777",
-    "department_id" => 2
+    "department_id" => 2,
+    "confirmed_at" => Time.now
   } }
 
   let(:super_professor_same_department) { {
@@ -120,7 +123,8 @@ describe RequestForTeachingAssistantsController do
     "email" => "super@ime.usp.br",
     "department_id" => 1,
     "nusp" => "1111111",
-    "professor_rank" => 1
+    "professor_rank" => 1,
+    "confirmed_at" => Time.now
   } }
 
   let(:zara) { {
@@ -129,7 +133,8 @@ describe RequestForTeachingAssistantsController do
     "email" => "zara@ime.usp.br",
     "department_id" => 1,
     "nusp" => "1726354",
-    "professor_rank" => 2
+    "professor_rank" => 2,
+    "confirmed_at" => Time.now
   } }
 
   # This should return the minimal set of values that should be in the session
@@ -305,7 +310,7 @@ describe RequestForTeachingAssistantsController do
 
   describe "filters for request for teaching assistant" do
 
-    it "filters the requests of other professors" do 
+    it "filters the requests of other professors" do
       Course.create! valid_second_course_attributes
       request_for_teaching_assistant = RequestForTeachingAssistant.create! valid_attributes
       RequestForTeachingAssistant.create! not_owned_attributes
@@ -313,7 +318,7 @@ describe RequestForTeachingAssistantsController do
       assigns(:request_for_teaching_assistants).should eq([request_for_teaching_assistant])
     end
 
-    it "filters the requests of the whole department" do 
+    it "filters the requests of the whole department" do
       Course.create! valid_second_course_attributes
       Course.create! valid_third_course_attributes
       super_professor = Professor.create! super_professor_same_department

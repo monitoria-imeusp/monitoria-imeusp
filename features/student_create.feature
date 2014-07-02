@@ -5,6 +5,7 @@ Feature: Student register
 
     Scenario: Real student create a student account
     	Given I'm at the home page
+        And I'm ready to receive email
         When I click the "Cadastrar-se" link
         And I fill the "Nome" field with "Carlinhos"
         And I fill the "Senha" field with "12345678"
@@ -24,9 +25,10 @@ Feature: Student register
         And I fill the "Email" field with "eu@usp.br"
         And I select the count option "Sim"
         And I press the "Salvar" button
-        Then I should see "Nome: Carlinhos"
-        And I should see "Sexo: Masculino"
+        And I confirm the student account with email "eu@usp.br" and sign in
+        Then I should see "Acesso efetuado com sucesso."
 
+    
     Scenario: Real student can't create a student account
         Given I'm at the home page
         When I click the "Cadastrar-se" link
