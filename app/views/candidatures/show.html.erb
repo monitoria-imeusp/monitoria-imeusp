@@ -3,6 +3,12 @@
 <p>
   <strong><%= t('activerecord.attributes.student.student') + ':' %></strong>
   <%= @candidature.student.name %>
+  <%= link_to " (mais informações)", @candidature.student %>
+</p>
+
+<p>
+  <strong><%= t('activerecord.attributes.student.nusp') + ':' %></strong>
+  <%= @candidature.student.nusp %>
 </p>
 
 <p>
@@ -16,6 +22,8 @@
   <% if @candidature.course2_id != nil%>
     <% course = Course.find(@candidature.course2_id) %>
     <%= course.course_code + " - " + course.name %>
+  <% else %>
+    <i>Nenhuma</i>
   <% end %>
 </p>
 
@@ -24,6 +32,8 @@
   <% if @candidature.course3_id != nil%>
     <% course = Course.find(@candidature.course3_id) %>
     <%= course.course_code + " - " + course.name %>
+  <% else %>
+    <i>Nenhuma</i>
   <% end %>
 </p>
 
