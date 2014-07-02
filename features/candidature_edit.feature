@@ -20,9 +20,16 @@ Feature: Upddating a candidature
 		And I select "MAC0438 - concorrente" on the "Curso: 2ª opção"
         And I mark the "Disponibilidade para trabalhar de dia" checkbox
         And I select the preference option "Diurno"
+        And I write on the "Observações" text area "teste observações"
         And I press the "Enviar" button
         Then I should see "Candidatura atualizada com sucesso."
         And I should see "Aluno: carlinhos"
+        And I should see "Curso: 1ª opção: MAC0342 - labxp"
+        And I should see "Curso: 2ª opção: MAC0438 - concorrente"
+        And I should see "Disponibilidade para trabalhar de dia: Sim"
+        And I should see "Disponibilidade para trabalhar de noite: Não"
+        And I should see "Preferência de trabalhar no período: Diurno"
+        And I should see "Observações: teste observações"
 
     Scenario: Student misses a field pattern
         Given I'm at the student login page
