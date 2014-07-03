@@ -21,7 +21,8 @@ if Rails.env.development?
       department: Department.find_by(:code => "MAC"),
       email: "nina@ime.usp.br",
       professor_rank: 1,
-      password: "changeme!"
+      password: "changeme!",
+      confirmed_at: Time.now
     },
     {
       name: "Kunio Okuda",
@@ -29,7 +30,8 @@ if Rails.env.development?
       department: Department.find_by(:code => "MAC"),
       email: "kunio@ime.usp.br",
       professor_rank: 1,
-      password: "changeme!"
+      password: "changeme!",
+      confirmed_at: Time.now
     },
     {
       name: "Zara Issa Abud",
@@ -37,26 +39,29 @@ if Rails.env.development?
       department: Department.find_by(:code => "MAT"),
       email: "zara@ime.usp.br",
       professor_rank: 2,
-      password: "changeme!"
+      password: "changeme!",
+      confirmed_at: Time.now
     },
     {
       name: "Siméon Denis Poisson",
       nusp: "10101",
       department: Department.find_by(:code => "MAE"),
       email: "poisson@1781.old",
-      password: "changeme!"
+      password: "changeme!",
+      confirmed_at: Time.now
     },
     {
       name: "George Bernard Dantzig",
       nusp: "20202",
       department: Department.find_by(:code => "MAP"),
       email: "dantzig@1914.old",
-      password: "changeme!"
+      password: "changeme!",
+      confirmed_at: Time.now
     }
   ].each do |prof|
     Professor.create(prof)
   end
-  
+
   [
     {
       name: "Introdução à Ciência da Computação",
@@ -98,7 +103,8 @@ if Rails.env.development?
       cel: "11122233344",
       email: "kazuo@ime.usp.br",
       has_bank_account: "true",
-      password: "changeme!"
+      password: "changeme!",
+      confirmed_at: Time.now
     },
     {
       name: "Jackção",
@@ -115,7 +121,8 @@ if Rails.env.development?
       cel: "11122233344",
       email: "jacks@ime.usp.br",
       has_bank_account: "false",
-      password: "changeme!"
+      password: "changeme!",
+      confirmed_at: Time.now
     }
   ].each do |student|
     Student.create(student)
