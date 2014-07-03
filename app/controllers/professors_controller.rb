@@ -1,4 +1,5 @@
 class ProfessorsController < ApplicationController
+  before_action :redirect_if_not_exists, only: [:show, :edit, :change_password, :update, :destroy]
   before_action :authenticate_admin!, :only => [:new, :create, :destroy]
   before_action :authenticate_edit!,  :only => [:edit, :update]
 
@@ -18,7 +19,6 @@ class ProfessorsController < ApplicationController
   end
 
   def show
-    redirect_if_not_exists
   end
 
   def index
@@ -26,20 +26,12 @@ class ProfessorsController < ApplicationController
   end
 
   def edit
-    redirect_if_not_exists
   end
 
   def change_password
-    redirect_if_not_exists
   end
 
   def update
-    if not Professor.exists? params[:id]
-      # TODO alert failure
-      redirect_to professors_path
-      return
-    end
-    @professor = Professor.find(params[:id])
     if params[:professor][:password].blank? && params[:professor][:password_confirmation].blank?
       params[:professor].delete(:password)
       params[:professor].delete(:password_confirmation)
