@@ -37,3 +37,14 @@ When(/^I confirm the (.*?) account with email "(.*?)" and sign in$/) do |class_n
   fill_in "Senha", :with => password
   click_button("Entrar")
 end
+
+When(/^I confirm the student account with email "(.*?)"$/) do |user_email|
+  user = Student.find_by_email(user_email)
+  user.should_not be_nil
+  email = ActionMailer::Base.deliveries.first
+  email.from.should == ["monitoria@ime.usp.br"]
+  email.to.should == [user_email]
+  m = email.body.match(/href="http:\/\/localhost:3000(\/.*?)"/)
+  confirmation_link = m[1]
+  visit confirmation_link
+end

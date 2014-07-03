@@ -25,10 +25,14 @@ Feature: Student register
         And I fill the "Email" field with "eu@usp.br"
         And I select the count option "Sim"
         And I press the "Salvar" button
-        And I confirm the student account with email "eu@usp.br" and sign in
+        And I confirm the student account with email "eu@usp.br"
+        And I should see "Acessar"
+        And I fill the "Número USP" field with "012345"
+        And I fill the "Senha" field with "12345678"
+        And I press the "Entrar" button
         Then I should see "Acesso efetuado com sucesso."
 
-    
+
     Scenario: Real student can't create a student account
         Given I'm at the home page
         When I click the "Cadastrar-se" link
