@@ -128,5 +128,11 @@ if Rails.env.development?
     Student.create(student)
   end
 
-  Secretary.create(name: "Marcia", nusp: "99999", email: "marcia@ime.usp.br", password: "changeme!")
+  Secretary.create(
+    name: "Marcia",
+    nusp: "99999",
+    email: "marcia@ime.usp.br",
+    password: "changeme!",
+    confirmed_at: Time.now
+  )
 end
