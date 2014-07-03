@@ -21,6 +21,7 @@ Rails.application.routes.draw do
 
   resources :request_for_teaching_assistants
   resources :professors
+  get 'professors/:id/change_password' => 'professors#change_password', as: :change_professor_password
 
   resources :courses
   resources :secretaries

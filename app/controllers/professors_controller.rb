@@ -18,11 +18,7 @@ class ProfessorsController < ApplicationController
   end
 
   def show
-    if Professor.exists?(params[:id])
-      @professor = Professor.find(params[:id])
-    else
-      redirect_to professors_path
-    end
+    redirect_if_not_exists
   end
 
   def index
@@ -30,11 +26,11 @@ class ProfessorsController < ApplicationController
   end
 
   def edit
-    if Professor.exists?(params[:id])
-      @professor = Professor.find(params[:id])
-    else
-      redirect_to professors_path
-    end
+    redirect_if_not_exists
+  end
+
+  def change_password
+    redirect_if_not_exists
   end
 
   def update
@@ -44,6 +40,10 @@ class ProfessorsController < ApplicationController
       return
     end
     @professor = Professor.find(params[:id])
+    if params[:professor][:password].blank? && params[:professor][:password_confirmation].blank?
+      params[:professor].delete(:password)
+      params[:professor].delete(:password_confirmation)
+    end
     if @professor.update(professor_params)
       sign_in  @professor, :bypass => true
       redirect_to @professor
@@ -61,8 +61,17 @@ class ProfessorsController < ApplicationController
   end
 
   private
+
+  def redirect_if_not_exists
+    if Professor.exists?(params[:id])
+      @professor = Professor.find(params[:id])
+    else
+      redirect_to professors_path
+    end
+  end
+
   def professor_params
     params.require(:professor).permit(:name, :nusp,:email,
-      :department_id, :professor_rank)
+      :department_id, :professor_rank, :password, :password_confirmation)
   end
 end
