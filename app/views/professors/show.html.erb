@@ -29,6 +29,6 @@
       <%= link_to 'Editar', edit_professor_path(@professor) %>
   </p>
   <p>
-      <%= link_to 'Mudar senha', "#{@professor.id}/change_pass" %>
+      <%= link_to 'Mudar senha', change_professor_password_path(@professor) %>
   </p>
 <% end %>

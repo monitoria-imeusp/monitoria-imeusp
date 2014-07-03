@@ -29,7 +29,7 @@ class ProfessorsController < ApplicationController
     redirect_if_not_exists
   end
 
-  def change_pass
+  def change_password
     redirect_if_not_exists
   end
 
