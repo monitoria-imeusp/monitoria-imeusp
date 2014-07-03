@@ -1,4 +1,5 @@
 class ProfessorsController < ApplicationController
+  before_action :redirect_if_not_exists, only: [:show, :edit, :change_password, :update, :destroy]
   before_action :authenticate_admin!, :only => [:new, :create, :destroy]
   before_action :authenticate_edit!,  :only => [:edit, :update]
 
@@ -18,11 +19,6 @@ class ProfessorsController < ApplicationController
   end
 
   def show
-    if Professor.exists?(params[:id])
-      @professor = Professor.find(params[:id])
-    else
-      redirect_to professors_path
-    end
   end
 
   def index
@@ -30,20 +26,16 @@ class ProfessorsController < ApplicationController
   end
 
   def edit
-    if Professor.exists?(params[:id])
-      @professor = Professor.find(params[:id])
-    else
-      redirect_to professors_path
-    end
+  end
+
+  def change_password
   end
 
   def update
-    if not Professor.exists? params[:id]
-      # TODO alert failure
-      redirect_to professors_path
-      return
+    if params[:professor][:password].blank? && params[:professor][:password_confirmation].blank?
+      params[:professor].delete(:password)
+      params[:professor].delete(:password_confirmation)
     end
-    @professor = Professor.find(params[:id])
     if @professor.update(professor_params)
       sign_in  @professor, :bypass => true
       redirect_to @professor
@@ -61,8 +53,17 @@ class ProfessorsController < ApplicationController
   end
 
   private
+
+  def redirect_if_not_exists
+    if Professor.exists?(params[:id])
+      @professor = Professor.find(params[:id])
+    else
+      redirect_to professors_path
+    end
+  end
+
   def professor_params
     params.require(:professor).permit(:name, :nusp,:email,
-      :department_id, :professor_rank)
+      :department_id, :professor_rank, :password, :password_confirmation)
   end
 end

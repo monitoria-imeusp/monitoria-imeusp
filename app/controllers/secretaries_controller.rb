@@ -1,5 +1,5 @@
 class SecretariesController < ApplicationController
-  before_action :set_secretary, only: [:show, :edit, :update, :destroy]
+  before_action :redirect_if_not_exists, only: [:show, :edit, :change_password, :update, :destroy]
   before_action :authenticate_admin!, :only => [:new, :create, :destroy]
   before_action :authenticate_edit!,  :only => [:edit, :update]
 
@@ -41,13 +41,16 @@ class SecretariesController < ApplicationController
     end
   end
 
+  def change_password
+  end
+
   # PATCH/PUT /secretaries/1
   # PATCH/PUT /secretaries/1.json
   def update
-    #if params[:secretary][:password].blank? && params[:secretary][:password_confirmation].blank?
-     # params[:secretary].delete(:password)
-      #params[:secretary].delete(:password_confirmation)
-    #end
+    if params[:secretary][:password].blank? && params[:secretary][:password_confirmation].blank?
+      params[:secretary].delete(:password)
+      params[:secretary].delete(:password_confirmation)
+    end
     respond_to do |format|
       if @secretary.update(secretary_params)
         sign_in  @secretary, :bypass => true
@@ -80,12 +83,16 @@ class SecretariesController < ApplicationController
 
   private
   # Use callbacks to share common setup or constraints between actions.
-  def set_secretary
-    @secretary = Secretary.find(params[:id])
+  def redirect_if_not_exists
+    if Secretary.exists?(params[:id])
+      @secretary = Secretary.find(params[:id])
+    else
+      redirect_to secretaries_path
+    end
   end
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def secretary_params
-    params.require(:secretary).permit(:nusp, :name, :email)
+    params.require(:secretary).permit(:nusp, :name, :email, :password, :password_confirmation)
   end
 end
