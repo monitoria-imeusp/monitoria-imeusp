@@ -3,11 +3,12 @@ class Ability
 
   def initialize(user)
     if nil == defined? user #user is not logged in
+      cannot :read, Admin
+      cannot :update, Admin
       cannot :read, Dump
       cannot :create, Professor
       cannot :read, Professor
       cannot :update, Professor
-      cannot :destroy, Professor
       cannot :create, Secretary
       cannot :read, Secretary
       cannot :update, Secretary
@@ -29,11 +30,12 @@ class Ability
       cannot :update, Candidature
       cannot :destroy, Candidature
     elsif user.is_a? Admin
+      can :read, Admin
+      can :update, Admin
       can :read, Dump
       can :create, Professor
       can :read, Professor
       can :update, Professor
-      can :destroy, Professor
       can :create, Secretary
       can :read, Secretary
       can :update, Secretary
@@ -55,11 +57,12 @@ class Ability
       can :update, Candidature
       can :destroy, Candidature
     elsif user.is_a? Professor and user.professor_rank == 2 #SSProfessor
+      cannot :read, Admin
+      cannot :update, Admin
       can :read, Dump
       can :create, Professor
       can :read, Professor
       can :update, Professor
-      can :destroy, Professor
       cannot :create, Secretary
       can :read, Secretary
       cannot :update, Secretary
@@ -81,11 +84,12 @@ class Ability
       can :update, Candidature
       can :destroy, Candidature
     elsif user.is_a? Professor and user.professor_rank == 1 #SProfessor
+      cannot :read, Admin
+      cannot :update, Admin
       can :read, Dump
       can :create, Professor
       can :read, Professor
       can :update, Professor
-      can :destroy, Professor
       cannot :create, Secretary
       can :read, Secretary
       cannot :update, Secretary
@@ -107,11 +111,12 @@ class Ability
       can :update, Candidature
       can :destroy, Candidature
     elsif user.is_a? Professor and user.professor_rank == 0 #Professor
+      cannot :read, Admin
+      cannot :update, Admin
       cannot :read, Dump
       cannot :create, Professor
       can :read, Professor
-      can :update, Professor #Only himself
-      can :destroy, Professor #Only himself
+      can :update, Professor, :id => user.id  #Only himself
       cannot :create, Secretary
       can :read, Secretary
       cannot :update, Secretary
@@ -125,19 +130,20 @@ class Ability
       cannot :update, Course
       cannot :destroy, Course
       can :create, RequestForTeachingAssistant
-      can :read, RequestForTeachingAssistant #Only his own
-      can :update, RequestForTeachingAssistant #Only his own
-      can :destroy, RequestForTeachingAssistant #Only his own
+      can :read, RequestForTeachingAssistant, :professor_id => user.id #Only his own
+      can :update, RequestForTeachingAssistant, :professor_id => user.id #Only his own
+      can :destroy, RequestForTeachingAssistant, :professor_id => user.id #Only his own
       cannot :create, Candidature
       cannot :read, Candidature
       cannot :update, Candidature
       cannot :destroy, Candidature
     elsif user.is_a? Secretary
+      cannot :read, Admin
+      cannot :update, Admin
       can :read, Dump
       can :create, Professor
       can :read, Professor
       can :update, Professor
-      can :destroy, Professor
       can :create, Secretary
       can :read, Secretary
       can :update, Secretary
@@ -159,20 +165,21 @@ class Ability
       can :update, Candidature
       can :destroy, Candidature
     elsif user.is_a? Student
+      cannot :read, Admin
+      cannot :update, Admin
       cannot :read, Dump
       cannot :create, Professor
       can :read, Professor
       cannot :update, Professor
-      cannot :destroy, Professor
       cannot :create, Secretary
       can :read, Secretary
       cannot :update, Secretary
       cannot :destroy, Secretary
       cannot :create, Student
-      can :read, Student
-      can :update, Student #Only himself
-      can :destroy, Student #Only himself
-      can :create, Course #Only himself
+      can :read, Student, :id => user.id #Only himself
+      can :update, Student, :id => user.id #Only himself
+      can :destroy, Student, :id => user.id #Only himself
+      cannot :create, Course
       can :read, Course
       cannot :update, Course
       cannot :destroy, Course
@@ -181,9 +188,9 @@ class Ability
       cannot :update, RequestForTeachingAssistant
       cannot :destroy, RequestForTeachingAssistant
       can :create, Candidature
-      can :read, Candidature #Only his own
-      can :update, Candidature #Only his own
-      can :destroy, Candidature #Only his own
+      can :read, Candidature, :candidature_id => user.id #Only his own
+      can :update, Candidature, :candidature_id => user.id #Only his own
+      can :destroy, Candidature, :candidature_id => user.id #Only his own
     end
 
     # The first argument to `can` is the action you are giving the user 
