@@ -46,14 +46,15 @@ Given(/^there is a department with code "(.*?)"$/) do |code|
   Department.create(code: code)
 end
 
-Given(/^there is an candidature with student "(.*?)" and first option "(.*?)" and second option "(.*?)" and third option "(.*?)" and availability for daytime "(.*?)" and availability for night time "(.*?)" and period preference "(.*?)"$/) do |student, course1, course2, course3, av_daytime, av_nighttime, period|
+Given(/^there is an candidature with student "(.*?)" and first option "(.*?)" and second option "(.*?)" and third option "(.*?)" and availability for daytime "(.*?)" and availability for night time "(.*?)" and period preference "(.*?)" and transcript file "(.*?)"$/) do |student, course1, course2, course3, av_daytime, av_nighttime, period, transcript_file_path|
   Candidature.create(
-    student_id: Student.where(name: student).take.id, 
-    course1_id: Course.where(name: course1).take.id, 
-    course2_id: Course.where(name: course2).take.id, 
-    daytime_availability: av_daytime, 
-    nighttime_availability: av_nighttime, 
-    time_period_preference: period)
+    student_id: Student.where(name: student).take.id,
+    course1_id: Course.where(name: course1).take.id,
+    course2_id: Course.where(name: course2).take.id,
+    daytime_availability: av_daytime,
+    nighttime_availability: av_nighttime,
+    time_period_preference: period,
+    transcript_file_path: transcript_file_path)
 end
 
 When(/^there is a course with name "(.*?)" and code "(.*?)" and department "(.*?)"$/) do |name, code, department|

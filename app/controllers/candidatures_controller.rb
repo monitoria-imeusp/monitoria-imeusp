@@ -1,5 +1,5 @@
 class CandidaturesController < ApplicationController
-  before_action :set_candidature, only: [:show, :edit, :update, :destroy]
+  before_action :set_candidature, only: [:show, :download_transcript, :edit, :update, :destroy]
   before_action :authenticate_student!, only: [:new, :create, :edit, :update, :destroy]
 
   # GET /candidatures
@@ -23,6 +23,10 @@ class CandidaturesController < ApplicationController
   def show
   end
 
+  def download_transcript
+    download
+  end
+
   # GET /candidatures/new
   def new
     @candidature = Candidature.new
@@ -36,14 +40,20 @@ class CandidaturesController < ApplicationController
   # POST /candidatures.json
   def create
     params[:candidature][:student_id] = current_student.id
+    uploaded = upload
     @candidature = Candidature.new(candidature_params)
-
     respond_to do |format|
-      if @candidature.save
-        BackupMailer.new_candidature(@candidature).deliver
-        format.html { redirect_to @candidature, notice: 'Candidatura criada com sucesso.' }
-        format.json { render action: 'show', status: :created, location: @candidature }
+      if uploaded
+        if @candidature.save
+          BackupMailer.new_candidature(@candidature).deliver
+          format.html { redirect_to @candidature, notice: 'Candidatura criada com sucesso.' }
+          format.json { render action: 'show', status: :created, location: @candidature }
+        else
+          format.html { render action: 'new' }
+          format.json { render json: @candidature.errors, status: :unprocessable_entity }
+        end
       else
+        @candidature.errors.add :transcript_file_path, "precisa ser um arquivo pdf"
         format.html { render action: 'new' }
         format.json { render json: @candidature.errors, status: :unprocessable_entity }
       end
@@ -53,12 +63,19 @@ class CandidaturesController < ApplicationController
   # PATCH/PUT /candidatures/1
   # PATCH/PUT /candidatures/1.json
   def update
+    uploaded = upload
     respond_to do |format|
-      if @candidature.update(candidature_params)
-        BackupMailer.edit_candidature(@candidature).deliver
-        format.html { redirect_to @candidature, notice: 'Candidatura atualizada com sucesso.' }
-        format.json { render action: 'show', status: :ok, location: @candidature }
+      if uploaded
+        if @candidature.update(candidature_params)
+          BackupMailer.edit_candidature(@candidature).deliver
+          format.html { redirect_to @candidature, notice: 'Candidatura atualizada com sucesso.' }
+          format.json { render action: 'show', status: :ok, location: @candidature }
+        else
+          format.html { render action: 'edit' }
+          format.json { render json: @candidature.errors, status: :unprocessable_entity }
+        end
       else
+        @candidature.errors.add :transcript_file_path, "precisa ser um arquivo pdf"
         format.html { render action: 'edit' }
         format.json { render json: @candidature.errors, status: :unprocessable_entity }
       end
@@ -76,7 +93,35 @@ class CandidaturesController < ApplicationController
     end
   end
 
+  protected
+  def upload
+      uploaded_io = params[:candidature][:transcript_file_path]
+      nusp = current_student.nusp
+      new_name = (Time.now.strftime '%Y%m%d_' + nusp) + ".pdf"
+      path = path_to_transcript new_name
+      params[:candidature][:transcript_file_path] = new_name
+      if uploaded_io and  uploaded_io.content_type == "application/pdf"
+          File.open(path, 'wb') do |file|
+                    file.write(uploaded_io.read)
+          end
+          true
+      else
+          false
+      end
+  end
+
+  def download
+    path = path_to_transcript @candidature.transcript_file_path
+    send_file path,
+              filename: "histórico-#{@candidature.student.nusp}.pdf",
+              type: "application/pdf"
+  end
+
   private
+  def path_to_transcript transcript_name
+    Rails.root.join('public', 'uploads', 'transcripts', transcript_name)
+  end
+
   # Use callbacks to share common setup or constraints between actions.
   def set_candidature
     @candidature = Candidature.find(params[:id])
@@ -84,7 +129,7 @@ class CandidaturesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
   def candidature_params
-    params.require(:candidature).permit(:daytime_availability, :nighttime_availability, :time_period_preference, :course1_id, :course2_id, :course3_id, :student_id, :observation)
+    params.require(:candidature).permit(:daytime_availability, :nighttime_availability, :time_period_preference, :course1_id, :course2_id, :course3_id, :student_id, :observation, :transcript_file_path)
   end
 
   def candidature_of_department?(professor, candidature)
