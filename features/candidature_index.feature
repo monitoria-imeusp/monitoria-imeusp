@@ -12,7 +12,7 @@ Feature: Candidature table visualization
         And there is a course with name "Cálculo I" and code "MAT0111" and department "MAT"
         And there is a course with name "Estatística Concorrente" and code "MAE0438" and department "MAE"
         And there is a course with name "Introdução à Ciência da Computação" and code "MAC0110" and department "MAC"
-        And there is an candidature with student "Rogerio" and first option "Cálculo I" and second option "Introdução à Ciência da Computação" and third option "" and availability for daytime "true" and availability for night time "false" and period preference "2"
+        And there is an candidature with student "Rogerio" and first option "Cálculo I" and second option "Introdução à Ciência da Computação" and third option "" and availability for daytime "true" and availability for night time "false" and period preference "2" and transcript file "exemplo.pdf"
         And there is an candidature with student "Caio" and first option "Introdução à Ciência da Computação" and second option "Estatística Concorrente" and third option "" and availability for daytime "false" and availability for night time "true" and period preference "1" and transcript file "exemplo.pdf"
 
     Scenario: Admin seeing all candidatures
