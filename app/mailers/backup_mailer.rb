@@ -5,14 +5,17 @@ class BackupMailer < ActionMailer::Base
 
   def new_candidature(candidature)
     set_parameters(candidature)
-    #@url  = 'http://example.com/login'
     mail(to: log_mail, subject: log_subject_new)
   end
 
   def edit_candidature(candidature)
     set_parameters(candidature)
-    #@url  = 'http://example.com/login'
     mail(to: log_mail, subject: log_subject_edit)
+  end
+
+  def delete_candidature(candidature)
+    @student = candidature.student
+    mail(to: log_mail, subject: log_subject_delete)
   end
 
   private
@@ -27,6 +30,10 @@ class BackupMailer < ActionMailer::Base
 
   def log_subject_edit
     "Mudança na inscrição do aluno #{@student.name} (#{Time.now})"
+  end
+
+  def log_subject_delete
+    "Desistência da inscrição do aluno #{@student.name} (#{Time.now})"
   end
 
   def set_parameters(candidature)

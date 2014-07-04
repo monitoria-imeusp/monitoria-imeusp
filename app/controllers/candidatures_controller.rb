@@ -68,6 +68,7 @@ class CandidaturesController < ApplicationController
   # DELETE /candidatures/1
   # DELETE /candidatures/1.json
   def destroy
+    BackupMailer.delete_candidature(@candidature).deliver
     @candidature.destroy
     respond_to do |format|
       format.html { redirect_to candidatures_url }
