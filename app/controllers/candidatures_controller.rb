@@ -63,12 +63,19 @@ class CandidaturesController < ApplicationController
   # PATCH/PUT /candidatures/1
   # PATCH/PUT /candidatures/1.json
   def update
+    uploaded = upload
     respond_to do |format|
-      if @candidature.update(candidature_params)
-        BackupMailer.edit_candidature(@candidature).deliver
-        format.html { redirect_to @candidature, notice: 'Candidatura atualizada com sucesso.' }
-        format.json { render action: 'show', status: :ok, location: @candidature }
+      if uploaded
+        if @candidature.update(candidature_params)
+          BackupMailer.edit_candidature(@candidature).deliver
+          format.html { redirect_to @candidature, notice: 'Candidatura atualizada com sucesso.' }
+          format.json { render action: 'show', status: :ok, location: @candidature }
+        else
+          format.html { render action: 'edit' }
+          format.json { render json: @candidature.errors, status: :unprocessable_entity }
+        end
       else
+        @candidature.errors.add :transcript_file_path, "precisa ser um arquivo pdf"
         format.html { render action: 'edit' }
         format.json { render json: @candidature.errors, status: :unprocessable_entity }
       end

@@ -197,6 +197,9 @@ describe CandidaturesController do
 
   describe "PUT update" do
     describe "with valid params" do
+      before :each do
+        CandidaturesController.any_instance.should_receive(:upload).and_return(true)
+      end
       it "updates the requested candidature" do
         candidature = Candidature.create! valid_attributes
         # Assuming there are no other candidatures in the database, this
