@@ -1,5 +1,5 @@
 class CandidaturesController < ApplicationController
-  before_action :set_candidature, only: [:show, :edit, :update, :destroy]
+  before_action :set_candidature, only: [:show, :download_transcript, :edit, :update, :destroy]
   before_action :authenticate_student!, only: [:new, :create, :edit, :update, :destroy]
 
   # GET /candidatures
@@ -23,6 +23,10 @@ class CandidaturesController < ApplicationController
   def show
   end
 
+  def download_transcript
+    download
+  end
+
   # GET /candidatures/new
   def new
     @candidature = Candidature.new
@@ -37,23 +41,23 @@ class CandidaturesController < ApplicationController
   def create
     params[:candidature][:student_id] = current_student.id
     uploaded = upload
-      @candidature = Candidature.new(candidature_params)
-        respond_to do |format|
-          if uploaded
-            if @candidature.save
-              BackupMailer.new_candidature(@candidature).deliver
-              format.html { redirect_to @candidature, notice: 'Candidatura criada com sucesso.' }
-              format.json { render action: 'show', status: :created, location: @candidature }
-            else
-              format.html { render action: 'new' }
-              format.json { render json: @candidature.errors, status: :unprocessable_entity }
-            end
-          else
-            @candidature.errors.add :transcript_file_path, "precisa ser um arquivo pdf"
-            format.html { render action: 'new' }
-            format.json { render json: @candidature.errors, status: :unprocessable_entity }
-          end
+    @candidature = Candidature.new(candidature_params)
+    respond_to do |format|
+      if uploaded
+        if @candidature.save
+          BackupMailer.new_candidature(@candidature).deliver
+          format.html { redirect_to @candidature, notice: 'Candidatura criada com sucesso.' }
+          format.json { render action: 'show', status: :created, location: @candidature }
+        else
+          format.html { render action: 'new' }
+          format.json { render json: @candidature.errors, status: :unprocessable_entity }
+        end
+      else
+        @candidature.errors.add :transcript_file_path, "precisa ser um arquivo pdf"
+        format.html { render action: 'new' }
+        format.json { render json: @candidature.errors, status: :unprocessable_entity }
       end
+    end
   end
 
   # PATCH/PUT /candidatures/1
@@ -82,13 +86,13 @@ class CandidaturesController < ApplicationController
     end
   end
 
-  private
+  protected
   def upload
       uploaded_io = params[:candidature][:transcript_file_path]
       nusp = current_student.nusp
       new_name = (Time.now.strftime '%Y%m%d_' + nusp) + ".pdf"
-      path = Rails.root.join('public', 'uploads', 'transcripts', new_name)
-      params[:candidature][:transcript_file_path] = path.to_s
+      path = path_to_transcript new_name
+      params[:candidature][:transcript_file_path] = new_name
       if uploaded_io and  uploaded_io.content_type == "application/pdf"
           File.open(path, 'wb') do |file|
                     file.write(uploaded_io.read)
@@ -99,10 +103,16 @@ class CandidaturesController < ApplicationController
       end
   end
 
-  def download transcript_file_path
-    send_data pdf,
-      :filename => transcript_file_path,
-      :type => "application/pdf"
+  def download
+    path = path_to_transcript @candidature.transcript_file_path
+    send_file path,
+              filename: "histórico-#{@candidature.student.nusp}.pdf",
+              type: "application/pdf"
+  end
+
+  private
+  def path_to_transcript transcript_name
+    Rails.root.join('public', 'uploads', 'transcripts', transcript_name)
   end
 
   # Use callbacks to share common setup or constraints between actions.

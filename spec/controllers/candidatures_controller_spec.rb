@@ -47,17 +47,20 @@ describe CandidaturesController do
 
   let(:valid_attributes) {{
     "time_period_preference" => "Indiferente",
-    "course1_id" => 1
+    "course1_id" => 1,
+    "transcript_file_path" => "example1.pdf"
   }}
 
   let(:valid_second_candidature_attributes) {{
     "time_period_preference" => "Indiferente",
-    "course1_id" => 2
+    "course1_id" => 2,
+    "transcript_file_path" => "example2.pdf"
   }}
 
   let(:valid_third_candidature_attributes) {{
     "time_period_preference" => "Indiferente",
-    "course1_id" => 3
+    "course1_id" => 3,
+    "transcript_file_path" => "example3.pdf"
   }}
 
   let(:kunio) { {
@@ -152,6 +155,9 @@ describe CandidaturesController do
 
   describe "POST create" do
     describe "with valid params" do
+      before :each do
+        CandidaturesController.any_instance.should_receive(:upload).and_return(true)
+      end
       it "creates a new Candidature" do
         expect {
           post :create, {:candidature => valid_attributes}, valid_session

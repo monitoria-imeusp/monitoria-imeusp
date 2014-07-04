@@ -56,7 +56,7 @@
 </p>
 <p>
   <strong><%= t('activerecord.attributes.candidature.transcript_file_path') + ':' %></strong>
-  <%= link_to "Download", @candidature.transcript_file_path %>
+  <%= link_to "Download", download_candidature_transcript_path(@candidature) %>
 </p>
 <%= link_to 'Editar', edit_candidature_path(@candidature) %> |
 <%= link_to 'Voltar', candidatures_path %>

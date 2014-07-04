@@ -30,10 +30,7 @@ Rails.application.routes.draw do
   resources :request_for_teaching_assistants
 
   resources :candidatures
-
-  resources :candidatures do
-      get :download
-  end
+  get 'candidatures/:id/download_transcript' => 'candidatures#download_transcript', as: :download_candidature_transcript
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
