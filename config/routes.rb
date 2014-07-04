@@ -2,6 +2,7 @@ Rails.application.routes.draw do
 
   get 'home/index'
   get 'home/dump'
+  get 'home/administracao'
 
   devise_for :admins, :controllers => { :admins => "admins" }
   devise_for :professors, :controllers => { :professors => "professors" }
