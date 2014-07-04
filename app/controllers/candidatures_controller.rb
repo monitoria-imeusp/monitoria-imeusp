@@ -1,6 +1,6 @@
 class CandidaturesController < ApplicationController
+  authorize_resource
   before_action :set_candidature, only: [:show, :download_transcript, :edit, :update, :destroy]
-  before_action :authenticate_student!, only: [:new, :create, :edit, :update, :destroy]
 
   # GET /candidatures
   # GET /candidatures.json

@@ -1,5 +1,5 @@
 class CoursesController < ApplicationController
-  before_action :authenticate! , :except => [:show, :index]
+  authorize_resource
 
   def new
     @course = Course.new
@@ -54,14 +54,6 @@ class CoursesController < ApplicationController
     @course.destroy
 
     redirect_to courses_path
-  end
-
-  protected
-
-  def authenticate!
-    unless admin_signed_in? or (professor_signed_in? and current_professor.super_professor?)
-      redirect_to courses_path
-    end
   end
 
   private

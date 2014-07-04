@@ -1,7 +1,7 @@
 class SecretariesController < ApplicationController
+  authorize_resource
   before_action :redirect_if_not_exists, only: [:show, :edit, :change_password, :update, :destroy]
-  before_action :authenticate_admin!, :only => [:new, :create, :destroy]
-  before_action :authenticate_edit!,  :only => [:edit, :update]
+  before_action :set_secretary, only: [:show, :edit, :update, :destroy]
 
   # GET /secretaries
   # GET /secretaries.json
@@ -70,14 +70,6 @@ class SecretariesController < ApplicationController
     respond_to do |format|
       format.html { redirect_to secretaries_url }
       format.json { head :no_content }
-    end
-  end
-
-  protected
-
-  def authenticate_edit!
-    unless secretary_signed_in? and (current_secretary.id == params[:id].to_i)
-      redirect_to root_path
     end
   end
 

@@ -1,7 +1,6 @@
 class RequestForTeachingAssistantsController < ApplicationController
-  before_action :authenticate_professor!
+  authorize_resource
   before_action :set_request_for_teaching_assistant, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate_professor_with_permission!, only: [:show, :edit, :update, :destroy]
 
   # GET /request_for_teaching_assistants
   # GET /request_for_teaching_assistants.json
@@ -98,12 +97,6 @@ class RequestForTeachingAssistantsController < ApplicationController
         professor.department == request.course.department
       )
     )
-  end
-
-  def authenticate_professor_with_permission!
-    unless professor_can_see?(current_professor, @request_for_teaching_assistant)
-      redirect_to request_for_teaching_assistants_path
-    end
   end
 
 end

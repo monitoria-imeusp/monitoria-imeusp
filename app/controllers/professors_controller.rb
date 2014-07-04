@@ -1,7 +1,6 @@
 class ProfessorsController < ApplicationController
+  authorize_resource
   before_action :redirect_if_not_exists, only: [:show, :edit, :change_password, :update, :destroy]
-  before_action :authenticate_admin!, :only => [:new, :create, :destroy]
-  before_action :authenticate_edit!,  :only => [:edit, :update]
 
   def new
     @professor = Professor.new
@@ -49,14 +48,6 @@ class ProfessorsController < ApplicationController
     @professor.destroy
 
     redirect_to professors_path
-  end
-
-  protected
-
-  def authenticate_edit!
-    unless professor_signed_in? and (current_professor.id == params[:id].to_i)
-      redirect_to root_path
-    end
   end
 
   private

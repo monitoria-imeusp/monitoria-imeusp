@@ -1,9 +1,5 @@
 class StudentsController < ApplicationController
-  before_action :authenticate_new!,  :only => [:new, :create]
-  before_action :authenticate_edit!,  :only => [:edit, :update]
-  before_action :authenticate_delete!,  :only => [:destroy]
-  before_action :authenticate_index!, :only => [:index]
-  before_action :authenticate_show!, :only => [:show]
+  authorize_resource
 
   def new
     @student = Student.new
@@ -58,44 +54,12 @@ class StudentsController < ApplicationController
     redirect_to students_path
   end
 
-  protected 
-
-  def authenticate_new!
-    if admin_signed_in? or professor_signed_in? or secretary_signed_in? or student_signed_in?
-      redirect_to students_path
-    end
+  private
+  def student_params
+    params.require(:student).permit(:name, :password, :password_confirmation,
+                                    :nusp, :gender, :rg, :cpf, 
+                                    :address, :complement, :district, :zipcode, :city, :state, 
+                                    :tel, :cel, :email, 
+                                    :has_bank_account)
   end
-
-  def authenticate_index!
-    unless admin_signed_in? or professor_signed_in? or secretary_signed_in?
-      redirect_to root_path
-    end
-  end
-
-  def authenticate_edit!
-    unless student_signed_in? and (current_student.id == params[:id].to_i)
-      redirect_to root_path
-    end
-  end
-
-  def authenticate_delete!
-    unless admin_signed_in? or secretary_signed_in?
-      redirect_to students_path 
-    end
-  end
-
-  def authenticate_show!
-    unless admin_signed_in? or professor_signed_in? or secretary_signed_in? or (student_signed_in? and (current_student.id == params[:id].to_i))
-      redirect_to root_path
-    end
-  end
-
-    private
-        def student_params
-            params.require(:student).permit(:name, :password, :password_confirmation,
-              :nusp, :gender, :rg, :cpf, 
-              :address, :complement, :district, :zipcode, :city, :state, 
-              :tel, :cel, :email, 
-              :has_bank_account)
-        end
 end
