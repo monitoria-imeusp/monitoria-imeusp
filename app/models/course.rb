@@ -3,4 +3,8 @@ class Course < ActiveRecord::Base
   belongs_to :department
 
   validates :department_id, presence: true
+
+  def full_name
+    course_code + " - " + name
+  end
 end

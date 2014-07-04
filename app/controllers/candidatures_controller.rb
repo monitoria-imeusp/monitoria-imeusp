@@ -8,7 +8,7 @@ class CandidaturesController < ApplicationController
     if admin_signed_in? or (professor_signed_in? and current_professor.hiper_professor?) or secretary_signed_in?
       @candidatures_filtered = Candidature.all
     elsif professor_signed_in? and current_professor.super_professor?
-      @candidatures_filtered = (Candidature.all.map do |candidature| candidature end).keep_if do |candidature| 
+      @candidatures_filtered = (Candidature.all.map do |candidature| candidature end).keep_if do |candidature|
         candidature_of_department?(current_professor, candidature)
       end
     elsif student_signed_in?
@@ -40,6 +40,7 @@ class CandidaturesController < ApplicationController
 
     respond_to do |format|
       if @candidature.save
+        BackupMailer.new_candidature(@candidature).deliver
         format.html { redirect_to @candidature, notice: 'Candidatura criada com sucesso.' }
         format.json { render action: 'show', status: :created, location: @candidature }
       else
@@ -54,6 +55,7 @@ class CandidaturesController < ApplicationController
   def update
     respond_to do |format|
       if @candidature.update(candidature_params)
+        BackupMailer.edit_candidature(@candidature).deliver
         format.html { redirect_to @candidature, notice: 'Candidatura atualizada com sucesso.' }
         format.json { render action: 'show', status: :ok, location: @candidature }
       else
@@ -66,6 +68,7 @@ class CandidaturesController < ApplicationController
   # DELETE /candidatures/1
   # DELETE /candidatures/1.json
   def destroy
+    BackupMailer.delete_candidature(@candidature).deliver
     @candidature.destroy
     respond_to do |format|
       format.html { redirect_to candidatures_url }
