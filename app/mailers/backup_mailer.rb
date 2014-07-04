@@ -1,5 +1,7 @@
 class BackupMailer < ActionMailer::Base
   default from: "sistemamonitoria@ime.usp.br"
+  add_template_helper(ApplicationHelper)
+  add_template_helper(CandidaturesHelper)
 
   def new_candidature_mail(candidature)
     @candidature = candidature

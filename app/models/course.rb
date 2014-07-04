@@ -5,6 +5,6 @@ class Course < ActiveRecord::Base
   validates :department_id, presence: true
 
   def full_name
-    department.code + course_code + " - " + name
+    course_code + " - " + name
   end
 end
