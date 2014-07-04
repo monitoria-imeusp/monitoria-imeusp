@@ -110,7 +110,7 @@ class CandidaturesController < ApplicationController
       uploaded_io = params[:candidature][:transcript_file_path]
       nusp = current_student.nusp
       new_name = (Time.now.strftime '%Y%m%d_' + nusp) + ".pdf"
-      path = path_to_transcript new_name
+      path = Candidature.path_to_transcript new_name
       params[:candidature][:transcript_file_path] = new_name
       if uploaded_io and  uploaded_io.content_type == "application/pdf"
           File.open(path, 'wb') do |file|
@@ -123,16 +123,12 @@ class CandidaturesController < ApplicationController
   end
 
   def download
-    path = path_to_transcript @candidature.transcript_file_path
-    send_file path,
-              filename: "histórico-#{@candidature.student.nusp}.pdf",
+    send_file @candidature.path_to_transcript,
+              filename: @candidature.generate_transcript_filename,
               type: "application/pdf"
   end
 
   private
-  def path_to_transcript transcript_name
-    Rails.root.join('public', 'uploads', 'transcripts', transcript_name)
-  end
 
   # Use callbacks to share common setup or constraints between actions.
   def set_candidature
