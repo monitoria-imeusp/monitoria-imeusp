@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+
+    <h1>Inscrição de monitoria</h1>
+
+    <p>Data: <%= Time.now %></p>
+
+    <h2>Dados do aluno</h2>
+
+    <p>
+      <strong><%= t('activerecord.attributes.student.name') + ':' %></strong>
+      <%= @student.name %>
+    </p>
+
+    <p>
+      <strong><%= t('activerecord.attributes.student.gender') + ':' %></strong>
+      <% if (@student.gender == 0) %>
+        <%="Feminino"%>
+      <%else%>
+        <%="Masculino"%>
+      <%end%>
+    </p>
+
+    <p>
+      <strong><%= t('activerecord.attributes.student.nusp') + ':' %></strong>
+      <%= @student.nusp %>
+    </p>
+
+    <p>
+      <strong><%= t('activerecord.attributes.student.rg') + ':' %></strong>
+      <%= @student.rg %>
+    </p>
+
+    <p>
+      <strong><%= t('activerecord.attributes.student.cpf') + ':' %></strong>
+      <%= @student.cpf %>
+    </p>
+
+    <p>
+      <strong><%= t('activerecord.attributes.student.address') + ':' %></strong>
+      <%= @student.address %>
+    </p>
+
+    <p>
+      <strong><%= t('activerecord.attributes.student.complement') + ':' %></strong>
+      <%= @student.complement %>
+    </p>
+
+    <p>
+      <strong><%= t('activerecord.attributes.student.district') + ':' %></strong>
+      <%= @student.district %>
+    </p>
+    <p>
+      <strong><%= t('activerecord.attributes.student.cep') + ':' %></strong>
+      <%= @student.zipcode %>
+    </p>
+
+    <p>
+      <strong><%= t('activerecord.attributes.student.city') + ':' %></strong>
+      <%= @student.city %>
+    </p>
+
+    <p>
+      <strong><%= t('activerecord.attributes.student.state') + ':' %></strong>
+      <%= @student.state %>
+    </p>
+
+    <p>
+      <strong><%= t('activerecord.attributes.student.tel') + ':' %></strong>
+      <%= @student.tel %>
+    </p>
+
+    <p>
+      <strong><%= t('activerecord.attributes.student.cel') + ':' %></strong>
+      <%= @student.cel %>
+    </p>
+
+    <p>
+      <strong><%= t('activerecord.attributes.student.email') + ':' %></strong>
+      <%= @student.email %>
+    </p>
+
+    <p>
+      <strong><%= t('activerecord.attributes.student.has_bank_account') + ':' %></strong>
+      <%= show_yes_or_no @student.has_bank_account %>
+    </p>
+
+    <h2>Dados da incrição</h2>
+
+    <p>
+      <strong><%= t('activerecord.attributes.candidature.course1_id') + ':' %></strong>
+      <%= @course1 %>
+    </p>
+
+    <p>
+      <strong><%= t('activerecord.attributes.candidature.course2_id') + ':' %></strong>
+      <% if @course2 != nil%>
+        <%= @course2 %>
+      <% else %>
+        <i>Nenhum</i>
+      <% end %>
+    </p>
+
+    <p>
+      <strong><%= t('activerecord.attributes.candidature.course3_id') + ':' %></strong>
+      <% if @course3 != nil%>
+        <%= @course3 %>
+      <% else %>
+        <i>Nenhum</i>
+      <% end %>
+    </p>
+
+    <p>
+      <strong><%= t('activerecord.attributes.candidature.daytime_availability') + ':' %></strong>
+      <%= show_yes_or_no(@candidature.daytime_availability) %>
+    </p>
+
+    <p>
+      <strong><%= t('activerecord.attributes.candidature.nighttime_availability') + ':' %></strong>
+      <%= show_yes_or_no(@candidature.nighttime_availability) %>
+    </p>
+
+    <p>
+      <strong><%= t('activerecord.attributes.candidature.time_period_preference') + ':' %></strong>
+      <%= daytimePreference()[@candidature.time_period_preference.to_i][0] %>
+    </p>
+
+    <p>
+      <strong><%= t('activerecord.attributes.candidature.observation') + ':' %></strong>
+      <%= (@candidature.observation) %>
+    </p>
+
+  </body>
+</html>
