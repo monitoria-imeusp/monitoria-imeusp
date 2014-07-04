@@ -46,6 +46,7 @@ class BackupMailer < ActionMailer::Base
     if candidature.course3_id != nil
       @course3 = Course.find(candidature.course3_id).full_name
     end
+    attachments[@candidature.generate_transcript_filename] = File.read(@candidature.path_to_transcript)
   end
 
 end

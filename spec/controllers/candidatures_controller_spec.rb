@@ -69,7 +69,7 @@ describe CandidaturesController do
     "email" => "kunio@ime.usp.br",
     "department_id" => 1,
     "nusp" => "2222222",
-    "professor_rank" => 1, 
+    "professor_rank" => 1,
     "confirmed_at" => Time.now
   } }
 
@@ -167,6 +167,9 @@ describe CandidaturesController do
     describe "with valid params" do
       before :each do
         CandidaturesController.any_instance.should_receive(:upload).and_return(true)
+        mail = double(Object)
+        BackupMailer.should_receive(:new_candidature).with(an_instance_of(Candidature)).and_return(mail)
+        mail.should_receive(:deliver)
       end
       it "creates a new Candidature" do
         expect {
@@ -209,27 +212,28 @@ describe CandidaturesController do
     describe "with valid params" do
       before :each do
         CandidaturesController.any_instance.should_receive(:upload).and_return(true)
+        @candidature = Candidature.create! valid_attributes
+        mail = double(Object)
+        BackupMailer.should_receive(:edit_candidature).with(@candidature).and_return(mail)
+        mail.should_receive(:deliver)
       end
       it "updates the requested candidature" do
-        candidature = Candidature.create! valid_attributes
         # Assuming there are no other candidatures in the database, this
         # specifies that the Candidature created on the previous line
         # receives the :update_attributes message with whatever params are
         # submitted in the request.
-        Candidature.any_instance.should_receive(:update).with({ "daytime_availability" => "false" })
-        put :update, {:id => candidature.to_param, :candidature => { "daytime_availability" => "false" }}, valid_session
+        Candidature.any_instance.should_receive(:update).with({ "daytime_availability" => "false" }).and_return(true)
+        put :update, {:id => @candidature.to_param, :candidature => { "daytime_availability" => "false" }}, valid_session
       end
 
       it "assigns the requested candidature as @candidature" do
-        candidature = Candidature.create! valid_attributes
-        put :update, {:id => candidature.to_param, :candidature => valid_attributes}, valid_session
-        assigns(:candidature).should eq(candidature)
+        put :update, {:id => @candidature.to_param, :candidature => valid_attributes}, valid_session
+        assigns(:candidature).should eq(@candidature)
       end
 
       it "redirects to the candidature" do
-        candidature = Candidature.create! valid_attributes
-        put :update, {:id => candidature.to_param, :candidature => valid_attributes}, valid_session
-        response.should redirect_to(candidature)
+        put :update, {:id => @candidature.to_param, :candidature => valid_attributes}, valid_session
+        response.should redirect_to(@candidature)
       end
     end
 
@@ -253,17 +257,21 @@ describe CandidaturesController do
   end
 
   describe "DELETE destroy" do
+    before :each do
+      @candidature = Candidature.create! valid_attributes
+      mail = double(Object)
+      BackupMailer.should_receive(:delete_candidature).with(@candidature).and_return(mail)
+      mail.should_receive(:deliver)
+    end
     it "destroys the requested candidature" do
-      candidature = Candidature.create! valid_attributes
-      Candidature.should_receive(:find).with(candidature.id.to_s).and_return(candidature)
-      candidature.should_receive(:destroy)
-      delete :destroy, {:id => candidature.to_param}, valid_session
-      assigns(:candidature).should eq(candidature)
+      Candidature.should_receive(:find).with(@candidature.id.to_s).and_return(@candidature)
+      @candidature.should_receive(:destroy)
+      delete :destroy, {:id => @candidature.to_param}, valid_session
+      assigns(:candidature).should eq(@candidature)
     end
 
     it "redirects to the candidatures list" do
-      candidature = Candidature.create! valid_attributes
-      delete :destroy, {:id => candidature.to_param}, valid_session
+      delete :destroy, {:id => @candidature.to_param}, valid_session
       response.should redirect_to(candidatures_url)
     end
   end
