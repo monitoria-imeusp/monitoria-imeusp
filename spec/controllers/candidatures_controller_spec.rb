@@ -83,6 +83,14 @@ describe CandidaturesController do
     "confirmed_at" => Time.now
   } }
 
+  let(:mac_attributes) { {
+    "id" => 1, "code" => "MAC"
+  } }
+
+  let(:mae_attributes) { {
+    "id" => 2, "code" => "MAE"
+  } }
+
   # This should return the minimal set of values that should be in the session
   # in order to pass any filters (e.g. authentication) defined in
   # CandidaturesController. Be sure to keep this updated too.
@@ -91,8 +99,9 @@ describe CandidaturesController do
   @student = login_student
 
   before :each do
-    Department.create! {{"id" => 1, "code" => "MAC"}}
-    Department.create! {{"id" => 2, "code" => "MAE"}}
+    @mac = Department.create! mac_attributes
+    @mae = Department.create! mae_attributes
+    @shown_candidatures = { @mac.code => [], @mae.code => [] }
     valid_attributes["student_id"] = @student.id
     Course.create! valid_course_attributes
     Course.create! valid_second_course_attributes
@@ -101,32 +110,33 @@ describe CandidaturesController do
 
   describe "GET index" do
     it "student assigns his candidatures as @candidatures" do
-      shown_candidatures = []
-      shown_candidatures.push(Candidature.create! valid_attributes)
+      @shown_candidatures[@mac.code].push(Candidature.create! valid_attributes)
       Candidature.create! valid_second_candidature_attributes
       Candidature.create! valid_third_candidature_attributes
       get :index, {}, valid_session
-      assigns(:candidatures_filtered).should eq(shown_candidatures)
+      assigns(:candidatures_filtered).should eq(@shown_candidatures)
     end
     it "super professor assigns candidatures of his department as @candidatures" do
-      shown_candidatures = []
-      shown_candidatures.push(Candidature.create! valid_attributes)
-      shown_candidatures.push(Candidature.create! valid_second_candidature_attributes)
+      @shown_candidatures[@mac.code].push(
+        (Candidature.create! valid_attributes),
+        (Candidature.create! valid_second_candidature_attributes)
+      )
       Candidature.create! valid_third_candidature_attributes
       super_professor = Professor.create! kunio
       sign_in :professor, super_professor
       get :index, {}, valid_session
-      assigns(:candidatures_filtered).should eq(shown_candidatures)
+      assigns(:candidatures_filtered).should eq(@shown_candidatures)
     end
     it "hiper professor assigns all candidatures as @candidatures" do
-      shown_candidatures = []
-      shown_candidatures.push(Candidature.create! valid_attributes)
-      shown_candidatures.push(Candidature.create! valid_second_candidature_attributes)
-      shown_candidatures.push(Candidature.create! valid_third_candidature_attributes)
+      @shown_candidatures[@mac.code].push(
+        (Candidature.create! valid_attributes),
+        (Candidature.create! valid_second_candidature_attributes)
+      )
+      @shown_candidatures[@mae.code].push(Candidature.create! valid_third_candidature_attributes)
       hiper_professor = Professor.create! zara
       sign_in :professor, hiper_professor
       get :index, {}, valid_session
-      assigns(:candidatures_filtered).should eq(shown_candidatures)
+      assigns(:candidatures_filtered).should eq(@shown_candidatures)
     end
   end
 
