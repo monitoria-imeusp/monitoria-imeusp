@@ -1,0 +1,45 @@
+
+<h2>Dados da incrição</h2>
+
+<p>
+  <strong><%= t('activerecord.attributes.candidature.course1_id') + ':' %></strong>
+  <%= @course1 %>
+</p>
+
+<p>
+  <strong><%= t('activerecord.attributes.candidature.course2_id') + ':' %></strong>
+  <% if @course2 != nil%>
+    <%= @course2 %>
+  <% else %>
+    <i>Nenhum</i>
+  <% end %>
+</p>
+
+<p>
+  <strong><%= t('activerecord.attributes.candidature.course3_id') + ':' %></strong>
+  <% if @course3 != nil%>
+    <%= @course3 %>
+  <% else %>
+    <i>Nenhum</i>
+  <% end %>
+</p>
+
+<p>
+  <strong><%= t('activerecord.attributes.candidature.daytime_availability') + ':' %></strong>
+  <%= show_yes_or_no(@candidature.daytime_availability) %>
+</p>
+
+<p>
+  <strong><%= t('activerecord.attributes.candidature.nighttime_availability') + ':' %></strong>
+  <%= show_yes_or_no(@candidature.nighttime_availability) %>
+</p>
+
+<p>
+  <strong><%= t('activerecord.attributes.candidature.time_period_preference') + ':' %></strong>
+  <%= daytimePreference()[@candidature.time_period_preference.to_i][0] %>
+</p>
+
+<p>
+  <strong><%= t('activerecord.attributes.candidature.observation') + ':' %></strong>
+  <%= (@candidature.observation) %>
+</p>
