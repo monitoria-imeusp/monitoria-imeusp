@@ -3,7 +3,7 @@ Feature: Candidature table visualization
     As a superprofessor, admin, student or secretary
     I want to see the candidatures
 
-    Background: 
+    Background:
         When there is a department with code "MAC"
         And there is a department with code "MAT"
         And there is a department with code "MAE"
@@ -12,8 +12,8 @@ Feature: Candidature table visualization
         And there is a course with name "Cálculo I" and code "MAT0111" and department "MAT"
         And there is a course with name "Estatística Concorrente" and code "MAE0438" and department "MAE"
         And there is a course with name "Introdução à Ciência da Computação" and code "MAC0110" and department "MAC"
-        And there is an candidature with student "Rogerio" and first option "Cálculo I" and second option "Introdução à Ciência da Computação" and third option "" and availability for daytime "true" and availability for night time "false" and period preference "2"
-        And there is an candidature with student "Caio" and first option "Estatística Concorrente" and second option "Cálculo I" and third option "" and availability for daytime "false" and availability for night time "true" and period preference "1"
+        And there is an candidature with student "Rogerio" and first option "Cálculo I" and second option "Introdução à Ciência da Computação" and third option "" and availability for daytime "true" and availability for night time "false" and period preference "2" and transcript file "exemplo.pdf"
+        And there is an candidature with student "Caio" and first option "Estatística Concorrente" and second option "Cálculo I" and third option "" and availability for daytime "false" and availability for night time "true" and period preference "1" and transcript file "exemplo.pdf"
 
     Scenario: Admin seeing all candidatures
         Given I'm at the login page
@@ -65,7 +65,7 @@ Feature: Candidature table visualization
 		And I should see "Editar"
 		And I should see "Remover"
 		And I should not see "Nova Candidatura"
-    
+
     Scenario: Secretary seeing all candidatures
         Given I'm at the secretary login page
         And there is a secretary with name "sec" and password "12345678" nusp "1111" and email "a@a.com"
@@ -81,8 +81,8 @@ Feature: Candidature table visualization
 		And I should see "Ver"
 		And I should see "Editar"
 		And I should see "Remover"
-    
-    
+
+
     Scenario: Student seeing candidatures
         Given I'm at the student login page
         When I fill the "Número USP" field with "123456"

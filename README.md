@@ -98,6 +98,7 @@ Pode ser preciso instalar os seguintes pacotes em um Ubuntu:
 -libqt4-dev
 -libqtwebkit-dev
 -postgresql
+-postgresql-server-dev-all
 
 ## Configurando o servidor
 
