@@ -3,6 +3,7 @@ class Ability
 
   def initialize(user)
     if nil == defined? user #user is not logged in
+      cannot :read, Dump
       cannot :create, Professor
       cannot :read, Professor
       cannot :update, Professor
@@ -28,6 +29,7 @@ class Ability
       cannot :update, Candidature
       cannot :destroy, Candidature
     elsif user.is_a? Admin
+      can :read, Dump
       can :create, Professor
       can :read, Professor
       can :update, Professor
@@ -53,6 +55,7 @@ class Ability
       can :update, Candidature
       can :destroy, Candidature
     elsif user.is_a? Professor and user.professor_rank == 2 #SSProfessor
+      can :read, Dump
       can :create, Professor
       can :read, Professor
       can :update, Professor
@@ -78,6 +81,7 @@ class Ability
       can :update, Candidature
       can :destroy, Candidature
     elsif user.is_a? Professor and user.professor_rank == 1 #SProfessor
+      can :read, Dump
       can :create, Professor
       can :read, Professor
       can :update, Professor
@@ -103,6 +107,7 @@ class Ability
       can :update, Candidature
       can :destroy, Candidature
     elsif user.is_a? Professor and user.professor_rank == 0 #Professor
+      cannot :read, Dump
       cannot :create, Professor
       can :read, Professor
       can :update, Professor #Only himself
@@ -128,6 +133,7 @@ class Ability
       cannot :update, Candidature
       cannot :destroy, Candidature
     elsif user.is_a? Secretary
+      can :read, Dump
       can :create, Professor
       can :read, Professor
       can :update, Professor
@@ -153,6 +159,7 @@ class Ability
       can :update, Candidature
       can :destroy, Candidature
     elsif user.is_a? Student
+      cannot :read, Dump
       cannot :create, Professor
       can :read, Professor
       cannot :update, Professor
