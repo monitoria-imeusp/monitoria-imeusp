@@ -29,6 +29,10 @@ class AdminsController < ApplicationController
     end
   end
 
+  def register_courses
+    puts "bla"
+  end
+
   private
     def admin_params
    		params.require(:admin).permit(:email, :password, :password_confirmation)

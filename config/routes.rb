@@ -17,7 +17,12 @@ Rails.application.routes.draw do
   get '/prof' => 'home#prof'
 
 
-  resources :admins
+  resources :admins do
+    collection do
+      post :register_courses
+    end
+  end
+
 
   resources :request_for_teaching_assistants
   resources :professors

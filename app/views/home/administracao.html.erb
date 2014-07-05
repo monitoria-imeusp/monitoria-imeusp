@@ -2,8 +2,6 @@
 
 <div>
   <h3>Cadastro de disciplinas oferecidas no semestre</h3>
-  <%= button_tag(type: 'submit', class: "cadastro_disciplina") do %>
-    Cadastrar disciplinas
-  <% end %>
+    <%= button_to "Cadastrar disciplinas", controller: "admins", :action => "register_courses", :method => 'post' %>
 </div>
 
