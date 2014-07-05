@@ -87,7 +87,7 @@
               <%= link_to "Meu Perfil", current_admin %>
             </li>
           <% end %>
-          <% if admin_signed_in? || (current_professor.present? && current_professor.super_professor?) %>
+          <% if admin_signed_in? || (professor_signed_in? and current_professor.super_professor?) %>
             <li>
               <%= link_to "Nova Disciplina", new_course_path %>
             </li>
@@ -109,14 +109,14 @@
               <%= link_to "Dump do banco de dados", { action: "dump", controller: "home" } %>
             </li>
           <% elsif professor_signed_in? %>
-            <li>
-              <%= link_to "Pedidos de Monitoria", request_for_teaching_assistants_path %>
-            </li>
+            <% unless Rails.env.production? %>
+              <li>
+                <%= link_to "Pedidos de Monitoria", request_for_teaching_assistants_path %>
+              </li>
+            <% end %>
             <% if current_professor.super_professor? then %>
               <li>
-              <%= link_to "Candidaturas", candidatures_path %>
-              <br>
-              <%= link_to "Dump do banco de dados", { action: "dump", controller: "home" } %>
+                <%= link_to "Candidaturas", candidatures_path %>
               </li>
             <% end %>
             <li>
