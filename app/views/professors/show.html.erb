@@ -19,10 +19,13 @@
 </p>
 
 <% if admin_signed_in? %>
-    <p>
-        <strong><%= t('activerecord.attributes.professor.professor_rank') + ':' %></strong>
-        <%= professorRankOptions()[@professor.professor_rank][0] %>
-    </p>
+  <p>
+    <strong><%= t('activerecord.attributes.professor.professor_rank') + ':' %></strong>
+    <%= professorRankOptions()[@professor.professor_rank][0] %>
+  </p>
+  <p>
+    <%= link_to 'Remover', professor_path(@professor), method: :delete, data: { confirm: 'Tem certeza?' } %>
+  </p>
 <% end %>
 <% if professor_signed_in? and current_professor == @professor %>
   <p>
