@@ -8,8 +8,7 @@ Feature: Showing a professor
 		And there is a professor with name "Gold" and password "changeme!" nusp "321" department "MAC" and email "gold@bob.bob"
 
 	Scenario: Anyone seeing detailed information
-		When I'm at the home page
-		And I click the "Professores" link
+		Given I'm at the "professors" page
 		And I click the "Bob" link
 		Then I should see "Nome: Bob"
 

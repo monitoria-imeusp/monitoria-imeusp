@@ -29,13 +29,13 @@
         <li>
           <%= link_to "Disciplinas", courses_path %>
         </li>
-        <li>
-          <%= link_to "Professores", professors_path %>
-        </li>
-        <li>
-        <%= link_to "Funcionários", secretaries_path %>
-        </li>
         <% if admin_signed_in? || professor_signed_in? || secretary_signed_in? %>
+          <li>
+            <%= link_to "Professores", professors_path %>
+          </li>
+          <li>
+            <%= link_to "Funcionários", secretaries_path %>
+          </li>
           <li>
             <%= link_to "Alunos", students_path %>
           </li>
