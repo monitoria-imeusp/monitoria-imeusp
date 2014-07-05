@@ -30,7 +30,12 @@ class AdminsController < ApplicationController
   end
 
   def register_courses
-    puts "bla"
+    @admin = Admin.new
+    @admin.registered_courses = false
+    Course.destroy_all
+    if (@admin.gather_undergrad_courses) and (@admin.gather_postgrad_courses)
+      @admin.registered_courses = true
+    end
   end
 
   private
