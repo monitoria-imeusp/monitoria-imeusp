@@ -56,7 +56,7 @@ class CoursesController < ApplicationController
     redirect_to courses_path
   end
 
-  protected 
+  protected
 
   def authenticate!
     unless admin_signed_in? or (professor_signed_in? and current_professor.super_professor?)

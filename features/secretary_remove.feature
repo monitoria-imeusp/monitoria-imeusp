@@ -3,7 +3,7 @@ Feature: Secretary remove
     As an admin
     I want to delete a secretary
 
-    Background: 
+    Background:
         Given there is a secretary with name "Marcia" and password "12345678" nusp "1111111" and email "marcia@ime.usp.br"
 
     Scenario: Admin removing a secretary
@@ -29,7 +29,6 @@ Feature: Secretary remove
         And I should not see "Remover"
 
     Scenario: Any person trying to remove a secretary
-        Given I'm at the home page
-        And I click the "Funcionários" link
+        Given I'm at the "secretaries" page
         And I click the "Marcia" link
         And I should not see "Remover"

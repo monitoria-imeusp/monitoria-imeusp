@@ -30,8 +30,7 @@ Feature: Secretary edit
         And I should not see "Remover"
 
     Scenario: Any person trying to edit a secretary
-        Given I'm at the home page
-        And I click the "Funcionários" link
+        Given I'm at the "secretaries" page
         And I click the "Marcia" link
         And I should not see "Editar"
         And I should not see "Remover"
