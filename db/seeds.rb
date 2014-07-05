@@ -7,7 +7,7 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
 
-Admin.create(email: 'kazuo@ime.usp.br', password: 'admin123')
+Admin.create(email: 'kazuo@ime.usp.br', password: 'admin123', )
 
 Department.create(code: 'MAC')
 Department.create(code: 'MAE')
@@ -66,21 +66,25 @@ if Rails.env.development?
 
   [
     {
+      educational_level: "undergraduation",
       name: "Introdução à Ciência da Computação",
       course_code: "MAC0110",
       department: Department.find_by(:code => "MAC")
     },
     {
+      educational_level: "undergraduation",
       name: "Cálculo I",
       course_code: "MAT0111",
       department: Department.find_by(:code => "MAT")
     },
     {
+      educational_level: "undergraduation",
       name: "Introdução à Probabilidade e Estatística I",
       course_code: "MAE0121",
       department: Department.find_by(:code => "MAE")
     },
     {
+      educational_level: "undergraduation",
       name: "Laboratório de Matemática Aplicada",
       course_code: "MAP0131",
       department: Department.find_by(:code => "MAP")
