@@ -46,6 +46,7 @@ ActiveRecord::Schema.define(version: 20140702172121) do
   end
 
   create_table "courses", force: true do |t|
+    t.string   "educational_level"
     t.string   "name"
     t.string   "course_code"
     t.datetime "created_at"
