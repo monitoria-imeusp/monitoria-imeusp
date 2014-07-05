@@ -159,3 +159,22 @@ div.sidebar {
   color: #b55;
   background-color: #fff;
 }
+
+/*********************************************************/
+
+p.notice, p.alert {
+  border-radius: 16px;
+  text-align: center;
+  padding: 4px;
+  font-weight: bold;
+}
+
+p.notice {
+  background-color: #eff;
+  border: 2px solid #bcc;
+}
+
+p.alert {
+  background-color: #e99;
+  border: 2px solid #b55;
+}
