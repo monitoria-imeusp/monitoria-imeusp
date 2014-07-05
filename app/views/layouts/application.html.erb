@@ -148,8 +148,12 @@
             </li>
           <% end %>
         </ul>
-        <p class="notice"><%= notice %></p>
-        <p class="alert"><%= alert %></p>
+        <% if flash[:notice] %>
+          <p class="notice"><%= notice %></p>
+        <% end %>
+        <% if flash[:alert] %>
+          <p class="alert"><%= alert %></p>
+        <% end %>
       </div>
       <div class="content">
         <%= yield %>
