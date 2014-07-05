@@ -5,6 +5,5 @@ module AdminsHelper
     else
       return "Houve algum problema no cadastro das disciplinas a serem oferecidas. \nContacte o administrador do sistema."
     end
-
   end
 end
