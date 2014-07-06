@@ -7,12 +7,15 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
 
-Admin.create(email: 'kazuo@ime.usp.br', password: 'admin123')
+Admin.create(email: 'kazuo@ime.usp.br', password: 'admin123', )
 
 Department.create(code: 'MAC')
 Department.create(code: 'MAE')
 Department.create(code: 'MAP')
 Department.create(code: 'MAT')
+Department.create(code: 'MPM')
+Department.create(code: 'INTERDEPARTAMENTAL')
+
 if Rails.env.development?
   [
     {
@@ -64,24 +67,34 @@ if Rails.env.development?
 
   [
     {
-      name: "Introdução à Ciência da Computação",
+      educational_level: 0,
+      name: "Introdução à Computação",
       course_code: "MAC0110",
       department: Department.find_by(:code => "MAC")
     },
     {
+      educational_level: 0,
       name: "Cálculo I",
       course_code: "MAT0111",
       department: Department.find_by(:code => "MAT")
     },
     {
+      educational_level: 0,
       name: "Introdução à Probabilidade e Estatística I",
       course_code: "MAE0121",
       department: Department.find_by(:code => "MAE")
     },
     {
+      educational_level: 0,
       name: "Laboratório de Matemática Aplicada",
       course_code: "MAP0131",
       department: Department.find_by(:code => "MAP")
+    },
+    {
+      educational_level: 1,
+      name: "Tópicos em Computação Gráfica",
+      course_code: "MAC6913",
+      department: Department.find_by(:code => "MAC")
     }
   ].each do |course|
     Course.create(course)

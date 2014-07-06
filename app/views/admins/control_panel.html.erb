@@ -1,0 +1,8 @@
+<h1>Administração do sistema</h1>
+
+<div>
+  <h3>Cadastro de disciplinas oferecidas no semestre</h3>
+  <%= button_to "Cadastrar disciplinas de graduação", controller: "admins", :action => "register_undergraduate_courses", :method => 'post' %>
+  <%= button_to "Cadastrar disciplinas de pós-graduação", controller: "admins", :action => "register_postgraduate_courses", :method => 'post' %>
+</div>
+

@@ -11,7 +11,7 @@
         department_name_field = document.getElementById("department_name")
         department_name_field.innerHTML = department_name_str;
     }
-  </script> 
+  </script>
 
   <div>
     <%= f.label :name, t('activerecord.attributes.course.name') %><br>
@@ -27,6 +27,14 @@
       <span id="department_name">
       </span>
       <%= f.text_field :course_code %>
+  </div>
+  <div class="field">
+    <%= f.label :educational_level, t('activerecord.attributes.course.educational_level') %><br>
+    <% educational_levels.each do | option | %>
+      <%= f.radio_button :educational_level, option[1] %>
+      <%= f.label option[0] %>
+      </br>
+    <% end %>
   </div>
   <p>
     <%= f.submit "Enviar" %>
