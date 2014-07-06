@@ -30,5 +30,4 @@ Feature: Secretary remove
 
     Scenario: Any person trying to remove a secretary
         Given I'm at the "secretaries" page
-        And I click the "Marcia" link
-        And I should not see "Remover"
+		Then I should see "Acesso negado"

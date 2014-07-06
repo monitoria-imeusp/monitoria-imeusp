@@ -1,7 +1,6 @@
 class ProfessorsController < ApplicationController
+  authorize_resource
   before_action :redirect_if_not_exists, only: [:show, :edit, :change_password, :update, :destroy]
-  before_action :authenticate_admin!, :only => [:new, :create, :destroy]
-  before_action :authenticate_edit!,  :only => [:edit, :update]
 
   def new
     @professor = Professor.new
@@ -26,12 +25,11 @@ class ProfessorsController < ApplicationController
   end
 
   def edit
-  end
-
-  def change_password
+    @professor = Professor.find(params[:id])
   end
 
   def update
+    @professor = Professor.find(params[:id])
     if params[:professor][:password].blank? && params[:professor][:password_confirmation].blank?
       params[:professor].delete(:password)
       params[:professor].delete(:password_confirmation)
@@ -51,21 +49,22 @@ class ProfessorsController < ApplicationController
     redirect_to professors_path
   end
 
-  protected
-
-  def authenticate_edit!
-    unless professor_signed_in? and (current_professor.id == params[:id].to_i)
-      redirect_to root_path
-    end
+  def change_password
   end
 
   private
-
   def redirect_if_not_exists
     if Professor.exists?(params[:id])
       @professor = Professor.find(params[:id])
+      authorization_professor
     else
       redirect_to professors_path
+    end
+  end
+
+  def authorization_professor
+    if (professor_signed_in? and current_professor.professor_rank == 0) and @professor.id != current_professor.id
+      raise CanCan::AccessDenied.new()
     end
   end
 

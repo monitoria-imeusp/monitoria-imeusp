@@ -1,7 +1,7 @@
 class SecretariesController < ApplicationController
+  authorize_resource
   before_action :redirect_if_not_exists, only: [:show, :edit, :change_password, :update, :destroy]
-  before_action :authenticate_admin!, :only => [:new, :create, :destroy]
-  before_action :authenticate_edit!,  :only => [:edit, :update]
+  before_action :set_secretary, only: [:show, :edit, :update, :destroy]
 
   # GET /secretaries
   # GET /secretaries.json
@@ -73,16 +73,12 @@ class SecretariesController < ApplicationController
     end
   end
 
-  protected
-
-  def authenticate_edit!
-    unless secretary_signed_in? and (current_secretary.id == params[:id].to_i)
-      redirect_to root_path
-    end
-  end
-
   private
   # Use callbacks to share common setup or constraints between actions.
+  def set_secretary
+    @secretary = Secretary.find(params[:id])
+  end
+
   def redirect_if_not_exists
     if Secretary.exists?(params[:id])
       @secretary = Secretary.find(params[:id])

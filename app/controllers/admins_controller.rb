@@ -1,5 +1,5 @@
 class AdminsController < ApplicationController
-	before_action :authenticate_admin!
+  authorize_resource
 
   def show
     if Admin.exists?(params[:id])

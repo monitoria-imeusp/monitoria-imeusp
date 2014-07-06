@@ -81,7 +81,7 @@ describe ProfessorsController do
       it "assigns the requested professor as @professor" do
         professor = Professor.create! valid_attributes
         get :edit, {:id => professor.to_param}
-        response.should redirect_to(root_path)
+        response.should render_template("edit")
       end
     end
 
@@ -95,7 +95,7 @@ describe ProfessorsController do
 
     describe 'index' do
       before :each do
-        Professor.should_receive(:all)
+        #Professor.should_receive(:all)
         get :index
       end
       it { should render_template :index }
@@ -146,7 +146,7 @@ describe ProfessorsController do
         it "redirects to the professor" do
           professor = Professor.create! other_valid_attributes
           put :update, {:id => professor.to_param, :professor => valid_attributes}
-          response.should redirect_to(root_path)
+          response.response_code.should == 403
         end
       end
 

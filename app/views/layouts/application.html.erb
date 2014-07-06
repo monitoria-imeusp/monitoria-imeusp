@@ -106,7 +106,7 @@
               <%= link_to "Sair", destroy_admin_session_path, method: :delete %>
             </li>
             <li>
-              <%= link_to "Dump do banco de dados", { action: "dump", controller: "home" } %>
+              <%= link_to "Dump do banco de dados", { action: "index", controller: "dumps" } %>
             </li>
             <li>
               <%= link_to "Administração do sistema", control_panel_admins_path %>
@@ -120,6 +120,8 @@
             <% if current_professor.super_professor? then %>
               <li>
                 <%= link_to "Candidaturas", candidatures_path %>
+                <br>
+                <%= link_to "Dump do banco de dados", { action: "index", controller: "dumps" } %>
               </li>
             <% end %>
             <li>
@@ -133,7 +135,7 @@
                <%= link_to "Candidaturas", candidatures_path %>
             </li>
             <li>
-              <%= link_to "Dump do banco de dados", { action: "dump", controller: "home" } %>
+              <%= link_to "Dump do banco de dados", { action: "index", controller: "dumps" } %>
             </li>
           <% elsif student_signed_in? %>
             <li>
@@ -147,7 +149,7 @@
               <%= link_to "Cadastrar-se", new_student_path %>
             </li>
             <li>
-              <%= link_to "Fazer acesso", new_student_session_path %>
+              <%= link_to "Acessar", new_student_session_path %>
             </li>
           <% end %>
         </ul>

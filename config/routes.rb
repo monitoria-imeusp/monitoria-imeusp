@@ -1,7 +1,6 @@
 Rails.application.routes.draw do
 
   get 'home/index'
-  get 'home/dump'
 
   devise_for :admins, :controllers => { :admins => "admins" }
   devise_for :professors, :controllers => { :professors => "professors" }
@@ -24,15 +23,18 @@ Rails.application.routes.draw do
   end
 
   resources :request_for_teaching_assistants
+
   resources :professors
   get 'professors/:id/change_password' => 'professors#change_password', as: :change_professor_password
 
   resources :courses
+
   resources :secretaries
   get 'secretaries/:id/change_password' => 'secretaries#change_password', as: :change_secretary_password
 
   resources :students
-  resources :request_for_teaching_assistants
+
+  resources :dumps
 
   resources :candidatures
   get 'candidatures/:id/download_transcript' => 'candidatures#download_transcript', as: :download_candidature_transcript
