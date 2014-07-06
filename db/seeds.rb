@@ -14,7 +14,7 @@ Department.create(code: 'MAE')
 Department.create(code: 'MAP')
 Department.create(code: 'MAT')
 Department.create(code: 'MPM')
-Department.create(code: 'INTERDEPARTMENTAL')
+Department.create(code: 'INTERDEPARTAMENTAL')
 
 if Rails.env.development?
   [
