@@ -5,7 +5,7 @@ Feature: Accessing the page
 
     Scenario: Verify if non-admins can't create a professors
         Given I'm at the create_professors page
-        Then I should see "Para continuar, faça login ou registre-se."
+        Then I should see "Acesso negado"
 
     Scenario: Verify if the admin can't edit professors
         Given I'm at the login page

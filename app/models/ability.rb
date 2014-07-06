@@ -2,15 +2,15 @@ class Ability
   include CanCan::Ability
 
   def initialize(user)
-    if nil == defined? user #user is not logged in
+    if user == nil #user is not logged in
       cannot :read, Admin
       cannot :update, Admin
       cannot :read, Dump
       cannot :create, Professor
-      cannot :read, Professor
+      can :read, Professor
       cannot :update, Professor
       cannot :create, Secretary
-      cannot :read, Secretary
+      can :read, Secretary
       cannot :update, Secretary
       cannot :destroy, Secretary
       can :create, Student

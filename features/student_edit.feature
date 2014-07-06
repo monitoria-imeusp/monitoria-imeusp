@@ -34,7 +34,7 @@ Feature: edit a student
     
     Scenario: Student trying to edit a student that isn't him
         When I try to access the "students" page with id "2" to "edit"
-        Then I should see "Bem-vindo ao sistema de monitoria do IME-USP!"
+        Then I should see "Acesso negado"
     
     Scenario: Student trying to update a student that doesn't exist
 		When I try to update the student with id "44"

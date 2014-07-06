@@ -188,7 +188,7 @@ describe RequestForTeachingAssistantsController do
       it "redirects back to the request list" do
         request_for_teaching_assistant = RequestForTeachingAssistant.create! not_owned_attributes
         get :edit, {:id => request_for_teaching_assistant.to_param}
-        response.should redirect_to request_for_teaching_assistants_path
+        response.response_code.should == 403
       end
     end
   end
@@ -300,10 +300,10 @@ describe RequestForTeachingAssistantsController do
     end
 
     describe "a request not from the signed professor" do
-      it "redirects back to the request list" do
+      it "gives access denied" do
         request_for_teaching_assistant = RequestForTeachingAssistant.create! not_owned_attributes
         delete :destroy, {:id => request_for_teaching_assistant.to_param}
-        response.should redirect_to request_for_teaching_assistants_path
+        response.response_code.should == 403
       end
     end
   end
