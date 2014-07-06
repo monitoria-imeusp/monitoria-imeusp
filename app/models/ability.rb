@@ -9,6 +9,7 @@ class Ability
       cannot :create, Professor
       can :read, Professor
       cannot :update, Professor
+      cannot :destroy, Professor
       cannot :create, Secretary
       can :read, Secretary
       cannot :update, Secretary
@@ -36,6 +37,7 @@ class Ability
       can :create, Professor
       can :read, Professor
       can :update, Professor
+      can :destroy, Professor
       can :create, Secretary
       can :read, Secretary
       can :update, Secretary
@@ -63,6 +65,7 @@ class Ability
       can :create, Professor
       can :read, Professor
       can :update, Professor
+      can :destroy, Professor
       cannot :create, Secretary
       can :read, Secretary
       cannot :update, Secretary
@@ -90,6 +93,7 @@ class Ability
       can :create, Professor
       can :read, Professor
       can :update, Professor
+      can :destroy, Professor
       cannot :create, Secretary
       can :read, Secretary
       cannot :update, Secretary
@@ -116,7 +120,8 @@ class Ability
       cannot :read, Dump
       cannot :create, Professor
       can :read, Professor
-      can :update, Professor #, :id => user.id  #Only himself
+      can :update, Professor #, :id => user.id #Only himself
+      can :destroy, Professor #, :id => user.id #Only Himself
       cannot :create, Secretary
       can :read, Secretary
       cannot :update, Secretary
@@ -144,6 +149,7 @@ class Ability
       can :create, Professor
       can :read, Professor
       can :update, Professor
+      can :destroy, Professor
       can :create, Secretary
       can :read, Secretary
       can :update, Secretary
@@ -171,6 +177,7 @@ class Ability
       cannot :create, Professor
       can :read, Professor
       cannot :update, Professor
+      cannot :destroy, Professor
       cannot :create, Secretary
       can :read, Secretary
       cannot :update, Secretary
