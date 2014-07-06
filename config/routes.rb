@@ -2,7 +2,6 @@ Rails.application.routes.draw do
 
   get 'home/index'
   get 'home/dump'
-  get 'home/administracao'
 
   devise_for :admins, :controllers => { :admins => "admins" }
   devise_for :professors, :controllers => { :professors => "professors" }
@@ -16,13 +15,13 @@ Rails.application.routes.draw do
   get '/sistema' => 'home#sys'
   get '/prof' => 'home#prof'
 
-
   resources :admins do
     collection do
-      post :register_courses
+      get :control_panel
+      post :register_undergraduate_courses
+      post :register_postgraduate_courses
     end
   end
-
 
   resources :request_for_teaching_assistants
   resources :professors

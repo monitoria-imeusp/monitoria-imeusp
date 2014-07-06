@@ -109,7 +109,7 @@
               <%= link_to "Dump do banco de dados", { action: "dump", controller: "home" } %>
             </li>
             <li>
-              <%= link_to "Administração do sistema", { action: "administracao", controller: "home" } %>
+              <%= link_to "Administração do sistema", control_panel_admins_path %>
             </li>
           <% elsif professor_signed_in? %>
             <% unless Rails.env.production? %>
