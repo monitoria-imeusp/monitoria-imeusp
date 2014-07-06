@@ -31,9 +31,7 @@ Feature: Secretary edit
 
     Scenario: Any person trying to edit a secretary
         Given I'm at the "secretaries" page
-        And I click the "Marcia" link
-        And I should not see "Editar"
-        And I should not see "Remover"
+		Then I should see "Acesso negado"
 
     Scenario: Secretary edits itself
         Given I'm at the secretary login page

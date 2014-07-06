@@ -7,11 +7,11 @@ class Ability
       cannot :update, Admin
       cannot :read, Dump
       cannot :create, Professor
-      can :read, Professor
+      cannot :read, Professor
       cannot :update, Professor
       cannot :destroy, Professor
       cannot :create, Secretary
-      can :read, Secretary
+      cannot :read, Secretary
       cannot :update, Secretary
       cannot :destroy, Secretary
       can :create, Student
