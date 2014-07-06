@@ -86,6 +86,9 @@ gem 'devise'
 # Internationalization
 gem 'rails-i18n'
 
+# Use mechanize to collect courses codes and names
+gem 'mechanize'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 

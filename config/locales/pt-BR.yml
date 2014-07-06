@@ -47,6 +47,7 @@ pt-BR:
       course:
         name: 'Nome da Disciplina'
         course_code: 'Código da Disciplina'
+        educational_level: 'Nível de escolaridade'
       secretary:
         nusp: 'Número USP'
         name: 'Nome'

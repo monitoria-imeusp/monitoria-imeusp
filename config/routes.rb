@@ -15,8 +15,13 @@ Rails.application.routes.draw do
   get '/sistema' => 'home#sys'
   get '/prof' => 'home#prof'
 
-
-  resources :admins
+  resources :admins do
+    collection do
+      get :control_panel
+      post :register_undergraduate_courses
+      post :register_postgraduate_courses
+    end
+  end
 
   resources :request_for_teaching_assistants
   resources :professors
