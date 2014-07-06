@@ -80,6 +80,10 @@ div.content {
   margin-left: 4em;
 }
 
+select {
+  max-width: 60%;
+}
+
 /*********************************************************/
 
 div.pagetop {
