@@ -92,12 +92,11 @@ class Admin < ActiveRecord::Base
     end
 
     courses_codes.each_with_index do |course_code, index|
-      print "\n\n#{course_code[1].class} #{courses_names[index].class} #{courses_codes[0].class}"
       if course_code[1] > 1
         Course.create({
                       educational_level: "post undergraduation",
                       name: courses_names[index],
-                      course_code: courses_codes[0],
+                      course_code: course_code[0],
                       department: Department.find_by(:code => "INTERDEPARTMENTAL")
                       })
       else
