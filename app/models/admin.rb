@@ -22,7 +22,7 @@ class Admin < ActiveRecord::Base
 
     departments.each { |dep_element| departments_courses << dep_element.css('td')[1].children[1].attributes['href'].value }
 
-    departments_courses.each do |department_link| 
+    departments_courses.each do |department_link|
       department.get("https://uspdigital.usp.br/jupiterweb/#{department_link}")
       courses = department.page.parser.css('table a')
       courses.shift
@@ -45,20 +45,20 @@ class Admin < ActiveRecord::Base
         end
       end
     end
-    
+
     courses_codes.each_with_index do |course_code, index|
       if course_code[1] > 1
-        Course.create({educational_level: "undergraduation",
+        Course.create({educational_level: 0,
                       name: courses_names[index],
                       course_code: course_code[0],
                       department: Department.find_by(:code => "INTERDEPARTMENTAL")})
       else
         department_code = course_code[0].match(/[A-Z]{3}/).to_s
-        Course.create({educational_level: "undergraduation",
+        Course.create({educational_level: 0,
                       name: courses_names[index],
                       course_code: course_code[0],
-                      department: Department.find_by(:code => department_code)})        
-      end 
+                      department: Department.find_by(:code => department_code)})
+      end
     end
   end
 
@@ -94,7 +94,7 @@ class Admin < ActiveRecord::Base
     courses_codes.each_with_index do |course_code, index|
       if course_code[1] > 1
         Course.create({
-                      educational_level: "post undergraduation",
+                      educational_level: 1,
                       name: courses_names[index],
                       course_code: course_code[0],
                       department: Department.find_by(:code => "INTERDEPARTMENTAL")
@@ -102,12 +102,12 @@ class Admin < ActiveRecord::Base
       else
         department_code = course_code[0][0..2]
         Course.create({
-                      educational_level: "post undergraduation",
+                      educational_level: 1,
                       name: courses_names[index],
                       course_code: course_code[0],
-                      department: Department.find_by(:code => "MAC")
-                      })        
-      end 
+                      department: Department.find_by(:code => department_code)
+                      })
+      end
     end
   end
 
