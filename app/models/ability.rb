@@ -116,7 +116,7 @@ class Ability
       cannot :read, Dump
       cannot :create, Professor
       can :read, Professor
-      can :update, Professor, :id => user.id  #Only himself
+      can :update, Professor #, :id => user.id  #Only himself
       cannot :create, Secretary
       can :read, Secretary
       cannot :update, Secretary
@@ -130,9 +130,9 @@ class Ability
       cannot :update, Course
       cannot :destroy, Course
       can :create, RequestForTeachingAssistant
-      can :read, RequestForTeachingAssistant, :professor_id => user.id #Only his own
-      can :update, RequestForTeachingAssistant, :professor_id => user.id #Only his own
-      can :destroy, RequestForTeachingAssistant, :professor_id => user.id #Only his own
+      can :read, RequestForTeachingAssistant #, :professor_id => user.id #Only his own
+      can :update, RequestForTeachingAssistant #, :professor_id => user.id #Only his own
+      can :destroy, RequestForTeachingAssistant #, :professor_id => user.id #Only his own
       cannot :create, Candidature
       cannot :read, Candidature
       cannot :update, Candidature
@@ -176,9 +176,9 @@ class Ability
       cannot :update, Secretary
       cannot :destroy, Secretary
       cannot :create, Student
-      can :read, Student, :id => user.id #Only himself
-      can :update, Student, :id => user.id #Only himself
-      can :destroy, Student, :id => user.id #Only himself
+      can :read, Student #, :id => user.id #Only himself
+      can :update, Student #, :id => user.id #Only himself
+      can :destroy, Student #, :id => user.id #Only himself
       cannot :create, Course
       can :read, Course
       cannot :update, Course
@@ -188,9 +188,9 @@ class Ability
       cannot :update, RequestForTeachingAssistant
       cannot :destroy, RequestForTeachingAssistant
       can :create, Candidature
-      can :read, Candidature, :candidature_id => user.id #Only his own
-      can :update, Candidature, :candidature_id => user.id #Only his own
-      can :destroy, Candidature, :candidature_id => user.id #Only his own
+      can :read, Candidature #, :student_id => user.id #Only his own
+      can :update, Candidature #, :student_id => user.id #Only his own
+      can :destroy, Candidature #, :student_id => user.id #Only his own
     end
 
     # The first argument to `can` is the action you are giving the user 

@@ -25,12 +25,11 @@ class ProfessorsController < ApplicationController
   end
 
   def edit
-  end
-
-  def change_password
+    @professor = Professor.find(params[:id])
   end
 
   def update
+    @professor = Professor.find(params[:id])
     if params[:professor][:password].blank? && params[:professor][:password_confirmation].blank?
       params[:professor].delete(:password)
       params[:professor].delete(:password_confirmation)
@@ -50,13 +49,22 @@ class ProfessorsController < ApplicationController
     redirect_to professors_path
   end
 
-  private
+  def change_password
+  end
 
+  private
   def redirect_if_not_exists
     if Professor.exists?(params[:id])
       @professor = Professor.find(params[:id])
+      authorization_professor
     else
       redirect_to professors_path
+    end
+  end
+
+  def authorization_professor
+    if (professor_signed_in? and current_professor.professor_rank == 0) and @professor.id != current_professor.id
+      raise CanCan::AccessDenied.new()
     end
   end
 

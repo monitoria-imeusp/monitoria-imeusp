@@ -15,6 +15,8 @@ class RequestForTeachingAssistantsController < ApplicationController
   # GET /request_for_teaching_assistants/1
   # GET /request_for_teaching_assistants/1.json
   def show
+    authorization_sprofessor
+    authorization_professor
     course_id = RequestForTeachingAssistant.find(params[:id]).course.id
     @candidatures_for_this_request = Candidature.where("course1_id = ? or course2_id = ? or course3_id = ?", course_id, course_id, course_id)
   end
@@ -26,6 +28,8 @@ class RequestForTeachingAssistantsController < ApplicationController
 
   # GET /request_for_teaching_assistants/1/edit
   def edit
+    authorization_sprofessor
+    authorization_professor
     if (not @request_for_teaching_assistant)
       redirect_to request_for_teaching_assistants_path
     end
@@ -51,6 +55,8 @@ class RequestForTeachingAssistantsController < ApplicationController
   # PATCH/PUT /request_for_teaching_assistants/1
   # PATCH/PUT /request_for_teaching_assistants/1.json
   def update
+    authorization_sprofessor
+    authorization_professor
     respond_to do |format|
       if @request_for_teaching_assistant.update(request_for_teaching_assistant_params)
         format.html { redirect_to @request_for_teaching_assistant, notice: 'Pedido de Monitoria atualizado com sucesso.' }
@@ -65,6 +71,8 @@ class RequestForTeachingAssistantsController < ApplicationController
   # DELETE /request_for_teaching_assistants/1
   # DELETE /request_for_teaching_assistants/1.json
   def destroy
+    authorization_sprofessor
+    authorization_professor
     if (not @request_for_teaching_assistant)
       redirect_to request_for_teaching_assistants_path
     else
@@ -81,6 +89,18 @@ class RequestForTeachingAssistantsController < ApplicationController
   def set_request_for_teaching_assistant
     if RequestForTeachingAssistant.exists?(params[:id])
       @request_for_teaching_assistant = RequestForTeachingAssistant.find(params[:id])
+    end
+  end
+
+  def authorization_sprofessor
+    if (professor_signed_in? and current_professor.professor_rank == 1) and Course.find_by_id(@request_for_teaching_assistant.course_id).department != current_professor.department
+      raise CanCan::AccessDenied.new()
+    end
+  end
+
+  def authorization_professor
+    if (professor_signed_in? and current_professor.professor_rank == 0) and @request_for_teaching_assistant.professor_id != current_professor.id
+      raise CanCan::AccessDenied.new()
     end
   end
 

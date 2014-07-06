@@ -18,6 +18,7 @@ class StudentsController < ApplicationController
   def show
     if Student.exists?(params[:id])
       @student = Student.find(params[:id])
+      authorization_student
     else
       redirect_to students_path
     end
@@ -30,11 +31,13 @@ class StudentsController < ApplicationController
   def edit
     if Student.exists?(params[:id])
       @student = Student.find(params[:id])
+      authorization_student
     end
   end
 
   def update
     @student = Student.find(params[:id])
+    authorization_student
     if params[:student][:password].blank? && params[:student][:password_confirmation].blank?
       params[:student].delete(:password)
       params[:student].delete(:password_confirmation)
@@ -49,12 +52,19 @@ class StudentsController < ApplicationController
 
   def destroy
     @student = Student.find(params[:id])
+    authorization_student
     @student.destroy
 
     redirect_to students_path
   end
 
   private
+  def authorization_student
+    if student_signed_in? and @student.id != current_student.id
+      raise CanCan::AccessDenied.new()
+    end
+  end
+
   def student_params
     params.require(:student).permit(:name, :password, :password_confirmation,
                                     :nusp, :gender, :rg, :cpf, 

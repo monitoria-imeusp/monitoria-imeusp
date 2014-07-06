@@ -33,6 +33,7 @@ class CandidaturesController < ApplicationController
   # GET /candidatures/1
   # GET /candidatures/1.json
   def show
+    authorization_student
   end
 
   def download_transcript
@@ -46,6 +47,7 @@ class CandidaturesController < ApplicationController
 
   # GET /candidatures/1/edit
   def edit
+    authorization_student
   end
 
   # POST /candidatures
@@ -75,6 +77,7 @@ class CandidaturesController < ApplicationController
   # PATCH/PUT /candidatures/1
   # PATCH/PUT /candidatures/1.json
   def update
+    authorization_student
     uploaded = upload
     respond_to do |format|
       if uploaded
@@ -97,6 +100,7 @@ class CandidaturesController < ApplicationController
   # DELETE /candidatures/1
   # DELETE /candidatures/1.json
   def destroy
+    authorization_student
     BackupMailer.delete_candidature(@candidature).deliver
     @candidature.destroy
     respond_to do |format|
@@ -135,7 +139,13 @@ class CandidaturesController < ApplicationController
     @candidature = Candidature.find(params[:id])
   end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
+  def authorization_student
+    if student_signed_in? and @candidature.student_id != current_student.id
+      raise CanCan::AccessDenied.new()
+    end
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
   def candidature_params
     params.require(:candidature).permit(:daytime_availability, :nighttime_availability, :time_period_preference, :course1_id, :course2_id, :course3_id, :student_id, :observation, :transcript_file_path)
   end
