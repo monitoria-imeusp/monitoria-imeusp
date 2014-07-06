@@ -48,17 +48,15 @@ class Course < ActiveRecord::Base
     end
 
     courses_codes.each_with_index do |course_code, index|
-      if course_code[1] > 1
-        Course.create({educational_level: 0,
-                      name: courses_names[index],
-                      course_code: course_code[0],
-                      department: Department.find_by(:code => "INTERDEPARTAMENTAL")})
-      else
-        department_code = course_code[0].match(/[A-Z]{3}/).to_s
-        Course.create({educational_level: 0,
-                      name: courses_names[index],
-                      course_code: course_code[0],
-                      department: Department.find_by(:code => department_code)})
+      department_code = course_code[0].match(/[A-Z]{3}/).to_s
+      attributes = {
+        educational_level: 0,
+        name: courses_names[index],
+        course_code: course_code[0],
+        department: Department.find_by(:code => (course_code[1] > 1 ? "INTERDEPARTAMENTAL" : department_code))
+      }
+      unless Course.where(course_code: course_code[0]).any?
+        Course.create(attributes)
       end
     end
   end
@@ -93,21 +91,15 @@ class Course < ActiveRecord::Base
     end
 
     courses_codes.each_with_index do |course_code, index|
-      if course_code[1] > 1
-        Course.create({
-                      educational_level: 1,
-                      name: courses_names[index],
-                      course_code: course_code[0],
-                      department: Department.find_by(:code => "INTERDEPARTAMENTAL")
-                      })
-      else
-        department_code = course_code[0][0..2]
-        Course.create({
-                      educational_level: 1,
-                      name: courses_names[index],
-                      course_code: course_code[0],
-                      department: Department.find_by(:code => department_code)
-                      })
+      department_code = course_code[0][0..2]
+      attributes = {
+        educational_level: 1,
+        name: courses_names[index],
+        course_code: course_code[0],
+        department: Department.find_by(:code => (course_code[1] > 1 ? "INTERDEPARTAMENTAL" : department_code))
+      }
+      unless Course.where(course_code: course_code[0]).any?
+        Course.create(attributes)
       end
     end
   end

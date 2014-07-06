@@ -68,7 +68,7 @@ if Rails.env.development?
   [
     {
       educational_level: 0,
-      name: "Introdução à Ciência da Computação",
+      name: "Introdução à Computação",
       course_code: "MAC0110",
       department: Department.find_by(:code => "MAC")
     },
@@ -92,8 +92,8 @@ if Rails.env.development?
     },
     {
       educational_level: 1,
-      name: "Tópicos de Análise de Algoritmos",
-      course_code: "MAC6711",
+      name: "Tópicos em Computação Gráfica",
+      course_code: "MAC6913",
       department: Department.find_by(:code => "MAC")
     }
   ].each do |course|
