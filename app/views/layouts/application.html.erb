@@ -120,8 +120,6 @@
             <% if current_professor.super_professor? then %>
               <li>
                 <%= link_to "Candidaturas", candidatures_path %>
-                <br>
-                <%= link_to "Dump do banco de dados", { action: "index", controller: "dumps" } %>
               </li>
             <% end %>
             <li>
@@ -133,9 +131,6 @@
             </li>
             <li>
                <%= link_to "Candidaturas", candidatures_path %>
-            </li>
-            <li>
-              <%= link_to "Dump do banco de dados", { action: "index", controller: "dumps" } %>
             </li>
           <% elsif student_signed_in? %>
             <li>
