@@ -17,6 +17,7 @@
   </div>
   <div class="field">
     <%= f.label :password, t('activerecord.attributes.student.password') %><br>
+    <span class="note">A senha deve conter pelo menos 8 caracteres</span><br>
     <%= f.password_field :password %>
   </div>
   <div class="field">
@@ -89,6 +90,12 @@
       </br>
     <% end %>
   </div>
+  <p><strong>
+    Será enviado um e-mail de confirmação para completar a ativação da conta.
+  </strong></p>
+  <p>
+    Qualquer dúvida, entre em contato com sistemamonitoria@ime.usp.br.
+  </p>
   <div class="field">
     <%= f.submit "Salvar" %>
   </div>
