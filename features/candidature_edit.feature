@@ -10,7 +10,7 @@ Feature: Upddating a candidature
         And there is a course with name "labxp" and code "MAC0342" and department "MAC"
         And there is a course with name "ihc" and code "MAC0446" and department "MAC"
         And there is a course with name "concorrente" and code "MAC0438" and department "MAC"
-        And there is an candidature with student "carlinhos" and first option "labxp" and second option "ihc" and third option "" and availability for daytime "true" and availability for night time "false" and period preference "2" and transcript file "exemplo.pdf"
+        And there is an candidature with student "carlinhos" and first option "labxp" and second option "ihc" and third option "" and availability for daytime "true" and availability for night time "false" and period preference "2"
         When I fill the "Número USP" field with "123456"
         And I fill the "Senha" field with "12345678"
         And I press the "Entrar" button
@@ -22,7 +22,6 @@ Feature: Upddating a candidature
         And I mark the "Disponibilidade para trabalhar de dia" checkbox
         And I select the preference option "Diurno"
         And I write on the "Observações" text area "teste observações"
-        And I upload the "exemplo.pdf" file to "Histórico Escolar"
         And I press the "Enviar" button
         Then I should see "Candidatura atualizada com sucesso."
         And I should see "Aluno: carlinhos"
@@ -40,7 +39,7 @@ Feature: Upddating a candidature
         And there is a course with name "labxp" and code "MAC0342" and department "MAC"
         And there is a course with name "ihc" and code "MAC0446" and department "MAC"
         And there is a course with name "concorrente" and code "MAC0438" and department "MAC"
-        And there is an candidature with student "carlinhos" and first option "labxp" and second option "ihc" and third option "" and availability for daytime "true" and availability for night time "false" and period preference "2" and transcript file "exemplo.pdf"
+        And there is an candidature with student "carlinhos" and first option "labxp" and second option "ihc" and third option "" and availability for daytime "true" and availability for night time "false" and period preference "2"
         When I fill the "Número USP" field with "123456"
         And I fill the "Senha" field with "12345678"
         And I press the "Entrar" button
