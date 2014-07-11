@@ -20,7 +20,6 @@ Feature: Create a candidature
         And I mark the "Disponibilidade para trabalhar de dia" checkbox
         And I select the preference option "Diurno"
         And I write on the "Observações" text area "teste observações"
-        And I upload the "exemplo.pdf" file to "Histórico Escolar"
         And I press the "Enviar" button
         Then I should see "Candidatura criada com sucesso."
         And I should see "Aluno: carlinhos"

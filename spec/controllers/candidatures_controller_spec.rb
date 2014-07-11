@@ -47,20 +47,17 @@ describe CandidaturesController do
 
   let(:valid_attributes) {{
     "time_period_preference" => "Indiferente",
-    "course1_id" => 1,
-    "transcript_file_path" => "example1.pdf"
+    "course1_id" => 1
   }}
 
   let(:valid_second_candidature_attributes) {{
     "time_period_preference" => "Indiferente",
-    "course1_id" => 2,
-    "transcript_file_path" => "example2.pdf"
+    "course1_id" => 2
   }}
 
   let(:valid_third_candidature_attributes) {{
     "time_period_preference" => "Indiferente",
-    "course1_id" => 3,
-    "transcript_file_path" => "example3.pdf"
+    "course1_id" => 3
   }}
 
   let(:kunio) { {
@@ -166,7 +163,6 @@ describe CandidaturesController do
   describe "POST create" do
     describe "with valid params" do
       before :each do
-        CandidaturesController.any_instance.should_receive(:upload).and_return(true)
         mail = double(Object)
         BackupMailer.should_receive(:new_candidature).with(an_instance_of(Candidature)).and_return(mail)
         mail.should_receive(:deliver)
@@ -211,7 +207,6 @@ describe CandidaturesController do
   describe "PUT update" do
     describe "with valid params" do
       before :each do
-        CandidaturesController.any_instance.should_receive(:upload).and_return(true)
         @candidature = Candidature.create! valid_attributes
         mail = double(Object)
         BackupMailer.should_receive(:edit_candidature).with(@candidature).and_return(mail)

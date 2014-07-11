@@ -54,20 +54,13 @@ class CandidaturesController < ApplicationController
   # POST /candidatures.json
   def create
     params[:candidature][:student_id] = current_student.id
-    uploaded = upload
     @candidature = Candidature.new(candidature_params)
     respond_to do |format|
-      if uploaded
-        if @candidature.save
-          BackupMailer.new_candidature(@candidature).deliver
-          format.html { redirect_to @candidature, notice: 'Candidatura criada com sucesso.' }
-          format.json { render action: 'show', status: :created, location: @candidature }
-        else
-          format.html { render action: 'new' }
-          format.json { render json: @candidature.errors, status: :unprocessable_entity }
-        end
+      if @candidature.save
+        BackupMailer.new_candidature(@candidature).deliver
+        format.html { redirect_to @candidature, notice: 'Candidatura criada com sucesso.' }
+        format.json { render action: 'show', status: :created, location: @candidature }
       else
-        @candidature.errors.add :transcript_file_path, "precisa ser um arquivo pdf"
         format.html { render action: 'new' }
         format.json { render json: @candidature.errors, status: :unprocessable_entity }
       end
@@ -78,19 +71,12 @@ class CandidaturesController < ApplicationController
   # PATCH/PUT /candidatures/1.json
   def update
     authorization_student
-    uploaded = upload
     respond_to do |format|
-      if uploaded
-        if @candidature.update(candidature_params)
-          BackupMailer.edit_candidature(@candidature).deliver
-          format.html { redirect_to @candidature, notice: 'Candidatura atualizada com sucesso.' }
-          format.json { render action: 'show', status: :ok, location: @candidature }
-        else
-          format.html { render action: 'edit' }
-          format.json { render json: @candidature.errors, status: :unprocessable_entity }
-        end
+      if @candidature.update(candidature_params)
+        BackupMailer.edit_candidature(@candidature).deliver
+        format.html { redirect_to @candidature, notice: 'Candidatura atualizada com sucesso.' }
+        format.json { render action: 'show', status: :ok, location: @candidature }
       else
-        @candidature.errors.add :transcript_file_path, "precisa ser um arquivo pdf"
         format.html { render action: 'edit' }
         format.json { render json: @candidature.errors, status: :unprocessable_entity }
       end
@@ -107,29 +93,6 @@ class CandidaturesController < ApplicationController
       format.html { redirect_to candidatures_url }
       format.json { head :no_content }
     end
-  end
-
-  protected
-  def upload
-      uploaded_io = params[:candidature][:transcript_file_path]
-      nusp = current_student.nusp
-      new_name = (Time.now.strftime '%Y%m%d_' + nusp) + ".pdf"
-      path = Candidature.path_to_transcript new_name
-      params[:candidature][:transcript_file_path] = new_name
-      if uploaded_io and  uploaded_io.content_type == "application/pdf"
-          File.open(path, 'wb') do |file|
-                    file.write(uploaded_io.read)
-          end
-          true
-      else
-          false
-      end
-  end
-
-  def download
-    send_file @candidature.path_to_transcript,
-              filename: @candidature.generate_transcript_filename,
-              type: "application/pdf"
   end
 
   private
