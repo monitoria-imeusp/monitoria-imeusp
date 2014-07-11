@@ -61,69 +61,12 @@ class Ability
       can :read, Candidature
       can :update, Candidature
       can :destroy, Candidature
-    elsif user.is_a? Professor and user.professor_rank == 2 #SSProfessor
+    elsif user.is_a? Professor #Professor
       cannot :read, Admin
       cannot :update, Admin
-      can :read, Dump
-      can :create, Professor
-      can :read, Professor
-      can :update, Professor
-      can :destroy, Professor
-      cannot :create, Secretary
-      can :read, Secretary
-      cannot :update, Secretary
-      cannot :destroy, Secretary
-      cannot :create, Student
-      can :read, Student
-      cannot :update, Student
-      cannot :destroy, Student
-      can :create, Course
-      can :read, Course
-      can :update, Course
-      can :destroy, Course
-      can :create, RequestForTeachingAssistant
-      can :read, RequestForTeachingAssistant
-      can :update, RequestForTeachingAssistant
-      can :destroy, RequestForTeachingAssistant
-      can :create, Candidature
-      can :read, Candidature
-      can :update, Candidature
-      can :destroy, Candidature
-    elsif user.is_a? Professor and user.professor_rank == 1 #SProfessor
-      cannot :read, Admin
-      cannot :update, Admin
-      can :read, Dump
-      can :create, Professor
-      can :read, Professor
-      can :update, Professor
-      can :destroy, Professor
-      cannot :create, Secretary
-      can :read, Secretary
-      cannot :update, Secretary
-      cannot :destroy, Secretary
-      cannot :create, Student
-      can :read, Student
-      cannot :update, Student
-      cannot :destroy, Student
-      can :create, Course
-      can :read, Course
-      can :update, Course
-      can :destroy, Course
-      can :create, RequestForTeachingAssistant
-      can :read, RequestForTeachingAssistant #Only his Dept.
-      can :update, RequestForTeachingAssistant #Only his Dept.
-      can :destroy, RequestForTeachingAssistant #Only his Dept.
-      can :create, Candidature
-      can :read, Candidature
-      can :update, Candidature
-      can :destroy, Candidature
-    elsif user.is_a? Professor and user.professor_rank == 0 #Professor
-      cannot :read, Admin
-      cannot :update, Admin
-      cannot :read, Dump
-      cannot :create, Professor
       can :read, Professor
       can :update, Professor #, :id => user.id #Only himself
+      can :change_password, Professor #, :id => user.id #Only himself
       can :destroy, Professor #, :id => user.id #Only Himself
       cannot :create, Secretary
       can :read, Secretary
@@ -133,18 +76,32 @@ class Ability
       can :read, Student
       cannot :update, Student
       cannot :destroy, Student
-      cannot :create, Course
       can :read, Course
-      cannot :update, Course
-      cannot :destroy, Course
       can :create, RequestForTeachingAssistant
       can :read, RequestForTeachingAssistant #, :professor_id => user.id #Only his own
       can :update, RequestForTeachingAssistant #, :professor_id => user.id #Only his own
       can :destroy, RequestForTeachingAssistant #, :professor_id => user.id #Only his own
-      cannot :create, Candidature
-      cannot :read, Candidature
-      cannot :update, Candidature
-      cannot :destroy, Candidature
+      if user.professor_rank > 0
+        can :read, Dump
+        can :create, Professor
+        can :create, Course
+        can :update, Course
+        can :destroy, Course
+        can :create, Candidature
+        can :read, Candidature
+        can :update, Candidature
+        can :destroy, Candidature
+      else
+        cannot :read, Dump
+        cannot :create, Professor
+        cannot :create, Course
+        cannot :update, Course
+        cannot :destroy, Course
+        cannot :create, Candidature
+        cannot :read, Candidature
+        cannot :update, Candidature
+        cannot :destroy, Candidature
+      end
     elsif user.is_a? Secretary
       cannot :read, Admin
       cannot :update, Admin
