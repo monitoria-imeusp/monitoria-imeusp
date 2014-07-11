@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140706170819) do
+ActiveRecord::Schema.define(version: 20140710234408) do
 
   create_table "admins", force: true do |t|
     t.string   "email",                  default: "", null: false
@@ -41,7 +41,6 @@ ActiveRecord::Schema.define(version: 20140706170819) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "student_id"
-    t.string   "transcript_file_path"
     t.text     "observation",            default: ""
   end
 
