@@ -76,10 +76,14 @@
 <% if student_signed_in? %>
   <p>
   <%= link_to 'Editar', edit_student_path(@student) %>
-  </p>  
+  </p>
 <% end %>
 
 <% if admin_signed_in? || secretary_signed_in? %>
+  <p>
+    <strong><%= t('activerecord.attributes.student.confirmed_at') + ':' %></strong>
+    <%= @student.confirmed_at ? @student.confirmed_at : t('activerecord.attributes.student.unconfirmed') %>
+  </p>
   <p>
   <%= link_to 'Remover', student_path(@student), method: :delete, data: { confirm: 'Tem certeza?' } %>
   </p>
