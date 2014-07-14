@@ -73,6 +73,8 @@ pt-BR:
         has_bank_account: 'Possui conta no Banco do Brasil'
         password: 'Senha'
         password_confirmation: 'Confirme a senha'
+        confirmed_at: 'Data de confirmação'
+        unconfirmed: 'Não confirmado'
       candidature:
         daytime_availability: 'Disponibilidade para trabalhar de dia'
         nighttime_availability: 'Disponibilidade para trabalhar de noite'
