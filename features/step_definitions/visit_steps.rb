@@ -42,6 +42,10 @@ Given(/^I'm at the student login page$/) do
   visit new_student_session_path
 end
 
+When(/^I go to the new candidature form$/) do
+  visit new_candidature_path
+end
+
 When(/^I try to access the "(.*?)" page with id "(.*?)" to "(.*?)"$/) do |page_name, id, action|
     if action != 'show'
         visit('/' + page_name + '/' + id.to_s + '/' + action)
