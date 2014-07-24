@@ -13,8 +13,7 @@ Feature: Create a candidature
         When I fill the "Número USP" field with "123456"
         And I fill the "Senha" field with "12345678"
         And I press the "Entrar" button
-        And I click the "Candidaturas" link
-        And I click the "Nova Candidatura" link
+        And I go to the new candidature form
 		And I select "MAC0342 - labxp" on the "Curso: 1ª opção"
 		And I select "MAC0438 - concorrente" on the "Curso: 2ª opção"
         And I mark the "Disponibilidade para trabalhar de dia" checkbox
@@ -40,8 +39,7 @@ Feature: Create a candidature
         When I fill the "Número USP" field with "123456"
         And I fill the "Senha" field with "12345678"
         And I press the "Entrar" button
-        And I click the "Candidaturas" link
-        And I click the "Nova Candidatura" link
+        And I go to the new candidature form
 		And I select "MAC0438 - concorrente" on the "Curso: 2ª opção"
         And I mark the "Disponibilidade para trabalhar de dia" checkbox
         And I select the preference option "Diurno"
