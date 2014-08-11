@@ -113,6 +113,7 @@ class Ability
       can :create, Secretary
       can :read, Secretary
       can :update, Secretary
+      can :change_password, Secretary #, :id => user.id #Only himself
       can :destroy, Secretary
       cannot :create, Student
       can :read, Student
