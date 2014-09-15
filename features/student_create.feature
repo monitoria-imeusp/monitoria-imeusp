@@ -7,7 +7,7 @@ Feature: Student register
     	Given I'm at the home page
         And I'm ready to receive email
         When I click the "Cadastrar-se" link
-        And I fill the "Nome" field with "Carlinhos"
+        And I fill the "Nome Completo" field with "Carlinhos"
         And I fill the "Senha" field with "12345678"
         And I fill the "Confirme a senha" field with "12345678"
         And I fill the "Número USP" field with "012345"
@@ -36,7 +36,7 @@ Feature: Student register
     Scenario: Real student can't create a student account
         Given I'm at the home page
         When I click the "Cadastrar-se" link
-        And I fill the "Nome" field with "Carlinhos"
+        And I fill the "Nome Completo" field with "Carlinhos"
         And I fill the "Senha" field with "12345678"
         And I fill the "Confirme a senha" field with "12345678"
         And I fill the "Número USP" field with "01245"
