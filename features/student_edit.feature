@@ -14,7 +14,7 @@ Feature: edit a student
     Scenario: Student edits his or hers profile
     	And I click the "Meu Perfil" link
         And I click the "Editar" link
-        And I fill the "Nome" field with "Carlinhos"
+        And I fill the "Nome Completo" field with "Carlinhos"
         And I fill the "Senha" field with "12345678"
         And I fill the "Confirme a senha" field with "12345678"
         And I select the gender option "Masculino"
@@ -25,7 +25,7 @@ Feature: edit a student
     Scenario: Student fails to edit his or hers profile
         And I click the "Meu Perfil" link
         And I click the "Editar" link
-        And I fill the "Nome" field with "Carlinhos"
+        And I fill the "Nome Completo" field with "Carlinhos"
         And I fill the "Senha" field with "12345678"
         And I select the gender option "Masculino"
         And I press the "Salvar" button

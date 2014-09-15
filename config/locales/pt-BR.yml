@@ -57,6 +57,7 @@ pt-BR:
       student:
         student: 'Aluno'
         name: 'Nome'
+        complete_name: 'Nome Completo'
         nusp: 'Número USP'
         gender: 'Sexo'
         rg: 'RG'
@@ -68,11 +69,14 @@ pt-BR:
         city: 'Cidade'
         state: 'Estado'
         tel: 'Telefone residencial'
+        tel_note: 'Use apenas dígitos e inclua o DDD (exemplo: 1144556677)'
         cel: 'Celular'
+        cel_note: 'Use apenas dígitos e inclua o DDD (exemplo: 11988776655)'
         email: 'Email'
         has_bank_account: 'Possui conta no Banco do Brasil'
         password: 'Senha'
         password_confirmation: 'Confirme a senha'
+        password_note: 'A senha deve conter pelo menos 8 caracteres'
         confirmed_at: 'Data de confirmação'
         unconfirmed: 'Não confirmado'
       candidature:
