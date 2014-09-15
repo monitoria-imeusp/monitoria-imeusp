@@ -56,7 +56,7 @@ pt-BR:
         password_confirmation: 'Confirme a senha'
       student:
         student: 'Aluno'
-        name: 'Nome'
+        name: 'Nome Completo'
         nusp: 'Número USP'
         gender: 'Sexo'
         rg: 'RG'
