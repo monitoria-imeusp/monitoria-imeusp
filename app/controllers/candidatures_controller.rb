@@ -71,7 +71,7 @@ class CandidaturesController < ApplicationController
         format.html { redirect_to @candidature, notice: 'Candidatura criada com sucesso.' }
         format.json { render action: 'show', status: :created, location: @candidature }
       else
-        format.html { render action: 'new' }
+        format.html { render action: 'new'}
         format.json { render json: @candidature.errors, status: :unprocessable_entity }
       end
     end
