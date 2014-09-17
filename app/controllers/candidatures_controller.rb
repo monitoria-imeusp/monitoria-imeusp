@@ -122,8 +122,8 @@ class CandidaturesController < ApplicationController
   def candidature_params
     params.require(:candidature).permit(
       :daytime_availability, :nighttime_availability, :time_period_preference,
-      :course1_id, :course2_id, :course3_id, :student_id, :semester_id, :observation,
-      :transcript_file_path
+      :course1_id, :course2_id, :course3_id, :course4_id, :student_id, :semester_id, 
+      :observation, :transcript_file_path
     )
   end
 

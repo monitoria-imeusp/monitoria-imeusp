@@ -8,5 +8,6 @@ FactoryGirl.define do
     course1_id 1
     course2_id 1
     course3_id 1
+    course4_id 1
   end
 end

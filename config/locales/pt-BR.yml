@@ -92,6 +92,7 @@ pt-BR:
         course2_id: 'Curso: 2ª opção'
         course3_id: 'Curso: 3ª opção'
         semester_id: 'Semestre'
+        course4_id: 'Curso: 4ª opção'
         observation: 'Observações'
         transcript_file_path: 'Histórico Escolar'
       department:
