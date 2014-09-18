@@ -17,6 +17,7 @@ Rails.application.routes.draw do
   resources :admins do
     collection do
       get :control_panel
+      post :duplicate_students
       post :register_undergraduate_courses
       post :register_postgraduate_courses
     end

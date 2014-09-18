@@ -36,6 +36,7 @@ class Ability
       can :control_panel, Admin
       can :register_undergraduate_courses, Admin
       can :register_postgraduate_courses, Admin
+      can :duplicate_students, Admin
       can :read, Dump
       can :create, Professor
       can :read, Professor
