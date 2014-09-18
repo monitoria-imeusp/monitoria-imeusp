@@ -36,9 +36,18 @@ end
 When(/^there is a student with name "(.*?)" and password "(.*?)" and nusp "(.*?)" and gender "(.*?)" and rg "(.*?)" and cpf "(.*?)" and address "(.*?)" and district "(.*?)" and zipcode "(.*?)" and city "(.*?)" and state "(.*?)" and tel "(.*?)" and cel "(.*?)" and email "(.*?)" and has_bank_account "(.*?)"$/) do |name, password, nusp, gender, rg, cpf, address, district, zipcode, city, state, tel, cel, email, has_bank_account|
   Student.create(name: name, password: password, email: email,
     nusp: nusp, gender: gender, rg: rg, cpf: cpf,
-    address: address, city: city, district: district, zipcode: zipcode, city: city, state: state,
+    address: address, city: city, district: district, zipcode: zipcode, state: state,
     tel: tel, cel: cel,
     has_bank_account: has_bank_account,
+    confirmation_token:nil, confirmed_at: Time.now)
+end
+
+Given(/^there is a student with name "(.*?)" with nusp "(.*?)" and email "(.*?)"$/) do |name, nusp, email|
+  Student.create(name: name, password: "changeme!", email: email,
+    nusp: nusp, gender: "1", rg: "1", cpf: "1",
+    address: "IME", city: "São Paulo", district: "Butantã", zipcode: "0", state: "SP",
+    tel: "1145454545", cel: "11985858585",
+    has_bank_account: "true",
     confirmation_token:nil, confirmed_at: Time.now)
 end
 
