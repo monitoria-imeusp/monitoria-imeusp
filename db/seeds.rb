@@ -148,4 +148,6 @@ if Rails.env.development?
     password: "changeme!",
     confirmed_at: Time.now
   )
+
+  Semester.create(year: 2014, parity: 1, open: false)
 end

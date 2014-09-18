@@ -1,0 +1,23 @@
+<h1>Semestres</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th><%= t('activerecord.attributes.semester.name') %></th>
+      <th><%= t('activerecord.attributes.semester.open') %></th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @semesters.each do |semester| %>
+      <tr>
+        <td><%= semester.year %>/<%= semester.parity_as_i %></td>
+        <td><%= semester.open_as_s %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= button_to "Adicionar semestre", controller: "semesters", :action => "create", :method => 'post' %>

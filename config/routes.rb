@@ -37,6 +37,7 @@ Rails.application.routes.draw do
 
   resources :dumps
 
+  resources :semesters
   resources :candidatures
   get 'candidatures/:id/download_transcript' => 'candidatures#download_transcript', as: :download_candidature_transcript
 
