@@ -3,6 +3,23 @@
 <div>
   <h3>Cadastro de disciplinas oferecidas no semestre</h3>
   <%= button_to "Cadastrar disciplinas de graduação", controller: "admins", :action => "register_undergraduate_courses", :method => 'post' %>
+  <br>
   <%= button_to "Cadastrar disciplinas de pós-graduação", controller: "admins", :action => "register_postgraduate_courses", :method => 'post' %>
+  <br>
+  <%= button_to "Detectar alunos duplicados", controller: "admins", :action => "duplicate_students", :method => 'get' %>
 </div>
+
+<% if @duplicates then %>
+  <div>
+    <h3>Alunos com número USP duplicados:</h3>
+    <% @duplicates.each do |entry| %>
+      <p>
+        <%= entry[0].nusp %>:
+        <% entry.each_with_index do |student, i| %>
+          <%= link_to i.to_s, student %>
+        <% end %>
+      </p>
+    <% end %>
+  </div>
+<% end %>
 

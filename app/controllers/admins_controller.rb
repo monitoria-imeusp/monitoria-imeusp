@@ -53,6 +53,27 @@ class AdminsController < ApplicationController
     end
   end
 
+  def duplicate_students
+    @duplicates = []
+    Student.all.each do |student|
+      entry = []
+      Student.all.each do |other|
+        if student.id < other.id and student.nusp == other.nusp then
+          entry.push student if entry.empty?
+          entry.push other
+        end
+      end
+      @duplicates.push entry unless entry.empty?
+    end
+    respond_to do |format|
+      if @duplicates.empty?
+        format.html { render control_panel_admins_path, notice: 'Nenhum aluno duplicado.' }
+      else
+        format.html { render control_panel_admins_path, alert: 'Alunos duplicados foram encontrados.' }
+      end
+    end
+  end
+
   private
     def admin_params
    		params.require(:admin).permit(:email, :password, :password_confirmation)
