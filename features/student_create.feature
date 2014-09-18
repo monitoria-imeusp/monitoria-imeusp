@@ -57,6 +57,14 @@ Feature: Student register
         Then I should not see "Nome: Carlinhos"
         And I should not see "Sexo: Masculino"
 
+    Scenario: Student cannot create account with same NUSP
+        Given I'm at the home page
+        And there is a student with name "Carlinhos" with nusp "012345" and email "cef@ime.usp.br"
+        When I click the "Cadastrar-se" link
+        And I fill the fields for student "Carlinhos" with nusp "012345" and email "cef@gmail.com"
+        And I press the "Salvar" button
+        Then I should see "Número USP já está em uso"
+
     Scenario: Admin cannot create a student account while logged
         Given I'm at the login page
         And there is an admin user with email "kazuo@ime.usp.br" and password "admin123"
