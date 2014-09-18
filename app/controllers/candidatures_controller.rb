@@ -62,11 +62,15 @@ class CandidaturesController < ApplicationController
     params[:candidature][:student_id] = current_student.id
     @candidature = Candidature.new(candidature_params)
     respond_to do |format|
+<<<<<<< HEAD
       if already_for_semester? @candidature.student_id, @candidature.semester_id
         @candidature.errors.add(:semester_id, t('errors.models.candidature.toomany'))
         format.html { render action: 'new' }
         format.json { render json: @candidature.errors, status: :unprocessable_entity }
       elsif @candidature.save
+=======
+      if @candidature.save
+>>>>>>> [fix_issue_47] Não mais limita a escolha de cursos na candidatura
         BackupMailer.new_candidature(@candidature).deliver
         format.html { redirect_to @candidature, notice: 'Candidatura criada com sucesso.' }
         format.json { render action: 'show', status: :created, location: @candidature }
