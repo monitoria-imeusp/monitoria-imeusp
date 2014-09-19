@@ -1,5 +1,17 @@
 <h1>Semestres</h1>
 
+<% if @semester and @semester.errors.any? %>
+  <div id="error_explanation">
+    <h2><%= pluralize(@semester.errors.count, "erro impediu", "erros impediram") %> essa candidatura de ser salva:</h3>
+
+    <ul>
+    <% @semester.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
+  </div>
+<% end %>
+
 <table>
   <thead>
     <tr>
@@ -13,6 +25,15 @@
       <tr>
         <td><%= semester.year %>/<%= semester.parity_as_i %></td>
         <td><%= semester.open_as_s %></td>
+        <% if semester.open %>
+          <td>
+            <%= button_to "Fechar", controller: "semesters", :action => "close", :id => semester.id, :method => 'post' %>
+          </td>
+        <% else %>
+          <td>
+            <%= button_to "Abrir", controller: "semesters", :action => "open", :id => semester.id, :method => 'post' %>
+          </td>
+        <% end %>
       </tr>
     <% end %>
   </tbody>

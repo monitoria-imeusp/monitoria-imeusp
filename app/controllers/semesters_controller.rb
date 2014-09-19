@@ -19,16 +19,25 @@ class SemestersController < ApplicationController
     @semesters = ordered_semesters
   end
 
-  def update
-    @semester = Semester.find params[:id]
-    if @semester.update semester_params
-      redirect_to semesters_path
-    else
-      render :edit
-    end
+  def open
+    change_state true
+  end
+
+  def close
+    change_state false
   end
 
   private
+
+  def change_state state
+    @semester = Semester.find params[:id]
+    @semester.open = state
+    if @semester.save
+      redirect_to semesters_path
+    else
+      render semesters_path
+    end
+  end
 
   def ordered_semesters
     Semester.order :year, :parity
