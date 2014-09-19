@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140918130208) do
+ActiveRecord::Schema.define(version: 20140918213508) do
 
   create_table "admins", force: true do |t|
     t.string   "email",                  default: "", null: false
@@ -125,6 +125,16 @@ ActiveRecord::Schema.define(version: 20140918130208) do
     t.datetime "confirmation_sent_at"
     t.string   "unconfirmed_email"
   end
+
+  create_table "semesters", force: true do |t|
+    t.integer  "year"
+    t.integer  "parity"
+    t.boolean  "open"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "semesters", ["year", "parity"], name: "index_semesters_on_year_and_parity", unique: true
 
   create_table "students", force: true do |t|
     t.string   "name"

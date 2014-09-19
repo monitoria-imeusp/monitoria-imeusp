@@ -69,3 +69,11 @@ When(/^there is a course with name "(.*?)" and code "(.*?)" and department "(.*?
   Course.create(name: name, course_code: code, department_id: Department.find_by({:code => department}).id)
 end
 
+When(/^there is a closed semester "(.*?)" "(.*?)"$/) do |year, parity|
+  Semester.create(year: year, parity: parity, open: false)
+end
+
+When(/^there is an open semester "(.*?)" "(.*?)"$/) do |year, parity|
+  Semester.create(year: year, parity: parity, open: true)
+end
+

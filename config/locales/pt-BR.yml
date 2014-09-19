@@ -54,6 +54,11 @@ pt-BR:
         email: 'Email'
         password: 'Senha'
         password_confirmation: 'Confirme a senha'
+      semester:
+        name: 'Semestre'
+        year: 'Ano'
+        parity: 'Paridade'
+        open: 'Estado'
       student:
         student: 'Aluno'
         name: 'Nome'

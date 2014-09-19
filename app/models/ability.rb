@@ -162,6 +162,11 @@ class Ability
       can :destroy, Candidature #, :student_id => user.id #Only his own
     end
 
+    # Semester management permissions
+    if user.is_a? Admin or user.is_a? Secretary
+      can :manage, Semester
+    end
+
     # The first argument to `can` is the action you are giving the user
     # permission to do.
     # If you pass :manage it will apply to every action. Other common actions
