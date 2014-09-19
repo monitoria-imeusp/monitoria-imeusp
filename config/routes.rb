@@ -37,6 +37,10 @@ Rails.application.routes.draw do
 
   resources :dumps
 
+  resources :semesters
+  post 'semesters/:id/open' => 'semesters#open', as: :open_semester
+  post 'semesters/:id/close' => 'semesters#close', as: :close_semester
+
   resources :candidatures
   get 'candidatures/:id/download_transcript' => 'candidatures#download_transcript', as: :download_candidature_transcript
 
