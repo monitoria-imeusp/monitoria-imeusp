@@ -6,7 +6,11 @@ class CandidaturesController < ApplicationController
   # GET /candidatures.json
   def index
     @candidatures_filtered = {}
-    @semesters = Semester.all_open
+    if student_signed_in?
+      @semesters = Semester.all_open.map do |semester|
+        { get: semester, valid: (not already_for_semester?(current_student.id, semester.id)) }
+      end
+    end
     Department.all.each do |dep|
       @candidatures_filtered[dep.code] = []
     end
@@ -58,7 +62,7 @@ class CandidaturesController < ApplicationController
     params[:candidature][:student_id] = current_student.id
     @candidature = Candidature.new(candidature_params)
     respond_to do |format|
-      if already_for_semester? @candidature
+      if already_for_semester? @candidature.student_id, @candidature.semester_id
         @candidature.errors.add(:semester_id, t('errors.models.candidature.toomany'))
         format.html { render action: 'new' }
         format.json { render json: @candidature.errors, status: :unprocessable_entity }
@@ -131,8 +135,8 @@ class CandidaturesController < ApplicationController
     return false
   end
 
-  def already_for_semester? candidature
-    Candidature.where(student_id: candidature.student_id, semester_id: candidature.semester_id).any?
+  def already_for_semester? student_id, semester_id
+    Candidature.where(student_id: student_id, semester_id: semester_id).any?
   end
 
 end

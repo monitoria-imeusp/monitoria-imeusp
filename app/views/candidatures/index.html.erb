@@ -50,6 +50,9 @@
 
 <% if student_signed_in? %>
   <% @semesters.each do |semester| %>
-      <%= link_to "Candidatar-se para #{semester.year}/#{semester.parity_as_i}", new_candidature_path(semester) %>
+    <% if semester[:valid] %>
+      <%= link_to "Candidatar-se para #{semester[:get].year}/#{semester[:get].parity_as_i}",
+                  new_candidature_path(semester[:get]) %>
+    <% end %>
   <% end %>
 <% end %>
