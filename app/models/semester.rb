@@ -18,4 +18,8 @@ class Semester < ActiveRecord::Base
   def open_as_s
     open ? "Aberto" : "Fechado"
   end
+
+  def self.all_open
+    Semester.where(open: true).all
+  end
 end
