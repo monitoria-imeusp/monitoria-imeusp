@@ -19,6 +19,10 @@ class Semester < ActiveRecord::Base
     open ? "Aberto" : "Fechado"
   end
 
+  def period_as_s
+    year.to_s + "/" + parity_as_i.to_s
+  end
+
   def self.all_open
     Semester.where(open: true).all
   end

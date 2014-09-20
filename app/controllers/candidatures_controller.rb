@@ -6,6 +6,11 @@ class CandidaturesController < ApplicationController
   # GET /candidatures.json
   def index
     @candidatures_filtered = {}
+    if student_signed_in?
+      @semesters = Semester.all_open.map do |semester|
+        { get: semester, valid: (not already_for_semester?(current_student.id, semester.id)) }
+      end
+    end
     Department.all.each do |dep|
       @candidatures_filtered[dep.code] = []
     end
@@ -40,9 +45,10 @@ class CandidaturesController < ApplicationController
     download
   end
 
-  # GET /candidatures/new
+  # GET /candidatures/2014/new
   def new
     @candidature = Candidature.new
+    @semester = Semester.find(params[:id])
   end
 
   # GET /candidatures/1/edit
@@ -56,7 +62,11 @@ class CandidaturesController < ApplicationController
     params[:candidature][:student_id] = current_student.id
     @candidature = Candidature.new(candidature_params)
     respond_to do |format|
-      if @candidature.save
+      if already_for_semester? @candidature.student_id, @candidature.semester_id
+        @candidature.errors.add(:semester_id, t('errors.models.candidature.toomany'))
+        format.html { render action: 'new' }
+        format.json { render json: @candidature.errors, status: :unprocessable_entity }
+      elsif @candidature.save
         BackupMailer.new_candidature(@candidature).deliver
         format.html { redirect_to @candidature, notice: 'Candidatura criada com sucesso.' }
         format.json { render action: 'show', status: :created, location: @candidature }
@@ -110,7 +120,11 @@ class CandidaturesController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def candidature_params
-    params.require(:candidature).permit(:daytime_availability, :nighttime_availability, :time_period_preference, :course1_id, :course2_id, :course3_id, :student_id, :observation, :transcript_file_path)
+    params.require(:candidature).permit(
+      :daytime_availability, :nighttime_availability, :time_period_preference,
+      :course1_id, :course2_id, :course3_id, :student_id, :semester_id, :observation,
+      :transcript_file_path
+    )
   end
 
   def candidature_of_department?(professor, candidature)
@@ -119,6 +133,10 @@ class CandidaturesController < ApplicationController
       return true
     end
     return false
+  end
+
+  def already_for_semester? student_id, semester_id
+    Candidature.where(student_id: student_id, semester_id: semester_id).any?
   end
 
 end
