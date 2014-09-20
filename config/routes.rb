@@ -41,8 +41,9 @@ Rails.application.routes.draw do
   post 'semesters/:id/open' => 'semesters#open', as: :open_semester
   post 'semesters/:id/close' => 'semesters#close', as: :close_semester
 
-  resources :candidatures
+  resources :candidatures, except: :new
   get 'candidatures/:id/download_transcript' => 'candidatures#download_transcript', as: :download_candidature_transcript
+  get 'candidatures/:id/new' => 'candidatures#new', as: :new_candidature
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

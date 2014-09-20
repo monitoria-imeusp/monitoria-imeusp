@@ -6,6 +6,7 @@ class CandidaturesController < ApplicationController
   # GET /candidatures.json
   def index
     @candidatures_filtered = {}
+    @semesters = Semester.all_open
     Department.all.each do |dep|
       @candidatures_filtered[dep.code] = []
     end
@@ -40,9 +41,10 @@ class CandidaturesController < ApplicationController
     download
   end
 
-  # GET /candidatures/new
+  # GET /candidatures/2014/new
   def new
     @candidature = Candidature.new
+    @semester = Semester.find(params[:id])
   end
 
   # GET /candidatures/1/edit
@@ -110,7 +112,11 @@ class CandidaturesController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def candidature_params
-    params.require(:candidature).permit(:daytime_availability, :nighttime_availability, :time_period_preference, :course1_id, :course2_id, :course3_id, :student_id, :observation, :transcript_file_path)
+    params.require(:candidature).permit(
+      :daytime_availability, :nighttime_availability, :time_period_preference,
+      :course1_id, :course2_id, :course3_id, :student_id, :semester_id, :observation,
+      :transcript_file_path
+    )
   end
 
   def candidature_of_department?(professor, candidature)
