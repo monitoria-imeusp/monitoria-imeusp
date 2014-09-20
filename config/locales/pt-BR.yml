@@ -91,7 +91,7 @@ pt-BR:
         course1_id: 'Curso: 1ª opção'
         course2_id: 'Curso: 2ª opção'
         course3_id: 'Curso: 3ª opção'
-        semester: 'Semestre'
+        semester_id: 'Semestre'
         observation: 'Observações'
         transcript_file_path: 'Histórico Escolar'
       department:
@@ -111,3 +111,5 @@ pt-BR:
           priority:
             inclusion: 'Escolha uma prioridade'
             blank: ''
+      candidature:
+        toomany: 'Você já tem uma candidatura nesse semestre'

@@ -58,7 +58,11 @@ class CandidaturesController < ApplicationController
     params[:candidature][:student_id] = current_student.id
     @candidature = Candidature.new(candidature_params)
     respond_to do |format|
-      if @candidature.save
+      if already_for_semester? @candidature
+        @candidature.errors.add(:semester_id, t('errors.models.candidature.toomany'))
+        format.html { render action: 'new' }
+        format.json { render json: @candidature.errors, status: :unprocessable_entity }
+      elsif @candidature.save
         BackupMailer.new_candidature(@candidature).deliver
         format.html { redirect_to @candidature, notice: 'Candidatura criada com sucesso.' }
         format.json { render action: 'show', status: :created, location: @candidature }
@@ -125,6 +129,10 @@ class CandidaturesController < ApplicationController
       return true
     end
     return false
+  end
+
+  def already_for_semester? candidature
+    Candidature.where(student_id: candidature.student_id, semester_id: candidature.semester_id).any?
   end
 
 end
