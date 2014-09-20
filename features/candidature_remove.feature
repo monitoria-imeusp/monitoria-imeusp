@@ -1,10 +1,13 @@
 Feature: Deleting a candidature
-	In order to delete a candidature
-	As a student
-	I want do delete a candidature
+    In order to delete a candidature
+    As a student
+    I want do delete a candidature
 
-	@javascript
-	Scenario: Student deleting a course
+    Background:
+        When there is an open semester "2014" "1"
+
+    @javascript
+    Scenario: Student deleting a course
         Given I'm at the student login page
         And there is a student with name "carlinhos" and password "12345678" and nusp "123456" and gender "1" and rg "123" and cpf "321" and address "matao" and district "butanta" and zipcode "000" and city "sp" and state "sp" and tel "0123456789" and cel "1234567890" and email "eu@usp.br" and has_bank_account "true"
         And there is a department with code "MAC"

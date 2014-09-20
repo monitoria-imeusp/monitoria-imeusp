@@ -141,6 +141,15 @@ if Rails.env.development?
     Student.create(student)
   end
 
+  Candidature.create(
+    student_id: Student.first.id,
+    course1_id: Course.first.id,
+    daytime_availability: true,
+    nighttime_availability: false,
+    time_period_preference: "0",
+    semester_id: Semester.first.id
+  )
+
   Secretary.create(
     name: "Marcia",
     nusp: "99999",

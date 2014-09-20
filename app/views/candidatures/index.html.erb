@@ -11,6 +11,7 @@
         <th><%= t('activerecord.attributes.candidature.course1_id') %></th>
         <th><%= t('activerecord.attributes.candidature.course2_id') %></th>
         <th><%= t('activerecord.attributes.candidature.course3_id') %></th>
+        <th><%= t('activerecord.attributes.candidature.semester_id') %></th>
           <th colspan="3"></th>
         </tr>
       </thead>
@@ -24,15 +25,18 @@
             </td>
             <td>
               <% if candidature.course2_id != nil %>
-              <% course = Course.find(candidature.course2_id) %>
-              <%= course.course_code + " - " + course.name %>
+                <% course = Course.find(candidature.course2_id) %>
+                <%= course.course_code + " - " + course.name %>
               <% end %>
             </td>
             <td>
               <% if candidature.course3_id != nil %>
-              <% course = Course.find(candidature.course3_id) %>
-              <%= course.course_code + " - " + course.name %>
+                <% course = Course.find(candidature.course3_id) %>
+                <%= course.course_code + " - " + course.name %>
               <% end %>
+            </td>
+            <td>
+              <%= candidature.semester.period_as_s %>
             </td>
             <td><%= link_to 'Ver', candidature %></td>
           </tr>
@@ -44,7 +48,11 @@
 
 <br>
 
-<%# FIXME %>
-<% if student_signed_in? and false %>
-    <%= link_to 'Nova Candidatura', new_candidature_path %>
+<% if student_signed_in? %>
+  <% @semesters.each do |semester| %>
+    <% if semester[:valid] %>
+      <%= link_to "Candidatar-se para #{semester[:get].year}/#{semester[:get].parity_as_i}",
+                  new_candidature_path(semester[:get]) %>
+    <% end %>
+  <% end %>
 <% end %>

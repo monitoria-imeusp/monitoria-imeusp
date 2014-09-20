@@ -47,17 +47,20 @@ describe CandidaturesController do
 
   let(:valid_attributes) {{
     "time_period_preference" => "Indiferente",
-    "course1_id" => 1
+    "course1_id" => 1,
+    "semester_id" => 1
   }}
 
   let(:valid_second_candidature_attributes) {{
     "time_period_preference" => "Indiferente",
-    "course1_id" => 2
+    "course1_id" => 2,
+    "semester_id" => 1
   }}
 
   let(:valid_third_candidature_attributes) {{
     "time_period_preference" => "Indiferente",
-    "course1_id" => 3
+    "course1_id" => 3,
+    "semester_id" => 1
   }}
 
   let(:kunio) { {
@@ -147,8 +150,10 @@ describe CandidaturesController do
 
   describe "GET new" do
     it "assigns a new candidature as @candidature" do
-      get :new, {}, valid_session
+      Semester.should_receive(:find).with("1").and_return(42)
+      get :new, {:id => "1"}, valid_session
       assigns(:candidature).should be_a_new(Candidature)
+      assigns(:semester).should be(42)
     end
   end
 
