@@ -60,6 +60,7 @@ Given(/^there is an candidature with student "(.*?)" and first option "(.*?)" an
     student_id: Student.where(name: student).take.id,
     course1_id: Course.where(name: course1).take.id,
     course2_id: Course.where(name: course2).take.id,
+    semester_id: Semester.first.id,
     daytime_availability: av_daytime,
     nighttime_availability: av_nighttime,
     time_period_preference: period)
