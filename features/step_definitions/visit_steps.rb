@@ -43,7 +43,7 @@ Given(/^I'm at the student login page$/) do
 end
 
 When(/^I go to the new candidature form$/) do
-  visit new_candidature_path
+  visit new_candidature_path(Semester.first.id)
 end
 
 When(/^I try to access the "(.*?)" page with id "(.*?)" to "(.*?)"$/) do |page_name, id, action|
