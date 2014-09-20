@@ -2,6 +2,11 @@
 <h2>Dados da incrição</h2>
 
 <p>
+  <strong><%= t('activerecord.attributes.candidature.semester_id') + ':' %></strong>
+  <%= @candidature.semester.period_as_s %>
+</p>
+
+<p>
   <strong><%= t('activerecord.attributes.candidature.course1_id') + ':' %></strong>
   <%= @course1 %>
 </p>
