@@ -1,6 +1,7 @@
 class Semester < ActiveRecord::Base
   include ActiveModel::Validations
 
+  has_many :candidature
   validates :year, presence: true
   validates :parity, presence: true, inclusion: {in: 0..1}
   #FIXME for some reason the line below does not work properly, it gives false positives.
