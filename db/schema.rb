@@ -42,6 +42,7 @@ ActiveRecord::Schema.define(version: 20140920191138) do
     t.datetime "updated_at"
     t.integer  "student_id"
     t.text     "observation",            default: ""
+    t.integer  "course4_id"
     t.integer  "semester_id"
   end
 
@@ -153,14 +154,14 @@ ActiveRecord::Schema.define(version: 20140920191138) do
     t.string   "tel"
     t.string   "cel"
     t.string   "email"
-    t.boolean  "has_bank_account"
+    t.boolean  "has_bank_account",       default: false
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "encrypted_password",     default: "", null: false
+    t.string   "encrypted_password",     default: "",    null: false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          default: 0,  null: false
+    t.integer  "sign_in_count",          default: 0,     null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"

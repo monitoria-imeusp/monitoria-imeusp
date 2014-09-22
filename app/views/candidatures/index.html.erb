@@ -11,6 +11,7 @@
         <th><%= t('activerecord.attributes.candidature.course1_id') %></th>
         <th><%= t('activerecord.attributes.candidature.course2_id') %></th>
         <th><%= t('activerecord.attributes.candidature.course3_id') %></th>
+        <th><%= t('activerecord.attributes.candidature.course4_id') %></th>
         <th><%= t('activerecord.attributes.candidature.semester_id') %></th>
           <th colspan="3"></th>
         </tr>
@@ -33,6 +34,12 @@
               <% if candidature.course3_id != nil %>
                 <% course = Course.find(candidature.course3_id) %>
                 <%= course.course_code + " - " + course.name %>
+              <% end %>
+            </td>
+            <td>
+              <% if candidature.course4_id != nil %>
+              <% course = Course.find(candidature.course4_id) %>
+              <%= course.course_code + " - " + course.name %>
               <% end %>
             </td>
             <td>

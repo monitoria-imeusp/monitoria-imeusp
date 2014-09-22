@@ -23,6 +23,10 @@
     <%= f.select :course3_id, course_options %><br>
   </div>
   <div class="field">
+    <%= f.label :course4_id, t('activerecord.attributes.candidature.course4_id') %><br>
+    <%= f.select :course4_id, course_options %><br>
+  </div>
+  <div class="field">
     <%= f.label :daytime_availability, t('activerecord.attributes.candidature.daytime_availability') %><br>
     <%= f.check_box :daytime_availability %>
   </div>

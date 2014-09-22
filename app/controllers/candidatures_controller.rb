@@ -71,7 +71,7 @@ class CandidaturesController < ApplicationController
         format.html { redirect_to @candidature, notice: 'Candidatura criada com sucesso.' }
         format.json { render action: 'show', status: :created, location: @candidature }
       else
-        format.html { render action: 'new' }
+        format.html { render action: 'new'}
         format.json { render json: @candidature.errors, status: :unprocessable_entity }
       end
     end
@@ -122,8 +122,8 @@ class CandidaturesController < ApplicationController
   def candidature_params
     params.require(:candidature).permit(
       :daytime_availability, :nighttime_availability, :time_period_preference,
-      :course1_id, :course2_id, :course3_id, :student_id, :semester_id, :observation,
-      :transcript_file_path
+      :course1_id, :course2_id, :course3_id, :course4_id, :student_id, :semester_id, 
+      :observation, :transcript_file_path
     )
   end
 

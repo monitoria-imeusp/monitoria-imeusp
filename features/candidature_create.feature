@@ -13,12 +13,15 @@ Feature: Create a candidature
         And there is a course with name "labxp" and code "MAC0342" and department "MAC"
         And there is a course with name "ihc" and code "MAC0446" and department "MAC"
         And there is a course with name "concorrente" and code "MAC0438" and department "MAC"
+        And there is a course with name "redes" and code "MAC0448" and department "MAC"
         When I fill the "Número USP" field with "123456"
         And I fill the "Senha" field with "12345678"
         And I press the "Entrar" button
         And I go to the new candidature form
 		And I select "MAC0342 - labxp" on the "Curso: 1ª opção"
 		And I select "MAC0438 - concorrente" on the "Curso: 2ª opção"
+        And I select "MAC0448 - redes" on the "Curso: 3ª opção"
+        And I select "MAC0446 - ihc" on the "Curso: 4ª opção"
         And I mark the "Disponibilidade para trabalhar de dia" checkbox
         And I select the preference option "Diurno"
         And I write on the "Observações" text area "teste observações"
@@ -27,6 +30,8 @@ Feature: Create a candidature
         And I should see "Aluno: carlinhos"
         And I should see "Curso: 1ª opção: MAC0342 - labxp"
         And I should see "Curso: 2ª opção: MAC0438 - concorrente"
+        And I should see "Curso: 3ª opção: MAC0448 - redes"
+        And I should see "Curso: 4ª opção: MAC0446 - ihc"
         And I should see "Disponibilidade para trabalhar de dia: Sim"
         And I should see "Disponibilidade para trabalhar de noite: Não"
         And I should see "Preferência de trabalhar no período: Diurno"
