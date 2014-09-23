@@ -141,6 +141,14 @@ if Rails.env.development?
     Student.create(student)
   end
 
+  Semester.create(
+    year: "2014",
+    parity: "0",
+    open: "true",
+    created_at: Time.now,
+    updated_at: Time.now
+  )
+
   Candidature.create(
     student_id: Student.first.id,
     course1_id: Course.first.id,
