@@ -17,6 +17,10 @@ class CoursesController < ApplicationController
   def show
     if Course.exists?(params[:id])
       @course = Course.find(params[:id])
+      @first_option_candidature = Candidature.where("course1_id = ?", @course.id)
+      @second_option_candidature = Candidature.where("course2_id = ?", @course.id)
+      @third_option_candidature = Candidature.where("course3_id = ?", @course.id)
+      @fourth_option_candidature = Candidature.where("course4_id = ?", @course.id)
     else
       redirect_to courses_path
     end
