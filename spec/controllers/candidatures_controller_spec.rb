@@ -91,6 +91,13 @@ describe CandidaturesController do
     "id" => 2, "code" => "MAE"
   } }
 
+  let(:valid_semester) {{
+      "id" => 1,
+      "year" => 2014,
+      "parity" => 0,
+      "open" => true
+  }}
+
   # This should return the minimal set of values that should be in the session
   # in order to pass any filters (e.g. authentication) defined in
   # CandidaturesController. Be sure to keep this updated too.
@@ -128,6 +135,7 @@ describe CandidaturesController do
       assigns(:candidatures_filtered).should eq(@shown_candidatures)
     end
     it "hiper professor assigns all candidatures as @candidatures" do
+      semester = Semester.create! valid_semester
       @shown_candidatures[@mac.code].push(
         (Candidature.create! valid_attributes),
         (Candidature.create! valid_second_candidature_attributes)
