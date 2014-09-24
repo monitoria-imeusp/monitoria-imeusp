@@ -4,8 +4,8 @@ Feature: delete a student
 	I want to delete a student
 
     Background:
-    	Given there is a student with name "carlinhos" and password "12345678" and nusp "123456" and gender "1" and rg "123" and cpf "321" and address "matao" and district "butanta" and zipcode "000" and city "sp" and state "sp" and tel "0123456789" and cel "1234567890" and email "eu@usp.br" and has_bank_account "true"
-        
+        Given there is a student with name "carlinhos" with nusp "123456" and email "eu@usp.br"
+
 
     Scenario: Admin deletes a student
         Given I'm at the login page
@@ -18,7 +18,7 @@ Feature: delete a student
     	And I click the "Remover" link
     	And I should not see "carlinhos"
 
-        
+
     Scenario: Secretary deletes a student
         Given I'm at the secretary login page
         And there is a secretary with name "Marcia" and password "12345678" nusp "1111111" and email "marcia@ime.usp.br"

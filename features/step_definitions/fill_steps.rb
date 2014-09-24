@@ -11,6 +11,7 @@ When(/^I fill the fields for student "(.*?)" with nusp "(.*?)" and email "(.*?)"
   fill_in "Senha", :with => "changeme!"
   fill_in "Confirme a senha", :with => "changeme!"
   fill_in "Número USP", :with => nusp
+  choose "student_institute_instituto_de_matemtica_e_estatstica"
   choose "student_gender_1"
   fill_in "RG", :with => "1"
   fill_in "CPF", :with => "1"
