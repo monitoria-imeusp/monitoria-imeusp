@@ -44,7 +44,7 @@ end
 
 Given(/^there is a student with name "(.*?)" with nusp "(.*?)" and email "(.*?)"$/) do |name, nusp, email|
   Student.create(name: name, password: "changeme!", email: email,
-    nusp: nusp, gender: "1", rg: "1", cpf: "1",
+    nusp: nusp, institute: "Instituto de Matemática e Estatística", gender: "1", rg: "1", cpf: "1",
     address: "IME", city: "São Paulo", district: "Butantã", zipcode: "0", state: "SP",
     tel: "1145454545", cel: "11985858585",
     has_bank_account: "true",

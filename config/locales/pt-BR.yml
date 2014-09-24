@@ -68,6 +68,7 @@ pt-BR:
         name: 'Nome'
         complete_name: 'Nome Completo'
         nusp: 'Número USP'
+        institute: 'Unidade de origem'
         gender: 'Sexo'
         rg: 'RG'
         cpf: 'CPF'

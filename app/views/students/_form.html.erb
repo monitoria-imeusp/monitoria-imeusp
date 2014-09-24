@@ -29,6 +29,14 @@
     <%= f.text_field :nusp %>
   </div>
   <div class="field">
+    <%= f.label :institute, t('activerecord.attributes.student.institute') %><br>
+    <% institute_options.each do | option | %>
+      <%= f.radio_button :institute, option %>
+      <%= f.label option %>
+      </br>
+    <% end %>
+  </div>
+  <div class="field">
     <%= f.label :gender, t('activerecord.attributes.student.gender') %><br>
     <% genderOptions.each do | option | %>
       <%= f.radio_button :gender, option[1] %>

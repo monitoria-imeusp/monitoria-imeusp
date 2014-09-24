@@ -14,4 +14,12 @@ module StudentsHelper
     ]
   end
 
+  def institute_options
+    [
+      "Instituto de Matemática e Estatística",
+      "Instituto de Física",
+      "Escola Politécnica"
+    ]
+  end
+
 end

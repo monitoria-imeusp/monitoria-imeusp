@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140920191138) do
+ActiveRecord::Schema.define(version: 20140924125124) do
 
   create_table "admins", force: true do |t|
     t.string   "email",                  default: "", null: false
@@ -42,8 +42,8 @@ ActiveRecord::Schema.define(version: 20140920191138) do
     t.datetime "updated_at"
     t.integer  "student_id"
     t.text     "observation",            default: ""
-    t.integer  "course4_id"
     t.integer  "semester_id"
+    t.integer  "course4_id"
   end
 
   create_table "courses", force: true do |t|
@@ -154,14 +154,14 @@ ActiveRecord::Schema.define(version: 20140920191138) do
     t.string   "tel"
     t.string   "cel"
     t.string   "email"
-    t.boolean  "has_bank_account",       default: false
+    t.boolean  "has_bank_account"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "encrypted_password",     default: "",    null: false
+    t.string   "encrypted_password",     default: "", null: false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          default: 0,     null: false
+    t.integer  "sign_in_count",          default: 0,  null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
@@ -170,6 +170,7 @@ ActiveRecord::Schema.define(version: 20140920191138) do
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
     t.string   "unconfirmed_email"
+    t.string   "institute"
   end
 
   add_index "students", ["nusp"], name: "index_students_on_nusp", unique: true

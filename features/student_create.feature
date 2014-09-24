@@ -7,28 +7,12 @@ Feature: Student register
     	Given I'm at the home page
         And I'm ready to receive email
         When I click the "Cadastrar-se" link
-        And I fill the "Nome Completo" field with "Carlinhos"
-        And I fill the "Senha" field with "12345678"
-        And I fill the "Confirme a senha" field with "12345678"
-        And I fill the "Número USP" field with "012345"
-        And I select the gender option "Masculino"
-        And I fill the "RG" field with "123"
-        And I fill the "CPF" field with "321"
-        And I fill the "Endereço" field with "R. Matao"
-        And I fill the "Complemento" field with ""
-        And I fill the "Bairro" field with "Butanta"
-        And I fill the "CEP" field with "000"
-        And I fill the "Cidade" field with "Sao Paulo"
-        And I fill the "Estado" field with "Sao Paulo"
-        And I fill the "Telefone residencial" field with "0123456789"
-        And I fill the "Celular" field with "0123456789"
-        And I fill the "Email" field with "eu@usp.br"
-        And I select the count option "Sim"
+        And I fill the fields for student "Carlinhos" with nusp "012345" and email "cef@gmail.com"
         And I press the "Salvar" button
-        And I confirm the student account with email "eu@usp.br"
+        And I confirm the student account with email "cef@gmail.com"
         And I should see "Acessar"
         And I fill the "Número USP" field with "012345"
-        And I fill the "Senha" field with "12345678"
+        And I fill the "Senha" field with "changeme!"
         And I press the "Entrar" button
         Then I should see "Acesso efetuado com sucesso."
 
@@ -36,23 +20,7 @@ Feature: Student register
     Scenario: Real student can't create a student account
         Given I'm at the home page
         When I click the "Cadastrar-se" link
-        And I fill the "Nome Completo" field with "Carlinhos"
-        And I fill the "Senha" field with "12345678"
-        And I fill the "Confirme a senha" field with "12345678"
-        And I fill the "Número USP" field with "01245"
-        And I select the gender option "Masculino"
-        And I fill the "RG" field with "123"
-        And I fill the "CPF" field with "321"
-        And I fill the "Endereço" field with "R. Matao"
-        And I fill the "Complemento" field with ""
-        And I fill the "Bairro" field with "Butanta"
-        And I fill the "CEP" field with "000"
-        And I fill the "Cidade" field with "Sao Paulo"
-        And I fill the "Estado" field with "Sao Paulo"
-        And I fill the "Telefone residencial" field with "012346789"
-        And I fill the "Celular" field with "012456789"
-        And I fill the "Email" field with "eu@usp.br"
-        And I select the count option "Sim"
+        And I fill the fields for student "Carlinhos" with nusp "01245" and email "cef@gmail.com"
         And I press the "Salvar" button
         Then I should not see "Nome: Carlinhos"
         And I should not see "Sexo: Masculino"

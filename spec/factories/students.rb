@@ -5,6 +5,7 @@ FactoryGirl.define do
     name "MyString"
     password "MyString"
     nusp "111111111"
+    institute "Institto de Matemática e Estatística"
     gender 1
     rg "MyString"
     cpf "MyString"
