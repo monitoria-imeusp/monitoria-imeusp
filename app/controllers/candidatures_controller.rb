@@ -16,7 +16,9 @@ class CandidaturesController < ApplicationController
     end
     if admin_signed_in? or (professor_signed_in? and current_professor.hiper_professor?) or secretary_signed_in?
       Candidature.all.each do |candidature|
-        @candidatures_filtered[candidature.main_department.code].push(candidature)
+        if candidature.semester.open
+          @candidatures_filtered[candidature.main_department.code].push(candidature)
+        end
       end
     elsif professor_signed_in? and current_professor.super_professor?
       Candidature.all.each do |candidature|

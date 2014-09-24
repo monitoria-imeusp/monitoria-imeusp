@@ -18,9 +18,16 @@ class CoursesController < ApplicationController
     if Course.exists?(params[:id])
       @course = Course.find(params[:id])
       @first_option_candidature = Candidature.where("course1_id = ?", @course.id)
+      @first_option_candidature = @first_option_candidature.select{|t| t.semester.open}
+
       @second_option_candidature = Candidature.where("course2_id = ?", @course.id)
+      @second_option_candidature = @second_option_candidature.select{|t| t.semester.open}
+
       @third_option_candidature = Candidature.where("course3_id = ?", @course.id)
+      @third_option_candidature = @third_option_candidature.select{|t| t.semester.open}
+
       @fourth_option_candidature = Candidature.where("course4_id = ?", @course.id)
+      @fourth_option_candidature = @fourth_option_candidature.select{|t| t.semester.open}
     else
       redirect_to courses_path
     end
