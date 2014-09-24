@@ -5,6 +5,7 @@ describe StudentsController do
   let(:valid_attributes) { {
     "name" => "carlinhos",
     "nusp" => "123456",
+    "institute" => "Institto de Matemática e Estatística",
     "gender" => "0",
     "rg" => "4523654",
     "password" => "Yeieieieie",
@@ -23,6 +24,7 @@ describe StudentsController do
   let(:another_valid_attributes) { {
     "name" => "gold",
     "nusp" => "654321",
+    "institute" => "Institto de Matemática e Estatística",
     "gender" => "0",
     "rg" => "7654321",
     "password" => "muahahahahah",
@@ -40,6 +42,7 @@ describe StudentsController do
   let(:changed_valid_attributes) { {
     "name" => "mandel",
     "nusp" => "123456",
+    "institute" => "Institto de Matemática e Estatística",
     "gender" => "0",
     "rg" => "4523654",
     "password" => "Yeieieieie",
@@ -58,6 +61,7 @@ describe StudentsController do
   let(:invalid_attributes) { {
     "name" => "carlinhos",
     "nusp" => "123",
+    "institute" => "Institto de Matemática e Estatística",
     "gender" => "0",
     "rg" => "4523654",
     "password" => "Yeieieieie",
