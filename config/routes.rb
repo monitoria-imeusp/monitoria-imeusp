@@ -46,6 +46,8 @@ Rails.application.routes.draw do
   get 'candidatures/:id/download_transcript' => 'candidatures#download_transcript', as: :download_candidature_transcript
   get 'candidatures/:id/new' => 'candidatures#new', as: :new_candidature
 
+  get 'system/candidature_index', as: :system_candidatures
+
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
