@@ -47,6 +47,10 @@ pt-BR:
       course:
         name: 'Nome da Disciplina'
         course_code: 'Código da Disciplina'
+        first_option_candidature: 'Alunos que se candidataram como primeira opção'
+        second_option_candidature: 'Alunos que se candidataram como segunda opção'
+        third_option_candidature: 'Alunos que se candidataram como terceira opção'
+        fourth_option_candidature: 'Alunos que se candidataram como quarta opção'
         educational_level: 'Nível de escolaridade'
       secretary:
         nusp: 'Número USP'
@@ -64,6 +68,7 @@ pt-BR:
         name: 'Nome'
         complete_name: 'Nome Completo'
         nusp: 'Número USP'
+        institute: 'Unidade de origem'
         gender: 'Sexo'
         rg: 'RG'
         cpf: 'CPF'
@@ -92,6 +97,7 @@ pt-BR:
         course2_id: 'Curso: 2ª opção'
         course3_id: 'Curso: 3ª opção'
         semester_id: 'Semestre'
+        course4_id: 'Curso: 4ª opção'
         observation: 'Observações'
         transcript_file_path: 'Histórico Escolar'
       department:

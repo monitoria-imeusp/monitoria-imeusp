@@ -38,6 +38,16 @@
 </p>
 
 <p>
+  <strong><%= t('activerecord.attributes.candidature.course4_id') + ':' %></strong>
+  <% if @candidature.course4_id != nil%>
+    <% course = Course.find(@candidature.course4_id) %>
+    <%= course.course_code + " - " + course.name %>
+  <% else %>
+    <i>Nenhum</i>
+  <% end %>
+</p>
+
+<p>
   <strong><%= t('activerecord.attributes.candidature.daytime_availability') + ':' %></strong>
   <%= show_yes_or_no(@candidature.daytime_availability) %>
 </p>

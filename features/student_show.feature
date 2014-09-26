@@ -4,8 +4,8 @@ Feature: Seeing information of a student
 	I want to see a student information
 
     Background:
-    	Given there is a student with name "carlinhos" and password "12345678" and nusp "123456" and gender "1" and rg "123" and cpf "321" and address "matao" and district "butanta" and zipcode "000" and city "sp" and state "sp" and tel "0123456789" and cel "1234567890" and email "eu@usp.br" and has_bank_account "true"
-        
+        Given there is a student with name "carlinhos" with nusp "123456" and email "eu@usp.br"
+
 
     Scenario: Admin look for student information
         Given I'm at the login page
@@ -17,7 +17,7 @@ Feature: Seeing information of a student
         And I click the "carlinhos" link
     	And I should see "Nome: carlinhos"
         And I should see "Número USP: 123456"
-    	And I should see "RG: 123"    
+    	And I should see "RG: 1"
 
     Scenario: Secretary look for student information
         Given I'm at the secretary login page
@@ -29,8 +29,8 @@ Feature: Seeing information of a student
         And I click the "carlinhos" link
         And I should see "Nome: carlinhos"
         And I should see "Número USP: 123456"
-        And I should see "RG: 123"
-    
+        And I should see "RG: 1"
+
     Scenario: Admin look for student that doesn't exist
 		Given I'm at the login page
     	And there is an admin user with email "kazuo@ime.usp.br" and password "admin123"
