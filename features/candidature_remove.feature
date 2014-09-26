@@ -19,7 +19,7 @@ Feature: Deleting a candidature
         And I fill the "Senha" field with "changeme!"
         And I press the "Entrar" button
         And I click the "Candidaturas" link
-        And I click the "Ver" link
+        And I click the "Mais informações" link
         And I click the "Remover" link
         And I should see "Você tem certeza?" in the alert
         And I confirm the alert

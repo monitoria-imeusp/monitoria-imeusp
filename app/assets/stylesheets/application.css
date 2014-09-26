@@ -46,6 +46,12 @@ td, th {
   padding: 4px 8px;
 }
 
+th.title, td.title {
+  padding: 4px 8px;
+  text-align: left;
+  width: 25%;
+}
+
 th {
   border-bottom: 2px solid #666;
   background-color: #bcc;

@@ -28,7 +28,7 @@ Feature: Candidature table visualization
 		And I should see "MAC0110 - Introdução à Ciência da Computação"
         Then I should see "Caio"
         And I should see "MAE0438 - Estatística Concorrente"
-		And I should see "Ver"
+		And I should see "Mais informações"
 		And I should not see "Nova Candidatura"
 
     Scenario: Hiperprofessor seeing all candidatures
@@ -43,7 +43,7 @@ Feature: Candidature table visualization
         And I should see "MAC0110 - Introdução à Ciência da Computação"
         Then I should see "Caio"
         And I should see "MAE0438 - Estatística Concorrente"
-        And I should see "Ver"
+        And I should see "Mais informações"
         And I should not see "Nova Candidatura"
 
     Scenario: Superprofessor seeing candidatures of his department
@@ -58,7 +58,7 @@ Feature: Candidature table visualization
 		And I should see "MAE0438 - Estatística Concorrente"
         Then I should not see "Rogerio"
         And I should not see "MAT0111 - Cálculo I"
-		And I should see "Ver"
+		And I should see "Mais informações"
 		And I should not see "Nova Candidatura"
 
     Scenario: Secretary seeing all candidatures
@@ -73,7 +73,7 @@ Feature: Candidature table visualization
         And I should see "MAC0110 - Introdução à Ciência da Computação"
         Then I should see "Caio"
         And I should see "MAE0438 - Estatística Concorrente"
-		And I should see "Ver"
+		And I should see "Mais informações"
 
 
     Scenario: Student seeing candidatures
@@ -87,4 +87,4 @@ Feature: Candidature table visualization
         And I should see "MAC0110 - Introdução à Ciência da Computação"
         Then I should not see "Caio"
         And I should not see "MAE0438 - Estatística Concorrente"
-		And I should see "Ver"
+		And I should see "Mais informações"

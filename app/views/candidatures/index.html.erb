@@ -1,57 +1,76 @@
 <h1>Lista de Candidaturas</h1>
 
-
 <% @candidatures_filtered.each do |dep, candidatures| %>
   <% if not candidatures.empty? %>
     <h2><%= dep.upcase %></h2>
-    <table>
-      <thead>
-        <tr>
-          <th><%= t('activerecord.attributes.student.student') %></th>
-          <th><%= t('activerecord.attributes.student.nusp') %></th>
-          <th><%= t('activerecord.attributes.candidature.course1_id') %></th>
-          <th><%= t('activerecord.attributes.candidature.course2_id') %></th>
-          <th><%= t('activerecord.attributes.candidature.course3_id') %></th>
-          <th><%= t('activerecord.attributes.candidature.course4_id') %></th>
-          <th><%= t('activerecord.attributes.candidature.semester_id') %></th>
-          <th colspan="3"></th>
-        </tr>
-      </thead>
-      <tbody>
-        <% candidatures.each do |candidature| %>
+    <% candidatures.each do |candidature| %>
+      <table>
+        <thead>
           <tr>
-            <td><%= candidature.student.name %></td>
-            <td><%= candidature.student.nusp %></td>
+            <th>
+              <%= t('activerecord.attributes.student.nusp') + ': ' + candidature.student.nusp %>
+            </th>
+            <th><%= candidature.student.name %></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="title"><%= t('activerecord.attributes.student.institute') %></td>
+            <td><%= candidature.student.institute %></td>
+          </tr>
+          <tr>
+            <td class="title"><%= t('activerecord.attributes.candidature.semester_id') %></td>
+            <td><%= candidature.semester.period_as_s %></td>
+          </tr>
+          <tr>
+            <td class="title">
+              <%= t('activerecord.attributes.candidature.course1_id') %>
+            </td>
             <td>
               <% course = Course.find(candidature.course1_id) %>
               <%= course.course_code + " - " + course.name %>
             </td>
-            <td>
-              <% if candidature.course2_id != nil %>
+          </tr>
+          <% if candidature.course2_id != nil %>
+            <tr>
+              <td class="title">
+                <%= t('activerecord.attributes.candidature.course2_id') %>
+              </td>
+              <td>
                 <% course = Course.find(candidature.course2_id) %>
                 <%= course.course_code + " - " + course.name %>
-              <% end %>
-            </td>
-            <td>
-              <% if candidature.course3_id != nil %>
+              </td>
+            </tr>
+          <% end %>
+          <% if candidature.course3_id != nil %>
+            <tr>
+              <td class="title">
+                <%= t('activerecord.attributes.candidature.course3_id') %>
+              </td>
+              <td>
                 <% course = Course.find(candidature.course3_id) %>
                 <%= course.course_code + " - " + course.name %>
-              <% end %>
-            </td>
-            <td>
-              <% if candidature.course4_id != nil %>
-              <% course = Course.find(candidature.course4_id) %>
-              <%= course.course_code + " - " + course.name %>
-              <% end %>
-            </td>
-            <td>
-              <%= candidature.semester.period_as_s %>
-            </td>
-            <td><%= link_to 'Ver', candidature %></td>
+              </td>
+            </tr>
+          <% end %>
+          <% if candidature.course4_id != nil %>
+            <tr>
+              <td class="title">
+                <%= t('activerecord.attributes.candidature.course4_id') %>
+              </td>
+              <td>
+                <% course = Course.find(candidature.course4_id) %>
+                <%= course.course_code + " - " + course.name %>
+              </td>
+            </tr>
+          <% end %>
+          <tr>
+            <td colspan="2"><%= link_to 'Mais informações', candidature %></th>
           </tr>
-        <% end %>
-      </tbody>
-    </table>
+        </tbody>
+      </table>
+      <br>
+    <% end %>
   <% end %>
 <% end %>
 
