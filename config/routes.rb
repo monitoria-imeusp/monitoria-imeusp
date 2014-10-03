@@ -27,6 +27,7 @@ Rails.application.routes.draw do
 
   resources :professors
   get 'professors/:id/change_password' => 'professors#change_password', as: :change_professor_password
+  post 'professors/:id/make_superprofessor' => 'professors#make_superprofessor', as: :make_super_professor
 
   resources :courses
 

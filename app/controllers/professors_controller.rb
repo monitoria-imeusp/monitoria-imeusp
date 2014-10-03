@@ -17,6 +17,11 @@ class ProfessorsController < ApplicationController
     end
   end
 
+  def make_superprofessor
+    @professor = Professor.find(param[:id])
+    @professor.professor_rank = 1
+  end
+
   def show
   end
 

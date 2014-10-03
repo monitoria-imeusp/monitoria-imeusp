@@ -18,6 +18,11 @@
   <%= @professor.department.code %>
 </p>
 
+<% if professor_signed_in? and current_professor.super_professor? %>
+  <p>
+    <%= button_to "Privilégios", controller: "professors", :action => "make_superprofessor", :id => @professor.id, :method => 'post' %>
+  </p>
+<% end %>
 <% if admin_signed_in? %>
   <p>
     <strong><%= t('activerecord.attributes.professor.professor_rank') + ':' %></strong>
