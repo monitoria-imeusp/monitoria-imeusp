@@ -18,8 +18,15 @@ class ProfessorsController < ApplicationController
   end
 
   def make_superprofessor
-    @professor = Professor.find(param[:id])
+    @professor = Professor.find(params[:id])
     @professor.professor_rank = 1
+    respond_to do |format|
+      if @professor.save
+        format.html {redirect_to @professor, notice: @professor.name.to_s + ' é agora um Super-professor'}
+      else
+        format.html {render @professor}
+      end
+    end
   end
 
   def show
