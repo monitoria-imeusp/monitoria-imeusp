@@ -104,6 +104,7 @@ if Rails.env.development?
     {
       name: "Will",
       nusp: "000000",
+      institute: "IME",
       gender: "1",
       rg: "123",
       cpf: "321",
@@ -115,13 +116,14 @@ if Rails.env.development?
       tel: "1111111111",
       cel: "11122233344",
       email: "kazuo@ime.usp.br",
-      has_bank_account: "true",
+      has_bank_account: true,
       password: "changeme!",
       confirmed_at: Time.now
     },
     {
       name: "Jackção",
       nusp: "242424",
+      institute: "IME",
       gender: "0",
       rg: "456",
       cpf: "654",
@@ -133,7 +135,7 @@ if Rails.env.development?
       tel: "1111111111",
       cel: "11122233344",
       email: "jacks@ime.usp.br",
-      has_bank_account: "false",
+      has_bank_account: false,
       password: "changeme!",
       confirmed_at: Time.now
     }

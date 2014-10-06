@@ -8,6 +8,10 @@ class Professor < ActiveRecord::Base
   validates :department_id, presence: true
   validates :nusp, presence: true
 
+  def normal_professor?
+    return professor_rank == 0
+  end
+
   def super_professor?
 		return professor_rank > 0
   end

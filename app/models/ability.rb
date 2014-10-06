@@ -92,6 +92,7 @@ class Ability
         can :read, Candidature
         can :update, Candidature
         can :destroy, Candidature
+        can :make_superprofessor, Professor
       else
         cannot :read, Dump
         cannot :create, Professor
