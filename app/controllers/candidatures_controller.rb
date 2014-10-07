@@ -14,15 +14,15 @@ class CandidaturesController < ApplicationController
     Department.all.each do |dep|
       @candidatures_filtered[dep.code] = []
     end
-    if admin_signed_in? or (professor_signed_in? and current_professor.hiper_professor?) or secretary_signed_in?
+    @departments = Department.all
+    if params[:department_id]
+      @current_department = Department.find(params[:department_id])
+    elsif professor_signed_in? and current_professor.super_professor? and not current_professor.hiper_professor?
+      @current_department = current_professor.department
+    end
+    if admin_signed_in? or professor_signed_in? or secretary_signed_in?
       Candidature.all.each do |candidature|
         if candidature.semester.open
-          @candidatures_filtered[candidature.main_department.code].push(candidature)
-        end
-      end
-    elsif professor_signed_in? and current_professor.super_professor?
-      Candidature.all.each do |candidature|
-        if candidature.main_department == current_professor.department
           @candidatures_filtered[candidature.main_department.code].push(candidature)
         end
       end
@@ -124,7 +124,7 @@ class CandidaturesController < ApplicationController
   def candidature_params
     params.require(:candidature).permit(
       :daytime_availability, :nighttime_availability, :time_period_preference,
-      :course1_id, :course2_id, :course3_id, :course4_id, :student_id, :semester_id, 
+      :course1_id, :course2_id, :course3_id, :course4_id, :student_id, :semester_id,
       :observation, :transcript_file_path
     )
   end
