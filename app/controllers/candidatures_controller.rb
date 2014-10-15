@@ -5,36 +5,12 @@ class CandidaturesController < ApplicationController
   # GET /candidatures
   # GET /candidatures.json
   def index
-    @candidatures_filtered = {}
-    if student_signed_in?
-      @semesters = Semester.all_open.map do |semester|
-        { get: semester, valid: (not already_for_semester?(current_student.id, semester.id)) }
-      end
-    end
-    Department.all.each do |dep|
-      @candidatures_filtered[dep.code] = []
+    if professor_signed_in? and current_professor.super_professor? and not current_professor.hiper_professor?
+      redirect_to candidatures_for_department_path(current_professor.department)
+    elsif student_signed_in?
+      redirect_to candidatures_for_student_path(current_student)
     end
     @departments = Department.all
-    if params[:department_id]
-      @current_department = Department.find(params[:department_id])
-    elsif professor_signed_in? and current_professor.super_professor? and not current_professor.hiper_professor?
-      @current_department = current_professor.department
-    end
-    if admin_signed_in? or professor_signed_in? or secretary_signed_in?
-      Candidature.all.each do |candidature|
-        if candidature.semester.open
-          @candidatures_filtered[candidature.main_department.code].push(candidature)
-        end
-      end
-    elsif student_signed_in?
-      Candidature.all.each do |candidature|
-        if candidature.student_id == current_student.id
-          @candidatures_filtered[candidature.main_department.code].push(candidature)
-        end
-      end
-    else
-      redirect_to root_path
-    end
   end
 
   def index_for_department
@@ -53,6 +29,13 @@ class CandidaturesController < ApplicationController
           end
         end
       end
+    end
+  end
+
+  def index_for_student
+    @candidatures = Candidature.where(student_id: current_student.id).order(:semester_id)
+    @semesters = Semester.all_open.map do |semester|
+      { get: semester, valid: (not already_for_semester?(current_student.id, semester.id)) }
     end
   end
 

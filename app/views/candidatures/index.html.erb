@@ -3,7 +3,7 @@
 <ul>
 <% @departments.each do |dep| %>
   <li>
-    <%= link_to dep.code, candidatures_with_department_path(dep) %>
+    <%= link_to dep.code, candidatures_for_department_path(dep) %>
   </li>
 <% end %>
 </ul>
