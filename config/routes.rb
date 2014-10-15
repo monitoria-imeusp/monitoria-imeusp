@@ -46,6 +46,7 @@ Rails.application.routes.draw do
   get 'candidatures/:id/download_transcript' => 'candidatures#download_transcript', as: :download_candidature_transcript
   get 'candidatures/:id/new' => 'candidatures#new', as: :new_candidature
   get 'candidatures/list/:department_id/' => 'candidatures#index', as: :candidatures_with_department
+  get 'candidatures/for_department/:department_id/' => 'candidatures#index_for_department', as: :candidatures_for_department
 
   get 'system/candidature_index', as: :system_candidatures
 

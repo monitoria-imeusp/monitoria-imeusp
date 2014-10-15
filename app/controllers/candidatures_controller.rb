@@ -37,6 +37,25 @@ class CandidaturesController < ApplicationController
     end
   end
 
+  def index_for_department
+    @current_department = Department.find(params[:department_id])
+    @candidatures_filtered = []
+    checked = {}
+    Candidature.courses_num.times do
+      @candidatures_filtered.push([])
+    end
+    Candidature.all.each do |candidature|
+      if candidature.semester.open
+        candidature.courses.each_with_index do |course, idx|
+          if not checked[candidature] and course and course.department == @current_department
+            @candidatures_filtered[idx].push(candidature)
+            checked[candidature] = true
+          end
+        end
+      end
+    end
+  end
+
   # GET /candidatures/1
   # GET /candidatures/1.json
   def show
