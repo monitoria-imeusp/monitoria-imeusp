@@ -3,7 +3,8 @@ Feature: Index of the Requests for Teaching Assistant
   As a professor
   I want to list the requests of teaching assistant
 
-    Background: 
+    Background:
+        Given there is an open semester "2014" "1"
         And there is a department with code "MAC"
         And there is a department with code "MAE"
         And there is a professor with name "Bob" and password "prof-123" nusp "123" department "MAC" and email "bob@bob.bob"
@@ -15,7 +16,7 @@ Feature: Index of the Requests for Teaching Assistant
         And there is a request for teaching assistant with professor "Bob" and course "MAC0110" and requested_number "4" and priority "Extremamente necessário, mas não imprescindível" and student_assistance "false" and work_correction "true" and test_oversight "true"
         And there is a request for teaching assistant with professor "Mandel" and course "MAC0122" and requested_number "2" and priority "Extremamente necessário, mas não imprescindível" and student_assistance "false" and work_correction "true" and test_oversight "true"
         And there is a request for teaching assistant with professor "Claudia" and course "MAE0438" and requested_number "2" and priority "Extremamente necessário, mas não imprescindível" and student_assistance "false" and work_correction "true" and test_oversight "true"
-    
+
     Scenario: Check request assistant table and professor can't see the other professor's request
         Given I'm at the professor login page
         When I fill the "Número USP" field with "123"
@@ -41,7 +42,7 @@ Feature: Index of the Requests for Teaching Assistant
         And I should see "MAC0110 - Mascarenhas"
         And I should see "MAC0122 - Coisas"
         And I should not see "MAE0438 - Estatística Concorrente"
-    
+
     Scenario: Hiperprofessor see only requests of his department
         Given I'm at the professor login page
         And there is a hiper_professor with name "zara" and password "12345678" nusp "2222222" department "MAE" and email "zara@usp.br"
