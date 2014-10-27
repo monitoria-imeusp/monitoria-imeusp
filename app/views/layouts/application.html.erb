@@ -115,11 +115,9 @@
               <%= link_to "Administração do sistema", control_panel_admins_path %>
             </li>
           <% elsif professor_signed_in? %>
-            <% unless Rails.env.production? %>
-              <li>
-                <%= link_to "Pedidos de Monitoria", request_for_teaching_assistants_path %>
-              </li>
-            <% end %>
+            <li>
+              <%= link_to "Pedidos de Monitoria", request_for_teaching_assistants_path %>
+            </li>
             <% if current_professor.super_professor? then %>
               <li>
                 <%= link_to "Candidaturas", candidatures_path %>

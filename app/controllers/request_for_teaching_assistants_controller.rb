@@ -10,6 +10,7 @@ class RequestForTeachingAssistantsController < ApplicationController
     end).keep_if do |request|
       professor_can_see?(current_professor, request)
     end
+    @semesters = Semester.all
   end
 
   # GET /request_for_teaching_assistants/1
@@ -24,6 +25,7 @@ class RequestForTeachingAssistantsController < ApplicationController
   # GET /request_for_teaching_assistants/new
   def new
     @request_for_teaching_assistant = RequestForTeachingAssistant.new
+    @semester = Semester.find(params[:semester_id])
   end
 
   # GET /request_for_teaching_assistants/1/edit

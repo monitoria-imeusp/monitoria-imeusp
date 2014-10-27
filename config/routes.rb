@@ -23,7 +23,8 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :request_for_teaching_assistants
+  resources :request_for_teaching_assistants, except: :new
+  get 'request_for_teaching_assistants/:semester_id/new' => 'request_for_teaching_assistants#new', as: :new_request_for_teaching_assistant
 
   resources :professors
   get 'professors/:id/change_password' => 'professors#change_password', as: :change_professor_password

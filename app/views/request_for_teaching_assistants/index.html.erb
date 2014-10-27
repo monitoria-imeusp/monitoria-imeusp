@@ -1,6 +1,15 @@
 <h1>Pedidos por Monitores</h1>
 
-<%= link_to 'Novo pedido por monitor', new_request_for_teaching_assistant_path %>
+<% if professor_signed_in? %>
+  <% @semesters.each do |semester| %>
+    <% if semester.open %>
+      <h2>
+      <%= link_to "Pedir monitor para #{semester.year}/#{semester.parity_as_i}",
+                  new_request_for_teaching_assistant_path(semester) %>
+      </h2>
+    <% end %>
+  <% end %>
+<% end %>
 
 <table>
   <thead>
