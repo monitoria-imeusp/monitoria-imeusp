@@ -44,6 +44,7 @@ pt-BR:
         work_correction: 'Correção de trabalhos'
         test_oversight: 'Fiscalização de provas'
         observation: 'Observações'
+        semester_id: 'Semestre'
       course:
         name: 'Nome da Disciplina'
         course_code: 'Código da Disciplina'

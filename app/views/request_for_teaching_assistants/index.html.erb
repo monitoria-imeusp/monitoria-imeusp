@@ -18,7 +18,7 @@
 	  <th><%= t('activerecord.attributes.professor.professor') %> </th>
 	  <th><%= t('activerecord.attributes.request_for_teaching_assistant.subject') %> </th>
 	  <th><%= t('activerecord.attributes.request_for_teaching_assistant.requested_number') %> </th>
-	  <th><%= t('activerecord.attributes.request_for_teaching_assistant.priority') %> </th>
+	  <th><%= t('activerecord.attributes.request_for_teaching_assistant.semester_id') %> </th>
     </tr>
   </thead>
 
@@ -29,7 +29,7 @@
         <td><%= Professor.find(request_for_teaching_assistant.professor_id).name %></td>
         <td><%= request_for_teaching_assistant.course.course_code + " - " + request_for_teaching_assistant.course.name %></td>
         <td><%= request_for_teaching_assistant.requested_number %></td>
-        <td><%= priorityOptions[request_for_teaching_assistant.priority][0] %></td>
+        <td><%= request_for_teaching_assistant.semester.period_as_s %></td>
       </tr>
     <% end %>
   </tbody>
