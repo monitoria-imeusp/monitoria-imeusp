@@ -23,6 +23,10 @@ class Semester < ActiveRecord::Base
     year.to_s + "/" + parity_as_i.to_s
   end
 
+  def as_s
+    "#{parity+1}º semestre de #{year}"
+  end
+
   def self.all_open
     Semester.where(open: true).all
   end

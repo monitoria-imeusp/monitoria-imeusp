@@ -4,7 +4,7 @@
   <% @semesters.each do |semester| %>
     <% if semester.open %>
       <h2>
-      <%= link_to "Pedir monitor para #{semester.year}/#{semester.parity_as_i}",
+      <%= link_to "Pedir monitor para #{semester.as_s}",
                   new_request_for_teaching_assistant_path(semester) %>
       </h2>
     <% end %>
