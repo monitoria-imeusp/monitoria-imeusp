@@ -33,7 +33,8 @@ describe RequestForTeachingAssistantsController do
     "student_assistance" => true,
     "work_correction" => false,
     "test_oversight" => true,
-    "observation" => "teste"
+    "observation" => "teste",
+    "semester_id" => 1
   } }
 
   let(:not_owned_attributes) { {
@@ -44,7 +45,8 @@ describe RequestForTeachingAssistantsController do
     "student_assistance" => true,
     "work_correction" => false,
     "test_oversight" => false,
-    "observation" => "teste"
+    "observation" => "teste",
+    "semester_id" => 1
   } }
 
   let(:other_department_attributes) { {
@@ -55,7 +57,8 @@ describe RequestForTeachingAssistantsController do
     "student_assistance" => true,
     "work_correction" => false,
     "test_oversight" => false,
-    "observation" => "teste"
+    "observation" => "teste",
+    "semester_id" => 1
   } }
 
   let(:valid_course_attributes) {{
@@ -87,7 +90,8 @@ describe RequestForTeachingAssistantsController do
     "student_assistance" => true,
     "work_correction" => false,
     "test_oversight" => false,
-    "observation" => "teste"
+    "observation" => "teste",
+    "semester_id" => 1
   } }
 
   let(:valid_professor) { {
@@ -137,6 +141,13 @@ describe RequestForTeachingAssistantsController do
     "confirmed_at" => Time.now
   } }
 
+  let(:valid_semester) {{
+      "id" => 1,
+      "year" => 2014,
+      "parity" => 0,
+      "open" => true
+  }}
+
   # This should return the minimal set of values that should be in the session
   # in order to pass any filters (e.g. authentication) defined in
   # RequestForTeachingAssistantsController. Be sure to keep this updated too.
@@ -148,6 +159,7 @@ describe RequestForTeachingAssistantsController do
     professor3 = Professor.create! another_professor_another_department
     Department.create! {{"id" => 1, "code" => "MAC"}}
     Department.create! {{"id" => 2, "code" => "MAE"}}
+    Semester.create! (valid_semester)
     Course.create! valid_course_attributes
     sign_in :professor, professor
   end
@@ -170,7 +182,7 @@ describe RequestForTeachingAssistantsController do
 
   describe "GET new" do
     it "assigns a new request_for_teaching_assistant as @request_for_teaching_assistant" do
-      get :new, {}
+      get :new, {:semester_id => "1"}
       assigns(:request_for_teaching_assistant).should be_a_new(RequestForTeachingAssistant)
     end
   end

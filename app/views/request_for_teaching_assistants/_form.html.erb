@@ -43,6 +43,13 @@
     <%= f.label :observation, t('activerecord.attributes.request_for_teaching_assistant.observation') %><br>
     <%= f.text_area :observation %>
   </div>
+  <div class="field">
+    <% if @semester %>
+      <%= f.hidden_field :semester_id, :value => @semester.id %>
+    <% else %>
+      <%= f.hidden_field :semester_id, :value => @request_for_teaching_assistant.semester_id %>
+    <% end %>
+  </div>
   <div class="actions">
     <%= f.submit "Enviar" %>
   </div>

@@ -4,7 +4,8 @@ Feature: Filtering requests for teaching assistant
     I want to filter the requests by department
 
     Background:
-        Given I'm at the professor login page
+        Given there is an open semester "2014" "1"
+        And I'm at the professor login page
         And there is a department with code "MAC"
         And there is a department with code "MAE"
         And there is a super_professor with name "Bob" and password "prof-123" nusp "123" department "MAC" and email "bob@bob.bob"
@@ -24,7 +25,7 @@ Feature: Filtering requests for teaching assistant
         And I fill the "Senha" field with "prof-123"
         And I press the "Entrar" button
         And I click the "Pedidos de Monitoria" link
-        
+
 
     Scenario: Another professor from the same department
         Then I should see "MAC0110"

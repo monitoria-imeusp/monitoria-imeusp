@@ -46,6 +46,10 @@ When(/^I go to the new candidature form$/) do
   visit new_candidature_path(Semester.first.id)
 end
 
+When(/^I go to the new request form$/) do
+  visit new_request_for_teaching_assistant_path(Semester.first.id)
+end
+
 When(/^I try to access the "(.*?)" page with id "(.*?)" to "(.*?)"$/) do |page_name, id, action|
     if action != 'show'
         visit('/' + page_name + '/' + id.to_s + '/' + action)

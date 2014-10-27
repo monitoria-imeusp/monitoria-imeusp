@@ -1,6 +1,15 @@
 <h1>Pedidos por Monitores</h1>
 
-<%= link_to 'Novo pedido por monitor', new_request_for_teaching_assistant_path %>
+<% if professor_signed_in? %>
+  <% @semesters.each do |semester| %>
+    <% if semester.open %>
+      <h2>
+      <%= link_to "Pedir monitor para #{semester.as_s}",
+                  new_request_for_teaching_assistant_path(semester) %>
+      </h2>
+    <% end %>
+  <% end %>
+<% end %>
 
 <table>
   <thead>
@@ -9,7 +18,7 @@
 	  <th><%= t('activerecord.attributes.professor.professor') %> </th>
 	  <th><%= t('activerecord.attributes.request_for_teaching_assistant.subject') %> </th>
 	  <th><%= t('activerecord.attributes.request_for_teaching_assistant.requested_number') %> </th>
-	  <th><%= t('activerecord.attributes.request_for_teaching_assistant.priority') %> </th>
+	  <th><%= t('activerecord.attributes.request_for_teaching_assistant.semester_id') %> </th>
     </tr>
   </thead>
 
@@ -20,7 +29,7 @@
         <td><%= Professor.find(request_for_teaching_assistant.professor_id).name %></td>
         <td><%= request_for_teaching_assistant.course.course_code + " - " + request_for_teaching_assistant.course.name %></td>
         <td><%= request_for_teaching_assistant.requested_number %></td>
-        <td><%= priorityOptions[request_for_teaching_assistant.priority][0] %></td>
+        <td><%= request_for_teaching_assistant.semester.period_as_s %></td>
       </tr>
     <% end %>
   </tbody>
