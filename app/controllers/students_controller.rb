@@ -7,7 +7,9 @@ class StudentsController < ApplicationController
 
   def create
     @student = Student.new(student_params)
-    if @student.save
+    if (params[:student][:institute] == "Outros") and params[:student][:institute_text].empty?
+      render 'new'
+    elsif @student.save
       sign_in  @student, :bypass => true
       redirect_to @student
     else
@@ -38,16 +40,22 @@ class StudentsController < ApplicationController
   def update
     @student = Student.find(params[:id])
     authorization_student
-    if params[:student][:password].blank? && params[:student][:password_confirmation].blank?
-      params[:student].delete(:password)
-      params[:student].delete(:password_confirmation)
-    end
-    if @student.update(student_params)
-      sign_in  @student, :bypass => true
-      redirect_to @student
-    else
-      render 'edit'
-    end
+      if params[:student][:password].blank? && params[:student][:password_confirmation].blank?
+        params[:student].delete(:password)
+        params[:student].delete(:password_confirmation)
+      end
+      if (params[:student][:institute] == "Outros") and params[:student][:institute_text].empty?
+          @student.errors.add(:student_id, t('errors.models.student.toofew'))
+          respond_to do |format|
+            format.html { render action: 'edit' }
+            format.json { render json: @student.errors, status: :unprocessable_entity }
+          end
+      elsif @student.update(student_params)
+        sign_in  @student, :bypass => true
+        redirect_to @student
+      else
+        render 'edit'
+      end
   end
 
   def destroy
@@ -67,7 +75,7 @@ class StudentsController < ApplicationController
 
   def student_params
     params.require(:student).permit(:name, :password, :password_confirmation,
-                                    :nusp, :institute, :gender, :rg, :cpf,
+                                    :nusp, :institute, :institute_text, :gender, :rg, :cpf,
                                     :address, :complement, :district, :zipcode, :city, :state,
                                     :tel, :cel, :email,
                                     :has_bank_account)

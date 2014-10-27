@@ -119,3 +119,5 @@ pt-BR:
             blank: ''
       candidature:
         toomany: 'Você já tem uma candidatura nesse semestre'
+      student:
+        toofew: 'Digite o nome do seu instituto no campo outros'

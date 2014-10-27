@@ -35,6 +35,9 @@
       <%= f.label option %>
       </br>
     <% end %>
+    <%= f.radio_button :institute, "Outros" %>
+    <%= f.label "Outros" %>
+    <%= f.text_field :institute_text %>
   </div>
   <div class="field">
     <%= f.label :gender, t('activerecord.attributes.student.gender') %><br>

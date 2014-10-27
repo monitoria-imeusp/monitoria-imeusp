@@ -19,7 +19,11 @@
 
 <p>
   <strong><%= t('activerecord.attributes.student.institute') + ':' %></strong>
-  <%= @student.institute %>
+  <% if @student.institute != "Outros" %>
+    <%= @student.institute %>
+  <% else %>
+    <%= @student.institute_text %>
+  <% end %>
 </p>
 
 <p>
