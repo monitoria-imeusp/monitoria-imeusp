@@ -44,6 +44,7 @@ pt-BR:
         work_correction: 'Correção de trabalhos'
         test_oversight: 'Fiscalização de provas'
         observation: 'Observações'
+        semester_id: 'Semestre'
       course:
         name: 'Nome da Disciplina'
         course_code: 'Código da Disciplina'
@@ -119,3 +120,5 @@ pt-BR:
             blank: ''
       candidature:
         toomany: 'Você já tem uma candidatura nesse semestre'
+      student:
+        toofew: 'Digite o nome do seu instituto no campo outros'

@@ -8,7 +8,7 @@ describe RequestForTeachingAssistantsController do
     end
 
     it "routes to #new" do
-      get("/request_for_teaching_assistants/new").should route_to("request_for_teaching_assistants#new")
+      get("/request_for_teaching_assistants/1/new").should route_to("request_for_teaching_assistants#new", :semester_id => "1")
     end
 
     it "routes to #show" do
