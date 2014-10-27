@@ -45,6 +45,11 @@ Rails.application.routes.draw do
   resources :candidatures, except: :new
   get 'candidatures/:id/download_transcript' => 'candidatures#download_transcript', as: :download_candidature_transcript
   get 'candidatures/:id/new' => 'candidatures#new', as: :new_candidature
+  get 'candidatures/list/:department_id/' => 'candidatures#index', as: :candidatures_with_department
+  get 'candidatures/for_department/:department_id/' => 'candidatures#index_for_department', as: :candidatures_for_department
+  get 'candidatures/for_student/:student_id/' => 'candidatures#index_for_student', as: :candidatures_for_student
+
+  get 'system/candidature_index', as: :system_candidatures
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

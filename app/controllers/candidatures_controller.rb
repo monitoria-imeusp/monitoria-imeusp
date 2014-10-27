@@ -5,35 +5,37 @@ class CandidaturesController < ApplicationController
   # GET /candidatures
   # GET /candidatures.json
   def index
-    @candidatures_filtered = {}
-    if student_signed_in?
-      @semesters = Semester.all_open.map do |semester|
-        { get: semester, valid: (not already_for_semester?(current_student.id, semester.id)) }
-      end
-    end
-    Department.all.each do |dep|
-      @candidatures_filtered[dep.code] = []
-    end
-    if admin_signed_in? or (professor_signed_in? and current_professor.hiper_professor?) or secretary_signed_in?
-      Candidature.all.each do |candidature|
-        if candidature.semester.open
-          @candidatures_filtered[candidature.main_department.code].push(candidature)
-        end
-      end
-    elsif professor_signed_in? and current_professor.super_professor?
-      Candidature.all.each do |candidature|
-        if candidature.main_department == current_professor.department
-          @candidatures_filtered[candidature.main_department.code].push(candidature)
-        end
-      end
+    if professor_signed_in? and current_professor.super_professor? and not current_professor.hiper_professor?
+      redirect_to candidatures_for_department_path(current_professor.department)
     elsif student_signed_in?
-      Candidature.all.each do |candidature|
-        if candidature.student_id == current_student.id
-          @candidatures_filtered[candidature.main_department.code].push(candidature)
+      redirect_to candidatures_for_student_path(current_student)
+    end
+    @departments = Department.all
+  end
+
+  def index_for_department
+    @current_department = Department.find(params[:department_id])
+    @candidatures_filtered = []
+    checked = {}
+    Candidature.courses_num.times do
+      @candidatures_filtered.push([])
+    end
+    Candidature.all.each do |candidature|
+      if candidature.semester.open
+        candidature.courses.each_with_index do |course, idx|
+          if not checked[candidature] and course and course.department == @current_department
+            @candidatures_filtered[idx].push(candidature)
+            checked[candidature] = true
+          end
         end
       end
-    else
-      redirect_to root_path
+    end
+  end
+
+  def index_for_student
+    @candidatures = Candidature.where(student_id: current_student.id).order(:semester_id)
+    @semesters = Semester.all_open.map do |semester|
+      { get: semester, valid: (not already_for_semester?(current_student.id, semester.id)) }
     end
   end
 
@@ -124,7 +126,7 @@ class CandidaturesController < ApplicationController
   def candidature_params
     params.require(:candidature).permit(
       :daytime_availability, :nighttime_availability, :time_period_preference,
-      :course1_id, :course2_id, :course3_id, :course4_id, :student_id, :semester_id, 
+      :course1_id, :course2_id, :course3_id, :course4_id, :student_id, :semester_id,
       :observation, :transcript_file_path
     )
   end

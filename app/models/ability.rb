@@ -168,6 +168,13 @@ class Ability
       can :manage, Semester
     end
 
+    # Candidature management permissions
+    if user.is_a? Admin or user.is_a? Secretary or (user.is_a? Professor and user.professor_rank > 0)
+      can :index_for_department, Candidature
+    elsif user.is_a? Student
+      can :index_for_student, Candidature
+    end
+
     # The first argument to `can` is the action you are giving the user
     # permission to do.
     # If you pass :manage it will apply to every action. Other common actions

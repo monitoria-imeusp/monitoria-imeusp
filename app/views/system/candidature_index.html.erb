@@ -1,0 +1,10 @@
+<h1>Candidaturas</h1>
+
+<% @semesters.reverse.each do |semester| %>
+  <h2><%= semester.period_as_s %></h2>
+  <p>
+    <% @departments.each do |department| %>
+      <%= link_to department.code, system_candidatures_path %>
+    <% end %>
+  </p>
+<% end %>
