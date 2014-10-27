@@ -3,7 +3,9 @@ class SemestersController < ApplicationController
 
   def create
     last = ordered_semesters.last
-    if last.parity == 0
+    if last == nil
+      @semester = Semester.new year: Time.now.year, parity: 0, open: false
+    elsif last.parity == 0
       @semester = Semester.new year: last.year, parity: 1, open: false
     else
       @semester = Semester.new year: last.year+1, parity: 0, open: false

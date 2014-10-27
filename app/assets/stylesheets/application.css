@@ -52,6 +52,12 @@ th.title, td.title {
   width: 25%;
 }
 
+th.name, td.name {
+  padding: 4px 8px;
+  text-align: left;
+  width: 75%;
+}
+
 th {
   border-bottom: 2px solid #666;
   background-color: #bcc;

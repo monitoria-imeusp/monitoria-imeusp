@@ -1,9 +1,18 @@
-<h1>Lista de Candidaturas</h1>
 
-<% @candidatures_filtered.each do |dep, candidatures| %>
-  <% if not candidatures.empty? %>
-    <h2><%= dep.upcase %></h2>
-    <% candidatures.each do |candidature| %>
+<h1>Candidaturas por departamento:</h2>
+<ul>
+<% @departments.each do |dep| %>
+  <li>
+    <%= link_to dep.code, candidatures_for_department_path(dep) %>
+  </li>
+<% end %>
+</ul>
+
+<% if @current_department %>
+  <% dep = @current_department.code %>
+  <% unless @candidatures_filtered[dep].empty? %>
+    <h1><%= dep.upcase %></h2>
+    <% @candidatures_filtered[dep].each do |candidature| %>
       <table>
         <thead>
           <tr>

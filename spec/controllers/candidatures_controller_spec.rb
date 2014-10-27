@@ -24,7 +24,9 @@ describe CandidaturesController do
   # Candidature. As you add validations to Candidature, be sure to
   # adjust the attributes here as well.
 
- let(:valid_course_attributes) {{
+  include Devise::TestHelpers
+
+  let(:valid_course_attributes) {{
     "id" => 1,
     "name" => "Mascarenhas",
     "course_code" => "MAC110",
@@ -67,7 +69,7 @@ describe CandidaturesController do
     "id" => 1,
     "password" => "prof-123",
     "email" => "kunio@ime.usp.br",
-    "department_id" => 1,
+    "department_id" => "1",
     "nusp" => "2222222",
     "professor_rank" => 1,
     "confirmed_at" => Time.now
@@ -77,7 +79,7 @@ describe CandidaturesController do
     "id" => 2,
     "password" => "prof-123",
     "email" => "zara@ime.usp.br",
-    "department_id" => 2,
+    "department_id" => "2",
     "nusp" => "3333333",
     "professor_rank" => 2,
     "confirmed_at" => Time.now
@@ -116,35 +118,64 @@ describe CandidaturesController do
   end
 
   describe "GET index" do
-    it "student assigns his candidatures as @candidatures" do
-      @shown_candidatures[@mac.code].push(Candidature.create! valid_attributes)
+    it "redirects students to index_for_student" do
+      get :index, {}, valid_session
+      response.should redirect_to action: :index_for_student, student_id: @student
+    end
+    it "redirects super professor to index_for_department" do
+      super_professor = Professor.create! kunio
+      sign_in :professor, super_professor
+      get :index, {}, valid_session
+      response.should redirect_to action: :index_for_department, department_id: super_professor.department
+    end
+    it "hiper professor assigns all departments as @departments" do
+      hiper_professor = Professor.create! zara
+      sign_in :professor, hiper_professor
+      get :index, {}, valid_session
+      assigns(:departments).should eq(Department.all)
+    end
+  end
+
+  describe "GET index for student" do
+    before :each do
+      @candidatures = []
+      @candidatures.push(Candidature.create! valid_attributes)
       Candidature.create! valid_second_candidature_attributes
       Candidature.create! valid_third_candidature_attributes
-      get :index, {}, valid_session
-      assigns(:candidatures_filtered).should eq(@shown_candidatures)
+      get :index_for_student, {student_id: @student}, valid_session
     end
-    it "super professor assigns candidatures of his department as @candidatures" do
-      @shown_candidatures[@mac.code].push(
+
+    it "renders the index for the student" do
+      should render_template :index_for_student
+    end
+
+    it "assigns student's candidatures as @candidatures" do
+      assigns(:candidatures).should eq(@candidatures)
+    end
+  end
+
+  describe "GET index for department" do
+    before do
+      Semester.create! valid_semester
+      @candidatures = [[], [], [], []]
+      @candidatures[0].push(
         (Candidature.create! valid_attributes),
         (Candidature.create! valid_second_candidature_attributes)
       )
       Candidature.create! valid_third_candidature_attributes
       super_professor = Professor.create! kunio
+      sign_out @student
       sign_in :professor, super_professor
-      get :index, {}, valid_session
-      assigns(:candidatures_filtered).should eq(@shown_candidatures)
+      Department.should_receive(:find).with(super_professor.department_id.to_s).and_return(@mac)
+      get :index_for_department, {department_id: @mac}, valid_session
     end
-    it "hiper professor assigns all candidatures as @candidatures" do
-      semester = Semester.create! valid_semester
-      @shown_candidatures[@mac.code].push(
-        (Candidature.create! valid_attributes),
-        (Candidature.create! valid_second_candidature_attributes)
-      )
-      @shown_candidatures[@mae.code].push(Candidature.create! valid_third_candidature_attributes)
-      hiper_professor = Professor.create! zara
-      sign_in :professor, hiper_professor
-      get :index, {}, valid_session
-      assigns(:candidatures_filtered).should eq(@shown_candidatures)
+
+    it "renders the index for the super professor's department" do
+      should render_template :index_for_department
+    end
+
+    it "assigns candidatures of super professor's department as @candidatures_filtered" do
+      assigns(:candidatures_filtered).should eq(@candidatures)
     end
   end
 

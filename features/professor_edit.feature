@@ -38,3 +38,23 @@ Feature: Edit Professor
         Then I should see "Email: gold@troll.com"
         Then I should see "Departamento: MAE"
 
+    Scenario: Super-professor can't give super-professor authorization
+        Given there is a super_professor with name "Nina" and password "changeme!" nusp "321" department "MAE" and email "nin@nin.nin"
+        Given I'm at the professor login page
+        And I fill the "Número USP" field with "321"
+        And I fill the "Senha" field with "changeme!"
+        And I press the "Entrar" button
+        When I click the "Professores" link
+        And I click the "Bob" link
+        Then I should not see "Privilégios" 
+
+    Scenario:Hiper-professor giving super-professor authorization
+        Given there is a hiper_professor with name "Zara" and password "changeme!" nusp "321" department "MAT" and email "zar@zar.zar"
+        Given I'm at the professor login page
+        And I fill the "Número USP" field with "321"
+        And I fill the "Senha" field with "changeme!"
+        And I press the "Entrar" button
+        When I click the "Professores" link
+        And I click the "Bob" link
+        And I press the "Privilégios" button
+        Then I should see "Bob é agora um Super-professor" 
