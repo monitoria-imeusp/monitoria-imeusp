@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140924125124) do
+ActiveRecord::Schema.define(version: 20141015212750) do
 
   create_table "admins", force: true do |t|
     t.string   "email",                  default: "", null: false
@@ -171,6 +171,7 @@ ActiveRecord::Schema.define(version: 20140924125124) do
     t.datetime "confirmation_sent_at"
     t.string   "unconfirmed_email"
     t.string   "institute"
+    t.string   "institute_text"
   end
 
   add_index "students", ["nusp"], name: "index_students_on_nusp", unique: true
