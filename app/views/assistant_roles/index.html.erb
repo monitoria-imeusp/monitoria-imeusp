@@ -1,0 +1,25 @@
+<h1>Monitores eleitos</h1>
+
+<% @assistant_roles_by_semester.each do |entry| %>
+  <h2><%= entry[:semester].as_s %></h2>
+  <table>
+    <thead>
+      <tr>
+        <th><%= t('activerecord.attributes.student.name') %> </th>
+        <th><%= t('activerecord.attributes.request_for_teaching_assistant.course_id') %> </th>
+        <th><%= t('activerecord.attributes.request_for_teaching_assistant.professor_id') %> </th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% entry[:role].each do |role| %>
+        <tr>
+          <td><%= role.student.name %></td>
+          <td><%= role.request_for_teaching_assistant.course.course_code %></td>
+          <td><%= role.request_for_teaching_assistant.professor.name %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>
+

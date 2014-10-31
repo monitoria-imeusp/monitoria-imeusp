@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141031152545) do
+ActiveRecord::Schema.define(version: 20141031161817) do
 
   create_table "admins", force: true do |t|
     t.string   "email",                  default: "", null: false
@@ -33,7 +33,7 @@ ActiveRecord::Schema.define(version: 20141031152545) do
 
   create_table "assistant_roles", force: true do |t|
     t.integer  "student_id"
-    t.integer  "request_id"
+    t.integer  "request_for_teaching_assistant_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -145,6 +145,18 @@ ActiveRecord::Schema.define(version: 20141031152545) do
   end
 
   add_index "semesters", ["year", "parity"], name: "index_semesters_on_year_and_parity", unique: true
+
+  create_table "student_assesments", force: true do |t|
+    t.integer  "candidature_id"
+    t.integer  "professor_id"
+    t.integer  "contact"
+    t.integer  "efficiency"
+    t.integer  "reliability"
+    t.integer  "concept"
+    t.text     "comment"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "students", force: true do |t|
     t.string   "name"
