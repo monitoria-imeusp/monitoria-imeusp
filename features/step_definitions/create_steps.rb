@@ -94,6 +94,18 @@ Given(/^there is an candidature with student "(.*?)" and first option "(.*?)" an
     time_period_preference: period)
 end
 
+When(/^there is a candidature by student "(.*?)" for course "(.*?)"$/) do |student_name, course_code|
+  course_id = Course.where(course_code: course_code).take.id
+  student_id = Student.where(name: student_name).take.id
+  Candidature.create(
+    student_id: student_id,
+    course1_id: course_id,
+    semester_id: Semester.first.id,
+    daytime_availability: true,
+    nighttime_availability: true,
+    time_period_preference: 0)
+end
+
 When(/^there is a course with name "(.*?)" and code "(.*?)" and department "(.*?)"$/) do |name, code, department|
   Course.create(name: name, course_code: code, department_id: Department.find_by({:code => department}).id)
 end

@@ -54,6 +54,11 @@ Given(/^I visit the assistant roles page$/) do
   visit assistant_roles_path
 end
 
+Given(/^I visit a request page$/) do
+  visit request_for_teaching_assistant_path(RequestForTeachingAssistant.first.id)
+end
+
+
 When(/^I try to access the "(.*?)" page with id "(.*?)" to "(.*?)"$/) do |page_name, id, action|
     if action != 'show'
         visit('/' + page_name + '/' + id.to_s + '/' + action)
