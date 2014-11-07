@@ -50,6 +50,10 @@ When(/^I go to the new request form$/) do
   visit new_request_for_teaching_assistant_path(Semester.first.id)
 end
 
+Given(/^I visit the assistant roles page$/) do
+  visit assistant_roles_path
+end
+
 When(/^I try to access the "(.*?)" page with id "(.*?)" to "(.*?)"$/) do |page_name, id, action|
     if action != 'show'
         visit('/' + page_name + '/' + id.to_s + '/' + action)

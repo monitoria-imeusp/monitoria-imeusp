@@ -14,6 +14,18 @@ Given(/^there is a request for teaching assistant with professor "(.*?)" and cou
     semester_id: Semester.first.id )
 end
 
+When(/^there is a request for teaching assistant by professor "(.*?)" for the course "(.*?)"$/) do |professor_name, course_code|
+  RequestForTeachingAssistant.create(
+    professor_id: Professor.where(name: professor_name).take.id,
+    course_id: Course.find_by({:course_code => course_code}).id,
+    requested_number: 1,
+    priority: 1,
+    student_assistance: false,
+    work_correction: false,
+    test_oversight: false,
+    semester_id: Semester.first.id )
+end
+
 def create_professor(name, password, nusp, department, email, professor_rank)
   d = Department.find_by("code" => department)
   if not d
@@ -28,8 +40,16 @@ Given(/^there is a professor with name "(.*?)" and password "(.*?)" nusp "(.*?)"
   create_professor(name, password, nusp, department, email, 0)
 end
 
+When(/^there is a professor with name "(.*?)" and nusp "(.*?)" and department "(.*?)" and email "(.*?)"$/) do |name, nusp, department, email|
+  create_professor(name, "password", nusp, department, email, 0)
+end
+
 Given(/^there is a super_professor with name "(.*?)" and password "(.*?)" nusp "(.*?)" department "(.*?)" and email "(.*?)"$/) do |name, password, nusp, department, email|
   create_professor(name, password, nusp, department, email, 1)
+end
+
+Given(/^there is a super_professor with name "(.*?)" nusp "(.*?)" department "(.*?)" and email "(.*?)"$/) do |name, nusp, department, email|
+  create_professor(name, "password", nusp, department, email, 1)
 end
 
 Given(/^there is a hiper_professor with name "(.*?)" and password "(.*?)" nusp "(.*?)" department "(.*?)" and email "(.*?)"$/) do |name, password, nusp, department, email|
@@ -84,5 +104,12 @@ end
 
 When(/^there is an open semester "(.*?)" "(.*?)"$/) do |year, parity|
   Semester.create(year: year, parity: parity, open: true)
+end
+
+When(/^there is an assistant role for student "(.*?)" with professor "(.*?)" at course "(.*?)"$/) do |student_name, professor_name, course_code|
+  professor_id = Professor.where(name: professor_name).take.id
+  course_id = Course.where(course_code: course_code).take.id
+  request_id = RequestForTeachingAssistant.where(professor_id: professor_id, course_id: course_id).take.id
+  AssistantRole.create(student_id: Student.where(name: student_name).take.id, request_for_teaching_assistant_id: request_id)
 end
 
