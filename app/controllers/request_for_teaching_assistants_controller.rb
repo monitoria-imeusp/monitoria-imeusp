@@ -19,7 +19,7 @@ class RequestForTeachingAssistantsController < ApplicationController
     authorization_sprofessor
     authorization_professor
     course_id = RequestForTeachingAssistant.find(params[:id]).course.id
-    @candidatures_for_this_request = Candidature.where("course1_id = ? or course2_id = ? or course3_id = ?", course_id, course_id, course_id)
+    @candidatures_for_this_request = Candidature.where "course1_id = ? or course2_id = ? or course3_id = ? or course4_id = ?", course_id, course_id, course_id, course_id
   end
 
   # GET /request_for_teaching_assistants/new
