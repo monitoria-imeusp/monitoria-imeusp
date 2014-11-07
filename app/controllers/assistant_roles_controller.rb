@@ -27,9 +27,6 @@ class AssistantRolesController < ApplicationController
     end
   end
 
-  def update
-  end
-
   def destroy
     if AssistantRole.exists? params[:id]
       @assistant_role = AssistantRole.find params[:id]

@@ -146,18 +146,6 @@ ActiveRecord::Schema.define(version: 20141031161817) do
 
   add_index "semesters", ["year", "parity"], name: "index_semesters_on_year_and_parity", unique: true
 
-  create_table "student_assesments", force: true do |t|
-    t.integer  "candidature_id"
-    t.integer  "professor_id"
-    t.integer  "contact"
-    t.integer  "efficiency"
-    t.integer  "reliability"
-    t.integer  "concept"
-    t.text     "comment"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "students", force: true do |t|
     t.string   "name"
     t.string   "password"

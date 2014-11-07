@@ -2,7 +2,7 @@
 
 FactoryGirl.define do
   factory :assistant_role do
-    student_id 1
-    request_id 1
+    student_id                        1
+    request_for_teaching_assistant_id 1
   end
 end

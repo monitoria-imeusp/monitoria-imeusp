@@ -13,6 +13,13 @@ module ControllerMacros
     end
   end
 
+  def login_super_professor
+    before :each do
+      @request.env["devise.mapping"] = Devise.mappings[:professor]
+      sign_in FactoryGirl.create(:super_professor)
+    end
+  end
+
   def login_secretary
     before(:each) do
       @request.env["devise.mapping"] = Devise.mappings[:secretary]
