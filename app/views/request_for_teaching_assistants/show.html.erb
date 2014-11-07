@@ -57,6 +57,7 @@
       <tr>
         <td><%= candidature.student.name %></td>
         <td><%= link_to 'Ver candidatura', candidature %></td>
+        <td><%= link_to 'Eleger', create_assistant_role_path(@request_for_teaching_assistant, candidature.student), method: :post %></td>
       </tr>
     <% end %>
   </tbody>
