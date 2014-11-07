@@ -48,7 +48,7 @@ Given(/^there is a super_professor with name "(.*?)" and password "(.*?)" nusp "
   create_professor(name, password, nusp, department, email, 1)
 end
 
-Given(/^there is a super_professor with name "(.*?)" nusp "(.*?)" department "(.*?)" and email "(.*?)"$/) do |name, nusp, department, email|
+Given(/^there is a super_professor with name "(.*?)" and nusp "(.*?)" and department "(.*?)" and email "(.*?)"$/) do |name, nusp, department, email|
   create_professor(name, "password", nusp, department, email, 1)
 end
 
