@@ -31,6 +31,19 @@ class AssistantRolesController < ApplicationController
   end
 
   def destroy
+    if AssistantRole.exists? params[:id]
+      @assistant_role = AssistantRole.find params[:id]
+      @assistant_role.destroy
+      respond_to do |format|
+        format.html { redirect_to assistant_roles_path }
+        format.json { head :no_content }
+      end
+    else
+      respond_to do |format|
+        format.html { redirect_to assistant_roles_path }
+        format.json { head :no_content }
+      end
+    end
   end
 
   private

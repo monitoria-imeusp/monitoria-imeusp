@@ -54,8 +54,8 @@ Rails.application.routes.draw do
 
   get 'assistant_roles/' => 'assistant_roles#index', as: :assistant_roles
   post 'assistant_roles/:request_for_teaching_assistant_id/:student_id/create' => 'assistant_roles#create', as: :create_assistant_role
-  get 'assistant_roles/update'
-  get 'assistant_roles/destroy'
+  put 'assistant_roles/:id/' => 'assistant_roles#update', as: :update_assistant_role
+  delete 'assistant_roles/:id/' => 'assistant_roles#destroy', as: :destroy_assistant_role
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
