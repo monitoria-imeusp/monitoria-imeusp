@@ -36,7 +36,7 @@ pt-BR:
         password_confirmation: 'Confirme a senha'
       request_for_teaching_assistant:
         course_id: 'Disciplina'
-        professor_id: 'ID do Professor'
+        professor_id: 'Professor(a)'
         subject: 'Disciplina'
         requested_number: 'Número de monitores solicitados'
         priority: 'Prioridade'
