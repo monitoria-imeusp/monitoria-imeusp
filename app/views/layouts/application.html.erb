@@ -122,6 +122,9 @@
               <li>
                 <%= link_to "Candidaturas", candidatures_path %>
               </li>
+              <li>
+                <%= link_to "Monitores", assistant_roles_path %>
+              </li>
             <% end %>
             <li>
               <%= link_to "Sair", destroy_professor_session_path, method: :delete %>
@@ -129,6 +132,9 @@
           <% elsif secretary_signed_in? %>
             <li>
               <%= link_to "Gerenciar semestres", semesters_path %>
+            </li>
+            <li>
+              <%= link_to "Monitores", assistant_roles_path %>
             </li>
             <li>
               <%= link_to "Sair", destroy_secretary_session_path, method: :delete %>
