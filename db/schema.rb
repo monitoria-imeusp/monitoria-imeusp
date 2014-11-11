@@ -39,6 +39,17 @@ ActiveRecord::Schema.define(version: 20141124160412) do
     t.boolean  "advise_urgency"
   end
 
+  create_table "assistant_evaluations", force: true do |t|
+    t.integer  "assistant_role_id"
+    t.integer  "ease_of_contact"
+    t.integer  "efficiency"
+    t.integer  "reliability"
+    t.integer  "overall"
+    t.text     "comment"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "assistant_roles", force: true do |t|
     t.integer  "student_id"
     t.integer  "request_for_teaching_assistant_id"
@@ -57,8 +68,8 @@ ActiveRecord::Schema.define(version: 20141124160412) do
     t.datetime "updated_at"
     t.integer  "student_id"
     t.text     "observation",            default: ""
-    t.integer  "course4_id"
     t.integer  "semester_id"
+    t.integer  "course4_id"
   end
 
   create_table "courses", force: true do |t|
@@ -153,6 +164,18 @@ ActiveRecord::Schema.define(version: 20141124160412) do
   end
 
   add_index "semesters", ["year", "parity"], name: "index_semesters_on_year_and_parity", unique: true
+
+  create_table "student_assesments", force: true do |t|
+    t.integer  "candidature_id"
+    t.integer  "professor_id"
+    t.integer  "contact"
+    t.integer  "efficiency"
+    t.integer  "reliability"
+    t.integer  "concept"
+    t.text     "comment"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "students", force: true do |t|
     t.string   "name"
