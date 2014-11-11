@@ -1,3 +1,9 @@
+
+<p>
+  <strong>TODO info do monitor</strong>
+  <strong>TODO instruções de preenchimento</strong>
+</p>
+
 <%= form_for(@assistant_evaluation) do |f| %>
   <% if @assistant_evaluation.errors.any? %>
     <div id="error_explanation">
@@ -12,28 +18,27 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :index_for_student %><br>
-    <%= f.text_field :index_for_student %>
+    <%= f.hidden_field :assistant_role_id, :value => @assistant_evaluation.assistant_role_id %>
   </div>
   <div class="field">
-    <%= f.label :new %><br>
-    <%= f.text_field :new %>
+    <%= f.label :ease_of_contact, t('activerecord.attributes.assistant_evaluation.ease_of_contact') %><br>
+    <%= f.number_field :ease_of_contact %>
   </div>
   <div class="field">
-    <%= f.label :edit %><br>
-    <%= f.text_field :edit %>
+    <%= f.label :efficiency, t('activerecord.attributes.assistant_evaluation.efficiency') %><br>
+    <%= f.number_field :efficiency %>
   </div>
   <div class="field">
-    <%= f.label :create %><br>
-    <%= f.text_field :create %>
+    <%= f.label :reliability, t('activerecord.attributes.assistant_evaluation.reliability') %><br>
+    <%= f.number_field :reliability %>
   </div>
   <div class="field">
-    <%= f.label :update %><br>
-    <%= f.text_field :update %>
+    <%= f.label :overall, t('activerecord.attributes.assistant_evaluation.overall') %><br>
+    <%= f.number_field :overall %>
   </div>
   <div class="field">
-    <%= f.label :destroy %><br>
-    <%= f.text_field :destroy %>
+    <%= f.label :comment, t('activerecord.attributes.assistant_evaluation.comment') %><br>
+    <%= f.text_field :comment %>
   </div>
   <div class="actions">
     <%= f.submit %>

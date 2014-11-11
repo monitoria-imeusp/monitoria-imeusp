@@ -106,7 +106,14 @@ pt-BR:
       advise:
         title: 'Título'
         message: 'Texto'
-        urgency: 'Mensagem Importante'        
+        urgency: 'Mensagem Importante'
+      assistant_evaluation:
+        assistant_name: 'Nome do monitor'
+        ease_of_contact: 'Facilidade de contato'
+        efficiency: 'Eficiência (respeito aos prazos estabelecidos'
+        reliability: 'Confiabilidade (qualidade de trabalho'
+        overall: 'Conceito (resumo dos itens anteriores)'
+        comment: 'Comentários'
   errors:
     messages:
       record_invalid: 'Entrada inválida'

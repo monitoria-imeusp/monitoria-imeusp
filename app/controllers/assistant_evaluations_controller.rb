@@ -7,9 +7,10 @@ class AssistantEvaluationsController < ApplicationController
     @assistant_evaluations = AssistantEvaluation.all
   end
 
-  # GET /assistant_evaluations/new
+  # GET /assistant_evaluations/1/new
   def new
     @assistant_evaluation = AssistantEvaluation.new
+    @assistant_evaluation.assistant_role = AssistantRole.find(params[:assistant_role_id])
   end
 
   # GET /assistant_evaluations/1/edit
@@ -23,7 +24,8 @@ class AssistantEvaluationsController < ApplicationController
 
     respond_to do |format|
       if @assistant_evaluation.save
-        format.html { redirect_to @assistant_evaluation, notice: 'Assistant evaluation was successfully created.' }
+        student = @assistant_evaluation.assistant_role.student
+        format.html { redirect_to assistant_evaluations_for_student_path(student), notice: 'Assistant evaluation was successfully created.' }
         format.json { render action: 'show', status: :created, location: @assistant_evaluation }
       else
         format.html { render action: 'new' }
