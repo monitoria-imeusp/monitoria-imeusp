@@ -7,11 +7,6 @@ class AssistantEvaluationsController < ApplicationController
     @assistant_evaluations = AssistantEvaluation.all
   end
 
-  # GET /assistant_evaluations/1
-  # GET /assistant_evaluations/1.json
-  def show
-  end
-
   # GET /assistant_evaluations/new
   def new
     @assistant_evaluation = AssistantEvaluation.new
