@@ -1,0 +1,35 @@
+<h1>Listing assistant_evaluations</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Index for student</th>
+      <th>New</th>
+      <th>Edit</th>
+      <th>Create</th>
+      <th>Update</th>
+      <th>Destroy</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @assistant_evaluations.each do |assistant_evaluation| %>
+      <tr>
+        <td><%= assistant_evaluation.index_for_student %></td>
+        <td><%= assistant_evaluation.new %></td>
+        <td><%= assistant_evaluation.edit %></td>
+        <td><%= assistant_evaluation.create %></td>
+        <td><%= assistant_evaluation.update %></td>
+        <td><%= assistant_evaluation.destroy %></td>
+        <td><%= link_to 'Show', assistant_evaluation %></td>
+        <td><%= link_to 'Edit', edit_assistant_evaluation_path(assistant_evaluation) %></td>
+        <td><%= link_to 'Destroy', assistant_evaluation, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Assistant evaluation', new_assistant_evaluation_path %>

@@ -58,6 +58,9 @@ Rails.application.routes.draw do
   post 'assistant_roles/:request_for_teaching_assistant_id/:student_id/create' => 'assistant_roles#create', as: :create_assistant_role
   delete 'assistant_roles/:id/' => 'assistant_roles#destroy', as: :destroy_assistant_role
 
+  resources :assistant_evaluations, except: :index
+  get 'assistant_evaluations/for_student/:student_id/' => 'assistant_evaluations#index_for_student', as: :assistant_evaluations_for_student
+
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
