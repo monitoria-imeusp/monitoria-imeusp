@@ -1,8 +1,8 @@
 class AssistantEvaluationsController < ApplicationController
+  authorize_resource
   before_action :set_assistant_evaluation, only: [:show, :edit, :update, :destroy]
 
-  # GET /assistant_evaluations
-  # GET /assistant_evaluations.json
+  # GET /assistant_evaluations/for_student/1
   def index_for_student
     @assistant_evaluations = AssistantEvaluation.all
   end

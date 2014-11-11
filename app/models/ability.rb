@@ -183,6 +183,11 @@ class Ability
       can :destroy, AssistantRole
     end
 
+    # Assistant evaluation management permissions
+    if user.is_a? Admin or user.is_a? Secretary or user.is_a? Professor
+      can :manage, AssistantEvaluation
+    end
+
     # The first argument to `can` is the action you are giving the user
     # permission to do.
     # If you pass :manage it will apply to every action. Other common actions
