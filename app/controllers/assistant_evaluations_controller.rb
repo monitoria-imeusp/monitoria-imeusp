@@ -49,16 +49,6 @@ class AssistantEvaluationsController < ApplicationController
     end
   end
 
-  # DELETE /assistant_evaluations/1
-  # DELETE /assistant_evaluations/1.json
-  def destroy
-    @assistant_evaluation.destroy
-    respond_to do |format|
-      format.html { redirect_to assistant_evaluations_url }
-      format.json { head :no_content }
-    end
-  end
-
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_assistant_evaluation

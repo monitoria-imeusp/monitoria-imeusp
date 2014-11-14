@@ -187,14 +187,14 @@ class Ability
     end
 
     # Assistant evaluation management permissions
-    if user.is_a? Admin or user.is_a? Secretary or user.is_a? Professor
-      can :index, AssistantEvaluation
-      if user.is_a? Professor
-        can :new, AssistantEvaluation
-        can :edit, AssistantEvaluation
-        can :create, AssistantEvaluation
-        can :update, AssistantEvaluation
-      end
+    if user.is_a? Professor
+      can :new, AssistantEvaluation
+      can :edit, AssistantEvaluation
+      can :create, AssistantEvaluation
+      can :update, AssistantEvaluation
+    end
+    if user.is_a? Admin or user.is_a? Secretary or (user.is_a? Professor and user.professor_rank > 0)
+      can :index_for_student, AssistantEvaluation
     end
 
     # The first argument to `can` is the action you are giving the user
