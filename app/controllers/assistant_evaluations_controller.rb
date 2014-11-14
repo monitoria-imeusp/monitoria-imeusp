@@ -4,7 +4,9 @@ class AssistantEvaluationsController < ApplicationController
 
   # GET /assistant_evaluations/for_student/1
   def index_for_student
-    @assistant_evaluations = AssistantEvaluation.all
+    @student = Student.find(params[:student_id])
+    student_roles = AssistantRole.where(student: @student)
+    @assistant_evaluations = AssistantEvaluation.where(assistant_role_id: student_roles).reverse
   end
 
   # GET /assistant_evaluations/1/new
