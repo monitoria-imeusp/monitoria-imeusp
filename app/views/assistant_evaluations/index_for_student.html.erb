@@ -1,5 +1,7 @@
 <h1>Avaliações de <%= @student.name %></h1>
 
+<p><%= link_to "Voltar para ficha do aluno", @student %></p>
+
 <% @assistant_evaluations.each do |assistant_evaluation| %>
   <% request = assistant_evaluation.assistant_role.request_for_teaching_assistant %>
   <table>
