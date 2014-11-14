@@ -26,9 +26,8 @@ class AssistantEvaluationsController < ApplicationController
 
     respond_to do |format|
       if @assistant_evaluation.save
-        student = @assistant_evaluation.assistant_role.student
-        format.html { redirect_to assistant_evaluations_for_student_path(student), notice: 'Assistant evaluation was successfully created.' }
-        format.json { render action: 'show', status: :created, location: @assistant_evaluation }
+        format.html { redirect_to assistant_roles_for_professor_path(current_professor), notice: 'Assistant evaluation was successfully created.' }
+        format.json { render action: 'index_for_professor', status: :created, location: current_professor }
       else
         format.html { render action: 'new' }
         format.json { render json: @assistant_evaluation.errors, status: :unprocessable_entity }
@@ -41,8 +40,8 @@ class AssistantEvaluationsController < ApplicationController
   def update
     respond_to do |format|
       if @assistant_evaluation.update(assistant_evaluation_params)
-        format.html { redirect_to @assistant_evaluation, notice: 'Assistant evaluation was successfully updated.' }
-        format.json { render action: 'show', status: :ok, location: @assistant_evaluation }
+        format.html { redirect_to assistant_roles_for_professor_path(current_professor), notice: 'Assistant evaluation was successfully updated.' }
+        format.json { render action: 'index_for_professor', status: :ok, location: current_professor }
       else
         format.html { render action: 'edit' }
         format.json { render json: @assistant_evaluation.errors, status: :unprocessable_entity }
