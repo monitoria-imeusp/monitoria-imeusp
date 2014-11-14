@@ -40,6 +40,7 @@ a:hover, a:active, a:focus {
 table {
   width: 80%;
   text-align: center;
+  border: 2px solid #666;
 }
 
 td, th {
@@ -50,12 +51,6 @@ th.title, td.title {
   padding: 4px 8px;
   text-align: left;
   width: 25%;
-}
-
-th.longtitle, td.longtitle {
-  padding: 4px 8px;
-  text-align: left;
-  width: 60%;
 }
 
 th.name, td.name {
