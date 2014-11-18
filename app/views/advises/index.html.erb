@@ -1,0 +1,27 @@
+<h1>Listing advises</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Message</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @advises.each do |advise| %>
+      <tr>
+        <td><%= advise.title %></td>
+        <td><%= advise.message %></td>
+        <td><%= link_to 'Show', advise %></td>
+        <td><%= link_to 'Edit', edit_advise_path(advise) %></td>
+        <td><%= link_to 'Destroy', advise, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Advise', new_advise_path %>

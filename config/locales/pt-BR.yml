@@ -103,6 +103,9 @@ pt-BR:
         transcript_file_path: 'Histórico Escolar'
       department:
         department: 'Departamento'
+      advise:
+        title: 'Título'
+        message: 'Texto'        
   errors:
     messages:
       record_invalid: 'Entrada inválida'

@@ -1,9 +1,15 @@
+<% if secretary_signed_in? %>
+  <%= link_to "Avisos", new_advise_path %>
+<% end %>
+
+
 <h2>Bem-vindo ao sistema de monitoria do IME-USP!</h2>
 
 <p>
   Esse sistema gerencia o cadastro de monitores nas disciplinas ministradas
   por professores do instituto. Alunos, sigam as instruções abaixo.
 </p>
+
 
 <h2>Alunos - Inscrições</h2>
 

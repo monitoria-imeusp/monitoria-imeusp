@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  resources :advises
+
   get 'home/index'
 
   devise_for :admins, :controllers => { :admins => "admins" }
