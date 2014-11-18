@@ -8,7 +8,7 @@
   <%= @course.name %>
 </p>
 
-<% if admin_signed_in? || (current_professor.present? && current_professor.super_professor?) || secretary_signed_in? %>
+<% if (current_professor.present? && current_professor.super_professor?) || secretary_signed_in? %>
 <table>
   <thead>
     <tr>
