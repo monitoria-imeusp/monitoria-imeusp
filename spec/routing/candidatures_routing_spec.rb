@@ -8,7 +8,7 @@ describe CandidaturesController do
     end
 
     it "routes to #new" do
-      get("/candidatures/1/new").should route_to("candidatures#new", :id => "1")
+      get("/candidatures/1/new").should route_to("candidatures#new", :semester_id => "1")
     end
 
     it "routes to #show" do

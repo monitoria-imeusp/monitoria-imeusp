@@ -190,7 +190,7 @@ describe CandidaturesController do
   describe "GET new" do
     it "assigns a new candidature as @candidature" do
       Semester.should_receive(:find).with("1").and_return(42)
-      get :new, {:id => "1"}, valid_session
+      get :new, {:semester_id => "1"}, valid_session
       assigns(:candidature).should be_a_new(Candidature)
       assigns(:semester).should be(42)
     end
