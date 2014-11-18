@@ -49,8 +49,8 @@ ActiveRecord::Schema.define(version: 20141031161817) do
     t.datetime "updated_at"
     t.integer  "student_id"
     t.text     "observation",            default: ""
-    t.integer  "semester_id"
     t.integer  "course4_id"
+    t.integer  "semester_id"
   end
 
   create_table "courses", force: true do |t|
