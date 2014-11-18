@@ -42,7 +42,7 @@ class AdvisesController < ApplicationController
   def update
     respond_to do |format|
       if @advise.update(advise_params)
-        format.html { redirect_to @advise, notice: 'Aviso editado com sucesso.' }
+        format.html { redirect_to root_path, notice: 'Aviso editado com sucesso.' }
         format.json { render action: 'show', status: :ok, location: @advise }
       else
         format.html { render action: 'edit' }
@@ -56,7 +56,7 @@ class AdvisesController < ApplicationController
   def destroy
     @advise.destroy
     respond_to do |format|
-      format.html { redirect_to advises_url }
+      format.html { redirect_to root_path }
       format.json { head :no_content }
     end
   end

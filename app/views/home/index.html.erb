@@ -10,6 +10,16 @@
   por professores do instituto. Alunos, sigam as instruções abaixo.
 </p>
 
+<% if (@advises = getAdivises) %>
+  <% @advises.each do |advise| %>
+      <h2><%= advise.title %></h2> 
+      <p><%= advise.message  %>
+      <% if secretary_signed_in? %>
+        <%= link_to 'Modificar', edit_advise_path(advise) %>
+        <%= link_to 'Deletar', advise, method: :delete, data: { confirm: 'Você tem certeza?' } %> </p>
+      <% end %>
+  <% end %>
+<% end %>
 
 <h2>Alunos - Inscrições</h2>
 
