@@ -77,7 +77,7 @@ describe AdvisesController do
 
       it "redirects to the created advise" do
         post :create, {:advise => valid_attributes}, valid_session
-        response.should redirect_to(Advise.last)
+        response.should redirect_to(root_url)
       end
     end
 
@@ -119,7 +119,7 @@ describe AdvisesController do
       it "redirects to the advise" do
         advise = Advise.create! valid_attributes
         put :update, {:id => advise.to_param, :advise => valid_attributes}, valid_session
-        response.should redirect_to(advise)
+        response.should redirect_to(root_url)
       end
     end
 
@@ -153,7 +153,7 @@ describe AdvisesController do
     it "redirects to the advises list" do
       advise = Advise.create! valid_attributes
       delete :destroy, {:id => advise.to_param}, valid_session
-      response.should redirect_to(advises_url)
+      response.should redirect_to(root_url)
     end
   end
 
