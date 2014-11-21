@@ -30,21 +30,6 @@ describe AdvisesController do
   # AdvisesController. Be sure to keep this updated too.
   let(:valid_session) { {} }
 
-  describe "GET index" do
-    it "assigns all advises as @advises" do
-      advise = Advise.create! valid_attributes
-      get :index, {}, valid_session
-      assigns(:advises).should eq([advise])
-    end
-  end
-
-  describe "GET show" do
-    it "assigns the requested advise as @advise" do
-      advise = Advise.create! valid_attributes
-      get :show, {:id => advise.to_param}, valid_session
-      assigns(:advise).should eq(advise)
-    end
-  end
 
   describe "GET new" do
     it "assigns a new advise as @advise" do
