@@ -105,7 +105,8 @@ pt-BR:
         department: 'Departamento'
       advise:
         title: 'Título'
-        message: 'Texto'        
+        message: 'Texto'
+        urgency: 'Mensagem Importante'        
   errors:
     messages:
       record_invalid: 'Entrada inválida'
