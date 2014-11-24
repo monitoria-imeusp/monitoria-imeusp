@@ -1,3 +1,8 @@
+<% if secretary_signed_in? %>
+  <%= link_to "Novos Avisos", new_advise_path, {:style=>'font-size:x-large;', :class => "css_class"} %>
+<% end %>
+
+
 <h2>Bem-vindo ao sistema de monitoria do IME-USP!</h2>
 
 <p>
@@ -5,29 +10,26 @@
   por professores do instituto. Alunos, sigam as instruções abaixo.
 </p>
 
+<% if (@advises = getAdivises) %>
+  <% @advises.each do |advise| %>
+      <h2><%= advise.title %></h2> 
+
+      <% if advise.advise_urgency? %>
+        <p style="color: red; "> 
+      <% else %>
+        <p style="color: black; ">
+      <% end %>
+      <%= advise.message %>
+      
+      <% if secretary_signed_in? %>
+        <%= link_to 'Modificar', edit_advise_path(advise)%>
+        <%= link_to 'Deletar', advise, method: :delete, data: { confirm: 'Você tem certeza?' } %> </p>
+      <% end %>
+  <% end %>
+<% end %>
+
 <h2>Alunos - Inscrições</h2>
 
-<div style="display: none">
-  <p style="color: #d55">
-    O período de inscrições para o segundo semestre de 2014 foram extendidas.
-  </p>
-
-  <p>
-    Estão abertas, de 7 de julho a <strong>15 de agosto</strong>, as inscrições para a monitoria referente ao segundo semestre de 2014 para as disciplinas de graduação no IME.
-  </p>
-
-  <p>
-    Podem se inscrever alunos do IME ou de outras unidades que tenham completado o segundo semestre de curso.
-  </p>
-
-  <p>
-    Para se candidatar, faça o cadastro através do menu lateral ou realize o acesso à sua conta, caso ela já exista.
-  </p>
-
-  <p>
-    Uma vez feito o acesso, o menu lateral apresentará a opção "Candidaturas", onde será possível administrar as suas inscrições.
-  </p>
-</div>
 
 <p style="color: #d55; font-weight: bold;">
   As inscrições para o segundo semestre de 2014 estão encerradas. Os resultados da seleção de monitores estão sendo divulgadas <a href="http://www.ime.usp.br/grad/monitoria">aqui.</a>

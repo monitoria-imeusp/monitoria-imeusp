@@ -52,3 +52,30 @@ Given(/^I'm logged in as a super professor$/) do
   fill_in "Senha", :with => "changeme!"
   click_button "Entrar"
 end
+
+Given(/^I'm logged in as a student$/) do
+  Student.create(
+    name: "Joao", 
+    password: "changeme!", 
+    email: "joao@ime.usp",
+    nusp: "55555", 
+    institute: "Instituto de Matemática e Estatística", 
+    gender: "1", 
+    rg: "1", 
+    cpf: "1",
+    address: "IME", 
+    city: "São Paulo", 
+    district: "Butantã", 
+    zipcode: "0", 
+    state: "SP",
+    tel: "1145454545", 
+    cel: "11985858585",
+    has_bank_account: "true",
+    confirmation_token:nil, 
+    confirmed_at: Time.now
+  )
+  visit new_student_session_path
+  fill_in "Número USP", :with => "55555"
+  fill_in "Senha", :with => "changeme!"
+  click_button "Entrar"
+end
