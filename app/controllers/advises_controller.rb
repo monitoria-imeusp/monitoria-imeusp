@@ -3,9 +3,6 @@ class AdvisesController < ApplicationController
 
   # GET /advises
   # GET /advises.json
-  def index
-    @advises = Advise.all
-  end
 
   # GET /advises/1
   # GET /advises/1.json
@@ -69,6 +66,6 @@ class AdvisesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def advise_params
-      params.require(:advise).permit(:title, :message)
+      params.require(:advise).permit(:title, :message, :advise_urgency)
     end
 end
