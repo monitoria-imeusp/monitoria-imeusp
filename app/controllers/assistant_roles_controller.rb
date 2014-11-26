@@ -1,15 +1,16 @@
 class AssistantRolesController < ApplicationController
   authorize_resource
 
+  # GET /assistant_roles
   def index
-    @assistant_roles_by_semester = Semester.all.reverse_order.map do |semester|
-      {
-        semester: semester,
-        role: AssistantRole.all.map { |x| x }.keep_if do |role|
-          role.request_for_teaching_assistant.semester == semester
-        end
-      }
-    end
+    separate_by_semester AssistantRole.all
+  end
+
+  # GET /assistant_roles/for_professor/1
+  def index_for_professor
+    @professor = Professor.find(params[:professor_id])
+    requests = RequestForTeachingAssistant.where(professor: @professor)
+    separate_by_semester AssistantRole.where(request_for_teaching_assistant: requests)
   end
 
   def create
@@ -50,5 +51,16 @@ class AssistantRolesController < ApplicationController
     params.permit(
       :student_id, :request_for_teaching_assistant_id
     )
+  end
+
+  def separate_by_semester record
+    @assistant_roles_by_semester = Semester.all.reverse_order.map do |semester|
+      {
+        semester: semester,
+        role: record.map { |x| x }.keep_if do |role|
+          role.request_for_teaching_assistant.semester == semester
+        end
+      }
+    end
   end
 end

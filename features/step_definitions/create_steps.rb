@@ -61,14 +61,6 @@ When(/^there is a secretary with name "(.*?)" and password "(.*?)" nusp "(.*?)" 
     confirmation_token:nil, confirmed_at: Time.now)
 end
 
-When(/^there is a student with name "(.*?)" and password "(.*?)" and nusp "(.*?)" and gender "(.*?)" and rg "(.*?)" and cpf "(.*?)" and address "(.*?)" and district "(.*?)" and zipcode "(.*?)" and city "(.*?)" and state "(.*?)" and tel "(.*?)" and cel "(.*?)" and email "(.*?)" and has_bank_account "(.*?)"$/) do |name, password, nusp, gender, rg, cpf, address, district, zipcode, city, state, tel, cel, email, has_bank_account|
-  Student.create(name: name, password: password, email: email,
-    nusp: nusp, gender: gender, rg: rg, cpf: cpf,
-    address: address, city: city, district: district, zipcode: zipcode, state: state,
-    tel: tel, cel: cel,
-    has_bank_account: has_bank_account,
-    confirmation_token:nil, confirmed_at: Time.now)
-end
 
 Given(/^there is a student with name "(.*?)" with nusp "(.*?)" and email "(.*?)"$/) do |name, nusp, email|
   Student.create(name: name, password: "changeme!", email: email,
@@ -125,3 +117,22 @@ When(/^there is an assistant role for student "(.*?)" with professor "(.*?)" at 
   AssistantRole.create(student_id: Student.where(name: student_name).take.id, request_for_teaching_assistant_id: request_id)
 end
 
+Given(/^there is an advise with title "(.*?)" and message "(.*?)" and urgency "(.*?)"$/) do |title, message, urgency|
+  Advise.create(title: title, message: message, advise_urgency: urgency)
+end
+
+When(/^thete is an assistant evaluation for student "(.*?)" with professor "(.*?)" at course "(.*?)" as "(.*?)"$/) do |student_name, professor_name, course_code, comment|
+  professor_id = Professor.where(name: professor_name).take.id
+  course_id = Course.where(course_code: course_code).take.id
+  request_id = RequestForTeachingAssistant.where(professor_id: professor_id, course_id: course_id).take.id
+  student_id = Student.where(name: student_name).take.id
+  assistant_role_id = AssistantRole.where(student_id: student_id, request_for_teaching_assistant_id: request_id).take.id
+  AssistantEvaluation.create(
+    assistant_role_id: assistant_role_id,
+    ease_of_contact: 1,
+    efficiency: 1,
+    reliability: 1,
+    overall: 1,
+    comment: comment
+  )
+end

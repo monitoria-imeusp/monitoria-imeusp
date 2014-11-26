@@ -97,3 +97,9 @@
   <%= link_to 'Remover', student_path(@student), method: :delete, data: { confirm: 'Tem certeza?' } %>
   </p>
 <% end %>
+
+<% if (professor_signed_in? and current_professor.super_professor?) or admin_signed_in? or secretary_signed_in? %>
+  <p>
+    <%= link_to 'Ver avaliações como monitor(a)', assistant_evaluations_for_student_path(@student) %>
+  </p>
+<% end %>

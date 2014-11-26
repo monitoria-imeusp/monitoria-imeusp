@@ -52,7 +52,7 @@ class CandidaturesController < ApplicationController
   # GET /candidatures/2014/new
   def new
     @candidature = Candidature.new
-    @semester = Semester.find(params[:id])
+    @semester = Semester.find(params[:semester_id])
   end
 
   # GET /candidatures/1/edit
