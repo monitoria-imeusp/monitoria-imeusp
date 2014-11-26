@@ -112,8 +112,8 @@ pt-BR:
         professor_name: 'Nome do professor(a)'
         semester: 'Semestre'
         ease_of_contact: 'Facilidade de contato'
-        efficiency: 'Eficiência (respeito aos prazos estabelecidos'
-        reliability: 'Confiabilidade (qualidade de trabalho'
+        efficiency: 'Eficiência (respeito aos prazos estabelecidos)'
+        reliability: 'Confiabilidade (qualidade de trabalho)'
         overall: 'Conceito (resumo dos itens anteriores)'
         comment: 'Comentários'
   errors:

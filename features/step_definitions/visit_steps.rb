@@ -54,6 +54,10 @@ Given(/^I visit the assistant roles page$/) do
   visit assistant_roles_path
 end
 
+Given(/^I visit my assistant roles page$/) do
+  visit assistant_roles_for_professor_path(Professor.first.id)
+end
+
 Given(/^I visit a request page$/) do
   visit request_for_teaching_assistant_path(RequestForTeachingAssistant.first.id)
 end

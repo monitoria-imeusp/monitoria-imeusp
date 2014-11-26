@@ -26,7 +26,7 @@ class AssistantEvaluationsController < ApplicationController
 
     respond_to do |format|
       if @assistant_evaluation.save
-        format.html { redirect_to assistant_roles_for_professor_path(current_professor), notice: 'Assistant evaluation was successfully created.' }
+        format.html { redirect_to assistant_roles_for_professor_path(current_professor), notice: 'Avaliação enviada com sucesso.' }
         format.json { render action: 'index_for_professor', status: :created, location: current_professor }
       else
         format.html { render action: 'new' }
@@ -40,7 +40,7 @@ class AssistantEvaluationsController < ApplicationController
   def update
     respond_to do |format|
       if @assistant_evaluation.update(assistant_evaluation_params)
-        format.html { redirect_to assistant_roles_for_professor_path(current_professor), notice: 'Assistant evaluation was successfully updated.' }
+        format.html { redirect_to assistant_roles_for_professor_path(current_professor), notice: 'Avaliação atualizada com sucesso.' }
         format.json { render action: 'index_for_professor', status: :ok, location: current_professor }
       else
         format.html { render action: 'edit' }
