@@ -37,6 +37,16 @@ Given(/^I'm logged in as a professor$/) do
   click_button "Entrar"
 end
 
+Given(/^I'm logged in as a professor "(.*?)"$/) do |name|
+  professor = Professor.where(name: name).take
+  visit new_professor_session_path
+  fill_in "Número USP", :with => professor.nusp.to_s
+  fill_in "Senha", :with => "password"
+  click_button "Entrar"
+
+  page.should have_text("Acesso efetuado com sucesso")
+end
+
 Given(/^I'm logged in as a super professor$/) do
   Professor.create(
     name: "Super Professor",

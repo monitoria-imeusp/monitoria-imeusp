@@ -40,6 +40,7 @@ a:hover, a:active, a:focus {
 table {
   width: 80%;
   text-align: center;
+  border: 2px solid #666;
 }
 
 td, th {

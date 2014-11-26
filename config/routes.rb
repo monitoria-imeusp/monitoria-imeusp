@@ -55,8 +55,13 @@ Rails.application.routes.draw do
   get 'system/candidature_index', as: :system_candidatures
 
   get 'assistant_roles/' => 'assistant_roles#index', as: :assistant_roles
+  get 'assistant_roles/for_professor/:professor_id' => 'assistant_roles#index_for_professor', as: :assistant_roles_for_professor
   post 'assistant_roles/:request_for_teaching_assistant_id/:student_id/create' => 'assistant_roles#create', as: :create_assistant_role
   delete 'assistant_roles/:id/' => 'assistant_roles#destroy', as: :destroy_assistant_role
+
+  resources :assistant_evaluations, except: [:index, :show, :new, :destroy]
+  get 'assistant_evaluations/for_student/:student_id/' => 'assistant_evaluations#index_for_student', as: :assistant_evaluations_for_student
+  get 'assistant_evaluations/:assistant_role_id/new' => 'assistant_evaluations#new', as: :new_assistant_evaluation
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

@@ -121,6 +121,9 @@
             <li>
               <%= link_to "Pedidos de Monitoria", request_for_teaching_assistants_path %>
             </li>
+            <li>
+              <%= link_to "Meus monitores", assistant_roles_for_professor_path(current_professor) %>
+            </li>
             <% if current_professor.super_professor? then %>
               <li>
                 <%= link_to "Candidaturas", candidatures_path %>

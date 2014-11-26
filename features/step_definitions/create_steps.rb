@@ -118,5 +118,21 @@ When(/^there is an assistant role for student "(.*?)" with professor "(.*?)" at 
 end
 
 Given(/^there is an advise with title "(.*?)" and message "(.*?)" and urgency "(.*?)"$/) do |title, message, urgency|
-  Advise.create(title: title, message: message, advise_urgency: urgency)  
+  Advise.create(title: title, message: message, advise_urgency: urgency)
+end
+
+When(/^thete is an assistant evaluation for student "(.*?)" with professor "(.*?)" at course "(.*?)" as "(.*?)"$/) do |student_name, professor_name, course_code, comment|
+  professor_id = Professor.where(name: professor_name).take.id
+  course_id = Course.where(course_code: course_code).take.id
+  request_id = RequestForTeachingAssistant.where(professor_id: professor_id, course_id: course_id).take.id
+  student_id = Student.where(name: student_name).take.id
+  assistant_role_id = AssistantRole.where(student_id: student_id, request_for_teaching_assistant_id: request_id).take.id
+  AssistantEvaluation.create(
+    assistant_role_id: assistant_role_id,
+    ease_of_contact: 1,
+    efficiency: 1,
+    reliability: 1,
+    overall: 1,
+    comment: comment
+  )
 end
