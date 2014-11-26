@@ -74,3 +74,8 @@ end
 When(/^I try to update the student with id "(.*?)"$/) do |id|
     page.driver.put('/students/' + id.to_s)
 end
+
+When(/^I visit student "(.*?)"'s page$/) do |name|
+  visit student_path(Student.where(name: name).take.id)
+end
+
