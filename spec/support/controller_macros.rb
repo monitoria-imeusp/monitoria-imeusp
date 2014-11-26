@@ -14,10 +14,13 @@ module ControllerMacros
   end
 
   def login_super_professor
-    before :each do
+    @professor = 1
+    before(:each) do
       @request.env["devise.mapping"] = Devise.mappings[:professor]
-      sign_in FactoryGirl.create(:super_professor)
+      @professor = FactoryGirl.create(:super_professor)
+      sign_in @professor
     end
+    return @professor
   end
 
   def login_secretary

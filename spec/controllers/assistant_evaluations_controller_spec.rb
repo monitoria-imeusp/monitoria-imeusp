@@ -20,64 +20,84 @@ require 'spec_helper'
 
 describe AssistantEvaluationsController do
 
-  # This should return the minimal set of attributes required to create a valid
-  # AssistantEvaluation. As you add validations to AssistantEvaluation, be sure to
-  # adjust the attributes here as well.
-  let(:valid_attributes) { { "index_for_student" => "MyString" } }
+  include Devise::TestHelpers
 
   # This should return the minimal set of values that should be in the session
   # in order to pass any filters (e.g. authentication) defined in
   # AssistantEvaluationsController. Be sure to keep this updated too.
   let(:valid_session) { {} }
 
-  describe "GET index" do
-    it "assigns all assistant_evaluations as @assistant_evaluations" do
-      assistant_evaluation = AssistantEvaluation.create! valid_attributes
-      get :index, {}, valid_session
-      assigns(:assistant_evaluations).should eq([assistant_evaluation])
-    end
+  @super_professor = login_super_professor()
+
+  before :each do
+    @semester   = FactoryGirl.create :semester
+    @department = FactoryGirl.create :department
+    @course1    = FactoryGirl.create :course1
+    @student    = FactoryGirl.create :student
+    @request_for_teaching_assistant = FactoryGirl.create :request_for_teaching_assistant
+    @assistant_role = FactoryGirl.create :assistant_role
   end
 
-  describe "GET show" do
-    it "assigns the requested assistant_evaluation as @assistant_evaluation" do
-      assistant_evaluation = AssistantEvaluation.create! valid_attributes
-      get :show, {:id => assistant_evaluation.to_param}, valid_session
-      assigns(:assistant_evaluation).should eq(assistant_evaluation)
+  describe "GET index" do
+    before :each do
+      @assistant_evaluation = FactoryGirl.create :assistant_evaluation
+      Student.should_receive(:find).with(@student.id.to_s).and_return(@student)
+      get :index_for_student, { student_id: @student.id }, valid_session
+    end
+
+    it { response.should be_ok }
+
+    it "assigns the student as @student" do
+      assigns(:student).should eq(@student)
+    end
+
+    it "assigns all assistant_evaluations for the student as @assistant_evaluations" do
+      assigns(:assistant_evaluations).should eq([@assistant_evaluation])
     end
   end
 
   describe "GET new" do
     it "assigns a new assistant_evaluation as @assistant_evaluation" do
-      get :new, {}, valid_session
+      get :new, { assistant_role_id: @assistant_role.id }, valid_session
       assigns(:assistant_evaluation).should be_a_new(AssistantEvaluation)
+      assigns(:assistant_evaluation).assistant_role_id.should eq(@assistant_role.id)
     end
   end
 
   describe "GET edit" do
     it "assigns the requested assistant_evaluation as @assistant_evaluation" do
-      assistant_evaluation = AssistantEvaluation.create! valid_attributes
-      get :edit, {:id => assistant_evaluation.to_param}, valid_session
+      assistant_evaluation = FactoryGirl.create :assistant_evaluation
+      AssistantEvaluation.should_receive(:find).with(assistant_evaluation.id.to_s).and_return(assistant_evaluation)
+      get :edit, { id: assistant_evaluation.to_param }, valid_session
       assigns(:assistant_evaluation).should eq(assistant_evaluation)
     end
   end
 
   describe "POST create" do
     describe "with valid params" do
-      it "creates a new AssistantEvaluation" do
-        expect {
-          post :create, {:assistant_evaluation => valid_attributes}, valid_session
-        }.to change(AssistantEvaluation, :count).by(1)
+      before :each do
+        @params = {
+          "assistant_role_id" => "1",
+          "ease_of_contact" => "1",
+          "efficiency" => "1",
+          "reliability" => "1",
+          "overall" => "1",
+          "comment" => "MyText"
+        }
+        @assistant_evaluation = FactoryGirl.create :assistant_evaluation
+        @assistant_evaluation.should_receive(:save).and_return(true)
+        AssistantEvaluation.should_receive(:new).with(@params).and_return(@assistant_evaluation)
+        post :create, { assistant_evaluation: @params }, valid_session
       end
 
-      it "assigns a newly created assistant_evaluation as @assistant_evaluation" do
-        post :create, {:assistant_evaluation => valid_attributes}, valid_session
+      it "assigns a newly created assistant_evaluation as @assistant_evaluation and persists it" do
         assigns(:assistant_evaluation).should be_a(AssistantEvaluation)
         assigns(:assistant_evaluation).should be_persisted
       end
 
       it "redirects to the created assistant_evaluation" do
-        post :create, {:assistant_evaluation => valid_attributes}, valid_session
-        response.should redirect_to(AssistantEvaluation.last)
+        # TODO should use @super_professor, but for some reason that does not work
+        response.should redirect_to(assistant_roles_for_professor_path(:professor_id => 1))
       end
     end
 
@@ -100,32 +120,44 @@ describe AssistantEvaluationsController do
 
   describe "PUT update" do
     describe "with valid params" do
+      before :each do
+        @params = {
+          "assistant_role_id" => "1",
+          "ease_of_contact" => "1",
+          "efficiency" => "1",
+          "reliability" => "1",
+          "overall" => "1",
+          "comment" => "MyText"
+        }
+      end
+
       it "updates the requested assistant_evaluation" do
-        assistant_evaluation = AssistantEvaluation.create! valid_attributes
+        assistant_evaluation = FactoryGirl.create :assistant_evaluation
         # Assuming there are no other assistant_evaluations in the database, this
         # specifies that the AssistantEvaluation created on the previous line
         # receives the :update_attributes message with whatever params are
         # submitted in the request.
-        AssistantEvaluation.any_instance.should_receive(:update).with({ "index_for_student" => "MyString" })
-        put :update, {:id => assistant_evaluation.to_param, :assistant_evaluation => { "index_for_student" => "MyString" }}, valid_session
+        AssistantEvaluation.any_instance.should_receive(:update).with(@params)
+        put :update, {:id => assistant_evaluation.to_param, :assistant_evaluation => @params}, valid_session
       end
 
       it "assigns the requested assistant_evaluation as @assistant_evaluation" do
-        assistant_evaluation = AssistantEvaluation.create! valid_attributes
-        put :update, {:id => assistant_evaluation.to_param, :assistant_evaluation => valid_attributes}, valid_session
+        assistant_evaluation = FactoryGirl.create :assistant_evaluation
+        put :update, {:id => assistant_evaluation.to_param, :assistant_evaluation => @params}, valid_session
         assigns(:assistant_evaluation).should eq(assistant_evaluation)
       end
 
       it "redirects to the assistant_evaluation" do
-        assistant_evaluation = AssistantEvaluation.create! valid_attributes
-        put :update, {:id => assistant_evaluation.to_param, :assistant_evaluation => valid_attributes}, valid_session
-        response.should redirect_to(assistant_evaluation)
+        assistant_evaluation = FactoryGirl.create :assistant_evaluation
+        put :update, {:id => assistant_evaluation.to_param, :assistant_evaluation => @params}, valid_session
+        # TODO should use @super_professor, but for some reason that does not work
+        response.should redirect_to(assistant_roles_for_professor_path(:professor_id => 1))
       end
     end
 
     describe "with invalid params" do
       it "assigns the assistant_evaluation as @assistant_evaluation" do
-        assistant_evaluation = AssistantEvaluation.create! valid_attributes
+        assistant_evaluation = FactoryGirl.create :assistant_evaluation
         # Trigger the behavior that occurs when invalid params are submitted
         AssistantEvaluation.any_instance.stub(:save).and_return(false)
         put :update, {:id => assistant_evaluation.to_param, :assistant_evaluation => { "index_for_student" => "invalid value" }}, valid_session
@@ -133,27 +165,12 @@ describe AssistantEvaluationsController do
       end
 
       it "re-renders the 'edit' template" do
-        assistant_evaluation = AssistantEvaluation.create! valid_attributes
+        assistant_evaluation = FactoryGirl.create :assistant_evaluation
         # Trigger the behavior that occurs when invalid params are submitted
         AssistantEvaluation.any_instance.stub(:save).and_return(false)
         put :update, {:id => assistant_evaluation.to_param, :assistant_evaluation => { "index_for_student" => "invalid value" }}, valid_session
         response.should render_template("edit")
       end
-    end
-  end
-
-  describe "DELETE destroy" do
-    it "destroys the requested assistant_evaluation" do
-      assistant_evaluation = AssistantEvaluation.create! valid_attributes
-      expect {
-        delete :destroy, {:id => assistant_evaluation.to_param}, valid_session
-      }.to change(AssistantEvaluation, :count).by(-1)
-    end
-
-    it "redirects to the assistant_evaluations list" do
-      assistant_evaluation = AssistantEvaluation.create! valid_attributes
-      delete :destroy, {:id => assistant_evaluation.to_param}, valid_session
-      response.should redirect_to(assistant_evaluations_url)
     end
   end
 
