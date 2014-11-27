@@ -1,9 +1,27 @@
 
+<hr>
+  <h2>Período letivo</h2>
 <p>
-  <strong>TODO info do monitor</strong>
-  <strong>TODO instruções de preenchimento</strong>
+  <%= @assistant_evaluation.semester.as_s %>
 </p>
+  <h2>Nome do Monitor(a)</h2>
+<p>
+  <%= @assistant_evaluation.student.name %>
+</p>
+  <h2>Colaborou junto à disciplina</h2>
+<p>
+  <%= @assistant_evaluation.course.full_name %>
+</p>
+<hr>
+  <h2>Códigos</h2>
+<p>
+  A - Ótimo<br>
+  B - Bom<br>
+  C - Regular
+</p>
+<hr>
 
+<h2>Avaliação</h2>
 <%= form_for(@assistant_evaluation) do |f| %>
   <% if @assistant_evaluation.errors.any? %>
     <div id="error_explanation">
@@ -16,7 +34,6 @@
       </ul>
     </div>
   <% end %>
-
   <div class="field">
     <%= f.hidden_field :assistant_role_id, :value => @assistant_evaluation.assistant_role_id %>
   </div>
