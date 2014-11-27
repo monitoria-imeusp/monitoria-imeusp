@@ -13,13 +13,6 @@
   <%= @assistant_evaluation.course.full_name %>
 </p>
 <hr>
-  <h2>Códigos</h2>
-<p>
-  A - Ótimo<br>
-  B - Bom<br>
-  C - Regular
-</p>
-<hr>
 
 <h2>Avaliação</h2>
 <%= form_for(@assistant_evaluation) do |f| %>
@@ -37,22 +30,17 @@
   <div class="field">
     <%= f.hidden_field :assistant_role_id, :value => @assistant_evaluation.assistant_role_id %>
   </div>
-  <div class="field">
-    <%= f.label :ease_of_contact, t('activerecord.attributes.assistant_evaluation.ease_of_contact') %><br>
-    <%= f.number_field :ease_of_contact %>
-  </div>
-  <div class="field">
-    <%= f.label :efficiency, t('activerecord.attributes.assistant_evaluation.efficiency') %><br>
-    <%= f.number_field :efficiency %>
-  </div>
-  <div class="field">
-    <%= f.label :reliability, t('activerecord.attributes.assistant_evaluation.reliability') %><br>
-    <%= f.number_field :reliability %>
-  </div>
-  <div class="field">
-    <%= f.label :overall, t('activerecord.attributes.assistant_evaluation.overall') %><br>
-    <%= f.number_field :overall %>
-  </div>
+  <% criteria.each do |crit| %>
+    <div class="field">
+      <p>
+        <strong><%= f.label crit, t('activerecord.attributes.assistant_evaluation.'+crit.to_s) %></strong><br>
+      </p>
+      <% evaluation_grades.each do | grade_option | %>
+        <%= f.radio_button crit, grade_option[1] %>
+        <%= f.label grade_option[0] %>
+      <% end %>
+    </div>
+  <% end %>
   <div class="field">
     <%= f.label :comment, t('activerecord.attributes.assistant_evaluation.comment') %><br>
     <%= f.text_area :comment %>
