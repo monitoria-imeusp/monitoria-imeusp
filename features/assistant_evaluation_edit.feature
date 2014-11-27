@@ -1,7 +1,7 @@
-Feature: Assistant evaluation creation
+Feature: Assistant evaluation edition
     In order to evaluate assistant roles
     As a professor
-    I want to create assistant evaluations
+    I want to edit assistant evaluations
 
     Background:
         When there is an open semester "2014" "1"
@@ -14,7 +14,7 @@ Feature: Assistant evaluation creation
         And there is an assistant role for student "Bob" with professor "Dude" at course "MAC0110"
         And thete is an assistant evaluation for student "Bob" with professor "Dude" at course "MAC0110" as "ok"
 
-    Scenario: Professor create assistant evaluation
+    Scenario: Professor edits assistant evaluation
         Given I'm logged in as a professor "Dude"
         And I visit my assistant roles page
         When I click the "Mudar avaliação" link
