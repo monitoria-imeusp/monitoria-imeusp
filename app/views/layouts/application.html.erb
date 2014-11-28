@@ -44,132 +44,129 @@
     </div>
     <div class="shell">
       <div class="sidebar">
-        <% if admin_signed_in? %>
+
+        <% if signed_in? %>
           <p>
             Acessando como
-            <b><%=current_admin.email%></b>
+            <b><%=current_user.email%></b>
           </p>
-        <% elsif professor_signed_in? %>
-          <p>
-            Acessando como
-            <b><%= current_professor.email %></b>
-          </p>
-        <% elsif secretary_signed_in? %>
-          <p>
-            Acessando como
-            <b><%= current_secretary.email %></b>
-          </p>
-        <% elsif student_signed_in? %>
-          <p>
-            Acessando como
-            <b><%= current_student.email %></b>
-          </p>
+          <hr>
+          <h2>Usuário</h2>
+          <ul>
+            <li>
+              <%= link_to "Perfil", current_user %>
+            </li>
+            <li>
+              <%= link_to "Sair", destroy_session_path, method: :delete %>
+            </li>
+          </ul>
         <% else %>
           <p>
             Você ainda não fez acesso
           </p>
         <% end %>
-        <ul>
-          <% if current_student.present? %>
+
+        <!-- Painel do admin -->
+        <% if admin_signed_in? %>
+          <hr>
+          <h2>Administrador(a)</h2>
+          <ul>
             <li>
-              <%= link_to "Meu Perfil", current_student %>
-            </li>
-          <% elsif current_secretary.present? %>
-            <li>
-              <%= link_to "Meu Perfil", current_secretary %>
-            </li>
-          <% elsif current_professor.present? %>
-            <li>
-              <%= link_to "Meu Perfil", current_professor %>
-            </li>
-          <% elsif current_admin.present? %>
-            <li>
-              <%= link_to "Meu Perfil", current_admin %>
-            </li>
-          <% end %>
-          <% if admin_signed_in? || (professor_signed_in? and current_professor.super_professor?) %>
-            <li>
-              <%= link_to "Nova Disciplina", new_course_path %>
-            </li>
-          <% end %>
-          <% if admin_signed_in? %>
-            <li>
-              <%= link_to "Novo Professor", new_professor_path %>
+              <%= link_to "Cadastrar disciplina", new_course_path %>
             </li>
             <li>
-              <%= link_to "Novo Funcionário", new_secretary_path %>
+              <%= link_to "Cadastrar professor", new_professor_path %>
             </li>
             <li>
-               <%= link_to "Candidaturas", candidatures_path %>
+              <%= link_to "Cadastrar funcionário", new_secretary_path %>
             </li>
             <li>
-              <%= link_to "Monitores", assistant_roles_path %>
+               <%= link_to "Visualizar candidaturas", candidatures_path %>
+            </li>
+            <li>
+              <%= link_to "Visualizar monitores", assistant_roles_path %>
             </li>
             <li>
               <%= link_to "Gerenciar semestres", semesters_path %>
-            </li>
-            <li>
-              <%= link_to "Sair", destroy_admin_session_path, method: :delete %>
             </li>
             <li>
               <%= link_to "Dump do banco de dados", { action: "index", controller: "dumps" } %>
             </li>
             <li>
-              <%= link_to "Administração do sistema", control_panel_admins_path %>
+              <%= link_to "Painel de controle", control_panel_admins_path %>
             </li>
-          <% elsif professor_signed_in? %>
+          </ul>
+        <!-- Painel dos professores -->
+        <% elsif professor_signed_in? %>
+          <hr>
+          <h2>Professor(a)</h2>
+          <ul>
             <li>
-              <%= link_to "Pedidos de Monitoria", request_for_teaching_assistants_path %>
+              <%= link_to "Gerenciar pedidos de monitoria", request_for_teaching_assistants_path %>
             </li>
             <li>
               <%= link_to "Meus monitores", assistant_roles_for_professor_path(current_professor) %>
             </li>
-            <% if current_professor.super_professor? then %>
-              <li>
-                <%= link_to "Candidaturas", candidatures_path %>
-              </li>
-              <li>
-                <%= link_to "Monitores", assistant_roles_path %>
-              </li>
-            <% end %>
-            <li>
-              <%= link_to "Sair", destroy_professor_session_path, method: :delete %>
-            </li>
-          <% elsif secretary_signed_in? %>
+          </ul>
+          <% if current_professor.super_professor? %>
+            <hr>
+            <h2>Comissão de monitoria</h2>
+            <ul>
+                <li>
+                  <%= link_to "Cadastrar disciplina", new_course_path %>
+                </li>
+                <li>
+                   <%= link_to "Visualizar candidaturas", candidatures_path %>
+                </li>
+                <li>
+                  <%= link_to "Visualizar monitores eleitos", assistant_roles_path %>
+                </li>
+            </ul>
+          <% end %>
+        <!-- Painel dos funcionários -->
+        <% elsif secretary_signed_in? %>
+          <hr>
+          <h2>Funcionário(a)</h2>
+          <ul>
             <li>
               <%= link_to "Gerenciar semestres", semesters_path %>
             </li>
             <li>
-              <%= link_to "Monitores", assistant_roles_path %>
+              <%= link_to "Visualizar monitores eleitos", assistant_roles_path %>
             </li>
             <li>
-              <%= link_to "Sair", destroy_secretary_session_path, method: :delete %>
+               <%= link_to "Visualizar candidaturas", candidatures_path %>
             </li>
+          </ul>
+        <!-- Painel dos alunos -->
+        <% elsif student_signed_in? %>
+          <hr>
+          <h2>Aluno(a)</h2>
+          <ul>
             <li>
-               <%= link_to "Candidaturas", candidatures_path %>
+               <%= link_to "Visualizar candidaturas", candidatures_path %>
             </li>
-          <% elsif student_signed_in? %>
-            <li>
-               <%= link_to "Candidaturas", candidatures_path %>
-            </li>
-            <li>
-              <%= link_to "Sair", destroy_student_session_path, method: :delete %>
-            </li>
-          <% else %>
+          </ul>
+        <!-- Painel de quem não é usuário -->
+        <% else %>
+          <hr>
+          <ul>
             <li>
               <%= link_to "Cadastrar-se", new_student_path %>
             </li>
             <li>
               <%= link_to "Acessar", new_student_session_path %>
             </li>
-          <% end %>
-        </ul>
+          </ul>
+        <% end %>
+
         <% if flash[:notice] %>
           <p class="notice"><%= notice %></p>
         <% end %>
         <% if flash[:alert] %>
           <p class="alert"><%= alert %></p>
         <% end %>
+
       </div>
       <div class="content">
         <%= yield %>

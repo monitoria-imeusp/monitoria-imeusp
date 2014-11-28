@@ -105,7 +105,8 @@ select {
 
 div.pagetop {
   padding: .7em 1em;
-  border-bottom: 2px solid #b55;
+  background-color: #eee;
+  border-bottom: 2px solid #bbb;
 }
 
 .pagetop > h1, ul {
@@ -132,8 +133,6 @@ div.pagetop {
 
 .pagetop > ul > li > a:hover, a:active {
   color: #b55;
-  background-color: #fff;
-  text-decoration: underline;
 }
 
 .pagetop > ul {
@@ -163,11 +162,15 @@ div.sidebar {
   text-align: center;
 }
 
+.sidebar > h2 {
+  margin-left: 1em;
+  margin-right: 1em;
+}
+
 .sidebar > ul {
   list-style-type: none;
   padding-left: 20px;
   line-height: 1.4;
-
 }
 
 .sidebar > ul > li > a:link, .sidebar > ul > li > a:visited {
