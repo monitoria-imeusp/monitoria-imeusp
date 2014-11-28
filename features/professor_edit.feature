@@ -23,7 +23,7 @@ Feature: Edit Professor
         And I fill the "Número USP" field with "123"
         And I fill the "Senha" field with "prof-123"
         And I press the "Entrar" button
-        When I click the "Meu Perfil" link
+        When I click the "Perfil" link
         And I click the "Editar" link
         And I fill the "Nome" field with "Gold"
         And I fill the "Número USP" field with "12345"
@@ -32,7 +32,7 @@ Feature: Edit Professor
         And I press the "Enviar" button
         And I click the "Sair" link
         And I confirm the professor edition with nusp "12345" and password "prof-123" and email "gold@troll.com" and sign in
-        And I click the "Meu Perfil" link
+        And I click the "Perfil" link
         Then I should see "Nome: Gold"
         Then I should see "Número USP: 12345"
         Then I should see "Email: gold@troll.com"
@@ -46,7 +46,7 @@ Feature: Edit Professor
         And I press the "Entrar" button
         When I click the "Professores" link
         And I click the "Bob" link
-        Then I should not see "Privilégios" 
+        Then I should not see "Privilégios"
 
     Scenario:Hiper-professor giving super-professor authorization
         Given there is a hiper_professor with name "Zara" and password "changeme!" nusp "321" department "MAT" and email "zar@zar.zar"
@@ -57,4 +57,4 @@ Feature: Edit Professor
         When I click the "Professores" link
         And I click the "Bob" link
         And I press the "Privilégios" button
-        Then I should see "Bob é agora um Super-professor" 
+        Then I should see "Bob é agora um Super-professor"
