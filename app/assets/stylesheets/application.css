@@ -124,6 +124,7 @@ div.pagetop {
   margin-right: auto;
   font-weight: bold;
   padding: 4pt 1em;
+  padding-bottom: 0pt;
 }
 
 .pagetop > ul > li.toptitle > a:link {
