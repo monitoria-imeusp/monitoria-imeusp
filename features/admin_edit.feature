@@ -12,7 +12,7 @@ Feature: Editing the admin
         Then I fill the "Email" field with "kazuo@ime.usp.br"
         And I fill the "Senha" field with "admin123"
         And I press the "Entrar" button
-		And I click the "Meu Perfil" link
+		And I click the "Perfil" link
 		And I click the "Editar" link
         Then I fill the "Email" field with "kazuou@ime.usp.br"
         And I fill the "Senha" field with "00000000"

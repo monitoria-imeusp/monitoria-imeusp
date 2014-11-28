@@ -13,7 +13,7 @@ Feature: Creating professor
 
 	Scenario: Valid data
         And I'm ready to receive email
-        Then I click the "Novo Professor" link
+        Then I click the "Cadastrar professor" link
         And I fill the "Nome" field with "Gold"
         And I fill the "Número USP" field with "12345"
         And I select "MAE" on the "Departamento"
@@ -25,7 +25,7 @@ Feature: Creating professor
         Then I should see "Acesso efetuado com sucesso."
 
     Scenario: Don't select departament
-        Then I click the "Novo Professor" link
+        Then I click the "Cadastrar professor" link
         And I fill the "Nome" field with "Gold"
         And I fill the "Número USP" field with "12345"
         And I fill the "Email" field with "gold@troll.com"
@@ -34,7 +34,7 @@ Feature: Creating professor
         Then I should see "Department não pode ficar em branco"
 
     Scenario: Not filling nusp
-        Then I click the "Novo Professor" link
+        Then I click the "Cadastrar professor" link
         And I fill the "Nome" field with "Gold"
         And I select "MAE" on the "Departamento"
         And I fill the "Email" field with "gold@troll.com"
@@ -43,7 +43,7 @@ Feature: Creating professor
         Then I should see "Número USP não pode ficar em branco"
 
     Scenario: Not filling email
-        Then I click the "Novo Professor" link
+        Then I click the "Cadastrar professor" link
         And I fill the "Nome" field with "Gold"
         And I fill the "Número USP" field with "12345"
         And I select "MAE" on the "Departamento"

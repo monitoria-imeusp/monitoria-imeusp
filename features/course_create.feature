@@ -11,7 +11,7 @@ Feature: Course creation
         When I fill the "Email" field with "kazuo@ime.usp.br"
         And I fill the "Senha" field with "admin123"
         And I press the "Entrar" button
-        And I click the "Nova Disciplina" link
+        And I click the "Cadastrar disciplina" link
         And I fill the "Nome da Disciplina" field with "proglin"
         And I select "MAC" on the "Departamento"
         And I should see "MAC"
@@ -29,7 +29,7 @@ Feature: Course creation
         When I fill the "Número USP" field with "1111111"
         And I fill the "Senha" field with "12345678"
         And I press the "Entrar" button
-        And I click the "Nova Disciplina" link
+        And I click the "Cadastrar disciplina" link
         And I fill the "Nome da Disciplina" field with "proglin"
         And I select "MAC" on the "Departamento"
         And I fill the "Código da Disciplina" field with "0315"
@@ -45,7 +45,7 @@ Feature: Course creation
         When I fill the "Número USP" field with "1111111"
         And I fill the "Senha" field with "12345678"
         And I press the "Entrar" button
-        And I should not see "Nova Disciplina"
+        And I should not see "Cadastrar disciplina"
         Then I try the create course URL
         Then I should see "Acesso negado"
 

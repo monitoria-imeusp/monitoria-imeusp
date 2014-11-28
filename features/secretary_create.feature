@@ -10,7 +10,7 @@ Feature: Secretary creation
         When I fill the "Email" field with "kazuo@ime.usp.br"
         And I fill the "Senha" field with "admin123"
         And I press the "Entrar" button
-        And I click the "Novo Funcionário" link
+        And I click the "Cadastrar funcionário" link
         And I fill the "Número USP" field with "1234567"
         And I fill the "Nome" field with "Marcia"
         And I fill the "Email" field with "marcia@ime.usp.br"

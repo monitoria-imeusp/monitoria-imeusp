@@ -12,7 +12,7 @@ Feature: edit a student
         And I press the "Entrar" button
 
     Scenario: Student edits his or hers profile
-    	And I click the "Meu Perfil" link
+    	And I click the "Perfil" link
         And I click the "Editar" link
         And I fill the "Nome Completo" field with "Carlinhos"
         And I fill the "Senha" field with "12345678"
@@ -23,7 +23,7 @@ Feature: edit a student
         And I should see "Masculino"
 
     Scenario: Student fails to edit his or hers profile
-        And I click the "Meu Perfil" link
+        And I click the "Perfil" link
         And I click the "Editar" link
         And I fill the "Nome Completo" field with "Carlinhos"
         And I fill the "Senha" field with "12345678"

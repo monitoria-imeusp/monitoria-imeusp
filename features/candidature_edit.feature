@@ -12,12 +12,12 @@ Feature: Upddating a candidature
         And there is a course with name "concorrente" and code "MAC0438" and department "MAC"
         And there is an candidature with student "carlinhos" and first option "labxp" and second option "ihc" and third option "" and availability for daytime "true" and availability for night time "false" and period preference "2"
 
-	Scenario: Student editing a course
+	Scenario: Student editing a candidature
         Given I'm at the student login page
         When I fill the "Número USP" field with "123456"
         And I fill the "Senha" field with "changeme!"
         And I press the "Entrar" button
-        And I click the "Candidaturas" link
+        And I click the "Visualizar candidaturas" link
         And I click the "Mais informações" link
         And I click the "Editar" link
 		And I select "MAC0342 - labxp" on the "Curso: 1ª opção"
@@ -40,7 +40,7 @@ Feature: Upddating a candidature
         When I fill the "Número USP" field with "123456"
         And I fill the "Senha" field with "changeme!"
         And I press the "Entrar" button
-        And I click the "Candidaturas" link
+        And I click the "Visualizar candidaturas" link
         And I click the "Mais informações" link
         And I click the "Editar" link
 		And I select "MAC0438 - concorrente" on the "Curso: 2ª opção"

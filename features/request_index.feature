@@ -22,8 +22,8 @@ Feature: Index of the Requests for Teaching Assistant
         When I fill the "Número USP" field with "123"
         And I fill the "Senha" field with "prof-123"
         And I press the "Entrar" button
-        And I should see "Pedidos de Monitoria"
-        Then I click the "Pedidos de Monitoria" link
+        And I should see "Gerenciar pedidos de monitoria"
+        Then I click the "Gerenciar pedidos de monitoria" link
         And I should see "MAC0110 - Mascarenhas"
         And I should not see "MAC0122 - Coisas"
         And I should see "1"
@@ -37,8 +37,8 @@ Feature: Index of the Requests for Teaching Assistant
         When I fill the "Número USP" field with "1234"
         And I fill the "Senha" field with "prof-123"
         And I press the "Entrar" button
-        And I should see "Pedidos de Monitoria"
-        Then I click the "Pedidos de Monitoria" link
+        And I should see "Gerenciar pedidos de monitoria"
+        Then I click the "Gerenciar pedidos de monitoria" link
         And I should see "MAC0110 - Mascarenhas"
         And I should see "MAC0122 - Coisas"
         And I should not see "MAE0438 - Estatística Concorrente"
@@ -49,8 +49,8 @@ Feature: Index of the Requests for Teaching Assistant
         When I fill the "Número USP" field with "2222222"
         And I fill the "Senha" field with "12345678"
         And I press the "Entrar" button
-        And I should see "Pedidos de Monitoria"
-        Then I click the "Pedidos de Monitoria" link
+        And I should see "Gerenciar pedidos de monitoria"
+        Then I click the "Gerenciar pedidos de monitoria" link
         And I should see "MAC0110 - Mascarenhas"
         And I should see "MAC0122 - Coisas"
         And I should see "MAE0438 - Estatística Concorrente"
