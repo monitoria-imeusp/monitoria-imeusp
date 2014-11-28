@@ -1,6 +1,5 @@
-<h1>Editing assistant_evaluation</h1>
+<h1>Avaliação de monitor (alteração)</h1>
 
 <%= render 'form' %>
 
-<%= link_to 'Show', @assistant_evaluation %> |
-<%= link_to 'Back', assistant_evaluations_path %>
+<%= link_to 'Voltar', assistant_roles_for_professor_path(@assistant_evaluation.professor) %>

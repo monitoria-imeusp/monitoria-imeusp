@@ -12,6 +12,6 @@ Feature: Showing the admin
         Then I fill the "Email" field with "kazuo@ime.usp.br"
         And I fill the "Senha" field with "admin123"
         And I press the "Entrar" button
-		And I click the "Meu Perfil" link
+		And I click the "Perfil" link
 		Then I should see "Email: kazuo@ime.usp.br"
 		And I should see "Editar"

@@ -104,36 +104,35 @@ select {
 /*********************************************************/
 
 div.pagetop {
-  padding: .7em 1em;
-  border-bottom: 2px solid #b55;
+  padding: .1em 1em;
+  background-color: #eee;
+  border-bottom: 1px solid #bbb;
 }
 
-.pagetop > h1, ul {
+.pagetop > ul {
   margin-left: auto;
   margin-right: auto;
   width: 1024px;
 }
 
-.pagetop > h1 {
-  font-size: 3em;
-}
-
 .pagetop > ul > li > a:link, .pagetop > ul > li > a:visited {
   display: block;
-  width: 80%;
   text-decoration: none;
   text-align: center;
   color: #666;
   margin-left: auto;
   margin-right: auto;
   font-weight: bold;
-  padding: 1px 1em;
+  padding: 4pt 1em;
+}
+
+.pagetop > ul > li.toptitle > a:link {
+  font-size: 24pt;
+  padding-top: 2pt;
 }
 
 .pagetop > ul > li > a:hover, a:active {
   color: #b55;
-  background-color: #fff;
-  text-decoration: underline;
 }
 
 .pagetop > ul {
@@ -163,11 +162,15 @@ div.sidebar {
   text-align: center;
 }
 
+.sidebar > h2 {
+  margin-left: 1em;
+  margin-right: 1em;
+}
+
 .sidebar > ul {
   list-style-type: none;
   padding-left: 20px;
   line-height: 1.4;
-
 }
 
 .sidebar > ul > li > a:link, .sidebar > ul > li > a:visited {

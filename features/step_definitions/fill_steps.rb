@@ -27,10 +27,10 @@ When(/^I fill the fields for student "(.*?)" with nusp "(.*?)" and email "(.*?)"
 end
 
 When(/^I fill the assistant evaluation fields$/) do
-  fill_in "Facilidade de contato", :with => 1
-  fill_in "Eficiência (respeito aos prazos estabelecidos)", :with => 1
-  fill_in "Confiabilidade (qualidade de trabalho)", :with => 1
-  fill_in "Conceito (resumo dos itens anteriores)", :with => 1
+  choose "assistant_evaluation_ease_of_contact_1"
+  choose "assistant_evaluation_efficiency_1"
+  choose "assistant_evaluation_reliability_1"
+  choose "assistant_evaluation_overall_1"
   fill_in "Comentários", :with => "Sbrubles"
 
 end

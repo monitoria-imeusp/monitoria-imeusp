@@ -1,5 +1,5 @@
-<h1>Nova avaliação de monitor</h1>
+<h1>Avaliação de monitor</h1>
 
 <%= render 'form' %>
 
-<%= link_to 'Voltar', assistant_evaluations_path(@assistant_evaluation.assistant_role.student) %>
+<%= link_to 'Voltar', assistant_roles_for_professor_path(@assistant_evaluation.professor) %>

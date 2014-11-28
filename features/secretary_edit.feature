@@ -39,8 +39,8 @@ Feature: Secretary edit
         When I fill the "Número USP" field with "1111111"
         And I fill the "Senha" field with "12345678"
         And I press the "Entrar" button
-        Then I should see "Meu Perfil"
-        And I click the "Meu Perfil" link
+        Then I should see "Perfil"
+        And I click the "Perfil" link
         Then I should see "Editar"
         And I click the "Editar" link
         And I fill the "Número USP" field with "2222222"
@@ -49,7 +49,7 @@ Feature: Secretary edit
         And I press the "Enviar" button
         And I click the "Sair" link
         And I confirm the secretary edition with nusp "2222222" and password "12345678" and email "joao@ime.usp.br" and sign in
-        And I click the "Meu Perfil" link
+        And I click the "Perfil" link
         Then I should see "Nome: João"
         Then I should see "Número USP: 2222222"
         Then I should see "Email: joao@ime.usp.br"
