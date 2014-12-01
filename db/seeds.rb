@@ -167,4 +167,10 @@ if Rails.env.development?
     password: "changeme!",
     confirmed_at: Time.now
   )
+
+  Advise.create(
+    title: "Bem-vindo ao sistema de monitoria do IME-USP!"
+    message: "Esse sistema gerencia o cadastro de monitores nas disciplinas ministradas por professores do instituto."
+  )
+
 end
