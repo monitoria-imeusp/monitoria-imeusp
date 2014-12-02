@@ -169,7 +169,7 @@ if Rails.env.development?
   )
 
   Advise.create(
-    title: "Bem-vindo ao sistema de monitoria do IME-USP!"
+    title: "Bem-vindo ao sistema de monitoria do IME-USP!",
     message: "Esse sistema gerencia o cadastro de monitores nas disciplinas ministradas por professores do instituto."
   )
 
