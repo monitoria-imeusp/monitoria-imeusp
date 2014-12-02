@@ -33,7 +33,7 @@ ActiveRecord::Schema.define(version: 20141202124942) do
 
   create_table "advises", force: true do |t|
     t.string   "title"
-    t.text     "message"
+    t.text     "message",        limit: 1048576
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "advise_urgency"
@@ -68,8 +68,8 @@ ActiveRecord::Schema.define(version: 20141202124942) do
     t.datetime "updated_at"
     t.integer  "student_id"
     t.text     "observation",            default: ""
-    t.integer  "semester_id"
     t.integer  "course4_id"
+    t.integer  "semester_id"
   end
 
   create_table "courses", force: true do |t|

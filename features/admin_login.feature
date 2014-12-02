@@ -18,5 +18,5 @@ Feature: Login
         And I fill the "Senha" field with "admin123"
         And I press the "Entrar" button
         And I'm at the login page
-        Then I should see "Bem-vindo ao sistema de monitoria do IME-USP!"
+        Then I should see "Avisos"
         And I should see "kazuo@ime.usp.br"
