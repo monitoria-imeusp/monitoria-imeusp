@@ -11,7 +11,7 @@ Feature: Course edit
         And I fill the "Senha" field with "admin123"
         And I press the "Entrar" button
         And there is a course with name "labxp" and code "MAC0342" and department "MAC"
-        And I click the "Disciplinas" link
+        And I go to the courses index
         And I click the "MAC0342" link
         And I click the "Editar" link
         And I fill the "Nome da Disciplina" field with "labXp"
@@ -28,7 +28,7 @@ Feature: Course edit
         When I fill the "Número USP" field with "1111111"
         And I fill the "Senha" field with "12345678"
         And I press the "Entrar" button
-        And I click the "Disciplinas" link
+        And I go to the courses index
         And I click the "MAC0342" link
         And I click the "Editar" link
         And I fill the "Nome da Disciplina" field with "labXp"
@@ -45,10 +45,10 @@ Feature: Course edit
         When I fill the "Número USP" field with "1111111"
         And I fill the "Senha" field with "12345678"
         And I press the "Entrar" button
-        And I click the "Disciplinas" link
+        And I go to the courses index
         And I should not see "Editar"
 
     Scenario: Any person trying to edit a course
         Given I'm at the home page
-        When I click the "Disciplinas" link
+        When I go to the courses index
         Then I should not see "Editar"

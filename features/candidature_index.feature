@@ -70,7 +70,7 @@ Feature: Candidature table visualization
         When I fill the "Número USP" field with "123456"
         And I fill the "Senha" field with "changeme!"
         And I press the "Entrar" button
-        And I click the "Visualizar candidaturas" link
+        And I click the "Minhas candidaturas" link
 		Then I should see "2014/2"
         And I should see "MAT0111 - Cálculo I"
         And I should see "MAE0438 - Estatística Concorrente"

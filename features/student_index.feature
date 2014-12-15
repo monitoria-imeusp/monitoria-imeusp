@@ -10,7 +10,7 @@ Feature: Seeing information of the students
         And I fill the "Senha" field with "12345678"
         And I press the "Entrar" button
         And there is a student with name "carlinhos" with nusp "123456" and email "eu@usp.br"
-    	And I click the "Alunos" link
+    	And I go to the students index
     	And I click the "carlinhos" link
     	And I should see "Nome: carlinhos"
         And I should see "Número USP: 123456"
