@@ -36,7 +36,7 @@ class CandidaturesController < ApplicationController
 
   def index_for_student
     @candidatures = Candidature.where(student_id: current_student.id).order(:semester_id)
-    @semesters = Semester.all_active.map do |semester|
+    @semesters = Semester.all_open.map do |semester|
       { get: semester, valid: (not already_for_semester?(current_student.id, semester.id)) }
     end
   end
