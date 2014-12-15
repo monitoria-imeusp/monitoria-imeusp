@@ -47,4 +47,8 @@ class Semester < ActiveRecord::Base
   def self.all_active
     Semester.where(active: true).all
   end
+
+  def self.current
+    all_active.last
+  end
 end

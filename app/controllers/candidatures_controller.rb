@@ -6,7 +6,7 @@ class CandidaturesController < ApplicationController
   # GET /candidatures.json
   def index
     if professor_signed_in? and current_professor.super_professor? and not current_professor.hiper_professor?
-      redirect_to candidatures_for_department_path(current_professor.department)
+      redirect_to candidatures_for_department_path(Semester.current, current_professor.department)
     elsif student_signed_in?
       redirect_to candidatures_for_student_path(current_student)
     end
@@ -15,13 +15,14 @@ class CandidaturesController < ApplicationController
 
   def index_for_department
     @current_department = Department.find(params[:department_id])
+    @semester = Semester.find(params[:semester_id])
     @candidatures_filtered = []
     checked = {}
     Candidature.courses_num.times do
       @candidatures_filtered.push([])
     end
-    Candidature.all.each do |candidature|
-      if candidature.semester.open
+    Candidature.where(semester: @semester).all.each do |candidature|
+      if candidature.semester.active
         candidature.courses.each_with_index do |course, idx|
           if not checked[candidature] and course and course.department == @current_department
             @candidatures_filtered[idx].push(candidature)
@@ -34,7 +35,7 @@ class CandidaturesController < ApplicationController
 
   def index_for_student
     @candidatures = Candidature.where(student_id: current_student.id).order(:semester_id)
-    @semesters = Semester.all_open.map do |semester|
+    @semesters = Semester.all_active.map do |semester|
       { get: semester, valid: (not already_for_semester?(current_student.id, semester.id)) }
     end
   end
