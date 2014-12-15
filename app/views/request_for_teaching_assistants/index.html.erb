@@ -3,10 +3,8 @@
 <% if professor_signed_in? %>
   <% @semesters.each do |semester| %>
     <% if semester.open %>
-      <h2>
       <%= link_to "Pedir monitor para #{semester.as_s}",
                   new_request_for_teaching_assistant_path(semester) %>
-      </h2>
     <% end %>
   <% end %>
 <% end %>
@@ -14,7 +12,7 @@
 <table>
   <thead>
     <tr>
-      <th colspan="1"></th>
+    <th colspan="1"></th>
 	  <th><%= t('activerecord.attributes.professor.professor') %> </th>
 	  <th><%= t('activerecord.attributes.request_for_teaching_assistant.subject') %> </th>
 	  <th><%= t('activerecord.attributes.request_for_teaching_assistant.requested_number') %> </th>
