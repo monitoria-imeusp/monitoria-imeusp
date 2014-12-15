@@ -97,6 +97,8 @@ div.content {
 .content > a:visited,
 .content > h1 > a,
 .content > h1 > a:visited,
+.content > h2 > a,
+.content > h2 > a:visited,
 td > a,
 td > a:visited {
   display: block;
@@ -106,8 +108,8 @@ td > a:visited {
   min-width: 128px;
   margin-left: 4px;
   margin-right: 4px;
-  margin-bottom: 2px;
-  margin-top: 2px;
+  margin-bottom: 0px;
+  margin-top: 0px;
   padding: 4px 6px;
   color: #eee;
   font-weight: bold;
@@ -121,6 +123,9 @@ td > a:visited {
 .content > h1 > a:hover,
 .content > h1 > a:active,
 .content > h1 > a:focus,
+.content > h2 > a:hover,
+.content > h2 > a:active,
+.content > h2 > a:focus,
 td > a:focus,
 td > a:active,
 td > a:hover {
