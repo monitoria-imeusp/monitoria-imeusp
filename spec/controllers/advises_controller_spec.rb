@@ -23,7 +23,7 @@ describe AdvisesController do
   # This should return the minimal set of attributes required to create a valid
   # Advise. As you add validations to Advise, be sure to
   # adjust the attributes here as well.
-  let(:valid_attributes) { { "title" => "MyString" } }
+  let(:valid_attributes) { { "title" => "MyString", "message" => "MyText", "order" => "1" } }
 
   # This should return the minimal set of values that should be in the session
   # in order to pass any filters (e.g. authentication) defined in
@@ -48,36 +48,40 @@ describe AdvisesController do
 
   describe "POST create" do
     describe "with valid params" do
+      before :each do
+        @advise = Advise.create! valid_attributes
+        Advise.should_receive(:new).and_return(@advise)
+        Advise.should_receive(:any?).and_return(false)
+        post :create, {:advise => valid_attributes}, valid_session
+      end
       it "creates a new Advise" do
-        expect {
-          post :create, {:advise => valid_attributes}, valid_session
-        }.to change(Advise, :count).by(1)
+        assigns(:advise).should eq(@advise)
       end
 
       it "assigns a newly created advise as @advise" do
-        post :create, {:advise => valid_attributes}, valid_session
         assigns(:advise).should be_a(Advise)
         assigns(:advise).should be_persisted
       end
 
       it "redirects to the created advise" do
-        post :create, {:advise => valid_attributes}, valid_session
         response.should redirect_to(root_url)
       end
     end
 
     describe "with invalid params" do
-      it "assigns a newly created but unsaved advise as @advise" do
+      before :each do
+        @advise = Advise.create! valid_attributes
+        Advise.should_receive(:new).and_return(@advise)
+        Advise.should_receive(:any?).and_return(false)
         # Trigger the behavior that occurs when invalid params are submitted
         Advise.any_instance.stub(:save).and_return(false)
         post :create, {:advise => { "title" => "invalid value" }}, valid_session
-        assigns(:advise).should be_a_new(Advise)
+      end
+      it "assigns a newly created but unsaved advise as @advise" do
+        assigns(:advise).should eq(@advise)
       end
 
       it "re-renders the 'new' template" do
-        # Trigger the behavior that occurs when invalid params are submitted
-        Advise.any_instance.stub(:save).and_return(false)
-        post :create, {:advise => { "title" => "invalid value" }}, valid_session
         response.should render_template("new")
       end
     end

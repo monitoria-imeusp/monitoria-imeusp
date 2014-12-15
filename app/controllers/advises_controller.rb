@@ -44,7 +44,11 @@ class AdvisesController < ApplicationController
   # POST /advises.json
   def create
     @advise = Advise.new(advise_params)
-    @advise.order = Advise.order(:order).last.order+1
+    if Advise.any?
+      @advise.order = Advise.order(:order).last.order+1
+    else
+      @advise.order = 0
+    end
     respond_to do |format|
       if @advise.save
         format.html { redirect_to root_path, notice: 'Aviso criado com sucesso.' }
