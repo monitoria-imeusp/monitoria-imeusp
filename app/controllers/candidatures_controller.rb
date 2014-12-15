@@ -16,6 +16,7 @@ class CandidaturesController < ApplicationController
   def index_for_department
     @current_department = Department.find(params[:department_id])
     @semester = Semester.find(params[:semester_id])
+    @active_semesters = Semester.all_active
     @candidatures_filtered = []
     checked = {}
     Candidature.courses_num.times do
