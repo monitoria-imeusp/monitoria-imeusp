@@ -13,7 +13,7 @@ Feature: Edit Professor
         And I fill the "Email" field with "kazuo@ime.usp.br"
         And I fill the "Senha" field with "admin123"
         And I press the "Entrar" button
-        When I click the "Professores" link
+        When I'm at the list_professors page
         And I click the "Bob" link
         And I should not see "Editar"
 
@@ -44,7 +44,7 @@ Feature: Edit Professor
         And I fill the "Número USP" field with "321"
         And I fill the "Senha" field with "changeme!"
         And I press the "Entrar" button
-        When I click the "Professores" link
+        When I'm at the list_professors page
         And I click the "Bob" link
         Then I should not see "Privilégios"
 
@@ -54,7 +54,7 @@ Feature: Edit Professor
         And I fill the "Número USP" field with "321"
         And I fill the "Senha" field with "changeme!"
         And I press the "Entrar" button
-        When I click the "Professores" link
+        When I'm at the list_professors page
         And I click the "Bob" link
         And I press the "Privilégios" button
         Then I should see "Bob é agora um Super-professor"

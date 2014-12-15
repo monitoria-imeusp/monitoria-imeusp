@@ -13,7 +13,7 @@ Feature: Seeing information of a student
         When I fill the "Email" field with "kazuo@ime.usp.br"
         And I fill the "Senha" field with "admin123"
         And I press the "Entrar" button
-    	And I click the "Alunos" link
+    	And I go to the students index
         And I click the "carlinhos" link
     	And I should see "Nome: carlinhos"
         And I should see "Número USP: 123456"
@@ -25,7 +25,7 @@ Feature: Seeing information of a student
         When I fill the "Número USP" field with "1111111"
         And I fill the "Senha" field with "12345678"
         And I press the "Entrar" button
-        And I click the "Alunos" link
+        And I go to the students index
         And I click the "carlinhos" link
         And I should see "Nome: carlinhos"
         And I should see "Número USP: 123456"

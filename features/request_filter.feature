@@ -24,7 +24,7 @@ Feature: Filtering requests for teaching assistant
         When I fill the "Número USP" field with "123"
         And I fill the "Senha" field with "prof-123"
         And I press the "Entrar" button
-        And I click the "Gerenciar pedidos de monitoria" link
+        And I click the "Pedidos de monitoria" link
 
 
     Scenario: Another professor from the same department

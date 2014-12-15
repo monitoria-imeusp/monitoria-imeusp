@@ -1,4 +1,11 @@
-<p id="notice"><%= notice %></p>
+
+<h1>Pedido de monitor</h1>
+<hr>
+
+<% if notice %>
+  <p id="notice"><%= notice %></p>
+  <hr>
+<% end %>
 
 <p>
   <strong><%= t('activerecord.attributes.professor.professor') + ':' %></strong>
@@ -43,12 +50,14 @@
 <%= link_to 'Editar', edit_request_for_teaching_assistant_path(@request_for_teaching_assistant) %>
 <%= link_to 'Remover', @request_for_teaching_assistant, method: :delete, data: { confirm: 'Tem certeza?' } %>
 <%= link_to 'Voltar', request_for_teaching_assistants_path %>
+<span style="height: 2em; display: block;"></span>
+<hr>
 
 <table>
   <thead>
     <tr>
       <th>Alunos que se candidataram para essa disciplina</th>
-      <th colspan="3"></th>
+      <th colspan="2"></th>
     </tr>
   </thead>
 

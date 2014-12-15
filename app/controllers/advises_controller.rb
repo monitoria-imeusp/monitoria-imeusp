@@ -1,14 +1,6 @@
 class AdvisesController < ApplicationController
   before_action :set_advise, only: [:show, :edit, :update, :destroy]
 
-  # GET /advises
-  # GET /advises.json
-
-  # GET /advises/1
-  # GET /advises/1.json
-  def show
-  end
-
   # GET /advises/new
   def new
     @advise = Advise.new
@@ -18,11 +10,45 @@ class AdvisesController < ApplicationController
   def edit
   end
 
+  # POST /advises/1/moveup
+  def moveup
+    id = params[:id]
+    last = nil
+    Advise.all.order(:order).each do |advise|
+      if advise.id == id.to_i and not last.nil?
+        advise.order, last.order = last.order, advise.order
+        advise.save
+        last.save
+      end
+      last = advise
+    end
+    redirect_to root_path
+  end
+
+  # POST /advises/1/movedown
+  def movedown
+    id = params[:id]
+    last = nil
+    Advise.all.order(:order).each do |advise|
+      if not last.nil? and last.id == id.to_i
+        advise.order, last.order = last.order, advise.order
+        advise.save
+        last.save
+      end
+      last = advise
+    end
+    redirect_to root_path
+  end
+
   # POST /advises
   # POST /advises.json
   def create
     @advise = Advise.new(advise_params)
-
+    if Advise.any?
+      @advise.order = Advise.order(:order).last.order+1
+    else
+      @advise.order = 0
+    end
     respond_to do |format|
       if @advise.save
         format.html { redirect_to root_path, notice: 'Aviso criado com sucesso.' }

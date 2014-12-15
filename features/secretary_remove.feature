@@ -12,7 +12,7 @@ Feature: Secretary remove
         When I fill the "Email" field with "kazuo@ime.usp.br"
         And I fill the "Senha" field with "admin123"
         And I press the "Entrar" button
-        And I click the "Funcionários" link
+        And I go to the secretaries index
         And I click the "Marcia" link
         And I click the "Remover" link
         And I should not see "Marcia"
@@ -24,7 +24,7 @@ Feature: Secretary remove
         When I fill the "Número USP" field with "1111111"
         And I fill the "Senha" field with "12345678"
         And I press the "Entrar" button
-        And I click the "Funcionários" link
+        And I go to the secretaries index
         And I click the "Marcia" link
         And I should not see "Remover"
 

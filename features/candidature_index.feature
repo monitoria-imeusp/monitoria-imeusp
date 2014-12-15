@@ -22,7 +22,7 @@ Feature: Candidature table visualization
         When I fill the "Email" field with "kazuo@ime.usp.br"
         And I fill the "Senha" field with "admin123"
         And I press the "Entrar" button
-        And I click the "Visualizar candidaturas" link
+        And I click the "Candidaturas" link
         Then I should see "MAC"
         And I should see "MAE"
         And I should see "MAT"
@@ -33,7 +33,7 @@ Feature: Candidature table visualization
         When I fill the "Número USP" field with "2222222"
         And I fill the "Senha" field with "12345678"
         And I press the "Entrar" button
-        And I click the "Visualizar candidaturas" link
+        And I click the "Candidaturas" link
         Then I should see "MAC"
         And I should see "MAE"
         And I should see "MAT"
@@ -44,7 +44,7 @@ Feature: Candidature table visualization
         When I fill the "Número USP" field with "1111111"
         And I fill the "Senha" field with "12345678"
         And I press the "Entrar" button
-        And I click the "Visualizar candidaturas" link
+        And I click the "Candidaturas" link
 		Then I should see "Caio"
         And I should see "MAC0110 - Introdução à Ciência da Computação"
 		And I should see "MAE0438 - Estatística Concorrente"
@@ -59,7 +59,7 @@ Feature: Candidature table visualization
         When I fill the "Número USP" field with "1111"
         And I fill the "Senha" field with "12345678"
         And I press the "Entrar" button
-        And I click the "Visualizar candidaturas" link
+        And I click the "Candidaturas" link
         Then I should see "MAC"
         And I should see "MAE"
         And I should see "MAT"
@@ -70,7 +70,7 @@ Feature: Candidature table visualization
         When I fill the "Número USP" field with "123456"
         And I fill the "Senha" field with "changeme!"
         And I press the "Entrar" button
-        And I click the "Visualizar candidaturas" link
+        And I click the "Minhas candidaturas" link
 		Then I should see "2014/2"
         And I should see "MAT0111 - Cálculo I"
         And I should see "MAE0438 - Estatística Concorrente"

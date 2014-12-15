@@ -21,25 +21,17 @@
 
   <body>
     <div class="pagetop">
-      <ul>
-        <li class="toptitle">
-          <%= link_to "Sistema de Monitoria", "/" %>
-        </li>
-        <li>
-          <%= link_to "Disciplinas", courses_path %>
-        </li>
-        <% if admin_signed_in? || professor_signed_in? || secretary_signed_in? %>
-          <li>
-            <%= link_to "Professores", professors_path %>
-          </li>
-          <li>
-            <%= link_to "Funcionários", secretaries_path %>
-          </li>
-          <li>
-            <%= link_to "Alunos", students_path %>
-          </li>
+      <div>
+        <div class="toptitle"><%= link_to "Sistema de Monitoria", "/" %></div>
+        <!-- Painel de quem não é usuário -->
+        <% if signed_in? %>
+          <%= link_to "Sair", destroy_session_path, method: :delete %>
+          <%= link_to "Perfil", current_user %>
+        <% else %>
+          <%= link_to "Cadastrar-se", new_student_path %>
+          <%= link_to "Acessar", new_student_session_path %>
         <% end %>
-      </ul>
+      </div>
     </div>
     <div class="shell">
       <div class="sidebar">
@@ -49,16 +41,6 @@
             Acessando como
             <b><%=current_user.email%></b>
           </p>
-          <hr>
-          <h2>Usuário</h2>
-          <ul>
-            <li>
-              <%= link_to "Perfil", current_user %>
-            </li>
-            <li>
-              <%= link_to "Sair", destroy_session_path, method: :delete %>
-            </li>
-          </ul>
         <% else %>
           <p>
             Você ainda não fez acesso
@@ -80,16 +62,16 @@
               <%= link_to "Cadastrar funcionário", new_secretary_path %>
             </li>
             <li>
-               <%= link_to "Visualizar candidaturas", candidatures_path %>
+               <%= link_to "Candidaturas", candidatures_path %>
             </li>
             <li>
-              <%= link_to "Visualizar monitores", assistant_roles_path %>
+              <%= link_to "Monitores eleitos", assistant_roles_path %>
             </li>
             <li>
               <%= link_to "Gerenciar semestres", semesters_path %>
             </li>
             <li>
-              <%= link_to "Dump do banco de dados", { action: "index", controller: "dumps" } %>
+              <%= link_to "Dump do BD", { action: "index", controller: "dumps" } %>
             </li>
             <li>
               <%= link_to "Painel de controle", control_panel_admins_path %>
@@ -101,7 +83,7 @@
           <h2>Professor(a)</h2>
           <ul>
             <li>
-              <%= link_to "Gerenciar pedidos de monitoria", request_for_teaching_assistants_path %>
+              <%= link_to "Pedidos de monitoria", request_for_teaching_assistants_path %>
             </li>
             <li>
               <%= link_to "Meus monitores", assistant_roles_for_professor_path(current_professor) %>
@@ -115,10 +97,10 @@
                   <%= link_to "Cadastrar disciplina", new_course_path %>
                 </li>
                 <li>
-                   <%= link_to "Visualizar candidaturas", candidatures_path %>
+                   <%= link_to "Candidaturas", candidatures_path %>
                 </li>
                 <li>
-                  <%= link_to "Visualizar monitores eleitos", assistant_roles_path %>
+                  <%= link_to "Monitores eleitos", assistant_roles_path %>
                 </li>
             </ul>
           <% end %>
@@ -131,10 +113,10 @@
               <%= link_to "Gerenciar semestres", semesters_path %>
             </li>
             <li>
-              <%= link_to "Visualizar monitores eleitos", assistant_roles_path %>
+              <%= link_to "Monitores eleitos", assistant_roles_path %>
             </li>
             <li>
-               <%= link_to "Visualizar candidaturas", candidatures_path %>
+               <%= link_to "Candidaturas", candidatures_path %>
             </li>
           </ul>
         <!-- Painel dos alunos -->
@@ -143,18 +125,7 @@
           <h2>Aluno(a)</h2>
           <ul>
             <li>
-               <%= link_to "Visualizar candidaturas", candidatures_path %>
-            </li>
-          </ul>
-        <!-- Painel de quem não é usuário -->
-        <% else %>
-          <hr>
-          <ul>
-            <li>
-              <%= link_to "Cadastrar-se", new_student_path %>
-            </li>
-            <li>
-              <%= link_to "Acessar", new_student_session_path %>
+               <%= link_to "Minhas candidaturas", candidatures_path %>
             </li>
           </ul>
         <% end %>

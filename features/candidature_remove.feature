@@ -18,7 +18,7 @@ Feature: Deleting a candidature
         When I fill the "Número USP" field with "123456"
         And I fill the "Senha" field with "changeme!"
         And I press the "Entrar" button
-        And I click the "Visualizar candidaturas" link
+        And I click the "Minhas candidaturas" link
         And I click the "Mais informações" link
         And I click the "Remover" link
         And I should see "Você tem certeza?" in the alert

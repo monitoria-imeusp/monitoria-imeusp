@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141202124942) do
+ActiveRecord::Schema.define(version: 20141215153547) do
 
   create_table "admins", force: true do |t|
     t.string   "email",                  default: "", null: false
@@ -37,6 +37,7 @@ ActiveRecord::Schema.define(version: 20141202124942) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "advise_urgency"
+    t.integer  "order"
   end
 
   create_table "assistant_evaluations", force: true do |t|
@@ -161,6 +162,7 @@ ActiveRecord::Schema.define(version: 20141202124942) do
     t.boolean  "open"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "active"
   end
 
   add_index "semesters", ["year", "parity"], name: "index_semesters_on_year_and_parity", unique: true

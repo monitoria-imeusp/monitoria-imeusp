@@ -103,11 +103,11 @@ When(/^there is a course with name "(.*?)" and code "(.*?)" and department "(.*?
 end
 
 When(/^there is a closed semester "(.*?)" "(.*?)"$/) do |year, parity|
-  Semester.create(year: year, parity: parity, open: false)
+  Semester.create(year: year, parity: parity, open: false, active: true)
 end
 
 When(/^there is an open semester "(.*?)" "(.*?)"$/) do |year, parity|
-  Semester.create(year: year, parity: parity, open: true)
+  Semester.create(year: year, parity: parity, open: true, active: true)
 end
 
 When(/^there is an assistant role for student "(.*?)" with professor "(.*?)" at course "(.*?)"$/) do |student_name, professor_name, course_code|
@@ -118,7 +118,12 @@ When(/^there is an assistant role for student "(.*?)" with professor "(.*?)" at 
 end
 
 Given(/^there is an advise with title "(.*?)" and message "(.*?)" and urgency "(.*?)"$/) do |title, message, urgency|
-  Advise.create(title: title, message: message, advise_urgency: urgency)
+  if Advise.any?
+    order = Advise.all.order(:order).last.order
+    Advise.create(title: title, message: message, advise_urgency: urgency, order: order)
+  else
+    Advise.create(title: title, message: message, advise_urgency: urgency, order: 0)
+  end
 end
 
 When(/^thete is an assistant evaluation for student "(.*?)" with professor "(.*?)" at course "(.*?)" as "(.*?)"$/) do |student_name, professor_name, course_code, comment|
