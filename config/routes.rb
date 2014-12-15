@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
 
-  resources :advises
 
   get 'home/index'
 
@@ -24,6 +23,10 @@ Rails.application.routes.draw do
       post :register_postgraduate_courses
     end
   end
+
+  resources :advises
+  post 'advises/:id/moveup' => 'advises#moveup', as: :moveup_advise
+  post 'advises/:id/movedown' => 'advises#movedown', as: :movedown_advise
 
   resources :request_for_teaching_assistants, except: :new
   get 'request_for_teaching_assistants/:semester_id/new' => 'request_for_teaching_assistants#new', as: :new_request_for_teaching_assistant

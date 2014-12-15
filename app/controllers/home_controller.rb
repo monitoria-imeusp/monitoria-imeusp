@@ -1,6 +1,6 @@
 class HomeController < ApplicationController
   def index
-    @advises = Advise.all
+    @advises = Advise.all.order(:order)
   end
 
   def sys

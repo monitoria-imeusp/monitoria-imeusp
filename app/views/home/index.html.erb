@@ -18,8 +18,10 @@
       <%= advise.message %>
       </p>
       <% if secretary_signed_in? %>
-        <%= link_to 'Modificar', edit_advise_path(advise)%>
         <%= link_to 'Deletar', advise, method: :delete, data: { confirm: 'Você tem certeza?' } %> </p>
+        <%= link_to 'Para baixo', movedown_advise_path(advise), method: :post %>
+        <%= link_to 'Para cima', moveup_advise_path(advise), method: :post %>
+        <%= link_to 'Modificar', edit_advise_path(advise) %>
       <% end %>
       <br>
   <% end %>
