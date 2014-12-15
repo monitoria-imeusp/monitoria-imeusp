@@ -14,9 +14,10 @@ Feature: Semester edition
         And I fill the "Senha" field with "admin123"
         And I press the "Entrar" button
         And I click the "Gerenciar semestres" link
-        And I press the "Fechar" button
+        And I click the "Fechar inscrições" link
         Then I should see "2014/2"
-        And I should see "Fechado"
+        And I should see "Ativo"
+
 
     Scenario: Secretary creating a semester
         Given I'm at the system access page
@@ -26,6 +27,6 @@ Feature: Semester edition
         And I fill the "Senha" field with "12345678"
         And I press the "Entrar" button
         And I click the "Gerenciar semestres" link
-        And I press the "Fechar" button
+        And I click the "Fechar inscrições" link
         Then I should see "2014/2"
-        And I should see "Fechado"
+        And I should see "Ativo"
