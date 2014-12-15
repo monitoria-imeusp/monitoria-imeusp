@@ -84,13 +84,42 @@ div.shell {
 /*********************************************************/
 
 div.content {
-  width: 90%;
+  width: 80%;
   padding: 1em 2em;
   min-height: 400px;
 }
 
 .content > p, form {
   margin-left: 4em;
+}
+
+.content > a,
+.content > a:visited,
+.content > h1 > a,
+.content > h1 > a:visited {
+  display: block;
+  float: right;
+  background-color: #368;
+  border-radius: 4px;
+  min-width: 160px;
+  margin-left: 5px;
+  margin-right: 5px;
+  margin-bottom: 2px;
+  margin-top: 2px;
+  padding: 4px 6px;
+  color: #eee;
+  font-weight: bold;
+  text-align: center;
+}
+
+.content > a:hover,
+.content > a:active,
+.content > a:focus,
+.content > h1 > a:hover,
+.content > h1 > a:active,
+.content > h1 > a:focus {
+  text-decoration: none;
+  background-color: #479;
 }
 
 select {
