@@ -11,7 +11,7 @@ Feature: Course deletion
         When I fill the "Email" field with "kazuo@ime.usp.br"
         And I fill the "Senha" field with "admin123"
         And I press the "Entrar" button
-        And I click the "Disciplinas" link
+        And I go to the courses index
         And I click the "MAC0342" link
         And I click the "Remover" link
         And I should not see "labxp"
@@ -26,7 +26,7 @@ Feature: Course deletion
         When I fill the "Número USP" field with "1111111"
         And I fill the "Senha" field with "12345678"
         And I press the "Entrar" button
-        And I click the "Disciplinas" link
+        And I go to the courses index
         And I click the "MAC0342" link
         And I click the "Remover" link
         And I should not see "labxp"
@@ -40,10 +40,10 @@ Feature: Course deletion
         When I fill the "Número USP" field with "1111111"
         And I fill the "Senha" field with "12345678"
         And I press the "Entrar" button
-        And I click the "Disciplinas" link
+        And I go to the courses index
         And I should not see "Remover"
 
     Scenario: Any person trying to remove a course
         Given I'm at the home page
-        And I click the "Disciplinas" link
+        And I go to the courses index
         And I should not see "Remover"

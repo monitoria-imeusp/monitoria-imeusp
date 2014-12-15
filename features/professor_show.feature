@@ -14,10 +14,10 @@ Feature: Showing a professor
 	Scenario: Admin seeing detailed information
 		When I'm at the login page
 		And there is an admin user with email "kazuo@ime.usp.br" and password "admin123"
-    	When I fill the "Email" field with "kazuo@ime.usp.br"
-    	And I fill the "Senha" field with "admin123"
-    	And I press the "Entrar" button
-		And I click the "Professores" link
+  	When I fill the "Email" field with "kazuo@ime.usp.br"
+  	And I fill the "Senha" field with "admin123"
+  	And I press the "Entrar" button
+		And I'm at the list_professors page
 		And I click the "Bob" link
 		Then I should see "Nome: Bob"
 		And I should see "Nível de acesso: Membro da comissão de monitoria"

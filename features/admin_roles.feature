@@ -14,7 +14,7 @@ Feature: Accessing the page
         When I fill the "Email" field with "kazuo@ime.usp.br"
         And I fill the "Senha" field with "admin123"
         And I press the "Entrar" button
-        And I click the "Professores" link
+        And I'm at the list_professors page
         And I click the "mqz" link
         Then I should not see "Editar"
 

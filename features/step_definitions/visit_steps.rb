@@ -50,6 +50,18 @@ When(/^I go to the new request form$/) do
   visit new_request_for_teaching_assistant_path(Semester.first.id)
 end
 
+When(/^I go to the courses index$/) do
+  visit courses_path
+end
+
+When(/^I go to the secretaries index$/) do
+  visit secretaries_path
+end
+
+When(/^I go to the students index$/) do
+  visit students_path
+end
+
 Given(/^I visit the assistant roles page$/) do
   visit assistant_roles_path
 end

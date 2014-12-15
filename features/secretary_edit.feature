@@ -13,7 +13,7 @@ Feature: Secretary edit
         When I fill the "Email" field with "kazuo@ime.usp.br"
         And I fill the "Senha" field with "admin123"
         And I press the "Entrar" button
-        And I click the "Funcionários" link
+        And I go to the secretaries index
         And I click the "Marcia" link
         And I should not see "Editar"
         And I should see "Remover"
@@ -24,13 +24,13 @@ Feature: Secretary edit
         When I fill the "Número USP" field with "1111111"
         And I fill the "Senha" field with "12345678"
         And I press the "Entrar" button
-        And I click the "Funcionários" link
+        And I go to the secretaries index
         And I click the "Marcia" link
         And I should not see "Editar"
         And I should not see "Remover"
 
     Scenario: Any person trying to edit a secretary
-        Given I'm at the "secretaries" page
+        Given I go to the secretaries index
 		Then I should see "Acesso negado"
 
     Scenario: Secretary edits itself
