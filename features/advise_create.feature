@@ -5,7 +5,7 @@ Feature: Adding new messages
 
 	Scenario: Secretary creating an advise
 		Given I'm logged in as a secretary
-		And I click the "Novos Avisos" link
+		And I click the "Adicionar aviso" link
 		And I fill the "Título" field with "Aviso 1"
 		And I fill the "Texto" field with "Teste 1"
 		And I mark the "Mensagem Importante" checkbox
@@ -20,12 +20,12 @@ Feature: Adding new messages
         And I fill the "Número USP" field with "123"
         And I fill the "Senha" field with "prof-123"
         And I press the "Entrar" button
-        Then I should not see "Novos Avisos"
+        Then I should not see "Adicionar aviso"
 
     Scenario: Student can't create an advise
     	Given I'm logged in as a student
-    	Then I should not see "Novos Avisos"
+    	Then I should not see "Adicionar aviso"
 
     Scenario: Stranger can't create an advise
     	Given I'm at the home page
-    	Then I should not see "Novos Avisos"
+    	Then I should not see "Adicionar aviso"
