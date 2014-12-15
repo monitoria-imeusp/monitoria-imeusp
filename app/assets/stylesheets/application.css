@@ -96,20 +96,23 @@ div.content {
 .content > a,
 .content > a:visited,
 .content > h1 > a,
-.content > h1 > a:visited {
+.content > h1 > a:visited,
+td > a,
+td > a:visited {
   display: block;
   float: right;
   background-color: #368;
   border-radius: 4px;
-  min-width: 160px;
-  margin-left: 5px;
-  margin-right: 5px;
+  min-width: 128px;
+  margin-left: 4px;
+  margin-right: 4px;
   margin-bottom: 2px;
   margin-top: 2px;
   padding: 4px 6px;
   color: #eee;
   font-weight: bold;
   text-align: center;
+  transition: background-color 0.15s;
 }
 
 .content > a:hover,
@@ -117,9 +120,14 @@ div.content {
 .content > a:focus,
 .content > h1 > a:hover,
 .content > h1 > a:active,
-.content > h1 > a:focus {
+.content > h1 > a:focus,
+td > a:focus,
+td > a:active,
+td > a:hover {
   text-decoration: none;
-  background-color: #479;
+  background-color: #b55;
+  transition: background-color 0.15s;
+  color: #eee;
 }
 
 select {
