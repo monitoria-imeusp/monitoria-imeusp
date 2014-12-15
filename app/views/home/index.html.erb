@@ -1,9 +1,10 @@
-<h1>Avisos</h1>
+<h1>
+  Avisos
+  <% if secretary_signed_in? %>
+    <%= link_to "Adicionar aviso", new_advise_path %>
+  <% end %>
+</h1>
 <hr>
-
-<% if secretary_signed_in? %>
-  <%= link_to "Novos Avisos", new_advise_path, {:style=>'font-size:x-large;', :class => "css_class"} %>
-<% end %>
 
 <% if (@advises = getAdivises) %>
   <% @advises.each do |advise| %>
@@ -15,10 +16,12 @@
         <p style="color: black; ">
       <% end %>
       <%= advise.message %>
-
+      </p>
       <% if secretary_signed_in? %>
         <%= link_to 'Modificar', edit_advise_path(advise)%>
         <%= link_to 'Deletar', advise, method: :delete, data: { confirm: 'Você tem certeza?' } %> </p>
       <% end %>
+      <br>
   <% end %>
 <% end %>
+
