@@ -46,7 +46,9 @@ Rails.application.routes.draw do
 
   resources :semesters
   post 'semesters/:id/open' => 'semesters#open', as: :open_semester
+  post 'semesters/:id/activate' => 'semesters#activate', as: :activate_semester
   post 'semesters/:id/close' => 'semesters#close', as: :close_semester
+  post 'semesters/:id/deactivate' => 'semesters#deactivate', as: :deactivate_semester
 
   resources :candidatures, except: :new
   get 'candidatures/:id/download_transcript' => 'candidatures#download_transcript', as: :download_candidature_transcript
