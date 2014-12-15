@@ -6,7 +6,7 @@
 </h1>
 <hr>
 
-<% if (@advises = getAdivises) %>
+<% if @advises %>
   <% @advises.each do |advise| %>
       <h2><%= advise.title %></h2>
 

@@ -1,5 +1,6 @@
 class HomeController < ApplicationController
   def index
+    @advises = Advise.all
   end
 
   def sys
