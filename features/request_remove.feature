@@ -14,8 +14,8 @@ Feature: Removing Requests for Teaching Assistant
         When I fill the "Número USP" field with "123"
         And I fill the "Senha" field with "prof-123"
         And I press the "Entrar" button
-        And I should see "Gerenciar pedidos de monitoria"
-        Then I click the "Gerenciar pedidos de monitoria" link
+        And I should see "Pedidos de monitoria"
+        Then I click the "Pedidos de monitoria" link
         And I click the "Ver" link
         And I click the "Remover" link
         And I should see "Você tem certeza?" in the alert

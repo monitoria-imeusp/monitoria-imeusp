@@ -14,8 +14,8 @@ Feature: Edit Request for Teaching Assistant
         When I fill the "Número USP" field with "123"
         And I fill the "Senha" field with "prof-123"
         And I press the "Entrar" button
-        And I should see "Gerenciar pedidos de monitoria"
-        And I click the "Gerenciar pedidos de monitoria" link
+        And I should see "Pedidos de monitoria"
+        And I click the "Pedidos de monitoria" link
         And I should see "MAC0110"
         And I click the "Ver" link
         And I click the "Editar" link

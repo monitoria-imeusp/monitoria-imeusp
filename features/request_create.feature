@@ -12,7 +12,7 @@ Feature: Creating Request for Teaching Assistant
         When I fill the "Número USP" field with "123"
         And I fill the "Senha" field with "prof-123"
         And I press the "Entrar" button
-        And I should see "Gerenciar pedidos de monitoria"
+        And I should see "Pedidos de monitoria"
         And I go to the new request form
 
     Scenario: Valid professor creating a new request
