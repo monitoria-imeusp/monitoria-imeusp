@@ -1,5 +1,10 @@
 <h1>Administração do sistema</h1>
 
+<%= link_to "Disciplinas", courses_path %>
+<%= link_to "Professores", professors_path %>
+<%= link_to "Funcionários", secretaries_path %>
+<%= link_to "Alunos", students_path %>
+
 <div>
   <h3>Cadastro de disciplinas oferecidas no semestre</h3>
   <%= button_to "Cadastrar disciplinas de graduação", controller: "admins", :action => "register_undergraduate_courses", :method => 'post' %>

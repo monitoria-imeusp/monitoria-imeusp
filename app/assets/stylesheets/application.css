@@ -148,33 +148,53 @@ select {
 div.pagetop {
   padding: .1em 1em;
   background-color: #eee;
+  height: 36pt;
   border-bottom: 1px solid #bbb;
 }
 
-.pagetop > ul {
+.pagetop > div {
   margin-left: auto;
   margin-right: auto;
   width: 1024px;
 }
 
-.pagetop > ul > li > a:link, .pagetop > ul > li > a:visited {
+.pagetop > div > a:visited,
+.pagetop > div > a:link {
   display: block;
+  float: right;
   text-decoration: none;
-  text-align: center;
-  color: #666;
+  color: #555;
+  margin-top: 8pt;
+  margin-bottom: 8pt;
   margin-left: auto;
   margin-right: auto;
-  font-weight: bold;
+  font-weight: bolder;
+  padding-left: 1em;
+  padding-right: 1em;
+  padding-top: 4pt;
+  font-size: 14pt;
+}
+
+div.toptitle > a:visited,
+div.toptitle > a:link
+ {
+  display: block;
+  float: left;
+  text-decoration: none;
+  color: #555;
+  margin-top: 8pt;
+  margin-bottom: 8pt;
+  margin-left: auto;
+  margin-right: auto;
+  font-weight: bolder;
   padding: 4pt 1em;
-  padding-bottom: 0pt;
-}
-
-.pagetop > ul > li.toptitle > a:link {
   font-size: 24pt;
-  padding-top: 2pt;
 }
 
-.pagetop > ul > li > a:hover, a:active {
+.pagetop > div > a:hover,
+.pagetop > div > a:active,
+div.toptitle > a:hover,
+div.toptitle > a:active {
   color: #b55;
 }
 

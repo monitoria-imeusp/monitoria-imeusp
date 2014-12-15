@@ -83,9 +83,7 @@
 </p>
 
 <% if student_signed_in? %>
-  <p>
   <%= link_to 'Editar', edit_student_path(@student) %>
-  </p>
 <% end %>
 
 <% if admin_signed_in? || secretary_signed_in? %>
