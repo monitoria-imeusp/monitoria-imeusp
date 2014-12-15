@@ -17,21 +17,27 @@
     <tr>
       <th><%= t('activerecord.attributes.semester.name') %></th>
       <th><%= t('activerecord.attributes.semester.open') %></th>
-      <th colspan="3"></th>
+      <th colspan="1"></th>
     </tr>
   </thead>
   <tbody>
     <% @semesters.each do |semester| %>
       <tr>
         <td><%= semester.year %>/<%= semester.parity_as_i %></td>
-        <td><%= semester.open_as_s %></td>
+        <td><%= semester.state_as_s %></td>
         <% if semester.open %>
           <td>
-            <%= button_to "Fechar", controller: "semesters", :action => "close", :id => semester.id, :method => 'post' %>
+            <%= link_to "Desativar", deactivate_semester_path(semester), :method => 'post' %>
+            <%= link_to "Fechar inscrições", close_semester_path(semester), :method => 'post' %>
+          </td>
+        <% elsif semester.active %>
+          <td>
+            <%= link_to "Desativar", deactivate_semester_path(semester), :method => 'post' %>
+            <%= link_to "Abrir inscrições", open_semester_path(semester), :method => 'post' %>
           </td>
         <% else %>
           <td>
-            <%= button_to "Abrir", controller: "semesters", :action => "open", :id => semester.id, :method => 'post' %>
+            <%= link_to "Ativar", activate_semester_path(semester), :method => 'post' %>
           </td>
         <% end %>
       </tr>

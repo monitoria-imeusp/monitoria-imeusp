@@ -11,13 +11,13 @@ Feature: Semester list visualization
     Scenario: Admin seeing all semesters
         Given I'm logged in as the admin
         When I'm at the "semesters" page
-        Then I should see "2014/2 Fechado"
-        And I should see "2015/1 Fechado"
+        Then I should see "2014/2 Ativo"
+        And I should see "2015/1 Ativo"
         And I should see "2015/2 Aberto"
 
     Scenario: Secretary seeing all semesters
         Given I'm logged in as a secretary
         When I'm at the "semesters" page
-        Then I should see "2014/2 Fechado"
-        And I should see "2015/1 Fechado"
+        Then I should see "2014/2 Ativo"
+        And I should see "2015/1 Ativo"
         And I should see "2015/2 Aberto"

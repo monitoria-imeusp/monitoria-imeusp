@@ -97,7 +97,8 @@ describe CandidaturesController do
       "id" => 1,
       "year" => 2014,
       "parity" => 0,
-      "open" => true
+      "open" => true,
+      "active" => true
   }}
 
   # This should return the minimal set of values that should be in the session
@@ -123,10 +124,12 @@ describe CandidaturesController do
       response.should redirect_to action: :index_for_student, student_id: @student
     end
     it "redirects super professor to index_for_department" do
+      semester = Semester.create! valid_semester
+      Semester.should_receive(:current).and_return(semester)
       super_professor = Professor.create! kunio
       sign_in :professor, super_professor
       get :index, {}, valid_session
-      response.should redirect_to action: :index_for_department, department_id: super_professor.department
+      response.should redirect_to action: :index_for_department, semester_id: valid_semester["id"], department_id: super_professor.department
     end
     it "hiper professor assigns all departments as @departments" do
       hiper_professor = Professor.create! zara
@@ -167,7 +170,7 @@ describe CandidaturesController do
       sign_out @student
       sign_in :professor, super_professor
       Department.should_receive(:find).with(super_professor.department_id.to_s).and_return(@mac)
-      get :index_for_department, {department_id: @mac}, valid_session
+      get :index_for_department, {semester_id: valid_semester["id"], department_id: @mac}, valid_session
     end
 
     it "renders the index for the super professor's department" do

@@ -6,6 +6,7 @@ class Semester < ActiveRecord::Base
   validates :parity, presence: true, inclusion: {in: 0..1}
   #FIXME for some reason the line below does not work properly, it gives false positives.
   #validates :open, presence: true
+  #validates :active, presence: true
 
   def parity_as_s
     parity == 0 ? "Ímpar" : "Par"
@@ -19,6 +20,18 @@ class Semester < ActiveRecord::Base
     open ? "Aberto" : "Fechado"
   end
 
+  def state_as_s
+    if open and active
+      "Aberto para inscrições"
+    elsif active
+      "Ativo"
+    elsif open
+      "Inválido"
+    else
+      "Fechado"
+    end
+  end
+
   def period_as_s
     year.to_s + "/" + parity_as_i.to_s
   end
@@ -29,5 +42,13 @@ class Semester < ActiveRecord::Base
 
   def self.all_open
     Semester.where(open: true).all
+  end
+
+  def self.all_active
+    Semester.where(active: true).all
+  end
+
+  def self.current
+    all_active.last
   end
 end

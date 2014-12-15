@@ -1,5 +1,11 @@
 
-<h1>Candidaturas do departamento <%= @current_department.code.upcase %>:</h1>
+<h1>Candidaturas do departamento <%= @current_department.code.upcase %> no <%= @semester.as_s %>:</h1>
+<hr>
+<% @active_semesters.reverse.each do |semester| %>
+  <%= link_to semester.period_as_s, candidatures_for_department_path(semester, @current_department) %>
+<% end %>
+<span style="height: 2em; display: block;"></span>
+<hr>
 
 <% @candidatures_filtered.each_with_index do |candidatures, priority| %>
   <h2>Como <%= priority+1 %>ª opção:</h2>
@@ -17,10 +23,6 @@
         <tr>
           <td class="title"><%= t('activerecord.attributes.student.institute') %></td>
           <td><%= candidature.student.institute %></td>
-        </tr>
-        <tr>
-          <td class="title"><%= t('activerecord.attributes.candidature.semester_id') %></td>
-          <td><%= candidature.semester.period_as_s %></td>
         </tr>
         <tr>
           <td class="title">
