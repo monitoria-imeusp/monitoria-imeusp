@@ -16,6 +16,11 @@
       <%= f.label :professor_id, t('activerecord.attributes.candidature.professor_id') %><br>
       <%= f.select :professor_id, professor_options, :selected => (f.object.id or current_professor.id), :include_blank => false %><br>
     </div>
+  <% elsif secretary_signed_in? %>
+    <div class="field">
+      <%= f.label :professor_id, t('activerecord.attributes.candidature.professor_id') %><br>
+      <%= f.select :professor_id, professor_options, :include_blank => false %><br>
+    </div>
   <% end %>
   <div class="field">
     <%= f.label :course_id, t('activerecord.attributes.request_for_teaching_assistant.course_id') %><br>

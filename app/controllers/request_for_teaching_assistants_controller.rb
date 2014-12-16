@@ -8,7 +8,7 @@ class RequestForTeachingAssistantsController < ApplicationController
     @request_for_teaching_assistants = (RequestForTeachingAssistant.all.map do
       |request| request
     end).keep_if do |request|
-      professor_can_see?(current_professor, request)
+      secretary_signed_in? or professor_can_see?(current_professor, request)
     end
     @semesters = Semester.all
   end
