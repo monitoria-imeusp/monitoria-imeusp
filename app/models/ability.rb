@@ -23,7 +23,7 @@ class Ability
       cannot :update, Course
       cannot :destroy, Course
       cannot :create, RequestForTeachingAssistant
-      can :read, RequestForTeachingAssistant
+      cannot :read, RequestForTeachingAssistant
       cannot :update, RequestForTeachingAssistant
       cannot :destroy, RequestForTeachingAssistant
       cannot :create, Candidature
@@ -154,7 +154,7 @@ class Ability
       cannot :update, Course
       cannot :destroy, Course
       cannot :create, RequestForTeachingAssistant
-      can :read, RequestForTeachingAssistant
+      cannot :read, RequestForTeachingAssistant
       cannot :update, RequestForTeachingAssistant
       cannot :destroy, RequestForTeachingAssistant
       can :create, Candidature
