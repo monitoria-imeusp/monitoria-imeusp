@@ -53,21 +53,23 @@
 <span style="height: 2em; display: block;"></span>
 <hr>
 
-<table>
-  <thead>
-    <tr>
-      <th>Alunos que se candidataram para essa disciplina</th>
-      <th colspan="2"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @candidatures_for_this_request.each do |candidature| %>
+<% if professor_signed_in? and current_professor.super_professor? %>
+  <table>
+    <thead>
       <tr>
-        <td><%= candidature.student.name %></td>
-        <td><%= link_to 'Ver candidatura', candidature %></td>
-        <td><%= link_to 'Eleger', create_assistant_role_path(@request_for_teaching_assistant, candidature.student), method: :post %></td>
+        <th>Alunos que se candidataram para essa disciplina</th>
+        <th colspan="2"></th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
+
+    <tbody>
+      <% @candidatures_for_this_request.each do |candidature| %>
+        <tr>
+          <td><%= candidature.student.name %></td>
+          <td><%= link_to 'Ver candidatura', candidature %></td>
+          <td><%= link_to 'Eleger', create_assistant_role_path(@request_for_teaching_assistant, candidature.student), method: :post %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>
