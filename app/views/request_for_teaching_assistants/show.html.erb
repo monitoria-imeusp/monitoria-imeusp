@@ -53,7 +53,7 @@
 <span style="height: 2em; display: block;"></span>
 <hr>
 
-<% if professor_signed_in? and current_professor.super_professor? %>
+<% if secretary_signed_in? or (professor_signed_in? and current_professor.super_professor?) %>
   <table>
     <thead>
       <tr>
