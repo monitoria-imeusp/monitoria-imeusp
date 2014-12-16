@@ -2,7 +2,7 @@
 <h1>Candidaturas do departamento <%= @current_department.code.upcase %> no <%= @semester.as_s %>:</h1>
 <hr>
 <% @active_semesters.reverse.each do |semester| %>
-  <%= link_to semester.period_as_s, candidatures_for_department_path(semester, @current_department) %>
+  <%= link_to semester.as_s, candidatures_for_department_path(semester, @current_department) %>
 <% end %>
 <span style="height: 2em; display: block;"></span>
 <hr>

@@ -1,7 +1,7 @@
 <h1>Pedidos de Monitoria</h1>
 <hr>
 
-<% if professor_signed_in? %>
+<% if professor_signed_in? or secretary_signed_in? %>
   <h2>
     Pedir monitor para:
     <% @semesters.each do |semester| %>
