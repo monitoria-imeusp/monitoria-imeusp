@@ -28,8 +28,9 @@ Rails.application.routes.draw do
   post 'advises/:id/moveup' => 'advises#moveup', as: :moveup_advise
   post 'advises/:id/movedown' => 'advises#movedown', as: :movedown_advise
 
-  resources :request_for_teaching_assistants, except: :new
+  resources :request_for_teaching_assistants, except: [:new]
   get 'request_for_teaching_assistants/:semester_id/new' => 'request_for_teaching_assistants#new', as: :new_request_for_teaching_assistant
+  get 'request_for_teaching_assistants_for_semester/:semester_id/' => 'request_for_teaching_assistants#index_for_semester', as: :request_for_teaching_assistants_for_semester
 
   resources :professors
   get 'professors/:id/change_password' => 'professors#change_password', as: :change_professor_password

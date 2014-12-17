@@ -5,12 +5,19 @@ class RequestForTeachingAssistantsController < ApplicationController
   # GET /request_for_teaching_assistants
   # GET /request_for_teaching_assistants.json
   def index
-    @request_for_teaching_assistants = (RequestForTeachingAssistant.all.map do
+    redirect_to request_for_teaching_assistants_for_semester_path(Semester.current)
+  end
+
+  # GET /request_for_teaching_assistants_for_semester
+  # GET /request_for_teaching_assistants_for_semester.json
+  def index_for_semester
+    @semester = Semester.find(params[:semester_id])
+    @request_for_teaching_assistants = (RequestForTeachingAssistant.where(semester: @semester).all.map do
       |request| request
     end).keep_if do |request|
       secretary_signed_in? or professor_can_see?(current_professor, request)
     end
-    @semesters = Semester.all
+    @semesters = Semester.where(active: true).all
   end
 
   # GET /request_for_teaching_assistants/1
