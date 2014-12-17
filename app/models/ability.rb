@@ -58,6 +58,7 @@ class Ability
       can :read, RequestForTeachingAssistant
       can :update, RequestForTeachingAssistant
       can :destroy, RequestForTeachingAssistant
+      can :index_for_semester, RequestForTeachingAssistant
       can :create, Candidature
       can :read, Candidature
       can :update, Candidature
@@ -82,6 +83,7 @@ class Ability
       can :read, RequestForTeachingAssistant #, :professor_id => user.id #Only his own
       can :update, RequestForTeachingAssistant #, :professor_id => user.id #Only his own
       can :destroy, RequestForTeachingAssistant #, :professor_id => user.id #Only his own
+      can :index_for_semester, RequestForTeachingAssistant
       if user.professor_rank > 0
         can :read, Dump
         can :create, Professor
@@ -129,6 +131,7 @@ class Ability
       can :read, RequestForTeachingAssistant
       can :update, RequestForTeachingAssistant
       can :destroy, RequestForTeachingAssistant
+      can :index_for_semester, RequestForTeachingAssistant
       can :create, Candidature
       can :read, Candidature
       can :update, Candidature

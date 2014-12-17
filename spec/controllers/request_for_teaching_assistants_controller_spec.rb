@@ -145,7 +145,8 @@ describe RequestForTeachingAssistantsController do
       "id" => 1,
       "year" => 2014,
       "parity" => 0,
-      "open" => true
+      "open" => true,
+      "active" => true
   }}
 
   # This should return the minimal set of values that should be in the session
@@ -159,7 +160,7 @@ describe RequestForTeachingAssistantsController do
     professor3 = Professor.create! another_professor_another_department
     Department.create! {{"id" => 1, "code" => "MAC"}}
     Department.create! {{"id" => 2, "code" => "MAE"}}
-    Semester.create! (valid_semester)
+    @semester = Semester.create! (valid_semester)
     Course.create! valid_course_attributes
     sign_in :professor, professor
   end
@@ -167,7 +168,7 @@ describe RequestForTeachingAssistantsController do
   describe "GET index" do
     it "assigns all request_for_teaching_assistants as @request_for_teaching_assistants" do
       request_for_teaching_assistant = RequestForTeachingAssistant.create! valid_attributes
-      get :index, {}
+      get :index_for_semester, { :semester_id => @semester.id }
       assigns(:request_for_teaching_assistants).should eq([request_for_teaching_assistant])
     end
   end
@@ -326,7 +327,7 @@ describe RequestForTeachingAssistantsController do
       Course.create! valid_second_course_attributes
       request_for_teaching_assistant = RequestForTeachingAssistant.create! valid_attributes
       RequestForTeachingAssistant.create! not_owned_attributes
-      get :index, {}
+      get :index_for_semester, { :semester_id => @semester.id }
       assigns(:request_for_teaching_assistants).should eq([request_for_teaching_assistant])
     end
 
@@ -340,7 +341,7 @@ describe RequestForTeachingAssistantsController do
       shown_requests.push(RequestForTeachingAssistant.create! not_owned_attributes)
       RequestForTeachingAssistant.create! not_owned_other_department_attributes
       RequestForTeachingAssistant.create! other_department_attributes
-      get :index, {}
+      get :index_for_semester, { :semester_id => @semester.id }
       assigns(:request_for_teaching_assistants).should eq(shown_requests)
     end
 
@@ -353,7 +354,7 @@ describe RequestForTeachingAssistantsController do
       shown_requests.push(RequestForTeachingAssistant.create! valid_attributes)
       shown_requests.push(RequestForTeachingAssistant.create! not_owned_attributes)
       shown_requests.push(RequestForTeachingAssistant.create! other_department_attributes)
-      get :index, {}
+      get :index_for_semester, { :semester_id => @semester.id }
       assigns(:request_for_teaching_assistants).should eq(shown_requests)
     end
 
