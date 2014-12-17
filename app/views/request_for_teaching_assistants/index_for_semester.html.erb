@@ -6,7 +6,7 @@
     Pedir monitor para:
     <% @semesters.each do |semester| %>
       <% if semester.open %>
-        <%= link_to semester.as_s,
+        <%= link_to semester.period_as_s,
                     new_request_for_teaching_assistant_path(semester) %>
       <% end %>
     <% end %>
@@ -15,7 +15,7 @@
   <h2>
     Ver pedidos de:
     <% @semesters.reverse.each do |semester| %>
-      <%= link_to semester.as_s, request_for_teaching_assistants_for_semester_path(semester) %>
+      <%= link_to semester.period_as_s, request_for_teaching_assistants_for_semester_path(semester) %>
     <% end %>
   </h2>
   <hr>
