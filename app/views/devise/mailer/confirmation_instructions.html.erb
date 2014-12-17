@@ -1,9 +1,28 @@
-<p>Bem-vindo <%= @email %>!</p>
+<h1>Bem-vind@, <%= @resource.name %>!</h1>
 
-<p>Você pode confirmar email através do link abaixo:</p>
-
-<p><%= link_to 'Confirmar meu cadastro', confirmation_url(@resource, confirmation_token: @token), target: "_blank" %></p>
-
-<% if @resource.class == Professor or @resource.class == Secretary %>
+<% if @resource.class == Secretary %>
   <p>Sua senha de acesso é: <strong><%= @resource.password%></strong> </p>
+<% elsif @resource.class == Professor %>
+  <p>
+    O Sistema de Monitoria do IME-USP permite que você peça monitores para suas disciplinas pela Internet. Este e-mail serve para confirmar seu cadastro. Para isso, basta acessar o link abaixo:
+  </p>
+  <p><%= link_to 'Confirmar meu cadastro', confirmation_url(@resource, confirmation_token: @token), target: "_blank" %></p>
+  <p>
+    <strong>Uma vez confirmada sua conta, é possível acessá-la no endereço <%= link_to 'monitoria.ime.usp.br/prof', new_professor_session_url, target: "_blank"%></strong>. Sua senha de acesso é: <strong><%= @resource.password%></strong> (você pode mudá-la no seu perfil)
+  </p>
+  <p>
+    Em caso de dúvidas sobre como usar o sistema, entre em contato pelo e-mail sistemamonitoria@ime.usp.br.
+  </p>
+<% else %>
+  <p>
+    Você pode confirmar sua conta através do link abaixo:
+  </p>
+  <p>
+    <%= link_to 'Confirmar meu cadastro', confirmation_url(@resource, confirmation_token: @token), target: "_blank" %>
+  </p>
 <% end %>
+
+<p>
+  Cordialmente,<br>
+  Sistema de Monitoria
+</p>
