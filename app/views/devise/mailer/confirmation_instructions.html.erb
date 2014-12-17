@@ -1,7 +1,13 @@
 <h1>Bem-vind@, <%= @resource.name %>!</h1>
 
 <% if @resource.class == Secretary %>
-  <p>Sua senha de acesso é: <strong><%= @resource.password%></strong> </p>
+  <p>
+    Você pode confirmar sua conta através do link abaixo:
+  </p>
+  <p>
+    <%= link_to 'Confirmar meu cadastro', confirmation_url(@resource, confirmation_token: @token), target: "_blank" %>
+  </p>
+  <p>Sua senha de acesso é: <strong><%= @resource.password%></strong></p>
 <% elsif @resource.class == Professor %>
   <p>
     O Sistema de Monitoria do IME-USP permite que você peça monitores para suas disciplinas pela Internet. Este e-mail serve para confirmar seu cadastro. Para isso, basta acessar o link abaixo:
