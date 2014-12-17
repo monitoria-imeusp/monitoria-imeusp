@@ -3,11 +3,15 @@
 
 <% if professor_signed_in? or secretary_signed_in? %>
   <h2>
-    Pedir monitor para:
-    <% @semesters.each do |semester| %>
-      <% if semester.open %>
-        <%= link_to semester.period_as_s,
-                    new_request_for_teaching_assistant_path(semester) %>
+    <% if @semesters.any? %>
+      <i>Nenhum semestre aberto à requisição de monitores no momento</i>
+    <% else %>
+      Pedir monitor para:
+      <% @semesters.each do |semester| %>
+        <% if semester.open %>
+          <%= link_to semester.period_as_s,
+                      new_request_for_teaching_assistant_path(semester) %>
+        <% end %>
       <% end %>
     <% end %>
   </h2>
