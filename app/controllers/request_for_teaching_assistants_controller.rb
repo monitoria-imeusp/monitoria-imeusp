@@ -26,7 +26,7 @@ class RequestForTeachingAssistantsController < ApplicationController
     authorization_sprofessor
     authorization_professor
     course_id = RequestForTeachingAssistant.find(params[:id]).course.id
-    @candidatures_for_this_request = Candidature.where("course1_id = ? or course2_id = ? or course3_id = ? or course4_id = ?", course_id, course_id, course_id, course_id
+    @candidatures_for_this_request = Candidature.where "course1_id = ? or course2_id = ? or course3_id = ? or course4_id = ?", course_id, course_id, course_id, course_id
     # Remove assitants that were already chosen for this request
     @candidatures_for_this_request = (@candidatures_for_this_request.map do |candidature| candidature end).keep_if do |candidature|
       not AssistantRole.where(request_for_teaching_assistant_id: @request_for_teaching_assistant.id, student_id: candidature.student_id).any?
