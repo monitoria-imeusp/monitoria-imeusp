@@ -29,6 +29,10 @@
     <%= professorRankOptions()[@professor.professor_rank][0] %>
   </p>
   <p>
+    <strong><%= t('activerecord.attributes.professor.confirmed_at') + ':' %></strong>
+    <%= @professor.confirmed_at ? @professor.confirmed_at : t('activerecord.attributes.professor.unconfirmed') %>
+  </p>
+  <p>
     <%= link_to 'Remover', professor_path(@professor), method: :delete, data: { confirm: 'Tem certeza?' } %>
   </p>
 <% end %>

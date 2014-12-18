@@ -34,6 +34,7 @@ pt-BR:
         professor_rank: 'Nível de acesso'
         password: 'Senha'
         password_confirmation: 'Confirme a senha'
+        confirmed_at: 'Data de confirmação'
       request_for_teaching_assistant:
         course_id: 'Disciplina'
         professor_id: 'Professor(a)'
