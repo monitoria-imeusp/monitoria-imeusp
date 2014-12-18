@@ -38,7 +38,7 @@ a:hover, a:active, a:focus {
 }
 
 table {
-  width: 80%;
+  width: 90%;
   text-align: center;
   border: 2px solid #666;
 }
@@ -55,7 +55,7 @@ th.title, td.title {
 
 th.name, td.name {
   padding: 4px 8px;
-  text-align: left;
+  text-align: center;
   width: 75%;
 }
 
