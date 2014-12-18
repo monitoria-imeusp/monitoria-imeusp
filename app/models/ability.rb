@@ -186,7 +186,7 @@ class Ability
     if user.is_a? Secretary
       can :notify_for_semester, AssistantRole
     end
-    if user.is_a? Professor and user.professor_rank > 0
+    if user.is_a? Secretary or (user.is_a? Professor and user.professor_rank > 0)
       can :create, AssistantRole
       can :update, AssistantRole
       can :destroy, AssistantRole
