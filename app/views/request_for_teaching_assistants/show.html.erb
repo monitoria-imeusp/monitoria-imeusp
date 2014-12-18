@@ -47,13 +47,35 @@
   <%= (@request_for_teaching_assistant.observation) %>
 </p>
 
-<%= link_to 'Editar', edit_request_for_teaching_assistant_path(@request_for_teaching_assistant) %>
-<%= link_to 'Remover', @request_for_teaching_assistant, method: :delete, data: { confirm: 'Tem certeza?' } %>
+<% if @request_for_teaching_assistant.semester.open %>
+  <%= link_to 'Editar', edit_request_for_teaching_assistant_path(@request_for_teaching_assistant) %>
+  <%= link_to 'Remover', @request_for_teaching_assistant, method: :delete, data: { confirm: 'Tem certeza?' } %>
+<% end %>
+
 <%= link_to 'Voltar', request_for_teaching_assistants_path %>
 <span style="height: 2em; display: block;"></span>
 <hr>
 
-<% if secretary_signed_in? or (professor_signed_in? and current_professor.super_professor?) %>
+<% if @chosen_roles.any? %>
+  <table>
+    <thead>
+      <tr>
+        <th colspan="2">Monitores eleitos para essa solicitação</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @chosen_roles.each do |role| %>
+        <tr>
+          <td class="name"><%= role.student.name %></td>
+          <td><%= link_to 'Ver dados', role.student %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <hr>
+<% end %>
+
+<% if @candidatures_for_this_request.any? and (secretary_signed_in? or (professor_signed_in? and current_professor.super_professor?)) %>
   <table>
     <thead>
       <tr>
@@ -72,4 +94,5 @@
       <% end %>
     </tbody>
   </table>
+  <hr>
 <% end %>
