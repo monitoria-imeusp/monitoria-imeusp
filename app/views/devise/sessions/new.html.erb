@@ -1,4 +1,14 @@
-<h1>Acesso</h1>
+<% if resource_name == :professor %>
+  <h1>Acesso como professor</h1>
+<% elsif resource_name == :student %>
+  <h1>Acesso como aluno</h1>
+<% elsif resource_name == :admin %>
+  <h1>Acesso como administrador</h1>
+<% elsif resource_name == :secretary %>
+  <h1>Acesso como funcionário</h1>
+<% else %>
+  <h1>Acesso</h1>
+<% end %>
 <hr>
 
 <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
