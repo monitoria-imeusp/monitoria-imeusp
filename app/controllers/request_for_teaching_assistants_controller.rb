@@ -15,9 +15,10 @@ class RequestForTeachingAssistantsController < ApplicationController
     @request_for_teaching_assistants = (RequestForTeachingAssistant.where(semester: @semester).all.map do
       |request| request
     end).keep_if do |request|
-      secretary_signed_in? or professor_can_see?(current_professor, request)
+      admin_signed_in? or secretary_signed_in? or professor_can_see?(current_professor, request)
     end
-    @semesters = Semester.where(active: true).all
+    @semesters = Semester.where(active: true)
+    @open_semesters = @semesters.where(open: true)
   end
 
   # GET /request_for_teaching_assistants/1
