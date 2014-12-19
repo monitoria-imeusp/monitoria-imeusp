@@ -70,6 +70,10 @@ Rails.application.routes.draw do
   get 'assistant_evaluations/for_student/:student_id/' => 'assistant_evaluations#index_for_student', as: :assistant_evaluations_for_student
   get 'assistant_evaluations/:assistant_role_id/new' => 'assistant_evaluations#new', as: :new_assistant_evaluation
 
+  ## External routes
+  get '/_instructions' => redirect('http://www.ime.usp.br/grad/monitoria'), as: :official_instructions
+  ##################
+
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
