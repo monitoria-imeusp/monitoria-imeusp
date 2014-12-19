@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+
+    <h1>Cancelamento da solicitação de monitor</h1>
+
+    <p>
+      <strong>Data:</strong> <%= Time.now %>
+    </p>
+
+    <p>
+      O(a) professor(a) abaixo desistiu da solicitação por monitor apresentada em seguida.
+    </p>
+
+    <%= render 'professor_details' %>
+    <%= render 'request_for_teaching_assistant_details' %>
+
+  </body>
+</html>

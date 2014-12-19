@@ -29,6 +29,11 @@ class BackupMailer < ActionMailer::Base
     mail(to: log_mail, subject: log_subject_edit_request_for_teaching_assistant)
   end
 
+  def delete_request_for_teaching_assistant request
+    @request = request
+    mail(to: log_mail, subject: log_subject_delete_request_for_teaching_assistant)
+  end
+
   private
 
   def log_mail
@@ -53,6 +58,10 @@ class BackupMailer < ActionMailer::Base
 
   def log_subject_edit_request_for_teaching_assistant
     "Mudança na solicitação de monitor pelo(a) professor(a) #{@request.professor.name} (#{Time.now})"
+  end
+
+  def log_subject_delete_request_for_teaching_assistant
+    "Cancelamento da solicitação de monitor pelo(a) professor(a) #{@request.professor.name} (#{Time.now})"
   end
 
   def set_candidature_parameters(candidature)

@@ -95,6 +95,7 @@ class RequestForTeachingAssistantsController < ApplicationController
     if (not @request_for_teaching_assistant)
       redirect_to request_for_teaching_assistants_path
     else
+      BackupMailer.delete_request_for_teaching_assistant(@request_for_teaching_assistant).deliver
       @request_for_teaching_assistant.destroy
       respond_to do |format|
         format.html { redirect_to request_for_teaching_assistants_url }
