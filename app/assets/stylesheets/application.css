@@ -124,7 +124,7 @@ td > a:visited {
   color: #eee;
   font-weight: bold;
   text-align: center;
-  transition: background-color 0.15s;
+  transition: background-color 0.2s;
 }
 
 section > a:hover,
@@ -141,7 +141,6 @@ td > a:active,
 td > a:hover {
   text-decoration: none;
   background-color: #b55;
-  transition: background-color 0.15s;
   color: #eee;
 }
 
