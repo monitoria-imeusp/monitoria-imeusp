@@ -27,22 +27,22 @@
 <table>
   <thead>
     <tr>
+    <th><%= t('activerecord.attributes.professor.professor') %> </th>
+    <th><%= t('activerecord.attributes.request_for_teaching_assistant.subject') %> </th>
+    <th><%= t('activerecord.attributes.request_for_teaching_assistant.requested_number') %> </th>
+    <th><%= t('activerecord.attributes.request_for_teaching_assistant.semester_id') %> </th>
     <th colspan="1"></th>
-	  <th><%= t('activerecord.attributes.professor.professor') %> </th>
-	  <th><%= t('activerecord.attributes.request_for_teaching_assistant.subject') %> </th>
-	  <th><%= t('activerecord.attributes.request_for_teaching_assistant.requested_number') %> </th>
-	  <th><%= t('activerecord.attributes.request_for_teaching_assistant.semester_id') %> </th>
     </tr>
   </thead>
 
   <tbody>
     <% @request_for_teaching_assistants.each do |request_for_teaching_assistant| %>
       <tr>
-        <td><%= link_to 'Ver', request_for_teaching_assistant %></td>
         <td><%= Professor.find(request_for_teaching_assistant.professor_id).name %></td>
         <td><%= request_for_teaching_assistant.course.course_code + " - " + request_for_teaching_assistant.course.name %></td>
         <td><%= request_for_teaching_assistant.requested_number %></td>
         <td><%= request_for_teaching_assistant.semester.period_as_s %></td>
+        <td><%= link_to 'Ver', request_for_teaching_assistant %></td>
       </tr>
     <% end %>
   </tbody>
