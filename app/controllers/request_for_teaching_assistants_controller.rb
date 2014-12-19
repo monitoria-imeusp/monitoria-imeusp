@@ -15,9 +15,10 @@ class RequestForTeachingAssistantsController < ApplicationController
     @request_for_teaching_assistants = (RequestForTeachingAssistant.where(semester: @semester).all.map do
       |request| request
     end).keep_if do |request|
-      secretary_signed_in? or professor_can_see?(current_professor, request)
+      admin_signed_in? or secretary_signed_in? or professor_can_see?(current_professor, request)
     end
-    @semesters = Semester.where(active: true).all
+    @semesters = Semester.where(active: true)
+    @open_semesters = @semesters.where(open: true)
   end
 
   # GET /request_for_teaching_assistants/1
@@ -60,6 +61,7 @@ class RequestForTeachingAssistantsController < ApplicationController
 
     respond_to do |format|
       if @request_for_teaching_assistant.save
+        BackupMailer.new_request_for_teaching_assistant(@request_for_teaching_assistant).deliver
         format.html { redirect_to @request_for_teaching_assistant, notice: 'Pedido de Monitoria feito com sucesso.' }
         format.json { render action: 'show', status: :created, location: @request_for_teaching_assistant }
       else
@@ -76,6 +78,7 @@ class RequestForTeachingAssistantsController < ApplicationController
     authorization_professor
     respond_to do |format|
       if @request_for_teaching_assistant.update(request_for_teaching_assistant_params)
+        BackupMailer.edit_request_for_teaching_assistant(@request_for_teaching_assistant).deliver
         format.html { redirect_to @request_for_teaching_assistant, notice: 'Pedido de Monitoria atualizado com sucesso.' }
         format.json { render action: 'show', status: :ok, location: @request_for_teaching_assistant }
       else
@@ -93,6 +96,7 @@ class RequestForTeachingAssistantsController < ApplicationController
     if (not @request_for_teaching_assistant)
       redirect_to request_for_teaching_assistants_path
     else
+      BackupMailer.delete_request_for_teaching_assistant(@request_for_teaching_assistant).deliver
       @request_for_teaching_assistant.destroy
       respond_to do |format|
         format.html { redirect_to request_for_teaching_assistants_url }

@@ -1,0 +1,42 @@
+
+<h2>Dados da solicitação</h2>
+
+<p>
+  <strong><%= t('activerecord.attributes.request_for_teaching_assistant.semester_id') + ':' %></strong>
+  <%= @request.semester.period_as_s %>
+</p>
+
+<p>
+  <strong><%= t('activerecord.attributes.request_for_teaching_assistant.course_id') + ':' %></strong>
+  <%= @request.course.full_name %>
+</p>
+
+<p>
+  <strong><%= t('activerecord.attributes.request_for_teaching_assistant.requested_number') + ':' %></strong>
+  <%= @request.requested_number %>
+</p>
+
+<p>
+  <strong><%= t('activerecord.attributes.request_for_teaching_assistant.priority') + ':' %></strong>
+  <%= priorityOptions[@request.priority][0] %>
+</p>
+
+<p>
+  <strong><%= t('activerecord.attributes.request_for_teaching_assistant.student_assistance') + ':' %></strong>
+  <%= show_yes_or_no(@request.student_assistance) %>
+</p>
+
+<p>
+  <strong><%= t('activerecord.attributes.request_for_teaching_assistant.work_correction') + ':' %></strong>
+  <%= show_yes_or_no(@request.work_correction) %>
+</p>
+
+<p>
+  <strong><%= t('activerecord.attributes.request_for_teaching_assistant.test_oversight') + ':' %></strong>
+  <%= show_yes_or_no(@request.test_oversight) %>
+</p>
+
+<p>
+  <strong><%= t('activerecord.attributes.request_for_teaching_assistant.observation') + ':' %></strong>
+  <%= (@request.observation) %>
+</p>
