@@ -13,31 +13,6 @@ class AssistantRolesController < ApplicationController
     separate_by_semester AssistantRole.where(request_for_teaching_assistant: requests)
   end
 
-  # POST /assistant_roles/notify/1
-  def notify_for_semester
-    @semester = Semester.find(params[:semester_id])
-    requests = RequestForTeachingAssistant.where(semester: @semester)
-    AssistantRole.where(request_for_teaching_assistant: requests).each do |assistant|
-      NotificationMailer.acceptance_notification(assistant).deliver
-    end
-    respond_to do |format|
-      format.html { redirect_to assistant_roles_path, notice: "Monitores do #{@semester.as_s} notificados com sucesso." }
-      format.json { render action: 'index' }
-    end
-  end
-
-  def request_evaluations_for_semester
-    @semester = Semester.find(params[:semester_id])
-    requests = RequestForTeachingAssistant.where(semester: @semester)
-    AssistantRole.where(request_for_teaching_assistant: requests).each do |assistant|
-      NotificationMailer.evaluation_request_notification(assistant).deliver
-    end
-    respond_to do |format|
-      format.html { redirect_to assistant_roles_path, notice: "Solicitações enviadas aos professores do #{@semester.as_s} com sucesso." }
-      format.json { render action: 'index' }
-    end
-  end
-
   def create
     @assistant_role = AssistantRole.new assistant_role_params
     if @assistant_role.save
@@ -66,6 +41,32 @@ class AssistantRolesController < ApplicationController
         format.html { redirect_to assistant_roles_path }
         format.json { head :no_content }
       end
+    end
+  end
+
+  # POST /assistant_roles/notify_for_semester/1
+  def notify_for_semester
+    @semester = Semester.find(params[:semester_id])
+    requests = RequestForTeachingAssistant.where(semester: @semester)
+    AssistantRole.where(request_for_teaching_assistant: requests).each do |assistant|
+      NotificationMailer.acceptance_notification(assistant).deliver
+    end
+    respond_to do |format|
+      format.html { redirect_to assistant_roles_path, notice: "Monitores do #{@semester.as_s} notificados com sucesso." }
+      format.json { render action: 'index' }
+    end
+  end
+
+  # POST /assistant_roles/request_for_teaching_assistant_id/1
+  def request_evaluations_for_semester
+    @semester = Semester.find(params[:semester_id])
+    requests = RequestForTeachingAssistant.where(semester: @semester)
+    AssistantRole.where(request_for_teaching_assistant: requests).each do |assistant|
+      NotificationMailer.evaluation_request_notification(assistant).deliver
+    end
+    respond_to do |format|
+      format.html { redirect_to assistant_roles_path, notice: "Solicitações enviadas aos professores do #{@semester.as_s} com sucesso." }
+      format.json { render action: 'index' }
     end
   end
 
