@@ -12,7 +12,7 @@ Feature: Assistant roles remotion
         And there is a request for teaching assistant by professor "Dude" for the course "MAC0110"
         And there is an assistant role for student "Bob" with professor "Dude" at course "MAC0110"
 
-    Scenario: Super professor sees all assistant roles
+    Scenario: Super professor destroys an assistant role
         Given I'm logged in as a super professor
         And I visit the assistant roles page
         And I click the "Remover" link
@@ -20,7 +20,7 @@ Feature: Assistant roles remotion
         And I should not see "Dude"
         And I should not see "MAC0110"
 
-    Scenario: Secretary sees all assistant roles
+    Scenario: Secretary destroys an assistant role
         Given I'm logged in as a secretary
         And I visit the assistant roles page
         And I click the "Remover" link

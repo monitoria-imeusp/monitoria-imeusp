@@ -12,7 +12,7 @@ Feature: Assistant roles creation
         And there is a request for teaching assistant by professor "Dude" for the course "MAC0110"
         And there is a candidature by student "Bob" for course "MAC0110"
 
-    Scenario: Super professor sees all assistant roles
+    Scenario: Super professor creates an assistant role
         Given I'm logged in as a super professor
         And I visit a request page
         And I click the "Eleger" link
@@ -21,7 +21,7 @@ Feature: Assistant roles creation
         And I should see "Dude"
         And I should see "MAC0110"
 
-    Scenario: Secretary sees all assistant roles
+    Scenario: Secretary sees creates an assistant role
         Given I'm logged in as a secretary
         And I visit a request page
         And I click the "Eleger" link
