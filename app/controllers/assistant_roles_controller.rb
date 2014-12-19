@@ -18,7 +18,7 @@ class AssistantRolesController < ApplicationController
     @semester = Semester.find(params[:semester_id])
     requests = RequestForTeachingAssistant.where(semester: @semester)
     AssistantRole.where(request_for_teaching_assistant: requests).each do |assistant|
-      AssistantMailer.acceptance_notification(assistant).deliver
+      NotificationMailer.acceptance_notification(assistant).deliver
     end
     respond_to do |format|
       format.html { redirect_to assistant_roles_path, notice: "Monitores do #{@semester.as_s} notificados com sucesso." }
