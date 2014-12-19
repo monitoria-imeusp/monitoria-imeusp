@@ -8,8 +8,8 @@ class NotificationMailer < ActionMailer::Base
     mail(to: assistant.student.email, subject: "Inscrição monitoria")
   end
 
-  def evaluation_request assistant
-    @assistant
+  def evaluation_request_notification assistant
+    @assistant = assistant
     mail(to: assistant.professor.email, subject: "Avaliação de monitor(a)")
   end
 

@@ -26,6 +26,18 @@ class AssistantRolesController < ApplicationController
     end
   end
 
+  def request_evaluations_for_semester
+    @semester = Semester.find(params[:semester_id])
+    requests = RequestForTeachingAssistant.where(semester: @semester)
+    AssistantRole.where(request_for_teaching_assistant: requests).each do |assistant|
+      NotificationMailer.evaluation_request_notification(assistant).deliver
+    end
+    respond_to do |format|
+      format.html { redirect_to assistant_roles_path, notice: "Solicitações enviadas aos professores do #{@semester.as_s} com sucesso." }
+      format.json { render action: 'index' }
+    end
+  end
+
   def create
     @assistant_role = AssistantRole.new assistant_role_params
     if @assistant_role.save
