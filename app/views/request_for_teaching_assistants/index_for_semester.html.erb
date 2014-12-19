@@ -3,7 +3,7 @@
 
 <% if professor_signed_in? or secretary_signed_in? %>
   <h2>
-    <% if @semesters.any? %>
+    <% unless @semesters.any? %>
       <i>Nenhum semestre aberto à requisição de monitores no momento</i>
     <% else %>
       Pedir monitor para:
