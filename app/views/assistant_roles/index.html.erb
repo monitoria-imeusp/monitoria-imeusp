@@ -5,6 +5,9 @@
   <h2>
     <%= entry[:semester].as_s %>
     <% if secretary_signed_in? %>
+      <% unless Rails.env.production? %>
+        <%= link_to "Pedir avaliações dos professores", request_assistant_evaluations_for_semester_path(entry[:semester]), method: :post %>
+      <% end %>
       <%= link_to "Notificar monitores", notify_assistant_roles_for_semester_path(entry[:semester]), method: :post %>
     <% end %>
   </h2>
@@ -28,7 +31,7 @@
           <td><%= role.request_for_teaching_assistant.course.course_code %></td>
           <td><%= role.request_for_teaching_assistant.professor.name %></td>
           <% if secretary_signed_in? or (professor_signed_in? and current_professor.super_professor?) %>
-            <td><%= link_to "Remover", destroy_assistant_role_path(role.id), method: :delete %></td>
+            <td><%= link_to "Remover", destroy_assistant_role_path(role.id), method: :delete, data: { confirm: 'Tem certeza?' } %></td>
           <% end %>
         </tr>
       <% end %>
