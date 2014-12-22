@@ -32,6 +32,7 @@ class AssistantRolesController < ApplicationController
   def destroy
     if AssistantRole.exists? params[:id]
       @assistant_role = AssistantRole.find params[:id]
+      BackupMailer.delete_assistant_role(@assistant_role, current_creator).deliver
       @assistant_role.destroy
       respond_to do |format|
         format.html { redirect_to assistant_roles_path }
