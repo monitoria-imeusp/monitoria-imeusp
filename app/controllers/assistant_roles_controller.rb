@@ -17,6 +17,7 @@ class AssistantRolesController < ApplicationController
     @assistant_role = AssistantRole.new assistant_role_params
     if @assistant_role.save
       respond_to do |format|
+        BackupMailer.new_assistant_role(@assistant_role, current_creator).deliver
         format.html { redirect_to @assistant_role.request_for_teaching_assistant, notice: 'Monitor eleito com sucesso.' }
         format.json { render action: 'show', status: :created, location: @assistant_role.request }
       end
@@ -87,6 +88,14 @@ class AssistantRolesController < ApplicationController
           role.request_for_teaching_assistant.semester == semester
         end
       }
+    end
+  end
+
+  def current_creator
+    if secretary_signed_in?
+      current_secretary
+    elsif professor_signed_in?
+      current_professor
     end
   end
 end

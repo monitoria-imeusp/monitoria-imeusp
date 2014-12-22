@@ -34,6 +34,13 @@ class BackupMailer < ActionMailer::Base
     mail(to: log_mail, subject: log_subject_delete_request_for_teaching_assistant)
   end
 
+  def new_assistant_role role, creator
+    @student = role.student
+    @request = role.request_for_teaching_assistant
+    @creator = creator
+    mail(to: log_mail, subject: log_subject_new_assistant_role)
+  end
+
   private
 
   def log_mail
@@ -62,6 +69,10 @@ class BackupMailer < ActionMailer::Base
 
   def log_subject_delete_request_for_teaching_assistant
     "Cancelamento da solicitação de monitor pelo(a) professor(a) #{@request.professor.name} (#{Time.now})"
+  end
+
+  def log_subject_new_assistant_role
+    "Monitor(a) #{@student.name} eleito(a) para o(a) professor(a) #{@request.professor.name} (#{Time.now})"
   end
 
   def set_candidature_parameters(candidature)
