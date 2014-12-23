@@ -1,0 +1,21 @@
+<h2>Dados do professor</h2>
+
+<p>
+  <strong><%= t('activerecord.attributes.professor.name') + ':' %></strong>
+  <%= @request.professor.name %>
+</p>
+
+<p>
+  <strong><%= t('activerecord.attributes.professor.nusp') + ':' %></strong>
+  <%= @request.professor.nusp %>
+</p>
+
+<p>
+  <strong><%= t('activerecord.attributes.professor.department_id') + ':' %></strong>
+  <%= @request.professor.department.code %>
+</p>
+
+<p>
+  <strong><%= t('activerecord.attributes.professor.email') + ':' %></strong>
+  <%= @request.professor.email %>
+</p>

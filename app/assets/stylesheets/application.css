@@ -38,7 +38,7 @@ a:hover, a:active, a:focus {
 }
 
 table {
-  width: 80%;
+  width: 90%;
   text-align: center;
   border: 2px solid #666;
 }
@@ -55,7 +55,7 @@ th.title, td.title {
 
 th.name, td.name {
   padding: 4px 8px;
-  text-align: left;
+  text-align: center;
   width: 75%;
 }
 
@@ -75,30 +75,40 @@ tr:hover {
 /*********************************************************/
 
 div.shell {
-  margin: auto;
   width: 1024px;
   min-height: 600px;
-  padding: 0.1em;
+  padding: 0em;
+  border: 0em;
+  margin: 0em;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+footer {
+  width: 100%;
+  margin-top: 30%;
+  height: 2em;
+  border-top: 2pt solid #bbb;
 }
 
 /*********************************************************/
 
-div.content {
+section {
   width: 80%;
   padding: 1em 2em;
   min-height: 400px;
 }
 
-.content > p, form {
+section > p, form {
   margin-left: 4em;
 }
 
-.content > a,
-.content > a:visited,
-.content > h1 > a,
-.content > h1 > a:visited,
-.content > h2 > a,
-.content > h2 > a:visited,
+section > a,
+section > a:visited,
+section > h1 > a,
+section > h1 > a:visited,
+section > h2 > a,
+section > h2 > a:visited,
 td > a,
 td > a:visited {
   display: block;
@@ -114,24 +124,23 @@ td > a:visited {
   color: #eee;
   font-weight: bold;
   text-align: center;
-  transition: background-color 0.15s;
+  transition: background-color 0.2s;
 }
 
-.content > a:hover,
-.content > a:active,
-.content > a:focus,
-.content > h1 > a:hover,
-.content > h1 > a:active,
-.content > h1 > a:focus,
-.content > h2 > a:hover,
-.content > h2 > a:active,
-.content > h2 > a:focus,
+section > a:hover,
+section > a:active,
+section > a:focus,
+section > h1 > a:hover,
+section > h1 > a:active,
+section > h1 > a:focus,
+section > h2 > a:hover,
+section > h2 > a:active,
+section > h2 > a:focus,
 td > a:focus,
 td > a:active,
 td > a:hover {
   text-decoration: none;
   background-color: #b55;
-  transition: background-color 0.15s;
   color: #eee;
 }
 
@@ -145,21 +154,21 @@ select {
 
 /*********************************************************/
 
-div.pagetop {
+header {
   padding: .1em 1em;
   background-color: #eee;
   height: 36pt;
   border-bottom: 1px solid #bbb;
 }
 
-.pagetop > div {
+header > div {
   margin-left: auto;
   margin-right: auto;
   width: 1024px;
 }
 
-.pagetop > div > a:visited,
-.pagetop > div > a:link {
+header > div > a:visited,
+header > div > a:link {
   display: block;
   float: right;
   text-decoration: none;
@@ -191,47 +200,47 @@ div.toptitle > a:link
   font-size: 24pt;
 }
 
-.pagetop > div > a:hover,
-.pagetop > div > a:active,
+header > div > a:hover,
+header > div > a:active,
 div.toptitle > a:hover,
 div.toptitle > a:active {
   color: #b55;
 }
 
-.pagetop > ul {
+header > ul {
   list-style-type: none;
   overflow: hidden;
 }
 
-.pagetop > ul > li {
+header > ul > li {
   float: left;
 }
 
 /*********************************************************/
 
-div.sidebar {
+nav {
   float: right;
-  margin: 1em 0em;
+  margin: 0em 0em;
   width: 20%;
   min-height: 600px;
   height: 100%;
-  border-left: 2px solid #888;
+  border-left: 2pt solid #ccc;
   padding-left: 0pt;
 }
 
-.sidebar > p {
+nav > p {
   margin-left: 1em;
   margin-right: 1em;
   padding-top: 2em;
   text-align: center;
 }
 
-.sidebar > h2 {
+nav > h2 {
   margin-left: 1em;
   margin-right: 1em;
 }
 
-.sidebar > ul {
+nav > ul {
   list-style-type: none;
   padding: 0pt;
   margin: 0pt;
@@ -239,13 +248,15 @@ div.sidebar {
   line-height: 1.4;
 }
 
-.sidebar > ul > li {
+nav > ul > li {
   padding: 0pt;
   margin: 0pt;
   border: 0pt;
 }
 
-.sidebar > ul > li > a:link, .sidebar > ul > li > a:visited {
+nav > ul > li > a,
+nav > ul > li > a:link,
+nav > ul > li > a:visited {
   text-decoration: none;
   font-weight: bold;
   padding: 0pt;
@@ -254,10 +265,9 @@ div.sidebar {
   color: #368;
 }
 
-.sidebar > ul > li > a:hover, .sidebar > ul > li > a:active {
+nav > ul > li > a:hover,
+nav > ul > li > a:active {
   color: #b55;
-  border-left: 4pt solid #b55;
-  padding-left: 4pt;
   background-color: #fff;
 }
 

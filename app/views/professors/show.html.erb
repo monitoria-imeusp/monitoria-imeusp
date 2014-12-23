@@ -29,14 +29,12 @@
     <%= professorRankOptions()[@professor.professor_rank][0] %>
   </p>
   <p>
-    <%= link_to 'Remover', professor_path(@professor), method: :delete, data: { confirm: 'Tem certeza?' } %>
+    <strong><%= t('activerecord.attributes.professor.confirmed_at') + ':' %></strong>
+    <%= @professor.confirmed_at ? @professor.confirmed_at : t('activerecord.attributes.professor.unconfirmed') %>
   </p>
+  <%= link_to 'Remover', professor_path(@professor), method: :delete, data: { confirm: 'Tem certeza?' } %>
 <% end %>
 <% if professor_signed_in? and current_professor == @professor %>
-  <p>
-      <%= link_to 'Editar', edit_professor_path(@professor) %>
-  </p>
-  <p>
-      <%= link_to 'Mudar senha', change_professor_password_path(@professor) %>
-  </p>
+  <%= link_to 'Editar', edit_professor_path(@professor) %>
+  <%= link_to 'Mudar senha', change_professor_password_path(@professor) %>
 <% end %>

@@ -20,7 +20,7 @@
   </head>
 
   <body>
-    <div class="pagetop">
+    <header>
       <div>
         <div class="toptitle"><%= link_to "Sistema de Monitoria", "/" %></div>
         <!-- Painel de quem não é usuário -->
@@ -32,9 +32,9 @@
           <%= link_to "Acessar", new_student_session_path %>
         <% end %>
       </div>
-    </div>
+    </header>
     <div class="shell">
-      <div class="sidebar">
+      <nav>
 
         <% if signed_in? %>
           <p>
@@ -140,11 +140,11 @@
           <p class="alert"><%= alert %></p>
         <% end %>
 
-      </div>
-      <div class="content">
+      </nav>
+      <section>
         <%= yield %>
-      </div>
-    <div>
+      </section>
+    </div>
 
   </body>
 </html>

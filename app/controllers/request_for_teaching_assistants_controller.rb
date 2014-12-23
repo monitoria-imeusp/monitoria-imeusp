@@ -15,9 +15,10 @@ class RequestForTeachingAssistantsController < ApplicationController
     @request_for_teaching_assistants = (RequestForTeachingAssistant.where(semester: @semester).all.map do
       |request| request
     end).keep_if do |request|
-      secretary_signed_in? or professor_can_see?(current_professor, request)
+      admin_signed_in? or secretary_signed_in? or professor_can_see?(current_professor, request)
     end
-    @semesters = Semester.where(active: true).all
+    @semesters = Semester.where(active: true)
+    @open_semesters = @semesters.where(open: true)
   end
 
   # GET /request_for_teaching_assistants/1
@@ -25,11 +26,19 @@ class RequestForTeachingAssistantsController < ApplicationController
   def show
     authorization_sprofessor
     authorization_professor
-    course_id = RequestForTeachingAssistant.find(params[:id]).course.id
+    @chosen_roles = AssistantRole.where(request_for_teaching_assistant_id: @request_for_teaching_assistant.id)
+    # Valid candidatures for this request
+    course_id = @request_for_teaching_assistant.course.id
     @candidatures_for_this_request = Candidature.where "course1_id = ? or course2_id = ? or course3_id = ? or course4_id = ?", course_id, course_id, course_id, course_id
     department_id = Course.find(course_id).department_id
     @courses = Course.where "department_id = ? and id != ?", department_id, course_id
     @candidatures_for_this_department = Candidature.where(course1_id: @courses)
+    # Remove assitants that were already chosen for this semester
+    current_requests = RequestForTeachingAssistant.where(semester_id: @request_for_teaching_assistant.semester.id)
+    current_roles = AssistantRole.where(request_for_teaching_assistant_id: current_requests)
+    @candidatures_for_this_request = (@candidatures_for_this_request.map do |candidature| candidature end).keep_if do |candidature|
+      not current_roles.where(student_id: candidature.student_id).any?
+    end
   end
 
   # GET /request_for_teaching_assistants/new
@@ -57,6 +66,7 @@ class RequestForTeachingAssistantsController < ApplicationController
 
     respond_to do |format|
       if @request_for_teaching_assistant.save
+        BackupMailer.new_request_for_teaching_assistant(@request_for_teaching_assistant).deliver
         format.html { redirect_to @request_for_teaching_assistant, notice: 'Pedido de Monitoria feito com sucesso.' }
         format.json { render action: 'show', status: :created, location: @request_for_teaching_assistant }
       else
@@ -73,6 +83,7 @@ class RequestForTeachingAssistantsController < ApplicationController
     authorization_professor
     respond_to do |format|
       if @request_for_teaching_assistant.update(request_for_teaching_assistant_params)
+        BackupMailer.edit_request_for_teaching_assistant(@request_for_teaching_assistant).deliver
         format.html { redirect_to @request_for_teaching_assistant, notice: 'Pedido de Monitoria atualizado com sucesso.' }
         format.json { render action: 'show', status: :ok, location: @request_for_teaching_assistant }
       else
@@ -90,6 +101,7 @@ class RequestForTeachingAssistantsController < ApplicationController
     if (not @request_for_teaching_assistant)
       redirect_to request_for_teaching_assistants_path
     else
+      BackupMailer.delete_request_for_teaching_assistant(@request_for_teaching_assistant).deliver
       @request_for_teaching_assistant.destroy
       respond_to do |format|
         format.html { redirect_to request_for_teaching_assistants_url }

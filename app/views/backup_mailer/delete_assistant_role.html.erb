@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+
+    <h1>Remoção de Monitor feita por <%= @creator.name %></h1>
+
+    <p>
+      <strong>Data:</strong> <%= Time.now %>
+    </p>
+
+    <%= render 'student_details' %>
+    <%= render 'request_for_teaching_assistant_details' %>
+    <%= render 'professor_details' %>
+
+  </body>
+</html>

@@ -2,14 +2,25 @@
 <hr>
 
 <% @assistant_roles_by_semester.each do |entry| %>
-  <h2><%= entry[:semester].as_s %></h2>
+  <h2>
+    <%= entry[:semester].as_s %>
+    <% if secretary_signed_in? %>
+      <% unless Rails.env.production? %>
+        <%= link_to "Pedir avaliações dos professores", request_assistant_evaluations_for_semester_path(entry[:semester]), method: :post %>
+      <% end %>
+      <%= link_to "Notificar monitores", notify_assistant_roles_for_semester_path(entry[:semester]), method: :post %>
+    <% end %>
+  </h2>
+  <hr>
   <table>
     <thead>
       <tr>
         <th><%= t('activerecord.attributes.student.name') %> </th>
         <th><%= t('activerecord.attributes.request_for_teaching_assistant.course_id') %> </th>
         <th><%= t('activerecord.attributes.request_for_teaching_assistant.professor_id') %> </th>
-        <th></th>
+        <% if secretary_signed_in? or (professor_signed_in? and current_professor.super_professor?) %>
+          <th></th>
+        <% end %>
       </tr>
     </thead>
 
@@ -19,10 +30,13 @@
           <td><%= role.student.name %></td>
           <td><%= role.request_for_teaching_assistant.course.course_code %></td>
           <td><%= role.request_for_teaching_assistant.professor.name %></td>
-          <td><%= link_to "Remover", destroy_assistant_role_path(role.id), method: :delete %></td>
+          <% if secretary_signed_in? or (professor_signed_in? and current_professor.super_professor?) %>
+            <td><%= link_to "Remover", destroy_assistant_role_path(role.id), method: :delete, data: { confirm: 'Tem certeza?' } %></td>
+          <% end %>
         </tr>
       <% end %>
     </tbody>
   </table>
+  <hr>
 <% end %>
 

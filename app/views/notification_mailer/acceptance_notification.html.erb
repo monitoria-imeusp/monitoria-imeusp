@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <p>
+      Prezado(a) <%= @assistant.student.name %>,
+    </p>
+
+    <p>
+      Você foi selecionado(a) para realizar atividades como monitor no IME/USP, no <%= @assistant.semester.as_s %>.
+    </p>
+    <p>
+      Por favor, acesse a página <%= link_to "www.ime.usp.br/grad/monitoria", official_instructions_url%> e verifique o nome do professor e disciplina para os quais você prestará monitoria.
+    </p>
+    <p>
+      Após, pedimos a gentileza de:
+    </p>
+    <ol>
+      <li>
+        Procurar o professor responsável pela disciplina que você irá auxiliar.
+      </li>
+      <li>
+        Comparecer à Seção de Monitoria (sala 12, bloco B – horário de atendimento de segunda a sexta, das 10h às 13h e das 18h às 20h), para preencher a Ficha de Acompanhamento do Monitor e retirar o calendário para acompanhar as datas em que você deve retirar a ficha para assinatura do professor.
+      </li>
+      <li>
+        Abrir Conta Corrente no Banco do Brasil (não pode ser poupança ou conjunta).
+      </li>
+      <li>
+        Depois da abertura da Conta Corrente, solicitar na Seção de Graduação da sua unidade o cadastramento do número da agência e da conta no sistema Júpiter (caso seja aluno da Pós-Graduação, solicitar na Seção de Pós-Graduação o cadastramento destes dados no sistema Janus).
+      </li>
+    </ol>
+    <p>
+      Obs: O cadastramento dos dados de agência e conta é necessário para o pagamento dos monitores.
+    </p>
+    <p>
+      Estamos a disposição em caso de dúvidas.
+    </p>
+    <p>
+      Comissão de Monitoria IME/USP<br>
+      E-mail: monitoria@ime.usp.br<br>
+      Telefone: 11 3091-6107<br>
+    </p>
+  </body>
+</html>
