@@ -100,6 +100,19 @@ if Rails.env.development?
     Course.create(course)
   end
 
+  if Rails.env.development?
+  [
+    {
+      professor_id: 1,
+      requested_number: 1,
+      priority: 0,
+      course_id: 1,
+      semester_id: 1
+    }
+  ].each do |ta_request|
+    RequestForTeachingAssistant.create(ta_request)
+  end
+
   [
     {
       name: "Will",
