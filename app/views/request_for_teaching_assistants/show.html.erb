@@ -71,5 +71,25 @@
         </tr>
       <% end %>
     </tbody>
+
+    <thead>
+      <tr>
+        <th>Alunos que se candidataram para disciplinas deste mesmo departamento</th>
+        <th colspan="2"></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @candidatures_for_this_department.each do |candidature| %>
+        <tr>
+          <td><%= candidature.student.name %></td>
+          <td><%= link_to 'Ver candidatura', candidature %></td>
+          <td><%= link_to 'Eleger', create_assistant_role_path(@request_for_teaching_assistant, candidature.student), method: :post %></td>
+        </tr>
+      <% end %>
+    </tbody>
+
   </table>
+
+
 <% end %>
