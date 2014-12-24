@@ -146,7 +146,8 @@ if Rails.env.development?
   Semester.create(
     year: "2014",
     parity: "0",
-    open: "true",
+    open: "false",
+    active: "true",
     created_at: Time.now,
     updated_at: Time.now
   )
