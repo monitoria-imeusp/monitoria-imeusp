@@ -168,6 +168,13 @@ if Rails.env.development?
       priority: 0,
       course_id: Course.first.id,
       semester_id: Semester.first.id
+    },
+    {
+      professor_id: Professor.first.id,
+      requested_number: 1,
+      priority: 0,
+      course_id: "5",
+      semester_id: Semester.first.id
     }
   ].each do |ta_request|
     RequestForTeachingAssistant.create(ta_request)
