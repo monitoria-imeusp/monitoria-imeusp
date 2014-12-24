@@ -152,14 +152,26 @@ if Rails.env.development?
     updated_at: Time.now
   )
 
-  Candidature.create(
-    student_id: Student.first.id,
-    course1_id: Course.first.id,
-    daytime_availability: true,
-    nighttime_availability: false,
-    time_period_preference: "0",
-    semester_id: Semester.first.id
-  )
+  [
+    {
+      student_id: Student.first.id,
+      course1_id: Course.first.id,
+      daytime_availability: true,
+      nighttime_availability: false,
+      time_period_preference: "0",
+      semester_id: Semester.first.id
+    },
+    {
+      student_id: "2",
+      course1_id: "5",
+      daytime_availability: true,
+      nighttime_availability: false,
+      time_period_preference: "0",
+      semester_id: Semester.first.id      
+    }
+  ].each do |candidature|
+    Candidature.create(candidature)
+  end
 
   [
     {
