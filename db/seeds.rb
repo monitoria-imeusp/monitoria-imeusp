@@ -100,7 +100,6 @@ if Rails.env.development?
     Course.create(course)
   end
 
-  if Rails.env.development?
   [
     {
       professor_id: 1,
