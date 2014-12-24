@@ -36,11 +36,14 @@ class RequestForTeachingAssistantsController < ApplicationController
     # Remove assitants that were already chosen for this semester
     current_requests = RequestForTeachingAssistant.where(semester_id: @request_for_teaching_assistant.semester.id)
     current_roles = AssistantRole.where(request_for_teaching_assistant_id: current_requests)
+    # Available candidates should be available for this request while there are places to take
+    puts elected_teaching_assistants = AssistantRole.where(request_for_teaching_assistant_id: @request_for_teaching_assistant.id).count
+    puts requested_number = RequestForTeachingAssistant.where(id: @request_for_teaching_assistant.id).take.requested_number
     @candidatures_for_this_department = (@candidatures_for_this_department.map do |candidature| candidature end).keep_if do |candidature|
-      not current_roles.where(student_id: candidature.student_id).any?
+      not (current_roles.where(student_id: candidature.student_id).any? or (elected_teaching_assistants >= requested_number))
     end
     @candidatures_for_this_request = (@candidatures_for_this_request.map do |candidature| candidature end).keep_if do |candidature|
-      not current_roles.where(student_id: candidature.student_id).any?
+      not (current_roles.where(student_id: candidature.student_id).any? or (elected_teaching_assistants >= requested_number))
     end
   end
 
