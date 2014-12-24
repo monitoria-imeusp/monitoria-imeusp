@@ -146,7 +146,8 @@ if Rails.env.development?
   Semester.create(
     year: "2014",
     parity: "0",
-    open: "true",
+    open: "false",
+    active: "true",
     created_at: Time.now,
     updated_at: Time.now
   )
@@ -159,6 +160,25 @@ if Rails.env.development?
     time_period_preference: "0",
     semester_id: Semester.first.id
   )
+
+  [
+    {
+      professor_id: Professor.first.id,
+      requested_number: 1,
+      priority: 0,
+      course_id: Course.first.id,
+      semester_id: Semester.first.id
+    },
+    {
+      professor_id: Professor.first.id,
+      requested_number: 1,
+      priority: 0,
+      course_id: "5",
+      semester_id: Semester.first.id
+    }
+  ].each do |ta_request|
+    RequestForTeachingAssistant.create(ta_request)
+  end
 
   Secretary.create(
     name: "Marcia",

@@ -34,6 +34,20 @@ class BackupMailer < ActionMailer::Base
     mail(to: log_mail, subject: log_subject_delete_request_for_teaching_assistant)
   end
 
+  def new_assistant_role role, creator
+    @student = role.student
+    @request = role.request_for_teaching_assistant
+    @creator = creator
+    mail(to: log_mail, subject: log_subject_new_assistant_role)
+  end
+
+  def delete_assistant_role role, creator
+    @student = role.student
+    @request = role.request_for_teaching_assistant
+    @creator = creator
+    mail(to: log_mail, subject: log_subject_delete_assistant_role)
+  end
+
   private
 
   def log_mail
@@ -62,6 +76,22 @@ class BackupMailer < ActionMailer::Base
 
   def log_subject_delete_request_for_teaching_assistant
     "Cancelamento da solicitação de monitor pelo(a) professor(a) #{@request.professor.name} (#{Time.now})"
+  end
+
+  def log_subject_new_assistant_role
+    if @student.is_female?
+      "Monitora #{@student.name} eleita para professor(a) #{@request.professor.name} (#{Time.now})"
+    else
+      "Monitor #{@student.name} eleito para professor(a) #{@request.professor.name} (#{Time.now})"
+    end
+  end
+
+  def log_subject_delete_assistant_role
+    if @student.is_female?
+      "Remoção da monitora #{@student.name} previamente eleita para professor(a) #{@request.professor.name} (#{Time.now})"
+    else
+      "Remoção do monitor #{@student.name} previamente eleito para professor(a) #{@request.professor.name} (#{Time.now})"
+    end
   end
 
   def set_candidature_parameters(candidature)

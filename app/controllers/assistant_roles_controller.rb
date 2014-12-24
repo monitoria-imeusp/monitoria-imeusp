@@ -13,35 +13,11 @@ class AssistantRolesController < ApplicationController
     separate_by_semester AssistantRole.where(request_for_teaching_assistant: requests)
   end
 
-  # POST /assistant_roles/notify/1
-  def notify_for_semester
-    @semester = Semester.find(params[:semester_id])
-    requests = RequestForTeachingAssistant.where(semester: @semester)
-    AssistantRole.where(request_for_teaching_assistant: requests).each do |assistant|
-      NotificationMailer.acceptance_notification(assistant).deliver
-    end
-    respond_to do |format|
-      format.html { redirect_to assistant_roles_path, notice: "Monitores do #{@semester.as_s} notificados com sucesso." }
-      format.json { render action: 'index' }
-    end
-  end
-
-  def request_evaluations_for_semester
-    @semester = Semester.find(params[:semester_id])
-    requests = RequestForTeachingAssistant.where(semester: @semester)
-    AssistantRole.where(request_for_teaching_assistant: requests).each do |assistant|
-      NotificationMailer.evaluation_request_notification(assistant).deliver
-    end
-    respond_to do |format|
-      format.html { redirect_to assistant_roles_path, notice: "Solicitações enviadas aos professores do #{@semester.as_s} com sucesso." }
-      format.json { render action: 'index' }
-    end
-  end
-
   def create
     @assistant_role = AssistantRole.new assistant_role_params
     if @assistant_role.save
       respond_to do |format|
+        BackupMailer.new_assistant_role(@assistant_role, current_creator).deliver
         format.html { redirect_to @assistant_role.request_for_teaching_assistant, notice: 'Monitor eleito com sucesso.' }
         format.json { render action: 'show', status: :created, location: @assistant_role.request }
       end
@@ -56,6 +32,7 @@ class AssistantRolesController < ApplicationController
   def destroy
     if AssistantRole.exists? params[:id]
       @assistant_role = AssistantRole.find params[:id]
+      BackupMailer.delete_assistant_role(@assistant_role, current_creator).deliver
       @assistant_role.destroy
       respond_to do |format|
         format.html { redirect_to assistant_roles_path }
@@ -66,6 +43,32 @@ class AssistantRolesController < ApplicationController
         format.html { redirect_to assistant_roles_path }
         format.json { head :no_content }
       end
+    end
+  end
+
+  # POST /assistant_roles/notify_for_semester/1
+  def notify_for_semester
+    @semester = Semester.find(params[:semester_id])
+    requests = RequestForTeachingAssistant.where(semester: @semester)
+    AssistantRole.where(request_for_teaching_assistant: requests).each do |assistant|
+      NotificationMailer.acceptance_notification(assistant).deliver
+    end
+    respond_to do |format|
+      format.html { redirect_to assistant_roles_path, notice: "Monitores do #{@semester.as_s} notificados com sucesso." }
+      format.json { render action: 'index' }
+    end
+  end
+
+  # POST /assistant_roles/request_for_teaching_assistant_id/1
+  def request_evaluations_for_semester
+    @semester = Semester.find(params[:semester_id])
+    requests = RequestForTeachingAssistant.where(semester: @semester)
+    AssistantRole.where(request_for_teaching_assistant: requests).each do |assistant|
+      NotificationMailer.evaluation_request_notification(assistant).deliver
+    end
+    respond_to do |format|
+      format.html { redirect_to assistant_roles_path, notice: "Solicitações enviadas aos professores do #{@semester.as_s} com sucesso." }
+      format.json { render action: 'index' }
     end
   end
 
@@ -86,6 +89,14 @@ class AssistantRolesController < ApplicationController
           role.request_for_teaching_assistant.semester == semester
         end
       }
+    end
+  end
+
+  def current_creator
+    if secretary_signed_in?
+      current_secretary
+    elsif professor_signed_in?
+      current_professor
     end
   end
 end
