@@ -10,7 +10,7 @@ module ApplicationHelper
   end
 
   def signed_in?
-    admin_signed_in? or secretary_signed_in? or professor_signed_in? or student_signed_in? or user_signed_in?
+    admin_signed_in? or secretary_signed_in? or professor_signed_in? or user_signed_in?
   end
 
   def current_signed
@@ -20,8 +20,6 @@ module ApplicationHelper
       current_secretary
     elsif professor_signed_in?
       current_professor
-    elsif student_signed_in?
-      current_student
     elsif user_signed_in?
       current_user
     end
@@ -34,8 +32,6 @@ module ApplicationHelper
       destroy_secretary_session_path
     elsif professor_signed_in?
       destroy_professor_session_path
-    elsif student_signed_in?
-      destroy_student_session_path
     elsif user_signed_in?
       destroy_user_session_path
     end

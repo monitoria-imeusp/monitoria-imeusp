@@ -39,7 +39,7 @@
         <% if signed_in? %>
           <p>
             Acessando como
-            <b><%=current_signed.email%></b>
+            <b><%=current_signed.name%></b>
           </p>
         <% else %>
           <p>
@@ -78,8 +78,9 @@
               <%= link_to "Painel de controle", control_panel_admins_path %>
             </li>
           </ul>
+        <% end %>
         <!-- Painel dos professores -->
-        <% elsif professor_signed_in? %>
+        <% if professor_signed_in? %>
           <hr>
           <h2>Professor(a)</h2>
           <ul>
@@ -105,8 +106,9 @@
                 </li>
             </ul>
           <% end %>
+        <% end %>
         <!-- Painel dos funcionários -->
-        <% elsif secretary_signed_in? %>
+        <% if secretary_signed_in? %>
           <hr>
           <h2>Funcionário(a)</h2>
           <ul>
@@ -123,8 +125,9 @@
                <%= link_to "Candidaturas", candidatures_path %>
             </li>
           </ul>
+        <% end %>
         <!-- Painel dos alunos -->
-        <% elsif student_signed_in? %>
+        <% if user_signed_in? and current_user.student? %>
           <hr>
           <h2>Aluno(a)</h2>
           <ul>
