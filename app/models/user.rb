@@ -6,6 +6,6 @@ class User < ActiveRecord::Base
   include ActiveModel::Validations
 
   validates :name , presence: true
-  validates :nusp , presence: true, format: { with: /\A[0-9]{5,9}\z/ }, uniqueness: true
+  validates :nusp , presence: true, inclusion: { in: 10000..100000000 }, uniqueness: true
   validates :email , presence: true
 end

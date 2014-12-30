@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141230193314) do
+ActiveRecord::Schema.define(version: 20141230212125) do
 
   create_table "admins", force: true do |t|
     t.string   "email",                  default: "", null: false
@@ -168,9 +168,6 @@ ActiveRecord::Schema.define(version: 20141230193314) do
   add_index "semesters", ["year", "parity"], name: "index_semesters_on_year_and_parity", unique: true
 
   create_table "students", force: true do |t|
-    t.string   "name"
-    t.string   "password"
-    t.string   "nusp"
     t.integer  "gender"
     t.string   "rg"
     t.string   "cpf"
@@ -182,30 +179,17 @@ ActiveRecord::Schema.define(version: 20141230193314) do
     t.string   "state"
     t.string   "tel"
     t.string   "cel"
-    t.string   "email"
     t.boolean  "has_bank_account"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "encrypted_password",     default: "", null: false
-    t.string   "reset_password_token"
-    t.datetime "reset_password_sent_at"
-    t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          default: 0,  null: false
-    t.datetime "current_sign_in_at"
-    t.datetime "last_sign_in_at"
-    t.string   "current_sign_in_ip"
-    t.string   "last_sign_in_ip"
-    t.string   "confirmation_token"
-    t.datetime "confirmed_at"
-    t.datetime "confirmation_sent_at"
-    t.string   "unconfirmed_email"
     t.string   "institute"
     t.string   "institute_text"
+    t.integer  "user_id"
   end
 
-  add_index "students", ["nusp"], name: "index_students_on_nusp", unique: true
-
   create_table "users", force: true do |t|
+    t.integer  "nusp"
+    t.string   "name"
     t.string   "email",                  default: "", null: false
     t.string   "encrypted_password",     default: "", null: false
     t.string   "reset_password_token"
@@ -220,8 +204,6 @@ ActiveRecord::Schema.define(version: 20141230193314) do
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
     t.string   "unconfirmed_email"
-    t.integer  "nusp"
-    t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

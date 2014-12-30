@@ -103,7 +103,7 @@ if Rails.env.development?
   [
     {
       name: "Will",
-      nusp: "000000",
+      nusp: "100000",
       institute: "IME",
       gender: "1",
       rg: "123",
@@ -167,7 +167,7 @@ if Rails.env.development?
       daytime_availability: true,
       nighttime_availability: false,
       time_period_preference: "0",
-      semester_id: Semester.first.id      
+      semester_id: Semester.first.id
     }
   ].each do |candidature|
     Candidature.create(candidature)
