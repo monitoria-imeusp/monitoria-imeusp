@@ -26,7 +26,7 @@
         <!-- Painel de quem não é usuário -->
         <% if signed_in? %>
           <%= link_to "Sair", destroy_session_path, method: :delete %>
-          <%= link_to "Perfil", current_user %>
+          <%= link_to "Perfil", current_signed %>
         <% else %>
           <%= link_to "Cadastrar-se", new_student_path %>
           <%= link_to "Acessar", new_student_session_path %>
@@ -39,7 +39,7 @@
         <% if signed_in? %>
           <p>
             Acessando como
-            <b><%=current_user.email%></b>
+            <b><%=current_signed.email%></b>
           </p>
         <% else %>
           <p>

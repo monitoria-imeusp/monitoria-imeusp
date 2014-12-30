@@ -2,7 +2,7 @@ class Ability
   include CanCan::Ability
 
   def initialize(user)
-    if user == nil #user is not logged in
+    if user == nil or user.is_a? User #user is not logged in
       cannot :read, Admin
       cannot :update, Admin
       cannot :read, Dump
