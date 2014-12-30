@@ -102,45 +102,55 @@ if Rails.env.development?
 
   [
     {
-      name: "Will",
-      nusp: "100000",
-      institute: "IME",
-      gender: "1",
-      rg: "123",
-      cpf: "321",
-      address: "R. Matão",
-      district: "Butantã",
-      zipcode: "000",
-      city: "São Paulo",
-      state: "São Paulo",
-      tel: "1111111111",
-      cel: "11122233344",
-      email: "kazuo@ime.usp.br",
-      has_bank_account: true,
-      password: "changeme!",
-      confirmed_at: Time.now
+      user: {
+        name: "Will",
+        nusp: 100000,
+        email: "kazuo@ime.usp.br",
+        password: "changeme!",
+        confirmed_at: Time.now
+      },
+      student: {
+        institute: "IME",
+        gender: "1",
+        rg: "123",
+        cpf: "321",
+        address: "R. Matão",
+        district: "Butantã",
+        zipcode: "000",
+        city: "São Paulo",
+        state: "São Paulo",
+        tel: "1111111111",
+        cel: "11122233344",
+        has_bank_account: true
+      }
     },
     {
-      name: "Jackção",
-      nusp: "242424",
-      institute: "IME",
-      gender: "0",
-      rg: "456",
-      cpf: "654",
-      address: "R. Matão",
-      district: "Butantã",
-      zipcode: "000",
-      city: "São Paulo",
-      state: "São Paulo",
-      tel: "1111111111",
-      cel: "11122233344",
-      email: "jacks@ime.usp.br",
-      has_bank_account: false,
-      password: "changeme!",
-      confirmed_at: Time.now
+      user: {
+        name: "Jackção",
+        nusp: "242424",
+        email: "jacks@ime.usp.br",
+        password: "changeme!",
+        confirmed_at: Time.now
+      },
+      student: {
+        institute: "IME",
+        gender: "0",
+        rg: "456",
+        cpf: "654",
+        address: "R. Matão",
+        district: "Butantã",
+        zipcode: "000",
+        city: "São Paulo",
+        state: "São Paulo",
+        tel: "1111111111",
+        cel: "11122233344",
+        has_bank_account: false
+      }
     }
-  ].each do |student|
-    Student.create(student)
+  ].each do |entry|
+    user = User.create(entry[:user])
+    entry[:student][:user_id] = user.id
+    Student.create(entry[:student])
   end
 
   Semester.create(
