@@ -74,14 +74,6 @@
   <%= link_to 'Editar', edit_student_path(@student) %>
 <% end %>
 
-<% if admin_signed_in? || secretary_signed_in? %>
-  <p>
-    <strong><%= t('activerecord.attributes.student.confirmed_at') + ':' %></strong>
-    <%= @student.confirmed_at ? @student.confirmed_at : t('activerecord.attributes.student.unconfirmed') %>
-  </p>
-  <%= link_to 'Remover', student_path(@student), method: :delete, data: { confirm: 'Tem certeza?' } %>
-<% end %>
-
 <% if (professor_signed_in? and current_professor.super_professor?) or admin_signed_in? or secretary_signed_in? %>
   <%= link_to 'Ver avaliações como monitor(a)', assistant_evaluations_for_student_path(@student) %>
 <% end %>

@@ -39,7 +39,7 @@
         <% if signed_in? %>
           <p>
             Acessando como
-            <b><%=current_signed.name%></b>
+            <b><%=admin_signed_in? ? current_signed.email : current_signed.name %></b>
           </p>
         <% else %>
           <p>

@@ -13,6 +13,10 @@ class Student < ActiveRecord::Base
 	validates :tel , presence: true, format: { with: /\A[0-9]{10,11}\z/ }
 	validates :cel , format: { with: /\A[0-9]{10,11}\z/ }
 
+	def name
+		user.name
+	end
+
 	def is_female?
 		gender == 0
 	end

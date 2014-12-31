@@ -17,12 +17,25 @@
   <%= @user.email %>
 </p>
 
+<% if admin_signed_in? || secretary_signed_in? %>
+  <p>
+    <strong><%= t('activerecord.attributes.user.confirmed_at') + ':' %></strong>
+    <%= @user.confirmed_at ? @user.confirmed_at : t('activerecord.attributes.user.unconfirmed') %>
+  </p>
+<% end %>
+
+<% if can? :remove, @user %>
+  <%= link_to 'Remover', user_path(@user), method: :delete, data: { confirm: 'Tem certeza?' } %>
+<% end %>
+
 <% if user_signed_in? and current_user.id == @user.id %>
   <%= link_to 'Editar', edit_user_path(@user) %>
-  <span style="height: 2em; display: block;"></span>
 <% end %>
+
+<span style="height: 2em; display: block;"></span>
 
 <% if @user.student? %>
   <% @student = @user.student %>
   <%= render template: "students/_show" %>
 <% end %>
+

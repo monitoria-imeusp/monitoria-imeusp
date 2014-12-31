@@ -2,9 +2,7 @@ class Ability
   include CanCan::Ability
 
   def initialize(user)
-    print "AEHOOOOOOOOOOOOOO\n"
     if user == nil #user is not logged in
-      print "NOOOOOOOOOOOOOOOOT\n"
       cannot :read, Admin
       cannot :update, Admin
       cannot :read, Dump
@@ -169,8 +167,7 @@ class Ability
     end
 
     # Standard user permissions
-    if user.is_a? User
-      print "USEEEEEEEEEEEEEER\n"
+    if user.is_a? User or user.is_a? Admin or user.is_a? Secretary
       can :manage, User
     end
 
