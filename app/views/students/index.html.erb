@@ -2,12 +2,13 @@
 
 <table>
   <tr>
-    <th><%= t('activerecord.attributes.student.name') %></th>
+    <th colspan="2"><%= t('activerecord.attributes.student.student') %></th>
   </tr>
 
   <% @students.each do |student| %>
     <tr>
-      <td><%= link_to student.name, student %></td>
+      <td class="name"><%= student.user.name %></td>
+      <td><%= link_to "Perfil", student.user %></td>
     </tr>
   <% end %>
 </table>
