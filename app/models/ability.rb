@@ -179,12 +179,11 @@ class Ability
     # Candidature management permissions
     if user.is_a? Admin or user.is_a? Secretary or (user.is_a? Professor and user.professor_rank > 0)
       can :index_for_department, Candidature
-    elsif user.is_a? Student
+    elsif user.is_a? User and user.student?
       can :index_for_student, Candidature
     end
 
     # Assistant role management permissions
-
     if user.is_a? Admin or user.is_a? Secretary or (user.is_a? Professor and user.professor_rank > 0)
       can :index, AssistantRole
     end
