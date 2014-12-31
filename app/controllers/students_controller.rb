@@ -23,7 +23,7 @@ class StudentsController < ApplicationController
       render 'new'
     elsif @student.save
       sign_in  @user, :bypass => true
-      redirect_to @student
+      redirect_to @user
     else
       render 'new'
     end
@@ -55,14 +55,6 @@ class StudentsController < ApplicationController
     else
       render 'edit'
     end
-  end
-
-  def destroy
-    @student = Student.find(params[:id])
-    authorization_student
-    @student.destroy
-
-    redirect_to students_path
   end
 
   private

@@ -20,12 +20,20 @@ class UsersController < ApplicationController
   end
 
   def destroy
+    @user = User.find(params[:id])
+    authorization_user
+    @user.student do |s|
+      s.destroy
+    end
+    @user.destroy
+
+    redirect_to root_path
   end
 
   private
 
   def authorization_user
-    if user_signed_in? and current_user.student? and @user.id != current_user.id
+    if user_signed_in? and current_user.student? and (not @user.student? or @user.id != current_user.id)
       raise CanCan::AccessDenied.new()
     end
   end

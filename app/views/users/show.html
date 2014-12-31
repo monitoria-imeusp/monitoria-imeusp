@@ -34,8 +34,8 @@
 
 <span style="height: 2em; display: block;"></span>
 
-<% if @user.student? %>
-  <% @student = @user.student %>
+<% @user.student do |student| %>
+  <% @student = student %>
   <%= render template: "students/_show" %>
 <% end %>
 
