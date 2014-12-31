@@ -17,6 +17,14 @@ class Student < ActiveRecord::Base
 		user.name
 	end
 
+	def nusp
+		user.nusp
+	end
+
+	def email
+		user.email
+	end
+
 	def is_female?
 		gender == 0
 	end
