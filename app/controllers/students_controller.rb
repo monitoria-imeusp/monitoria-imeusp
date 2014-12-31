@@ -51,7 +51,10 @@ class StudentsController < ApplicationController
           format.json { render json: @student.errors, status: :unprocessable_entity }
         end
     elsif @student.update(student_params)
-      redirect_to @student
+      respond_to do |format|
+        format.html { redirect_to @student.user, notice: 'Dados de aluno atualizados com sucesso.' }
+        format.json { render action: 'show', status: :created, location: @student.user }
+      end
     else
       render 'edit'
     end
