@@ -3,26 +3,29 @@ class StudentsController < ApplicationController
 
   def new
     @student = Student.new
+    @user = User.new
   end
 
   def create
+    @user = User.new(user_params)
     @student = Student.new(student_params)
+
+    unless @user.save
+      respond_to do |format|
+        format.html { render action: 'new'}
+        format.json { render json: @user.errors, status: :unprocessable_entity }
+      end
+    end
+
+    @student.user_id = @user.id
+
     if (params[:student][:institute] == "Outros") and params[:student][:institute_text].empty?
       render 'new'
     elsif @student.save
-      sign_in  @student, :bypass => true
+      sign_in  @user, :bypass => true
       redirect_to @student
     else
       render 'new'
-    end
-  end
-
-  def show
-    if Student.exists?(params[:id])
-      @student = Student.find(params[:id])
-      authorization_student
-    else
-      redirect_to students_path
     end
   end
 
@@ -33,6 +36,7 @@ class StudentsController < ApplicationController
   def edit
     if Student.exists?(params[:id])
       @student = Student.find(params[:id])
+      @user = @student.user
       authorization_student
     end
   end
@@ -40,22 +44,17 @@ class StudentsController < ApplicationController
   def update
     @student = Student.find(params[:id])
     authorization_student
-      if params[:student][:password].blank? && params[:student][:password_confirmation].blank?
-        params[:student].delete(:password)
-        params[:student].delete(:password_confirmation)
-      end
-      if (params[:student][:institute] == "Outros") and params[:student][:institute_text].empty?
-          @student.errors.add(:student_id, t('errors.models.student.toofew'))
-          respond_to do |format|
-            format.html { render action: 'edit' }
-            format.json { render json: @student.errors, status: :unprocessable_entity }
-          end
-      elsif @student.update(student_params)
-        sign_in  @student, :bypass => true
-        redirect_to @student
-      else
-        render 'edit'
-      end
+    if (params[:student][:institute] == "Outros") and params[:student][:institute_text].empty?
+        @student.errors.add(:student_id, t('errors.models.student.toofew'))
+        respond_to do |format|
+          format.html { render action: 'edit' }
+          format.json { render json: @student.errors, status: :unprocessable_entity }
+        end
+    elsif @student.update(student_params)
+      redirect_to @student
+    else
+      render 'edit'
+    end
   end
 
   def destroy
@@ -68,7 +67,7 @@ class StudentsController < ApplicationController
 
   private
   def authorization_student
-    if student_signed_in? and @student.id != current_student.id
+    if user_signed_in? and current_user.student? and @student.user.id != current_user.id
       raise CanCan::AccessDenied.new()
     end
   end
@@ -79,5 +78,10 @@ class StudentsController < ApplicationController
                                     :address, :complement, :district, :zipcode, :city, :state,
                                     :tel, :cel, :email,
                                     :has_bank_account)
+  end
+
+  def user_params
+    params.require(:user).permit(:name, :password, :password_confirmation,
+                                 :nusp, :email)
   end
 end

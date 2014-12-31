@@ -1,0 +1,31 @@
+<h1>Perfil</h1>
+<hr>
+
+<h2>Dados de usuário</h2>
+
+<p>
+  <strong><%= t('activerecord.attributes.user.complete_name') + ':' %></strong>
+  <%= @user.name %>
+</p>
+
+<p>
+  <strong><%= t('activerecord.attributes.user.nusp') + ':' %></strong>
+  <%= @user.nusp %>
+</p>
+
+<p>
+  <strong><%= t('activerecord.attributes.user.email') + ':' %></strong>
+  <%= @user.email %>
+</p>
+
+<% if user_signed_in? and current_user.id == @user.id %>
+  <%= link_to 'Editar', edit_user_path(@user) %>
+  <span style="height: 2em; display: block;"></span>
+<% end %>
+
+<hr>
+
+<% if @user.student? %>
+  <% @student = @user.student %>
+  <%= render template: "students/_show" %>
+<% end %>

@@ -20,4 +20,8 @@ class Student < ActiveRecord::Base
 	def is_male?
 		gender == 1
 	end
+
+	def user
+		User.find(user_id)
+	end
 end

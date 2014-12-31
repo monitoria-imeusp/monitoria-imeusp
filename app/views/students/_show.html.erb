@@ -1,7 +1,5 @@
-<p>
-  <strong><%= t('activerecord.attributes.student.name') + ':' %></strong>
-  <%= @student.name %>
-</p>
+
+<h2>Dados de aluno</h2>
 
 <p>
   <strong><%= t('activerecord.attributes.student.gender') + ':' %></strong>
@@ -10,11 +8,6 @@
   <%else%>
     <%="Masculino"%>
   <%end%>
-</p>
-
-<p>
-  <strong><%= t('activerecord.attributes.student.nusp') + ':' %></strong>
-  <%= @student.nusp %>
 </p>
 
 <p>
@@ -73,16 +66,11 @@
 </p>
 
 <p>
-  <strong><%= t('activerecord.attributes.student.email') + ':' %></strong>
-  <%= @student.email %>
-</p>
-
-<p>
   <strong><%= t('activerecord.attributes.student.has_bank_account') + ':' %></strong>
   <%= show_yes_or_no @student.has_bank_account %>
 </p>
 
-<% if student_signed_in? %>
+<% if can? :edit, @student %>
   <%= link_to 'Editar', edit_student_path(@student) %>
 <% end %>
 

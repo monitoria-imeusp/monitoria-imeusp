@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   devise_for :professors, :controllers => { :professors => "professors" }
   devise_for :secretaries, :controllers => { :secretaries => "secretaries" }
   devise_for :students, :controllers => { :students => "students" }
-  devise_for :users
+  devise_for :users, :controllers => { :users => "users" }
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

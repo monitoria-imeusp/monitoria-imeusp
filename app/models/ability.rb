@@ -2,7 +2,9 @@ class Ability
   include CanCan::Ability
 
   def initialize(user)
+    print "AEHOOOOOOOOOOOOOO\n"
     if user == nil #user is not logged in
+      print "NOOOOOOOOOOOOOOOOT\n"
       cannot :read, Admin
       cannot :update, Admin
       cannot :read, Dump
@@ -136,7 +138,7 @@ class Ability
       can :read, Candidature
       can :update, Candidature
       can :destroy, Candidature
-    elsif user.is_a? Student
+    elsif user.is_a? User and user.student?
       cannot :read, Admin
       cannot :update, Admin
       cannot :read, Dump
@@ -164,6 +166,12 @@ class Ability
       can :read, Candidature #, :student_id => user.id #Only his own
       can :update, Candidature #, :student_id => user.id #Only his own
       can :destroy, Candidature #, :student_id => user.id #Only his own
+    end
+
+    # Standard user permissions
+    if user.is_a? User
+      print "USEEEEEEEEEEEEEER\n"
+      can :manage, User
     end
 
     # Semester management permissions
