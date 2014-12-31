@@ -19,6 +19,11 @@
 
 /*********************************************************/
 
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
 body {
   font-family: Helvetica, Arial, sans-serif;
   font-size: 12px;
@@ -82,27 +87,37 @@ tr:hover {
 
 div.shell {
   width: 1024px;
-  min-height: 600px;
+  margin: auto;
+  height: 100%;
   padding: 0em;
   border: 0em;
-  margin: 0em;
-  margin-left: auto;
-  margin-right: auto;
 }
 
 footer {
-  width: 100%;
-  margin-top: 30%;
+  /*
+  */
+  margin-bottom: 0;
   height: 2em;
+  padding-top: 2em;
+  padding-bottom: 2em;
   border-top: 2pt solid #bbb;
+}
+
+footer > p {
+  width: 100%;
+  text-align: center;
+  margin: 0;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 /*********************************************************/
 
 section {
-  width: 80%;
+  width: 75%;
   padding: 1em 2em;
   min-height: 400px;
+  border-right: 2pt solid #bbb;
 }
 
 section > p, form {
@@ -163,7 +178,7 @@ select {
 header {
   padding: .1em 1em;
   background-color: #eee;
-  height: 36pt;
+  min-height: 36pt;
   border-bottom: 1px solid #bbb;
 }
 
@@ -228,9 +243,7 @@ nav {
   float: right;
   margin: 0em 0em;
   width: 20%;
-  min-height: 600px;
-  height: 100%;
-  border-left: 2pt solid #ccc;
+  min-height: 100%;
   padding-left: 0pt;
 }
 
@@ -274,7 +287,7 @@ nav > ul > li > a:visited {
 nav > ul > li > a:hover,
 nav > ul > li > a:active {
   color: #b55;
-  background-color: #fff;
+  background-color: inherit;
 }
 
 /*********************************************************/
