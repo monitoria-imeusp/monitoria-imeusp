@@ -30,7 +30,16 @@ body {
 }
 
 h2 {
-  margin-left: 2em;
+  padding-left: 2em;
+}
+
+section > h2 {
+  padding: .5em 0em;
+  text-align: center;
+  width: 100%;
+  margin: 1em 0;
+  border-top: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
 }
 
 p, form, a, a:hover, a:visited, a:active, td, th {

@@ -1,5 +1,4 @@
 <h1>Perfil</h1>
-<hr>
 
 <h2>Dados de usuário</h2>
 
@@ -22,8 +21,6 @@
   <%= link_to 'Editar', edit_user_path(@user) %>
   <span style="height: 2em; display: block;"></span>
 <% end %>
-
-<hr>
 
 <% if @user.student? %>
   <% @student = @user.student %>
