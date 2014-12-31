@@ -10,22 +10,22 @@ class StudentsController < ApplicationController
     @user = User.new(user_params)
     @student = Student.new(student_params)
 
-    unless @user.save
+    if @user.save
+      @student.user_id = @user.id
+
+      if (params[:student][:institute] == "Outros") and params[:student][:institute_text].empty?
+        render 'new'
+      elsif @student.save
+        sign_in  @user, :bypass => true
+        redirect_to @user
+      else
+        render 'new'
+      end
+    else
       respond_to do |format|
         format.html { render action: 'new'}
         format.json { render json: @user.errors, status: :unprocessable_entity }
       end
-    end
-
-    @student.user_id = @user.id
-
-    if (params[:student][:institute] == "Outros") and params[:student][:institute_text].empty?
-      render 'new'
-    elsif @student.save
-      sign_in  @user, :bypass => true
-      redirect_to @user
-    else
-      render 'new'
     end
   end
 

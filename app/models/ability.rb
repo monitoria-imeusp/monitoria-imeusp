@@ -48,7 +48,7 @@ class Ability
       can :destroy, Secretary
       cannot :create, Student
       can :read, Student
-      can :update, Student
+      cannot :update, Student
       can :destroy, Student
       can :create, Course
       can :read, Course
