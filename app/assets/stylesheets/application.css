@@ -106,9 +106,9 @@ footer {
   /*
   */
   margin-bottom: 0;
-  height: 2em;
-  padding-top: 2em;
-  padding-bottom: 2em;
+  height: 1em;
+  padding-top: 1.5em;
+  padding-bottom: 1em;
   border-top: 2pt solid #bbb;
 }
 
@@ -118,6 +118,7 @@ footer > p {
   margin: 0;
   margin-left: auto;
   margin-right: auto;
+  font-size: 12px;
 }
 
 /*********************************************************/
