@@ -68,7 +68,7 @@ class CandidaturesController < ApplicationController
   # POST /candidatures
   # POST /candidatures.json
   def create
-    params[:candidature][:student_id] = current_student.id
+    params[:candidature][:student_id] = current_user.student.id
     @candidature = Candidature.new(candidature_params)
     respond_to do |format|
       if already_for_semester? @candidature.student_id, @candidature.semester_id

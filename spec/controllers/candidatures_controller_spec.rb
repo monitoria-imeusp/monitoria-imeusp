@@ -172,18 +172,20 @@ describe CandidaturesController do
       )
       Candidature.create! valid_third_candidature_attributes
       super_professor = Professor.create! kunio
-      sign_out student
+      sign_out user
       sign_in :professor, super_professor
       Department.should_receive(:find).with(super_professor.department_id.to_s).and_return(@mac)
-      get :index_for_department, {semester_id: valid_semester["id"], department_id: @mac}, valid_session
+      get :index_for_department, {semester_id: valid_semester["id"], department_id: @mac.id}
     end
 
-    it "renders the index for the super professor's department" do
-      should render_template :index_for_department
+    context 'response' do
+      subject { response }
+      it { expect(response).to render_template(:index_for_department) }
     end
 
-    it "assigns candidatures of super professor's department as @candidatures_filtered" do
-      assigns(:candidatures_filtered).should eq(@candidatures)
+    context 'filtered candidatures' do
+      subject { assigns(:candidatures_filtered) }
+      it { expect(subject).to eq(@candidatures) }
     end
   end
 
