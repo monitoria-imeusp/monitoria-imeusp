@@ -67,7 +67,7 @@
       <% @chosen_roles.each do |role| %>
         <tr>
           <td class="name"><%= role.student.name %></td>
-          <td><%= link_to 'Ver dados', role.student %></td>
+          <td><%= link_to 'Ver dados', role.student.user %></td>
         </tr>
       <% end %>
     </tbody>

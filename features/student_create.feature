@@ -9,7 +9,7 @@ Feature: Student register
         When I click the "Cadastrar-se" link
         And I fill the fields for student "Carlinhos" with nusp "012345" and email "cef@gmail.com"
         And I press the "Salvar" button
-        And I confirm the student account with email "cef@gmail.com"
+        And I confirm the user account with email "cef@gmail.com"
         And I should see "Acessar"
         And I fill the "Número USP" field with "012345"
         And I fill the "Senha" field with "changeme!"

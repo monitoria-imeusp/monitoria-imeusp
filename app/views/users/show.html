@@ -24,7 +24,7 @@
   </p>
 <% end %>
 
-<% if can? :remove, @user %>
+<% if can? :destroy, @user and can_be_removed? @user %>
   <%= link_to 'Remover', user_path(@user), method: :delete, data: { confirm: 'Tem certeza?' } %>
 <% end %>
 

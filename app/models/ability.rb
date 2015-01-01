@@ -167,8 +167,10 @@ class Ability
     end
 
     # Standard user permissions
-    if user.is_a? User or user.is_a? Admin or user.is_a? Secretary
-      can :manage, User
+    if user.is_a? User or user.is_a? Admin or user.is_a? Secretary or user.is_a? Professor
+      can :read, User
+      can :update, User
+      can :destroy, User
     end
 
     # Semester management permissions

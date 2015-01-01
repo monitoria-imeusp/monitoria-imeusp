@@ -8,7 +8,7 @@
   <% @students.each do |student| %>
     <tr>
       <td class="name"><%= student.user.name %></td>
-      <td><%= link_to "Perfil", student.user %></td>
+      <td><%= link_to "Ver perfil", student.user %></td>
     </tr>
   <% end %>
 </table>

@@ -63,12 +63,11 @@ end
 
 
 Given(/^there is a student with name "(.*?)" with nusp "(.*?)" and email "(.*?)"$/) do |name, nusp, email|
-  Student.create(name: name, password: "changeme!", email: email,
-    nusp: nusp, institute: "Instituto de Matemática e Estatística", gender: "1", rg: "1", cpf: "1",
+  user = User.create(name: name, password: "changeme!", email: email, nusp: nusp, confirmed_at: Time.now)
+  Student.create(institute: "Instituto de Matemática e Estatística", gender: "1", rg: "1", cpf: "1",
     address: "IME", city: "São Paulo", district: "Butantã", zipcode: "0", state: "SP",
     tel: "1145454545", cel: "11985858585",
-    has_bank_account: "true",
-    confirmation_token:nil, confirmed_at: Time.now)
+    has_bank_account: "true", user_id: user.id)
 end
 
 Given(/^there is a department with code "(.*?)"$/) do |code|
@@ -77,7 +76,7 @@ end
 
 Given(/^there is an candidature with student "(.*?)" and first option "(.*?)" and second option "(.*?)" and third option "(.*?)" and availability for daytime "(.*?)" and availability for night time "(.*?)" and period preference "(.*?)"$/) do |student, course1, course2, course3, av_daytime, av_nighttime, period|
   Candidature.create(
-    student_id: Student.where(name: student).take.id,
+    student_id: User.where(name: student).take.student.id,
     course1_id: Course.where(name: course1).take.id,
     course2_id: Course.where(name: course2).take.id,
     semester_id: Semester.first.id,
@@ -88,7 +87,7 @@ end
 
 When(/^there is a candidature by student "(.*?)" for course "(.*?)"$/) do |student_name, course_code|
   course_id = Course.where(course_code: course_code).take.id
-  student_id = Student.where(name: student_name).take.id
+  student_id = User.where(name: student_name).take.student.id
   Candidature.create(
     student_id: student_id,
     course1_id: course_id,
@@ -114,7 +113,7 @@ When(/^there is an assistant role for student "(.*?)" with professor "(.*?)" at 
   professor_id = Professor.where(name: professor_name).take.id
   course_id = Course.where(course_code: course_code).take.id
   request_id = RequestForTeachingAssistant.where(professor_id: professor_id, course_id: course_id).take.id
-  AssistantRole.create(student_id: Student.where(name: student_name).take.id, request_for_teaching_assistant_id: request_id)
+  AssistantRole.create(student_id: User.where(name: student_name).take.student.id, request_for_teaching_assistant_id: request_id)
 end
 
 Given(/^there is an advise with title "(.*?)" and message "(.*?)" and urgency "(.*?)"$/) do |title, message, urgency|
@@ -130,7 +129,7 @@ When(/^thete is an assistant evaluation for student "(.*?)" with professor "(.*?
   professor_id = Professor.where(name: professor_name).take.id
   course_id = Course.where(course_code: course_code).take.id
   request_id = RequestForTeachingAssistant.where(professor_id: professor_id, course_id: course_id).take.id
-  student_id = Student.where(name: student_name).take.id
+  student_id = User.where(name: student_name).take.student.id
   assistant_role_id = AssistantRole.where(student_id: student_id, request_for_teaching_assistant_id: request_id).take.id
   AssistantEvaluation.create(
     assistant_role_id: assistant_role_id,

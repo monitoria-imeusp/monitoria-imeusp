@@ -1,5 +1,5 @@
 
-<% fields_for(@user) do |u| %>
+<%= fields_for(@user) do |u| %>
   <% if @user.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@user.errors.count, "erro impediu", "erros impediram") %> esse aluno de ser salvo:</h2>

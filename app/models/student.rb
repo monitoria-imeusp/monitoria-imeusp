@@ -12,6 +12,7 @@ class Student < ActiveRecord::Base
 	validates :state , presence: true
 	validates :tel , presence: true, format: { with: /\A[0-9]{10,11}\z/ }
 	validates :cel , format: { with: /\A[0-9]{10,11}\z/ }
+	belongs_to :user
 
 	def name
 		user.name

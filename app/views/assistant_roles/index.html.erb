@@ -1,17 +1,15 @@
 <h1>Monitores eleitos</h1>
-<hr>
 
 <% @assistant_roles_by_semester.each do |entry| %>
   <h2>
     <%= entry[:semester].as_s %>
-    <% if secretary_signed_in? %>
-      <% unless Rails.env.production? %>
-        <%= link_to "Pedir avaliações dos professores", request_assistant_evaluations_for_semester_path(entry[:semester]), method: :post %>
-      <% end %>
-      <%= link_to "Notificar monitores", notify_assistant_roles_for_semester_path(entry[:semester]), method: :post %>
-    <% end %>
   </h2>
-  <hr>
+  <% if secretary_signed_in? %>
+    <% unless Rails.env.production? %>
+      <%= link_to "Pedir avaliações dos professores", request_assistant_evaluations_for_semester_path(entry[:semester]), method: :post %>
+    <% end %>
+    <%= link_to "Notificar monitores", notify_assistant_roles_for_semester_path(entry[:semester]), method: :post %>
+  <% end %>
   <table>
     <thead>
       <tr>
@@ -37,6 +35,5 @@
       <% end %>
     </tbody>
   </table>
-  <hr>
 <% end %>
 
