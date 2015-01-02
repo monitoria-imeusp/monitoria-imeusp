@@ -9,6 +9,7 @@ class User < ActiveRecord::Base
   validates :nusp , presence: true, inclusion: { in: 10000..100000000 }, uniqueness: true
   validates :email , presence: true
   has_one :student
+  has_one :professor
 
   def student
     result = Student.where(user_id: id)
