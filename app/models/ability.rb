@@ -63,7 +63,7 @@ class Ability
       can :read, Candidature
       can :update, Candidature
       can :destroy, Candidature
-    elsif user.is_a? Professor #Professor
+    elsif user.is_a? User and user.professor? #Professor
       cannot :read, Admin
       cannot :update, Admin
       can :read, Professor
@@ -84,7 +84,7 @@ class Ability
       can :update, RequestForTeachingAssistant #, :professor_id => user.id #Only his own
       can :destroy, RequestForTeachingAssistant #, :professor_id => user.id #Only his own
       can :index_for_semester, RequestForTeachingAssistant
-      if user.professor_rank > 0
+      if user.super_professor?
         can :read, Dump
         can :create, Professor
         can :create, Course
@@ -167,7 +167,7 @@ class Ability
     end
 
     # Standard user permissions
-    if user.is_a? User or user.is_a? Admin or user.is_a? Secretary or user.is_a? Professor
+    if user.is_a? User or user.is_a? Admin or user.is_a? Secretary
       can :read, User
       can :update, User
       can :destroy, User
@@ -179,21 +179,21 @@ class Ability
     end
 
     # Candidature management permissions
-    if user.is_a? Admin or user.is_a? Secretary or (user.is_a? Professor and user.professor_rank > 0)
+    if user.is_a? Admin or user.is_a? Secretary or (user.is_a? User and user.super_professor?)
       can :index_for_department, Candidature
     elsif user.is_a? User and user.student?
       can :index_for_student, Candidature
     end
 
     # Assistant role management permissions
-    if user.is_a? Admin or user.is_a? Secretary or (user.is_a? Professor and user.professor_rank > 0)
+    if user.is_a? Admin or user.is_a? Secretary or (user.is_a? User and user.super_professor?)
       can :index, AssistantRole
     end
     if user.is_a? Secretary
       can :notify_for_semester, AssistantRole
       can :request_evaluations_for_semester, AssistantRole
     end
-    if user.is_a? Secretary or (user.is_a? Professor and user.professor_rank > 0)
+    if user.is_a? Secretary or (user.is_a? User and user.super_professor?)
       can :create, AssistantRole
       can :update, AssistantRole
       can :destroy, AssistantRole
@@ -209,7 +209,7 @@ class Ability
       can :create, AssistantEvaluation
       can :update, AssistantEvaluation
     end
-    if user.is_a? Admin or user.is_a? Secretary or (user.is_a? Professor and user.professor_rank > 0)
+    if user.is_a? Admin or user.is_a? Secretary or (user.is_a? User and user.super_professor?)
       can :index_for_student, AssistantEvaluation
     end
 

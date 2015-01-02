@@ -6,6 +6,10 @@ class Professor < ActiveRecord::Base
 
   validates :department_id, presence: true
 
+  def name
+    return user.name
+  end
+
   def normal_professor?
     return professor_rank == 0
   end

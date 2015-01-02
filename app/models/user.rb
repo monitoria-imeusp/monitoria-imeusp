@@ -34,4 +34,9 @@ class User < ActiveRecord::Base
   def professor?
     Professor.where(user_id: id).any?
   end
+
+  def super_professor?
+    query = Professor.where(user_id: id)
+    query.any? and query.take.super_professor?
+  end
 end
