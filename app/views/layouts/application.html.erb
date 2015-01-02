@@ -79,34 +79,6 @@
             </li>
           </ul>
         <% end %>
-        <!-- Painel dos professores -->
-        <% if professor_signed_in? %>
-          <hr>
-          <h2>Professor(a)</h2>
-          <ul>
-            <li>
-              <%= link_to "Pedidos de monitoria", request_for_teaching_assistants_path %>
-            </li>
-            <li>
-              <%= link_to "Meus monitores", assistant_roles_for_professor_path(current_professor) %>
-            </li>
-          </ul>
-          <% if current_professor.super_professor? %>
-            <hr>
-            <h2>Comissão de monitoria</h2>
-            <ul>
-                <li>
-                  <%= link_to "Cadastrar disciplina", new_course_path %>
-                </li>
-                <li>
-                   <%= link_to "Candidaturas", candidatures_path %>
-                </li>
-                <li>
-                  <%= link_to "Monitores eleitos", assistant_roles_path %>
-                </li>
-            </ul>
-          <% end %>
-        <% end %>
         <!-- Painel dos funcionários -->
         <% if secretary_signed_in? %>
           <hr>
@@ -126,18 +98,48 @@
             </li>
           </ul>
         <% end %>
-        <!-- Painel dos alunos -->
-        <% if user_signed_in? and current_user.student? %>
-          <hr>
-          <h2>Aluno(a)</h2>
-          <ul>
-            <li>
-               <%= link_to "Minhas candidaturas", candidatures_path %>
-            </li>
-            <li>
-               <%= link_to "Guia de uso da página pelos estudantes", help_students_path('home') %>
-            </li>
-          </ul>
+        <% if user_signed_in? %>
+          <!-- Painel dos professores -->
+          <% current_user.professor do |professor| %>
+            <hr>
+            <h2>Professor(a)</h2>
+            <ul>
+              <li>
+                <%= link_to "Pedidos de monitoria", request_for_teaching_assistants_path %>
+              </li>
+              <li>
+                <%= link_to "Meus monitores", assistant_roles_for_professor_path(professor) %>
+              </li>
+            </ul>
+            <% if professor.super_professor? %>
+              <hr>
+              <h2>Comissão de monitoria</h2>
+              <ul>
+                  <li>
+                    <%= link_to "Cadastrar disciplina", new_course_path %>
+                  </li>
+                  <li>
+                     <%= link_to "Candidaturas", candidatures_path %>
+                  </li>
+                  <li>
+                    <%= link_to "Monitores eleitos", assistant_roles_path %>
+                  </li>
+              </ul>
+            <% end %>
+          <% end %>
+          <!-- Painel dos alunos -->
+          <% current_user.student do |student| %>
+            <hr>
+            <h2>Aluno(a)</h2>
+            <ul>
+              <li>
+                 <%= link_to "Minhas candidaturas", candidatures_path %>
+              </li>
+              <li>
+                 <%= link_to "Guia de uso", help_students_path('home') %>
+              </li>
+            </ul>
+          <% end %>
         <% end %>
 
         <% if flash[:notice] %>

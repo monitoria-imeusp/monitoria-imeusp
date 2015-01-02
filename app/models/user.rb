@@ -22,4 +22,16 @@ class User < ActiveRecord::Base
   def student?
     Student.where(user_id: id).any?
   end
+
+  def professor
+    result = Professor.where(user_id: id)
+    if block_given? and result.any?
+      yield result.take
+    end
+    result.take
+  end
+
+  def professor?
+    Professor.where(user_id: id).any?
+  end
 end
