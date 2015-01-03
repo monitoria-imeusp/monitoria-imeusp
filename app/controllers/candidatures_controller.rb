@@ -5,9 +5,12 @@ class CandidaturesController < ApplicationController
   # GET /candidatures
   # GET /candidatures.json
   def index
-    if professor_signed_in? and current_professor.super_professor? and not current_professor.hiper_professor?
-      redirect_to candidatures_for_department_path(Semester.current, current_professor.department)
-    elsif user_signed_in?
+    if user_signed_in?
+      current_user.professor do |professor|
+        if professor.super_professor? and not professor.hiper_professor?
+          redirect_to candidatures_for_department_path(Semester.current, professor.department)
+        end
+      end
       current_user.student do |student|
         redirect_to candidatures_for_student_path(student)
       end

@@ -120,24 +120,34 @@ describe CandidaturesController do
     Course.create! valid_third_course_attributes
   end
 
-  describe "GET index" do
-    it "redirects students to index_for_student" do
-      get :index, {}, valid_session
-      response.should redirect_to action: :index_for_student, student_id: student
+  describe ".index" do
+    context 'as student' do
+      before :each do
+        get :index, {}
+      end
+      it { should redirect_to action: :index_for_student, student_id: student }
     end
-    it "redirects super professor to index_for_department" do
-      semester = Semester.create! valid_semester
-      Semester.should_receive(:current).and_return(semester)
-      super_professor = Professor.create! kunio
-      sign_in :professor, super_professor
-      get :index, {}, valid_session
-      response.should redirect_to action: :index_for_department, semester_id: valid_semester["id"], department_id: super_professor.department
+    context 'as super professor' do
+      let!(:semester) { FactoryGirl.create :semester }
+      let(:prof_user) { FactoryGirl.create :another_user }
+      let!(:super_professor) { FactoryGirl.create :super_professor, user_id: prof_user.id }
+      before :each do
+        sign_out user
+        sign_in prof_user
+        get :index, {}
+      end
+      it { should redirect_to action: :index_for_department, semester_id: semester.id, department_id: super_professor.department }
     end
-    it "hiper professor assigns all departments as @departments" do
-      hiper_professor = Professor.create! zara
-      sign_in :professor, hiper_professor
-      get :index, {}, valid_session
-      assigns(:departments).should eq(Department.all)
+    context 'as hiper professor' do
+      let(:prof_user) { FactoryGirl.create :another_user }
+      let!(:hiper_professor) { FactoryGirl.create :hiper_professor, user_id: prof_user.id }
+      before :each do
+        sign_out user
+        sign_in prof_user
+        get :index, {}
+      end
+      subject { assigns(:departments) }
+      it { expect(subject).to eq(Department.all) }
     end
   end
 
@@ -162,20 +172,17 @@ describe CandidaturesController do
     end
   end
 
-  describe "GET index for department" do
+  describe ".index_for_department" do
+    let!(:semester) { FactoryGirl.create :semester }
+    let(:prof_user) { FactoryGirl.create :another_user }
+    let!(:super_professor) { FactoryGirl.create :super_professor, user_id: prof_user.id }
+    let!(:candidatures) { [[ Candidature.create!(valid_attributes), Candidature.create!(valid_second_candidature_attributes) ], [], [], []] }
+    let!(:unrelated_candidature) { Candidature.create! valid_third_candidature_attributes }
     before do
-      Semester.create! valid_semester
-      @candidatures = [[], [], [], []]
-      @candidatures[0].push(
-        (Candidature.create! valid_attributes),
-        (Candidature.create! valid_second_candidature_attributes)
-      )
-      Candidature.create! valid_third_candidature_attributes
-      super_professor = Professor.create! kunio
       sign_out user
-      sign_in :professor, super_professor
-      Department.should_receive(:find).with(super_professor.department_id.to_s).and_return(@mac)
-      get :index_for_department, {semester_id: valid_semester["id"], department_id: @mac.id}
+      sign_in prof_user
+      #Department.should_receive(:find).with(super_professor.department_id.to_s).and_return(@mac)
+      get :index_for_department, { semester_id: semester.id, department_id: @mac.id}
     end
 
     context 'response' do
@@ -185,7 +192,7 @@ describe CandidaturesController do
 
     context 'filtered candidatures' do
       subject { assigns(:candidatures_filtered) }
-      it { expect(subject).to eq(@candidatures) }
+      it { expect(subject).to eq(candidatures) }
     end
   end
 

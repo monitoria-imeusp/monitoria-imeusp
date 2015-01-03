@@ -75,9 +75,8 @@ describe StudentsController do
 
   context 'when signed in as professor' do
     let(:user) { FactoryGirl.create :user }
-    let(:professor) { FactoryGirl.create :professor, user_id: user.id }
+    let!(:professor) { FactoryGirl.create :professor, user_id: user.id }
     before :each do
-      professor
       @request.env["devise.mapping"] = Devise.mappings[:user]
       sign_in user
     end
