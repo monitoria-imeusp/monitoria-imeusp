@@ -14,7 +14,7 @@ Feature: Assistant evaluation creation
         And there is an assistant role for student "Bob" with professor "Dude" at course "MAC0110"
 
     Scenario: Professor creates assistant evaluation
-        Given I'm logged in as a professor "Dude"
+        Given I'm logged in as professor "Dude"
         And I visit my assistant roles page
         When I click the "Avaliar" link
         And I fill the assistant evaluation fields

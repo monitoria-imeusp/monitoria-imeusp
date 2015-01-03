@@ -5,7 +5,6 @@ class AssistantEvaluation < ActiveRecord::Base
   validates :efficiency, presence: true, inclusion: { in: 0..2 }
   validates :reliability, presence: true, inclusion: { in: 0..2 }
   validates :overall, presence: true, inclusion: { in: 0..2 }
-  validates :comment, presence: true
   belongs_to :assistant_role
 
   def semester

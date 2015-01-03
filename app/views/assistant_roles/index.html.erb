@@ -16,7 +16,7 @@
         <th><%= t('activerecord.attributes.student.name') %> </th>
         <th><%= t('activerecord.attributes.request_for_teaching_assistant.course_id') %> </th>
         <th><%= t('activerecord.attributes.request_for_teaching_assistant.professor_id') %> </th>
-        <% if secretary_signed_in? or (professor_signed_in? and current_professor.super_professor?) %>
+        <% if secretary_signed_in? or (user_signed_in? and current_user.super_professor?) %>
           <th></th>
         <% end %>
       </tr>

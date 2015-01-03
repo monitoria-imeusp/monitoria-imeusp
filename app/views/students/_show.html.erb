@@ -74,7 +74,7 @@
   <%= link_to 'Editar', edit_student_path(@student) %>
 <% end %>
 
-<% if (professor_signed_in? and current_professor.super_professor?) or admin_signed_in? or secretary_signed_in? %>
+<% if (user_signed_in? and current_user.super_professor?) or admin_signed_in? or secretary_signed_in? %>
   <%= link_to 'Ver avaliações como monitor(a)', assistant_evaluations_for_student_path(@student) %>
 <% end %>
 
