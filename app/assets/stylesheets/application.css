@@ -303,6 +303,7 @@ nav > ul > li > a:active {
 /*********************************************************/
 
 p.notice, p.alert {
+  display: block;
   border-radius: 16px;
   text-align: center;
   padding: 4px;

@@ -6,7 +6,7 @@
   <%= @professor.department.code %>
 </p>
 
-<% if admin_signed_in? %>
+<% if admin_signed_in? or secretary_signed_in? or current_user.super_professor? %>
   <p>
     <strong><%= t('activerecord.attributes.professor.professor_rank') + ':' %></strong>
     <%= professorRankOptions()[@professor.professor_rank][0] %>
@@ -15,9 +15,9 @@
 
 <% if user_signed_in? and current_user.professor == @professor %>
   <%= link_to 'Editar', edit_professor_path(@professor) %>
+  <span style="height: 2em; display: block;"></span>
 <% end %>
 
-<span style="height: 2em; display: block;"></span>
 
 <% if can_promote? %>
   <p>

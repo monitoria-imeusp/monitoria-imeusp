@@ -33,9 +33,9 @@ class ProfessorsController < ApplicationController
     @professor.professor_rank = 1
     respond_to do |format|
       if @professor.save
-        format.html {redirect_to @professor, notice: @professor.name.to_s + ' é agora um Super-professor'}
+        format.html {redirect_to @professor.user, notice: @professor.name.to_s + ' é agora um Super-professor'}
       else
-        format.html {render @professor}
+        format.html {render @professor.user}
       end
     end
   end
