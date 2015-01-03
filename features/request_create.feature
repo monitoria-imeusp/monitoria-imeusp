@@ -7,9 +7,9 @@ Feature: Creating Request for Teaching Assistant
         Given there is an open semester "2014" "1"
         And I'm at the professor login page
         And there is a department with code "MAC"
-        And there is a professor with name "Bob" and password "prof-123" nusp "123" department "MAC" and email "bob@bob.bob"
+        And there is a professor with name "Bob" and password "prof-123" nusp "123456" department "MAC" and email "bob@bob.bob"
         And there is a course with name "Mascarenhas" and code "MAC0300" and department "MAC"
-        When I fill the "Número USP" field with "123"
+        When I fill the "Número USP" field with "123456"
         And I fill the "Senha" field with "prof-123"
         And I press the "Entrar" button
         And I should see "Pedidos de monitoria"

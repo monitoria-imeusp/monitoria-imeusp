@@ -7,9 +7,9 @@ Feature: Index of the Requests for Teaching Assistant
         Given there is an open semester "2014" "1"
         And there is a department with code "MAC"
         And there is a department with code "MAE"
-        And there is a professor with name "Bob" and password "prof-123" nusp "123" department "MAC" and email "bob@bob.bob"
-        And there is a super_professor with name "Mandel" and password "prof-123" nusp "1234" department "MAC" and email "kira@bob.bob"
-        And there is a professor with name "Claudia" and password "prof-123" nusp "1235" department "MAE" and email "claudia@ime.br"
+        And there is a professor with name "Bob" and password "prof-123" nusp "12333" department "MAC" and email "bob@bob.bob"
+        And there is a super_professor with name "Mandel" and password "prof-123" nusp "12344" department "MAC" and email "kira@bob.bob"
+        And there is a professor with name "Claudia" and password "prof-123" nusp "12355" department "MAE" and email "claudia@ime.br"
         And there is a course with name "Mascarenhas" and code "MAC0110" and department "MAC"
         And there is a course with name "Coisas" and code "MAC0122" and department "MAC"
         And there is a course with name "Estatística Concorrente" and code "MAE0438" and department "MAE"
@@ -19,7 +19,7 @@ Feature: Index of the Requests for Teaching Assistant
 
     Scenario: Check request assistant table and professor can't see the other professor's request
         Given I'm at the professor login page
-        When I fill the "Número USP" field with "123"
+        When I fill the "Número USP" field with "12333"
         And I fill the "Senha" field with "prof-123"
         And I press the "Entrar" button
         And I should see "Pedidos de monitoria"
@@ -34,7 +34,7 @@ Feature: Index of the Requests for Teaching Assistant
 
     Scenario: Superprofessor see only requests of his department
         Given I'm at the professor login page
-        When I fill the "Número USP" field with "1234"
+        When I fill the "Número USP" field with "12344"
         And I fill the "Senha" field with "prof-123"
         And I press the "Entrar" button
         And I should see "Pedidos de monitoria"

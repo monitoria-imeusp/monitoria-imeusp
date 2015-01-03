@@ -31,7 +31,7 @@ Given(/^I'm at the list_professors page$/) do
 end
 
 Given(/^I'm at the professor login page$/) do
-  visit new_professor_session_path
+  visit new_user_session_path
 end
 
 Given(/^I'm at the secretary login page$/) do

@@ -4,7 +4,7 @@ end
 
 Given(/^there is a request for teaching assistant with professor "(.*?)" and course "(.*?)" and requested_number "(.*?)" and priority "(.*?)" and student_assistance "(.*?)" and work_correction "(.*?)" and test_oversight "(.*?)"$/) do |professor_name, course_code, requested_number, priority, student_assistance, work_correction, test_oversight|
   RequestForTeachingAssistant.create(
-    professor_id: Professor.where(name: professor_name).take.id,
+    professor_id: User.where(name: professor_name).take.professor.id,
     course_id: Course.find_by({:course_code => course_code}).id,
     requested_number: requested_number,
     priority: priority,
@@ -16,7 +16,7 @@ end
 
 When(/^there is a request for teaching assistant by professor "(.*?)" for the course "(.*?)"$/) do |professor_name, course_code|
   RequestForTeachingAssistant.create(
-    professor_id: Professor.where(name: professor_name).take.id,
+    professor_id: User.where(name: professor_name).take.professor.id,
     course_id: Course.find_by({:course_code => course_code}).id,
     requested_number: 1,
     priority: 1,
@@ -31,9 +31,8 @@ def create_professor(name, password, nusp, department, email, professor_rank)
   if not d
     d = Department.create! {{"code" => department}}
   end
-  Professor.create(name: name , password: password, nusp: nusp, department_id: d.id, email: email,
-    professor_rank: professor_rank,
-    confirmation_token:nil, confirmed_at: Time.now)
+  user = User.create(name: name , password: password, nusp: nusp, email: email, confirmed_at: Time.now)
+  Professor.create(department_id: d.id, professor_rank: professor_rank, user_id: user.id)
 end
 
 Given(/^there is a professor with name "(.*?)" and password "(.*?)" nusp "(.*?)" department "(.*?)" and email "(.*?)"$/) do |name, password, nusp, department, email|
@@ -110,7 +109,7 @@ When(/^there is an open semester "(.*?)" "(.*?)"$/) do |year, parity|
 end
 
 When(/^there is an assistant role for student "(.*?)" with professor "(.*?)" at course "(.*?)"$/) do |student_name, professor_name, course_code|
-  professor_id = Professor.where(name: professor_name).take.id
+  professor_id = User.where(name: professor_name).take.professor.id
   course_id = Course.where(course_code: course_code).take.id
   request_id = RequestForTeachingAssistant.where(professor_id: professor_id, course_id: course_id).take.id
   AssistantRole.create(student_id: User.where(name: student_name).take.student.id, request_for_teaching_assistant_id: request_id)
@@ -125,8 +124,8 @@ Given(/^there is an advise with title "(.*?)" and message "(.*?)" and urgency "(
   end
 end
 
-When(/^thete is an assistant evaluation for student "(.*?)" with professor "(.*?)" at course "(.*?)" as "(.*?)"$/) do |student_name, professor_name, course_code, comment|
-  professor_id = Professor.where(name: professor_name).take.id
+When(/^there is an assistant evaluation for student "(.*?)" with professor "(.*?)" at course "(.*?)" as "(.*?)"$/) do |student_name, professor_name, course_code, comment|
+  professor_id = User.where(name: professor_name).take.professor.id
   course_id = Course.where(course_code: course_code).take.id
   request_id = RequestForTeachingAssistant.where(professor_id: professor_id, course_id: course_id).take.id
   student_id = User.where(name: student_name).take.student.id

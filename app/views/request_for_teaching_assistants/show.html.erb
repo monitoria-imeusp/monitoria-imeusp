@@ -75,7 +75,7 @@
   <hr>
 <% end %>
 
-<% if (@candidatures_for_this_request.any? or @candidatures_for_this_department.any?) and (secretary_signed_in? or (professor_signed_in? and current_professor.super_professor?)) %>
+<% if (not @candidatures_for_this_request.nil? or not @candidatures_for_this_department.nil?) and (secretary_signed_in? or (user_signed_in? and current_user.super_professor?)) %>
   <table>
     <thead>
       <tr>

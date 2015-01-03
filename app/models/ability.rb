@@ -40,7 +40,7 @@ class Ability
       can :read, Dump
       can :create, Professor
       can :read, Professor
-      can :update, Professor
+      cannot :update, Professor
       can :destroy, Professor
       can :create, Secretary
       can :read, Secretary

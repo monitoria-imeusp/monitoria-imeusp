@@ -11,6 +11,7 @@ class UsersController < ApplicationController
   end
 
   def index
+    authorization_user
   end
 
   def edit
