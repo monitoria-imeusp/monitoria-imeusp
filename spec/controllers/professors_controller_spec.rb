@@ -63,15 +63,6 @@ describe ProfessorsController do
       it { expect(subject).to render_template :index }
     end
 
-    describe ".edit" do
-      let(:professor) { FactoryGirl.create(:professor) }
-      before :each do
-        get :edit, { id: professor.id }
-      end
-      subject { response }
-      it { expect(subject).to render_template :edit }
-    end
-
   end
 
   context 'when signed in as professor' do
