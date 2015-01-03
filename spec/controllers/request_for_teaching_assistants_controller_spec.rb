@@ -154,15 +154,17 @@ describe RequestForTeachingAssistantsController do
   # RequestForTeachingAssistantsController. Be sure to keep this updated too.
   let(:valid_session) { { } }
 
+  let(:prof_user) { FactoryGirl.create :user }
+  let!(:professor) { FactoryGirl.create :professor, user_id: prof_user.id }
   before :each do
-    professor = Professor.create! valid_professor
-    professor2 = Professor.create! another_professor_same_department
-    professor3 = Professor.create! another_professor_another_department
+    #professor = Professor.create! valid_professor
+    #professor2 = Professor.create! another_professor_same_department
+    #professor3 = Professor.create! another_professor_another_department
     Department.create! {{"id" => 1, "code" => "MAC"}}
     Department.create! {{"id" => 2, "code" => "MAE"}}
     @semester = Semester.create! (valid_semester)
     Course.create! valid_course_attributes
-    sign_in :professor, professor
+    sign_in prof_user
   end
 
   describe "GET index" do
@@ -321,7 +323,7 @@ describe RequestForTeachingAssistantsController do
     end
   end
 
-  describe "filters for request for teaching assistant" do
+  describe ".index_for_semester" do
 
     it "filters the requests of other professors" do
       Course.create! valid_second_course_attributes
@@ -330,32 +332,49 @@ describe RequestForTeachingAssistantsController do
       get :index_for_semester, { :semester_id => @semester.id }
       assigns(:request_for_teaching_assistants).should eq([request_for_teaching_assistant])
     end
-
-    it "filters the requests of the whole department" do
-      Course.create! valid_second_course_attributes
-      Course.create! valid_third_course_attributes
-      super_professor = Professor.create! super_professor_same_department
-      sign_in :professor, super_professor
-      shown_requests = []
-      shown_requests.push(RequestForTeachingAssistant.create! valid_attributes)
-      shown_requests.push(RequestForTeachingAssistant.create! not_owned_attributes)
-      RequestForTeachingAssistant.create! not_owned_other_department_attributes
-      RequestForTeachingAssistant.create! other_department_attributes
-      get :index_for_semester, { :semester_id => @semester.id }
-      assigns(:request_for_teaching_assistants).should eq(shown_requests)
+    context 'as super professor' do
+      let!(:courses) {
+        Course.create! valid_second_course_attributes
+        Course.create! valid_third_course_attributes
+      }
+      let(:super_prof_user) { FactoryGirl.create :another_user }
+      let!(:super_professor) { FactoryGirl.create :super_professor, user_id: super_prof_user.id }
+      let!(:shown_requests) {[
+        RequestForTeachingAssistant.create!(valid_attributes),
+        RequestForTeachingAssistant.create!(not_owned_attributes)
+      ]}
+      let!(:not_shown_requests) {
+        RequestForTeachingAssistant.create! not_owned_other_department_attributes
+        RequestForTeachingAssistant.create! other_department_attributes
+      }
+      before :each do
+        sign_out :prof_user
+        sign_in super_prof_user
+        get :index_for_semester, { :semester_id => @semester.id }
+      end
+      subject { assigns(:request_for_teaching_assistants) }
+      it { expect(subject).to eq(shown_requests) }
     end
 
-    it "filters the requests of the all department" do
-      Course.create! valid_second_course_attributes
-      Course.create! valid_third_course_attributes
-      hiper_professor = Professor.create! zara
-      sign_in :professor, hiper_professor
-      shown_requests = []
-      shown_requests.push(RequestForTeachingAssistant.create! valid_attributes)
-      shown_requests.push(RequestForTeachingAssistant.create! not_owned_attributes)
-      shown_requests.push(RequestForTeachingAssistant.create! other_department_attributes)
-      get :index_for_semester, { :semester_id => @semester.id }
-      assigns(:request_for_teaching_assistants).should eq(shown_requests)
+    context 'as hiper professor' do
+      let!(:courses) {
+        Course.create! valid_second_course_attributes
+        Course.create! valid_third_course_attributes
+      }
+      let(:hiper_prof_user) { FactoryGirl.create :another_user }
+      let!(:hiper_professor) { FactoryGirl.create :hiper_professor, user_id: hiper_prof_user.id }
+      let!(:shown_requests) {[
+        RequestForTeachingAssistant.create!(valid_attributes),
+        RequestForTeachingAssistant.create!(not_owned_attributes),
+        RequestForTeachingAssistant.create!(other_department_attributes)
+      ]}
+      before :each do
+        sign_out prof_user
+        sign_in hiper_prof_user
+        get :index_for_semester, { :semester_id => @semester.id }
+      end
+      subject { assigns(:request_for_teaching_assistants) }
+      it { expect(subject).to eq(shown_requests) }
     end
 
   end

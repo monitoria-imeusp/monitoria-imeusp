@@ -66,7 +66,7 @@ class RequestForTeachingAssistantsController < ApplicationController
   # POST /request_for_teaching_assistants.json
   def create
     if params[:request_for_teaching_assistant][:professor_id].nil?
-      params[:request_for_teaching_assistant][:professor_id] = current_professor.id
+      params[:request_for_teaching_assistant][:professor_id] = current_user.professor.id
     end
     @request_for_teaching_assistant = RequestForTeachingAssistant.new(request_for_teaching_assistant_params)
 
@@ -125,14 +125,22 @@ class RequestForTeachingAssistantsController < ApplicationController
   end
 
   def authorization_sprofessor
-    if (professor_signed_in? and current_professor.professor_rank == 1) and Course.find_by_id(@request_for_teaching_assistant.course_id).department != current_professor.department
-      raise CanCan::AccessDenied.new()
+    if user_signed_in?
+      current_user.professor do |professor|
+        if professor.professor_rank == 1 and Course.find_by_id(@request_for_teaching_assistant.course_id).department != professor.department
+          raise CanCan::AccessDenied.new
+        end
+      end
     end
   end
 
   def authorization_professor
-    if (professor_signed_in? and current_professor.professor_rank == 0) and @request_for_teaching_assistant.professor_id != current_professor.id
-      raise CanCan::AccessDenied.new()
+    if user_signed_in?
+      current_user.professor do |professor|
+        if professor.normal_professor? and @request_for_teaching_assistant.professor_id != professor.id
+          raise CanCan::AccessDenied.new
+        end
+      end
     end
   end
 
