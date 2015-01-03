@@ -95,8 +95,8 @@ class AssistantRolesController < ApplicationController
   def current_creator
     if secretary_signed_in?
       current_secretary
-    elsif professor_signed_in?
-      current_professor
+    elsif user_signed_in?
+      current_user.professor
     end
   end
 end

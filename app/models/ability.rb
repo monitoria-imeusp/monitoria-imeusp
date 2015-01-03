@@ -198,12 +198,12 @@ class Ability
       can :update, AssistantRole
       can :destroy, AssistantRole
     end
-    if user.is_a? Professor
+    if user.is_a? User and user.professor?
       can :index_for_professor, AssistantRole
     end
 
     # Assistant evaluation management permissions
-    if user.is_a? Professor
+    if user.is_a? User and user.professor?
       can :new, AssistantEvaluation
       can :edit, AssistantEvaluation
       can :create, AssistantEvaluation

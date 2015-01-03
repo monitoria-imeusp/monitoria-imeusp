@@ -2,6 +2,7 @@
 
 FactoryGirl.define do
   factory :request_for_teaching_assistant do
+    id                  1
     professor_id        1
     course_id           1
     requested_number    1
