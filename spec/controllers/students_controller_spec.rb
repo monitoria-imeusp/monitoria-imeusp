@@ -2,12 +2,6 @@ require 'spec_helper'
 
 describe StudentsController do
 
-  before do
-    #@user = FactoryGirl.create :student_user
-    #@student = FactoryGirl.create :student
-    @id = "42"
-  end
-
   context 'when not signed' do
 
     describe '.new' do
@@ -80,11 +74,17 @@ describe StudentsController do
   end
 
   context 'when signed in as professor' do
-    login_professor
+    let(:user) { FactoryGirl.create :user }
+    let(:professor) { FactoryGirl.create :professor, user_id: user.id }
+    before :each do
+      professor
+      @request.env["devise.mapping"] = Devise.mappings[:user]
+      sign_in user
+    end
 
     describe '.index' do
       before :each do
-        get :index
+        get :index, {}
       end
       it { should render_template :index }
       context "with no students" do
@@ -96,7 +96,6 @@ describe StudentsController do
         it { should eq([student]) }
       end
     end
-
   end
 
   context 'when signed in as secretary' do
@@ -122,6 +121,7 @@ describe StudentsController do
     let(:user) { FactoryGirl.create :user }
     let(:student) { FactoryGirl.create :student, user_id: user.id }
     before :each do
+      @request.env["devise.mapping"] = Devise.mappings[:user]
       sign_in user
     end
 

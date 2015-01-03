@@ -53,6 +53,7 @@ class ProfessorsController < ApplicationController
     if @professor.update(professor_params)
       redirect_to @professor.user
     else
+      # Never managed to reach here
       render 'edit'
     end
   end
@@ -73,7 +74,10 @@ class ProfessorsController < ApplicationController
   def authorization_professor
     if user_signed_in?
       current_user.professor do |professor|
-        raise CanCan::AccessDenied.new if (not professor.super_professor?) and @professor.id != professor.id
+        raise CanCan::AccessDenied.new unless @professor.id == professor.id
+      end
+      current_user.student do |student|
+        raise CanCan::AccessDenied.new
       end
     end
   end

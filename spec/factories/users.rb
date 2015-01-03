@@ -11,8 +11,8 @@ FactoryGirl.define do
   end
   factory :another_user, class: User do
     id            "2"
-    name          "Student"
-    email         "student@ime.usp.br"
+    name          "Another"
+    email         "another@ime.usp.br"
     nusp          22222
     password      "password"
     confirmed_at  Time.now

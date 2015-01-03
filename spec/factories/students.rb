@@ -2,6 +2,7 @@
 
 FactoryGirl.define do
   factory :student do
+    id                1
     institute         "Instituto de Matemática e Estatística"
     gender            1
     rg                "1"

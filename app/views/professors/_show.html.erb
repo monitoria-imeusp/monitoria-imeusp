@@ -13,11 +13,10 @@
   </p>
 <% end %>
 
-<% if user_signed_in? and current_user.professor == @professor %>
+<% if admin_signed_in? or (user_signed_in? and current_user.professor == @professor) %>
   <%= link_to 'Editar', edit_professor_path(@professor) %>
   <span style="height: 2em; display: block;"></span>
 <% end %>
-
 
 <% if can_promote? %>
   <p>
