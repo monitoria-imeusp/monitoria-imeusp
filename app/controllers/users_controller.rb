@@ -54,8 +54,13 @@ class UsersController < ApplicationController
   private
 
   def authorization_user
-    if user_signed_in? and current_user.student? and (not @user.student? or @user.id != current_user.id)
-      raise CanCan::AccessDenied.new()
+    if user_signed_in?
+      if current_user.student? and (not @user.student? or @user.id != current_user.id)
+        raise CanCan::AccessDenied.new
+      end
+      current_user.professor do |professor|
+        raise CanCan::AccessDenied.new unless professor.super_professor? or @user.id == current_user.id
+      end
     end
   end
 

@@ -50,13 +50,8 @@ class ProfessorsController < ApplicationController
 
   def update
     @professor = Professor.find(params[:id])
-    if params[:professor][:password].blank? && params[:professor][:password_confirmation].blank?
-      params[:professor].delete(:password)
-      params[:professor].delete(:password_confirmation)
-    end
     if @professor.update(professor_params)
-      sign_in  @professor, :bypass => true
-      redirect_to @professor
+      redirect_to @professor.user
     else
       render 'edit'
     end
@@ -76,8 +71,10 @@ class ProfessorsController < ApplicationController
   end
 
   def authorization_professor
-    if (professor_signed_in? and current_professor.professor_rank == 0) and @professor.id != current_professor.id
-      raise CanCan::AccessDenied.new()
+    if user_signed_in?
+      current_user.professor do |professor|
+        raise CanCan::AccessDenied.new if (not professor.super_professor?) and @professor.id != professor.id
+      end
     end
   end
 

@@ -18,8 +18,9 @@
 
   <div class="field">
     <%= f.label :department_id, t('activerecord.attributes.department.department') %><br>
-    <%= f.select :department_id, department_options %>
+    <%= f.select :department_id, department_options, :include_blank => false %>
   </div>
+
   <% if admin_signed_in? %>
     <div class="field">
     <%= f.label :professor_rank, t('activerecord.attributes.professor.professor_rank') %><br>

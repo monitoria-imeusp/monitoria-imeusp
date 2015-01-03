@@ -88,6 +88,7 @@ pt-BR:
         password: 'Senha'
         password_confirmation: 'Confirme a senha'
         password_note: 'A senha deve conter pelo menos 8 caracteres'
+        password_optional: 'Pode deixar em branco se não quiser mudar'
         email: 'E-mail'
         confirmed_at: 'Data de confirmação'
         unconfirmed: 'Não confirmado'
