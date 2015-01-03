@@ -39,3 +39,8 @@
   <%= render template: "students/_show" %>
 <% end %>
 
+<% @user.professor do |professor| %>
+  <% @professor = professor %>
+  <%= render template: "professors/_show" %>
+<% end %>
+

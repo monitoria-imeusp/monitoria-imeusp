@@ -4,16 +4,27 @@ class ProfessorsController < ApplicationController
 
   def new
     @professor = Professor.new
+    @user = User.new
   end
 
   def create
+    @user = User.new(user_params)
     @professor = Professor.new(professor_params)
     generated_password = Devise.friendly_token.first(8)
-    @professor.password = generated_password
-    if @professor.save
-      redirect_to @professor
+    @user.password = generated_password
+
+    if @user.save
+      @professor.user_id = @user.id
+      if @professor.save
+        redirect_to @user
+      else
+        render 'new'
+      end
     else
-      render 'new'
+      respond_to do |format|
+        format.html { render action: 'new'}
+        format.json { render json: @user.errors, status: :unprocessable_entity }
+      end
     end
   end
 
@@ -27,9 +38,6 @@ class ProfessorsController < ApplicationController
         format.html {render @professor}
       end
     end
-  end
-
-  def show
   end
 
   def index
@@ -54,13 +62,6 @@ class ProfessorsController < ApplicationController
     end
   end
 
-  def destroy
-    @professor = Professor.find(params[:id])
-    @professor.destroy
-
-    redirect_to professors_path
-  end
-
   def change_password
   end
 
@@ -81,7 +82,10 @@ class ProfessorsController < ApplicationController
   end
 
   def professor_params
-    params.require(:professor).permit(:name, :nusp,:email,
-      :department_id, :professor_rank, :password, :password_confirmation)
+    params.require(:professor).permit(:department_id, :professor_rank)
+  end
+
+  def user_params
+    params.require(:user).permit(:name, :nusp, :email)
   end
 end

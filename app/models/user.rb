@@ -15,8 +15,9 @@ class User < ActiveRecord::Base
     result = Student.where(user_id: id)
     if block_given? and result.any?
       yield result.take
+    else
+      result.take
     end
-    result.take
   end
 
   def student?
@@ -27,8 +28,9 @@ class User < ActiveRecord::Base
     result = Professor.where(user_id: id)
     if block_given? and result.any?
       yield result.take
+    else
+      result.take
     end
-    result.take
   end
 
   def professor?

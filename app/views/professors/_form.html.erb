@@ -1,4 +1,9 @@
 <%= form_for(@professor) do |f| %>
+
+  <% unless @user.nil? %>
+    <%= render template: "users/_inner_nopass_form" %>
+  <% end %>
+
   <% if @professor.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@professor.errors.count, "erro impediu", "erros impediram") %> esse professor de ser salvo:</h3>
@@ -12,20 +17,8 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :name, t('activerecord.attributes.professor.name') %><br>
-    <%= f.text_field :name %>
-  </div>
-  <div class="field">
-    <%= f.label :nusp, t('activerecord.attributes.professor.nusp') %><br>
-    <%= f.text_field :nusp %>
-  </div>
-  <div class="field">
     <%= f.label :department_id, t('activerecord.attributes.department.department') %><br>
     <%= f.select :department_id, department_options %>
-  </div>
-  <div class="field">
-    <%= f.label :email, t('activerecord.attributes.professor.email') %><br>
-    <%= f.email_field :email %>
   </div>
   <% if admin_signed_in? %>
     <div class="field">

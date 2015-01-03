@@ -43,6 +43,9 @@ class UsersController < ApplicationController
     @user.student do |s|
       s.destroy
     end
+    @user.professor do |p|
+      p.destroy
+    end
     @user.destroy
 
     redirect_to root_path

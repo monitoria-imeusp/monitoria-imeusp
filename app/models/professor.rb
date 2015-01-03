@@ -10,6 +10,14 @@ class Professor < ActiveRecord::Base
     return user.name
   end
 
+  def email
+    return user.email
+  end
+
+  def nusp
+    return user.nusp
+  end
+
   def normal_professor?
     return professor_rank == 0
   end
