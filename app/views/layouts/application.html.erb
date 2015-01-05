@@ -45,11 +45,13 @@
           <p>
             Você ainda não fez acesso
           </p>
-          <ul>
-            <li>
-              <%= link_to "Guia de uso (alunos)", help_students_path('home') %>
-            </li>
-          </ul>
+          <% unless Rails.env.production? %>
+            <ul>
+              <li>
+                <%= link_to "Guia de uso (alunos)", help_students_path('home') %>
+              </li>
+            </ul>
+          <% end %>
         <% end %>
 
         <!-- Painel do admin -->
@@ -139,9 +141,11 @@
               <li>
                  <%= link_to "Minhas candidaturas", candidatures_path %>
               </li>
-              <li>
-                 <%= link_to "Guia de uso", help_students_path('home') %>
-              </li>
+              <% unless Rails.env.production? %>
+                <li>
+                   <%= link_to "Guia de uso", help_students_path('home') %>
+                </li>
+              <% end %>
             </ul>
           <% end %>
         <% end %>
