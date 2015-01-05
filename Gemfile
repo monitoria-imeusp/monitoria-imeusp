@@ -21,6 +21,9 @@ gem 'modernizr-rails'
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 
+# Use fancybox to zoom images
+gem 'fancybox2-rails', '~> 0.2.8'
+
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 gem 'turbolinks'
 

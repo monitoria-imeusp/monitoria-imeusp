@@ -45,6 +45,7 @@
           <p>
             Você ainda não fez acesso
           </p>
+          <%= link_to "Guia de uso da página pelos estudantes", help_students_path('home') %>
         <% end %>
 
         <!-- Painel do admin -->
@@ -129,6 +130,9 @@
           <ul>
             <li>
                <%= link_to "Minhas candidaturas", candidatures_path %>
+            </li>
+            <li>
+               <%= link_to "Guia de uso da página pelos estudantes", help_students_path('home') %>
             </li>
           </ul>
         <% end %>
