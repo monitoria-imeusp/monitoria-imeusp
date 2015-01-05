@@ -6,7 +6,7 @@ class User < ActiveRecord::Base
   include ActiveModel::Validations
 
   validates :name , presence: true
-  validates :nusp , presence: true, inclusion: { in: 10000..100000000 }, uniqueness: true
+  validates :nusp , presence: true, inclusion: { in: 0..100000000 }, uniqueness: true
   validates :email , presence: true
   has_one :student
   has_one :professor
