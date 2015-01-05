@@ -106,79 +106,93 @@ describe CandidaturesController do
   # CandidaturesController. Be sure to keep this updated too.
   let(:valid_session) { {} }
 
-  @student = login_student
+  let(:user) { FactoryGirl.create :user }
+  let(:student) { FactoryGirl.create :student, user_id: user.id }
 
   before :each do
+    sign_in user
     @mac = Department.create! mac_attributes
     @mae = Department.create! mae_attributes
     @shown_candidatures = { @mac.code => [], @mae.code => [] }
-    valid_attributes["student_id"] = @student.id
+    valid_attributes["student_id"] = student.id
     Course.create! valid_course_attributes
     Course.create! valid_second_course_attributes
     Course.create! valid_third_course_attributes
   end
 
-  describe "GET index" do
-    it "redirects students to index_for_student" do
-      get :index, {}, valid_session
-      response.should redirect_to action: :index_for_student, student_id: @student
+  describe ".index" do
+    context 'as student' do
+      before :each do
+        get :index, {}
+      end
+      it { should redirect_to action: :index_for_student, student_id: student }
     end
-    it "redirects super professor to index_for_department" do
-      semester = Semester.create! valid_semester
-      Semester.should_receive(:current).and_return(semester)
-      super_professor = Professor.create! kunio
-      sign_in :professor, super_professor
-      get :index, {}, valid_session
-      response.should redirect_to action: :index_for_department, semester_id: valid_semester["id"], department_id: super_professor.department
+    context 'as super professor' do
+      let!(:semester) { FactoryGirl.create :semester }
+      let(:prof_user) { FactoryGirl.create :another_user }
+      let!(:super_professor) { FactoryGirl.create :super_professor, user_id: prof_user.id }
+      before :each do
+        sign_out user
+        sign_in prof_user
+        get :index, {}
+      end
+      it { should redirect_to action: :index_for_department, semester_id: semester.id, department_id: super_professor.department }
     end
-    it "hiper professor assigns all departments as @departments" do
-      hiper_professor = Professor.create! zara
-      sign_in :professor, hiper_professor
-      get :index, {}, valid_session
-      assigns(:departments).should eq(Department.all)
-    end
-  end
-
-  describe "GET index for student" do
-    before :each do
-      @candidatures = []
-      @candidatures.push(Candidature.create! valid_attributes)
-      Candidature.create! valid_second_candidature_attributes
-      Candidature.create! valid_third_candidature_attributes
-      get :index_for_student, {student_id: @student}, valid_session
-    end
-
-    it "renders the index for the student" do
-      should render_template :index_for_student
-    end
-
-    it "assigns student's candidatures as @candidatures" do
-      assigns(:candidatures).should eq(@candidatures)
+    context 'as hiper professor' do
+      let(:prof_user) { FactoryGirl.create :another_user }
+      let!(:hiper_professor) { FactoryGirl.create :hiper_professor, user_id: prof_user.id }
+      before :each do
+        sign_out user
+        sign_in prof_user
+        get :index, {}
+      end
+      subject { assigns(:departments) }
+      it { expect(subject).to eq(Department.all) }
     end
   end
 
-  describe "GET index for department" do
+  describe ".index_for_student" do
+    context 'response' do
+      before :each do
+        get :index_for_student, {student_id: student.id}
+      end
+      subject { response }
+      it { expect(subject).to render_template(:index_for_student) }
+    end
+
+    context 'candidatures' do
+      let(:candidatures) { [Candidature.create!(valid_attributes)] }
+      before :each do
+        Candidature.create! valid_second_candidature_attributes
+        Candidature.create! valid_third_candidature_attributes
+        get :index_for_student, {student_id: student.id}
+      end
+      subject { assigns(:candidatures) }
+      it { expect(subject).to eq(candidatures) }
+    end
+  end
+
+  describe ".index_for_department" do
+    let!(:semester) { FactoryGirl.create :semester }
+    let(:prof_user) { FactoryGirl.create :another_user }
+    let!(:super_professor) { FactoryGirl.create :super_professor, user_id: prof_user.id }
+    let!(:candidatures) { [[ Candidature.create!(valid_attributes), Candidature.create!(valid_second_candidature_attributes) ], [], [], []] }
+    let!(:unrelated_candidature) { Candidature.create! valid_third_candidature_attributes }
     before do
-      Semester.create! valid_semester
-      @candidatures = [[], [], [], []]
-      @candidatures[0].push(
-        (Candidature.create! valid_attributes),
-        (Candidature.create! valid_second_candidature_attributes)
-      )
-      Candidature.create! valid_third_candidature_attributes
-      super_professor = Professor.create! kunio
-      sign_out @student
-      sign_in :professor, super_professor
-      Department.should_receive(:find).with(super_professor.department_id.to_s).and_return(@mac)
-      get :index_for_department, {semester_id: valid_semester["id"], department_id: @mac}, valid_session
+      sign_out user
+      sign_in prof_user
+      #Department.should_receive(:find).with(super_professor.department_id.to_s).and_return(@mac)
+      get :index_for_department, { semester_id: semester.id, department_id: @mac.id}
     end
 
-    it "renders the index for the super professor's department" do
-      should render_template :index_for_department
+    context 'response' do
+      subject { response }
+      it { expect(response).to render_template(:index_for_department) }
     end
 
-    it "assigns candidatures of super professor's department as @candidatures_filtered" do
-      assigns(:candidatures_filtered).should eq(@candidatures)
+    context 'filtered candidatures' do
+      subject { assigns(:candidatures_filtered) }
+      it { expect(subject).to eq(candidatures) }
     end
   end
 
@@ -224,7 +238,7 @@ describe CandidaturesController do
         post :create, {:candidature => valid_attributes}, valid_session
         assigns(:candidature).should be_a(Candidature)
         assigns(:candidature).should be_persisted
-        assigns(:candidature).student_id.should eq(@student.id)
+        assigns(:candidature).student_id.should eq(student.id)
       end
 
       it "redirects to the created candidature" do
@@ -239,7 +253,7 @@ describe CandidaturesController do
         Candidature.any_instance.stub(:save).and_return(false)
         post :create, {:candidature => {}}, valid_session
         assigns(:candidature).should be_a_new(Candidature)
-        assigns(:candidature).student_id.should eq(@student.id)
+        assigns(:candidature).student_id.should eq(student.id)
       end
 
       it "re-renders the 'new' template" do

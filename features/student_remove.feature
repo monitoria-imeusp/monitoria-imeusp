@@ -14,7 +14,7 @@ Feature: delete a student
         And I fill the "Senha" field with "admin123"
         And I press the "Entrar" button
     	And I go to the students index
-        And I click the "carlinhos" link
+        And I click the "Ver perfil" link
     	And I click the "Remover" link
     	And I should not see "carlinhos"
 
@@ -26,7 +26,7 @@ Feature: delete a student
         And I fill the "Senha" field with "12345678"
         And I press the "Entrar" button
         And I go to the students index
-        And I click the "carlinhos" link
+        And I click the "Ver perfil" link
         And I should see "Remover"
         And I click the "Remover" link
         And I should not see "carlinhos"
@@ -38,5 +38,5 @@ Feature: delete a student
         And I fill the "Senha" field with "12345678"
         And I press the "Entrar" button
     	And I go to the students index
-        And I click the "carlinhos" link
+        And I click the "Ver perfil" link
     	And I should not see "Remover"

@@ -1,70 +1,73 @@
 
 <h1>Minhas candidaturas</h1>
-<hr>
 
-<% @candidatures.each do |candidature| %>
-  <table>
-    <thead>
-      <tr>
-        <th colspan="2">
-          <%= candidature.semester.period_as_s %>
-        </th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td class="title">
-          <%= t('activerecord.attributes.candidature.course1_id') %>
-        </td>
-        <td class="name">
-          <% course = Course.find(candidature.course1_id) %>
-          <%= course.course_code + " - " + course.name %>
-        </td>
-      </tr>
-      <% if candidature.course2_id != nil %>
+<% if @candidatures.any? %>
+  <% @candidatures.each do |candidature| %>
+    <table>
+      <thead>
+        <tr>
+          <th colspan="2">
+            <%= candidature.semester.period_as_s %>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
         <tr>
           <td class="title">
-            <%= t('activerecord.attributes.candidature.course2_id') %>
+            <%= t('activerecord.attributes.candidature.course1_id') %>
           </td>
           <td class="name">
-            <% course = Course.find(candidature.course2_id) %>
+            <% course = Course.find(candidature.course1_id) %>
             <%= course.course_code + " - " + course.name %>
           </td>
         </tr>
-      <% end %>
-      <% if candidature.course3_id != nil %>
+        <% if candidature.course2_id != nil %>
+          <tr>
+            <td class="title">
+              <%= t('activerecord.attributes.candidature.course2_id') %>
+            </td>
+            <td class="name">
+              <% course = Course.find(candidature.course2_id) %>
+              <%= course.course_code + " - " + course.name %>
+            </td>
+          </tr>
+        <% end %>
+        <% if candidature.course3_id != nil %>
+          <tr>
+            <td class="title">
+              <%= t('activerecord.attributes.candidature.course3_id') %>
+            </td>
+            <td class="name">
+              <% course = Course.find(candidature.course3_id) %>
+              <%= course.course_code + " - " + course.name %>
+            </td>
+          </tr>
+        <% end %>
+        <% if candidature.course4_id != nil %>
+          <tr>
+            <td class="title">
+              <%= t('activerecord.attributes.candidature.course4_id') %>
+            </td>
+            <td class="name">
+              <% course = Course.find(candidature.course4_id) %>
+              <%= course.course_code + " - " + course.name %>
+            </td>
+          </tr>
+        <% end %>
         <tr>
-          <td class="title">
-            <%= t('activerecord.attributes.candidature.course3_id') %>
-          </td>
-          <td class="name">
-            <% course = Course.find(candidature.course3_id) %>
-            <%= course.course_code + " - " + course.name %>
-          </td>
+          <td colspan="2"><%= link_to 'Mais informações', candidature %></th>
         </tr>
-      <% end %>
-      <% if candidature.course4_id != nil %>
-        <tr>
-          <td class="title">
-            <%= t('activerecord.attributes.candidature.course4_id') %>
-          </td>
-          <td class="name">
-            <% course = Course.find(candidature.course4_id) %>
-            <%= course.course_code + " - " + course.name %>
-          </td>
-        </tr>
-      <% end %>
-      <tr>
-        <td colspan="2"><%= link_to 'Mais informações', candidature %></th>
-      </tr>
-    </tbody>
-  </table>
-  <br>
+      </tbody>
+    </table>
+    <br>
+  <% end %>
+<% else %>
+  <h2><i>Você não tem nenhuma candidatura</i></h2>
 <% end %>
 
 <br>
 
-<% if student_signed_in? %>
+<% if user_signed_in? and current_user.student? %>
   <% @semesters.each do |semester| %>
     <% if semester[:valid] %>
       <%= link_to "Candidatar-se para #{semester[:get].as_s}",

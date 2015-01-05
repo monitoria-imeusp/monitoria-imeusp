@@ -13,7 +13,7 @@ Feature: Create a candidature
         And there is a course with name "redes" and code "MAC0448" and department "MAC"
 
 	Scenario: Student creating a candidature
-        Given I'm at the student login page
+        Given I'm at the user login page
         When I fill the "Número USP" field with "123456"
         And I fill the "Senha" field with "changeme!"
         And I press the "Entrar" button
@@ -38,7 +38,7 @@ Feature: Create a candidature
         And I should see "Observações: teste observações"
 
     Scenario: Student misses a field pattern
-        Given I'm at the student login page
+        Given I'm at the user login page
         When I fill the "Número USP" field with "123456"
         And I fill the "Senha" field with "changeme!"
         And I press the "Entrar" button

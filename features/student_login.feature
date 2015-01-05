@@ -4,7 +4,7 @@ Feature: Login Student
     I want to login in the system
 
     Scenario: Valid credentials
-        Given I'm at the student login page
+        Given I'm at the user login page
         And there is a student with name "carlinhos" with nusp "123456" and email "eu@usp.br"
         When I fill the "Número USP" field with "123456"
         And I fill the "Senha" field with "changeme!"

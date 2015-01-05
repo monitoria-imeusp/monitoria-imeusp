@@ -2,9 +2,7 @@
 
 FactoryGirl.define do
   factory :student do
-    name              "Aluno"
-    password          "changeme!"
-    nusp              "111111111"
+    id                1
     institute         "Instituto de Matemática e Estatística"
     gender            1
     rg                "1"
@@ -17,8 +15,6 @@ FactoryGirl.define do
     state             "Estado"
     tel               "0111111111"
     cel               "0111111111"
-    email             "email@email.com"
     has_bank_account  true
-    confirmed_at      Time.now
   end
 end

@@ -5,7 +5,7 @@ Feature: Edit Professor
 
     Background:
         Given there is an admin user with email "kazuo@ime.usp.br" and password "admin123"
-        And there is a professor with name "Bob" and password "prof-123" nusp "123" department "MAC" and email "bob@bob.bob"
+        And there is a professor with name "Bob" and password "prof-123" nusp "123456" department "MAC" and email "bob@bob.bob"
         And there is a department with code "MAE"
 
     Scenario: Admin can not edit a professor
@@ -20,41 +20,32 @@ Feature: Edit Professor
     Scenario: Professor editing itself
         Then I'm at the professor login page
         When I'm ready to receive email
-        And I fill the "Número USP" field with "123"
+        And I fill the "Número USP" field with "123456"
         And I fill the "Senha" field with "prof-123"
         And I press the "Entrar" button
         When I click the "Perfil" link
-        And I click the "Editar" link
-        And I fill the "Nome" field with "Gold"
-        And I fill the "Número USP" field with "12345"
+        And I click the second "Editar" link
         And I select "MAE" on the "Departamento"
-        And I fill the "Email" field with "gold@troll.com"
         And I press the "Enviar" button
-        And I click the "Sair" link
-        And I confirm the professor edition with nusp "12345" and password "prof-123" and email "gold@troll.com" and sign in
-        And I click the "Perfil" link
-        Then I should see "Nome: Gold"
-        Then I should see "Número USP: 12345"
-        Then I should see "Email: gold@troll.com"
         Then I should see "Departamento: MAE"
 
     Scenario: Super-professor can't give super-professor authorization
-        Given there is a super_professor with name "Nina" and password "changeme!" nusp "321" department "MAE" and email "nin@nin.nin"
+        Given there is a super_professor with name "Nina" and password "changeme!" nusp "654321" department "MAE" and email "nin@nin.nin"
         Given I'm at the professor login page
-        And I fill the "Número USP" field with "321"
+        And I fill the "Número USP" field with "654321"
         And I fill the "Senha" field with "changeme!"
         And I press the "Entrar" button
         When I'm at the list_professors page
         And I click the "Bob" link
-        Then I should not see "Privilégios"
+        Then I should not see "Promover para comissão de monitoria"
 
     Scenario:Hiper-professor giving super-professor authorization
-        Given there is a hiper_professor with name "Zara" and password "changeme!" nusp "321" department "MAT" and email "zar@zar.zar"
+        Given there is a hiper_professor with name "Zara" and password "changeme!" nusp "654321" department "MAT" and email "zar@zar.zar"
         Given I'm at the professor login page
-        And I fill the "Número USP" field with "321"
+        And I fill the "Número USP" field with "654321"
         And I fill the "Senha" field with "changeme!"
         And I press the "Entrar" button
         When I'm at the list_professors page
         And I click the "Bob" link
-        And I press the "Privilégios" button
+        And I press the "Promover para comissão de monitoria" button
         Then I should see "Bob é agora um Super-professor"

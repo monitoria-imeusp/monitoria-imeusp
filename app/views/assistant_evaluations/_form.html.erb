@@ -1,18 +1,20 @@
 
-<hr>
-  <h2>Período letivo</h2>
+<h2>Informações gerais</h2>
+
+<h3>Período letivo</h3>
 <p>
   <%= @assistant_evaluation.semester.as_s %>
 </p>
-  <h2>Nome do Monitor(a)</h2>
+
+<h3>Nome do Monitor(a)</h3>
 <p>
   <%= @assistant_evaluation.student.name %>
 </p>
-  <h2>Colaborou junto à disciplina</h2>
+
+<h3>Colaborou junto à disciplina</h3>
 <p>
   <%= @assistant_evaluation.course.full_name %>
 </p>
-<hr>
 
 <h2>Avaliação</h2>
 <%= form_for(@assistant_evaluation) do |f| %>
@@ -32,9 +34,9 @@
   </div>
   <% criteria.each do |crit| %>
     <div class="field">
-      <p>
-        <strong><%= f.label crit, t('activerecord.attributes.assistant_evaluation.'+crit.to_s) %></strong><br>
-      </p>
+      <h3>
+        <%= f.label crit, t('activerecord.attributes.assistant_evaluation.'+crit.to_s) %><br>
+      </h3>
       <% evaluation_grades.each do | grade_option | %>
         <%= f.radio_button crit, grade_option[1] %>
         <%= f.label grade_option[0] %>
@@ -42,7 +44,7 @@
     </div>
   <% end %>
   <div class="field">
-    <%= f.label :comment, t('activerecord.attributes.assistant_evaluation.comment') %><br>
+    <h3><%= f.label :comment, t('activerecord.attributes.assistant_evaluation.comment') %><br></h3>
     <%= f.text_area :comment %>
   </div>
   <div class="actions">

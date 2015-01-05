@@ -12,10 +12,10 @@ Feature: Assistant evaluation edition
         And there is a request for teaching assistant by professor "Dude" for the course "MAC0110"
         And there is a candidature by student "Bob" for course "MAC0110"
         And there is an assistant role for student "Bob" with professor "Dude" at course "MAC0110"
-        And thete is an assistant evaluation for student "Bob" with professor "Dude" at course "MAC0110" as "ok"
+        And there is an assistant evaluation for student "Bob" with professor "Dude" at course "MAC0110" as "ok"
 
     Scenario: Professor edits assistant evaluation
-        Given I'm logged in as a professor "Dude"
+        Given I'm logged in as professor "Dude"
         And I visit my assistant roles page
         When I click the "Mudar avaliação" link
         And I fill the assistant evaluation fields

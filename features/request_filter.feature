@@ -8,9 +8,9 @@ Feature: Filtering requests for teaching assistant
         And I'm at the professor login page
         And there is a department with code "MAC"
         And there is a department with code "MAE"
-        And there is a super_professor with name "Bob" and password "prof-123" nusp "123" department "MAC" and email "bob@bob.bob"
-        And there is a professor with name "Bob2" and password "prof-123" nusp "1234" department "MAC" and email "bob2@bob.bob"
-        And there is a professor with name "Bob3" and password "prof-123" nusp "1235" department "MAE" and email "bob3@bob.bob"
+        And there is a super_professor with name "Bob" and password "prof-123" nusp "12333" department "MAC" and email "bob@bob.bob"
+        And there is a professor with name "Bob2" and password "prof-123" nusp "12344" department "MAC" and email "bob2@bob.bob"
+        And there is a professor with name "Bob3" and password "prof-123" nusp "12355" department "MAE" and email "bob3@bob.bob"
         And there is a course with name "Mascarenhas" and code "MAC0110" and department "MAC"
         And there is a course with name "Coisas" and code "MAC0112" and department "MAC"
         And there is a course with name "Coisas2" and code "MAC0113" and department "MAC"
@@ -21,7 +21,7 @@ Feature: Filtering requests for teaching assistant
         And there is a request for teaching assistant with professor "Bob" and course "MAC0113" and requested_number "20" and priority "1" and student_assistance "true" and work_correction "true" and test_oversight "true"
         And there is a request for teaching assistant with professor "Bob3" and course "MAE0114" and requested_number "2" and priority "1" and student_assistance "true" and work_correction "true" and test_oversight "true"
         And there is a request for teaching assistant with professor "Bob3" and course "MAE0115" and requested_number "4" and priority "1" and student_assistance "true" and work_correction "true" and test_oversight "true"
-        When I fill the "Número USP" field with "123"
+        When I fill the "Número USP" field with "12333"
         And I fill the "Senha" field with "prof-123"
         And I press the "Entrar" button
         And I click the "Pedidos de monitoria" link

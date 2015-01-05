@@ -26,10 +26,10 @@
         <!-- Painel de quem não é usuário -->
         <% if signed_in? %>
           <%= link_to "Sair", destroy_session_path, method: :delete %>
-          <%= link_to "Perfil", current_user %>
+          <%= link_to "Perfil", current_signed %>
         <% else %>
           <%= link_to "Cadastrar-se", new_student_path %>
-          <%= link_to "Acessar", new_student_session_path %>
+          <%= link_to "Acessar", new_user_session_path %>
         <% end %>
       </div>
     </header>
@@ -39,12 +39,19 @@
         <% if signed_in? %>
           <p>
             Acessando como
-            <b><%=current_user.email%></b>
+            <b><%=admin_signed_in? ? current_signed.email : current_signed.name %></b>
           </p>
         <% else %>
           <p>
             Você ainda não fez acesso
           </p>
+          <% unless Rails.env.production? %>
+            <ul>
+              <li>
+                <%= link_to "Guia de uso (alunos)", help_students_path('home') %>
+              </li>
+            </ul>
+          <% end %>
         <% end %>
 
         <!-- Painel do admin -->
@@ -77,35 +84,9 @@
               <%= link_to "Painel de controle", control_panel_admins_path %>
             </li>
           </ul>
-        <!-- Painel dos professores -->
-        <% elsif professor_signed_in? %>
-          <hr>
-          <h2>Professor(a)</h2>
-          <ul>
-            <li>
-              <%= link_to "Pedidos de monitoria", request_for_teaching_assistants_path %>
-            </li>
-            <li>
-              <%= link_to "Meus monitores", assistant_roles_for_professor_path(current_professor) %>
-            </li>
-          </ul>
-          <% if current_professor.super_professor? %>
-            <hr>
-            <h2>Comissão de monitoria</h2>
-            <ul>
-                <li>
-                  <%= link_to "Cadastrar disciplina", new_course_path %>
-                </li>
-                <li>
-                   <%= link_to "Candidaturas", candidatures_path %>
-                </li>
-                <li>
-                  <%= link_to "Monitores eleitos", assistant_roles_path %>
-                </li>
-            </ul>
-          <% end %>
+        <% end %>
         <!-- Painel dos funcionários -->
-        <% elsif secretary_signed_in? %>
+        <% if secretary_signed_in? %>
           <hr>
           <h2>Funcionário(a)</h2>
           <ul>
@@ -122,15 +103,51 @@
                <%= link_to "Candidaturas", candidatures_path %>
             </li>
           </ul>
-        <!-- Painel dos alunos -->
-        <% elsif student_signed_in? %>
-          <hr>
-          <h2>Aluno(a)</h2>
-          <ul>
-            <li>
-               <%= link_to "Minhas candidaturas", candidatures_path %>
-            </li>
-          </ul>
+        <% end %>
+        <% if user_signed_in? %>
+          <!-- Painel dos professores -->
+          <% current_user.professor do |professor| %>
+            <hr>
+            <h2>Professor(a)</h2>
+            <ul>
+              <li>
+                <%= link_to "Pedidos de monitoria", request_for_teaching_assistants_path %>
+              </li>
+              <li>
+                <%= link_to "Meus monitores", assistant_roles_for_professor_path(professor) %>
+              </li>
+            </ul>
+            <% if professor.super_professor? %>
+              <hr>
+              <h2>Comissão de monitoria</h2>
+              <ul>
+                  <li>
+                    <%= link_to "Cadastrar disciplina", new_course_path %>
+                  </li>
+                  <li>
+                     <%= link_to "Candidaturas", candidatures_path %>
+                  </li>
+                  <li>
+                    <%= link_to "Monitores eleitos", assistant_roles_path %>
+                  </li>
+              </ul>
+            <% end %>
+          <% end %>
+          <!-- Painel dos alunos -->
+          <% current_user.student do |student| %>
+            <hr>
+            <h2>Aluno(a)</h2>
+            <ul>
+              <li>
+                 <%= link_to "Minhas candidaturas", candidatures_path %>
+              </li>
+              <% unless Rails.env.production? %>
+                <li>
+                   <%= link_to "Guia de uso", help_students_path('home') %>
+                </li>
+              <% end %>
+            </ul>
+          <% end %>
         <% end %>
 
         <% if flash[:notice] %>
@@ -144,6 +161,10 @@
       <section>
         <%= yield %>
       </section>
+    <footer>
+      <p><strong>Dúvidas sobre o processo de inscrição</strong>: monitoria@ime.usp.br</p>
+      <p><strong>Problemas com o sistema</strong>: sistemamonitoria@ime.usp.br</p>
+    </footer>
     </div>
 
   </body>

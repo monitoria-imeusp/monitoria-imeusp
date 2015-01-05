@@ -31,15 +31,15 @@ Given(/^I'm at the list_professors page$/) do
 end
 
 Given(/^I'm at the professor login page$/) do
-  visit new_professor_session_path
+  visit new_user_session_path
 end
 
 Given(/^I'm at the secretary login page$/) do
   visit new_secretary_session_path
 end
 
-Given(/^I'm at the student login page$/) do
-  visit new_student_session_path
+Given(/^I'm at the user login page$/) do
+  visit new_user_session_path
 end
 
 When(/^I go to the new candidature form$/) do
@@ -88,6 +88,14 @@ When(/^I try to update the student with id "(.*?)"$/) do |id|
 end
 
 When(/^I visit student "(.*?)"'s page$/) do |name|
-  visit student_path(Student.where(name: name).take.id)
+  visit user_path(User.where(name: name).take.id)
+end
+
+Then(/^I cannot access the "(.*?)" page with id "(.*?)" to "(.*?)"$/) do |page_name, id, action|
+  if action != 'show'
+    expect { visit('/' + page_name + '/' + id.to_s + '/' + action) }.to raise_error(ActionController::RoutingError)
+  else
+    expect { visit('/' + page_name + '/' + id.to_s) }.to raise_error(ActionController::RoutingError)
+  end
 end
 

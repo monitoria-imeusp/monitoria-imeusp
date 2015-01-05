@@ -19,7 +19,7 @@ Feature: Login Professor
         And I press the "Entrar" button
         And I'm at the login page
         Then I should see "Sistema de Monitoria"
-        And I should see "devil@usp.br"
+        And I should see "mandel"
 
     Scenario: Professor doesn't exist
         Given I'm at the professor login page

@@ -8,7 +8,7 @@ Feature: Deleting a candidature
 
     @javascript
     Scenario: Student deleting a candidature
-        Given I'm at the student login page
+        Given I'm at the user login page
         And there is a student with name "carlinhos" with nusp "123456" and email "eu@usp.br"
         And there is a department with code "MAC"
         And there is a course with name "labxp" and code "MAC0342" and department "MAC"
@@ -23,4 +23,4 @@ Feature: Deleting a candidature
         And I click the "Remover" link
         And I should see "Você tem certeza?" in the alert
         And I confirm the alert
-        Then I should not see "carlinhos"
+        Then I should see "Você não tem nenhuma candidatura"

@@ -4,9 +4,9 @@ Feature: Invalid student login
     I want to fail the login
 
     Background:
-        Given I'm at the student login page
+        Given I'm at the user login page
         And there is a student with name "carlinhos" with nusp "123456" and email "eu@usp.br"
-    
+
 
     Scenario: Invalid nusp
         When I fill the "Número USP" field with "123457"

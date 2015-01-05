@@ -7,9 +7,12 @@ module ControllerMacros
   end
 
   def login_professor
+    let(:user) { FactoryGirl.create :user }
+    let(:professor) { FactoryGirl.create :professor, user_id: user.id }
     before(:each) do
-      @request.env["devise.mapping"] = Devise.mappings[:professor]
-      sign_in FactoryGirl.create(:professor)
+      @request.env["devise.mapping"] = Devise.mappings[:user]
+      print user.inspect
+      sign_in user
     end
   end
 

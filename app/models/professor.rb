@@ -1,12 +1,22 @@
 class Professor < ActiveRecord::Base
-	devise :database_authenticatable, :recoverable, :rememberable, :trackable, :validatable,
-		:confirmable, :authentication_keys => [:nusp]
 
   has_many :request_for_teaching_assistant
   belongs_to :department
+  belongs_to :user
 
   validates :department_id, presence: true
-  validates :nusp, presence: true, uniqueness: true
+
+  def name
+    return user.name
+  end
+
+  def email
+    return user.email
+  end
+
+  def nusp
+    return user.nusp
+  end
 
   def normal_professor?
     return professor_rank == 0

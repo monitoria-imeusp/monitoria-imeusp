@@ -1,4 +1,4 @@
-Feature: Assistant evaluation creation
+Feature: Assistant evaluation index
     In order to evaluate assistant roles
     As a professor
     I want to see a assistant's evaluations
@@ -12,9 +12,9 @@ Feature: Assistant evaluation creation
         And there is a request for teaching assistant by professor "Dude" for the course "MAC0110"
         And there is a candidature by student "Bob" for course "MAC0110"
         And there is an assistant role for student "Bob" with professor "Dude" at course "MAC0110"
-        And thete is an assistant evaluation for student "Bob" with professor "Dude" at course "MAC0110" as "ok"
+        And there is an assistant evaluation for student "Bob" with professor "Dude" at course "MAC0110" as "ok"
 
-    Scenario: Professor create assistant evaluation
+    Scenario: Professor lists assistant evaluations
         Given I'm logged in as a super professor
         When I visit student "Bob"'s page
         And I click the "Ver avaliações como monitor(a)" link

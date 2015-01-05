@@ -11,4 +11,4 @@ Feature: Login Secretary
         And I press the "Entrar" button
         Then I should see "Acesso efetuado com sucesso."
         And I should see "Sistema de Monitoria"
-        And I should see "secretaria@ime.usp.br"
+        And I should see "secretaria"

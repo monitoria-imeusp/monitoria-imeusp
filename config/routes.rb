@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   devise_for :professors, :controllers => { :professors => "professors" }
   devise_for :secretaries, :controllers => { :secretaries => "secretaries" }
   devise_for :students, :controllers => { :students => "students" }
+  devise_for :users, :controllers => { :users => "users" }
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
@@ -14,6 +15,8 @@ Rails.application.routes.draw do
   root 'home#index'
   get '/sistema' => 'home#sys'
   get '/prof' => 'home#prof'
+
+  resources :users
 
   resources :admins do
     collection do
@@ -41,7 +44,7 @@ Rails.application.routes.draw do
   resources :secretaries
   get 'secretaries/:id/change_password' => 'secretaries#change_password', as: :change_secretary_password
 
-  resources :students
+  resources :students, except: :show
 
   resources :dumps
 
@@ -70,6 +73,8 @@ Rails.application.routes.draw do
   resources :assistant_evaluations, except: [:index, :show, :new, :destroy]
   get 'assistant_evaluations/for_student/:student_id/' => 'assistant_evaluations#index_for_student', as: :assistant_evaluations_for_student
   get 'assistant_evaluations/:assistant_role_id/new' => 'assistant_evaluations#new', as: :new_assistant_evaluation
+
+  get "help_students/:id" => "help_students#index", :as => :help_students
 
   ## External routes
   get '/_instructions' => redirect('http://www.ime.usp.br/grad/monitoria'), as: :official_instructions
