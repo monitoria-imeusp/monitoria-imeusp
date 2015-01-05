@@ -4,9 +4,8 @@
     <%= link_to "Adicionar aviso", new_advise_path %>
   <% end %>
 </h1>
-<hr>
 
-<% if @advises %>
+<% if @advises and @advises.any? %>
   <% @advises.each do |advise| %>
       <h2><%= advise.title %></h2>
 
@@ -25,5 +24,7 @@
       <% end %>
       <br>
   <% end %>
+<% else %>
+  <hr>
 <% end %>
 
