@@ -15,15 +15,15 @@ class Student < ActiveRecord::Base
 	belongs_to :user
 
 	def name
-		user.name
+		self[:name] or user.name
 	end
 
 	def nusp
-		user.nusp
+		self[:nusp] or user.nusp
 	end
 
 	def email
-		user.email
+		self[:email] or user.email
 	end
 
 	def is_female?
