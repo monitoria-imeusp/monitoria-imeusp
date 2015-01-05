@@ -3,7 +3,7 @@
 <p>
   <strong><%= t('activerecord.attributes.student.student') + ':' %></strong>
   <%= @candidature.student.name %>
-  <%= link_to " (mais informações)", @candidature.student %>
+  <%= link_to " (mais informações)", @candidature.student.user %>
 </p>
 
 <p>
