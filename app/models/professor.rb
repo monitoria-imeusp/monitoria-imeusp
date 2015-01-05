@@ -7,15 +7,15 @@ class Professor < ActiveRecord::Base
   validates :department_id, presence: true
 
   def name
-    return user.name
+    self[:name] or user.name
   end
 
   def email
-    return user.email
+    self[:email] or user.email
   end
 
   def nusp
-    return user.nusp
+    self[:nusp] or user.nusp
   end
 
   def normal_professor?
