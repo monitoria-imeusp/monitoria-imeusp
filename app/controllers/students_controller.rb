@@ -10,7 +10,7 @@ class StudentsController < ApplicationController
     @user = User.new(user_params)
     @student = Student.new(student_params)
 
-    if @user.save
+    if @student.valid? and @user.save
       @student.user_id = @user.id
 
       if (params[:student][:institute] == "Outros") and params[:student][:institute_text].empty?

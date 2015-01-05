@@ -83,6 +83,7 @@ pt-BR:
         cel_note: 'Use apenas dígitos e inclua o DDD (exemplo: 11988776655)'
         has_bank_account: 'Possui conta no Banco do Brasil'
       user:
+        user: 'Usuário'
         complete_name: 'Nome Completo'
         nusp: 'Número USP'
         password: 'Senha'
