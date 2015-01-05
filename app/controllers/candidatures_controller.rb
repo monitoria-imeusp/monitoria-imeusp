@@ -5,10 +5,15 @@ class CandidaturesController < ApplicationController
   # GET /candidatures
   # GET /candidatures.json
   def index
-    if professor_signed_in? and current_professor.super_professor? and not current_professor.hiper_professor?
-      redirect_to candidatures_for_department_path(Semester.current, current_professor.department)
-    elsif student_signed_in?
-      redirect_to candidatures_for_student_path(current_student)
+    if user_signed_in?
+      current_user.professor do |professor|
+        if professor.super_professor? and not professor.hiper_professor?
+          redirect_to candidatures_for_department_path(Semester.current, professor.department)
+        end
+      end
+      current_user.student do |student|
+        redirect_to candidatures_for_student_path(student)
+      end
     end
     @departments = Department.all
   end
@@ -35,9 +40,10 @@ class CandidaturesController < ApplicationController
   end
 
   def index_for_student
-    @candidatures = Candidature.where(student_id: current_student.id).order(:semester_id)
+    student = Student.find(params[:student_id])
+    @candidatures = Candidature.where(student_id: student.id).order(:semester_id)
     @semesters = Semester.all_open.map do |semester|
-      { get: semester, valid: (not already_for_semester?(current_student.id, semester.id)) }
+      { get: semester, valid: (not already_for_semester?(student.id, semester.id)) }
     end
   end
 
@@ -65,7 +71,7 @@ class CandidaturesController < ApplicationController
   # POST /candidatures
   # POST /candidatures.json
   def create
-    params[:candidature][:student_id] = current_student.id
+    params[:candidature][:student_id] = current_user.student.id
     @candidature = Candidature.new(candidature_params)
     respond_to do |format|
       if already_for_semester? @candidature.student_id, @candidature.semester_id

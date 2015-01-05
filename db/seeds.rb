@@ -19,50 +19,72 @@ Department.create(code: 'INTERDEPARTAMENTAL')
 if Rails.env.development?
   [
     {
-      name: "Nina S. T. Hirata",
-      nusp: "33333",
-      department: Department.find_by(:code => "MAC"),
-      email: "nina@ime.usp.br",
-      professor_rank: 1,
-      password: "changeme!",
-      confirmed_at: Time.now
+      user: {
+        name: "Nina S. T. Hirata",
+        nusp: "33333",
+        email: "nina@ime.usp.br",
+        password: "changeme!",
+        confirmed_at: Time.now
+      },
+      professor: {
+        department: Department.find_by(:code => "MAC"),
+        professor_rank: 1
+      }
     },
     {
-      name: "Kunio Okuda",
-      nusp: "22222",
-      department: Department.find_by(:code => "MAC"),
-      email: "kunio@ime.usp.br",
-      professor_rank: 1,
-      password: "changeme!",
-      confirmed_at: Time.now
+      user: {
+        name: "Kunio Okuda",
+        nusp: "22222",
+        email: "kunio@ime.usp.br",
+        password: "changeme!",
+        confirmed_at: Time.now
+      },
+      professor: {
+        department: Department.find_by(:code => "MAC"),
+        professor_rank: 1
+      }
     },
     {
-      name: "Zara Issa Abud",
-      nusp: "11111",
-      department: Department.find_by(:code => "MAT"),
-      email: "zara@ime.usp.br",
-      professor_rank: 2,
-      password: "changeme!",
-      confirmed_at: Time.now
+      user: {
+        name: "Zara Issa Abud",
+        nusp: "11111",
+        email: "zara@ime.usp.br",
+        password: "changeme!",
+        confirmed_at: Time.now
+      },
+      professor: {
+        department: Department.find_by(:code => "MAT"),
+        professor_rank: 2
+      }
     },
     {
-      name: "Siméon Denis Poisson",
-      nusp: "10101",
-      department: Department.find_by(:code => "MAE"),
-      email: "poisson@1781.old",
-      password: "changeme!",
-      confirmed_at: Time.now
+      user: {
+        name: "Siméon Denis Poisson",
+        nusp: "10101",
+        email: "poisson@1781.old",
+        password: "changeme!",
+        confirmed_at: Time.now
+      },
+      professor: {
+        department: Department.find_by(:code => "MAE")
+      }
     },
     {
-      name: "George Bernard Dantzig",
-      nusp: "20202",
-      department: Department.find_by(:code => "MAP"),
-      email: "dantzig@1914.old",
-      password: "changeme!",
-      confirmed_at: Time.now
+      user: {
+        name: "George Bernard Dantzig",
+        nusp: "20202",
+        email: "dantzig@1914.old",
+        password: "changeme!",
+        confirmed_at: Time.now
+      },
+      professor: {
+        department: Department.find_by(:code => "MAP")
+      }
     }
-  ].each do |prof|
-    Professor.create(prof)
+  ].each do |entry|
+    user = User.create(entry[:user])
+    entry[:professor][:user_id] = user.id
+    Professor.create(entry[:professor])
   end
 
   [
@@ -102,45 +124,55 @@ if Rails.env.development?
 
   [
     {
-      name: "Will",
-      nusp: "000000",
-      institute: "IME",
-      gender: "1",
-      rg: "123",
-      cpf: "321",
-      address: "R. Matão",
-      district: "Butantã",
-      zipcode: "000",
-      city: "São Paulo",
-      state: "São Paulo",
-      tel: "1111111111",
-      cel: "11122233344",
-      email: "kazuo@ime.usp.br",
-      has_bank_account: true,
-      password: "changeme!",
-      confirmed_at: Time.now
+      user: {
+        name: "Will",
+        nusp: 100000,
+        email: "kazuo@ime.usp.br",
+        password: "changeme!",
+        confirmed_at: Time.now
+      },
+      student: {
+        institute: "IME",
+        gender: "1",
+        rg: "123",
+        cpf: "321",
+        address: "R. Matão",
+        district: "Butantã",
+        zipcode: "000",
+        city: "São Paulo",
+        state: "São Paulo",
+        tel: "1111111111",
+        cel: "11122233344",
+        has_bank_account: true
+      }
     },
     {
-      name: "Jackção",
-      nusp: "242424",
-      institute: "IME",
-      gender: "0",
-      rg: "456",
-      cpf: "654",
-      address: "R. Matão",
-      district: "Butantã",
-      zipcode: "000",
-      city: "São Paulo",
-      state: "São Paulo",
-      tel: "1111111111",
-      cel: "11122233344",
-      email: "jacks@ime.usp.br",
-      has_bank_account: false,
-      password: "changeme!",
-      confirmed_at: Time.now
+      user: {
+        name: "Jackção",
+        nusp: "242424",
+        email: "jacks@ime.usp.br",
+        password: "changeme!",
+        confirmed_at: Time.now
+      },
+      student: {
+        institute: "IME",
+        gender: "0",
+        rg: "456",
+        cpf: "654",
+        address: "R. Matão",
+        district: "Butantã",
+        zipcode: "000",
+        city: "São Paulo",
+        state: "São Paulo",
+        tel: "1111111111",
+        cel: "11122233344",
+        has_bank_account: false
+      }
     }
-  ].each do |student|
-    Student.create(student)
+  ].each do |entry|
+    user = User.create(entry[:user])
+    entry[:student][:user_id] = user.id
+    Student.create(entry[:student])
   end
 
   Semester.create(
@@ -167,7 +199,7 @@ if Rails.env.development?
       daytime_availability: true,
       nighttime_availability: false,
       time_period_preference: "0",
-      semester_id: Semester.first.id      
+      semester_id: Semester.first.id
     }
   ].each do |candidature|
     Candidature.create(candidature)

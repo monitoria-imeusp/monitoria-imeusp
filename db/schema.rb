@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141215153547) do
+ActiveRecord::Schema.define(version: 20150102195359) do
 
   create_table "admins", force: true do |t|
     t.string   "email",                  default: "", null: false
@@ -96,26 +96,11 @@ ActiveRecord::Schema.define(version: 20141215153547) do
   end
 
   create_table "professors", force: true do |t|
-    t.string   "name"
-    t.string   "nusp"
-    t.string   "email"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "encrypted_password",     default: "", null: false
-    t.string   "reset_password_token"
-    t.datetime "reset_password_sent_at"
-    t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          default: 0,  null: false
-    t.datetime "current_sign_in_at"
-    t.datetime "last_sign_in_at"
-    t.string   "current_sign_in_ip"
-    t.string   "last_sign_in_ip"
     t.integer  "department_id"
-    t.string   "confirmation_token"
-    t.datetime "confirmed_at"
-    t.datetime "confirmation_sent_at"
-    t.string   "unconfirmed_email"
-    t.integer  "professor_rank",         default: 0
+    t.integer  "professor_rank", default: 0
+    t.integer  "user_id"
   end
 
   create_table "request_for_teaching_assistants", force: true do |t|
@@ -168,9 +153,6 @@ ActiveRecord::Schema.define(version: 20141215153547) do
   add_index "semesters", ["year", "parity"], name: "index_semesters_on_year_and_parity", unique: true
 
   create_table "students", force: true do |t|
-    t.string   "name"
-    t.string   "password"
-    t.string   "nusp"
     t.integer  "gender"
     t.string   "rg"
     t.string   "cpf"
@@ -182,10 +164,18 @@ ActiveRecord::Schema.define(version: 20141215153547) do
     t.string   "state"
     t.string   "tel"
     t.string   "cel"
-    t.string   "email"
     t.boolean  "has_bank_account"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "institute"
+    t.string   "institute_text"
+    t.integer  "user_id"
+  end
+
+  create_table "users", force: true do |t|
+    t.integer  "nusp"
+    t.string   "name"
+    t.string   "email",                  default: "", null: false
     t.string   "encrypted_password",     default: "", null: false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
@@ -199,10 +189,12 @@ ActiveRecord::Schema.define(version: 20141215153547) do
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
     t.string   "unconfirmed_email"
-    t.string   "institute"
-    t.string   "institute_text"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
-  add_index "students", ["nusp"], name: "index_students_on_nusp", unique: true
+  add_index "users", ["email"], name: "index_users_on_email", unique: true
+  add_index "users", ["nusp"], name: "index_users_on_nusp", unique: true
+  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
 
 end

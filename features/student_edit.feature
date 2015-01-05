@@ -4,30 +4,34 @@ Feature: edit a student
 	I want to edit my profile
 
     Background:
-		Given I'm at the student login page
+		Given I'm at the user login page
         And there is a student with name "carlinhos" with nusp "123456" and email "eu@usp.br"
         And there is a student with name "carlinhos2" with nusp "1234567" and email "eu2@usp.br"
         When I fill the "Número USP" field with "123456"
         And I fill the "Senha" field with "changeme!"
         And I press the "Entrar" button
 
-    Scenario: Student edits his or hers profile
+    Scenario: Student edits his or hers user profile
     	And I click the "Perfil" link
-        And I click the "Editar" link
+        And I click the first "Editar" link
         And I fill the "Nome Completo" field with "Carlinhos"
         And I fill the "Senha" field with "12345678"
         And I fill the "Confirme a senha" field with "12345678"
-        And I select the gender option "Masculino"
         And I press the "Salvar" button
         Then I should see "Carlinhos"
-        And I should see "Masculino"
+
+    Scenario: Student edits his or hers student profile
+        When I click the "Perfil" link
+        And I click the second "Editar" link
+        And I fill the "Endereço" field with "Narnia"
+        And I press the "Salvar" button
+        And I should see "Narnia"
 
     Scenario: Student fails to edit his or hers profile
         And I click the "Perfil" link
-        And I click the "Editar" link
+        And I click the first "Editar" link
         And I fill the "Nome Completo" field with "Carlinhos"
         And I fill the "Senha" field with "12345678"
-        And I select the gender option "Masculino"
         And I press the "Salvar" button
         Then I should not see "Carlinhos"
 

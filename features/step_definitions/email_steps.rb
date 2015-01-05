@@ -38,8 +38,8 @@ When(/^I confirm the (.*?) account with email "(.*?)" and sign in$/) do |class_n
   click_button("Entrar")
 end
 
-When(/^I confirm the student account with email "(.*?)"$/) do |user_email|
-  user = Student.find_by_email(user_email)
+When(/^I confirm the user account with email "(.*?)"$/) do |user_email|
+  user = User.find_by_email(user_email)
   user.should_not be_nil
   email = ActionMailer::Base.deliveries.first
   email.from.should == ["monitoria@ime.usp.br"]

@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   devise_for :professors, :controllers => { :professors => "professors" }
   devise_for :secretaries, :controllers => { :secretaries => "secretaries" }
   devise_for :students, :controllers => { :students => "students" }
+  devise_for :users, :controllers => { :users => "users" }
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
@@ -14,6 +15,8 @@ Rails.application.routes.draw do
   root 'home#index'
   get '/sistema' => 'home#sys'
   get '/prof' => 'home#prof'
+
+  resources :users
 
   resources :admins do
     collection do
@@ -41,7 +44,7 @@ Rails.application.routes.draw do
   resources :secretaries
   get 'secretaries/:id/change_password' => 'secretaries#change_password', as: :change_secretary_password
 
-  resources :students
+  resources :students, except: :show
 
   resources :dumps
 

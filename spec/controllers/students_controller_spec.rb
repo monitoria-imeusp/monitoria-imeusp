@@ -2,355 +2,154 @@ require 'spec_helper'
 
 describe StudentsController do
 
-  let(:valid_attributes) { {
-    "name" => "carlinhos",
-    "nusp" => "123456",
-    "institute" => "Institto de Matemática e Estatística",
-    "gender" => "0",
-    "rg" => "4523654",
-    "password" => "Yeieieieie",
-    "cpf" => "651651561",
-    "address" => "rua do nada sem número",
-    "district" => "nerdlandia",
-    "zipcode" => "3256874",
-    "city" => "feliz feliz",
-    "state" => "felizlandia",
-    "cel" => "0123456789",
-    "tel" => "0123456789",
-    "email" => "easy@facil.com",
-    "confirmed_at" => Time.now
-  } }
+  context 'when not signed' do
 
-  let(:another_valid_attributes) { {
-    "name" => "gold",
-    "nusp" => "654321",
-    "institute" => "Institto de Matemática e Estatística",
-    "gender" => "0",
-    "rg" => "7654321",
-    "password" => "muahahahahah",
-    "cpf" => "00000000000",
-    "address" => "rua do nada sem número",
-    "district" => "nerdlandia",
-    "zipcode" => "3256874",
-    "city" => "feliz feliz",
-    "state" => "felizlandia",
-    "cel" => "0123456789",
-    "tel" => "0123456789",
-    "email" => "hard@facil.com"
-  } }
-
-  let(:changed_valid_attributes) { {
-    "name" => "mandel",
-    "nusp" => "123456",
-    "institute" => "Institto de Matemática e Estatística",
-    "gender" => "0",
-    "rg" => "4523654",
-    "password" => "Yeieieieie",
-    "password_confirmation" => "Yeieieieie",
-    "cpf" => "651651561",
-    "address" => "rua do nada sem número",
-    "district" => "nerdlandia",
-    "zipcode" => "3256874",
-    "city" => "feliz feliz",
-    "state" => "felizlandia",
-    "cel" => "0123456789",
-    "tel" => "0123456789",
-    "email" => "easy@facil.com"
-  } }
-
-  let(:invalid_attributes) { {
-    "name" => "carlinhos",
-    "nusp" => "123",
-    "institute" => "Institto de Matemática e Estatística",
-    "gender" => "0",
-    "rg" => "4523654",
-    "password" => "Yeieieieie",
-    "cpf" => "651651561",
-    "address" => "rua do nada sem número",
-    "district" => "nerdlandia",
-    "zipcode" => "3256874",
-    "city" => "feliz feliz",
-    "state" => "felizlandia",
-    "cel" => "0123456789",
-    "tel" => "0123456789",
-    "email" => "easy@facil.com"
-  } }
-
-  before do
-    @student = mock_model(Student)
-    @id = "42"
-  end
-
-  context 'when user is not logged' do
-
-    describe 'new' do
+    describe '.new' do
       before :each do
         get :new
         assigns(:student).should be_a_new(Student)
+        assigns(:user).should be_a_new(User)
       end
-
-      it { should respond_with(:success) }
-      it { should render_template(:new) }
+      subject { response }
+      it { expect(subject).to render_template(:new) }
     end
 
-    describe 'create' do
+    describe '.create' do
 
       context 'succeeds to save' do
         before :each do
-          post :create, { :student => valid_attributes }
+          post :create, { :student => FactoryGirl.attributes_for(:student), :user => FactoryGirl.attributes_for(:user) }
         end
-        it {
-          assigns(:student).should be_a(Student)
-          assigns(:student).should be_persisted()
-        }
-        #it { should redirect_to Student.last }
+
+        it { should redirect_to User.last }
+
+        context 'user' do
+          subject { assigns(:user) }
+          it { expect(subject).to be_a(User) }
+          it { expect(subject).to be_persisted() }
+        end
+
+        context 'student' do
+          subject { assigns(:student) }
+          it { expect(subject).to be_a(Student) }
+          it { expect(subject).to be_persisted() }
+          its(:user_id) { should eq(assigns(:user).id) }
+        end
       end
 
       context 'fails to save' do
         before :each do
-          post :create, {:student => invalid_attributes}
+          post :create, { :student => { gender: 1 }, :user => { name: "Derp" } }
         end
-        it {
-          should render_template :new
-        }
-        it{
-          assigns(:student).should be_a_new(Student)
-          assigns(:student).should_not be_persisted()
-        }
-      end
-    end
 
-    describe 'edit student' do
-      context 'a request made by anyone' do
-        it "can not edit a student" do
-          another_student = Student.create! valid_attributes
-          get :edit, {:id => another_student.to_param}
-          response.response_code.should == 403
+        it { should render_template :new }
+
+        context 'student' do
+          subject { assigns(:student) }
+          it { should be_a_new(Student) }
+          it { should_not be_persisted() }
         end
       end
     end
   end
 
-  context 'when logged in as admin' do
+  context 'when signed in as admin' do
     login_admin
 
-    describe 'show' do
-      context 'student exists' do
-        before :each do
-          @another_student =Student.create! valid_attributes
-          get :show, {:id => @another_student.to_param}
-        end
-        it {
-          should render_template :show
-        }
-        it {
-          assigns(:student).should eq(@another_student)
-        }
-      end
-      context 'student does not exist' do
-        before :each  do
-          get :show, {:id => valid_attributes}
-        end
-        it { should redirect_to students_path }
-      end
-    end
-
-    describe 'index' do
+    describe '.index' do
       before :each do
         get :index
       end
+      it { should render_template :index }
       context "with no students" do
-        it { should render_template :index }
         it { assigns(:students).should eq([]) }
       end
       context "with students" do
-        before :each do
-          @student = Student.create! valid_attributes
-        end
-        it { should render_template :index }
-        it { assigns(:students).should eq([@student]) }
-      end
-    end
-
-    describe 'delete' do
-      context 'student exists' do
-        before :each do
-          @student = Student.create! valid_attributes
-        end
-        it "destroys the requested student" do
-          delete :destroy, {:id => @student.to_param}
-          assert(!(Student.exists?valid_attributes[:id]))
-        end
-        it "redirects to the students list" do
-          delete :destroy, {:id => @student.to_param}
-          response.should redirect_to(students_path)
-        end
-      end
-    end
-
-    describe 'edit student' do
-      context 'a request made by the admin' do
-        it "can not edit a student" do
-          another_student = Student.create! valid_attributes
-          get :edit, {:id => another_student.to_param}
-          response.should render_template("edit")
-        end
+        let(:student) { FactoryGirl.create :student }
+        subject { assigns(:students) }
+        it { should eq([student]) }
       end
     end
 
   end
 
-  context 'when logged in as professor' do
-    login_professor
+  context 'when signed in as professor' do
+    let(:user) { FactoryGirl.create :user }
+    let!(:professor) { FactoryGirl.create :professor, user_id: user.id }
+    before :each do
+      @request.env["devise.mapping"] = Devise.mappings[:user]
+      sign_in user
+    end
 
-    describe 'index' do
+    describe '.index' do
       before :each do
-        get :index
+        get :index, {}
       end
+      it { should render_template :index }
       context "with no students" do
-        it { should render_template :index }
         it { assigns(:students).should eq([]) }
       end
       context "with students" do
-        before :each do
-          @student = Student.create! valid_attributes
-        end
-        it { should render_template :index }
-        it { assigns(:students).should eq([@student]) }
+        let(:student) { FactoryGirl.create :student }
+        subject { assigns(:students) }
+        it { should eq([student]) }
       end
     end
-
-    describe 'show' do
-      context 'student exists' do
-        before :each do
-          @another_student =Student.create! valid_attributes
-          get :show, {:id => @another_student.to_param}
-        end
-        it {
-          should render_template :show
-        }
-        it {
-          assigns(:student).should eq(@another_student)
-        }
-      end
-      context 'student does not exist' do
-        before :each  do
-          get :show, {:id => valid_attributes}
-        end
-        it { should redirect_to students_path }
-      end
-    end
-
-    describe 'edit student' do
-      context 'a request made by the professor' do
-        it "can not edit a student" do
-          another_student = Student.create! valid_attributes
-          get :edit, {:id => another_student.to_param}
-          response.response_code.should == 403
-        end
-      end
-    end
-
   end
 
-  context 'when logged in as secretary' do
+  context 'when signed in as secretary' do
     login_secretary
 
-    describe 'show' do
-      context 'student exists' do
-        before :each do
-          @another_student =Student.create! valid_attributes
-          get :show, {:id => @another_student.to_param}
-        end
-        it {
-          should render_template :show
-        }
-        it {
-          assigns(:student).should eq(@another_student)
-        }
-      end
-      context 'student does not exist' do
-        before :each  do
-          get :show, {:id => valid_attributes}
-        end
-        it { should redirect_to students_path }
-      end
-    end
-
-    describe 'index' do
+    describe '.index' do
       before :each do
         get :index
       end
+      it { should render_template :index }
       context "with no students" do
-        it { should render_template :index }
         it { assigns(:students).should eq([]) }
       end
       context "with students" do
-        before :each do
-          @student = Student.create! valid_attributes
-        end
-        it { should render_template :index }
-        it { assigns(:students).should eq([@student]) }
+        let(:student) { FactoryGirl.create :student }
+        subject { assigns(:students) }
+        it { should eq([student]) }
       end
     end
-
-    describe 'delete' do
-      context 'student exists' do
-        before :each do
-          @student = Student.create! valid_attributes
-        end
-        it "destroys the requested student" do
-          delete :destroy, {:id => @student.to_param}
-          assert(!(Student.exists?valid_attributes[:id]))
-        end
-        it "redirects to the students list" do
-          delete :destroy, {:id => @student.to_param}
-          response.should redirect_to(students_path)
-        end
-      end
-    end
-
-    describe 'edit student' do
-      context 'a request made by the admin' do
-        it "can not edit a student" do
-          another_student = Student.create! valid_attributes
-          get :edit, {:id => another_student.to_param}
-          response.response_code.should == 403
-        end
-      end
-    end
-
   end
 
-  context 'when logged in as student' do
+  context 'when signed in as student' do
+    let(:user) { FactoryGirl.create :user }
+    let(:student) { FactoryGirl.create :student, user_id: user.id }
     before :each do
-      @student = Student.create! valid_attributes
-      sign_in @student
+      @request.env["devise.mapping"] = Devise.mappings[:user]
+      sign_in user
     end
 
-    describe 'edit' do
-      describe 'a request made by the signed student' do
-        it "can edit your account" do
-          get :edit, {:id => @student.to_param}
-          assigns(:student).should eq(@student)
+    describe '.edit' do
+      context 'himself or herself' do
+        before :each do
+          get :edit, {:id => student.id}
         end
-        it "can not edit an account of another student" do
-          another_student = Student.create! another_valid_attributes
-          get :edit, {:id => another_student.to_param}
-          response.response_code.should == 403
+        subject { assigns(:student) }
+        it { should eq(student) }
+      end
+      context 'another' do
+        let(:another_user) { FactoryGirl.create :another_user }
+        let(:another_student) { FactoryGirl.create :student, user_id: another_user.id }
+        before :each do
+          get :edit, {:id => another_student.id}
         end
+        it { should respond_with(403) }
       end
     end
 
-    describe 'update' do
-      describe 'a request made by the signed student' do
-        describe 'with valid params' do
-          it {
-            put :update, {:id => @student.to_param, :student => changed_valid_attributes}
-            assigns(:student).should eq(@student)
-            #assigns(:student).should receive(:update).with(changed_valid_attributes)
-            #assigns(:student).name.should eq(changed_valid_attributes[:name])
-          }
+    describe '.update' do
+      context 'himself or herself' do
+        before :each do
+          put :update, {:id => student.id, :student => { address: "New address" } }
+        end
+        context 'with valid params' do
+          subject { assigns(:student) }
+          it { should eq(student) }
         end
       end
     end

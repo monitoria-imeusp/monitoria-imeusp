@@ -4,16 +4,27 @@ class ProfessorsController < ApplicationController
 
   def new
     @professor = Professor.new
+    @user = User.new
   end
 
   def create
+    @user = User.new(user_params)
     @professor = Professor.new(professor_params)
     generated_password = Devise.friendly_token.first(8)
-    @professor.password = generated_password
-    if @professor.save
-      redirect_to @professor
+    @user.password = generated_password
+
+    if @user.save
+      @professor.user_id = @user.id
+      if @professor.save
+        redirect_to @user
+      else
+        render 'new'
+      end
     else
-      render 'new'
+      respond_to do |format|
+        format.html { render action: 'new'}
+        format.json { render json: @user.errors, status: :unprocessable_entity }
+      end
     end
   end
 
@@ -22,14 +33,11 @@ class ProfessorsController < ApplicationController
     @professor.professor_rank = 1
     respond_to do |format|
       if @professor.save
-        format.html {redirect_to @professor, notice: @professor.name.to_s + ' é agora um Super-professor'}
+        format.html {redirect_to @professor.user, notice: @professor.name.to_s + ' é agora um Super-professor'}
       else
-        format.html {render @professor}
+        format.html {render @professor.user}
       end
     end
-  end
-
-  def show
   end
 
   def index
@@ -42,23 +50,12 @@ class ProfessorsController < ApplicationController
 
   def update
     @professor = Professor.find(params[:id])
-    if params[:professor][:password].blank? && params[:professor][:password_confirmation].blank?
-      params[:professor].delete(:password)
-      params[:professor].delete(:password_confirmation)
-    end
     if @professor.update(professor_params)
-      sign_in  @professor, :bypass => true
-      redirect_to @professor
+      redirect_to @professor.user
     else
+      # Never managed to reach here
       render 'edit'
     end
-  end
-
-  def destroy
-    @professor = Professor.find(params[:id])
-    @professor.destroy
-
-    redirect_to professors_path
   end
 
   def change_password
@@ -75,13 +72,21 @@ class ProfessorsController < ApplicationController
   end
 
   def authorization_professor
-    if (professor_signed_in? and current_professor.professor_rank == 0) and @professor.id != current_professor.id
-      raise CanCan::AccessDenied.new()
+    if user_signed_in?
+      current_user.professor do |professor|
+        raise CanCan::AccessDenied.new unless @professor.id == professor.id
+      end
+      current_user.student do |student|
+        raise CanCan::AccessDenied.new
+      end
     end
   end
 
   def professor_params
-    params.require(:professor).permit(:name, :nusp,:email,
-      :department_id, :professor_rank, :password, :password_confirmation)
+    params.require(:professor).permit(:department_id, :professor_rank)
+  end
+
+  def user_params
+    params.require(:user).permit(:name, :nusp, :email)
   end
 end

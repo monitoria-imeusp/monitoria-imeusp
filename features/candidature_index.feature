@@ -66,7 +66,7 @@ Feature: Candidature table visualization
 
 
     Scenario: Student seeing candidatures
-        Given I'm at the student login page
+        Given I'm at the user login page
         When I fill the "Número USP" field with "123456"
         And I fill the "Senha" field with "changeme!"
         And I press the "Entrar" button

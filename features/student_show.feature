@@ -14,8 +14,8 @@ Feature: Seeing information of a student
         And I fill the "Senha" field with "admin123"
         And I press the "Entrar" button
     	And I go to the students index
-        And I click the "carlinhos" link
-    	And I should see "Nome: carlinhos"
+        And I click the "Ver perfil" link
+    	And I should see "Nome Completo: carlinhos"
         And I should see "Número USP: 123456"
     	And I should see "RG: 1"
 
@@ -26,8 +26,8 @@ Feature: Seeing information of a student
         And I fill the "Senha" field with "12345678"
         And I press the "Entrar" button
         And I go to the students index
-        And I click the "carlinhos" link
-        And I should see "Nome: carlinhos"
+        And I click the "Ver perfil" link
+        And I should see "Nome Completo: carlinhos"
         And I should see "Número USP: 123456"
         And I should see "RG: 1"
 
@@ -37,6 +37,4 @@ Feature: Seeing information of a student
     	And I fill the "Email" field with "kazuo@ime.usp.br"
     	And I fill the "Senha" field with "admin123"
     	And I press the "Entrar" button
-        When I try to access the "students" page with id "2" to "show"
-        Then I should see "Alunos"
-    	And I should see "carlinhos"
+        Then I cannot access the "users" page with id "2" to "show"

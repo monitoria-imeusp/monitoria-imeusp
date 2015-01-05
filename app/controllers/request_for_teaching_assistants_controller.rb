@@ -15,7 +15,7 @@ class RequestForTeachingAssistantsController < ApplicationController
     @request_for_teaching_assistants = (RequestForTeachingAssistant.where(semester: @semester).all.map do
       |request| request
     end).keep_if do |request|
-      admin_signed_in? or secretary_signed_in? or professor_can_see?(current_professor, request)
+      admin_signed_in? or secretary_signed_in? or professor_can_see?(current_user.professor, request)
     end
     @semesters = Semester.where(active: true)
     @open_semesters = @semesters.where(open: true)
@@ -27,23 +27,25 @@ class RequestForTeachingAssistantsController < ApplicationController
     authorization_sprofessor
     authorization_professor
     @chosen_roles = AssistantRole.where(request_for_teaching_assistant_id: @request_for_teaching_assistant.id)
-    # Valid candidatures for this request
-    course_id = @request_for_teaching_assistant.course.id
-    @candidatures_for_this_request = Candidature.where "course1_id = ? or course2_id = ? or course3_id = ? or course4_id = ?", course_id, course_id, course_id, course_id
-    department_id = Course.find(course_id).department_id
-    @courses = Course.where "department_id = ? and id != ?", department_id, course_id
-    @candidatures_for_this_department = Candidature.where(course1_id: @courses)
-    # Remove assitants that were already chosen for this semester
-    current_requests = RequestForTeachingAssistant.where(semester_id: @request_for_teaching_assistant.semester.id)
-    current_roles = AssistantRole.where(request_for_teaching_assistant_id: current_requests)
     # Available candidates should be available for this request while there are places to take
-    puts elected_teaching_assistants = AssistantRole.where(request_for_teaching_assistant_id: @request_for_teaching_assistant.id).count
-    puts requested_number = RequestForTeachingAssistant.where(id: @request_for_teaching_assistant.id).take.requested_number
-    @candidatures_for_this_department = (@candidatures_for_this_department.map do |candidature| candidature end).keep_if do |candidature|
-      not (current_roles.where(student_id: candidature.student_id).any? or (elected_teaching_assistants >= requested_number))
-    end
-    @candidatures_for_this_request = (@candidatures_for_this_request.map do |candidature| candidature end).keep_if do |candidature|
-      not (current_roles.where(student_id: candidature.student_id).any? or (elected_teaching_assistants >= requested_number))
+    elected_teaching_assistants = AssistantRole.where(request_for_teaching_assistant_id: @request_for_teaching_assistant.id).count
+    requested_number = @request_for_teaching_assistant.requested_number
+    if elected_teaching_assistants < requested_number
+      # Valid candidatures for this request
+      course_id = @request_for_teaching_assistant.course.id
+      @candidatures_for_this_request = Candidature.where "course1_id = ? or course2_id = ? or course3_id = ? or course4_id = ?", course_id, course_id, course_id, course_id
+      department_id = Course.find(course_id).department_id
+      @courses = Course.where "department_id = ? and id != ?", department_id, course_id
+      @candidatures_for_this_department = Candidature.where(course1_id: @courses)
+      # Remove assitants that were already chosen for this semester
+      current_requests = RequestForTeachingAssistant.where(semester_id: @request_for_teaching_assistant.semester.id)
+      current_roles = AssistantRole.where(request_for_teaching_assistant_id: current_requests)
+      @candidatures_for_this_department = (@candidatures_for_this_department.map do |candidature| candidature end).keep_if do |candidature|
+        not current_roles.where(student_id: candidature.student_id).any?
+      end
+      @candidatures_for_this_request = (@candidatures_for_this_request.map do |candidature| candidature end).keep_if do |candidature|
+        not current_roles.where(student_id: candidature.student_id).any?
+      end
     end
   end
 
@@ -66,7 +68,7 @@ class RequestForTeachingAssistantsController < ApplicationController
   # POST /request_for_teaching_assistants.json
   def create
     if params[:request_for_teaching_assistant][:professor_id].nil?
-      params[:request_for_teaching_assistant][:professor_id] = current_professor.id
+      params[:request_for_teaching_assistant][:professor_id] = current_user.professor.id
     end
     @request_for_teaching_assistant = RequestForTeachingAssistant.new(request_for_teaching_assistant_params)
 
@@ -125,14 +127,22 @@ class RequestForTeachingAssistantsController < ApplicationController
   end
 
   def authorization_sprofessor
-    if (professor_signed_in? and current_professor.professor_rank == 1) and Course.find_by_id(@request_for_teaching_assistant.course_id).department != current_professor.department
-      raise CanCan::AccessDenied.new()
+    if user_signed_in?
+      current_user.professor do |professor|
+        if professor.professor_rank == 1 and Course.find_by_id(@request_for_teaching_assistant.course_id).department != professor.department
+          raise CanCan::AccessDenied.new
+        end
+      end
     end
   end
 
   def authorization_professor
-    if (professor_signed_in? and current_professor.professor_rank == 0) and @request_for_teaching_assistant.professor_id != current_professor.id
-      raise CanCan::AccessDenied.new()
+    if user_signed_in?
+      current_user.professor do |professor|
+        if professor.normal_professor? and @request_for_teaching_assistant.professor_id != professor.id
+          raise CanCan::AccessDenied.new
+        end
+      end
     end
   end
 

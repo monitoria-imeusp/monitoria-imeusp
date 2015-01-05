@@ -4,14 +4,17 @@ describe AssistantRolesController do
 
   include Devise::TestHelpers
 
-  @super_professor = login_super_professor
+  let(:user) { FactoryGirl.create :user }
+  let(:prof_user) { FactoryGirl.create :another_user }
+  let!(:super_professor) { FactoryGirl.create :super_professor, user_id: prof_user.id }
 
   before :each do
     @semester   = FactoryGirl.create :semester
     @department = FactoryGirl.create :department
     @course1    = FactoryGirl.create :course1
-    @student    = FactoryGirl.create :student
-    @request_for_teaching_assistant = FactoryGirl.create :request_for_teaching_assistant
+    @student    = FactoryGirl.create :student, user_id: user.id
+    @request_for_teaching_assistant = FactoryGirl.create :request_for_teaching_assistant, professor_id: super_professor.id
+    sign_in prof_user
   end
 
   describe "GET 'index'" do
@@ -32,12 +35,12 @@ describe AssistantRolesController do
           "request_for_teaching_assistant_id" => @request_for_teaching_assistant.id.to_s,
           "student_id" => @student.id.to_s
         }
-        @assistant_role = FactoryGirl.create :assistant_role
-        AssistantRole.should_receive(:new).with(@params).and_return(@assistant_role)
+        #@assistant_role = FactoryGirl.create :assistant_role
+        #AssistantRole.should_receive(:new).with(@params).and_return(@assistant_role)
+        post 'create', @params
       end
 
       it "redirects back to the request" do
-        post 'create', @params
         response.should redirect_to @request_for_teaching_assistant
       end
     end

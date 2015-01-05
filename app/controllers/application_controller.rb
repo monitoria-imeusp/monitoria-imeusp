@@ -9,8 +9,8 @@ class ApplicationController < ActionController::Base
 
   def current_ability
       @current_ability ||= ::Ability.new(
-        if student_signed_in?
-            current_student
+        if user_signed_in?
+            current_user
         elsif secretary_signed_in?
           current_secretary
         elsif admin_signed_in?

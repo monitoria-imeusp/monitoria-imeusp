@@ -14,7 +14,6 @@ Feature: Course creation
         And I click the "Cadastrar disciplina" link
         And I fill the "Nome da Disciplina" field with "proglin"
         And I select "MAC" on the "Departamento"
-        And I should see "MAC"
         And I fill the "Código da Disciplina" field with "0315"
         And I press the "Enviar" button
         Then I should see "Nome da Disciplina: proglin"

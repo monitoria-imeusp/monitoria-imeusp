@@ -67,10 +67,11 @@
   <%= (@candidature.observation) %>
 </p>
 
-<% if student_signed_in? %>
+<% if user_signed_in? and current_user.student? %>
   <%= link_to 'Editar', edit_candidature_path(@candidature) %>
   <% if @candidature.semester.open %>
     <%= link_to 'Remover', @candidature, method: :delete, data: { confirm: 'Tem certeza?' } %>
   <% end %>
 <% end %>
 <%= link_to 'Voltar', candidatures_path %>
+<span style="height: 2em; display: block;"></span>
