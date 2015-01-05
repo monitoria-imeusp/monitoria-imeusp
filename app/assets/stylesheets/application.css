@@ -12,6 +12,7 @@
  *
  *= boilerplate/main.css
  *= boilerplate/normalize.css
+ *= require fancybox
  *= require_tree .
  *= require_self
  */

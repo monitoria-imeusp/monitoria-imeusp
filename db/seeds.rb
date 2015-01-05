@@ -192,6 +192,18 @@ if Rails.env.development?
     RequestForTeachingAssistant.create(ta_request)
   end
 
+  [
+    {
+      professor_id: Professor.first.id,
+      requested_number: 1,
+      priority: 0,
+      course_id: Course.first.id,
+      semester_id: Semester.first.id
+    }
+  ].each do |ta_request|
+    RequestForTeachingAssistant.create(ta_request)
+  end
+
   Secretary.create(
     name: "Marcia",
     nusp: "99999",
