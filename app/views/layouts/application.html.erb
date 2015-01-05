@@ -45,7 +45,11 @@
           <p>
             Você ainda não fez acesso
           </p>
-          <%= link_to "Guia de uso da página pelos estudantes", help_students_path('home') %>
+          <ul>
+            <li>
+              <%= link_to "Guia de uso (alunos)", help_students_path('home') %>
+            </li>
+          </ul>
         <% end %>
 
         <!-- Painel do admin -->
