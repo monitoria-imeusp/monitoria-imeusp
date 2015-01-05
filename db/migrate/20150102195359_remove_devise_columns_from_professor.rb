@@ -10,6 +10,7 @@ class RemoveDeviseColumnsFromProfessor < ActiveRecord::Migration
         print user.nusp
         raise
       end
+      user.skip_confirmation!
       user.save
       professor.user_id = user.id
       unless professor.valid?
