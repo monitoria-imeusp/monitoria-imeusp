@@ -11,7 +11,7 @@ class UsersController < ApplicationController
   end
 
   def index
-    authorization_user
+    @users = User.all
   end
 
   def edit

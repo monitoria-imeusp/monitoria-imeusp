@@ -1,0 +1,16 @@
+<h1>Usuários</h1>
+<hr>
+
+<table>
+  <tr>
+    <th colspan="3"><%= t('activerecord.attributes.user.user') %></th>
+  </tr>
+
+  <% @users.each do |user| %>
+    <tr>
+      <td class="name"><%= user.name %></td>
+      <td><%= "#{user.nusp}" %></td>
+      <td><%= link_to "Ver perfil", user %></td>
+    </tr>
+  <% end %>
+</table>

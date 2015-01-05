@@ -13,7 +13,7 @@ class ProfessorsController < ApplicationController
     generated_password = Devise.friendly_token.first(8)
     @user.password = generated_password
 
-    if @user.save
+    if @professor.valid? and @user.save
       @professor.user_id = @user.id
       if @professor.save
         redirect_to @user

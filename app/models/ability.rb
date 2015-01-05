@@ -172,6 +172,9 @@ class Ability
       can :update, User
       can :destroy, User
     end
+    if user.is_a? Admin
+      can :index, User
+    end
 
     # Semester management permissions
     if user.is_a? Admin or user.is_a? Secretary
