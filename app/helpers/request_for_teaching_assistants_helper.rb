@@ -14,8 +14,8 @@ module RequestForTeachingAssistantsHelper
   end
 
   def professor_options
-    Professor.all.map do |professor|
+    (Professor.all.map do |professor|
       [professor.name, professor.id]
-    end
+    end).sort
   end
 end

@@ -3,13 +3,21 @@
 
 <table>
   <tr>
-    <th colspan="3"><%= t('activerecord.attributes.user.user') %></th>
+    <th colspan="5"><%= t('activerecord.attributes.user.user') %></th>
   </tr>
 
   <% @users.each do |user| %>
     <tr>
       <td class="name"><%= user.name %></td>
       <td><%= "#{user.nusp}" %></td>
+      <td>
+        <% if user.student? %>
+          aluno
+        <% end %>
+        <% if user.professor? %>
+          professor
+        <% end %>
+      </td>
       <td><%= link_to "Ver perfil", user %></td>
     </tr>
   <% end %>
