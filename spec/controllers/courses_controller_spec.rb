@@ -76,7 +76,6 @@ describe CoursesController do
 
     describe 'index' do
       before :each do
-        Course.should_receive(:all)
         get :index
       end
       it { should render_template :index }
