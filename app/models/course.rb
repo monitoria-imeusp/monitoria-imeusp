@@ -4,6 +4,7 @@ class Course < ActiveRecord::Base
 
   validates :department_id, presence: true
   validates :educational_level, presence: true, inclusion: { in: 0..1 }
+  validates :course_code, presence: true, uniqueness: true
 
   def full_name
     course_code + " - " + name
