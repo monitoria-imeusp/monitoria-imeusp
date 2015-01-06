@@ -34,7 +34,7 @@ class CoursesController < ApplicationController
   end
 
   def index
-    @courses = Course.all
+    @courses = Course.all.order(:course_code)
   end
 
   def edit
