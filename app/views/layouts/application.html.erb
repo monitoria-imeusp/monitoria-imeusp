@@ -116,6 +116,9 @@
               <li>
                 <%= link_to "Meus monitores", assistant_roles_for_professor_path(professor) %>
               </li>
+              <li>
+                <%= link_to "Guia de uso do sistema", help_professors_path('home') %>
+              </li>
             </ul>
             <% if professor.super_professor? %>
               <hr>

@@ -78,6 +78,8 @@ Rails.application.routes.draw do
 
   get "help_students/:id" => "help_students#index", :as => :help_students
 
+  get "help_professors/:id" => "help_professors#index", :as => :help_professors
+
   ## External routes
   get '/_instructions' => redirect('http://www.ime.usp.br/grad/monitoria'), as: :official_instructions
   ##################
