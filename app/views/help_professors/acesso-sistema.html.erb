@@ -1,0 +1,15 @@
+<% if current_user.professor? %>
+	<h2>Para acessar o sistema basta seguir os passos abaixo ilustrados passo a passo por figuras.</h2><br>
+
+
+	<div>
+	  <li>Vá para a página <a href="http://monitoria.ime.usp.br">monitoria.usp.br</a> usando um navegador de sua escolha e clique no link 'Acessar' no canto superior direito da página.</li>
+	  <%= link_to image_tag("/assets/tutoriais-sistema-monitoria/editar-cadastro/editar-cadastro1.png", width: '95%', height: '95%'), "/assets/tutoriais-sistema-monitoria/editar-cadastro/editar-cadastro1.png", class: 'images' %><br><br>
+	</div>
+
+	<div>
+	  <li>Digite o seu NºUSP e senha para fazer login no sistema.</li>
+	  <%= link_to image_tag("/assets/tutoriais-sistema-monitoria/reenviar-email-confirmacao/reenviar-email-confirmacao5.png", width: '95%', height: '95%'), "/assets/tutoriais-sistema-monitoria/reenviar-email-confirmacao/reenviar-email-confirmacao5.png", class: 'images' %><br><br>
+	  <%= link_to image_tag("/assets/tutoriais-sistema-monitoria/reenviar-email-confirmacao/reenviar-email-confirmacao6.png", width: '95%', height: '95%'), "/assets/tutoriais-sistema-monitoria/reenviar-email-confirmacao/reenviar-email-confirmacao6.png", class: 'images' %><br><br>
+	</div>
+<% end %>
