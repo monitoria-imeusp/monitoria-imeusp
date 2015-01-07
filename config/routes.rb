@@ -46,7 +46,8 @@ Rails.application.routes.draw do
 
   resources :students, except: :show
 
-  resources :dumps
+  #resources :dumps
+  get 'dumps/' => 'dumps#index', as: :dumps
 
   resources :semesters
   post 'semesters/:id/open' => 'semesters#open', as: :open_semester
