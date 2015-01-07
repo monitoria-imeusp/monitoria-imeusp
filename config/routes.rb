@@ -15,6 +15,7 @@ Rails.application.routes.draw do
   root 'home#index'
   get '/sistema' => 'home#sys'
   get '/prof' => 'home#prof'
+  get '/professors/sign_in/' => 'home#prof'
 
   resources :users
 
