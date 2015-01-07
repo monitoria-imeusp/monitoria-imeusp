@@ -1,0 +1,41 @@
+<% if current_user.professor? %>
+	<h2>Para remover um pedido de monitor basta seguir os passos abaixo ilustrados passo a passo por figuras.</h2><br>
+
+	<div>
+	  <li>Vá para a página <a href="http://monitoria.ime.usp.br">monitoria.usp.br</a> usando um navegador de sua escolha e clique no link 'Acessar' no canto superior direito da página.</li>
+	  <%= link_to image_tag("/assets/tutoriais-sistema-monitoria/editar-cadastro/editar-cadastro1.png", width: '95%', height: '95%'), "/assets/tutoriais-sistema-monitoria/editar-cadastro/editar-cadastro1.png", class: 'images' %><br><br>
+	</div>
+
+	<div>
+	  <li>Digite o seu NºUSP e senha para fazer login no sistema.</li>
+	  <%= link_to image_tag("/assets/tutoriais-sistema-monitoria/reenviar-email-confirmacao/reenviar-email-confirmacao5.png", width: '95%', height: '95%'), "/assets/tutoriais-sistema-monitoria/reenviar-email-confirmacao/reenviar-email-confirmacao5.png", class: 'images' %><br><br>
+	  <%= link_to image_tag("/assets/tutoriais-sistema-monitoria/reenviar-email-confirmacao/reenviar-email-confirmacao6.png", width: '95%', height: '95%'), "/assets/tutoriais-sistema-monitoria/reenviar-email-confirmacao/reenviar-email-confirmacao6.png", class: 'images' %><br><br>
+	</div>
+
+	<div>
+	  <li>Agora você está no seu painel do usuário. Clique no link 'Pedidos de monitoria' no lado direito da página.</li>
+	  <%= link_to image_tag("/assets/tutoriais-sistema-monitoria/pedido-monitor/pedido-monitor1.png", width: '95%', height: '95%'), "/assets/tutoriais-sistema-monitoria/pedido-monitor/pedido-monitor1.png", class: 'images' %><br><br>
+	</div>
+
+	<div>
+	  <li>Para encontrar o pedido que você deseja remover clique no botão correspondente ao semestre para o qual foi feito o pedido da monitoria que se deseja remover na seção 'Ver pedidos de:'.</li>
+	  <li>Considere que só é possível remover pedidos de monitoria em semestres que estão abertos no sistema e não é necessário remover pedidos de monitorias que foram oferecidas em semestres anteriores.</li>
+	  <%= link_to image_tag("/assets/tutoriais-sistema-monitoria/remover-pedido-monitor/remover-pedido-monitor1.png", width: '95%', height: '95%'), "/assets/tutoriais-sistema-monitoria/remover-pedido-monitor/remover-pedido-monitor1.png", class: 'images' %><br><br>
+	</div>
+
+	<div>
+	  <li>Na seção 'Pedidos do n-ésimo semestre de yyyy' (1º ou 2º semestre do ano 20xx) é mostrada a lista de pedidos de monitoria realizados para o semestre selecionado.</li>
+	  <li>Clique no botão 'Ver' do pedido que você deseja remover.</li>
+	  <%= link_to image_tag("/assets/tutoriais-sistema-monitoria/remover-pedido-monitor/remover-pedido-monitor2.png", width: '95%', height: '95%'), "/assets/tutoriais-sistema-monitoria/remover-pedido-monitor/remover-pedido-monitor2.png", class: 'images' %><br><br>
+	</div>
+
+	<div>
+	  <li>Confira os dados do pedido para ter certeza de que vocẽ deseja remover o pedido e em caso positivo clique no botão 'Remover'.</li>
+	  <%= link_to image_tag("/assets/tutoriais-sistema-monitoria/remover-pedido-monitor/remover-pedido-monitor3.png", width: '95%', height: '95%'), "/assets/tutoriais-sistema-monitoria/remover-pedido-monitor/remover-pedido-monitor3.png", class: 'images' %><br><br>  
+	</div>
+
+	<div>
+	  <li>Será solicitada a confirmação de remoção do pedido. Clique em 'Ok' e o seu pedido terá sido removido.</li>
+	  <%= link_to image_tag("/assets/tutoriais-sistema-monitoria/remover-pedido-monitor/remover-pedido-monitor4.png", width: '95%', height: '95%'), "/assets/tutoriais-sistema-monitoria/remover-pedido-monitor/remover-pedido-monitor4.png", class: 'images' %><br><br>  
+	</div>
+<% end %>
