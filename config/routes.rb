@@ -63,8 +63,6 @@ Rails.application.routes.draw do
   get 'candidatures/for_department/:semester_id/:department_id/' => 'candidatures#index_for_department', as: :candidatures_for_department
   get 'candidatures/for_student/:student_id/' => 'candidatures#index_for_student', as: :candidatures_for_student
 
-  get 'system/candidature_index', as: :system_candidatures
-
   get 'assistant_roles/' => 'assistant_roles#index', as: :assistant_roles
   get 'assistant_roles/for_professor/:professor_id' => 'assistant_roles#index_for_professor', as: :assistant_roles_for_professor
   post 'assistant_roles/notify_for_semester/:semester_id' => 'assistant_roles#notify_for_semester', as: :notify_assistant_roles_for_semester
