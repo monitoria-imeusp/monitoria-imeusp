@@ -1,0 +1,36 @@
+<% if current_user.professor? %>
+  <h2>Para avaliar um monitor de uma das disciplinas que você lecionou basta seguir os passos abaixo ilustrados passo a passo por figuras.</h2><br>
+
+  <div>
+    <li>Vá para a página <a href="http://monitoria.ime.usp.br">monitoria.usp.br</a> usando um navegador de sua escolha e clique no link 'Acessar' no canto superior direito da página.</li>
+    <%= link_to image_tag("/assets/tutoriais-sistema-monitoria/editar-cadastro/editar-cadastro1.png", width: '95%', height: '95%'), "/assets/tutoriais-sistema-monitoria/editar-cadastro/editar-cadastro1.png", class: 'images' %><br><br>
+  </div>
+
+  <div>
+    <li>Digite o seu Nº USP e senha para fazer login no sistema.</li>
+    <%= link_to image_tag("/assets/tutoriais-sistema-monitoria/reenviar-email-confirmacao/reenviar-email-confirmacao5.png", width: '95%', height: '95%'), "/assets/tutoriais-sistema-monitoria/reenviar-email-confirmacao/reenviar-email-confirmacao5.png", class: 'images' %><br><br>
+    <%= link_to image_tag("/assets/tutoriais-sistema-monitoria/reenviar-email-confirmacao/reenviar-email-confirmacao6.png", width: '95%', height: '95%'), "/assets/tutoriais-sistema-monitoria/reenviar-email-confirmacao/reenviar-email-confirmacao6.png", class: 'images' %><br><br>
+  </div>
+
+  <div>
+    <li>Clique no link 'Meus monitores' no lado direito da tela</li>
+    <%= link_to image_tag("/assets/tutoriais-sistema-monitoria/avaliar-monitor/avaliar-monitor1.png", width: '95%', height: '95%'), "/assets/tutoriais-sistema-monitoria/avaliar-monitor/avaliar-monitor1.png", class: 'images' %><br><br>
+  </div>
+
+  <div>
+    <li>Você vai ver uma lista de semestres. Você somente pode avaliar os monitores das disciplinas lecionadas nos semestres que estiverem abertos no sistema. Isso significa que provavelmente você pode avaliar apenas os monitores do semestre letivo atual.</li>
+    <li>Clique no botão 'Avaliar' correspondente ao monitor que você deseja avaliar.</li>
+    <%= link_to image_tag("/assets/tutoriais-sistema-monitoria/avaliar-monitor/avaliar-monitor2.png", width: '95%', height: '95%'), "/assets/tutoriais-sistema-monitoria/avaliar-monitor/avaliar-monitor2.png", class: 'images' %><br><br>
+  </div>
+
+  <div>
+    <li>Irá aparecer uma tela com algumas informações relacionadas ao monitor como a disciplina para qual ele ofereceu assistência e o semestre em que isso ocorreu.</li>
+    <li>Logo abaixo são listados alguns critérios para você avaliar. É necessário que você escolha uma opção para cada critério. Escreva comentários no campo de observações caso julgue necessário.</li>
+    <li>Depois de ter completado a avaliação clique no botão 'Enviar avaliação'</li>
+    <%= link_to image_tag("/assets/tutoriais-sistema-monitoria/avaliar-monitor/avaliar-monitor3.png", width: '95%', height: '95%'), "/assets/tutoriais-sistema-monitoria/avaliar-monitor/avaliar-monitor3.png", class: 'images' %><br><br>
+  </div>
+
+  <div>
+    <li>Se julgar necessário você pode mudar a avaliação do aluno. Para isto basta voltar à tela 'Meus monitores' e clicar no botão 'Mudar avaliação' correspondente ao monitor cuja avaliação você deseja alterar.</li>
+  </div>
+<% end %>

@@ -1,0 +1,14 @@
+<% if current_user.professor? %>
+	<h1>Tutoriais de uso do sistema por professores</h1>
+
+	<p>Esta página contém tutoriais que ajudam os docentes a usarem o sistema de monitoria. Para acessar os tutorias basta clicar abaixo no tutorial desejado.</p>
+
+	<div>
+	  <%= link_to "Fazer acesso ao sistema", help_professors_path('acesso-sistema') %><br><br>
+	  <%= link_to "Editar perfil no sistema", help_professors_path('editar-perfil') %><br><br>
+	  <%= link_to "Fazer pedido de monitor para disciplina", help_professors_path('pedido-monitor') %><br><br>
+	  <%= link_to "Remover pedido de monitor para disciplina", help_professors_path('remover-pedido-monitor') %><br><br>
+	  <%= link_to "Como avaliar um monitor de uma disciplina", help_professors_path('avaliar-monitor') %><br><br>
+	  <%= link_to "Recuperação de senha de usuário no sistema", help_students_path('esqueceu-senha') %><br><br>
+	</div>
+<% end %>

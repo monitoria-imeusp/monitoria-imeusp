@@ -1,0 +1,41 @@
+<% if current_user.professor? %>
+  <h2>Para editar o seu perfil basta seguir os passos abaixo ilustrados passo a passo por figuras.</h2><br>
+
+
+  <div>
+    <li>Vá para a página <a href="http://monitoria.ime.usp.br">monitoria.usp.br</a> usando um navegador de sua escolha e clique no link 'Acessar' no canto superior direito da página.</li>
+    <%= link_to image_tag("/assets/tutoriais-sistema-monitoria/editar-cadastro/editar-cadastro1.png", width: '95%', height: '95%'), "/assets/tutoriais-sistema-monitoria/editar-cadastro/editar-cadastro1.png", class: 'images' %><br><br>
+  </div>
+
+  <div>
+    <li>Digite o seu Nº USP e senha para fazer login no sistema.</li>
+    <%= link_to image_tag("/assets/tutoriais-sistema-monitoria/reenviar-email-confirmacao/reenviar-email-confirmacao5.png", width: '95%', height: '95%'), "/assets/tutoriais-sistema-monitoria/reenviar-email-confirmacao/reenviar-email-confirmacao5.png", class: 'images' %><br><br>
+    <%= link_to image_tag("/assets/tutoriais-sistema-monitoria/reenviar-email-confirmacao/reenviar-email-confirmacao6.png", width: '95%', height: '95%'), "/assets/tutoriais-sistema-monitoria/reenviar-email-confirmacao/reenviar-email-confirmacao6.png", class: 'images' %><br><br>
+  </div>
+
+  <div>
+    <li>Agora você está no seu painel do usuário. Clique no link 'Perfil' no canto superior direito da página.</li>
+    <%= link_to image_tag("/assets/tutoriais-sistema-monitoria/editar-perfil/editar-perfil1.png", width: '95%', height: '95%'), "/assets/tutoriais-sistema-monitoria/editar-perfil/editar-perfil1.png", class: 'images' %><br><br>
+  </div>
+
+  <div>
+    <li>Agora as informações do seu perfil estão na tela. Para alterar as suas informações pessoais clique no botão 'Editar' que fica na seção 'Dados de usuário'.</li>
+    <%= link_to image_tag("/assets/tutoriais-sistema-monitoria/editar-perfil/editar-perfil2.png", width: '95%', height: '95%'), "/assets/tutoriais-sistema-monitoria/editar-perfil/editar-perfil2.png", class: 'images' %><br><br>
+  </div>
+
+  <div>
+    <li>Altere os campos que você quiser. <b>Não é necessário digitar a sua senha novamente para realizar a atualização dos seus dados.</b></li>
+    <li>Clique no botão 'Salvar' e os seus dados terão sido alterados com sucesso.</li>
+    <%= link_to image_tag("/assets/tutoriais-sistema-monitoria/editar-perfil/editar-perfil3.png", width: '95%', height: '95%'), "/assets/tutoriais-sistema-monitoria/editar-perfil/editar-perfil3.png", class: 'images' %><br><br>
+  </div>
+
+  <div>
+    <li>Caso queira alterar o departamento ao qual você pertence clique no botão 'Editar' que fica na seção 'Dados de professor'.</li>
+    <%= link_to image_tag("/assets/tutoriais-sistema-monitoria/editar-perfil/editar-perfil4.png", width: '95%', height: '95%'), "/assets/tutoriais-sistema-monitoria/editar-perfil/editar-perfil4.png", class: 'images' %><br><br>
+  </div>
+
+  <div>
+    <li>Selecione o departamento ao qual você pertence e clique no botão 'Enviar'.</li>
+    <%= link_to image_tag("/assets/tutoriais-sistema-monitoria/editar-perfil/editar-perfil5.png", width: '95%', height: '95%'), "/assets/tutoriais-sistema-monitoria/editar-perfil/editar-perfil5.png", class: 'images' %><br><br>
+  </div>
+<% end %>
