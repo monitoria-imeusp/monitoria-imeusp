@@ -10,67 +10,69 @@
 <% @candidatures_filtered.each_with_index do |candidatures, priority| %>
   <h2>Como <%= priority+1 %>ª opção:</h2>
   <% candidatures.each do |candidature| %>
-    <table>
-      <thead>
-        <tr>
-          <th>
-            <%= "#{t('activerecord.attributes.user.nusp')}: #{candidature.student.nusp}" %>
-          </th>
-          <th><%= candidature.student.name %></th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td class="title"><%= t('activerecord.attributes.student.institute') %></td>
-          <td><%= candidature.student.institute %></td>
-        </tr>
-        <tr>
-          <td class="title">
-            <%= t('activerecord.attributes.candidature.course1_id') %>
-          </td>
-          <td>
-            <% course = Course.find(candidature.course1_id) %>
-            <%= course.course_code + " - " + course.name %>
-          </td>
-        </tr>
-        <% if candidature.course2_id != nil %>
+    <% if candidature.student %>
+      <table>
+        <thead>
+          <tr>
+            <th>
+              <%= "#{t('activerecord.attributes.user.nusp')}: #{candidature.student.nusp}" %>
+            </th>
+            <th><%= candidature.student.name %></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="title"><%= t('activerecord.attributes.student.institute') %></td>
+            <td><%= candidature.student.institute %></td>
+          </tr>
           <tr>
             <td class="title">
-              <%= t('activerecord.attributes.candidature.course2_id') %>
+              <%= t('activerecord.attributes.candidature.course1_id') %>
             </td>
             <td>
-              <% course = Course.find(candidature.course2_id) %>
+              <% course = Course.find(candidature.course1_id) %>
               <%= course.course_code + " - " + course.name %>
             </td>
           </tr>
-        <% end %>
-        <% if candidature.course3_id != nil %>
+          <% if candidature.course2_id != nil %>
+            <tr>
+              <td class="title">
+                <%= t('activerecord.attributes.candidature.course2_id') %>
+              </td>
+              <td>
+                <% course = Course.find(candidature.course2_id) %>
+                <%= course.course_code + " - " + course.name %>
+              </td>
+            </tr>
+          <% end %>
+          <% if candidature.course3_id != nil %>
+            <tr>
+              <td class="title">
+                <%= t('activerecord.attributes.candidature.course3_id') %>
+              </td>
+              <td>
+                <% course = Course.find(candidature.course3_id) %>
+                <%= course.course_code + " - " + course.name %>
+              </td>
+            </tr>
+          <% end %>
+          <% if candidature.course4_id != nil %>
+            <tr>
+              <td class="title">
+                <%= t('activerecord.attributes.candidature.course4_id') %>
+              </td>
+              <td>
+                <% course = Course.find(candidature.course4_id) %>
+                <%= course.course_code + " - " + course.name %>
+              </td>
+            </tr>
+          <% end %>
           <tr>
-            <td class="title">
-              <%= t('activerecord.attributes.candidature.course3_id') %>
-            </td>
-            <td>
-              <% course = Course.find(candidature.course3_id) %>
-              <%= course.course_code + " - " + course.name %>
-            </td>
+            <td colspan="2"><%= link_to 'Mais informações', candidature %></th>
           </tr>
-        <% end %>
-        <% if candidature.course4_id != nil %>
-          <tr>
-            <td class="title">
-              <%= t('activerecord.attributes.candidature.course4_id') %>
-            </td>
-            <td>
-              <% course = Course.find(candidature.course4_id) %>
-              <%= course.course_code + " - " + course.name %>
-            </td>
-          </tr>
-        <% end %>
-        <tr>
-          <td colspan="2"><%= link_to 'Mais informações', candidature %></th>
-        </tr>
-      </tbody>
-    </table>
+        </tbody>
+      </table>
+    <% end %>
     <br>
   <% end %>
 <% end %>
