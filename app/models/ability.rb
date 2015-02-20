@@ -171,7 +171,7 @@ class Ability
       can :index, User
     end
     if user.is_a? User or user.is_a? Admin or user.is_a? Secretary
-      can :read, User
+      can :show, User
       can :update, User
       can :destroy, User
     end
