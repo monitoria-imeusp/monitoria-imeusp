@@ -125,8 +125,10 @@ class CandidaturesController < ApplicationController
   end
 
   def authorization_student
-    if student_signed_in? and @candidature.student_id != current_student.id
-      raise CanCan::AccessDenied.new()
+    if user_signed_in?
+      current_user.student do |student|
+        raise CanCan::AccessDenied.new() if @candidature.student_id != student.id
+      end
     end
   end
 
