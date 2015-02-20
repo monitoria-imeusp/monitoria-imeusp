@@ -40,6 +40,7 @@ class CandidaturesController < ApplicationController
   end
 
   def index_for_student
+    authorization_same_student params[:student_id]
     student = Student.find(params[:student_id])
     @candidatures = Candidature.where(student_id: student.id).order(:semester_id)
     @semesters = Semester.all_open.map do |semester|
@@ -122,6 +123,14 @@ class CandidaturesController < ApplicationController
   # Use callbacks to share common setup or constraints between actions.
   def set_candidature
     @candidature = Candidature.find(params[:id])
+  end
+
+  def authorization_same_student student_id
+    if user_signed_in?
+      current_user.student do |student|
+        raise CanCan::AccessDenied.new() if student_id != student.id.to_s
+      end
+    end
   end
 
   def authorization_student
