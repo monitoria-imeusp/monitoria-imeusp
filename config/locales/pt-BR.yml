@@ -45,7 +45,8 @@ pt-BR:
         work_correction: 'Correção de trabalhos'
         test_oversight: 'Fiscalização de provas'
         observation: 'Observações'
-        semester_id: 'Semestre'
+        semester_id: 'Período'
+        semester: 'Período'
       course:
         name: 'Nome da Disciplina'
         course_code: 'Código da Disciplina'
@@ -104,6 +105,8 @@ pt-BR:
         course4_id: 'Curso: 4ª opção'
         observation: 'Observações'
         transcript_file_path: 'Histórico Escolar'
+        semester_id: 'Período'
+        semester: 'Período'
       department:
         department: 'Departamento'
       advise:

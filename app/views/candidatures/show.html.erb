@@ -12,6 +12,11 @@
 </p>
 
 <p>
+  <strong><%= t('activerecord.attributes.candidature.semester') + ':' %></strong>
+  <%= @candidature.semester.as_s %>
+</p>
+
+<p>
   <strong><%= t('activerecord.attributes.candidature.course1_id') + ':' %></strong>
   <% course = Course.find(@candidature.course1_id) %>
   <%= course.course_code + " - " + course.name %>

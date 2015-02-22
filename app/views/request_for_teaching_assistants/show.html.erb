@@ -9,7 +9,12 @@
 
 <p>
   <strong><%= t('activerecord.attributes.professor.professor') + ':' %></strong>
-  <%= Professor.find(@request_for_teaching_assistant.professor_id).name %>
+  <%= @request_for_teaching_assistant.professor.name %>
+</p>
+
+<p>
+  <strong><%= t('activerecord.attributes.request_for_teaching_assistant.semester') + ':' %></strong>
+  <%= @request_for_teaching_assistant.semester.as_s %>
 </p>
 
 <p>
