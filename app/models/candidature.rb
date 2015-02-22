@@ -24,7 +24,7 @@ class Candidature < ActiveRecord::Base
   end
 
   def self.for_course_in_semester course, semester
-    candidatures_for_course = Candidature.where "course1_id = ? or course2_id = ? or course3_id = ? or course4_id = ?", course.id, course.id, course.id, course.id
+    candidatures_for_course = Candidature.where "semester_id = ? and (course1_id = ? or course2_id = ? or course3_id = ? or course4_id = ?)", semester.id, course.id, course.id, course.id, course.id
     current_requests = RequestForTeachingAssistant.where(semester: semester)
     current_roles = AssistantRole.where(request_for_teaching_assistant: current_requests)
     (candidatures_for_course.map do |candidature| candidature end).reject do |candidature|
@@ -35,7 +35,7 @@ class Candidature < ActiveRecord::Base
 
   def self.for_same_department_in_semester course, semester
     courses_in_same_department = Course.where "department_id = ? and id != ?", course.department_id, course.id
-    candidatures_in_same_department = Candidature.where(course1_id: courses_in_same_department)
+    candidatures_in_same_department = Candidature.where(course1_id: courses_in_same_department).where(semester: semester)
     current_requests = RequestForTeachingAssistant.where(semester: semester)
     current_roles = AssistantRole.where(request_for_teaching_assistant: current_requests)
     (candidatures_in_same_department.map do |candidature| candidature end).reject do |candidature|
