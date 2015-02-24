@@ -73,8 +73,8 @@
 </p>
 
 <% if user_signed_in? and current_user.student? %>
-  <%= link_to 'Editar', edit_candidature_path(@candidature) %>
   <% if @candidature.semester.open %>
+    <%= link_to 'Editar', edit_candidature_path(@candidature) %>
     <%= link_to 'Remover', @candidature, method: :delete, data: { confirm: 'Tem certeza?' } %>
   <% end %>
 <% end %>
