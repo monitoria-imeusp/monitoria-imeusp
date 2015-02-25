@@ -59,13 +59,15 @@
 
 <%= link_to 'Voltar', request_for_teaching_assistants_path %>
 <span style="height: 2em; display: block;"></span>
-<hr>
 
+<h2>Monitores eleitos para essa solicitação</h2>
 <% if @chosen_roles.any? %>
   <table>
     <thead>
       <tr>
-        <th colspan="2">Monitores eleitos para essa solicitação</th>
+        <th>Nome</th>
+        <th>Nº USP</th>
+        <th></th>
       </tr>
     </thead>
     <tbody>
@@ -78,13 +80,19 @@
     </tbody>
   </table>
   <hr>
+<% else %>
+  <p>Nenhum</p>
 <% end %>
 
 <% if (not @candidatures_for_this_request.nil? or not @candidatures_for_this_department.nil?) and (secretary_signed_in? or (user_signed_in? and current_user.super_professor?)) %>
+
+  <h2>Monitores eleitos para essa solicitação</h2>
+
   <table>
     <thead>
       <tr>
-        <th>Alunos que se candidataram para essa disciplina</th>
+        <th>Nome</th>
+        <th>Nº USP</th>
         <th colspan="2"></th>
       </tr>
     </thead>
@@ -93,6 +101,7 @@
       <% @candidatures_for_this_request.each do |candidature| %>
         <tr>
           <td><%= candidature.student.name %></td>
+          <td><%= candidature.student.nusp %></td>
           <td><%= link_to 'Ver candidatura', candidature %></td>
           <td><%= link_to 'Eleger', create_assistant_role_path(@request_for_teaching_assistant, candidature.student), method: :post %></td>
         </tr>
@@ -100,10 +109,13 @@
     </tbody>
   </table>
 
+  <h2>Alunos que se candidataram para disciplinas deste mesmo departamento</h2>
+  
   <table>
     <thead>
       <tr>
-        <th>Alunos que se candidataram para disciplinas deste mesmo departamento</th>
+        <th>Nome</th>
+        <th>Nº USP</th>
         <th colspan="2"></th>
       </tr>
     </thead>
@@ -112,6 +124,7 @@
       <% @candidatures_for_this_department.each do |candidature| %>
         <tr>
           <td><%= candidature.student.name %></td>
+          <td><%= candidature.student.nusp %></td>
           <td><%= link_to 'Ver candidatura', candidature %></td>
           <td><%= link_to 'Eleger', create_assistant_role_path(@request_for_teaching_assistant, candidature.student), method: :post %></td>
         </tr>
