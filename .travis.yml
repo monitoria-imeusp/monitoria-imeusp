@@ -9,11 +9,12 @@ notifications:
   email:
     recipients:
       - kazuo256@gmail.com
-      - andre.pest92@gmail.com
-      - jacksonjsouza@gmail.com
-      - lggassert@gmail.com
-      - lucastakeshipalma@gmail.com
-      - marcheing@gmail.com
+      - rewasvat@gmail.com
+      - bsesso@gmail.com
+      - gabrielguilhoto@gmail.com
+      - lucasdario.dariolucas@gmail.com
+      - matbarrosrodrigues@gmail.com
+      - ogawa.gabriel@gmail.com
     on_success: change
     on_failure: always
 
