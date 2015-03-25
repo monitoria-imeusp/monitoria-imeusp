@@ -25,7 +25,7 @@
   <div class="field">
     <%= f.label :course_id, t('activerecord.attributes.request_for_teaching_assistant.course_id') %><br>
     <%= f.select :course_id, course_options %><br>
-  </div>
+  </div>  
   <div class="field">
     <%= f.label :requested_number, t('activerecord.attributes.request_for_teaching_assistant.requested_number') %><br>
     <%= f.number_field :requested_number %>
@@ -65,3 +65,29 @@
     <%= f.submit "Enviar" %>
   </div>
 <% end %>
+
+<script>
+var listaTodosNomes = [];
+var listaTodosIds = [];
+var name;
+var id;
+<% course_options.each do |course| %>
+  name = "<%= course[0] %>";
+  id = "<%= course[1] %>";
+  listaTodosNomes.push(name); 
+  listaTodosIds.push(id);
+<% end %>
+var select = document.getElementById("request_for_teaching_assistant_course_id");
+var selectLength = select.options.length;
+for (var j = selectLength - 1; j >= 0; j--) {
+  select.remove(j);
+}
+for (var i = 0; i < listaTodosNomes.length; i++) {
+  if (listaTodosNomes[i].substring(0, 3) == "MAC") {
+    var option = document.createElement("option");
+    option.text = listaTodosNomes[i];
+    option.value = listaTodosIds[i];
+    select.add(option);
+  }  
+}
+</script>
