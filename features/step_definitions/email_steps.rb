@@ -41,7 +41,7 @@ end
 When(/^I confirm the user account with email "(.*?)"$/) do |user_email|
   user = User.find_by_email(user_email)
   user.should_not be_nil
-  email = ActionMailer::Base.deliveries.first
+  email = ActionMailer::Base.deliveries.last
   email.from.should == ["monitoria@ime.usp.br"]
   email.to.should == [user_email]
   m = email.body.match(/href="http:\/\/localhost:3000(\/.*?)"/)
