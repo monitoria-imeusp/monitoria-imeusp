@@ -40,7 +40,7 @@ class UsersController < ApplicationController
 
   def destroy
     @user = User.find(params[:id])
-    authorization_user
+    authorization_user_destroy
     @user.student do |s|
       s.destroy
     end
@@ -57,6 +57,16 @@ class UsersController < ApplicationController
   def authorization_user
     if user_signed_in?
       if current_user.student? and (not @user.student? or @user.id != current_user.id)
+        raise CanCan::AccessDenied.new
+      end
+      current_user.professor do |professor|
+        raise CanCan::AccessDenied.new unless professor.super_professor? or @user.id == current_user.id
+      end
+    end
+  end
+  def authorization_user_destroy
+    if user_signed_in?
+      if current_user.student?
         raise CanCan::AccessDenied.new
       end
       current_user.professor do |professor|

@@ -173,6 +173,8 @@ class Ability
     if user.is_a? User or user.is_a? Admin or user.is_a? Secretary
       can :show, User
       can :update, User
+    end
+    if user.is_a? Admin or user.is_a? Secretary
       can :destroy, User
     end
 

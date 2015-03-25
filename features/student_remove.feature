@@ -40,3 +40,12 @@ Feature: delete a student
     	And I go to the students index
         And I click the "Ver perfil" link
     	And I should not see "Remover"
+    	
+	Scenario: Student can't delete itself
+	    Given I'm at the user login page
+	    When I fill the "Número USP" field with "123456"
+	    And I fill the "Senha" field with "changeme!"
+	    And I press the "Entrar" button
+	    And I click the "Perfil" link
+	    And I should not see "Remover"
+
