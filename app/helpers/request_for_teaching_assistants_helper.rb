@@ -8,9 +8,9 @@ module RequestForTeachingAssistantsHelper
   end
 
   def course_options
-    (Course.all.order(:course_code).map do |course|
+    Course.all.order(:course_code).map do |course|
       [course.course_code + " - " + course.name, course.id]
-    end).unshift ["", ""]
+    end
   end
 
   def professor_options
