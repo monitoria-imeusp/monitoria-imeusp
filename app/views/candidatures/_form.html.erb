@@ -10,22 +10,20 @@
       </ul>
     </div>
   <% end %>
-  <div class="field">
-    <%= f.label :course1_id, t('activerecord.attributes.candidature.course1_id') %><br>
-    <%= f.select :course1_id, course_options %><br>
-  </div>
-  <div class="field">
-    <%= f.label :course2_id, t('activerecord.attributes.candidature.course2_id') %><br>
-    <%= f.select :course2_id, course_options %><br>
-  </div>
-  <div class="field">
-    <%= f.label :course3_id, t('activerecord.attributes.candidature.course3_id') %><br>
-    <%= f.select :course3_id, course_options %><br>
-  </div>
-  <div class="field">
-    <%= f.label :course4_id, t('activerecord.attributes.candidature.course4_id') %><br>
-    <%= f.select :course4_id, course_options %><br>
-  </div>
+  
+  <% (1..4).each do |i| %>
+    <div class="field">
+      <% cid = "course#{i}_id".to_sym %>
+      <%= f.label cid, t("activerecord.attributes.candidature.course#{i}_id") %><br>
+      <input type="radio" name="<%="disc#{i}"%>" onchange="<%="updateList(this.value, #{i})"%>" id="<%="MAC#{i}"%>" value="MAC"> MAC
+      <input type="radio" name="<%="disc#{i}"%>" onchange="<%="updateList(this.value, #{i})"%>" id="<%="MAE#{i}"%>" value="MAE"> MAE
+      <input type="radio" name="<%="disc#{i}"%>" onchange="<%="updateList(this.value, #{i})"%>" id="<%="MAP#{i}"%>" value="MAP"> MAP
+      <input type="radio" name="<%="disc#{i}"%>" onchange="<%="updateList(this.value, #{i})"%>" id="<%="MAT#{i}"%>" value="MAT"> MAT
+      <input type="radio" name="<%="disc#{i}"%>" onchange="<%="updateList(this.value, #{i})"%>" id="<%="ALL#{i}"%>" value="ALL" checked> Todas<br>
+      <%= f.select cid, course_options %><br>
+    </div>
+  <% end %>
+  
   <div class="field">
     <%= f.label :daytime_availability, t('activerecord.attributes.candidature.daytime_availability') %><br>
     <%= f.check_box :daytime_availability %>
@@ -57,3 +55,50 @@
     <%= f.submit "Enviar" %>
   </div>
 <% end %>
+
+<script>
+var courseList = [];
+var coursesByDep = {};
+var name;
+var id;
+<% course_options.each do |course| %>
+  name = "<%= course[0] %>";
+  id = "<%= course[1] %>";
+  courseList.push({display: name, value: id});
+<% end %>
+
+coursesByDep["MAC"] = [];
+coursesByDep["MAE"] = [];
+coursesByDep["MAT"] = [];
+coursesByDep["MAP"] = [];
+coursesByDep["ALL"] = courseList;
+
+for (var i = 1; i < courseList.length; i++) {
+  var dep = courseList[i].display.substring(0, 3);
+  coursesByDep[dep].push(courseList[i]);
+}
+
+updateList("ALL", 1);
+updateList("ALL", 2);
+updateList("ALL", 3);
+updateList("ALL", 4);
+
+function updateList(dep, listId) {
+  var select = document.getElementById("candidature_course" + listId + "_id");
+  var selectLength = select.options.length;
+  for (var j = selectLength - 1; j >= 0; j--) {
+    select.remove(j);
+  }
+  var list = coursesByDep[dep];
+  var blank = document.createElement("option");
+  blank.text = "";
+  blank.value = "";
+  select.add(blank);
+  for (var i = 0; i < list.length; i++) {
+    var option = document.createElement("option");
+    option.text = list[i].display;
+    option.value = list[i].value;
+    select.add(option);
+  }
+}
+</script>
