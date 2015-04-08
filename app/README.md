@@ -1,7 +1,9 @@
 
-=== Descrição geral do sistema ===
+Descrição geral do sistema
+==========================
 
---- Arquitetura ---
+Arquitetura
+-----------
 
 O sistema usa o padrão de arquitetura de software chamado Model-View-Control
 (MVC). Nele, a aplicação fica dividia em três grandes partes (como indica o
