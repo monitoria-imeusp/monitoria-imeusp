@@ -9,11 +9,13 @@ module OmniAuth
       # This is where you pass the options you would pass when
       # initializing your consumer from the OAuth gem.
       option :client_options, {
-        site: "https://uspdigital.usp.br/wsusuario/"
+        #site: "https://uspdigital.usp.br/wsusuario/"
+        site: "https://labs.uspdigital.usp.br/wsusuario"
       }
 
       option :authorize_params, {
-        callback_id: "9"
+        #callback_id: "9"
+        callback_id: "8"
       }
 
       option :callback_confirmed, true
