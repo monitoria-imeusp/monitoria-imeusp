@@ -23,6 +23,20 @@ class Candidature < ActiveRecord::Base
     end
   end
 
+  def has_repeated_courses
+    non_nil_courses = []
+    (1..4).each do |i|
+      if course(i) != nil
+        non_nil_courses.push(course(i))
+      end
+    end
+    if non_nil_courses.uniq.length == non_nil_courses.length
+      return false
+    else
+      return true
+    end
+  end
+
   def self.for_course_in_semester course, semester
     candidatures_for_course = Candidature.where "semester_id = ? and (course1_id = ? or course2_id = ? or course3_id = ? or course4_id = ?)", semester.id, course.id, course.id, course.id, course.id
     current_requests = RequestForTeachingAssistant.where(semester: semester)

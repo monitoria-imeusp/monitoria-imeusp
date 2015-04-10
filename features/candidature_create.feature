@@ -52,6 +52,14 @@ Feature: Create a candidature
         And I press the "Enviar" button
         Then I should not see "Candidatura criada com sucesso."
 
+    Scenario: Student cheats to select the same course twice
+        And I select "MAC0438 - concorrente" on the "Curso: 2ª opção"
+        And I select "MAC0438 - concorrente" on the "Curso: 1ª opção"
+        And I mark the "Disponibilidade para trabalhar de dia" checkbox
+        And I select the preference option "Diurno"
+        And I press the "Enviar" button
+        Then I should not see "Candidatura criada com sucesso."
+
     @javascript
     Scenario: First option courses are sorted by department
         Then "Curso: 1ª opção" should contain "MAC0342 - labxp"

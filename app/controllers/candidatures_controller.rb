@@ -79,6 +79,10 @@ class CandidaturesController < ApplicationController
         @candidature.errors.add(:semester_id, t('errors.models.candidature.toomany'))
         format.html { render action: 'new' }
         format.json { render json: @candidature.errors, status: :unprocessable_entity }
+      elsif @candidature.has_repeated_courses
+        @candidature.errors.add(:-, t('errors.models.candidature.repeated'))
+        format.html { render action: 'new' }
+        format.json { render json: @candidature.errors, status: :unprocessable_entity }
       elsif @candidature.save
         BackupMailer.new_candidature(@candidature).deliver
         format.html { redirect_to @candidature, notice: 'Candidatura criada com sucesso.' }
