@@ -88,7 +88,7 @@ coursesByDep["MAT"] = [];
 coursesByDep["MAP"] = [];
 coursesByDep["ALL"] = courseList;
 
-for (var i = 1; i < courseList.length; i++) {
+for (var i = 0; i < courseList.length; i++) {
   var dep = courseList[i].display.substring(0, 3);
   coursesByDep[dep].push(courseList[i]);
 }

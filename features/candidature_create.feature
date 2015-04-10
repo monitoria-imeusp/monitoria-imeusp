@@ -178,3 +178,22 @@ Feature: Create a candidature
         And "Curso: 4ª opção" should contain "MAT0110 - Algebra"
         And "Curso: 4ª opção" should contain "MAE0238 - Estocasticos"
         And "Curso: 4ª opção" should contain "MAP0456 - Aplicacoes"
+
+    @javascript
+    Scenario: Student can only choose each discipline once
+        Then I select "MAC0342 - labxp" on the "Curso: 1ª opção"
+        And "Curso: 2ª opção" should not contain "MAC0342 - labxp"
+        And "Curso: 3ª opção" should not contain "MAC0342 - labxp"
+        And "Curso: 4ª opção" should not contain "MAC0342 - labxp"
+        Then I select "MAC0438 - concorrente" on the "Curso: 1ª opção"
+        And "Curso: 1ª opção" should contain "MAC0342 - labxp"
+        And "Curso: 2ª opção" should contain "MAC0342 - labxp"
+        And "Curso: 3ª opção" should contain "MAC0342 - labxp"
+        And "Curso: 4ª opção" should contain "MAC0342 - labxp"
+        And "Curso: 2ª opção" should not contain "MAC0438 - concorrente"
+        And "Curso: 3ª opção" should not contain "MAC0438 - concorrente"
+        And "Curso: 4ª opção" should not contain "MAC0438 - concorrente"
+        And I select the department option "MAE1"
+        And "Curso: 2ª opção" should contain "MAC0438 - concorrente"
+        And "Curso: 3ª opção" should contain "MAC0438 - concorrente"
+        And "Curso: 4ª opção" should contain "MAC0438 - concorrente"
