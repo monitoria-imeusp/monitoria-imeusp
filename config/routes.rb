@@ -3,11 +3,11 @@ Rails.application.routes.draw do
 
   get 'home/index'
 
+  devise_for :users, :controllers => { :users => "users", :omniauth_callbacks => "users/omniauth_callbacks" }
   devise_for :admins, :controllers => { :admins => "admins" }
   devise_for :professors, :controllers => { :professors => "professors" }
   devise_for :secretaries, :controllers => { :secretaries => "secretaries" }
   devise_for :students, :controllers => { :students => "students" }
-  devise_for :users, :controllers => { :users => "users" }
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
