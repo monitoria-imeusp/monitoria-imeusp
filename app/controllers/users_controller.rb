@@ -10,10 +10,6 @@ class UsersController < ApplicationController
     end
   end
 
-  def index
-    @users = User.all
-  end
-
   def edit
     if User.exists?(params[:id])
       @user = User.find(params[:id])
@@ -21,6 +17,10 @@ class UsersController < ApplicationController
     else
       raise ActionController::RoutingError.new('Not Found')
     end
+  end
+
+  def index
+    @users = User.all
   end
 
   def update
@@ -64,6 +64,7 @@ class UsersController < ApplicationController
       end
     end
   end
+
   def authorization_user_destroy
     if user_signed_in?
       if current_user.student?

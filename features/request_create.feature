@@ -39,6 +39,7 @@ Feature: Creating Request for Teaching Assistant
         And I should see "Fiscalização de provas: Sim"
         And I should see "Observações: teste observações"
 
+    @javascript
     Scenario: Invalid Course
         When I fill the "Número de monitores solicitados" field with "2"
         And I select the priority option "Extremamente necessário, mas não imprescindível"

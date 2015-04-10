@@ -9,8 +9,8 @@ module CandidaturesHelper
   end
 
   def course_options
-    (Course.all.map do |course|
+    Course.all.map do |course|
       [course.course_code + " - " + course.name, course.id]
-    end).unshift ["", ""]
+    end
   end
 end

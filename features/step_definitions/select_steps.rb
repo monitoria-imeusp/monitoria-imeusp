@@ -60,6 +60,6 @@ Then(/^"(.*?)" should contain "(.*?)"$/) do |dropdown, text|
   page.has_select?(dropdown, :with_options => [text]).should == true
 end
 
-Then /^"(.*?)" should not contain "([^"]*)"$/ do |dropdown, text|
+Then(/^"(.*?)" should not contain "(.*?)"$/)  do |dropdown, text|
   page.has_select?(dropdown, :with_options => [text]).should == false
 end

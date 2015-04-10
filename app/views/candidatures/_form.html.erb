@@ -15,12 +15,12 @@
     <div class="field">
       <% cid = "course#{i}_id".to_sym %>
       <%= f.label cid, t("activerecord.attributes.candidature.course#{i}_id") %><br>
-      <input type="radio" name="<%="disc#{i}"%>" onchange="<%="updateList(this.value, #{i})"%>" id="<%="MAC#{i}"%>" value="MAC"> MAC
-      <input type="radio" name="<%="disc#{i}"%>" onchange="<%="updateList(this.value, #{i})"%>" id="<%="MAE#{i}"%>" value="MAE"> MAE
-      <input type="radio" name="<%="disc#{i}"%>" onchange="<%="updateList(this.value, #{i})"%>" id="<%="MAP#{i}"%>" value="MAP"> MAP
-      <input type="radio" name="<%="disc#{i}"%>" onchange="<%="updateList(this.value, #{i})"%>" id="<%="MAT#{i}"%>" value="MAT"> MAT
-      <input type="radio" name="<%="disc#{i}"%>" onchange="<%="updateList(this.value, #{i})"%>" id="<%="ALL#{i}"%>" value="ALL" checked> Todas<br>
-      <%= f.select cid, course_options %><br>
+      <input type="radio" name="<%="disc#{i}"%>" onchange="<%="updateList(this.value, #{i}, true)"%>" id="<%="MAC#{i}"%>" value="MAC"> MAC
+      <input type="radio" name="<%="disc#{i}"%>" onchange="<%="updateList(this.value, #{i}, true)"%>" id="<%="MAE#{i}"%>" value="MAE"> MAE
+      <input type="radio" name="<%="disc#{i}"%>" onchange="<%="updateList(this.value, #{i}, true)"%>" id="<%="MAP#{i}"%>" value="MAP"> MAP
+      <input type="radio" name="<%="disc#{i}"%>" onchange="<%="updateList(this.value, #{i}, true)"%>" id="<%="MAT#{i}"%>" value="MAT"> MAT
+      <input type="radio" name="<%="disc#{i}"%>" onchange="<%="updateList(this.value, #{i}, true)"%>" id="<%="ALL#{i}"%>" value="ALL" checked> Todas<br>
+      <%= f.select cid, course_options, {}, {:onchange => "removeFromOthers(#{i})"} %><br>
     </div>
   <% end %>
   
@@ -59,6 +59,9 @@
 <script>
 var courseList = [];
 var coursesByDep = {};
+var currDep = ["all", "all", "all", "all"];
+var removedOptions = [];
+var oldSelectionValue = [0, 0, 0 ,0];
 var name;
 var id;
 <% course_options.each do |course| %>
@@ -73,18 +76,52 @@ coursesByDep["MAT"] = [];
 coursesByDep["MAP"] = [];
 coursesByDep["ALL"] = courseList;
 
-for (var i = 1; i < courseList.length; i++) {
+for (var i = 0; i < courseList.length; i++) {
   var dep = courseList[i].display.substring(0, 3);
   coursesByDep[dep].push(courseList[i]);
 }
 
-updateList("ALL", 1);
-updateList("ALL", 2);
-updateList("ALL", 3);
-updateList("ALL", 4);
+for (var i = 1; i <= 4; i++) 
+  updateList("ALL", i, false);
 
-function updateList(dep, listId) {
+function removeFromOthers(listId) {
   var select = document.getElementById("candidature_course" + listId + "_id");
+  var selectedOption = select.options[select.selectedIndex];
+  if (selectedOption.text != "") removedOptions.push(selectedOption.value);  
+  
+  clearBanList(false, listId);
+  oldSelectionValue[listId - 1] = select.options[select.selectedIndex].value;
+} 
+
+function clearBanList(wasRadio, listId) {
+
+  for (var i = 0; i < removedOptions.length; i++) {
+    if (removedOptions[i] == oldSelectionValue[listId - 1]) {
+      removedOptions.splice(i, 1);
+      break;
+    }
+  }
+
+  if(!wasRadio) {
+    for (var j = 1; j <= 4; j++) {
+      if (j != listId) {
+        updateList(currDep[j-1], j, false);
+      }
+    } 
+  }
+
+}
+
+function updateList(dep, listId, wasRadio) {
+  var select = document.getElementById("candidature_course" + listId + "_id");
+  var oldIndex = select.selectedIndex;
+
+  currDep[listId - 1] = dep;
+
+  if (wasRadio) {
+    clearBanList(true, listId, select.options[oldIndex].value);
+  }
+
   var selectLength = select.options.length;
   for (var j = selectLength - 1; j >= 0; j--) {
     select.remove(j);
@@ -95,10 +132,24 @@ function updateList(dep, listId) {
   blank.value = "";
   select.add(blank);
   for (var i = 0; i < list.length; i++) {
-    var option = document.createElement("option");
-    option.text = list[i].display;
-    option.value = list[i].value;
-    select.add(option);
+    var val = list[i].value;
+    if (val == oldSelectionValue[listId - 1] || removedOptions.indexOf(val) < 0) {
+      var option = document.createElement("option");
+      option.text = list[i].display;
+      option.value = val;
+      select.add(option);
+    }
   }
+
+  for (var i = 0; i < select.options.length; i++) {
+    if (oldSelectionValue[listId - 1] == select.options[i].value) {
+      select.selectedIndex = i;
+    }
+  }
+
+  if (wasRadio)
+    removeFromOthers(listId);
+
+  oldSelectionValue[listId - 1] = select.options[select.selectedIndex].value;
 }
 </script>
