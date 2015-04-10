@@ -98,13 +98,39 @@
     </thead>
 
     <tbody>
+      <h3>Como 1ª opção</h3>
       <% @candidatures_for_this_request.each do |candidature| %>
-        <tr>
-          <td><%= candidature.student.name %></td>
-          <td><%= candidature.student.nusp %></td>
-          <td><%= link_to 'Ver candidatura', candidature %></td>
-          <td><%= link_to 'Eleger', create_assistant_role_path(@request_for_teaching_assistant, candidature.student), method: :post %></td>
-        </tr>
+        <% if (candidature.course1_id == @request_for_teaching_assistant.course_id) %>
+            <tr>
+              <td><%= candidature.student.name %></td>
+              <td><%= candidature.student.nusp %></td>
+              <td><%= link_to 'Ver candidatura', candidature %></td>
+              <td><%= link_to 'Eleger', create_assistant_role_path(@request_for_teaching_assistant, candidature.student), method: :post %></td>
+            </tr>
+        <% end %>
+      <% end %>
+    </tbody>
+  </table>
+  <table>
+    <thead>
+      <tr>
+        <th>Nome</th>
+        <th>Nº USP</th>
+        <th colspan="2"></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <h3>Como 2ª, 3ª ou 4ª opção</h3>
+      <% @candidatures_for_this_request.each do |candidature| %>
+        <% if (candidature.course1_id != @request_for_teaching_assistant.course_id) %>
+            <tr>
+              <td><%= candidature.student.name %></td>
+              <td><%= candidature.student.nusp %></td>
+              <td><%= link_to 'Ver candidatura', candidature %></td>
+              <td><%= link_to 'Eleger', create_assistant_role_path(@request_for_teaching_assistant, candidature.student), method: :post %></td>
+            </tr>
+        <% end %>
       <% end %>
     </tbody>
   </table>
