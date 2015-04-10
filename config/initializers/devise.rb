@@ -232,10 +232,7 @@ Devise.setup do |config|
   # up on your models and hooks.
   # config.omniauth :github, 'APP_ID', 'APP_SECRET', scope: 'user,public_repo'
   require 'omniauth/strategies/usp'
-  # development
   config.omniauth :usp, "ime_helios", ENV["OMNIAUTH_MONITORIA_KEY"]
-  # production
-  #config.omniauth :usp, "ime_helios", ENV["OMNIAUTH_MONITORIA_KEY"]
 
 
   # ==> Warden configuration
