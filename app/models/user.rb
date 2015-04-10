@@ -1,7 +1,7 @@
 class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :lockable, :timeoutable and :omniauthable
-  devise :database_authenticatable, :recoverable, :rememberable, :trackable, :validatable, :confirmable, :authentication_keys => [:nusp]
+  devise :database_authenticatable, :recoverable, :rememberable, :trackable, :validatable, :confirmable, :omniauthable, :authentication_keys => [:nusp], :omniauth_providers => [:usp]
 
   include ActiveModel::Validations
 
@@ -40,5 +40,13 @@ class User < ActiveRecord::Base
   def super_professor?
     query = Professor.where(user_id: id)
     query.any? and query.take.super_professor?
+  end
+
+  def self.from_omniauth(auth)
+    #where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
+    #  user.email = auth.info.email
+    #  user.password = Devise.friendly_token[0,20]
+    #  user.name = auth.info.name   # assuming the user model has a name
+    #end
   end
 end
