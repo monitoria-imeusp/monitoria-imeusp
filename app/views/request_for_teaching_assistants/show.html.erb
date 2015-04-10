@@ -86,7 +86,7 @@
 
 <% if (not @candidatures_for_this_request.nil? or not @candidatures_for_this_department.nil?) and (secretary_signed_in? or (user_signed_in? and current_user.super_professor?)) %>
 
-  <h2>Monitores eleitos para essa solicitação</h2>
+  <h2>Alunos que se candidataram para essa disciplina</h2>
 
   <table>
     <thead>
