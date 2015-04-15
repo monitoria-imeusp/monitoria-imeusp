@@ -54,3 +54,24 @@ Feature: Index of the Requests for Teaching Assistant
         And I should see "MAC0110 - Mascarenhas"
         And I should see "MAC0122 - Coisas"
         And I should see "MAE0438 - Estatística Concorrente"
+
+    @javascript
+    Scenario: Hiperprofessor can sort requests by department
+        Given I'm at the professor login page
+        And there is a hiper_professor with name "zara" and password "12345678" nusp "2222222" department "MAE" and email "zara@usp.br"
+        When I fill the "Número USP" field with "2222222"
+        And I fill the "Senha" field with "12345678"
+        And I press the "Entrar" button
+        And I should see "Pedidos de monitoria"
+        Then I click the "Pedidos de monitoria" link
+        And I should see "MAC0110 - Mascarenhas"
+        And I should see "MAC0122 - Coisas"
+        And I should see "MAE0438 - Estatística Concorrente"
+        Then I select the department option "MAE"
+        And I should see "MAE0438 - Estatística Concorrente"
+        And I should not see "MAC0110 - Mascarenhas"
+        And I should not see "MAC0122 - Coisas"
+        Then I select the department option "MAC"
+        And I should not see "MAE0438 - Estatística Concorrente"
+        And I should see "MAC0110 - Mascarenhas"
+        And I should see "MAC0122 - Coisas"

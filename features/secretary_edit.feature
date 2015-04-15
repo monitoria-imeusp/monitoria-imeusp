@@ -31,7 +31,7 @@ Feature: Secretary edit
 
     Scenario: Any person trying to edit a secretary
         Given I go to the secretaries index
-		Then I should see "Acesso negado"
+		Then I should see "ACESSO NEGADO"
 
     Scenario: Secretary edits itself
         Given I'm at the secretary login page

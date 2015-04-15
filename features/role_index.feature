@@ -29,4 +29,4 @@ Feature: Assistant roles table visualization
     Scenario: Common professor cannot see all assistant roles
         Given I'm logged in as a professor
         And I visit the assistant roles page
-        Then I should see "Acesso negado"
+        Then I should see "ACESSO NEGADO"
