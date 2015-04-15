@@ -30,4 +30,4 @@ Feature: Secretary remove
 
     Scenario: Any person trying to remove a secretary
         Given I'm at the "secretaries" page
-		Then I should see "Acesso negado"
+		Then I should see "ACESSO NEGADO"

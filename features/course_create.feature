@@ -46,9 +46,9 @@ Feature: Course creation
         And I press the "Entrar" button
         And I should not see "Cadastrar disciplina"
         Then I try the create course URL
-        Then I should see "Acesso negado"
+        Then I should see "ACESSO NEGADO"
 
     Scenario: Any person trying to create a course
         Given I'm at the home page
         Then I try the create course URL
-        Then I should see "Acesso negado"
+        Then I should see "ACESSO NEGADO"

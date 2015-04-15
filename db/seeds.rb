@@ -57,6 +57,19 @@ if Rails.env.development?
         professor_rank: 2
       }
     },
+    { 
+      user: {
+        name: "Eloi Medina Galego",
+        nusp: "01234",
+        email: "eloi@ime.usp.br",
+        password: "changeme!",
+        confirmed_at: Time.now
+      },
+      professor: {
+        department: Department.find_by(:code => "MAT"),
+        professor_rank: 1
+      }
+    },    
     {
       user: {
         name: "Siméon Denis Poisson",

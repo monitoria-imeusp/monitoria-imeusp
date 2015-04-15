@@ -9,7 +9,7 @@ Feature: Showing a professor
 
 	Scenario: Anyone trying to see detailed information
 		Given I'm at the "professors" page
-		Then I should see "Acesso negado"
+		Then I should see "ACESSO NEGADO"
 
 	Scenario: Admin seeing detailed information
 		When I'm at the login page

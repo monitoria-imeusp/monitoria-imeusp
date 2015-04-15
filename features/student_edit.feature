@@ -38,7 +38,7 @@ Feature: edit a student
 
     Scenario: Student trying to edit a student that isn't him
         When I try to access the "students" page with id "2" to "edit"
-        Then I should see "Acesso negado"
+        Then I should see "ACESSO NEGADO"
 
 	#Scenario: Student trying to update a student that doesn't exist
 		#When I try to update the student with id "44"
