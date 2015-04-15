@@ -42,7 +42,22 @@ class User < ActiveRecord::Base
     query.any? and query.take.super_professor?
   end
 
-  def self.from_omniauth(auth)
+  def self.from_omniauth auth
+    p auth.info.nusp
+    registered = where nusp: auth.info.nusp
+    if registered.any?
+      user = registered.take
+      if auth.info.link == :student and user.student?
+        user.provider = auth.provider
+        user.uid = auth.uid
+        user.save
+        user
+      else
+        raise "Not student"
+      end
+    else
+      raise "Not registered"
+    end
     #where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
     #  user.email = auth.info.email
     #  user.password = Devise.friendly_token[0,20]

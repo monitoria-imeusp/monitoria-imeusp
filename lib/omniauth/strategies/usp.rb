@@ -29,7 +29,8 @@ module OmniAuth
         {
           :nusp => raw_info['loginUsuario'],
           :name => raw_info['nomeUsuario'],
-          :email => raw_info['emailPrincipalUsuario']
+          :email => raw_info['emailPrincipalUsuario'],
+          :link => userlink
         }
       end
 
@@ -39,9 +40,23 @@ module OmniAuth
         }
       end
 
+      private
+
       def raw_info
         body = access_token.post('/oauth/usuariousp').body
-        @raw_info ||= MultiJson.decode(body)
+        #@raw_info ||= MultiJson.decode(body)
+        @raw_info = MultiJson.decode(body)
+      end
+
+      def userlink
+        raw_info['vinculo'].each do |link|
+          type = link['tipoVinculo']
+          if type == "ALUNOGR" or type == "ALUNOPOS"
+            return :student
+          elsif type == "SERVIDOR"
+            return :teacher
+          end
+        end
       end
     end
   end
