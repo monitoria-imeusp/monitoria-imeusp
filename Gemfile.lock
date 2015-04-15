@@ -1,3 +1,11 @@
+GIT
+  remote: https://github.com/monitoria-imeusp/omniauth-oauth.git
+  revision: 53676ee0171972c38a2e47bd547c1d2071c6a73a
+  specs:
+    omniauth-oauth (1.0.1)
+      oauth
+      omniauth (~> 1.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -100,7 +108,7 @@ GEM
       multi_json (~> 1.3)
     haml (4.0.5)
       tilt
-    hashie (3.4.0)
+    hashie (3.4.1)
     hike (1.2.3)
     http-cookie (1.0.2)
       domain_name (~> 0.5)
@@ -159,9 +167,6 @@ GEM
     omniauth (1.2.2)
       hashie (>= 1.2, < 4)
       rack (~> 1.0)
-    omniauth-oauth (1.0.1)
-      oauth
-      omniauth (~> 1.0)
     orm_adapter (0.5.0)
     pg (0.17.1)
     poltergeist (1.5.0)
@@ -308,7 +313,7 @@ DEPENDENCIES
   mailcatcher
   mechanize
   modernizr-rails
-  omniauth-oauth
+  omniauth-oauth!
   pg
   poltergeist (~> 1.5.0)
   rails (= 4.1.0.rc2)

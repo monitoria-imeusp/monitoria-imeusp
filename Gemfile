@@ -37,7 +37,7 @@ gem 'sdoc', require: false
 gem 'spring', group: :development
 
 # For authentication in USP server
-gem 'omniauth-oauth'
+gem 'omniauth-oauth', git: 'https://github.com/monitoria-imeusp/omniauth-oauth.git'
 
 group :test do
   # Easier test writing
