@@ -32,7 +32,8 @@ class RequestForTeachingAssistantsController < ApplicationController
       # Valid candidatures for this request
       course = @request_for_teaching_assistant.course
       semester = @request_for_teaching_assistant.semester
-      @candidatures_for_this_request = Candidature.for_course_in_semester course, semester
+      @first_option_candidatures_for_this_request = Candidature.for_course_in_semester course, semester, true
+      @other_option_candidatures_for_this_request = Candidature.for_course_in_semester course, semester, false
       # Valid candidatures for the same department
       @candidatures_for_this_department = Candidature.for_same_department_in_semester course, semester
     end
