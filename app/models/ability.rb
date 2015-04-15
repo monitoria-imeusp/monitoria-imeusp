@@ -14,7 +14,7 @@ class Ability
       cannot :read, Secretary
       cannot :update, Secretary
       cannot :destroy, Secretary
-      can :create, Student
+      cannot :create, Student
       cannot :read, Student
       cannot :update, Student
       cannot :destroy, Student
@@ -164,6 +164,10 @@ class Ability
       can :read, Candidature #, :student_id => user.id #Only his own
       can :update, Candidature #, :student_id => user.id #Only his own
       can :destroy, Candidature #, :student_id => user.id #Only his own
+    end
+
+    if user.is_a? User
+      can :create, Student
     end
 
     # Standard user permissions

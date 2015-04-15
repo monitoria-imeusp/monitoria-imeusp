@@ -43,25 +43,25 @@ class User < ActiveRecord::Base
   end
 
   def self.from_omniauth auth
-    p auth.info.nusp
     registered = where nusp: auth.info.nusp
     if registered.any?
       user = registered.take
-      if auth.info.link == :student and user.student?
+      if auth.info.link == :student
         user.provider = auth.provider
         user.uid = auth.uid
         user.save
         user
       else
-        raise "Not student"
+        raise "Not student" # <--- professor?
       end
     else
-      raise "Not registered"
+      user = User.new(nusp: auth.info.nusp, name: auth.info.name, email: auth.info.email, password: "changeme!")
+      user.confirmed_at = Time.now
+      user.skip_confirmation_notification!
+      unless user.save
+        raise user.errors.inspect
+      end
+      user
     end
-    #where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
-    #  user.email = auth.info.email
-    #  user.password = Devise.friendly_token[0,20]
-    #  user.name = auth.info.name   # assuming the user model has a name
-    #end
   end
 end
