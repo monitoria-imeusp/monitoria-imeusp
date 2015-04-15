@@ -2,13 +2,17 @@ require 'spec_helper'
 
 describe StudentsController do
 
-  context 'when not signed' do
+  context 'when signed in without student info' do
+    let(:user) { FactoryGirl.create :user }
+    before :each do
+      @request.env["devise.mapping"] = Devise.mappings[:user]
+      sign_in user
+    end
 
     describe '.new' do
       before :each do
         get :new
         assigns(:student).should be_a_new(Student)
-        assigns(:user).should be_a_new(User)
       end
       subject { response }
       it { expect(subject).to render_template(:new) }
@@ -23,17 +27,11 @@ describe StudentsController do
 
         it { should redirect_to User.last }
 
-        context 'user' do
-          subject { assigns(:user) }
-          it { expect(subject).to be_a(User) }
-          it { expect(subject).to be_persisted() }
-        end
-
         context 'student' do
           subject { assigns(:student) }
           it { expect(subject).to be_a(Student) }
           it { expect(subject).to be_persisted() }
-          its(:user_id) { should eq(assigns(:user).id) }
+          its(:user_id) { should eq(user.id) }
         end
       end
 
