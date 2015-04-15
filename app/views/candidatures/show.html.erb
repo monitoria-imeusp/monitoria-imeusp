@@ -3,13 +3,95 @@
 <p>
   <strong><%= t('activerecord.attributes.student.student') + ':' %></strong>
   <%= @candidature.student.name %>
-  <%= link_to " (mais informações)", @candidature.student.user %>
 </p>
 
 <p>
   <strong><%= t('activerecord.attributes.student.nusp') + ':' %></strong>
   <%= @candidature.student.nusp %>
 </p>
+
+<p>
+  <strong><%= t('activerecord.attributes.student.email') + ':' %></strong>
+  <%= @candidature.student.email %>
+</p>
+
+<!-- AMAGAD GAMBZ -->
+<!-- fomos incapazes de fazer o render template do students/_show funcionar, então... -->
+
+<h2>Dados de aluno</h2>
+
+<p>
+  <strong><%= t('activerecord.attributes.student.gender') + ':' %></strong>
+  <% if (@candidature.student.gender == 0) %>
+    <%="Feminino"%>
+  <%else%>
+    <%="Masculino"%>
+  <%end%>
+</p>
+
+<p>
+  <strong><%= t('activerecord.attributes.student.institute') + ':' %></strong>
+  <% if @candidature.student.institute != "Outros" %>
+    <%= @candidature.student.institute %>
+  <% else %>
+    <%= @candidature.student.institute_text %>
+  <% end %>
+</p>
+
+<p>
+  <strong><%= t('activerecord.attributes.student.rg') + ':' %></strong>
+  <%= @candidature.student.rg %>
+</p>
+
+<p>
+  <strong><%= t('activerecord.attributes.student.cpf') + ':' %></strong>
+  <%= @candidature.student.cpf %>
+</p>
+
+<p>
+  <strong><%= t('activerecord.attributes.student.address') + ':' %></strong>
+ 	<%= @candidature.student.address %>
+</p>
+
+<p>
+  <strong><%= t('activerecord.attributes.student.complement') + ':' %></strong>
+  <%= @candidature.student.complement %>
+</p>
+
+<p>
+  <strong><%= t('activerecord.attributes.student.district') + ':' %></strong>
+  <%= @candidature.student.district %>
+</p>
+<p>
+  <strong><%= t('activerecord.attributes.student.cep') + ':' %></strong>
+  <%= @candidature.student.zipcode %>
+</p>
+
+<p>
+  <strong><%= t('activerecord.attributes.student.city') + ':' %></strong>
+  <%= @candidature.student.city %>
+</p>
+<p>
+  <strong><%= t('activerecord.attributes.student.state') + ':' %></strong>
+  <%= @candidature.student.state %>
+</p>
+<p>
+  <strong><%= t('activerecord.attributes.student.tel') + ':' %></strong>
+  <%= @candidature.student.tel %>
+</p>
+<p>
+  <strong><%= t('activerecord.attributes.student.cel') + ':' %></strong>
+  <%= @candidature.student.cel %>
+</p>
+
+<% if (user_signed_in? and current_user.super_professor?) or admin_signed_in? or secretary_signed_in? %>
+  <%= link_to 'Ver avaliações como monitor(a)', assistant_evaluations_for_student_path(@candidature.student) %>
+<% end %>
+<span style="height: 2em; display: block;"></span>
+
+<!-- FIM DE AMAGAD GAMBZ -->
+
+<h2>Dados da candidatura</h2>
 
 <p>
   <strong><%= t('activerecord.attributes.candidature.semester') + ':' %></strong>
