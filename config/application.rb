@@ -24,5 +24,7 @@ module BaseRailsApp
 
     config.i18n.fallbacks = true
     config.i18n.fallbacks = [:en]
+
+    config.exceptions_app = self.routes
   end
 end

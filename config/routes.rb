@@ -1,6 +1,14 @@
 Rails.application.routes.draw do
 
 
+  get 'errors/file_not_found'
+
+  get 'errors/unprocessable'
+
+  get 'errors/internal_server_error'
+
+  get 'errors/access_denied'
+
   get 'home/index'
 
   devise_for :users, :controllers => { :users => "users", :omniauth_callbacks => "users/omniauth_callbacks" }
@@ -77,6 +85,12 @@ Rails.application.routes.draw do
   get "help_students/:id" => "help_students#index", :as => :help_students
 
   get "help_professors/:id" => "help_professors#index", :as => :help_professors
+
+  match '/403', to: 'errors#access_denied', via: :all
+  match '/404', to: 'errors#file_not_found', via: :all
+  match '/422', to: 'errors#unprocessable', via: :all
+  match '/500', to: 'errors#internal_server_error', via: :all
+
 
   ## External routes
   get '/_instructions' => redirect('http://www.ime.usp.br/grad/monitoria'), as: :official_instructions
