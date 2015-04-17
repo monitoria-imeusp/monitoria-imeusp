@@ -64,7 +64,7 @@ describe UsersController do
           delete :destroy, { id: user.id }
         end
         
-        it { should respond_with(403) }
+        it { should redirect_to('/403') }
         context 'database check' do
           it { expect(User.exists? (user.id)).to eq(true) }
         end
@@ -79,7 +79,7 @@ describe UsersController do
           delete :destroy, { id: user2.id }
         end
         
-        it { should respond_with(403) }
+        it { should redirect_to('/403') }
         context 'database check' do
           it { expect(User.exists? (user2.id)).to eq(true) }
         end
@@ -105,7 +105,7 @@ describe UsersController do
           delete :destroy, { id: user2.id }
         end
         
-        it { should respond_with(403) }
+        it { should redirect_to('/403') }
         context 'database check' do
           it { expect(User.exists? (user2.id)).to eq(true) }
         end

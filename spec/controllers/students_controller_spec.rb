@@ -138,7 +138,7 @@ describe StudentsController do
         before :each do
           get :edit, {:id => another_student.id}
         end
-        it { should respond_with(403) }
+        it { should redirect_to('/403') }
       end
     end
 
