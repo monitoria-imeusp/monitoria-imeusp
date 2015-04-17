@@ -19,7 +19,9 @@ class RequestForTeachingAssistantsController < ApplicationController
     end
     @semesters = Semester.where(active: true)
     @open_semesters = @semesters.where(open: true)
-    @should_have_department_sort = (current_user.professor.hiper_professor?) or (admin_signed_in?) or (secretary_signed_in?)
+    if (admin_signed_in?) or (secretary_signed_in?) or (current_user.professor.hiper_professor?)
+      @should_have_department_sort = true
+    end
   end
 
   # GET /request_for_teaching_assistants/1
