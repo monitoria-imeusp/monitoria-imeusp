@@ -1,9 +1,7 @@
 class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   def usp
-    # You need to implement the method below in your model (e.g. app/models/user.rb)
     auth = request.env["omniauth.auth"]
     @user = User.from_omniauth auth
-
     if @user.student? and auth.info.link == :student
       #this will throw if @user is not activated
       sign_in_and_redirect @user, :event => :authentication
@@ -14,4 +12,5 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
       end
     end
   end
+
 end

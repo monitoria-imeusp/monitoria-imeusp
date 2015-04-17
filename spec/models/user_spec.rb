@@ -2,6 +2,7 @@ require 'spec_helper'
 
 describe User do
 	let!(:user) { FactoryGirl.create :user }
+	let!(:student) { FactoryGirl.create :student }
 
 
 	let!(:info1) {{ }}
