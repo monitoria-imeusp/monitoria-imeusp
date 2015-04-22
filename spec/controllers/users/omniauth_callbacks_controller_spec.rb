@@ -2,6 +2,7 @@ require 'spec_helper'
 
 describe Users::OmniauthCallbacksController do
 
+  include ControllerHelpers
 	OmniAuth.config.test_mode = true
 
 	let!(:user) { FactoryGirl.create :user, uid: 1 }
@@ -39,6 +40,7 @@ describe Users::OmniauthCallbacksController do
       context 'user' do
         subject { assigns(:user) }
         it { expect(subject).to be_persisted }
+        it { expect(subject).to eq(current_user) }
         its(:nusp) { should be(11111) }
       end
 
@@ -77,6 +79,7 @@ describe Users::OmniauthCallbacksController do
       context 'user' do
         subject { assigns(:user) }
         it { expect(subject).to be_persisted }
+        it { expect(subject).to eq(current_user) }
         its(:nusp) { should be(11112) }
       end
 
