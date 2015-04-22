@@ -28,7 +28,6 @@
           <%= link_to "Sair", destroy_session_path, method: :delete %>
           <%= link_to "Perfil", current_signed %>
         <% else %>
-          <%= link_to "Cadastrar-se", new_student_path %>
           <%= link_to "Acessar", new_user_session_path %>
           <%= link_to "Acesso USP", user_omniauth_authorize_path(:usp) %>
         <% end %>
