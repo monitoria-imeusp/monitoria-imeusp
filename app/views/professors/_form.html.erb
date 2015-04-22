@@ -1,8 +1,4 @@
-<%= form_for(@professor) do |f| %>
-
-  <% unless @user.nil? %>
-    <%= render template: "users/_inner_nopass_form" %>
-  <% end %>
+  <%= form_for(@professor) do |f| %>
 
   <% if @professor.errors.any? %>
     <div id="error_explanation">

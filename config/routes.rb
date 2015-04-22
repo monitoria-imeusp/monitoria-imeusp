@@ -13,9 +13,7 @@ Rails.application.routes.draw do
 
   devise_for :users, :controllers => { :users => "users", :omniauth_callbacks => "users/omniauth_callbacks" }
   devise_for :admins, :controllers => { :admins => "admins" }
-  devise_for :professors, :controllers => { :professors => "professors" }
   devise_for :secretaries, :controllers => { :secretaries => "secretaries" }
-  devise_for :students, :controllers => { :students => "students" }
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
@@ -90,7 +88,6 @@ Rails.application.routes.draw do
   match '/404', to: 'errors#file_not_found', via: :all
   match '/422', to: 'errors#unprocessable', via: :all
   match '/500', to: 'errors#internal_server_error', via: :all
-
 
   ## External routes
   get '/_instructions' => redirect('http://www.ime.usp.br/grad/monitoria'), as: :official_instructions
