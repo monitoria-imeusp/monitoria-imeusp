@@ -68,7 +68,6 @@ class User < ActiveRecord::Base
         unless prof.save
           raise prof.errors.inspect
         end
-        p user.professor
       end
       user
     end
