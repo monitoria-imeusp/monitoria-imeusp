@@ -53,11 +53,12 @@ module OmniAuth
           type = link['tipoVinculo']
           if type == "ALUNOGR" or type == "ALUNOPOS"
             return :student
-          elsif type == "SERVIDOR"
+          elsif type == "SERVIDOR" 
             return :teacher
           end
         end
       end
+
     end
   end
 end

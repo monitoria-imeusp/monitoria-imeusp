@@ -50,16 +50,25 @@ class User < ActiveRecord::Base
         user.provider = auth.provider
         user.uid = auth.uid
         user.save
-        user
-      else
-        raise "Not student" # <--- professor?
+      elsif auth.info.link == :teacher
+        user.provider = auth.provider
+        user.uid = auth.uid
+        user.save    
       end
+      user
     else
       user = User.new(nusp: auth.info.nusp, name: auth.info.name, email: auth.info.email, password: "changeme!")
       user.confirmed_at = Time.now
       user.skip_confirmation_notification!
       unless user.save
         raise user.errors.inspect
+      end
+      if auth.info.link == :teacher 
+        prof = Professor.new(user_id: user.id, department: Department.find_by(:code => "MAC"))
+        unless prof.save
+          raise prof.errors.inspect
+        end
+        p user.professor
       end
       user
     end

@@ -68,6 +68,7 @@ class Ability
       cannot :update, Admin
       can :read, Professor
       can :update, Professor #, :id => user.id #Only himself
+      can :create, Professor 
       can :change_password, Professor #, :id => user.id #Only himself
       can :destroy, Professor #, :id => user.id #Only Himself
       cannot :create, Secretary
