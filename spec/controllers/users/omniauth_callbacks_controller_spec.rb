@@ -13,25 +13,40 @@ describe Users::OmniauthCallbacksController do
 
   context "user is already registered" do
 
-    context "redirect authenticated student to starting page" do
+    let!(:info) {{}}
+    let!(:count) { User.count }
 
-      it {
-        OmniAuth.config.mock_auth[:usp] = OmniAuth::AuthHash.new({
-              :provider => 'USP',
-              :uid => '1',
-              :info => { :nusp => 11111,
-                     :name => "Wil",
-                     :email => "kazuo@ime.usp.br",
-                     :link => :student
-              }
-          })
+    describe ".usp" do
 
-        post :create, :provider => "USP"
-        response.should redirect_to('/')
-        OmniAuth.config.mock_auth[:usp] = nil
-      }
+      before :each do
+        info.should_receive(:nusp).at_least(1).times.and_return(11111)
+        #info.should_receive(:name).at_least(1).times.and_return("Wil")
+        #info.should_receive(:email).at_least(1).times.and_return("kazuo@ime.usp.br")
+        info.should_receive(:link).at_least(1).times.and_return(:student)
+        OmniAuth.config.mock_auth[:usp] = OmniAuth::AuthHash.new({})
+        OmniAuth.config.mock_auth[:usp].should_receive(:provider).at_least(1).times.and_return(:usp)
+        OmniAuth.config.mock_auth[:usp].should_receive(:uid).at_least(1).times.and_return('1')
+        OmniAuth.config.mock_auth[:usp].should_receive(:info).at_least(1).times.and_return(info)
+        request.env["omniauth.auth"] = OmniAuth.config.mock_auth[:usp] 
+        get :usp
+      end
+
+      context 'response' do
+        subject { response }
+        it { expect(subject).to redirect_to('/') }
+      end
+
+      context 'user' do
+        subject { assigns(:user) }
+        it { expect(subject).to be_persisted }
+        its(:nusp) { should be(11111) }
+      end
+
+      context 'user count' do
+        subject { User }
+        its(:count) { should be(count) }
+      end
     end
-
   end
 
   context "user is not registered" do
