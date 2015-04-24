@@ -48,6 +48,10 @@
     <% end %>
   </div>
   <div class="field">
+    <%= f.label :voluntary, t('activerecord.attributes.candidature.voluntary') %><br>
+    <%= f.check_box :voluntary %>
+  </div>
+  <div class="field">
     <%= f.label :observation, t('activerecord.attributes.candidature.observation') %><br>
     <%= f.text_area :observation %>
   </div>
