@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150410164544) do
+ActiveRecord::Schema.define(version: 20150424201255) do
 
   create_table "admins", force: true do |t|
     t.string   "email",                  default: "", null: false
@@ -71,6 +71,7 @@ ActiveRecord::Schema.define(version: 20150410164544) do
     t.text     "observation",            default: ""
     t.integer  "course4_id"
     t.integer  "semester_id"
+    t.boolean  "voluntary",              default: false
   end
 
   create_table "courses", force: true do |t|
