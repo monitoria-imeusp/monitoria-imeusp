@@ -41,6 +41,7 @@ Feature: Create a candidature
         And I should see "Curso: 4ª opção: MAC0446 - ihc"
         And I should see "Disponibilidade para trabalhar de dia: Sim"
         And I should see "Disponibilidade para trabalhar de noite: Não"
+        And I should see "Aceita ser monitor voluntário (sem bolsa): Não"
         And I should see "Preferência de trabalhar no período: Diurno"
         And I should see "Observações: teste observações"
 
