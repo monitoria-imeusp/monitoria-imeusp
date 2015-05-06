@@ -150,6 +150,11 @@
 </p>
 
 <p>
+  <strong><%= t('activerecord.attributes.candidature.voluntary') + ':' %></strong>
+  <%= show_yes_or_no(@candidature.voluntary) %>
+</p>
+
+<p>
   <strong><%= t('activerecord.attributes.candidature.observation') + ':' %></strong>
   <%= (@candidature.observation) %>
 </p>

@@ -107,6 +107,7 @@ pt-BR:
         transcript_file_path: 'Histórico Escolar'
         semester_id: 'Período'
         semester: 'Período'
+        voluntary: 'Aceita ser monitor voluntário (sem bolsa)'
       department:
         department: 'Departamento'
       advise:
