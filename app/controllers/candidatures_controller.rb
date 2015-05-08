@@ -37,6 +37,9 @@ class CandidaturesController < ApplicationController
         end
       end
     end
+    @candidatures_filtered.each do |candidaturelist|
+      candidaturelist.sort! { |a,b| a.student.name.downcase <=> b.student.name.downcase }
+    end
   end
 
   def index_for_student

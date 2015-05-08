@@ -18,7 +18,7 @@ FactoryGirl.define do
     has_bank_account  true
   end
 
-  factory :student2 do
+  factory :student2, class: Student do
     id                2
     institute         "Instituto de Matemática e Estatística"
     gender            1
@@ -35,7 +35,7 @@ FactoryGirl.define do
     has_bank_account  true
   end
 
-  factory :student3 do
+  factory :student3, class: Student do
     id                3
     institute         "Instituto de Matemática e Estatística"
     gender            1
@@ -52,7 +52,7 @@ FactoryGirl.define do
     has_bank_account  true
   end
 
-  factory :student4 do
+  factory :student4, class: Student do
     id                4
     institute         "Instituto de Matemática e Estatística"
     gender            1
