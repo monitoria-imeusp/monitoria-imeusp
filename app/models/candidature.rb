@@ -54,12 +54,6 @@ class Candidature < ActiveRecord::Base
   def self.for_same_department_in_semester course, semester
     courses_in_same_department = Course.where "department_id = ? and id != ?", course.department_id, course.id
     candidatures_in_same_department = Candidature.where(course1_id: courses_in_same_department).where(semester: semester)
-    current_requests = RequestForTeachingAssistant.where(semester: semester)
-    current_roles = AssistantRole.where(request_for_teaching_assistant: current_requests)
-    (candidatures_in_same_department.map do |candidature| candidature end).reject do |candidature|
-      # Rejects if candidature's student already has a role this semester
-      current_roles.where(student: candidature.student).any?
-    end
   end
 
   def self.courses_num
