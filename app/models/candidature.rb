@@ -36,18 +36,18 @@ class Candidature < ActiveRecord::Base
       return true
     end
   end
+  
+  def elected?
+    current_requests = RequestForTeachingAssistant.where(semester: semester)
+    current_roles = AssistantRole.where(request_for_teaching_assistant: current_requests)
+    current_roles.where(student: student).any?
+  end
 
   def self.for_course_in_semester course, semester, only_first_option
     if only_first_option
         candidatures_for_course = Candidature.where "semester_id = ? and course1_id = ?", semester.id, course.id
     else
         candidatures_for_course = Candidature.where "semester_id = ? and (course1_id != ? and (course2_id = ? or course3_id = ? or course4_id = ?))", semester.id, course.id, course.id, course.id, course.id
-    end
-    current_requests = RequestForTeachingAssistant.where(semester: semester)
-    current_roles = AssistantRole.where(request_for_teaching_assistant: current_requests)
-    (candidatures_for_course.map do |candidature| candidature end).reject do |candidature|
-      # Rejects if candidature's student already has a role this semester
-      current_roles.where(student: candidature.student).any?
     end
   end
 

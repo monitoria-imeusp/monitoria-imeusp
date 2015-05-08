@@ -93,6 +93,7 @@
       <tr>
         <th>Nome</th>
         <th>Nº USP</th>
+        <th>Já foi eleito?</th>
         <th colspan="2"></th>
       </tr>
     </thead>
@@ -100,10 +101,15 @@
     <tbody>
       <h3>Como 1ª opção</h3>
       <% @first_option_candidatures_for_this_request.each do |candidature| %>
-        <tr>
+        <% if candidature.elected? %>
+         <tr class="elected">
+        <% else %>
+         <tr>
+        <% end %>
           <td><%= candidature.student.name %></td>
           <td><%= candidature.student.nusp %></td>
-          <td><%= link_to 'Ver candidatura', candidature %></td>
+          <td><%= show_yes_or_no(candidature.elected?) %></td>
+          <td><%= link_to 'Detalhes', candidature %></td>
           <td><%= link_to 'Eleger', create_assistant_role_path(@request_for_teaching_assistant, candidature.student), method: :post %></td>
         </tr>
       <% end %>
