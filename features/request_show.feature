@@ -22,7 +22,21 @@ Feature: Show a request for teaching assistant
         Then I click the "Pedidos de monitoria" link
 
 
-    Scenario: Admin seeing all candidature categories (by department)
+    Scenario: No elected candidatures
         And I should see "LabXP"
         Then I click the first "Ver" link
         And I should see "Disciplina: MAC0110 - Introdução"
+        Then "123456" elected status should be "Não"
+        Then "123457" elected status should be "Não"
+        
+    Scenario: Some elected candidatures
+        And I should see "LabXP"
+        Then I click the first "Ver" link
+        And I should see "Disciplina: MAC0110 - Introdução"
+        Then I click the first "Eleger" link
+        Then I click the "Voltar" link
+        Then I click the second "Ver" link
+        And I should see "Disciplina: MAC0666 - LabXP"
+        Then "123456" elected status should be "Sim"
+        Then "123457" elected status should be "Não"
+
