@@ -65,16 +65,15 @@
   courses_by_department["MAE"] = [];
   courses_by_department["MAT"] = [];
   courses_by_department["MAP"] = [];
+  courses_by_department["ALL"] = [];
 
   for (var i = 1; i < table.rows.length; i++) {
     var row = table.rows[i];
     var course_name = row.cells[1].innerHTML;
     var columns = {professor: row.cells[0].innerHTML, course: course_name, number: row.cells[2].innerHTML, semester: row.cells[3].innerHTML, button: row.cells[4].innerHTML };
     courses_by_department[course_name.substring(0, 3)].push(columns);
+    courses_by_department["ALL"].push(columns);
   }
-  courses_by_department["ALL"] = courses_by_department["MAC"].concat(courses_by_department["MAE"]);
-  courses_by_department["ALL"] = courses_by_department["ALL"].concat(courses_by_department["MAT"]);
-  courses_by_department["ALL"] = courses_by_department["ALL"].concat(courses_by_department["MAP"]);
 
   update_table("ALL");
 
