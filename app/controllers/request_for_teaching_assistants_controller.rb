@@ -17,6 +17,7 @@ class RequestForTeachingAssistantsController < ApplicationController
     end).keep_if do |request|
       admin_signed_in? or secretary_signed_in? or professor_can_see?(current_user.professor, request)
     end
+    @request_for_teaching_assistants.sort! { |a,b| a.professor.name.downcase <=> b.professor.name.downcase }
     @semesters = Semester.where(active: true)
     @open_semesters = @semesters.where(open: true)
     if (admin_signed_in?) or (secretary_signed_in?) or (current_user.professor.hiper_professor?)

@@ -43,7 +43,7 @@ Feature: Index of the Requests for Teaching Assistant
         And I should see "MAC0122 - Coisas"
         And I should not see "MAE0438 - Estatística Concorrente"
 
-    Scenario: Hiperprofessor see only requests of his department
+    Scenario: Hiperprofessor can see all requests
         Given I'm at the professor login page
         And there is a hiper_professor with name "zara" and password "12345678" nusp "2222222" department "MAE" and email "zara@usp.br"
         When I fill the "Número USP" field with "2222222"
@@ -54,6 +54,21 @@ Feature: Index of the Requests for Teaching Assistant
         And I should see "MAC0110 - Mascarenhas"
         And I should see "MAC0122 - Coisas"
         And I should see "MAE0438 - Estatística Concorrente"
+
+    @javascript
+    Scenario: Hiperprofessor list of all requests is ordered by professor name
+        Given I'm at the professor login page
+        And there is a hiper_professor with name "zara" and password "12345678" nusp "2222222" department "MAE" and email "zara@usp.br"
+        When I fill the "Número USP" field with "2222222"
+        And I fill the "Senha" field with "12345678"
+        And I press the "Entrar" button
+        And I should see "Pedidos de monitoria"
+        Then I click the "Pedidos de monitoria" link
+        And I should see "MAC0110 - Mascarenhas"
+        And I should see "MAC0122 - Coisas"
+        And I should see "MAE0438 - Estatística Concorrente"
+        Then "Bob" should appear before "Claudia"
+        And "Claudia" should appear before "Mandel"  
 
     @javascript
     Scenario: Hiperprofessor can sort requests by department

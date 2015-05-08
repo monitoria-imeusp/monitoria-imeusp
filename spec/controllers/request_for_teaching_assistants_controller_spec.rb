@@ -325,6 +325,53 @@ describe RequestForTeachingAssistantsController do
 
   describe ".index_for_semester" do
 
+    let(:valid_request1) { {
+      "professor_id" => "4",
+      "course_id" => "1",
+      "requested_number" => 1,
+      "priority" => 0,
+      "student_assistance" => true,
+      "work_correction" => false,
+      "test_oversight" => true,
+      "observation" => "teste",
+      "semester_id" => 1
+    } }
+
+    let(:valid_request2) { {
+      "professor_id" => "5",
+      "course_id" => "2",
+      "requested_number" => 2,
+      "priority" => 2,
+      "student_assistance" => true,
+      "work_correction" => false,
+      "test_oversight" => false,
+      "observation" => "teste",
+      "semester_id" => 1
+    } }
+
+    let(:valid_request3) { {
+      "professor_id" => "6",
+      "course_id" => "3",
+      "requested_number" => 2,
+      "priority" => 2,
+      "student_assistance" => true,
+      "work_correction" => false,
+      "test_oversight" => false,
+      "observation" => "teste",
+      "semester_id" => 1
+    } }
+
+    let(:puser1) { FactoryGirl.create :user, id: "4", name: "Marco Aurelio Gerosa", email: "a@a.com", nusp: 11112 }
+    let(:puser2) { FactoryGirl.create :user, id: "5", name: "Edson Arantes do Nascimento", email: "b@a.com", nusp: 11113 }
+    let(:puser3) { FactoryGirl.create :user, id: "6", name: "Robson Calzone di Calabria", email: "c@a.com", nusp: 11114 }
+    let!(:professor1) { FactoryGirl.create :professor, id: 4, department_id: 1,  user_id: puser1.id }
+    let!(:professor2) { FactoryGirl.create :professor, id: 5, department_id: 1,  user_id: puser2.id }
+    let!(:professor3) { FactoryGirl.create :professor, id: 6, department_id: 2, user_id: puser3.id }
+
+    let!(:request1) { RequestForTeachingAssistant.create! valid_request1 }
+    let!(:request2) { RequestForTeachingAssistant.create! valid_request2 }
+    let!(:request3) { RequestForTeachingAssistant.create! valid_request3 }
+
     it "filters the requests of other professors" do
       Course.create! valid_second_course_attributes
       request_for_teaching_assistant = RequestForTeachingAssistant.create! valid_attributes
@@ -339,10 +386,7 @@ describe RequestForTeachingAssistantsController do
       }
       let(:super_prof_user) { FactoryGirl.create :another_user }
       let!(:super_professor) { FactoryGirl.create :super_professor, user_id: super_prof_user.id }
-      let!(:shown_requests) {[
-        RequestForTeachingAssistant.create!(valid_attributes),
-        RequestForTeachingAssistant.create!(not_owned_attributes)
-      ]}
+      let!(:shown_requests) { [ request2, request1 ] }        
       let!(:not_shown_requests) {
         RequestForTeachingAssistant.create! not_owned_other_department_attributes
         RequestForTeachingAssistant.create! other_department_attributes
@@ -363,13 +407,9 @@ describe RequestForTeachingAssistantsController do
       }
       let(:hiper_prof_user) { FactoryGirl.create :another_user }
       let!(:hiper_professor) { FactoryGirl.create :hiper_professor, user_id: hiper_prof_user.id }
-      let!(:shown_requests) {[
-        RequestForTeachingAssistant.create!(valid_attributes),
-        RequestForTeachingAssistant.create!(not_owned_attributes),
-        RequestForTeachingAssistant.create!(other_department_attributes)
-      ]}
+      let!(:shown_requests) { [ request2, request1, request3 ] }   
       before :each do
-        sign_out prof_user
+        sign_out :prof_user
         sign_in hiper_prof_user
         get :index_for_semester, { :semester_id => @semester.id }
       end
