@@ -88,6 +88,10 @@ tr {
   background-color: #dee;
 }
 
+tr.elected {
+  color: #b55;
+}
+
 tr:hover {
   background-color: #eff;
 }
