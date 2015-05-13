@@ -1,7 +1,7 @@
 <h1>Pedidos de Monitoria</h1>
 
 <% if user_signed_in? or secretary_signed_in? or admin_signed_in? %>
-  <% unless @open_semesters.any? %>
+  <% unless @open_semesters.any? or current_user.professor.super_professor? or current_user.professor.hiper_professor? %>
     <h2>
       <i>Nenhum semestre aberto à requisição de monitores no momento</i>
     </h2>
@@ -9,7 +9,7 @@
     <h2>
       Pedir monitor para:
     </h2>
-    <% @open_semesters.each do |semester| %>
+    <% @active_semesters.each do |semester| %>
       <%= link_to semester.period_as_s, new_request_for_teaching_assistant_path(semester) %>
     <% end %>
     <span style="height: 2em; display: block;"></span>
