@@ -64,7 +64,7 @@ class User < ActiveRecord::Base
         raise user.errors.inspect
       end
       if auth.info.link == :teacher 
-        prof = Professor.new(user_id: user.id, department: Department.find_by(:code => "MAC"))
+        prof = Professor.new(user_id: user.id, department: Department.find_by(:code => "MAC"), dirty: true)
         unless prof.save
           raise prof.errors.inspect
         end

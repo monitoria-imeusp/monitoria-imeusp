@@ -1,8 +1,6 @@
 class UsersController < ApplicationController
   authorize_resource
 
-  before_action :authenticate_user!
-
   def show
     if User.exists?(params[:id])
       @user = User.find(params[:id])
@@ -58,7 +56,7 @@ class UsersController < ApplicationController
 
   def authorization_user
     if user_signed_in?
-      if not current_user.student? and not current_user.professor?
+      if not current_user.student? and (not current_user.professor? or current_user.professor.dirty)
         raise CanCan::AccessDenied.new
       end
       if current_user.student? and (not @user.student? or @user.id != current_user.id)

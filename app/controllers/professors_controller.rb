@@ -85,7 +85,7 @@ class ProfessorsController < ApplicationController
   end
 
   def professor_params
-    params.require(:professor).permit(:department_id, :professor_rank)
+    params.require(:professor).permit(:department_id, :professor_rank, :dirty)
   end
 
   def user_params

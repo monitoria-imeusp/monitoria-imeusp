@@ -196,7 +196,6 @@ class Ability
       cannot :read, User
       cannot :update, User
       cannot :destroy, User
-      puts "CARAMBOLAS"
     end
 
     if user.is_a? User

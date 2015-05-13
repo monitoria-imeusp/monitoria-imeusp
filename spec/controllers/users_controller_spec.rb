@@ -13,14 +13,19 @@ describe UsersController do
         
         before :each do
           expect(User.exists? (user.id)).to eq(true)
-          delete :destroy, { id: user.id }
+          get :destroy, { id: user.id }
         end
         
-        it { should redirect_to "/" }
-        subject { assigns(:user) }
-        it { should eq(user) }
-
-        it { expect(User.exists? (user.id)).to eq(false) }
+        context 'response' do
+          it { should redirect_to "/" }
+        end
+        context 'user' do
+          subject { assigns(:user) }
+          it { should eq(user) }
+        end
+        context 'database' do
+          it { expect(User.exists? (user.id)).to eq(false) }
+        end
       end
     end
   end
