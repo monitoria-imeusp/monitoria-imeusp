@@ -3,16 +3,19 @@ require 'spec_helper'
 describe Users::OmniauthCallbacksController do
 
   include ControllerHelpers
-	OmniAuth.config.test_mode = true
+  OmniAuth.config.test_mode = true
 
-	let!(:user) { FactoryGirl.create :user, uid: 1 }
-	let!(:student) { FactoryGirl.create :student, user_id: user.id }
+  let!(:user) { FactoryGirl.create :user, uid: 1 }
+  let!(:student) { FactoryGirl.create :student, user_id: user.id }
+  let!(:user2) { FactoryGirl.create :another_user, uid: 2}
+  let!(:professor) { FactoryGirl.create :professor, user_id: user2.id }
+  let!(:department) { FactoryGirl.create :department }
 
-	before :each do
-		request.env["devise.mapping"] = Devise.mappings[:user] 
+  before :each do
+    request.env["devise.mapping"] = Devise.mappings[:user] 
   end
 
-  context "user is already registered" do
+  context "student is already registered" do
 
     let!(:info) {{}}
     let!(:count) { User.count }
@@ -51,7 +54,7 @@ describe Users::OmniauthCallbacksController do
     end
   end
 
-  context "user is not registered" do
+  context "student is not registered" do
 
     let!(:info) {{}}
     let!(:count) { User.count }
@@ -81,6 +84,87 @@ describe Users::OmniauthCallbacksController do
         it { expect(subject).to be_persisted }
         it { expect(subject).to eq(current_user) }
         its(:nusp) { should be(11112) }
+      end
+
+      context 'user count' do
+        subject { User }
+        its(:count) { should be(count + 1) }
+      end
+		end
+
+	end
+	
+	######################
+	context "professor is already registered" do
+
+    let!(:info) {{}}
+    let!(:count) { User.count }
+
+    describe ".usp" do
+
+      before :each do
+        info.should_receive(:nusp).at_least(1).times.and_return(22222)
+        #info.should_receive(:name).at_least(1).times.and_return("Wil")
+        #info.should_receive(:email).at_least(1).times.and_return("kazuo@ime.usp.br")
+        info.should_receive(:link).at_least(1).times.and_return(:teacher)
+        OmniAuth.config.mock_auth[:usp] = OmniAuth::AuthHash.new({})
+        OmniAuth.config.mock_auth[:usp].should_receive(:provider).at_least(1).times.and_return(:usp)
+        OmniAuth.config.mock_auth[:usp].should_receive(:uid).at_least(1).times.and_return('2')
+        OmniAuth.config.mock_auth[:usp].should_receive(:info).at_least(1).times.and_return(info)
+        request.env["omniauth.auth"] = OmniAuth.config.mock_auth[:usp] 
+        get :usp
+      end
+
+      context 'response' do
+        subject { response }
+        it { expect(subject).to redirect_to('/') }
+      end
+
+      context 'user' do
+        subject { assigns(:user) }
+        it { expect(subject).to be_persisted }
+        it { expect(subject).to eq(current_user) }
+        its(:nusp) { should be(22222) }
+      end
+
+      context 'user count' do
+        subject { User }
+        its(:count) { should be(count) }
+      end
+    end
+  end
+  
+  #################
+  context "professor is not registered" do
+
+    let!(:info) {{}}
+    let!(:count) { User.count }
+
+    describe ".usp" do
+
+      before :each do
+        info.should_receive(:nusp).at_least(1).times.and_return(22223)
+        info.should_receive(:name).at_least(1).times.and_return("Pindamoiangaba")
+        info.should_receive(:email).at_least(1).times.and_return("sesso4eva@neverforget.com")
+        info.should_receive(:link).at_least(1).times.and_return(:teacher)
+        OmniAuth.config.mock_auth[:usp] = OmniAuth::AuthHash.new({})
+        #OmniAuth.config.mock_auth[:usp].should_receive(:provider).at_least(1).times.and_return(:usp)
+        #OmniAuth.config.mock_auth[:usp].should_receive(:uid).at_least(1).times.and_return('2')
+        OmniAuth.config.mock_auth[:usp].should_receive(:info).at_least(1).times.and_return(info)
+        request.env["omniauth.auth"] = OmniAuth.config.mock_auth[:usp] 
+        get :usp
+      end
+
+      context 'response' do
+        subject { response }
+        it { expect(subject).to redirect_to("/professors/#{assigns(:user).professor.id}/edit") }
+      end
+
+      context 'user' do
+        subject { assigns(:user) }
+        it { expect(subject).to be_persisted }
+        it { expect(subject).to eq(current_user) }
+        its(:nusp) { should be(22223) }
       end
 
       context 'user count' do
