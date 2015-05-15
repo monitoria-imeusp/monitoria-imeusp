@@ -1,4 +1,3 @@
-
 Given(/^I'm logged in as the admin$/) do
   Admin.create(email: "kazuo@ime.usp.br", password: "admin123")
   visit new_admin_session_path
@@ -29,21 +28,22 @@ Given(/^I'm logged in as a professor$/) do
     password: "changeme!",
     confirmed_at: Time.now
   )
+  Department.create(
+    code: "MAC"
+  )
   Professor.create(
     department_id: Department.first.id,
     professor_rank: 0,
     user_id: user.id
   )
   OmniAuth.config.test_mode = true
-  OmniAuth.config.add_mock(:usp, {
-    :uid => user.id,
-    :info => {
-      :nusp => user.nusp,
-      :name => user.name,
-      :email => user.email,
-      :link => :teacher
-    }
-  })
+  OmniAuth.config.add_mock(:usp , OmniAuth::AuthHash.new({
+  'uid' => user.id,
+  'provider' => :usp,
+  "info" => {
+    "nusp" => 66666,
+    "link" => :teacher
+  }}))
   visit "/users/auth/usp"
 end
 
