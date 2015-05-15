@@ -34,20 +34,32 @@ Given(/^I'm logged in as a professor$/) do
     professor_rank: 0,
     user_id: user.id
   )
-  visit new_user_session_path
-  fill_in "Número USP", :with => "66666"
-  fill_in "Senha", :with => "changeme!"
-  click_button "Entrar"
+  OmniAuth.config.test_mode = true
+  OmniAuth.config.add_mock(:usp, {
+    :uid => user.id,
+    :info => {
+      :nusp => user.nusp,
+      :name => user.name,
+      :email => user.email,
+      :link => :teacher
+    }
+  })
+  visit "/users/auth/usp"
 end
 
 Given(/^I'm logged in as professor "(.*?)"$/) do |name|
   professor = User.where(name: name).take
-  visit new_user_session_path
-  fill_in "Número USP", :with => professor.nusp.to_s
-  fill_in "Senha", :with => "password"
-  click_button "Entrar"
-
-  page.should have_text("Acesso efetuado com sucesso")
+  OmniAuth.config.test_mode = true
+  OmniAuth.config.add_mock(:usp, {
+    :uid => professor.id,
+    :info => {
+      :nusp => professor.nusp,
+      :name => professor.name,
+      :email => professor.email,
+      :link => :teacher
+    }
+  })
+  visit "/users/auth/usp"
 end
 
 Given(/^I'm logged in as a super professor$/) do
