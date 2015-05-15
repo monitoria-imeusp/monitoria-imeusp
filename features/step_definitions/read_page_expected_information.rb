@@ -10,6 +10,10 @@ Then (/^"(.*)" should appear before "(.*)"/) do |first_example, second_example|
   page.text.should match(/#{first_example}.*#{second_example}/)
 end
 
+Then (/^"(.*)" should not appear before "(.*)"/) do |first_example, second_example|
+  page.text.should_not match(/#{first_example}.*#{second_example}/)
+end
+
 Then (/^"(.*)" elected status should be "(.*)"/) do |nusp, eleito|
   page.body.should match(/#{nusp}[^r]*#{eleito}/)
 end

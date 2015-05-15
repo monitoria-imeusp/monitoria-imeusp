@@ -20,6 +20,7 @@ class RequestForTeachingAssistantsController < ApplicationController
     @request_for_teaching_assistants.sort! { |a,b| a.professor.name.downcase <=> b.professor.name.downcase }
     @semesters = Semester.where(active: true)
     @open_semesters = @semesters.where(open: true)
+    @active_semesters = Semester.all_active
     if (admin_signed_in?) or (secretary_signed_in?) or (current_user.professor.hiper_professor?)
       @should_have_department_sort = true
     end
