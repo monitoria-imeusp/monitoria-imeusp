@@ -2,4 +2,6 @@
 
 <%= render 'form' %>
 
-<%= link_to 'Voltar', @professor.user %>
+<%if not @professor.dirty %>
+  <%= link_to 'Voltar', @professor.user %>
+<% end %>

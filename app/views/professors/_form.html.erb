@@ -16,6 +16,8 @@
     <%= f.label :department_id, t('activerecord.attributes.department.department') %><br>
     <%= f.select :department_id, department_options, :include_blank => false %>
   </div>
+  
+  <%= f.hidden_field :dirty, :value => 'false' %>
 
   <% if admin_signed_in? %>
     <div class="field">

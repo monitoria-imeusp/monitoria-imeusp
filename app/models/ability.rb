@@ -165,6 +165,37 @@ class Ability
       can :read, Candidature #, :student_id => user.id #Only his own
       can :update, Candidature #, :student_id => user.id #Only his own
       can :destroy, Candidature #, :student_id => user.id #Only his own
+    else # 'ghost' User (usuario que não completou cadastro)
+      cannot :read, Admin
+      cannot :update, Admin
+      cannot :read, Dump
+      cannot :create, Professor
+      cannot :read, Professor
+      cannot :update, Professor
+      cannot :destroy, Professor
+      cannot :create, Secretary
+      cannot :read, Secretary
+      cannot :update, Secretary
+      cannot :destroy, Secretary
+      cannot :create, Student
+      cannot :read, Student
+      cannot :update, Student
+      cannot :destroy, Student
+      cannot :create, Course
+      cannot :read, Course
+      cannot :update, Course
+      cannot :destroy, Course
+      cannot :create, RequestForTeachingAssistant
+      cannot :read, RequestForTeachingAssistant
+      cannot :update, RequestForTeachingAssistant
+      cannot :destroy, RequestForTeachingAssistant
+      cannot :create, Candidature
+      cannot :read, Candidature
+      cannot :update, Candidature
+      cannot :destroy, Candidature
+      cannot :read, User
+      cannot :update, User
+      cannot :destroy, User
     end
 
     if user.is_a? User
