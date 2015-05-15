@@ -8,12 +8,19 @@ module OmniAuth
 
       # This is where you pass the options you would pass when
       # initializing your consumer from the OAuth gem.
+      site = "https://uspdigital.usp.br/wsusuario"
+      id = "9"
+      if Rails.env.development?
+        site = "https://labs.uspdigital.usp.br/wsusuario"
+        id = "8"
+      end      
+
       option :client_options, {
-        site: "https://uspdigital.usp.br/wsusuario"
+        site: site
       }
 
       option :authorize_params, {
-        callback_id: "9"
+        callback_id: id
       }
 
       option :callback_confirmed, true
