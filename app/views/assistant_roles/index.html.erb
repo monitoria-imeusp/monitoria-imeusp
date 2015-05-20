@@ -29,7 +29,12 @@
           <td><%= role.request_for_teaching_assistant.course.course_code %></td>
           <td><%= role.request_for_teaching_assistant.professor.name %></td>
           <% if secretary_signed_in? or (user_signed_in? and current_user.super_professor?) %>
-            <td><%= link_to "Remover", destroy_assistant_role_path(role.id), method: :delete, data: { confirm: 'Tem certeza?' } %></td>
+            <td>
+              <%if role.active %>
+                <%= link_to "Desativar", deactivate_assistant_role_path(role.id), method: :post, data: { confirm: 'Deseja mesmo desativar este monitor?' } %></td>
+              <% else %>
+                Desativado
+              <% end %>
           <% end %>
         </tr>
       <% end %>

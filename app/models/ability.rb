@@ -238,6 +238,7 @@ class Ability
       can :create, AssistantRole
       can :update, AssistantRole
       can :destroy, AssistantRole
+      can :deactivate_assistant_role, AssistantRole
     end
     if user.is_a? User and user.professor?
       can :index_for_professor, AssistantRole
