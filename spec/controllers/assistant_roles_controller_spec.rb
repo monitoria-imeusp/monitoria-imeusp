@@ -14,6 +14,7 @@ describe AssistantRolesController do
     @course1    = FactoryGirl.create :course1
     @student    = FactoryGirl.create :student, user_id: user.id
     @request_for_teaching_assistant = FactoryGirl.create :request_for_teaching_assistant, professor_id: super_professor.id
+    @assistant_role = FactoryGirl.create :assistant_role
     sign_in prof_user
   end
 
@@ -50,6 +51,24 @@ describe AssistantRolesController do
         pending "what should happen here?"
       end
     end
+  end
+
+  describe "POST 'deactivate'" do
+    before :each do
+      @params = {"id" => @assistant_role.id.to_s}
+      post 'deactivate_assistant_role', @params
+    end
+
+    context "response" do
+      subject { response }
+      it { expect(subject).to redirect_to('/assistant_roles') }
+    end
+
+    context "assistant role" do
+      subject { assigns(:assistant_role) }
+      its(:active) { should be_false }
+    end
+
   end
 
   describe "DELETE 'destroy'" do

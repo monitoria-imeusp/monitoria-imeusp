@@ -115,6 +115,13 @@ When(/^there is an assistant role for student "(.*?)" with professor "(.*?)" at 
   AssistantRole.create(student_id: User.where(name: student_name).take.student.id, request_for_teaching_assistant_id: request_id)
 end
 
+When(/^there is a deactivated assistant role for student "(.*?)" with professor "(.*?)" at course "(.*?)"$/) do |student_name, professor_name, course_code|
+  professor_id = User.where(name: professor_name).take.professor.id
+  course_id = Course.where(course_code: course_code).take.id
+  request_id = RequestForTeachingAssistant.where(professor_id: professor_id, course_id: course_id).take.id
+  AssistantRole.create(student_id: User.where(name: student_name).take.student.id, request_for_teaching_assistant_id: request_id, active: false)
+end
+
 Given(/^there is an advise with title "(.*?)" and message "(.*?)" and urgency "(.*?)"$/) do |title, message, urgency|
   if Advise.any?
     order = Advise.all.order(:order).last.order
