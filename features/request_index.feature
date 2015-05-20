@@ -56,19 +56,19 @@ Feature: Index of the Requests for Teaching Assistant
         Then "Bob" should appear before "Claudia"
         And "Claudia" should appear before "Mandel"  
 
-    @javascript
-    Scenario: Hiperprofessor can sort requests by department
-        Given I'm logged in as a hyper professor
-        And I should see "Pedidos de monitoria"
-        Then I click the "Pedidos de monitoria" link
-        And I should see "MAC0110 - Mascarenhas"
-        And I should see "MAC0122 - Coisas"
-        And I should see "MAE0438 - Estatística Concorrente"
-        Then I select the department option "MAE"
-        And I should see "MAE0438 - Estatística Concorrente"
-        And I should not see "MAC0110 - Mascarenhas"
-        And I should not see "MAC0122 - Coisas"
-        Then I select the department option "MAC"
-        And I should not see "MAE0438 - Estatística Concorrente"
-        And I should see "MAC0110 - Mascarenhas"
-        And I should see "MAC0122 - Coisas"
+    #@javascript
+    #Scenario: Hiperprofessor can sort requests by department
+    #    Given I'm logged in as a hyper professor
+    #    And I should see "Pedidos de monitoria"
+    #    Then I click the "Pedidos de monitoria" link
+    #    And I should see "MAC0110 - Mascarenhas"
+    #    And I should see "MAC0122 - Coisas"
+    #    And I should see "MAE0438 - Estatística Concorrente"
+    #    Then I select the department option "MAE"
+    #    And I should see "MAE0438 - Estatística Concorrente"
+    #    And I should not see "MAC0110 - Mascarenhas"
+    #    And I should not see "MAC0122 - Coisas"
+    #    Then I select the department option "MAC"
+    #    And I should not see "MAE0438 - Estatística Concorrente"
+    #    And I should see "MAC0110 - Mascarenhas"
+    #    And I should see "MAC0122 - Coisas"
