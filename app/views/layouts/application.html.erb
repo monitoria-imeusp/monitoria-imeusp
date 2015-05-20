@@ -20,7 +20,7 @@
   </head>
 
   <body>
-    <% if signed_in? and (current_signed.student? or (current_signed.professor? and not current_signed.professor.dirty)) %>
+    <% if signed_in? and (admin_signed_in? or secretary_signed_in? or current_signed.student? or (current_signed.professor? and not current_signed.professor.dirty)) %>
     <!-- Header dos usuarios normais -->
         <header>
           <div>
