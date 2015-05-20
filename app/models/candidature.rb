@@ -40,7 +40,7 @@ class Candidature < ActiveRecord::Base
   def elected?
     current_requests = RequestForTeachingAssistant.where(semester: semester)
     current_roles = AssistantRole.where(request_for_teaching_assistant: current_requests)
-    current_roles.where(student: student).any?
+    current_roles.where(student: student, active: true).any?
   end
 
   def self.for_course_in_semester course, semester, only_first_option

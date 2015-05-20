@@ -36,6 +36,7 @@ pt-BR:
         password_confirmation: 'Confirme a senha'
         confirmed_at: 'Data de confirmação'
       request_for_teaching_assistant:
+        active: 'Ativo'
         course_id: 'Disciplina'
         professor_id: 'Professor(a)'
         subject: 'Disciplina'
