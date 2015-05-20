@@ -5,6 +5,7 @@ class AssistantRole < ActiveRecord::Base
   belongs_to :student
   belongs_to :request_for_teaching_assistant
   has_one :assistant_evaluation
+  has_many :assistant_frequency
 
   def semester
     request_for_teaching_assistant.semester

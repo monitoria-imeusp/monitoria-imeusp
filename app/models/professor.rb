@@ -1,6 +1,7 @@
 class Professor < ActiveRecord::Base
 
   has_many :request_for_teaching_assistant
+  has_many :assistant_frequency
   belongs_to :department
   belongs_to :user
 
