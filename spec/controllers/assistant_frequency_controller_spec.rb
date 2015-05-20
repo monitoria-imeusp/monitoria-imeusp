@@ -1,19 +1,7 @@
 require 'spec_helper'
 
 describe AssistantFrequencyController do
-
-  describe "GET 'create'" do
-    it "returns http success" do
-      get 'create'
-      response.should be_success
-    end
-  end
-
-  describe "GET 'destroy'" do
-    it "returns http success" do
-      get 'destroy'
-      response.should be_success
-    end
-  end
+  
+  pending "add some examples to (or delete) #{__FILE__}"
 
 end

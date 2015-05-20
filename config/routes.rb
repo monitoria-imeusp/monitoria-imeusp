@@ -53,8 +53,18 @@ Rails.application.routes.draw do
 
   resources :students, except: :show
 
+  #get 'assistant_frequency/' => 'assistant_frequency#index'
+  resources :assistant_frequency do
+    collection do
+      get :index 
+      post :request_frequency
+    end
+  end
+
   #resources :dumps
   get 'dumps/' => 'dumps#index', as: :dumps
+
+  post 'assistant_frequency/request_frequency/' => 'assistant_frequency#request_frequency', as: :request_frequency
 
   resources :semesters
   post 'semesters/:id/open' => 'semesters#open', as: :open_semester
