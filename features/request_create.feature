@@ -15,7 +15,6 @@ Feature: Creating Request for Teaching Assistant
         And there is a course with name "Algebra" and code "MAT0110" and department "MAT"
         And there is a course with name "Aplicacoes" and code "MAP0456" and department "MAP"    
         And I'm logged in as professor "Bob"
-        And I should see "Pedidos de monitoria"
         And I go to the new request form
 
     Scenario: Valid professor creating a new request

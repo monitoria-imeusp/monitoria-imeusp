@@ -31,7 +31,7 @@ class RequestForTeachingAssistantsController < ApplicationController
   def show
     authorization_sprofessor
     authorization_professor
-    @chosen_roles = AssistantRole.where(request_for_teaching_assistant_id: @request_for_teaching_assistant.id)
+    @chosen_roles = AssistantRole.where(request_for_teaching_assistant_id: @request_for_teaching_assistant.id, active: true)
     # Available candidates should be available for this request while there are places to take
     if @chosen_roles.count < @request_for_teaching_assistant.requested_number
       # Valid candidatures for this request

@@ -72,6 +72,22 @@ class AssistantRolesController < ApplicationController
     end
   end
 
+  def deactivate_assistant_role
+    if AssistantRole.exists? params[:id]
+      @assistant_role = AssistantRole.find params[:id]
+      @assistant_role.deactivate
+      respond_to do |format|
+        format.html { redirect_to assistant_roles_path }
+        format.json { head :no_content }
+      end
+    else
+      respond_to do |format|
+        format.html { redirect_to assistant_roles_path }
+        format.json { head :no_content }
+      end
+    end
+  end    
+
   private
 
   # Never trust parameters from the scary internet, only allow the white list through.

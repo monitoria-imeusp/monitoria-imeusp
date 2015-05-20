@@ -14,6 +14,10 @@ Then (/^"(.*)" should not appear before "(.*)"/) do |first_example, second_examp
   page.text.should_not match(/#{first_example}.*#{second_example}/)
 end
 
-Then (/^"(.*)" elected status should be "(.*)"/) do |nusp, eleito|
-  page.body.should match(/#{nusp}[^r]*#{eleito}/)
+Then (/^"(.*)" elected status should be "(.*)"/) do |nusp, elected|
+  page.body.should match(/#{nusp}[^r]*#{elected}/)
+end
+
+Then (/^"(.*)" active status should be "(.*)"/) do |name, active|
+  page.body.should match(/#{name}[^r]*#{active}/)
 end

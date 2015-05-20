@@ -4,5 +4,6 @@ FactoryGirl.define do
   factory :assistant_role do
     student_id                        1
     request_for_teaching_assistant_id 1
+    active							  true
   end
 end
