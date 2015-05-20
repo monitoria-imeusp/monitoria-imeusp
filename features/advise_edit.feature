@@ -16,10 +16,6 @@ Feature: Editing an advise
 		And I should see "Teste 2"
 
 	Scenario: Professor can't edit an advise
-		Given there is a professor with name "Bob" and password "prof-123" nusp "123" department "MAC" and email "bob@bob.bob"
-		Then I'm at the professor login page
-        When I'm ready to receive email
-        And I fill the "Número USP" field with "123"
-        And I fill the "Senha" field with "prof-123"
-        And I press the "Entrar" button
+        Given there is a department with code "MAC"
+		And I'm logged in as a professor
         Then I should not see "Modificar"

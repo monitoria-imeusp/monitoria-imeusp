@@ -11,7 +11,7 @@ Rails.application.routes.draw do
 
   get 'home/index'
 
-  devise_for :users, :controllers => { :users => "users", :omniauth_callbacks => "users/omniauth_callbacks" }
+  devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
   devise_for :admins, :controllers => { :admins => "admins" }
   devise_for :secretaries, :controllers => { :secretaries => "secretaries" }
   # The priority is based upon order of creation: first created -> highest priority.
@@ -20,8 +20,9 @@ Rails.application.routes.draw do
   # You can have the root of your site routed with "root"
   root 'home#index'
   get '/sistema' => 'home#sys'
-  get '/prof' => 'home#prof'
-  get '/professors/sign_in/' => 'home#prof'
+  get '/prof' => 'home#index'
+  get '/professors/sign_in/' => 'home#index'  
+  get "/users/sign_in/" => "home#index"
 
   resources :users
 
@@ -88,6 +89,10 @@ Rails.application.routes.draw do
   match '/404', to: 'errors#file_not_found', via: :all
   match '/422', to: 'errors#unprocessable', via: :all
   match '/500', to: 'errors#internal_server_error', via: :all
+
+  devise_scope :user do
+    match '/users/auth/USP/callback', to: 'users/omniauth_callbacks#usp', via: [:get, :post]
+  end
 
   ## External routes
   get '/_instructions' => redirect('http://www.ime.usp.br/grad/monitoria'), as: :official_instructions

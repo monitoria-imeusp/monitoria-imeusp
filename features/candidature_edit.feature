@@ -13,10 +13,7 @@ Feature: Upddating a candidature
         And there is an candidature with student "carlinhos" and first option "labxp" and second option "ihc" and third option "" and availability for daytime "true" and availability for night time "false" and period preference "2"
 
 	Scenario: Student editing a candidature
-        Given I'm at the user login page
-        When I fill the "Número USP" field with "123456"
-        And I fill the "Senha" field with "changeme!"
-        And I press the "Entrar" button
+        Given I'm logged in as student "carlinhos"
         And I click the "Minhas candidaturas" link
         And I click the "Mais informações" link
         And I click the "Editar" link
@@ -38,10 +35,7 @@ Feature: Upddating a candidature
         And I should see "Observações: teste observações"
 
     Scenario: Student misses a field pattern
-        Given I'm at the user login page
-        When I fill the "Número USP" field with "123456"
-        And I fill the "Senha" field with "changeme!"
-        And I press the "Entrar" button
+        Given I'm logged in as student "carlinhos"
         And I click the "Minhas candidaturas" link
         And I click the "Mais informações" link
         And I click the "Editar" link

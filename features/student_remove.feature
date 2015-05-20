@@ -32,20 +32,14 @@ Feature: delete a student
         And I should not see "carlinhos"
 
     Scenario: Professor can't delete a student
-    	Given I'm at the professor login page
         And there is a professor with name "mandel" and password "12345678" nusp "1111111" department "MAC" and email "devil@usp.br"
-        When I fill the "Número USP" field with "1111111"
-        And I fill the "Senha" field with "12345678"
-        And I press the "Entrar" button
+        And I'm logged in as professor "mandel"
     	And I go to the students index
         And I click the "Ver perfil" link
     	And I should not see "Remover"
     	
 	Scenario: Student can't delete itself
-	    Given I'm at the user login page
-	    When I fill the "Número USP" field with "123456"
-	    And I fill the "Senha" field with "changeme!"
-	    And I press the "Entrar" button
+	    And I'm logged in as student "carlinhos"
 	    And I click the "Perfil" link
 	    And I should not see "Remover"
 

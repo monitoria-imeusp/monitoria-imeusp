@@ -24,10 +24,7 @@ Feature: Course creation
     Scenario: Super professor creating a course
         Given I'm at the professor login page
         And there is a department with code "MAC"
-        And there is a super_professor with name "mqz" and password "12345678" nusp "1111111" department "MAC" and email "music@usp.br"
-        When I fill the "Número USP" field with "1111111"
-        And I fill the "Senha" field with "12345678"
-        And I press the "Entrar" button
+        And I'm logged in as super professor from the "MAC" department
         And I click the "Cadastrar disciplina" link
         And I fill the "Nome da Disciplina" field with "proglin"
         And I select "MAC" on the "Departamento"
@@ -38,12 +35,8 @@ Feature: Course creation
         And I should see "Editar"
 
     Scenario: Professor cannot create a course
-        Given I'm at the professor login page
-        And there is a department with code "MAC"
-        And there is a professor with name "arnaldo" and password "12345678" nusp "1111111" department "MAC" and email "kira@usp.br"
-        When I fill the "Número USP" field with "1111111"
-        And I fill the "Senha" field with "12345678"
-        And I press the "Entrar" button
+        Given there is a department with code "MAC"
+        And I'm logged in as a professor
         And I should not see "Cadastrar disciplina"
         Then I try the create course URL
         Then I should see "ACESSO NEGADO"

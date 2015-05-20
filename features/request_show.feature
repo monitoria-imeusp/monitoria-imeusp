@@ -15,10 +15,7 @@ Feature: Show a request for teaching assistant
         And there is a request for teaching assistant by professor "zara" for the course "MAC0666"
         And there is a candidature by student "Rogerio" for course "MAC0110"
         And there is a candidature by student "Caio" for course "MAC0666"
-        Given I'm at the professor login page
-        When I fill the "Número USP" field with "2222222"
-        And I fill the "Senha" field with "12345678"
-        And I press the "Entrar" button
+        And I'm logged in as professor "zara"
         Then I click the "Pedidos de monitoria" link
 
 

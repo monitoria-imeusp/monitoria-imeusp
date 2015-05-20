@@ -27,23 +27,15 @@ Feature: Candidature table visualization
         And I should see "MAE"
         And I should see "MAT"
 
-    Scenario: Hiperprofessor seeing all candidature categories (by department)
-        Given I'm at the professor login page
-        And there is a hiper_professor with name "zara" and password "12345678" nusp "2222222" department "MAE" and email "zara@usp.br"
-        When I fill the "Número USP" field with "2222222"
-        And I fill the "Senha" field with "12345678"
-        And I press the "Entrar" button
+    Scenario: Hyper professor seeing all candidature categories (by department)
+        Given I'm logged in as a hyper professor
         And I click the "Candidaturas" link
         Then I should see "MAC"
         And I should see "MAE"
         And I should see "MAT"
 
-    Scenario: Superprofessor seeing candidatures involving his department
-        Given I'm at the professor login page
-        And there is a super_professor with name "mandel" and password "12345678" nusp "1111111" department "MAC" and email "devil@usp.br"
-        When I fill the "Número USP" field with "1111111"
-        And I fill the "Senha" field with "12345678"
-        And I press the "Entrar" button
+    Scenario: Super professor seeing candidatures involving his department
+        Given I'm logged in as super professor from the "MAC" department
         And I click the "Candidaturas" link
 		Then I should see "Caio"
         And I should see "MAC0110 - Introdução à Ciência da Computação"
@@ -66,10 +58,7 @@ Feature: Candidature table visualization
 
 
     Scenario: Student seeing candidatures
-        Given I'm at the user login page
-        When I fill the "Número USP" field with "123456"
-        And I fill the "Senha" field with "changeme!"
-        And I press the "Entrar" button
+        Given I'm logged in as student "Rogerio"
         And I click the "Minhas candidaturas" link
 		Then I should see "2014/2"
         And I should see "MAT0111 - Cálculo I"
