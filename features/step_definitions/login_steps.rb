@@ -46,6 +46,33 @@ Given(/^I'm logged in as a professor$/) do
   OmniAuth.config.test_mode = false
 end
 
+Given(/^I'm logged in for the first time as a professor$/) do
+  user = User.create(
+    name: "Common Professor",
+    nusp: "66666",
+    email: "common@ime.usp.br",
+    password: "changeme!",
+    confirmed_at: Time.now
+  )
+  Professor.create(
+    department_id: Department.first.id,
+    professor_rank: 0,
+    user_id: user.id,
+    dirty: true
+  )
+  OmniAuth.config.test_mode = true
+  OmniAuth.config.mock_auth[:usp] = OmniAuth::AuthHash.new({
+    'uid' => user.id,
+    'provider' => :usp,
+    "info" => {
+      "nusp" => 66666,
+      "link" => :teacher
+    }
+  })
+  visit "/users/auth/usp"
+  OmniAuth.config.test_mode = false
+end
+
 Given(/^I'm logged in as professor "(.*?)"$/) do |name|
   professor = User.where(name: name).take
   OmniAuth.config.test_mode = true
@@ -162,6 +189,27 @@ Given(/^I'm logged in as a student$/) do
     tel: "1145454545",
     cel: "11985858585",
     has_bank_account: "true"
+  )
+  OmniAuth.config.test_mode = true
+  OmniAuth.config.mock_auth[:usp] = OmniAuth::AuthHash.new ({
+    'uid' => user.id,
+    'provider' => :usp,
+    "info" => {
+      "nusp" => user.nusp,
+      "link" => :student
+    }
+  })
+  visit "/users/auth/usp"
+  OmniAuth.config.test_mode = false
+end
+
+Given(/^I'm logged in for the first time as a student$/) do
+  user = User.create(
+    name: "Joao",
+    password: "changeme!",
+    email: "joao@ime.usp",
+    nusp: "55555",
+    confirmed_at: Time.now
   )
   OmniAuth.config.test_mode = true
   OmniAuth.config.mock_auth[:usp] = OmniAuth::AuthHash.new ({
