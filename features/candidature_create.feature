@@ -18,10 +18,7 @@ Feature: Create a candidature
         And there is a course with name "Estocasticos" and code "MAE0238" and department "MAE"
         And there is a course with name "Algebra" and code "MAT0110" and department "MAT"
         And there is a course with name "Aplicacoes" and code "MAP0456" and department "MAP" 
-        Given I'm at the user login page
-        When I fill the "Número USP" field with "123456"
-        And I fill the "Senha" field with "changeme!"
-        And I press the "Entrar" button
+        And I'm logged in as a student
         And I go to the new candidature form
 
 	Scenario: Student creating a candidature
@@ -34,7 +31,7 @@ Feature: Create a candidature
         And I write on the "Observações" text area "teste observações"
         And I press the "Enviar" button
         Then I should see "Candidatura criada com sucesso."
-        And I should see "Aluno: carlinhos"
+        And I should see "Aluno: Joao"
         And I should see "Curso: 1ª opção: MAC0342 - labxp"
         And I should see "Curso: 2ª opção: MAC0438 - concorrente"
         And I should see "Curso: 3ª opção: MAC0448 - redes"
