@@ -43,17 +43,6 @@ class User < ActiveRecord::Base
   end
 
   def self.from_omniauth auth
-    print "============="
-    print auth
-    print "============="
-    print auth.info
-    print "============="
-    print auth.info.nusp
-    print "============="
-    print auth.uid
-    print "============="
-    print auth.provider
-    print "============="
     registered = where nusp: auth.info.nusp
     if registered.any?
       user = registered.take

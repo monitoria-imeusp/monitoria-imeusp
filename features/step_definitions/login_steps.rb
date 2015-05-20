@@ -22,6 +22,7 @@ end
 
 Given(/^I'm logged in as a professor$/) do
   user = User.create(
+    id: 100,
     name: "Common Professor",
     nusp: "66666",
     email: "common@ime.usp.br",
@@ -36,15 +37,19 @@ Given(/^I'm logged in as a professor$/) do
     professor_rank: 0,
     user_id: user.id
   )
+  
   OmniAuth.config.test_mode = true
-  OmniAuth.config.add_mock(:usp , OmniAuth::AuthHash.new({
-  'uid' => user.id,
+
+
+  OmniAuth.config.mock_auth[:default] = OmniAuth::AuthHash.new({
+  'uid' => 100,
   'provider' => :usp,
   "info" => {
-    "nusp" => 66666,
-    "link" => :teacher
-  }}))
+  "nusp" => 66666,
+  "link" => :teacher
+  }})
   visit "/users/auth/usp"
+  OmniAuth.config.test_mode = false
 end
 
 Given(/^I'm logged in as professor "(.*?)"$/) do |name|
