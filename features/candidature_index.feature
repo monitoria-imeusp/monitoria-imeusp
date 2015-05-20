@@ -58,7 +58,7 @@ Feature: Candidature table visualization
 
 
     Scenario: Student seeing candidatures
-        Given I'm logged in as a student
+        Given I'm logged in as student "Rogerio"
         And I click the "Minhas candidaturas" link
 		Then I should see "2014/2"
         And I should see "MAT0111 - Cálculo I"

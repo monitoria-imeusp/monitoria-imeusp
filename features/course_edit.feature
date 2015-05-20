@@ -21,13 +21,9 @@ Feature: Course edit
         And I should see "Código da Disciplina: MAC342"
 
     Scenario: Super professor editing a course
-        Given I'm at the professor login page
-        And there is a super_professor with name "mqz" and password "12345678" nusp "1111111" department "MAC" and email "music@usp.br"
         And there is a department with code "MAC"
         And there is a course with name "labxp" and code "MAC0342" and department "MAC"
-        When I fill the "Número USP" field with "1111111"
-        And I fill the "Senha" field with "12345678"
-        And I press the "Entrar" button
+        And I'm logged in as a super professor
         And I go to the courses index
         And I click the "MAC0342" link
         And I click the "Editar" link
@@ -38,13 +34,9 @@ Feature: Course edit
         And I should see "Código da Disciplina: MAC0342"
 
     Scenario: Professor cannot edit a course
-        Given I'm at the professor login page
         And there is a department with code "MAC"
-        And there is a professor with name "arnaldo" and password "12345678" nusp "1111111" department "MAC" and email "kira@usp.br"
         And there is a course with name "labxp" and code "MAC0342" and department "MAC"
-        When I fill the "Número USP" field with "1111111"
-        And I fill the "Senha" field with "12345678"
-        And I press the "Entrar" button
+        And I'm logged in as a professor
         And I go to the courses index
         And I should not see "Editar"
 

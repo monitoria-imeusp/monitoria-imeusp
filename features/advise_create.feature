@@ -13,8 +13,8 @@ Feature: Adding new messages
 		Then I should see "Aviso 1"
 		And I should see "Teste 1"
 
-	@omniauth_professor
 	Scenario: Professor can't create an advise
+        Given there is a department with code "MAC"
 		Then I'm logged in as a professor
 	    Then I should not see "Adicionar aviso"
 

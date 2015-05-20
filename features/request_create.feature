@@ -5,7 +5,6 @@ Feature: Creating Request for Teaching Assistant
 
     Background:
         Given there is an open semester "2014" "1"
-        And I'm at the professor login page
         And there is a department with code "MAC"
         And there is a department with code "MAE"
         And there is a department with code "MAT"
@@ -15,9 +14,7 @@ Feature: Creating Request for Teaching Assistant
         And there is a course with name "Estocasticos" and code "MAE0238" and department "MAE"
         And there is a course with name "Algebra" and code "MAT0110" and department "MAT"
         And there is a course with name "Aplicacoes" and code "MAP0456" and department "MAP"    
-        When I fill the "Número USP" field with "123456"
-        And I fill the "Senha" field with "prof-123"
-        And I press the "Entrar" button
+        And I'm logged in as professor "Bob"
         And I should see "Pedidos de monitoria"
         And I go to the new request form
 

@@ -18,10 +18,7 @@ Feature: Index of the Requests for Teaching Assistant
         And there is a request for teaching assistant with professor "Claudia" and course "MAE0438" and requested_number "2" and priority "Extremamente necessário, mas não imprescindível" and student_assistance "false" and work_correction "true" and test_oversight "true"
 
     Scenario: Check request assistant table and professor can't see the other professor's request
-        Given I'm at the professor login page
-        When I fill the "Número USP" field with "12333"
-        And I fill the "Senha" field with "prof-123"
-        And I press the "Entrar" button
+        Given I'm logged in as professor "Bob"
         And I should see "Pedidos de monitoria"
         Then I click the "Pedidos de monitoria" link
         And I should see "MAC0110 - Mascarenhas"
@@ -33,10 +30,7 @@ Feature: Index of the Requests for Teaching Assistant
         And I should see "Fiscalização de provas: Sim"
 
     Scenario: Superprofessor see only requests of his department
-        Given I'm at the professor login page
-        When I fill the "Número USP" field with "12344"
-        And I fill the "Senha" field with "prof-123"
-        And I press the "Entrar" button
+        Given I'm logged in as professor "Mandel"
         And I should see "Pedidos de monitoria"
         Then I click the "Pedidos de monitoria" link
         And I should see "MAC0110 - Mascarenhas"
@@ -44,11 +38,7 @@ Feature: Index of the Requests for Teaching Assistant
         And I should not see "MAE0438 - Estatística Concorrente"
 
     Scenario: Hiperprofessor can see all requests
-        Given I'm at the professor login page
-        And there is a hiper_professor with name "zara" and password "12345678" nusp "2222222" department "MAE" and email "zara@usp.br"
-        When I fill the "Número USP" field with "2222222"
-        And I fill the "Senha" field with "12345678"
-        And I press the "Entrar" button
+        Given I'm logged in as a hyper professor
         And I should see "Pedidos de monitoria"
         Then I click the "Pedidos de monitoria" link
         And I should see "MAC0110 - Mascarenhas"
@@ -57,11 +47,7 @@ Feature: Index of the Requests for Teaching Assistant
 
     @javascript
     Scenario: Hiperprofessor list of all requests is ordered by professor name
-        Given I'm at the professor login page
-        And there is a hiper_professor with name "zara" and password "12345678" nusp "2222222" department "MAE" and email "zara@usp.br"
-        When I fill the "Número USP" field with "2222222"
-        And I fill the "Senha" field with "12345678"
-        And I press the "Entrar" button
+        Given I'm logged in as a hyper professor
         And I should see "Pedidos de monitoria"
         Then I click the "Pedidos de monitoria" link
         And I should see "MAC0110 - Mascarenhas"
@@ -72,11 +58,7 @@ Feature: Index of the Requests for Teaching Assistant
 
     @javascript
     Scenario: Hiperprofessor can sort requests by department
-        Given I'm at the professor login page
-        And there is a hiper_professor with name "zara" and password "12345678" nusp "2222222" department "MAE" and email "zara@usp.br"
-        When I fill the "Número USP" field with "2222222"
-        And I fill the "Senha" field with "12345678"
-        And I press the "Entrar" button
+        Given I'm logged in as a hyper professor
         And I should see "Pedidos de monitoria"
         Then I click the "Pedidos de monitoria" link
         And I should see "MAC0110 - Mascarenhas"

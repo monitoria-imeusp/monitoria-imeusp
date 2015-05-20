@@ -16,5 +16,6 @@ Feature: Editing an advise
 		And I should see "Teste 2"
 
 	Scenario: Professor can't edit an advise
-		Given I'm logged in as a professor
+        Given there is a department with code "MAC"
+		And I'm logged in as a professor
         Then I should not see "Modificar"

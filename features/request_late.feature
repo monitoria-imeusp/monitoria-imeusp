@@ -13,10 +13,7 @@ Feature: Late Requests for Teaching Assistant
 
     Scenario: Normal professor should not see closed semester
     	Given there is a closed semester "2014" "0"
-    	And I'm at the professor login page
-        When I fill the "Número USP" field with "12333"
-        And I fill the "Senha" field with "prof-123"
-        And I press the "Entrar" button
+    	And I'm logged in as professor "Bob"
         And I should see "Pedidos de monitoria"
         Then I click the "Pedidos de monitoria" link
         Then I should see "Nenhum semestre aberto à requisição de monitores no momento"
@@ -24,10 +21,7 @@ Feature: Late Requests for Teaching Assistant
 
     Scenario: Super professor should see closed semester
     	Given there is a closed semester "2014" "0"
-    	And I'm at the professor login page
-        When I fill the "Número USP" field with "12344"
-        And I fill the "Senha" field with "prof-123"
-        And I press the "Entrar" button
+    	And I'm logged in as professor "Mandel"
         And I should see "Pedidos de monitoria"
         Then I click the "Pedidos de monitoria" link
 		Then I should not see "Nenhum semestre aberto à requisição de monitores no momento"
@@ -35,10 +29,7 @@ Feature: Late Requests for Teaching Assistant
 
 	Scenario: Hiper professor should see closed semester
     	Given there is a closed semester "2014" "0"
-    	And I'm at the professor login page
-        When I fill the "Número USP" field with "12355"
-        And I fill the "Senha" field with "prof-123"
-        And I press the "Entrar" button
+        And I'm logged in as professor "Claudia"
         And I should see "Pedidos de monitoria"
         Then I click the "Pedidos de monitoria" link
 		Then I should not see "Nenhum semestre aberto à requisição de monitores no momento"

@@ -4,7 +4,7 @@ module OmniAuth
   module Strategies
     class USP < OmniAuth::Strategies::OAuth
       # Give your strategy a name.
-      option :name, "USP"
+      option :name, "usp"
 
       # This is where you pass the options you would pass when
       # initializing your consumer from the OAuth gem.

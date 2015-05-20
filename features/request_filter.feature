@@ -5,7 +5,6 @@ Feature: Filtering requests for teaching assistant
 
     Background:
         Given there is an open semester "2014" "1"
-        And I'm at the professor login page
         And there is a department with code "MAC"
         And there is a department with code "MAE"
         And there is a super_professor with name "Bob" and password "prof-123" nusp "12333" department "MAC" and email "bob@bob.bob"
@@ -21,9 +20,7 @@ Feature: Filtering requests for teaching assistant
         And there is a request for teaching assistant with professor "Bob" and course "MAC0113" and requested_number "20" and priority "1" and student_assistance "true" and work_correction "true" and test_oversight "true"
         And there is a request for teaching assistant with professor "Bob3" and course "MAE0114" and requested_number "2" and priority "1" and student_assistance "true" and work_correction "true" and test_oversight "true"
         And there is a request for teaching assistant with professor "Bob3" and course "MAE0115" and requested_number "4" and priority "1" and student_assistance "true" and work_correction "true" and test_oversight "true"
-        When I fill the "Número USP" field with "12333"
-        And I fill the "Senha" field with "prof-123"
-        And I press the "Entrar" button
+        And I'm logged in as professor "Bob"
         And I click the "Pedidos de monitoria" link
 
 

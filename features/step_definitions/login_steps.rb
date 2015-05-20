@@ -28,16 +28,13 @@ Given(/^I'm logged in as a professor$/) do
     password: "changeme!",
     confirmed_at: Time.now
   )
-  Department.create(
-    code: "MAC"
-  )
   Professor.create(
     department_id: Department.first.id,
     professor_rank: 0,
     user_id: user.id
   )
   OmniAuth.config.test_mode = true
-  OmniAuth.config.mock_auth[:USP] = OmniAuth::AuthHash.new({
+  OmniAuth.config.mock_auth[:usp] = OmniAuth::AuthHash.new({
     'uid' => user.id,
     'provider' => :usp,
     "info" => {
@@ -52,7 +49,7 @@ end
 Given(/^I'm logged in as professor "(.*?)"$/) do |name|
   professor = User.where(name: name).take
   OmniAuth.config.test_mode = true
-  OmniAuth.config.mock_auth[:USP] = OmniAuth::AuthHash.new ({
+  OmniAuth.config.mock_auth[:usp] = OmniAuth::AuthHash.new ({
     'uid' => professor.id,
     'provider' => :usp,
     "info" => {
@@ -78,7 +75,7 @@ Given(/^I'm logged in as a super professor$/) do
     user_id: user.id
   )
   OmniAuth.config.test_mode = true
-  OmniAuth.config.mock_auth[:USP] = OmniAuth::AuthHash.new ({
+  OmniAuth.config.mock_auth[:usp] = OmniAuth::AuthHash.new ({
     'uid' => user.id,
     'provider' => :usp,
     "info" => {
@@ -105,7 +102,7 @@ Given(/^I'm logged in as super professor from the "(.*?)" department$/) do |dep|
     user_id: user.id
   )
   OmniAuth.config.test_mode = true
-  OmniAuth.config.mock_auth[:USP] = OmniAuth::AuthHash.new ({
+  OmniAuth.config.mock_auth[:usp] = OmniAuth::AuthHash.new ({
     'uid' => user.id,
     'provider' => :usp,
     "info" => {
@@ -131,7 +128,7 @@ Given(/^I'm logged in as a hyper professor$/) do
     user_id: user.id
   )
   OmniAuth.config.test_mode = true
-  OmniAuth.config.mock_auth[:USP] = OmniAuth::AuthHash.new ({
+  OmniAuth.config.mock_auth[:usp] = OmniAuth::AuthHash.new ({
     'uid' => user.id,
     'provider' => :usp,
     "info" => {
@@ -167,7 +164,7 @@ Given(/^I'm logged in as a student$/) do
     has_bank_account: "true"
   )
   OmniAuth.config.test_mode = true
-  OmniAuth.config.mock_auth[:USP] = OmniAuth::AuthHash.new ({
+  OmniAuth.config.mock_auth[:usp] = OmniAuth::AuthHash.new ({
     'uid' => user.id,
     'provider' => :usp,
     "info" => {
@@ -182,7 +179,7 @@ end
 Given(/^I'm logged in as student "(.*?)"$/) do |name|
   student = User.where(name: name).take
   OmniAuth.config.test_mode = true
-  OmniAuth.config.mock_auth[:USP] = OmniAuth::AuthHash.new ({
+  OmniAuth.config.mock_auth[:usp] = OmniAuth::AuthHash.new ({
     'uid' => student.id,
     'provider' => :usp,
     "info" => {
@@ -196,7 +193,7 @@ end
 
 Given(/^I logged in as an unfinished student$/) do
   OmniAuth.config.test_mode = true
-  OmniAuth.config.mock_auth[:USP] = OmniAuth::AuthHash.new ({
+  OmniAuth.config.mock_auth[:usp] = OmniAuth::AuthHash.new ({
     'uid' => 999,
     'provider' => :usp,
     "info" => {
@@ -212,7 +209,7 @@ end
 
 Given(/^I logged in as an unfinished professor$/) do
   OmniAuth.config.test_mode = true
-  OmniAuth.config.mock_auth[:USP] = OmniAuth::AuthHash.new ({
+  OmniAuth.config.mock_auth[:usp] = OmniAuth::AuthHash.new ({
     'uid' => 998,
     'provider' => :usp,
     "info" => {
