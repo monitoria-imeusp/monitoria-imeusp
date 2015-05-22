@@ -23,23 +23,17 @@ class AssistantFrequencyController < ApplicationController
   end
 
   def request_frequency
-    sent_mails = false
     professors = []
-    semester = Semester.find(params[:semester_id])
+    semester = Semester.current
     requests = RequestForTeachingAssistant.where(semester: semester)
     AssistantRole.where(request_for_teaching_assistant: requests).each do |assistant|
       professors.push(assistant.professor)
     end
-    professors.uniq.each.do |professor|     
-      print ">>> Mandando email para professor com email " + professor.email + " >>>"
-      #NotificationMailer.frequency_request_notification(professor).deliver      
+    professors.uniq.each do |professor|   
+      NotificationMailer.frequency_request_notification(professor).deliver      
     end
     respond_to do |format|
-      if sent_mails
-        format.html { redirect_to '/assistant_frequency/', notice: 'Pedidos enviados com sucesso.' }
-      else
-        format.html { redirect_to '/assistant_frequency/', alert: 'Houve algum problema no envio dos pedidos.' }
-      end
+      format.html { redirect_to '/assistant_frequency/', notice: 'Pedidos enviados com sucesso.' }      
     end
   end
 
