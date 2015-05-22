@@ -55,7 +55,9 @@ Feature: Index of the Requests for Teaching Assistant
         And I should see "MAC0122 - Coisas"
         And I should see "MAE0438 - Estatística Concorrente"
         Then "Bob" should appear before "Claudia"
-        And "Claudia" should appear before "Mandel"  
+        And "Claudia" should appear before "Mandel"
+        And I click the "Sair" link
+        And I should see "Sessão encerrada com sucesso."
 
     @javascript
     Scenario: Hiperprofessor can sort requests by department
@@ -73,3 +75,4 @@ Feature: Index of the Requests for Teaching Assistant
         And I should not see "MAE0438 - Estatística Concorrente"
         And I should see "MAC0110 - Mascarenhas"
         And I should see "MAC0122 - Coisas"
+        And I click the "Sair" link
