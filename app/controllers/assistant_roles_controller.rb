@@ -3,7 +3,9 @@ class AssistantRolesController < ApplicationController
 
   # GET /assistant_roles
   def index
-    separate_by_semester AssistantRole.all
+    separate_by_semester AssistantRole.all    
+    @current_semester_frequencies = AssistantFrequency.current_frequencies
+    create_current_months
   end
 
   # GET /assistant_roles/for_professor/1
@@ -106,6 +108,15 @@ class AssistantRolesController < ApplicationController
         end
       }
     end
+  end
+
+  def create_current_months
+    @months = [Time.now.month]
+    @current_semester_frequencies.each do |freq|
+      @months.push(freq.month)
+    end
+    @months.uniq!
+    @months.sort!
   end
 
   def current_creator

@@ -526,6 +526,121 @@ if Rails.env.development?
     RequestForTeachingAssistant.create(ta_request)
   end
 
+  [
+    {
+      request_for_teaching_assistant_id: "1",
+      student_id: "9"
+    }, 
+    {
+      request_for_teaching_assistant_id: "2", 
+      student_id: "7"
+    }, 
+    {
+      request_for_teaching_assistant_id: "5",
+      student_id: "8"
+    }, 
+    {
+      request_for_teaching_assistant_id: "5",
+      student_id: "6"
+    }, 
+    {
+      request_for_teaching_assistant_id: "5",
+      student_id: "7"
+    }
+  ].each do |assistant_role|
+      AssistantRole.create(assistant_role)
+  end
+
+  [
+    {
+      assistant_role_id: "1",
+      month: "2",
+      presence: true
+    },
+    {
+      assistant_role_id: "1",
+      month: "3",
+      presence: true   
+    },
+    {
+      assistant_role_id: "1",
+      month: "4",
+      presence: true   
+    },
+    {
+      assistant_role_id: "1",
+      month: "5",
+      presence: false   
+    },
+    {
+      assistant_role_id: "2",
+      month: "2",
+      presence: true
+    },
+    {
+      assistant_role_id: "2",
+      month: "3",
+      presence: true   
+    },
+    {
+      assistant_role_id: "2",
+      month: "4",
+      presence: true   
+    },
+    {
+      assistant_role_id: "3",
+      month: "2",
+      presence: true
+    },
+    {
+      assistant_role_id: "3",
+      month: "3",
+      presence: false   
+    },
+    {
+      assistant_role_id: "3",
+      month: "4",
+      presence: true   
+    }, 
+    {
+      assistant_role_id: "4",
+      month: "2",
+      presence: true
+    },
+    {
+      assistant_role_id: "4",
+      month: "3",
+      presence: false   
+    },
+    {
+      assistant_role_id: "4",
+      month: "4",
+      presence: true   
+    },
+    {
+      assistant_role_id: "4",
+      month: "5",
+      presence: false   
+    },
+    {
+      assistant_role_id: "5",
+      month: "2",
+      presence: true
+    },
+    {
+      assistant_role_id: "5",
+      month: "3",
+      presence: true   
+    },
+    {
+      assistant_role_id: "5",
+      month: "4",
+      presence: true   
+    }
+    ].each do |assistant_frequency|
+      AssistantFrequency.create(assistant_frequency)
+  end
+
   Secretary.create(
     name: "Marcia",
     nusp: "99999",

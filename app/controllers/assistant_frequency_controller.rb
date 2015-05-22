@@ -14,14 +14,6 @@ class AssistantFrequencyController < ApplicationController
     end
   end
 
-  def destroy
-  end
-
-   # GET /assistant_frequency
-  def index
-
-  end
-
   def request_frequency
     professors = []
     semester = Semester.current
@@ -33,7 +25,7 @@ class AssistantFrequencyController < ApplicationController
       NotificationMailer.frequency_request_notification(professor).deliver      
     end
     respond_to do |format|
-      format.html { redirect_to '/assistant_frequency/', notice: 'Pedidos enviados com sucesso.' }      
+      format.html { redirect_to '/assistant_roles', notice: 'Pedidos enviados com sucesso.' }      
     end
   end
 

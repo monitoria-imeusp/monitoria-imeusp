@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150520175629) do
+ActiveRecord::Schema.define(version: 20150522194622) do
 
   create_table "admins", force: true do |t|
     t.string   "email",                  default: "", null: false
@@ -54,8 +54,7 @@ ActiveRecord::Schema.define(version: 20150520175629) do
   create_table "assistant_frequencies", force: true do |t|
     t.integer  "month"
     t.boolean  "presence"
-    t.integer  "professor_id"
-    t.integer  "role_id"
+    t.integer  "assistant_role_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

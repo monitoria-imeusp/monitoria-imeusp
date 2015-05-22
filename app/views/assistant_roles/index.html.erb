@@ -8,7 +8,8 @@
     <% unless Rails.env.production? %>
       <%= link_to "Pedir avaliações dos professores", request_assistant_evaluations_for_semester_path(entry[:semester]), method: :post %>
     <% end %>
-    <%= link_to "Notificar monitores", notify_assistant_roles_for_semester_path(entry[:semester]), method: :post %>
+    <%= link_to "Notificar monitores", notify_assistant_roles_for_semester_path(entry[:semester]), method: :post %>   
+    <%= link_to "Pedir frequências", request_frequency_path, method: :post %> 
   <% end %>
   <table>
     <thead>
@@ -36,6 +37,28 @@
                 Desativado
               <% end %>
           <% end %>
+        </tr>
+        <tr>
+          <td colspan=4>
+            <% @months.each do |month| %>
+            <% status = role.frequency_status_for_month(month) %>
+            <% color = "black" %>
+            <% if status == "Presente"
+                  color = "green"
+               elsif status == "Ausente"
+                  color = "red"
+               else
+                  color = "darkgoldenrod"
+               end
+            %>
+            <%= "&nbsp;&bull;".html_safe %>
+            <%= " #{months_to_names[month]}: " %>  
+            <%= content_tag :span, style: "color:#{color}" do -%>
+            <%= status %>
+            <% end -%>
+            <br>            
+            <% end %>
+          </td>
         </tr>
       <% end %>
     </tbody>
