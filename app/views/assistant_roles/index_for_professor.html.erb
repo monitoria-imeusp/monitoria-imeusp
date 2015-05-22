@@ -10,6 +10,8 @@
         <th><%= t('activerecord.attributes.request_for_teaching_assistant.professor_id') %> </th>
         <th><%= t('activerecord.attributes.request_for_teaching_assistant.active') %> </th>
         <th></th>
+        <th></th>
+        <th></th>
       </tr>
     </thead>
 
@@ -20,6 +22,8 @@
           <td><%= role.request_for_teaching_assistant.course.course_code %></td>
           <td><%= role.request_for_teaching_assistant.professor.name %></td>
           <td><%= show_yes_or_no(role.active) %></td>
+          <td></td>
+          <td></td>
           <% if role.assistant_evaluation %>
             <td><%= link_to "Mudar avaliação", edit_assistant_evaluation_path(role.assistant_evaluation) %></td>
           <% else %>
