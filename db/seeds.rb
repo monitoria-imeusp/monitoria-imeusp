@@ -331,7 +331,30 @@ if Rails.env.development?
         cel: "11122233344",
         has_bank_account: true
       }
-    }    
+    }, 
+    {
+      user: {
+        name: "Alfredo Silverman",
+        nusp: 100008,
+        email: "silver@ime.usp.br",
+        password: "changeme!",
+        confirmed_at: Time.now
+      },
+      student: {
+        institute: "IME",
+        gender: "0",
+        rg: "123",
+        cpf: "321",
+        address: "R. Matão",
+        district: "Butantã",
+        zipcode: "000",
+        city: "São Paulo",
+        state: "São Paulo",
+        tel: "1111111111",
+        cel: "11122233344",
+        has_bank_account: true
+      }
+    }     
   ].each do |entry|
     user = User.create(entry[:user])
     entry[:student][:user_id] = user.id
