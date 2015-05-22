@@ -29,4 +29,20 @@ class AssistantFrequencyController < ApplicationController
     end
   end
 
+  def mark_assistant_role_frequency
+    presence = params[:presence]
+    month = params[:month]
+    role = params[:role]
+    id = params[:pid]
+    if presence
+      respond_to do |format|
+        format.html { redirect_to '/assistant_roles/for_professor/'+id, notice: 'Presença marcada com sucesso.' }      
+      end
+    else 
+      respond_to do |format|
+        format.html { redirect_to '/assistant_roles/for_professor/'+id, notice: 'Ausência marcada com sucesso.' }      
+      end
+    end
+  end
+
 end
