@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <p>
+      Prezado(a) <%= @professor.name %>,
+    </p>
+
+    <p>
+      Precisamos que você indique a frequência de 
+      seu(s) monitor(es) para o mês atual. 
+    </p>
+    <p>
+      Por favor, acesse a página <%= link_to "monitoria.ime.usp.br", "http://monitoria.ime.usp.br"%> e acesse a seção "Meus monitores", 
+      na qual poderá marcar a frequência.
+    </p>
+    <p>
+      Caso já tenha marcado a frequência de seu(s) monitores, por favor desconsidere esta mensagem.
+    </p>
+    <p>
+      Estamos a disposição em caso de dúvidas.
+    </p>
+    <p>
+      Comissão de Monitoria IME/USP<br>
+      E-mail: monitoria@ime.usp.br<br>
+      Telefone: 11 3091-6107<br>
+    </p>
+  </body>
+</html>
