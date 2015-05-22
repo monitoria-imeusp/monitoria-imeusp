@@ -57,6 +57,19 @@ if Rails.env.development?
         professor_rank: 2
       }
     },
+    { 
+      user: {
+        name: "Eloi Medina Galego",
+        nusp: "01234",
+        email: "eloi@ime.usp.br",
+        password: "changeme!",
+        confirmed_at: Time.now
+      },
+      professor: {
+        department: Department.find_by(:code => "MAT"),
+        professor_rank: 1
+      }
+    },    
     {
       user: {
         name: "Siméon Denis Poisson",
@@ -117,6 +130,18 @@ if Rails.env.development?
       name: "Tópicos em Computação Gráfica",
       course_code: "MAC6913",
       department: Department.find_by(:code => "MAC")
+    }, 
+    {
+      educational_level: 0,
+      name: "Estrutura de dados",
+      course_code: "MAC0323",
+      department: Department.find_by(:code => "MAC")
+    }, 
+    {
+      educational_level: 0,
+      name: "Trabalho de formatura supervisionado",
+      course_code: "MAC0499",
+      department: Department.find_by(:code => "MAC")
     }
   ].each do |course|
     Course.create(course)
@@ -125,7 +150,7 @@ if Rails.env.development?
   [
     {
       user: {
-        name: "Will",
+        name: "Wilson Kazuo Mizutani",
         nusp: 100000,
         email: "kazuo@ime.usp.br",
         password: "changeme!",
@@ -148,7 +173,7 @@ if Rails.env.development?
     },
     {
       user: {
-        name: "Jackção",
+        name: "Jackção Souza",
         nusp: "242424",
         email: "jacks@ime.usp.br",
         password: "changeme!",
@@ -168,7 +193,168 @@ if Rails.env.development?
         cel: "11122233344",
         has_bank_account: false
       }
-    }
+    },
+    {
+      user: {
+        name: "Zé Eduardo Ferreira",
+        nusp: 100001,
+        email: "zezinho@ime.usp.br",
+        password: "changeme!",
+        confirmed_at: Time.now
+      },
+      student: {
+        institute: "IME",
+        gender: "1",
+        rg: "123",
+        cpf: "321",
+        address: "R. Matão",
+        district: "Butantã",
+        zipcode: "000",
+        city: "São Paulo",
+        state: "São Paulo",
+        tel: "1111111111",
+        cel: "11122233344",
+        has_bank_account: true
+      }
+    },
+    {
+      user: {
+        name: "Jef Eduardo Ferreira",
+        nusp: 100003,
+        email: "jef@ime.usp.br",
+        password: "changeme!",
+        confirmed_at: Time.now
+      },
+      student: {
+        institute: "IME",
+        gender: "1",
+        rg: "123",
+        cpf: "321",
+        address: "R. Matão",
+        district: "Butantã",
+        zipcode: "000",
+        city: "São Paulo",
+        state: "São Paulo",
+        tel: "1111111111",
+        cel: "11122233344",
+        has_bank_account: true
+      }
+    }, 
+    {
+      user: {
+        name: "Jao Henrique Luciano",
+        nusp: 100004,
+        email: "jao@ime.usp.br",
+        password: "changeme!",
+        confirmed_at: Time.now
+      },
+      student: {
+        institute: "IME",
+        gender: "1",
+        rg: "123",
+        cpf: "321",
+        address: "R. Matão",
+        district: "Butantã",
+        zipcode: "000",
+        city: "São Paulo",
+        state: "São Paulo",
+        tel: "1111111111",
+        cel: "11122233344",
+        has_bank_account: true
+      }
+    }, 
+    {
+      user: {
+        name: "Zizao Chen Tin",
+        nusp: 100005,
+        email: "zizao@ime.usp.br",
+        password: "changeme!",
+        confirmed_at: Time.now
+      },
+      student: {
+        institute: "IME",
+        gender: "1",
+        rg: "123",
+        cpf: "321",
+        address: "R. Matão",
+        district: "Butantã",
+        zipcode: "000",
+        city: "São Paulo",
+        state: "São Paulo",
+        tel: "1111111111",
+        cel: "11122233344",
+        has_bank_account: true
+      }
+    }, 
+    {
+      user: {
+        name: "Leonardo Haddad",
+        nusp: 100006,
+        email: "leo@ime.usp.br",
+        password: "changeme!",
+        confirmed_at: Time.now
+      },
+      student: {
+        institute: "IME",
+        gender: "1",
+        rg: "123",
+        cpf: "321",
+        address: "R. Matão",
+        district: "Butantã",
+        zipcode: "000",
+        city: "São Paulo",
+        state: "São Paulo",
+        tel: "1111111111",
+        cel: "11122233344",
+        has_bank_account: true
+      }
+    }, 
+    {
+      user: {
+        name: "Bianca Similamore Sanches Bittencourt",
+        nusp: 100007,
+        email: "bia@ime.usp.br",
+        password: "changeme!",
+        confirmed_at: Time.now
+      },
+      student: {
+        institute: "IME",
+        gender: "0",
+        rg: "123",
+        cpf: "321",
+        address: "R. Matão",
+        district: "Butantã",
+        zipcode: "000",
+        city: "São Paulo",
+        state: "São Paulo",
+        tel: "1111111111",
+        cel: "11122233344",
+        has_bank_account: true
+      }
+    }, 
+    {
+      user: {
+        name: "Alfredo Silverman",
+        nusp: 100008,
+        email: "silver@ime.usp.br",
+        password: "changeme!",
+        confirmed_at: Time.now
+      },
+      student: {
+        institute: "IME",
+        gender: "0",
+        rg: "123",
+        cpf: "321",
+        address: "R. Matão",
+        district: "Butantã",
+        zipcode: "000",
+        city: "São Paulo",
+        state: "São Paulo",
+        tel: "1111111111",
+        cel: "11122233344",
+        has_bank_account: true
+      }
+    }     
   ].each do |entry|
     user = User.create(entry[:user])
     entry[:student][:user_id] = user.id
@@ -196,6 +382,82 @@ if Rails.env.development?
     {
       student_id: "2",
       course1_id: "5",
+      course2_id: "1",
+      daytime_availability: true,
+      nighttime_availability: false,
+      time_period_preference: "0",
+      semester_id: Semester.first.id
+    },
+    {
+      student_id: "3",
+      course1_id: "5",
+      course2_id: "1",
+      course3_id: "3",
+      course4_id: "6", 
+      daytime_availability: true,
+      nighttime_availability: false,
+      time_period_preference: "0",
+      semester_id: Semester.first.id
+    },
+    {
+      student_id: "4",
+      course1_id: "5",
+      course2_id: "1",
+      course3_id: "6",
+      daytime_availability: true,
+      nighttime_availability: false,
+      time_period_preference: "0",
+      semester_id: Semester.first.id
+    },
+    {
+      student_id: "5",
+      course1_id: "5",
+      course2_id: "1",
+      course3_id: "3",
+      daytime_availability: true,
+      nighttime_availability: false,
+      time_period_preference: "0",
+      semester_id: Semester.first.id
+    },
+    {
+      student_id: "6",
+      course1_id: "2",
+      course2_id: "1",
+      course3_id: "6",
+      course4_id: "5",
+      daytime_availability: true,
+      nighttime_availability: false,
+      time_period_preference: "0",
+      semester_id: Semester.first.id
+    },     
+    {
+      student_id: "7",
+      course1_id: "2",
+      course2_id: "3",
+      course3_id: "1",
+      course4_id: "5",
+      daytime_availability: true,
+      nighttime_availability: false,
+      time_period_preference: "0",
+      semester_id: Semester.first.id
+    }, 
+    {
+      student_id: "8",
+      course1_id: "2",
+      course2_id: "6",
+      course3_id: "3",
+      course4_id: "5",
+      daytime_availability: true,
+      nighttime_availability: false,
+      time_period_preference: "0",
+      semester_id: Semester.first.id
+    },     
+    {
+      student_id: "9",
+      course1_id: "2",
+      course2_id: "4",
+      course3_id: "1",
+      course4_id: "6",
       daytime_availability: true,
       nighttime_availability: false,
       time_period_preference: "0",
@@ -218,6 +480,34 @@ if Rails.env.development?
       requested_number: 1,
       priority: 0,
       course_id: "5",
+      semester_id: Semester.first.id
+    }, 
+    {
+      professor_id: "2",
+      requested_number: 1,
+      priority: 0,
+      course_id: "6",
+      semester_id: Semester.first.id
+    },     
+    {
+      professor_id: "3",
+      requested_number: 1,
+      priority: 0,
+      course_id: "2",
+      semester_id: Semester.first.id
+    },     
+    {
+      professor_id: "4",
+      requested_number: 3,
+      priority: 0,
+      course_id: "2",
+      semester_id: Semester.first.id
+    },      
+    {
+      professor_id: "5",
+      requested_number: 1,
+      priority: 0,
+      course_id: "3",
       semester_id: Semester.first.id
     }
   ].each do |ta_request|

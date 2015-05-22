@@ -85,7 +85,7 @@
 
 <br>
 
-<% if student_signed_in? %>
+<% if user_signed_in? && current_user.student? %>
   <% @semesters.each do |semester| %>
     <% if semester[:valid] %>
       <%= link_to "Candidatar-se para #{semester[:get].year}/#{semester[:get].parity_as_i}",

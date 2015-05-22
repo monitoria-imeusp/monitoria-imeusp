@@ -5,7 +5,7 @@ Feature: Accessing the page
 
     Scenario: Verify if non-admins can't create a professors
         Given I'm at the create_professors page
-        Then I should see "Acesso negado"
+        Then I should see "ACESSO NEGADO"
 
     Scenario: Verify if the admin can't edit professors
         Given I'm at the login page

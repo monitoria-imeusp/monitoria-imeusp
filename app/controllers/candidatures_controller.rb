@@ -37,6 +37,9 @@ class CandidaturesController < ApplicationController
         end
       end
     end
+    @candidatures_filtered.each do |candidaturelist|
+      candidaturelist.sort! { |a,b| a.student.name.downcase <=> b.student.name.downcase }
+    end
   end
 
   def index_for_student
@@ -77,6 +80,10 @@ class CandidaturesController < ApplicationController
     respond_to do |format|
       if already_for_semester? @candidature.student_id, @candidature.semester_id
         @candidature.errors.add(:semester_id, t('errors.models.candidature.toomany'))
+        format.html { render action: 'new' }
+        format.json { render json: @candidature.errors, status: :unprocessable_entity }
+      elsif @candidature.has_repeated_courses
+        @candidature.errors.add(:-, t('errors.models.candidature.repeated'))
         format.html { render action: 'new' }
         format.json { render json: @candidature.errors, status: :unprocessable_entity }
       elsif @candidature.save
@@ -146,7 +153,7 @@ class CandidaturesController < ApplicationController
     params.require(:candidature).permit(
       :daytime_availability, :nighttime_availability, :time_period_preference,
       :course1_id, :course2_id, :course3_id, :course4_id, :student_id, :semester_id,
-      :observation, :transcript_file_path
+      :observation, :transcript_file_path, :voluntary
     )
   end
 

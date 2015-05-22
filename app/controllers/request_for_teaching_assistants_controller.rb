@@ -17,8 +17,13 @@ class RequestForTeachingAssistantsController < ApplicationController
     end).keep_if do |request|
       admin_signed_in? or secretary_signed_in? or professor_can_see?(current_user.professor, request)
     end
+    @request_for_teaching_assistants.sort! { |a,b| a.professor.name.downcase <=> b.professor.name.downcase }
     @semesters = Semester.where(active: true)
     @open_semesters = @semesters.where(open: true)
+    @active_semesters = Semester.all_active
+    if (admin_signed_in?) or (secretary_signed_in?) or (current_user.professor.hiper_professor?)
+      @should_have_department_sort = true
+    end
   end
 
   # GET /request_for_teaching_assistants/1
@@ -26,13 +31,14 @@ class RequestForTeachingAssistantsController < ApplicationController
   def show
     authorization_sprofessor
     authorization_professor
-    @chosen_roles = AssistantRole.where(request_for_teaching_assistant_id: @request_for_teaching_assistant.id)
+    @chosen_roles = AssistantRole.where(request_for_teaching_assistant_id: @request_for_teaching_assistant.id, active: true)
     # Available candidates should be available for this request while there are places to take
     if @chosen_roles.count < @request_for_teaching_assistant.requested_number
       # Valid candidatures for this request
       course = @request_for_teaching_assistant.course
       semester = @request_for_teaching_assistant.semester
-      @candidatures_for_this_request = Candidature.for_course_in_semester course, semester
+      @first_option_candidatures_for_this_request = Candidature.for_course_in_semester course, semester, true
+      @other_option_candidatures_for_this_request = Candidature.for_course_in_semester course, semester, false
       # Valid candidatures for the same department
       @candidatures_for_this_department = Candidature.for_same_department_in_semester course, semester
     end

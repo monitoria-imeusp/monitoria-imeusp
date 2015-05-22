@@ -18,12 +18,8 @@ Feature: Semester creation
         Then I should see "2015/1"
 
     Scenario: Professor can't create a semester
-        Given I'm at the professor login page
         And there is a professor with name "Bob" and password "prof-123" nusp "123" department "MAC" and email "bob@bob.bob"
-        When I'm ready to receive email
-        And I fill the "Número USP" field with "123"
-        And I fill the "Senha" field with "prof-123"
-        And I press the "Entrar" button
+        And I'm logged in as professor "Bob"
         Then I should not see "Gerenciar semestres"
 
     Scenario: Secretary creating a semester

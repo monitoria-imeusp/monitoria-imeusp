@@ -12,10 +12,12 @@ class ProfessorsController < ApplicationController
     @professor = Professor.new(professor_params)
     generated_password = Devise.friendly_token.first(8)
     @user.password = generated_password
+    @user.skip_confirmation_notification!
 
     if @professor.valid? and @user.save
       @professor.user_id = @user.id
       if @professor.save
+        @user.send_confirmation_instructions  
         redirect_to @user
       else
         render 'new'
@@ -83,7 +85,7 @@ class ProfessorsController < ApplicationController
   end
 
   def professor_params
-    params.require(:professor).permit(:department_id, :professor_rank)
+    params.require(:professor).permit(:department_id, :professor_rank, :dirty)
   end
 
   def user_params

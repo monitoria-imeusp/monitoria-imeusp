@@ -4,19 +4,19 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   rescue_from CanCan::AccessDenied do |exception|
-    render :file => "#{Rails.root}/public/403.html", :status => 403, :layout => false
+    #render :file => "#{Rails.root}/public/403.html", :status => 403, :layout => false    
+
+    redirect_to '/403'
   end
 
   def current_ability
       @current_ability ||= ::Ability.new(
         if user_signed_in?
-            current_user
+          current_user
         elsif secretary_signed_in?
           current_secretary
         elsif admin_signed_in?
           current_admin
-        elsif professor_signed_in?
-          current_professor
         else
           nil
         end

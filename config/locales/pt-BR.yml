@@ -36,6 +36,7 @@ pt-BR:
         password_confirmation: 'Confirme a senha'
         confirmed_at: 'Data de confirmação'
       request_for_teaching_assistant:
+        active: 'Ativo'
         course_id: 'Disciplina'
         professor_id: 'Professor(a)'
         subject: 'Disciplina'
@@ -107,6 +108,7 @@ pt-BR:
         transcript_file_path: 'Histórico Escolar'
         semester_id: 'Período'
         semester: 'Período'
+        voluntary: 'Aceita ser monitor voluntário (sem bolsa)'
       department:
         department: 'Departamento'
       advise:
@@ -139,5 +141,6 @@ pt-BR:
             blank: ''
       candidature:
         toomany: 'Você já tem uma candidatura nesse semestre'
+        repeated: 'Você não pode selecionar a mesma matéria mais de uma vez'
       student:
         toofew: 'Digite o nome do seu instituto no campo outros'

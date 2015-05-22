@@ -7,9 +7,7 @@ Feature: edit a student
 		Given I'm at the user login page
         And there is a student with name "carlinhos" with nusp "123456" and email "eu@usp.br"
         And there is a student with name "carlinhos2" with nusp "1234567" and email "eu2@usp.br"
-        When I fill the "Número USP" field with "123456"
-        And I fill the "Senha" field with "changeme!"
-        And I press the "Entrar" button
+        And I'm logged in as student "carlinhos"
 
     Scenario: Student edits his or hers user profile
     	And I click the "Perfil" link
@@ -38,7 +36,7 @@ Feature: edit a student
 
     Scenario: Student trying to edit a student that isn't him
         When I try to access the "students" page with id "2" to "edit"
-        Then I should see "Acesso negado"
+        Then I should see "ACESSO NEGADO"
 
 	#Scenario: Student trying to update a student that doesn't exist
 		#When I try to update the student with id "44"

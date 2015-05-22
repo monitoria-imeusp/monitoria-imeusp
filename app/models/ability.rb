@@ -14,7 +14,7 @@ class Ability
       cannot :read, Secretary
       cannot :update, Secretary
       cannot :destroy, Secretary
-      can :create, Student
+      cannot :create, Student
       cannot :read, Student
       cannot :update, Student
       cannot :destroy, Student
@@ -68,6 +68,7 @@ class Ability
       cannot :update, Admin
       can :read, Professor
       can :update, Professor #, :id => user.id #Only himself
+      can :create, Professor 
       can :change_password, Professor #, :id => user.id #Only himself
       can :destroy, Professor #, :id => user.id #Only Himself
       cannot :create, Secretary
@@ -164,6 +165,41 @@ class Ability
       can :read, Candidature #, :student_id => user.id #Only his own
       can :update, Candidature #, :student_id => user.id #Only his own
       can :destroy, Candidature #, :student_id => user.id #Only his own
+    else # 'ghost' User (usuario que não completou cadastro)
+      cannot :read, Admin
+      cannot :update, Admin
+      cannot :read, Dump
+      cannot :create, Professor
+      cannot :read, Professor
+      cannot :update, Professor
+      cannot :destroy, Professor
+      cannot :create, Secretary
+      cannot :read, Secretary
+      cannot :update, Secretary
+      cannot :destroy, Secretary
+      cannot :create, Student
+      cannot :read, Student
+      cannot :update, Student
+      cannot :destroy, Student
+      cannot :create, Course
+      cannot :read, Course
+      cannot :update, Course
+      cannot :destroy, Course
+      cannot :create, RequestForTeachingAssistant
+      cannot :read, RequestForTeachingAssistant
+      cannot :update, RequestForTeachingAssistant
+      cannot :destroy, RequestForTeachingAssistant
+      cannot :create, Candidature
+      cannot :read, Candidature
+      cannot :update, Candidature
+      cannot :destroy, Candidature
+      cannot :read, User
+      cannot :update, User
+      cannot :destroy, User
+    end
+
+    if user.is_a? User
+      can :create, Student
     end
 
     # Standard user permissions
@@ -173,6 +209,8 @@ class Ability
     if user.is_a? User or user.is_a? Admin or user.is_a? Secretary
       can :show, User
       can :update, User
+    end
+    if user.is_a? Admin or user.is_a? Secretary
       can :destroy, User
     end
 
@@ -200,6 +238,7 @@ class Ability
       can :create, AssistantRole
       can :update, AssistantRole
       can :destroy, AssistantRole
+      can :deactivate_assistant_role, AssistantRole
     end
     if user.is_a? User and user.professor?
       can :index_for_professor, AssistantRole

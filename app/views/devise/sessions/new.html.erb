@@ -1,3 +1,8 @@
+<% if resource_name == :user %>
+  <h1 style="color:red">Não foi possível fazer o login</h1>
+  <p>Tente novamente fazer o login pelo Acesso USP.
+  Se o problema persistir, entre em contato utilizando as informações do rodapé.</p>
+<% else %>
 <% if resource_name == :professor %>
   <h1>Acesso como professor</h1>
 <% elsif resource_name == :student %>
@@ -34,3 +39,4 @@
 <% end %>
 
 <%= render "devise/shared/links" %>
+<% end %>

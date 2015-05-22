@@ -17,4 +17,8 @@ class AssistantRole < ActiveRecord::Base
   def course
     request_for_teaching_assistant.course
   end
+  
+  def deactivate
+    update_column(:active, false)
+  end
 end

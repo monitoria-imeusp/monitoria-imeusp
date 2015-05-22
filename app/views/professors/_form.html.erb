@@ -1,8 +1,4 @@
-<%= form_for(@professor) do |f| %>
-
-  <% unless @user.nil? %>
-    <%= render template: "users/_inner_nopass_form" %>
-  <% end %>
+  <%= form_for(@professor) do |f| %>
 
   <% if @professor.errors.any? %>
     <div id="error_explanation">
@@ -20,6 +16,8 @@
     <%= f.label :department_id, t('activerecord.attributes.department.department') %><br>
     <%= f.select :department_id, department_options, :include_blank => false %>
   </div>
+  
+  <%= f.hidden_field :dirty, :value => 'false' %>
 
   <% if admin_signed_in? %>
     <div class="field">

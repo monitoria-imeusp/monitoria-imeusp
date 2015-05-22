@@ -20,16 +20,13 @@ Feature: Secretary creation
         Then I should see "Acesso efetuado com sucesso."
 
     Scenario: Professor cannot create a secretary
-        Given I'm at the professor login page
         And there is a professor with name "arnaldo" and password "12345678" nusp "1111111" department "MAC" and email "kira@usp.br"
-        When I fill the "Número USP" field with "1111111"
-        And I fill the "Senha" field with "12345678"
-        And I press the "Entrar" button
+        And I'm logged in as professor "arnaldo"
         And I should not see "Novo Funcionário"
         Then I try the create secretary URL
-        Then I should see "Acesso negado"
+        Then I should see "ACESSO NEGADO"
 
     Scenario: Any person trying to create a secretary
         Given I'm at the home page
         Then I try the create secretary URL
-        Then I should see "Acesso negado"
+        Then I should see "ACESSO NEGADO"

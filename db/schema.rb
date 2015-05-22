@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150102195359) do
+ActiveRecord::Schema.define(version: 20150520175629) do
 
   create_table "admins", force: true do |t|
     t.string   "email",                  default: "", null: false
@@ -51,11 +51,21 @@ ActiveRecord::Schema.define(version: 20150102195359) do
     t.datetime "updated_at"
   end
 
+  create_table "assistant_frequencies", force: true do |t|
+    t.integer  "month"
+    t.boolean  "presence"
+    t.integer  "professor_id"
+    t.integer  "role_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "assistant_roles", force: true do |t|
     t.integer  "student_id"
     t.integer  "request_for_teaching_assistant_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "active",                            default: true
   end
 
   create_table "candidatures", force: true do |t|
@@ -71,6 +81,7 @@ ActiveRecord::Schema.define(version: 20150102195359) do
     t.text     "observation",            default: ""
     t.integer  "course4_id"
     t.integer  "semester_id"
+    t.boolean  "voluntary",              default: false
   end
 
   create_table "courses", force: true do |t|
@@ -101,6 +112,7 @@ ActiveRecord::Schema.define(version: 20150102195359) do
     t.integer  "department_id"
     t.integer  "professor_rank", default: 0
     t.integer  "user_id"
+    t.boolean  "dirty",          default: false
   end
 
   create_table "request_for_teaching_assistants", force: true do |t|
@@ -191,6 +203,8 @@ ActiveRecord::Schema.define(version: 20150102195359) do
     t.string   "unconfirmed_email"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "provider"
+    t.string   "uid"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true

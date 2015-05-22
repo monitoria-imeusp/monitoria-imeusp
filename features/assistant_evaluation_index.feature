@@ -15,7 +15,7 @@ Feature: Assistant evaluation index
         And there is an assistant evaluation for student "Bob" with professor "Dude" at course "MAC0110" as "ok"
 
     Scenario: Professor lists assistant evaluations
-        Given I'm logged in as a super professor
+        Given I'm logged in as super professor from the "MAC" department
         When I visit student "Bob"'s page
         And I click the "Ver avaliações como monitor(a)" link
         Then I should see "Avaliações de Bob"

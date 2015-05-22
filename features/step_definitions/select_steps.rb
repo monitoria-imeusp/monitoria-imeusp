@@ -31,6 +31,11 @@ When(/^I select the count option "(.*?)"$/) do |radio_button_string|
   end
 end
 
+When(/^I select the department option "(.*?)"$/) do |radio_button_string|
+  choose(radio_button_string)
+end
+
+
 When(/^I select the preference option "(.*?)"$/) do |radio_button_string|
   CandidaturesHelper.daytimePreference.each do |preference_options|
     if preference_options[0] == radio_button_string
@@ -49,4 +54,12 @@ end
 
 When(/^I select "(.*?)" on the "(.*?)"$/) do |option, box|
   select(option, :from => box)
+end
+
+Then(/^"(.*?)" should contain "(.*?)"$/) do |dropdown, text|
+  page.has_select?(dropdown, :with_options => [text]).should == true
+end
+
+Then(/^"(.*?)" should not contain "(.*?)"$/)  do |dropdown, text|
+  page.has_no_select?(dropdown, :with_options => [text]).should be_true
 end

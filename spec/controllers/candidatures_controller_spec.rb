@@ -50,19 +50,28 @@ describe CandidaturesController do
   let(:valid_attributes) {{
     "time_period_preference" => "Indiferente",
     "course1_id" => 1,
-    "semester_id" => 1
+    "semester_id" => 1,
+    "student_id" => 1
   }}
 
   let(:valid_second_candidature_attributes) {{
     "time_period_preference" => "Indiferente",
     "course1_id" => 2,
-    "semester_id" => 1
+    "semester_id" => 1,
+    "student_id" => 2
   }}
 
   let(:valid_third_candidature_attributes) {{
     "time_period_preference" => "Indiferente",
     "course1_id" => 3,
     "semester_id" => 1
+  }}
+
+  let(:valid_fourth_candidature_attributes) {{
+    "time_period_preference" => "Indiferente",
+    "course1_id" => 2,
+    "semester_id" => 1,
+    "student_id" => 3
   }}
 
   let(:kunio) { {
@@ -106,8 +115,14 @@ describe CandidaturesController do
   # CandidaturesController. Be sure to keep this updated too.
   let(:valid_session) { {} }
 
-  let(:user) { FactoryGirl.create :user }
-  let(:student) { FactoryGirl.create :student, user_id: user.id }
+  let(:user) { FactoryGirl.create :user, name: "Wilson Kazuo Mizutani" }
+  let(:user2) { FactoryGirl.create :user, id: "3", name: "Marco Aurelio Gerosa", email: "a@a.com", nusp: 11112 }
+  let(:user3) { FactoryGirl.create :user, id: "4", name: "Edson Arantes do Nascimento", email: "b@a.com", nusp: 11113 }
+  let(:user4) { FactoryGirl.create :user, id: "5", name: "Robson Calzone di Calabria", email: "c@a.com", nusp: 11114 }
+  let!(:student) { FactoryGirl.create :student, user_id: user.id }
+  let!(:student2) { FactoryGirl.create :student2, user_id: user2.id }
+  let!(:student3) { FactoryGirl.create :student3, user_id: user3.id }
+  let!(:student4) { FactoryGirl.create :student4, user_id: user4.id }
 
   before :each do
     sign_in user
@@ -176,11 +191,15 @@ describe CandidaturesController do
     let!(:semester) { FactoryGirl.create :semester }
     let(:prof_user) { FactoryGirl.create :another_user }
     let!(:super_professor) { FactoryGirl.create :super_professor, user_id: prof_user.id }
-    let!(:candidatures) { [[ Candidature.create!(valid_attributes), Candidature.create!(valid_second_candidature_attributes) ], [], [], []] }
+    let!(:candidature1) { Candidature.create!(valid_attributes) }
+    let!(:candidature2) { Candidature.create!(valid_second_candidature_attributes) }
+    let!(:candidature3) { Candidature.create!(valid_fourth_candidature_attributes) }
+    let!(:candidatures) { [[ candidature1, candidature2, candidature3], [], [], []] }
+    let!(:orderedcandidatures) { [[ candidature3, candidature2, candidature1], [], [], []] }
     let!(:unrelated_candidature) { Candidature.create! valid_third_candidature_attributes }
     before do
       sign_out user
-      sign_in prof_user
+      sign_in prof_user      
       #Department.should_receive(:find).with(super_professor.department_id.to_s).and_return(@mac)
       get :index_for_department, { semester_id: semester.id, department_id: @mac.id}
     end
@@ -192,8 +211,11 @@ describe CandidaturesController do
 
     context 'filtered candidatures' do
       subject { assigns(:candidatures_filtered) }
-      it { expect(subject).to eq(candidatures) }
+      it { expect(subject).not_to eq(candidatures)             
+           expect(subject).to eq(orderedcandidatures)
+          }
     end
+
   end
 
   describe "GET show" do

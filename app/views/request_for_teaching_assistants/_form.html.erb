@@ -22,10 +22,15 @@
       <%= f.select :professor_id, professor_options, :include_blank => false %><br>
     </div>
   <% end %>
+  <input type="radio" name="disc" onchange="updateList(this.value)" id="MAC" value="MAC"> MAC
+  <input type="radio" name="disc" onchange="updateList(this.value)" id="MAE" value="MAE"> MAE
+  <input type="radio" name="disc" onchange="updateList(this.value)" id="MAP" value="MAP"> MAP
+  <input type="radio" name="disc" onchange="updateList(this.value)" id="MAT" value="MAT"> MAT
+  <input type="radio" name="disc" onchange="updateList(this.value)" id="ALL" value="ALL" checked> Todas
   <div class="field">
     <%= f.label :course_id, t('activerecord.attributes.request_for_teaching_assistant.course_id') %><br>
     <%= f.select :course_id, course_options %><br>
-  </div>
+  </div>  
   <div class="field">
     <%= f.label :requested_number, t('activerecord.attributes.request_for_teaching_assistant.requested_number') %><br>
     <%= f.number_field :requested_number %>
@@ -65,3 +70,47 @@
     <%= f.submit "Enviar" %>
   </div>
 <% end %>
+
+<script>
+var courseList = [];
+var coursesByDep = {};
+var name;
+var id;
+<% course_options.each do |course| %>
+  name = "<%= course[0] %>";
+  id = "<%= course[1] %>";
+  courseList.push({display: name, value: id});
+<% end %>
+
+coursesByDep["MAC"] = [];
+coursesByDep["MAE"] = [];
+coursesByDep["MAT"] = [];
+coursesByDep["MAP"] = [];
+coursesByDep["ALL"] = courseList;
+
+for (var i = 0; i < courseList.length; i++) {
+  var dep = courseList[i].display.substring(0, 3);
+  coursesByDep[dep].push(courseList[i]);
+}
+
+updateList("ALL");
+
+function updateList(dep) {
+  var select = document.getElementById("request_for_teaching_assistant_course_id");
+  var selectLength = select.options.length;
+  for (var j = selectLength - 1; j >= 0; j--) {
+    select.remove(j);
+  }
+  var list = coursesByDep[dep];
+  var blank = document.createElement("option");
+  blank.text = "";
+  blank.value = "";
+  select.add(blank);
+  for (var i = 0; i < list.length; i++) {
+    var option = document.createElement("option");
+    option.text = list[i].display;
+    option.value = list[i].value;
+    select.add(option);
+  }
+}
+</script>

@@ -2,29 +2,28 @@ class StudentsController < ApplicationController
   authorize_resource
 
   def new
+    authorization_user
     @student = Student.new
-    @user = User.new
   end
 
   def create
-    @user = User.new(user_params)
+    authorization_user
     @student = Student.new(student_params)
 
-    if @student.valid? and @user.save
-      @student.user_id = @user.id
+    if @student.valid?
+      @student.user_id = current_user.id
 
       if (params[:student][:institute] == "Outros") and params[:student][:institute_text].empty?
         render 'new'
       elsif @student.save
-        sign_in  @user, :bypass => true
-        redirect_to @user
+        redirect_to current_user
       else
         render 'new'
       end
     else
       respond_to do |format|
         format.html { render action: 'new'}
-        format.json { render json: @user.errors, status: :unprocessable_entity }
+        format.json { render json: current_user.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -61,6 +60,11 @@ class StudentsController < ApplicationController
   end
 
   private
+  def authorization_user
+    raise CanCan::AccessDenied.new if current_user.student?
+  end
+
+
   def authorization_student
     if user_signed_in? and current_user.student? and @student.user.id != current_user.id
       raise CanCan::AccessDenied.new()

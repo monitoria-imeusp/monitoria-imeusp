@@ -1,21 +1,28 @@
 Rails.application.routes.draw do
 
 
+  get 'errors/file_not_found'
+
+  get 'errors/unprocessable'
+
+  get 'errors/internal_server_error'
+
+  get 'errors/access_denied'
+
   get 'home/index'
 
+  devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
   devise_for :admins, :controllers => { :admins => "admins" }
-  devise_for :professors, :controllers => { :professors => "professors" }
   devise_for :secretaries, :controllers => { :secretaries => "secretaries" }
-  devise_for :students, :controllers => { :students => "students" }
-  devise_for :users, :controllers => { :users => "users" }
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
   root 'home#index'
   get '/sistema' => 'home#sys'
-  get '/prof' => 'home#prof'
-  get '/professors/sign_in/' => 'home#prof'
+  get '/prof' => 'home#index'
+  get '/professors/sign_in/' => 'home#index'  
+  get "/users/sign_in/" => "home#index"
 
   resources :users
 
@@ -68,6 +75,7 @@ Rails.application.routes.draw do
   post 'assistant_roles/notify_for_semester/:semester_id' => 'assistant_roles#notify_for_semester', as: :notify_assistant_roles_for_semester
   post 'assistant_roles/request_evaluations_for_semester/:semester_id' => 'assistant_roles#request_evaluations_for_semester', as: :request_assistant_evaluations_for_semester
   post 'assistant_roles/:request_for_teaching_assistant_id/:student_id/create' => 'assistant_roles#create', as: :create_assistant_role
+  post 'assistant_roles/deactivate_assistant_role/:id' => 'assistant_roles#deactivate_assistant_role', as: :deactivate_assistant_role
   delete 'assistant_roles/:id/' => 'assistant_roles#destroy', as: :destroy_assistant_role
 
   resources :assistant_evaluations, except: [:index, :show, :new, :destroy]
@@ -77,6 +85,15 @@ Rails.application.routes.draw do
   get "help_students/:id" => "help_students#index", :as => :help_students
 
   get "help_professors/:id" => "help_professors#index", :as => :help_professors
+
+  match '/403', to: 'errors#access_denied', via: :all
+  match '/404', to: 'errors#file_not_found', via: :all
+  match '/422', to: 'errors#unprocessable', via: :all
+  match '/500', to: 'errors#internal_server_error', via: :all
+
+  devise_scope :user do
+    match '/users/auth/USP/callback', to: 'users/omniauth_callbacks#usp', via: [:get, :post]
+  end
 
   ## External routes
   get '/_instructions' => redirect('http://www.ime.usp.br/grad/monitoria'), as: :official_instructions

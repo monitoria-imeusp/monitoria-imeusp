@@ -8,6 +8,8 @@ FactoryGirl.define do
     nusp          11111
     password      "password"
     confirmed_at  Time.now
+    provider      "provider"
+    uid           2
   end
   factory :another_user, class: User do
     id            "2"

@@ -18,16 +18,13 @@ Feature: Secretary remove
         And I should not see "Marcia"
         And I should not see "marcia@ime.usp.br"
 
-    Scenario: Professor cannot remove a secretary
-        Given I'm at the professor login page
+    Scenario: Professor cannot remove a secretary        
         And there is a professor with name "arnaldo" and password "12345678" nusp "1111111" department "MAC" and email "kira@usp.br"
-        When I fill the "Número USP" field with "1111111"
-        And I fill the "Senha" field with "12345678"
-        And I press the "Entrar" button
+        And I'm logged in as professor "arnaldo"
         And I go to the secretaries index
         And I click the "Marcia" link
         And I should not see "Remover"
 
     Scenario: Any person trying to remove a secretary
         Given I'm at the "secretaries" page
-		Then I should see "Acesso negado"
+		Then I should see "ACESSO NEGADO"
