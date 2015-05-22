@@ -92,6 +92,28 @@ class AssistantRolesController < ApplicationController
     end
   end   
 
+  def mark_assistant_role_frequency
+    if AssistantRole.exists? params[:id]
+      @assistant_role = AssistantRole.find params[:id]
+      time = Time.new
+      @assistant_frequency = AssistantFrequency.create(
+        professor_id: @assistant_role.professor.professor_id, 
+        role_id: @assistant_role.id, 
+        month: time.month 
+      )
+
+      @assistant_role.botacoisasnoAR
+      respond_to do |format|
+        format.html { redirect_to assistant_roles_path }
+        format.json { head :no_content }
+      end
+    else
+      respond_to do |format|
+        format.html { redirect_to assistant_roles_path }
+        format.json { head :no_content }
+      end
+  end
+
   private
 
   # Never trust parameters from the scary internet, only allow the white list through.
