@@ -13,4 +13,10 @@ class NotificationMailer < ActionMailer::Base
     mail(to: assistant.professor.email, subject: "Avaliação de monitor(a)")
   end
 
+
+  def frequency_request_notification professor
+    @professor = professor
+    mail(to: professor.email, subject: "Frequência de monitor(es)")
+  end
+
 end
