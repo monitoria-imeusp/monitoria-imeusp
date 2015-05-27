@@ -6,11 +6,32 @@ Feature: Assistant roles table visualization
     Background:
         When there is an open semester "2014" "1"
         And there is a department with code "MAC"
+        And there is a department with code "MAT"
         And there is a course with name "Introdução à Ciência da Computação" and code "MAC0110" and department "MAC"
+        And there is a course with name "Laboratório de programação eXtrema" and code "MAC0431" and department "MAC"
+        And there is a course with name "Algebra II" and code "MAT0125" and department "MAT"
         And there is a student with name "Bob" with nusp "123456" and email "aluno@usp.br"
+        And there is a student with name "John" with nusp "123457" and email "john@usp.br"
+        And there is a student with name "Wil" with nusp "11112" and email "wil@usp.br"
+        And there is a student with name "Mary" with nusp "22221" and email "mary@usp.br"
         And there is a professor with name "Dude" and nusp "111111" and department "MAC" and email "prof@ime.usp.br"
+        And there is a professor with name "Gold" and nusp "87777" and department "MAC" and email "gold@ime.usp.br"
+        And there is a professor with name "Silver" and nusp "77778" and department "MAT" and email "silver@ime.usp.br"
         And there is a request for teaching assistant by professor "Dude" for the course "MAC0110"
+        And there is a request for teaching assistant by professor "Gold" for the course "MAC0431"
+        And there is a request for teaching assistant by professor "Silver" for the course "MAT0125"
         And there is an assistant role for student "Bob" with professor "Dude" at course "MAC0110"
+        And there is an assistant role for student "John" with professor "Gold" at course "MAC0431"
+        And there is an assistant role for student "Wil" with professor "Gold" at course "MAC0431"
+        And there is an assistant role for student "Mary" with professor "Silver" at course "MAT0125"
+        And there is an assistant frequency with month "3" with presence "false" for student "Bob" and professor "Dude" at course "MAC0110"
+        And there is an assistant frequency with month "4" with presence "true" for student "Bob" and professor "Dude" at course "MAC0110"
+        And there is an assistant frequency with month "5" with presence "true" for student "Bob" and professor "Dude" at course "MAC0110"        
+        And there is an assistant frequency with month "3" with presence "true" for student "John" and professor "Gold" at course "MAC0431"
+        And there is an assistant frequency with month "4" with presence "false" for student "John" and professor "Gold" at course "MAC0431"        
+        And there is an assistant frequency with month "3" with presence "true" for student "Wil" and professor "Gold" at course "MAC0431"
+        And there is an assistant frequency with month "4" with presence "true" for student "Wil" and professor "Gold" at course "MAC0431"
+        And there is an assistant frequency with month "5" with presence "true" for student "Wil" and professor "Gold" at course "MAC0431"
 
     Scenario: Super professor sees all assistant roles
         Given I'm logged in as a super professor
@@ -30,3 +51,48 @@ Feature: Assistant roles table visualization
         Given I'm logged in as a professor
         And I visit the assistant roles page
         Then I should see "ACESSO NEGADO"
+
+    Scenario: Secretary sees the correct frequencies
+        Given I'm logged in as a secretary
+        And I visit the assistant roles page
+        Then I should see "Bob MAC0110 Dude Desativar • Março: Ausente • Abril: Presente • Maio: Presente"
+        Then I should see "John MAC0431 Gold Desativar • Março: Presente • Abril: Ausente • Maio: Pendente"
+        Then I should see "Wil MAC0431 Gold Desativar • Março: Presente • Abril: Presente • Maio: Presente"
+        Then I should see "Mary MAT0125 Silver Desativar • Março: Pendente • Abril: Pendente • Maio: Pendente"
+        And I should not see "Junho"
+
+    Scenario: Super professor sees the correct frequencies
+        Given I'm logged in as a super professor
+        And I visit the assistant roles page
+        Then I should see "Bob MAC0110 Dude Desativar • Março: Ausente • Abril: Presente • Maio: Presente"
+        Then I should see "John MAC0431 Gold Desativar • Março: Presente • Abril: Ausente • Maio: Marcar presença Marcar ausência"
+        Then I should see "Wil MAC0431 Gold Desativar • Março: Presente • Abril: Presente • Maio: Presente"
+        Then I should see "Mary MAT0125 Silver Desativar • Março: Marcar presença Marcar ausência • Abril: Marcar presença Marcar ausência • Maio: Marcar presença Marcar ausência"
+        And I should not see "Junho"
+
+    Scenario: Super professor marks frequency
+        Given I'm logged in as a super professor
+        And I visit the assistant roles page
+        And I click the first "Marcar presença" link
+        Then I should see "Bob MAC0110 Dude Desativar • Março: Ausente • Abril: Presente • Maio: Presente"
+        Then I should see "John MAC0431 Gold Desativar • Março: Presente • Abril: Ausente • Maio: Presente"
+        Then I should see "Wil MAC0431 Gold Desativar • Março: Presente • Abril: Presente • Maio: Presente"
+        Then I should see "Mary MAT0125 Silver Desativar • Março: Marcar presença Marcar ausência • Abril: Marcar presença Marcar ausência • Maio: Marcar presença Marcar ausência"
+        And I click the first "Marcar ausência" link
+        Then I should see "Bob MAC0110 Dude Desativar • Março: Ausente • Abril: Presente • Maio: Presente"
+        Then I should see "John MAC0431 Gold Desativar • Março: Presente • Abril: Ausente • Maio: Presente"
+        Then I should see "Wil MAC0431 Gold Desativar • Março: Presente • Abril: Presente • Maio: Presente"
+        Then I should see "Mary MAT0125 Silver Desativar • Março: Ausente • Abril: Marcar presença Marcar ausência • Maio: Marcar presença Marcar ausência"
+        And I should not see "Junho"
+
+    Scenario: Frequency request emails are delivered
+        Given I'm logged in as a secretary
+        And I visit the assistant roles page
+        And I'm ready to receive email
+        And I click the "Pedir frequências" link
+        Then the frequency request email should have been delivered properly to "prof@ime.usp.br" 
+        Then the frequency request email should have been delivered properly to "gold@ime.usp.br" 
+        Then the frequency request email should have been delivered properly to "silver@ime.usp.br" 
+        And I should see "Pedidos enviados com sucesso"
+
+
