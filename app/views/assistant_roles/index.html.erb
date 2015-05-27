@@ -46,7 +46,7 @@
             <%= "&nbsp;&bull;".html_safe %>
             <%= " #{months_to_names[month]}: " %>  
             <% if status == "Pendente" && !secretary_signed_in? %>
-              <%= content_tag :span, style: "padding-right: 80px" do -%>
+              <%= content_tag :span, style: "padding-right: 30px" do -%>
               <%= link_to "Marcar presença", 
               mark_assistant_role_frequency_path(role: role.id, month: month, presence: true, pid: -1), method: :post, data: { confirm: 'Deseja mesmo marcar presença para este monitor?' }  %>
               <% end -%>
@@ -66,7 +66,7 @@
               <%= content_tag :span, style: "color:#{color}" do -%>
               <%= status %>
               <% end -%>
-            <% end %>           
+            <% end %>    
             <br>
             <% end %>
           </td>
