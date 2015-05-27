@@ -239,9 +239,11 @@ class Ability
       can :update, AssistantRole
       can :destroy, AssistantRole
       can :deactivate_assistant_role, AssistantRole
+      can :mark_assistance_role_frequency, AssistantRole
     end
     if user.is_a? User and user.professor?
       can :index_for_professor, AssistantRole
+      can :mark_assistance_role_frequency, AssistantRole
     end
 
     # Assistant evaluation management permissions

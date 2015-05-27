@@ -22,4 +22,22 @@ class AssistantRole < ActiveRecord::Base
   def deactivate
     update_column(:active, false)
   end
+
+  def frequency_status_for_month month
+    found = false
+    assistant_frequency.each do |freq|
+      if month == freq.month
+        found = true
+        if freq.presence
+          return "Presente"
+        else
+          return "Ausente"
+        end        
+      end
+    end
+    if !found
+      return "Pendente"
+    end
+  end
+
 end
