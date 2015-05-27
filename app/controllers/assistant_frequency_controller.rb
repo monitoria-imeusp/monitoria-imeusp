@@ -1,19 +1,5 @@
 class AssistantFrequencyController < ApplicationController
-  def create
-    @assistant_frequency = AssistantFrequency.new assistant_frequency_params
-    if @assistant_frequency.save
-      respond_to do |format|
-        format.html { redirect_to @assistant_frequency.assistant_role.index, notice: 'Frequência marcada com sucesso.' }
-        format.json { render action: 'show', status: :created, location: @assistant_frequency.assistant_role }
-      end
-    else
-      respond_to do |format|
-        format.html { redirect_to @assistant_frequency.assistant_role }
-        format.json { render json: @assistante_frequency.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
+ 
   def request_frequency
     professors = []
     semester = Semester.current
@@ -34,15 +20,25 @@ class AssistantFrequencyController < ApplicationController
     month = params[:month]
     role = params[:role]
     id = params[:pid]
-    if presence
-      respond_to do |format|
-        format.html { redirect_to '/assistant_roles/for_professor/'+id, notice: 'Presença marcada com sucesso.' }      
+    red_path = '/assistant_roles/for_professor/'+id
+    if id.to_i < 0
+      red_path = '/assistant_roles'
+    end
+    @assistant_frequency = AssistantFrequency.new(month: month, presence: presence, assistant_role_id: role)
+    if @assistant_frequency.save
+      if presence
+        respond_to do |format|
+          format.html { redirect_to red_path, notice: 'Presença marcada com sucesso.' }      
+        end
+      else 
+        respond_to do |format|
+          format.html { redirect_to red_path, notice: 'Ausência marcada com sucesso.' }      
+        end
       end
-    else 
-      respond_to do |format|
-        format.html { redirect_to '/assistant_roles/for_professor/'+id, notice: 'Ausência marcada com sucesso.' }      
-      end
+    else
+        respond_to do |format|
+          format.html { redirect_to red_path, notice: 'Erro ao marcar frequência.' }      
+        end      
     end
   end
-
 end
