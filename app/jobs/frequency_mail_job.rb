@@ -3,7 +3,7 @@ class FrequencyMailJob
 	def perform
 	    semester = Semester.current
 	    requests = RequestForTeachingAssistant.where(semester: semester)
-	    Professor.where(professor_rank: 1).each do |super_professor|
+	    Professor.where(:professor_rank => [1, 2]).each do |super_professor|
 		    pending_roles = []
 	    	AssistantRole.where(request_for_teaching_assistant: requests).each do |assistant|
 	    		if !AssistantFrequency.where(month: Time.now.month, assistant_role_id: assistant.id).any?

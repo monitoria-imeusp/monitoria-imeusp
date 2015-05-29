@@ -2,6 +2,7 @@ Given(/^I'm ready to receive email$/) do
 	ActionMailer::Base.delivery_method = :test
 	ActionMailer::Base.perform_deliveries = true
 	ActionMailer::Base.deliveries.clear
+  Delayed::Worker.delay_jobs = false
 end
 
 When(/^I confirm the (.*?) edition with nusp "(.*?)" and password "(.*?)" and email "(.*?)" and sign in$/) do |class_name, nusp, password, user_email|
@@ -55,6 +56,19 @@ Then(/^the frequency request email should have been delivered properly to "(.*?)
     if mail.to == [professor_email]
       mail.from.should == ["sistemamonitoria@ime.usp.br"]
       mail.body.should match(/Precisamos que você indique a frequência/)
+      received = true
+    end    
+  end
+  received.should be_true
+end
+
+
+Then(/^the frequency reminder email should have been delivered properly to "(.*?)" with student "(.*?)" as pending$/) do |professor_email, student_name|
+  received = false
+  ActionMailer::Base.deliveries.each do |mail|
+    if mail.to == [professor_email]
+      mail.from.should == ["sistemamonitoria@ime.usp.br"]
+      mail.body.should match(/#{student_name}/)
       received = true
     end    
   end
