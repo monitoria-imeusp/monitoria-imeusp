@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <p>
+      Prezado(a) <%= @super_professor.name %>,
+    </p>
+
+    <p>
+      Precisamos que você indique a frequência do(s) 
+      seguinte(s) monitor(es) que ainda estão com 
+      frequência pendente para o mês atual:
+    </p>
+    <table border=1>
+      <thead>
+        <tr>
+          <th> Monitor </th>
+          <th> Professor </th>
+          <th> Disciplina </th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @pending_roles.each do |role| %>
+        <tr>
+          <td align="center"> <%= role.student.name %> </td>
+          <td align="center"> <%= role.professor.name %> </td>
+          <td align="center"> <%= role.course.full_name %> </td>
+        </tr>
+        <% end %>
+      </tbody>
+   </table>
+    <p>
+      Por favor, acesse a página <%= link_to "monitoria.ime.usp.br", "http://monitoria.ime.usp.br"%> e acesse a seção "Monitores eleitos", 
+      na qual poderá marcar a(s) frequência(s).
+    </p>
+    <p>
+      Caso não existam mais pendências, por favor desconsidere esta mensagem.
+    </p>
+    <p>
+      Estamos a disposição em caso de dúvidas.
+    </p>
+    <p>
+      Comissão de Monitoria IME/USP<br>
+      E-mail: monitoria@ime.usp.br<br>
+      Telefone: 11 3091-6107<br>
+    </p>
+  </body>
+</html>

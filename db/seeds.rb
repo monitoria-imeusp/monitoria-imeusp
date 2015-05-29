@@ -22,7 +22,7 @@ if Rails.env.development?
       user: {
         name: "Nina S. T. Hirata",
         nusp: "33333",
-        email: "nina@ime.usp.br",
+        email: "ninadev@ime.usp.br",
         password: "changeme!",
         confirmed_at: Time.now
       },
@@ -35,7 +35,7 @@ if Rails.env.development?
       user: {
         name: "Kunio Okuda",
         nusp: "22222",
-        email: "kunio@ime.usp.br",
+        email: "kuniodev@ime.usp.br",
         password: "changeme!",
         confirmed_at: Time.now
       },
@@ -48,7 +48,7 @@ if Rails.env.development?
       user: {
         name: "Zara Issa Abud",
         nusp: "11111",
-        email: "zara@ime.usp.br",
+        email: "zaradev@ime.usp.br",
         password: "changeme!",
         confirmed_at: Time.now
       },
@@ -74,7 +74,7 @@ if Rails.env.development?
       user: {
         name: "Siméon Denis Poisson",
         nusp: "10101",
-        email: "poisson@1781.old",
+        email: "poissondev@1781.old",
         password: "changeme!",
         confirmed_at: Time.now
       },
@@ -86,12 +86,25 @@ if Rails.env.development?
       user: {
         name: "George Bernard Dantzig",
         nusp: "20202",
-        email: "dantzig@1914.old",
+        email: "dantzigdev@1914.old",
         password: "changeme!",
         confirmed_at: Time.now
       },
       professor: {
         department: Department.find_by(:code => "MAP")
+      }
+    }, 
+    {
+      user: {
+        name: "Eloi Medina Galego",
+        nusp: "30303",
+        email: "eloidev@ime.usp.br",
+        password: "changeme!",
+        confirmed_at: Time.now
+      },
+      professor: {
+        department: Department.find_by(:code => "MAT"),
+        professor_rank: 1
       }
     }
   ].each do |entry|
@@ -221,7 +234,7 @@ if Rails.env.development?
       user: {
         name: "Jef Eduardo Ferreira",
         nusp: 100003,
-        email: "jef@ime.usp.br",
+        email: "jefdev@ime.usp.br",
         password: "changeme!",
         confirmed_at: Time.now
       },
