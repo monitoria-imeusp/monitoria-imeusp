@@ -11,9 +11,6 @@ describe AssistantFrequencyController do
   let!(:course1) { FactoryGirl.create :course1 }
   let!(:request_for_teaching_assistant) { FactoryGirl.create :request_for_teaching_assistant, professor_id: super_professor.id }
   let!(:assistant_role) { FactoryGirl.create :assistant_role }
-  
-  describe ".request_frequency" do
-  end
 
   describe ".mark_assistant_role_frequency" do
   
