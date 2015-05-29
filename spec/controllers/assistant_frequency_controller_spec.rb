@@ -24,6 +24,8 @@ describe AssistantFrequencyController do
       end
       
       context "when redirected" do
+      	subject { response }
+      	it { expect(subject).to redirect_to('/assistant_roles/for_professor/2') }
       end
       context "with correct attributes" do
         subject { assigns(:assistant_frequency) }
@@ -38,11 +40,52 @@ describe AssistantFrequencyController do
     end
     
     context "when marking absence" do
-      pending "SHAIZA"
+      before :each do
+        @params = { "presence" => "false", "month" => "5", "role" => assistant_role.id.to_s, "pid" => "-2"}
+        post 'mark_assistant_role_frequency', @params
+      end
+      
+      context "when redirected" do
+      	subject { response }
+      	it { expect(subject).to redirect_to('/assistant_roles') }
+      end
+
+      context "with correct attributes" do
+        subject { assigns(:assistant_frequency) }
+        its(:presence) { should be_false }
+        its(:month) { should eq(5) }
+        its(:assistant_role_id) { should eq(assistant_role.id) }
+      end
+
+      context "when DB is updated" do
+        subject { assigns(:assistant_frequency) }
+        it { should be_persisted }
+      end
     end
     
     context "when passing invalid arguments" do
-      pending "ALLAHUAKBHAR"
+      before :each do
+        @params = { "presence" => "false", "month" => "20", "role" => assistant_role.id.to_s, "pid" => super_professor.id.to_s}
+        post 'mark_assistant_role_frequency', @params
+      end
+      
+      context "when redirected" do
+      	subject { response }
+      	it { expect(subject).to redirect_to('/assistant_roles/for_professor/2') }
+      end
+
+      context "with incorrect attributes" do
+        subject { assigns(:assistant_frequency) }
+        its(:presence) { should be_false}
+        its(:month) { should eq(20) }
+        its(:assistant_role_id) { should eq(assistant_role.id) }
+      end
+      
+      context "when DB is updated" do
+        subject { assigns(:assistant_frequency) }
+        it { should_not be_persisted }
+      end
+
     end
   
   end
