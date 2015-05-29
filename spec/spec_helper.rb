@@ -45,6 +45,8 @@ RSpec.configure do |config|
   config.expect_with :rspec do |c|
     c.syntax = [:should, :expect]
   end
+  
+  Delayed::Worker.delay_jobs = !%w[ test ].include?(Rails.env)
 
   config.include Devise::TestHelpers, :type => :controller
   config.extend ControllerMacros, :type => :controller

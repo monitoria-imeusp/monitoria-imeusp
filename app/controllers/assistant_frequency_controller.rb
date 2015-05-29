@@ -10,6 +10,7 @@ class AssistantFrequencyController < ApplicationController
     professors.uniq.each do |professor|   
       NotificationMailer.frequency_request_notification(professor).deliver      
     end
+    Delayed::Job.enqueue(FrequencyMailJob.new, 0, 3.days.from_now.getutc)
     respond_to do |format|
       format.html { redirect_to '/assistant_roles', notice: 'Pedidos enviados com sucesso.' }      
     end
