@@ -15,8 +15,10 @@ Feature: Assistant roles table visualization
         And there is a student with name "Wil" with nusp "11112" and email "wil@usp.br"
         And there is a student with name "Mary" with nusp "22221" and email "mary@usp.br"
         And there is a professor with name "Dude" and nusp "111111" and department "MAC" and email "prof@ime.usp.br"
-        And there is a professor with name "Gold" and nusp "87777" and department "MAC" and email "gold@ime.usp.br"
+        And there is a professor with name "Gold" and nusp "87777" and department "MAC" and email "golddev@ime.usp.br"
         And there is a professor with name "Silver" and nusp "77778" and department "MAT" and email "silver@ime.usp.br"
+        And there is a super_professor with name "Nina" and nusp "99987" and department "MAC" and email "ninadev@ime.usp.br"
+        And there is a hiper_professor with name "Zara" and password "changeme!" nusp "99986" department "MAT" and email "zaradev@ime.usp.br"
         And there is a request for teaching assistant by professor "Dude" for the course "MAC0110"
         And there is a request for teaching assistant by professor "Gold" for the course "MAC0431"
         And there is a request for teaching assistant by professor "Silver" for the course "MAT0125"
@@ -91,8 +93,24 @@ Feature: Assistant roles table visualization
         And I'm ready to receive email
         And I click the "Pedir frequências" link
         Then the frequency request email should have been delivered properly to "prof@ime.usp.br" 
-        Then the frequency request email should have been delivered properly to "gold@ime.usp.br" 
+        Then the frequency request email should have been delivered properly to "golddev@ime.usp.br" 
         Then the frequency request email should have been delivered properly to "silver@ime.usp.br" 
         And I should see "Pedidos enviados com sucesso"
+
+    Scenario: Frequency reminder emails are delivered to super professors
+        Given I'm logged in as a secretary
+        And I visit the assistant roles page
+        And I'm ready to receive email
+        And I click the "Pedir frequências" link
+        Then the frequency reminder email should have been delivered properly to "ninadev@ime.usp.br" with student "John" as pending
+
+
+    Scenario: Frequency reminder emails are delivered to hiper professors
+        Given I'm logged in as a secretary
+        And I visit the assistant roles page
+        And I'm ready to receive email
+        And I click the "Pedir frequências" link
+        Then the frequency reminder email should have been delivered properly to "zaradev@ime.usp.br" with student "Mary" as pending
+
 
 
