@@ -1,4 +1,4 @@
-Feature: Editing an advise
+Feature: Editing an advisecontroller
 	In order to change the advises
 	As a secretary
 	I want to edit the current messages

@@ -146,3 +146,16 @@ When(/^there is an assistant evaluation for student "(.*?)" with professor "(.*?
     comment: comment
   )
 end
+
+When(/^there is an assistant frequency with month "(.*?)" with presence "(.*?)" for student "(.*?)" and professor "(.*?)" at course "(.*?)"$/) do |month, presence, student_name, professor_name, course_code |
+  professor_id = User.where(name: professor_name).take.professor.id
+  course_id = Course.where(course_code: course_code).take.id
+  request_id = RequestForTeachingAssistant.where(professor_id: professor_id, course_id: course_id).take.id
+  student_id = User.where(name: student_name).take.student.id
+  assistant_role_id = AssistantRole.where(student_id: student_id, request_for_teaching_assistant_id: request_id).take.id
+  AssistantFrequency.create(
+    assistant_role_id: assistant_role_id,
+    month: month,
+    presence: presence
+  )
+end

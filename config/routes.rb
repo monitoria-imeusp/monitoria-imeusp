@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
 
-
   get 'errors/file_not_found'
 
   get 'errors/unprocessable'
@@ -54,8 +53,19 @@ Rails.application.routes.draw do
 
   resources :students, except: :show
 
+  #get 'assistant_frequency/' => 'assistant_frequency#index'
+  resources :assistant_frequency do
+    collection do
+      get :index 
+      post :request_frequency
+    end
+  end
+
   #resources :dumps
   get 'dumps/' => 'dumps#index', as: :dumps
+
+  post 'assistant_frequency/request_frequency/' => 'assistant_frequency#request_frequency', as: :request_frequency
+  post 'assistant_frequency/mark_assistant_role_frequency/' => 'assistant_frequency#mark_assistant_role_frequency', as: :mark_assistant_role_frequency
 
   resources :semesters
   post 'semesters/:id/open' => 'semesters#open', as: :open_semester
@@ -71,7 +81,7 @@ Rails.application.routes.draw do
   get 'candidatures/for_student/:student_id/' => 'candidatures#index_for_student', as: :candidatures_for_student
 
   get 'assistant_roles/' => 'assistant_roles#index', as: :assistant_roles
-  get 'assistant_roles/for_professor/:professor_id' => 'assistant_roles#index_for_professor', as: :assistant_roles_for_professor
+  get 'assistant_roles/for_professor/:professor_id' => 'assistant_roles#index_for_professor', as: :assistant_roles_for_professor  
   post 'assistant_roles/notify_for_semester/:semester_id' => 'assistant_roles#notify_for_semester', as: :notify_assistant_roles_for_semester
   post 'assistant_roles/request_evaluations_for_semester/:semester_id' => 'assistant_roles#request_evaluations_for_semester', as: :request_assistant_evaluations_for_semester
   post 'assistant_roles/:request_for_teaching_assistant_id/:student_id/create' => 'assistant_roles#create', as: :create_assistant_role

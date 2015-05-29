@@ -39,6 +39,12 @@ gem 'spring', group: :development
 # For authentication in USP server
 gem 'omniauth-oauth', git: 'https://github.com/monitoria-imeusp/omniauth-oauth.git'
 
+# For delayed tasks
+gem 'delayed_job_active_record'
+
+# To run tasks
+gem 'daemons'
+
 group :test do
   # Easier test writing
   gem "shoulda-matchers", require: false # not requiring is necessary to avoid warnings from minitest 5, with version 2.6 this might get fixed

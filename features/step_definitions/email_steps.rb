@@ -48,3 +48,15 @@ When(/^I confirm the user account with email "(.*?)"$/) do |user_email|
   confirmation_link = m[1]
   visit confirmation_link
 end
+
+Then(/^the frequency request email should have been delivered properly to "(.*?)"$/) do |professor_email|
+  received = false
+  ActionMailer::Base.deliveries.each do |mail|
+    if mail.to == [professor_email]
+      mail.from.should == ["sistemamonitoria@ime.usp.br"]
+      mail.body.should match(/Precisamos que você indique a frequência/)
+      received = true
+    end    
+  end
+  received.should be_true
+end

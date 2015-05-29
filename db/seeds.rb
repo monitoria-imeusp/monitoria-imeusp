@@ -22,7 +22,7 @@ if Rails.env.development?
       user: {
         name: "Nina S. T. Hirata",
         nusp: "33333",
-        email: "nina@ime.usp.br",
+        email: "ninadev@ime.usp.br",
         password: "changeme!",
         confirmed_at: Time.now
       },
@@ -35,7 +35,7 @@ if Rails.env.development?
       user: {
         name: "Kunio Okuda",
         nusp: "22222",
-        email: "kunio@ime.usp.br",
+        email: "kuniodev@ime.usp.br",
         password: "changeme!",
         confirmed_at: Time.now
       },
@@ -48,7 +48,7 @@ if Rails.env.development?
       user: {
         name: "Zara Issa Abud",
         nusp: "11111",
-        email: "zara@ime.usp.br",
+        email: "zaradev@ime.usp.br",
         password: "changeme!",
         confirmed_at: Time.now
       },
@@ -59,14 +59,14 @@ if Rails.env.development?
     },
     { 
       user: {
-        name: "Eloi Medina Galego",
-        nusp: "01234",
-        email: "eloi@ime.usp.br",
+        name: "Gold",
+        nusp: "84710",
+        email: "goldboy@ime.usp.br",
         password: "changeme!",
         confirmed_at: Time.now
       },
       professor: {
-        department: Department.find_by(:code => "MAT"),
+        department: Department.find_by(:code => "MAC"),
         professor_rank: 1
       }
     },    
@@ -74,7 +74,7 @@ if Rails.env.development?
       user: {
         name: "Siméon Denis Poisson",
         nusp: "10101",
-        email: "poisson@1781.old",
+        email: "poissondev@1781.old",
         password: "changeme!",
         confirmed_at: Time.now
       },
@@ -86,12 +86,25 @@ if Rails.env.development?
       user: {
         name: "George Bernard Dantzig",
         nusp: "20202",
-        email: "dantzig@1914.old",
+        email: "dantzigdev@1914.old",
         password: "changeme!",
         confirmed_at: Time.now
       },
       professor: {
         department: Department.find_by(:code => "MAP")
+      }
+    }, 
+    {
+      user: {
+        name: "Eloi Medina Galego",
+        nusp: "30303",
+        email: "eloidev@ime.usp.br",
+        password: "changeme!",
+        confirmed_at: Time.now
+      },
+      professor: {
+        department: Department.find_by(:code => "MAT"),
+        professor_rank: 1
       }
     }
   ].each do |entry|
@@ -221,7 +234,7 @@ if Rails.env.development?
       user: {
         name: "Jef Eduardo Ferreira",
         nusp: 100003,
-        email: "jef@ime.usp.br",
+        email: "jefdev@ime.usp.br",
         password: "changeme!",
         confirmed_at: Time.now
       },
@@ -524,6 +537,121 @@ if Rails.env.development?
     }
   ].each do |ta_request|
     RequestForTeachingAssistant.create(ta_request)
+  end
+
+  [
+    {
+      request_for_teaching_assistant_id: "1",
+      student_id: "9"
+    }, 
+    {
+      request_for_teaching_assistant_id: "2", 
+      student_id: "7"
+    }, 
+    {
+      request_for_teaching_assistant_id: "5",
+      student_id: "8"
+    }, 
+    {
+      request_for_teaching_assistant_id: "5",
+      student_id: "6"
+    }, 
+    {
+      request_for_teaching_assistant_id: "5",
+      student_id: "7"
+    }
+  ].each do |assistant_role|
+      AssistantRole.create(assistant_role)
+  end
+
+  [
+    {
+      assistant_role_id: "1",
+      month: "2",
+      presence: true
+    },
+    {
+      assistant_role_id: "1",
+      month: "3",
+      presence: true   
+    },
+    {
+      assistant_role_id: "1",
+      month: "4",
+      presence: true   
+    },
+    {
+      assistant_role_id: "1",
+      month: "5",
+      presence: false   
+    },
+    {
+      assistant_role_id: "2",
+      month: "2",
+      presence: true
+    },
+    {
+      assistant_role_id: "2",
+      month: "3",
+      presence: true   
+    },
+    {
+      assistant_role_id: "2",
+      month: "4",
+      presence: true   
+    },
+    {
+      assistant_role_id: "3",
+      month: "2",
+      presence: true
+    },
+    {
+      assistant_role_id: "3",
+      month: "3",
+      presence: false   
+    },
+    {
+      assistant_role_id: "3",
+      month: "4",
+      presence: true   
+    }, 
+    {
+      assistant_role_id: "4",
+      month: "2",
+      presence: true
+    },
+    {
+      assistant_role_id: "4",
+      month: "3",
+      presence: false   
+    },
+    {
+      assistant_role_id: "4",
+      month: "4",
+      presence: true   
+    },
+    {
+      assistant_role_id: "4",
+      month: "5",
+      presence: false   
+    },
+    {
+      assistant_role_id: "5",
+      month: "2",
+      presence: true
+    },
+    {
+      assistant_role_id: "5",
+      month: "3",
+      presence: true   
+    },
+    {
+      assistant_role_id: "5",
+      month: "4",
+      presence: true   
+    }
+    ].each do |assistant_frequency|
+      AssistantFrequency.create(assistant_frequency)
   end
 
   Secretary.create(
