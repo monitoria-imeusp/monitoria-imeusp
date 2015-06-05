@@ -1,3 +1,7 @@
+include RSpec::Matchers
+include RSpec::Mocks::ExampleMethods
+
+
 Then(/^I should see "(.*?)"$/) do |text|
   page.should have_text(text)
 end
