@@ -2,6 +2,7 @@ include RequestForTeachingAssistantsHelper
 include StudentsHelper
 include CandidaturesHelper
 include ProfessorsHelper
+include RSpec::Matchers
 
 When(/^I select the "(.*?)" option$/) do |option|
   choose(option, visible: false)
@@ -61,5 +62,5 @@ Then(/^"(.*?)" should contain "(.*?)"$/) do |dropdown, text|
 end
 
 Then(/^"(.*?)" should not contain "(.*?)"$/)  do |dropdown, text|
-  page.has_no_select?(dropdown, :with_options => [text]).should be_true
+  page.has_no_select?(dropdown, :with_options => [text]).should be_truthy
 end
