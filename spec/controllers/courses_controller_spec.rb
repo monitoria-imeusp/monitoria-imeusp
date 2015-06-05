@@ -62,14 +62,14 @@ describe CoursesController do
           get :show, id: @id
           expect(assigns(:course)).to eq(@course)
         end
-        it {is_expected.to render_template :show}
+        it { is_expected.to render_template :show}
       end
       context 'course does not exist' do
         before :each do
           expect(Course).to receive(:exists?).with(@id).and_return(false)
           get :show, id: @id
         end
-        it {is_expected.to redirect_to courses_path}
+        it { is_expected.to redirect_to courses_path}
       end
     end
 

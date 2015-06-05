@@ -24,8 +24,6 @@ describe Users::OmniauthCallbacksController do
 
       before :each do
         expect(info).to receive(:nusp).at_least(1).times.and_return(11111)
-        #info.should_receive(:name).at_least(1).times.and_return("Wil")
-        #info.should_receive(:email).at_least(1).times.and_return("kazuo@ime.usp.br")
         expect(info).to receive(:link).at_least(1).times.and_return(:student)
         OmniAuth.config.mock_auth[:usp] = OmniAuth::AuthHash.new({})
         expect(OmniAuth.config.mock_auth[:usp]).to receive(:provider).at_least(1).times.and_return(:usp)
@@ -75,8 +73,6 @@ describe Users::OmniauthCallbacksController do
         expect(info).to receive(:email).at_least(1).times.and_return("sesso@neverforget.com")
         expect(info).to receive(:link).at_least(1).times.and_return(:student)
         OmniAuth.config.mock_auth[:usp] = OmniAuth::AuthHash.new({})
-        #OmniAuth.config.mock_auth[:usp].should_receive(:provider).at_least(1).times.and_return(:usp)
-        #OmniAuth.config.mock_auth[:usp].should_receive(:uid).at_least(1).times.and_return('2')
         expect(OmniAuth.config.mock_auth[:usp]).to receive(:info).at_least(1).times.and_return(info)
         request.env["omniauth.auth"] = OmniAuth.config.mock_auth[:usp] 
         get :usp
@@ -120,8 +116,6 @@ describe Users::OmniauthCallbacksController do
 
       before :each do
         expect(info).to receive(:nusp).at_least(1).times.and_return(22222)
-        #info.should_receive(:name).at_least(1).times.and_return("Wil")
-        #info.should_receive(:email).at_least(1).times.and_return("kazuo@ime.usp.br")
         expect(info).to receive(:link).at_least(1).times.and_return(:teacher)
         OmniAuth.config.mock_auth[:usp] = OmniAuth::AuthHash.new({})
         expect(OmniAuth.config.mock_auth[:usp]).to receive(:provider).at_least(1).times.and_return(:usp)
@@ -172,8 +166,6 @@ describe Users::OmniauthCallbacksController do
         expect(info).to receive(:email).at_least(1).times.and_return("sesso4eva@neverforget.com")
         expect(info).to receive(:link).at_least(1).times.and_return(:teacher)
         OmniAuth.config.mock_auth[:usp] = OmniAuth::AuthHash.new({})
-        #OmniAuth.config.mock_auth[:usp].should_receive(:provider).at_least(1).times.and_return(:usp)
-        #OmniAuth.config.mock_auth[:usp].should_receive(:uid).at_least(1).times.and_return('2')
         expect(OmniAuth.config.mock_auth[:usp]).to receive(:info).at_least(1).times.and_return(info)
         request.env["omniauth.auth"] = OmniAuth.config.mock_auth[:usp] 
         get :usp

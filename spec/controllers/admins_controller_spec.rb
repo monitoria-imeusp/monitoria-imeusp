@@ -23,12 +23,8 @@ describe AdminsController do
         before :each do
           get :show, {:id => @admin.to_param}
         end
-        it { 
-          is_expected.to render_template :show 
-        }
-        it {
-          expect(assigns(:admin)).to eq(@admin)
-        }
+        it { is_expected.to render_template :show }
+        it { expect(assigns(:admin)).to eq(@admin) }
       end
     end
 

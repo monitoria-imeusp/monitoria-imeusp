@@ -23,15 +23,11 @@ describe User do
 
 
 		it "return an user if the authenticated student already exists" do
-			#info1.should_receive(:name).and_return("Bruno Sesso")
 			expect(info1).to receive(:nusp).at_least(1).times.and_return(student.nusp)
-			#info1.should_receive(:email).and_return("sesso@neverforget.com")
 			expect(info1).to receive(:link).and_return(:student)
-
 			expect(auth1).to receive(:info).at_least(1).times.and_return(info1)
 			expect(auth1).to receive(:provider).and_return("bla")
 			expect(auth1).to receive(:uid).and_return(2)
-
 
 			returned_user = User.from_omniauth auth1
 			expect(returned_user.nusp).to eq (student.nusp)
@@ -42,13 +38,10 @@ describe User do
 			expect(info2).to receive(:nusp).at_least(1).times.and_return(11112)
 			expect(info2).to receive(:email).and_return("sesso@neverforget.com")
 			expect(info2).to receive(:link).and_return(:student)
-
 			expect(auth2).to receive(:info).at_least(1).times.and_return(info2)
-
 			
 			returned_user = User.from_omniauth auth2
-			registered = User.where nusp: returned_user.nusp
-			
+			registered = User.where nusp: returned_user.nusp			
 			expect(registered.any?).to be_truthy
 		end
 
@@ -59,14 +52,10 @@ describe User do
 
 		it "return an user if the authenticated professor already exists" do
 			expect(info3).to receive(:nusp).at_least(1).times.and_return(professor.nusp)
-			#info3.should_receive(:name).and_return("Nina S. T. Hirata")
-			#info3.should_receive(:email).and_return("nina@ime.usp.br")
 			expect(info3).to receive(:link).at_least(1).times.and_return(:teacher)
-
 			expect(auth3).to receive(:info).at_least(1).times.and_return(info3)
 			expect(auth3).to receive(:provider).and_return("bla")
 			expect(auth3).to receive(:uid).and_return(2)
-
 
 			returned_user = User.from_omniauth auth3
 			expect(returned_user.nusp).to eq (professor.nusp)
