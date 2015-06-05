@@ -129,6 +129,8 @@ describe RequestForTeachingAssistantsController do
   }}
 
 
+  let(:valid_session) { {} }
+
   let(:prof_user) { FactoryGirl.create :user }
   let!(:professor) { FactoryGirl.create :professor, user_id: prof_user.id }
   before :each do

@@ -2,7 +2,6 @@ include RequestForTeachingAssistantsHelper
 include StudentsHelper
 include CandidaturesHelper
 include ProfessorsHelper
-include RSpec::Matchers
 
 When(/^I select the "(.*?)" option$/) do |option|
   choose(option, visible: false)

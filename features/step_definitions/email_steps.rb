@@ -54,12 +54,12 @@ Then(/^the frequency request email should have been delivered properly to "(.*?)
   received = false
   ActionMailer::Base.deliveries.each do |mail|
     if mail.to == [professor_email]
-      mail.from.should == ["sistemamonitoria@ime.usp.br"]
-      mail.body.should match(/Precisamos que você indique a frequência/)
+      expect(mail.from).to be ["sistemamonitoria@ime.usp.br"]
+      expect(mail.body).to match(/Precisamos que você indique a frequência/)
       received = true
     end    
   end
-  received.should be true
+  expect(received).to be true
 end
 
 
@@ -67,10 +67,10 @@ Then(/^the frequency reminder email should have been delivered properly to "(.*?
   received = false
   ActionMailer::Base.deliveries.each do |mail|
     if mail.to == [professor_email]
-      mail.from.should == ["sistemamonitoria@ime.usp.br"]
-      mail.body.should match(/#{student_name}/)
+      expect(mail.from).to be ["sistemamonitoria@ime.usp.br"]
+      expect(mail.body).to match(/#{student_name}/)
       received = true
     end    
   end
-  received.should be true
+  expect(received).to be true
 end
