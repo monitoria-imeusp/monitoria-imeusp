@@ -65,6 +65,7 @@ group :development, :test do
   gem 'sqlite3'
 
   # Test framework
+  gem 'rspec-activemodel-mocks'
   gem 'rspec-rails', '>= 3.2.0  '#'>= 2.14.0'
 
   # Fixtures made easy

@@ -141,7 +141,7 @@ describe CandidaturesController do
       before :each do
         get :index, {}
       end
-      it { should redirect_to action: :index_for_student, student_id: student }
+      it { is_expected.to redirect_to action: :index_for_student, student_id: student }
     end
     context 'as super professor' do
       let!(:semester) { FactoryGirl.create :semester }
@@ -152,7 +152,7 @@ describe CandidaturesController do
         sign_in prof_user
         get :index, {}
       end
-      it { should redirect_to action: :index_for_department, semester_id: semester.id, department_id: super_professor.department }
+      it { is_expected.to redirect_to action: :index_for_department, semester_id: semester.id, department_id: super_professor.department }
     end
     context 'as hiper professor' do
       let(:prof_user) { FactoryGirl.create :another_user }
@@ -223,16 +223,16 @@ describe CandidaturesController do
     it "assigns the requested candidature as @candidature" do
       candidature = Candidature.create! valid_attributes
       get :show, {:id => candidature.to_param}, valid_session
-      assigns(:candidature).should eq(candidature)
+      expect(assigns(:candidature)).to eq(candidature)
     end
   end
 
   describe "GET new" do
     it "assigns a new candidature as @candidature" do
-      Semester.should_receive(:find).with("1").and_return(42)
+      expect(Semester).to receive(:find).with("1").and_return(42)
       get :new, {:semester_id => "1"}, valid_session
-      assigns(:candidature).should be_a_new(Candidature)
-      assigns(:semester).should be(42)
+      expect(assigns(:candidature)).to be_a_new(Candidature)
+      expect(assigns(:semester)).to be(42)
     end
   end
 
@@ -240,7 +240,7 @@ describe CandidaturesController do
     it "assigns the requested candidature as @candidature" do
       candidature = Candidature.create! valid_attributes
       get :edit, {:id => candidature.to_param}, valid_session
-      assigns(:candidature).should eq(candidature)
+      expect(assigns(:candidature)).to eq(candidature)
     end
   end
 
@@ -248,8 +248,8 @@ describe CandidaturesController do
     describe "with valid params" do
       before :each do
         mail = double(Object)
-        BackupMailer.should_receive(:new_candidature).with(an_instance_of(Candidature)).and_return(mail)
-        mail.should_receive(:deliver)
+        expect(BackupMailer).to receive(:new_candidature).with(an_instance_of(Candidature)).and_return(mail)
+        expect(mail).to receive(:deliver)
       end
       it "creates a new Candidature" do
         expect {
@@ -259,31 +259,31 @@ describe CandidaturesController do
 
       it "assigns a newly created candidature as @candidature" do
         post :create, {:candidature => valid_attributes}, valid_session
-        assigns(:candidature).should be_a(Candidature)
-        assigns(:candidature).should be_persisted
-        assigns(:candidature).student_id.should eq(student.id)
+        expect(assigns(:candidature)).to be_a(Candidature)
+        expect(assigns(:candidature)).to be_persisted
+        expect(assigns(:candidature).student_id).to eq(student.id)
       end
 
       it "redirects to the created candidature" do
         post :create, {:candidature => valid_attributes}, valid_session
-        response.should redirect_to(Candidature.last)
+        expect(response).to redirect_to(Candidature.last)
       end
     end
 
     describe "with invalid params" do
       it "assigns a newly created but unsaved candidature as @candidature" do
         # Trigger the behavior that occurs when invalid params are submitted
-        Candidature.any_instance.stub(:save).and_return(false)
+        allow_any_instance_of(Candidature).to receive(:save).and_return(false)
         post :create, {:candidature => {}}, valid_session
-        assigns(:candidature).should be_a_new(Candidature)
-        assigns(:candidature).student_id.should eq(student.id)
+        expect(assigns(:candidature)).to be_a_new(Candidature)
+        expect(assigns(:candidature).student_id).to eq(student.id)
       end
 
       it "re-renders the 'new' template" do
         # Trigger the behavior that occurs when invalid params are submitted
-        Candidature.any_instance.stub(:save).and_return(false)
+        allow_any_instance_of(Candidature).to receive(:save).and_return(false)
         post :create, {:candidature => {}}, valid_session
-        response.should render_template("new")
+        expect(response).to render_template("new")
       end
     end
   end
@@ -293,26 +293,26 @@ describe CandidaturesController do
       before :each do
         @candidature = Candidature.create! valid_attributes
         mail = double(Object)
-        BackupMailer.should_receive(:edit_candidature).with(@candidature).and_return(mail)
-        mail.should_receive(:deliver)
+        expect(BackupMailer).to receive(:edit_candidature).with(@candidature).and_return(mail)
+        expect(mail).to receive(:deliver)
       end
       it "updates the requested candidature" do
         # Assuming there are no other candidatures in the database, this
         # specifies that the Candidature created on the previous line
         # receives the :update_attributes message with whatever params are
         # submitted in the request.
-        Candidature.any_instance.should_receive(:update).with({ "daytime_availability" => "false" }).and_return(true)
+        expect_any_instance_of(Candidature).to receive(:update).with({ "daytime_availability" => "false" }).and_return(true)
         put :update, {:id => @candidature.to_param, :candidature => { "daytime_availability" => "false" }}, valid_session
       end
 
       it "assigns the requested candidature as @candidature" do
         put :update, {:id => @candidature.to_param, :candidature => valid_attributes}, valid_session
-        assigns(:candidature).should eq(@candidature)
+        expect(assigns(:candidature)).to eq(@candidature)
       end
 
       it "redirects to the candidature" do
         put :update, {:id => @candidature.to_param, :candidature => valid_attributes}, valid_session
-        response.should redirect_to(@candidature)
+        expect(response).to redirect_to(@candidature)
       end
     end
 
@@ -320,17 +320,17 @@ describe CandidaturesController do
       it "assigns the candidature as @candidature" do
         candidature = Candidature.create! valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
-        Candidature.any_instance.stub(:save).and_return(false)
+        allow_any_instance_of(Candidature).to receive(:save).and_return(false)
         put :update, {:id => candidature.to_param, :candidature => { "daytime_availability" => "invalid value" }}, valid_session
-        assigns(:candidature).should eq(candidature)
+        expect(assigns(:candidature)).to eq(candidature)
       end
 
       it "re-renders the 'edit' template" do
         candidature = Candidature.create! valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
-        Candidature.any_instance.stub(:save).and_return(false)
+        allow_any_instance_of(Candidature).to receive(:save).and_return(false)
         put :update, {:id => candidature.to_param, :candidature => { "daytime_availability" => "invalid value" }}, valid_session
-        response.should render_template("edit")
+        expect(response).to render_template("edit")
       end
     end
   end
@@ -339,19 +339,19 @@ describe CandidaturesController do
     before :each do
       @candidature = Candidature.create! valid_attributes
       mail = double(Object)
-      BackupMailer.should_receive(:delete_candidature).with(@candidature).and_return(mail)
-      mail.should_receive(:deliver)
+      expect(BackupMailer).to receive(:delete_candidature).with(@candidature).and_return(mail)
+      expect(mail).to receive(:deliver)
     end
     it "destroys the requested candidature" do
-      Candidature.should_receive(:find).with(@candidature.id.to_s).and_return(@candidature)
-      @candidature.should_receive(:destroy)
+      expect(Candidature).to receive(:find).with(@candidature.id.to_s).and_return(@candidature)
+      expect(@candidature).to receive(:destroy)
       delete :destroy, {:id => @candidature.to_param}, valid_session
-      assigns(:candidature).should eq(@candidature)
+      expect(assigns(:candidature)).to eq(@candidature)
     end
 
     it "redirects to the candidatures list" do
       delete :destroy, {:id => @candidature.to_param}, valid_session
-      response.should redirect_to(candidatures_url)
+      expect(response).to redirect_to(candidatures_url)
     end
   end
 

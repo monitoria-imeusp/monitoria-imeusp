@@ -24,7 +24,7 @@ describe AssistantRolesController do
     end
       
     context "when http success" do
-      it { should respond_with(:success) }
+      it { is_expected.to respond_with(:success) }
     end
 
     context "with roles by semester" do
@@ -40,7 +40,7 @@ describe AssistantRolesController do
         post 'create', { "request_for_teaching_assistant_id" => request_for_teaching_assistant.id.to_s, "student_id" => student.id.to_s }
       end
 
-      it { should redirect_to(request_for_teaching_assistant) }
+      it { is_expected.to redirect_to(request_for_teaching_assistant) }
     end
 
     context "with invalid request" do 
@@ -48,14 +48,14 @@ describe AssistantRolesController do
         post 'create', { "request_for_teaching_assistant_id" => "666", "student_id" => student.id.to_s }
       end
       
-      it { should redirect_to('/') }
+      it { is_expected.to redirect_to('/') }
     end
     context "with invalid student" do 
       before :each do
         post 'create', { "request_for_teaching_assistant_id" => request_for_teaching_assistant.id.to_s, "student_id" => "666" }
       end
       
-      it { should redirect_to(request_for_teaching_assistant) }
+      it { is_expected.to redirect_to(request_for_teaching_assistant) }
     end
   end
 
@@ -71,7 +71,11 @@ describe AssistantRolesController do
 
     context "assistant role" do
       subject { assigns(:assistant_role) }
-      its(:active) { should be_false }
+
+      describe '#active' do
+        subject { super().active }
+        it { is_expected.to be_falsey }
+      end
     end
 
   end
@@ -83,12 +87,12 @@ describe AssistantRolesController do
 
     context "when should be destroyed" do
       subject { AssistantRole.exists? @id }
-      it { should be_false }
+      it { is_expected.to be_falsey }
     end
 
     context "when http return success" do
       subject { response }
-      it { should redirect_to(assistant_roles_path) }
+      it { is_expected.to redirect_to(assistant_roles_path) }
     end
   end
 
