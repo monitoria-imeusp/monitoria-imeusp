@@ -1,5 +1,3 @@
-include RSpec::Matchers
-
 Given(/^I'm ready to receive email$/) do
 	ActionMailer::Base.delivery_method = :test
 	ActionMailer::Base.perform_deliveries = true
@@ -61,7 +59,7 @@ Then(/^the frequency request email should have been delivered properly to "(.*?)
       received = true
     end    
   end
-  received.should be_truthy
+  received.should be true
 end
 
 
@@ -74,5 +72,5 @@ Then(/^the frequency reminder email should have been delivered properly to "(.*?
       received = true
     end    
   end
-  received.should be_truthy
+  received.should be true
 end
