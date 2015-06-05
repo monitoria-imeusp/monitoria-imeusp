@@ -26,13 +26,25 @@ describe AssistantFrequencyController do
       end
       context "with correct attributes" do
         subject { assigns(:assistant_frequency) }
-        its(:presence) { should be_true }
-        its(:month) { should eq(5) }
-        its(:assistant_role_id) { should eq(assistant_role.id) }
+
+        describe '#presence' do
+          subject { super().presence }
+          it { is_expected.to be_truthy }
+        end
+
+        describe '#month' do
+          subject { super().month }
+          it { is_expected.to eq(5) }
+        end
+
+        describe '#assistant_role_id' do
+          subject { super().assistant_role_id }
+          it { is_expected.to eq(assistant_role.id) }
+        end
       end
       context "when DB is updated" do
         subject { assigns(:assistant_frequency) }
-        it { should be_persisted }
+        it { is_expected.to be_persisted }
       end
     end
     
@@ -49,14 +61,26 @@ describe AssistantFrequencyController do
 
       context "with correct attributes" do
         subject { assigns(:assistant_frequency) }
-        its(:presence) { should be_false }
-        its(:month) { should eq(5) }
-        its(:assistant_role_id) { should eq(assistant_role.id) }
+
+        describe '#presence' do
+          subject { super().presence }
+          it { is_expected.to be_falsey }
+        end
+
+        describe '#month' do
+          subject { super().month }
+          it { is_expected.to eq(5) }
+        end
+
+        describe '#assistant_role_id' do
+          subject { super().assistant_role_id }
+          it { is_expected.to eq(assistant_role.id) }
+        end
       end
 
       context "when DB is updated" do
         subject { assigns(:assistant_frequency) }
-        it { should be_persisted }
+        it { is_expected.to be_persisted }
       end
     end
     
@@ -73,14 +97,26 @@ describe AssistantFrequencyController do
 
       context "with incorrect attributes" do
         subject { assigns(:assistant_frequency) }
-        its(:presence) { should be_false}
-        its(:month) { should eq(20) }
-        its(:assistant_role_id) { should eq(assistant_role.id) }
+
+        describe '#presence' do
+          subject { super().presence }
+          it { is_expected.to be_falsey}
+        end
+
+        describe '#month' do
+          subject { super().month }
+          it { is_expected.to eq(20) }
+        end
+
+        describe '#assistant_role_id' do
+          subject { super().assistant_role_id }
+          it { is_expected.to eq(assistant_role.id) }
+        end
       end
       
       context "when DB is updated" do
         subject { assigns(:assistant_frequency) }
-        it { should_not be_persisted }
+        it { is_expected.not_to be_persisted }
       end
 
     end
