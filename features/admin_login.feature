@@ -20,3 +20,4 @@ Feature: Login
         And I'm at the login page
         Then I should see "Avisos"
         And I should see "kazuo@ime.usp.br"
+        And I should not see "Cadastrar Professor"
