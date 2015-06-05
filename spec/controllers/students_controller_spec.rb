@@ -12,7 +12,7 @@ describe StudentsController do
     describe '.new' do
       before :each do
         get :new
-        assigns(:student).should be_a_new(Student)
+        expect(assigns(:student)).to be_a_new(Student)
       end
       subject { response }
       it { expect(subject).to render_template(:new) }
@@ -25,13 +25,17 @@ describe StudentsController do
           post :create, { :student => FactoryGirl.attributes_for(:student), :user => FactoryGirl.attributes_for(:user) }
         end
 
-        it { should redirect_to User.last }
+        it { is_expected.to redirect_to User.last }
 
         context 'student' do
           subject { assigns(:student) }
           it { expect(subject).to be_a(Student) }
           it { expect(subject).to be_persisted() }
-          its(:user_id) { should eq(user.id) }
+
+          describe '#user_id' do
+            subject { super().user_id }
+            it { is_expected.to eq(user.id) }
+          end
         end
       end
 
@@ -40,12 +44,12 @@ describe StudentsController do
           post :create, { :student => { gender: 1 }, :user => { name: "Derp" } }
         end
 
-        it { should render_template :new }
+        it { is_expected.to render_template :new }
 
         context 'student' do
           subject { assigns(:student) }
-          it { should be_a_new(Student) }
-          it { should_not be_persisted() }
+          it { is_expected.to be_a_new(Student) }
+          it { is_expected.not_to be_persisted() }
         end
       end
     end
@@ -58,14 +62,14 @@ describe StudentsController do
       before :each do
         get :index
       end
-      it { should render_template :index }
+      it { is_expected.to render_template :index }
       context "with no students" do
-        it { assigns(:students).should eq([]) }
+        it { expect(assigns(:students)).to eq([]) }
       end
       context "with students" do
         let(:student) { FactoryGirl.create :student }
         subject { assigns(:students) }
-        it { should eq([student]) }
+        it { is_expected.to eq([student]) }
       end
     end
 
@@ -83,14 +87,14 @@ describe StudentsController do
       before :each do
         get :index, {}
       end
-      it { should render_template :index }
+      it { is_expected.to render_template :index }
       context "with no students" do
-        it { assigns(:students).should eq([]) }
+        it { expect(assigns(:students)).to eq([]) }
       end
       context "with students" do
         let(:student) { FactoryGirl.create :student }
         subject { assigns(:students) }
-        it { should eq([student]) }
+        it { is_expected.to eq([student]) }
       end
     end
   end
@@ -102,14 +106,14 @@ describe StudentsController do
       before :each do
         get :index
       end
-      it { should render_template :index }
+      it { is_expected.to render_template :index }
       context "with no students" do
-        it { assigns(:students).should eq([]) }
+        it { expect(assigns(:students)).to eq([]) }
       end
       context "with students" do
         let(:student) { FactoryGirl.create :student }
         subject { assigns(:students) }
-        it { should eq([student]) }
+        it { is_expected.to eq([student]) }
       end
     end
   end
@@ -128,7 +132,7 @@ describe StudentsController do
           get :edit, {:id => student.id}
         end
         subject { assigns(:student) }
-        it { should eq(student) }
+        it { is_expected.to eq(student) }
       end
       context 'another' do
         let(:another_user) { FactoryGirl.create :another_user }
@@ -136,7 +140,7 @@ describe StudentsController do
         before :each do
           get :edit, {:id => another_student.id}
         end
-        it { should redirect_to('/403') }
+        it { is_expected.to redirect_to('/403') }
       end
     end
 
@@ -147,7 +151,7 @@ describe StudentsController do
         end
         context 'with valid params' do
           subject { assigns(:student) }
-          it { should eq(student) }
+          it { is_expected.to eq(student) }
         end
       end
     end

@@ -21,18 +21,18 @@ describe AssistantFrequencyController do
       end
       
       context "when redirected" do
-      	subject { response }
-      	it { expect(subject).to redirect_to('/assistant_roles/for_professor/2') }
+        subject { response }
+        it { expect(subject).to redirect_to('/assistant_roles/for_professor/2') }
       end
       context "with correct attributes" do
         subject { assigns(:assistant_frequency) }
-        it { expect(:presence).to be true }
-        it { expect(:month).to eq(5) }
-        it { expect(:assistant_role_id).to eq(assistant_role.id) }
+        its(:presence) { should be_true }
+        its(:month) { should eq(5) }
+        its(:assistant_role_id) { should eq(assistant_role.id) }
       end
       context "when DB is updated" do
         subject { assigns(:assistant_frequency) }
-        it { expect(subject).to be_persisted }
+        it { should be_persisted }
       end
     end
     
@@ -43,20 +43,20 @@ describe AssistantFrequencyController do
       end
       
       context "when redirected" do
-      	subject { response }
-      	it { expect(subject).to redirect_to('/assistant_roles') }
+        subject { response }
+        it { expect(subject).to redirect_to('/assistant_roles') }
       end
 
       context "with correct attributes" do
         subject { assigns(:assistant_frequency) }
-        it { expect(:presence).to be false }
-        it { expect(:month).to eq(5) }
-        it { expect(:assistant_role_id).to eq(assistant_role.id) }
+        its(:presence) { should be_false }
+        its(:month) { should eq(5) }
+        its(:assistant_role_id) { should eq(assistant_role.id) }
       end
 
       context "when DB is updated" do
         subject { assigns(:assistant_frequency) }
-        it { expect(subject).to be_persisted }
+        it { should be_persisted }
       end
     end
     
@@ -67,20 +67,20 @@ describe AssistantFrequencyController do
       end
       
       context "when redirected" do
-      	subject { response }
-      	it { expect(subject).to redirect_to('/assistant_roles/for_professor/2') }
+        subject { response }
+        it { expect(subject).to redirect_to('/assistant_roles/for_professor/2') }
       end
 
       context "with incorrect attributes" do
         subject { assigns(:assistant_frequency) }
-        it { expect(:presence).to be false}
-        it { expect(:month).to eq(20) }
-        it { expect(:assistant_role_id).to eq(assistant_role.id) }
+        its(:presence) { should be_false}
+        its(:month) { should eq(20) }
+        its(:assistant_role_id) { should eq(assistant_role.id) }
       end
       
       context "when DB is updated" do
         subject { assigns(:assistant_frequency) }
-        it { expect(subject).to_not be_persisted }
+        it { should_not be_persisted }
       end
 
     end

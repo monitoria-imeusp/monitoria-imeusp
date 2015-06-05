@@ -24,10 +24,10 @@ describe AdminsController do
           get :show, {:id => @admin.to_param}
         end
         it { 
-          should render_template :show 
+          is_expected.to render_template :show 
         }
         it {
-          assigns(:admin).should eq(@admin)
+          expect(assigns(:admin)).to eq(@admin)
         }
       end
     end
@@ -36,7 +36,7 @@ describe AdminsController do
       describe 'a request made by the signed admin' do
         it "can edit its own account" do
           get :edit, {:id => @admin.to_param}
-          assigns(:admin).should eq(@admin)
+          expect(assigns(:admin)).to eq(@admin)
         end
       end
     end
@@ -46,16 +46,16 @@ describe AdminsController do
         describe 'with valid params' do
           it {
             put :update, {:id => @admin.to_param, :admin => changed_valid_attributes}
-            assigns(:admin).should eq(@admin)
+            expect(assigns(:admin)).to eq(@admin)
           }
         end
       end
       describe "with invalid params" do
         it "assigns the admin as @admin" do
           # Trigger the behavior that occurs when invalid params are submitted
-          Admin.any_instance.stub(:save).and_return(false)
+          allow_any_instance_of(Admin).to receive(:save).and_return(false)
           put :update, {:id => @admin.to_param, :admin => { "email" => "" }}
-          assigns(:admin).should eq(@admin)
+          expect(assigns(:admin)).to eq(@admin)
         end
       end
     end

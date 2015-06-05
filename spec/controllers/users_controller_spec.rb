@@ -17,11 +17,11 @@ describe UsersController do
         end
         
         context 'response' do
-          it { should redirect_to "/" }
+          it { is_expected.to redirect_to "/" }
         end
         context 'user' do
           subject { assigns(:user) }
-          it { should eq(user) }
+          it { is_expected.to eq(user) }
         end
         context 'database' do
           it { expect(User.exists? (user.id)).to eq(false) }
@@ -44,9 +44,9 @@ describe UsersController do
           delete :destroy, { id: user.id }
         end
         
-        it { should redirect_to "/" }
+        it { is_expected.to redirect_to "/" }
         subject { assigns(:user) }
-        it { should eq(user) }
+        it { is_expected.to eq(user) }
 
         it { expect(User.exists? (user.id)).to eq(false) }
       end
@@ -69,7 +69,7 @@ describe UsersController do
           delete :destroy, { id: user.id }
         end
         
-        it { should redirect_to('/403') }
+        it { is_expected.to redirect_to('/403') }
         context 'database check' do
           it { expect(User.exists? (user.id)).to eq(true) }
         end
@@ -84,7 +84,7 @@ describe UsersController do
           delete :destroy, { id: user2.id }
         end
         
-        it { should redirect_to('/403') }
+        it { is_expected.to redirect_to('/403') }
         context 'database check' do
           it { expect(User.exists? (user2.id)).to eq(true) }
         end
@@ -110,7 +110,7 @@ describe UsersController do
           delete :destroy, { id: user2.id }
         end
         
-        it { should redirect_to('/403') }
+        it { is_expected.to redirect_to('/403') }
         context 'database check' do
           it { expect(User.exists? (user2.id)).to eq(true) }
         end

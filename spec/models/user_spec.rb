@@ -24,32 +24,32 @@ describe User do
 
 		it "return an user if the authenticated student already exists" do
 			#info1.should_receive(:name).and_return("Bruno Sesso")
-			info1.should_receive(:nusp).at_least(1).times.and_return(student.nusp)
+			expect(info1).to receive(:nusp).at_least(1).times.and_return(student.nusp)
 			#info1.should_receive(:email).and_return("sesso@neverforget.com")
-			info1.should_receive(:link).and_return(:student)
+			expect(info1).to receive(:link).and_return(:student)
 
-			auth1.should_receive(:info).at_least(1).times.and_return(info1)
-			auth1.should_receive(:provider).and_return("bla")
-			auth1.should_receive(:uid).and_return(2)
+			expect(auth1).to receive(:info).at_least(1).times.and_return(info1)
+			expect(auth1).to receive(:provider).and_return("bla")
+			expect(auth1).to receive(:uid).and_return(2)
 
 
 			returned_user = User.from_omniauth auth1
-			returned_user.nusp.should eq (student.nusp)
+			expect(returned_user.nusp).to eq (student.nusp)
 		end
 
 		it "create an user if the authenticated student does not exist" do
-			info2.should_receive(:name).and_return("Bruno Sesso")
-			info2.should_receive(:nusp).at_least(1).times.and_return(11112)
-			info2.should_receive(:email).and_return("sesso@neverforget.com")
-			info2.should_receive(:link).and_return(:student)
+			expect(info2).to receive(:name).and_return("Bruno Sesso")
+			expect(info2).to receive(:nusp).at_least(1).times.and_return(11112)
+			expect(info2).to receive(:email).and_return("sesso@neverforget.com")
+			expect(info2).to receive(:link).and_return(:student)
 
-			auth2.should_receive(:info).at_least(1).times.and_return(info2)
+			expect(auth2).to receive(:info).at_least(1).times.and_return(info2)
 
 			
 			returned_user = User.from_omniauth auth2
 			registered = User.where nusp: returned_user.nusp
 			
-			expect(registered.any?).to be_true
+			expect(registered.any?).to be_truthy
 		end
 
 	end
@@ -58,33 +58,33 @@ describe User do
 
 
 		it "return an user if the authenticated professor already exists" do
-			info3.should_receive(:nusp).at_least(1).times.and_return(professor.nusp)
+			expect(info3).to receive(:nusp).at_least(1).times.and_return(professor.nusp)
 			#info3.should_receive(:name).and_return("Nina S. T. Hirata")
 			#info3.should_receive(:email).and_return("nina@ime.usp.br")
-			info3.should_receive(:link).at_least(1).times.and_return(:teacher)
+			expect(info3).to receive(:link).at_least(1).times.and_return(:teacher)
 
-			auth3.should_receive(:info).at_least(1).times.and_return(info3)
-			auth3.should_receive(:provider).and_return("bla")
-			auth3.should_receive(:uid).and_return(2)
+			expect(auth3).to receive(:info).at_least(1).times.and_return(info3)
+			expect(auth3).to receive(:provider).and_return("bla")
+			expect(auth3).to receive(:uid).and_return(2)
 
 
 			returned_user = User.from_omniauth auth3
-			returned_user.nusp.should eq (professor.nusp)
+			expect(returned_user.nusp).to eq (professor.nusp)
 		end
 		
 		it "create an user if the authenticated professor does not exist" do
-			info4.should_receive(:name).and_return("Mateus Barros Rodrigues")
-			info4.should_receive(:nusp).at_least(1).times.and_return(6666666)
-			info4.should_receive(:email).and_return("mlordx@curtobeterraba.legumes")
-			info4.should_receive(:link).and_return(:teacher)
+			expect(info4).to receive(:name).and_return("Mateus Barros Rodrigues")
+			expect(info4).to receive(:nusp).at_least(1).times.and_return(6666666)
+			expect(info4).to receive(:email).and_return("mlordx@curtobeterraba.legumes")
+			expect(info4).to receive(:link).and_return(:teacher)
 
-			auth4.should_receive(:info).at_least(1).times.and_return(info4)
+			expect(auth4).to receive(:info).at_least(1).times.and_return(info4)
 
 			
 			returned_user = User.from_omniauth auth4
 			registered = User.where nusp: returned_user.nusp
 			
-			expect(registered.any?).to be_true
+			expect(registered.any?).to be_truthy
 		end
 
 	end

@@ -37,7 +37,7 @@ describe SecretariesController do
       it "assigns all secretaries as @secretaries" do
         secretary = Secretary.create! valid_attributes
         get :index, {}
-        assigns(:secretaries).should eq([secretary])
+        expect(assigns(:secretaries)).to eq([secretary])
       end
     end
 
@@ -45,14 +45,14 @@ describe SecretariesController do
       it "assigns the requested secretary as @secretary" do
         secretary = Secretary.create! valid_attributes
         get :show, {:id => secretary.to_param}
-        assigns(:secretary).should eq(secretary)
+        expect(assigns(:secretary)).to eq(secretary)
       end
     end
 
     describe "GET new" do
       it "assigns a new secretary as @secretary" do
         get :new, {}
-        assigns(:secretary).should be_a_new(Secretary)
+        expect(assigns(:secretary)).to be_a_new(Secretary)
       end
     end
 
@@ -60,7 +60,7 @@ describe SecretariesController do
       it "assigns the requested secretary as @secretary" do
         secretary = Secretary.create! valid_attributes
         get :edit, {:id => secretary.to_param}
-        response.should render_template("edit")
+        expect(response).to render_template("edit")
       end
     end
 
@@ -74,29 +74,29 @@ describe SecretariesController do
 
         it "assigns a newly created secretary as @secretary" do
           post :create, {:secretary => valid_attributes}
-          assigns(:secretary).should be_a(Secretary)
-          assigns(:secretary).should be_persisted
+          expect(assigns(:secretary)).to be_a(Secretary)
+          expect(assigns(:secretary)).to be_persisted
         end
 
         it "redirects to the created secretary" do
           post :create, {:secretary => valid_attributes}
-          response.should redirect_to(Secretary.last)
+          expect(response).to redirect_to(Secretary.last)
         end
       end
 
       describe "with invalid params" do
         it "assigns a newly created but unsaved secretary as @secretary" do
           # Trigger the behavior that occurs when invalid params are submitted
-          Secretary.any_instance.stub(:save).and_return(false)
+          allow_any_instance_of(Secretary).to receive(:save).and_return(false)
           post :create, {:secretary => { "nusp" => "invalid value" }}
-          assigns(:secretary).should be_a_new(Secretary)
+          expect(assigns(:secretary)).to be_a_new(Secretary)
         end
 
         it "re-renders the 'new' template" do
           # Trigger the behavior that occurs when invalid params are submitted
-          Secretary.any_instance.stub(:save).and_return(false)
+          allow_any_instance_of(Secretary).to receive(:save).and_return(false)
           post :create, {:secretary => { "nusp" => "invalid value" }}
-          response.should render_template("new")
+          expect(response).to render_template("new")
         end
       end
     end
@@ -112,7 +112,7 @@ describe SecretariesController do
       it "redirects to the secretaries list" do
         secretary = Secretary.create! valid_attributes
         delete :destroy, {:id => secretary.to_param}
-        response.should redirect_to(secretaries_url)
+        expect(response).to redirect_to(secretaries_url)
       end
     end
   end
@@ -137,21 +137,21 @@ describe SecretariesController do
     describe "GET index" do
       it "assigns all secretaries as @secretaries" do
         get :index, {}
-        assigns(:secretaries).should eq([@secretary])
+        expect(assigns(:secretaries)).to eq([@secretary])
       end
     end
 
     describe "GET show" do
       it "assigns the requested secretary as @secretary" do
         get :show, {:id => @secretary.to_param}
-        assigns(:secretary).should eq(@secretary)
+        expect(assigns(:secretary)).to eq(@secretary)
       end
     end
 
     describe "GET edit" do
       it "assigns the requested secretary as @secretary" do
         get :edit, {:id => @secretary.to_param}
-        assigns(:secretary).should eq(@secretary)
+        expect(assigns(:secretary)).to eq(@secretary)
       end
     end
   
@@ -162,13 +162,13 @@ describe SecretariesController do
           # specifies that the Secretary created on the previous line
           # receives the :update_attributes message with whatever params are
           # submitted in the request.
-          Secretary.any_instance.should_receive(:update).with({ "nusp" => "MyString" })
+          expect_any_instance_of(Secretary).to receive(:update).with({ "nusp" => "MyString" })
           put :update, {:id => @secretary.to_param, :secretary => { "nusp" => "MyString" }}
         end
 
         it "assigns the requested secretary as @secretary" do
           put :update, {:id => @secretary.to_param, :secretary => valid_attributes}
-          assigns(:secretary).should eq(@secretary)
+          expect(assigns(:secretary)).to eq(@secretary)
         end
 
         #it "redirects to the secretary" do
@@ -181,16 +181,16 @@ describe SecretariesController do
       describe "with invalid params" do
         it "assigns the secretary as @secretary" do
           # Trigger the behavior that occurs when invalid params are submitted
-          Secretary.any_instance.stub(:save).and_return(false)
+          allow_any_instance_of(Secretary).to receive(:save).and_return(false)
           put :update, {:id => @secretary.to_param, :secretary => { "nusp" => "invalid value" }}
-          assigns(:secretary).should eq(@secretary)
+          expect(assigns(:secretary)).to eq(@secretary)
         end
 
         it "re-renders the 'edit' template" do
           # Trigger the behavior that occurs when invalid params are submitted
-          Secretary.any_instance.stub(:save).and_return(false)
+          allow_any_instance_of(Secretary).to receive(:save).and_return(false)
           put :update, {:id => @secretary.to_param, :secretary => { "nusp" => "invalid value" }}
-          response.should render_template("edit")
+          expect(response).to render_template("edit")
         end
       end
     end

@@ -34,7 +34,7 @@ describe AdvisesController do
   describe "GET new" do
     it "assigns a new advise as @advise" do
       get :new, {}, valid_session
-      assigns(:advise).should be_a_new(Advise)
+      expect(assigns(:advise)).to be_a_new(Advise)
     end
   end
 
@@ -42,7 +42,7 @@ describe AdvisesController do
     it "assigns the requested advise as @advise" do
       advise = Advise.create! valid_attributes
       get :edit, {:id => advise.to_param}, valid_session
-      assigns(:advise).should eq(advise)
+      expect(assigns(:advise)).to eq(advise)
     end
   end
 
@@ -50,39 +50,39 @@ describe AdvisesController do
     describe "with valid params" do
       before :each do
         @advise = Advise.create! valid_attributes
-        Advise.should_receive(:new).and_return(@advise)
-        Advise.should_receive(:any?).and_return(false)
+        expect(Advise).to receive(:new).and_return(@advise)
+        expect(Advise).to receive(:any?).and_return(false)
         post :create, {:advise => valid_attributes}, valid_session
       end
       it "creates a new Advise" do
-        assigns(:advise).should eq(@advise)
+        expect(assigns(:advise)).to eq(@advise)
       end
 
       it "assigns a newly created advise as @advise" do
-        assigns(:advise).should be_a(Advise)
-        assigns(:advise).should be_persisted
+        expect(assigns(:advise)).to be_a(Advise)
+        expect(assigns(:advise)).to be_persisted
       end
 
       it "redirects to the created advise" do
-        response.should redirect_to(root_url)
+        expect(response).to redirect_to(root_url)
       end
     end
 
     describe "with invalid params" do
       before :each do
         @advise = Advise.create! valid_attributes
-        Advise.should_receive(:new).and_return(@advise)
-        Advise.should_receive(:any?).and_return(false)
+        expect(Advise).to receive(:new).and_return(@advise)
+        expect(Advise).to receive(:any?).and_return(false)
         # Trigger the behavior that occurs when invalid params are submitted
-        Advise.any_instance.stub(:save).and_return(false)
+        allow_any_instance_of(Advise).to receive(:save).and_return(false)
         post :create, {:advise => { "title" => "invalid value" }}, valid_session
       end
       it "assigns a newly created but unsaved advise as @advise" do
-        assigns(:advise).should eq(@advise)
+        expect(assigns(:advise)).to eq(@advise)
       end
 
       it "re-renders the 'new' template" do
-        response.should render_template("new")
+        expect(response).to render_template("new")
       end
     end
   end
@@ -95,20 +95,20 @@ describe AdvisesController do
         # specifies that the Advise created on the previous line
         # receives the :update_attributes message with whatever params are
         # submitted in the request.
-        Advise.any_instance.should_receive(:update).with({ "title" => "MyString" })
+        expect_any_instance_of(Advise).to receive(:update).with({ "title" => "MyString" })
         put :update, {:id => advise.to_param, :advise => { "title" => "MyString" }}, valid_session
       end
 
       it "assigns the requested advise as @advise" do
         advise = Advise.create! valid_attributes
         put :update, {:id => advise.to_param, :advise => valid_attributes}, valid_session
-        assigns(:advise).should eq(advise)
+        expect(assigns(:advise)).to eq(advise)
       end
 
       it "redirects to the advise" do
         advise = Advise.create! valid_attributes
         put :update, {:id => advise.to_param, :advise => valid_attributes}, valid_session
-        response.should redirect_to(root_url)
+        expect(response).to redirect_to(root_url)
       end
     end
 
@@ -116,17 +116,17 @@ describe AdvisesController do
       it "assigns the advise as @advise" do
         advise = Advise.create! valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
-        Advise.any_instance.stub(:save).and_return(false)
+        allow_any_instance_of(Advise).to receive(:save).and_return(false)
         put :update, {:id => advise.to_param, :advise => { "title" => "invalid value" }}, valid_session
-        assigns(:advise).should eq(advise)
+        expect(assigns(:advise)).to eq(advise)
       end
 
       it "re-renders the 'edit' template" do
         advise = Advise.create! valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
-        Advise.any_instance.stub(:save).and_return(false)
+        allow_any_instance_of(Advise).to receive(:save).and_return(false)
         put :update, {:id => advise.to_param, :advise => { "title" => "invalid value" }}, valid_session
-        response.should render_template("edit")
+        expect(response).to render_template("edit")
       end
     end
   end
@@ -142,7 +142,7 @@ describe AdvisesController do
     it "redirects to the advises list" do
       advise = Advise.create! valid_attributes
       delete :destroy, {:id => advise.to_param}, valid_session
-      response.should redirect_to(root_url)
+      expect(response).to redirect_to(root_url)
     end
   end
 

@@ -207,7 +207,7 @@ describe CandidaturesController do
 
   describe "GET new" do
     it "assigns a new candidature as @candidature" do
-      Semester.should_receive(:find).with("1").and_return(42)
+      expect(Semester).to receive(:find).with("1").and_return(42)
       get :new, {:semester_id => "1"}, valid_session
       it { 
         expect(assigns(:candidature)).to be_a_new(Candidature)
@@ -228,8 +228,8 @@ describe CandidaturesController do
     describe "with valid params" do
       before :each do
         mail = double(Object)
-        BackupMailer.should_receive(:new_candidature).with(an_instance_of(Candidature)).and_return(mail)
-        mail.should_receive(:deliver)
+        expect(BackupMailer).to receive(:new_candidature).with(an_instance_of(Candidature)).and_return(mail)
+        expect(mail).to receive(:deliver)
       end
       it "creates a new Candidature" do
         expect {
@@ -255,7 +255,7 @@ describe CandidaturesController do
     describe "with invalid params" do
       it "assigns a newly created but unsaved candidature as @candidature" do
         # Trigger the behavior that occurs when invalid params are submitted
-        Candidature.any_instance.stub(:save).and_return(false)
+        allow_any_instance_of(Candidature).to receive(:save).and_return(false)
         post :create, {:candidature => {}}, valid_session
         it { 
           expect(assigns(:candidature)).to be_a_new(Candidature)
@@ -265,7 +265,7 @@ describe CandidaturesController do
 
       it "re-renders the 'new' template" do
         # Trigger the behavior that occurs when invalid params are submitted
-        Candidature.any_instance.stub(:save).and_return(false)
+        allow_any_instance_of(Candidature).to receive(:save).and_return(false)
         post :create, {:candidature => {}}, valid_session
         it { expect(response).to render_template("new") }
       end
@@ -307,7 +307,7 @@ describe CandidaturesController do
       it "assigns the candidature as @candidature" do
         candidature = Candidature.create! valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
-        Candidature.any_instance.stub(:save).and_return(false)
+        allow_any_instance_of(Candidature).to receive(:save).and_return(false)
         put :update, {:id => candidature.to_param, :candidature => { "daytime_availability" => "invalid value" }}, valid_session
         it { expect(assigns(:candidature)).to eq(candidature) }
       end
@@ -315,7 +315,7 @@ describe CandidaturesController do
       it "re-renders the 'edit' template" do
         candidature = Candidature.create! valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
-        Candidature.any_instance.stub(:save).and_return(false)
+        allow_any_instance_of(Candidature).to receive(:save).and_return(false)
         put :update, {:id => candidature.to_param, :candidature => { "daytime_availability" => "invalid value" }}, valid_session
         it { expect(response).to render_template("edit") }
       end

@@ -104,14 +104,14 @@ describe AssistantEvaluationsController do
     describe "with invalid params" do
       it "assigns a newly created but unsaved assistant_evaluation as @assistant_evaluation" do
         # Trigger the behavior that occurs when invalid params are submitted
-        AssistantEvaluation.any_instance.stub(:save).and_return(false)
+        allow_any_instance_of(AssistantEvaluation).to receive(:save).and_return(false)
         post :create, {:assistant_evaluation => { "index_for_student" => "invalid value" }}
         it { expect(assigns(:assistant_evaluation)).to be_a_new(AssistantEvaluation) }
       end
 
       it "re-renders the 'new' template" do
         # Trigger the behavior that occurs when invalid params are submitted
-        AssistantEvaluation.any_instance.stub(:save).and_return(false)
+        allow_any_instance_of(AssistantEvaluation).to receive(:save).and_return(false)
         post :create, {:assistant_evaluation => { "index_for_student" => "invalid value" }}
         it { expect(response).to render_template("new") }
       end
@@ -159,7 +159,7 @@ describe AssistantEvaluationsController do
       it "assigns the assistant_evaluation as @assistant_evaluation" do
         assistant_evaluation = FactoryGirl.create :assistant_evaluation
         # Trigger the behavior that occurs when invalid params are submitted
-        AssistantEvaluation.any_instance.stub(:save).and_return(false)
+        allow_any_instance_of(AssistantEvaluation).to receive(:save).and_return(false)
         put :update, {:id => assistant_evaluation.to_param, :assistant_evaluation => { "index_for_student" => "invalid value" }}
         it { expect(assigns(:assistant_evaluation)).to eq(assistant_evaluation) }
       end
@@ -167,7 +167,7 @@ describe AssistantEvaluationsController do
       it "re-renders the 'edit' template" do
         assistant_evaluation = FactoryGirl.create :assistant_evaluation
         # Trigger the behavior that occurs when invalid params are submitted
-        AssistantEvaluation.any_instance.stub(:save).and_return(false)
+        allow_any_instance_of(AssistantEvaluation).to receive(:save).and_return(false)
         put :update, {:id => assistant_evaluation.to_param, :assistant_evaluation => { "index_for_student" => "invalid value" }}
         it { expect(response).to render_template("edit") }
       end
