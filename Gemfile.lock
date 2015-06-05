@@ -331,7 +331,7 @@ DEPENDENCIES
   rails (= 4.1.0.rc2)
   rails-i18n
   rails_12factor
-  rspec-rails (>= 3.2)
+  rspec-rails (>= 3.2.0)
   sass-rails (~> 4.0.1)
   sdoc
   shoulda-matchers

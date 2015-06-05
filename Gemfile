@@ -65,7 +65,7 @@ group :development, :test do
   gem 'sqlite3'
 
   # Test framework
-  gem 'rspec-rails', '>= 3.2'#'>= 2.14.0'
+  gem 'rspec-rails', '>= 3.2.0  '#'>= 2.14.0'
 
   # Fixtures made easy
   gem 'factory_girl_rails', '~> 4.4.1'

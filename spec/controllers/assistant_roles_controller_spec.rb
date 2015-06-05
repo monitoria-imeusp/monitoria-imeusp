@@ -24,7 +24,7 @@ describe AssistantRolesController do
     end
       
     context "when http success" do
-      it { should respond_with(:success) }
+      it { expect(response).to respond_with(:success) }
     end
 
     context "with roles by semester" do
@@ -37,25 +37,25 @@ describe AssistantRolesController do
   describe ".create" do
     context "with valid parameters" do
       before :each do
-        post 'create', { "request_for_teaching_assistant_id" => request_for_teaching_assistant.id.to_s, "student_id" => student.id.to_s }
+        subject { post 'create', { "request_for_teaching_assistant_id" => request_for_teaching_assistant.id.to_s, "student_id" => student.id.to_s } }
       end
 
-      it { should redirect_to(request_for_teaching_assistant) }
+      it { expect(subject).to redirect_to(request_for_teaching_assistant) }
     end
 
     context "with invalid request" do 
       before :each do
-        post 'create', { "request_for_teaching_assistant_id" => "666", "student_id" => student.id.to_s }
+        subject { post 'create', { "request_for_teaching_assistant_id" => "666", "student_id" => student.id.to_s } }
       end
       
-      it { should redirect_to('/') }
+      it { expect(subject).to redirect_to('/') }
     end
     context "with invalid student" do 
       before :each do
-        post 'create', { "request_for_teaching_assistant_id" => request_for_teaching_assistant.id.to_s, "student_id" => "666" }
+        subject { post 'create', { "request_for_teaching_assistant_id" => request_for_teaching_assistant.id.to_s, "student_id" => "666" } }
       end
       
-      it { should redirect_to(request_for_teaching_assistant) }
+      it { expect(subject).to redirect_to(request_for_teaching_assistant) }
     end
   end
 
@@ -71,7 +71,7 @@ describe AssistantRolesController do
 
     context "assistant role" do
       subject { assigns(:assistant_role) }
-      its(:active) { should be_false }
+      it { expect(:active).to  be false }
     end
 
   end
@@ -83,12 +83,12 @@ describe AssistantRolesController do
 
     context "when should be destroyed" do
       subject { AssistantRole.exists? @id }
-      it { should be_false }
+      it { expect(subject).to be false }
     end
 
     context "when http return success" do
       subject { response }
-      it { should redirect_to(assistant_roles_path) }
+      it { expect(subject).to redirect_to(assistant_roles_path) }
     end
   end
 

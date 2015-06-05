@@ -26,13 +26,13 @@ describe AssistantFrequencyController do
       end
       context "with correct attributes" do
         subject { assigns(:assistant_frequency) }
-        its(:presence) { should be_true }
-        its(:month) { should eq(5) }
-        its(:assistant_role_id) { should eq(assistant_role.id) }
+        it { expect(:presence).to be true }
+        it { expect(:month).to eq(5) }
+        it { expect(:assistant_role_id).to eq(assistant_role.id) }
       end
       context "when DB is updated" do
         subject { assigns(:assistant_frequency) }
-        it { should be_persisted }
+        it { expect(subject).to be_persisted }
       end
     end
     
@@ -49,14 +49,14 @@ describe AssistantFrequencyController do
 
       context "with correct attributes" do
         subject { assigns(:assistant_frequency) }
-        its(:presence) { should be_false }
-        its(:month) { should eq(5) }
-        its(:assistant_role_id) { should eq(assistant_role.id) }
+        it { expect(:presence).to be false }
+        it { expect(:month).to eq(5) }
+        it { expect(:assistant_role_id).to eq(assistant_role.id) }
       end
 
       context "when DB is updated" do
         subject { assigns(:assistant_frequency) }
-        it { should be_persisted }
+        it { expect(subject).to be_persisted }
       end
     end
     
@@ -73,14 +73,14 @@ describe AssistantFrequencyController do
 
       context "with incorrect attributes" do
         subject { assigns(:assistant_frequency) }
-        its(:presence) { should be_false}
-        its(:month) { should eq(20) }
-        its(:assistant_role_id) { should eq(assistant_role.id) }
+        it { expect(:presence).to be false}
+        it { expect(:month).to eq(20) }
+        it { expect(:assistant_role_id).to eq(assistant_role.id) }
       end
       
       context "when DB is updated" do
         subject { assigns(:assistant_frequency) }
-        it { should_not be_persisted }
+        it { expect(subject).to_not be_persisted }
       end
 
     end

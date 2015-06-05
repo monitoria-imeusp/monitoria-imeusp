@@ -38,18 +38,18 @@ describe AssistantEvaluationsController do
   describe "GET index" do
     before :each do
       @assistant_evaluation = FactoryGirl.create :assistant_evaluation
-      Student.should_receive(:find).with(@student.id.to_s).and_return(@student)
+      it{ expect(Student).to receive(:find).with(@student.id.to_s).and_return(@student) }
       get :index_for_student, { student_id: @student.id }
     end
 
-    it { response.should be_ok }
+    it { expect(response).to be_ok }
 
     it "assigns the student as @student" do
-      assigns(:student).should eq(@student)
+      it { expect(assigns(:student)).to eq(@student) }
     end
 
     it "assigns all assistant_evaluations for the student as @assistant_evaluations" do
-      assigns(:assistant_evaluations).should eq([@assistant_evaluation])
+      it { expect(assigns(:assistant_evaluations)).to eq([@assistant_evaluation]) }
     end
   end
 
@@ -60,16 +60,16 @@ describe AssistantEvaluationsController do
     context 'assistant evaluation' do
       subject { assigns(:assistant_evaluation) }
       it { expect(subject).to be_a_new(AssistantEvaluation) }
-      its(:assistant_role_id) { should eq @assistant_role.id }
+      it { expect(:assistant_role_id).to eq(@assistant_role.id) }
     end
   end
 
   describe "GET edit" do
     it "assigns the requested assistant_evaluation as @assistant_evaluation" do
       assistant_evaluation = FactoryGirl.create :assistant_evaluation
-      AssistantEvaluation.should_receive(:find).with(assistant_evaluation.id.to_s).and_return(assistant_evaluation)
+      it { expect(AssistantEvaluation).to receive(:find).with(assistant_evaluation.id.to_s).and_return(assistant_evaluation) }
       get :edit, { id: assistant_evaluation.to_param }
-      assigns(:assistant_evaluation).should eq(assistant_evaluation)
+      it { expect(assigns(:assistant_evaluation)).to eq(assistant_evaluation) }
     end
   end
 
@@ -85,19 +85,19 @@ describe AssistantEvaluationsController do
           "comment" => "MyText"
         }
         @assistant_evaluation = FactoryGirl.create :assistant_evaluation
-        @assistant_evaluation.should_receive(:save).and_return(true)
-        AssistantEvaluation.should_receive(:new).with(@params).and_return(@assistant_evaluation)
+        it { expect(@assistant_evaluation).to receive(:save).and_return(true) }
+        it { expect(AssistantEvaluation).to receive(:new).with(@params).and_return(@assistant_evaluation) }
         post :create, { assistant_evaluation: @params }
       end
 
       it "assigns a newly created assistant_evaluation as @assistant_evaluation and persists it" do
-        assigns(:assistant_evaluation).should be_a(AssistantEvaluation)
-        assigns(:assistant_evaluation).should be_persisted
+        it { expect(assigns(:assistant_evaluation)).to be_a(AssistantEvaluation) }
+        it { expect(assigns(:assistant_evaluation)).to be_persisted }
       end
 
       it "redirects to the created assistant_evaluation" do
         # TODO should use @super_professor, but for some reason that does not work
-        response.should redirect_to(assistant_roles_for_professor_path(professor_id: super_professor.id))
+        it { expect(response).to redirect_to(assistant_roles_for_professor_path(professor_id: super_professor.id)) }
       end
     end
 
@@ -106,14 +106,14 @@ describe AssistantEvaluationsController do
         # Trigger the behavior that occurs when invalid params are submitted
         AssistantEvaluation.any_instance.stub(:save).and_return(false)
         post :create, {:assistant_evaluation => { "index_for_student" => "invalid value" }}
-        assigns(:assistant_evaluation).should be_a_new(AssistantEvaluation)
+        it { expect(assigns(:assistant_evaluation)).to be_a_new(AssistantEvaluation) }
       end
 
       it "re-renders the 'new' template" do
         # Trigger the behavior that occurs when invalid params are submitted
         AssistantEvaluation.any_instance.stub(:save).and_return(false)
         post :create, {:assistant_evaluation => { "index_for_student" => "invalid value" }}
-        response.should render_template("new")
+        it { expect(response).to render_template("new") }
       end
     end
   end
@@ -137,21 +137,21 @@ describe AssistantEvaluationsController do
         # specifies that the AssistantEvaluation created on the previous line
         # receives the :update_attributes message with whatever params are
         # submitted in the request.
-        AssistantEvaluation.any_instance.should_receive(:update).with(@params)
+        it { expect(AssistantEvaluation.any_instance).to receive(:update).with(@params) }
         put :update, {:id => assistant_evaluation.to_param, :assistant_evaluation => @params}
       end
 
       it "assigns the requested assistant_evaluation as @assistant_evaluation" do
         assistant_evaluation = FactoryGirl.create :assistant_evaluation
         put :update, {:id => assistant_evaluation.to_param, :assistant_evaluation => @params}
-        assigns(:assistant_evaluation).should eq(assistant_evaluation)
+        it { expect(assigns(:assistant_evaluation)).to eq(assistant_evaluation) }
       end
 
       it "redirects to the assistant_evaluation" do
         assistant_evaluation = FactoryGirl.create :assistant_evaluation
         put :update, {:id => assistant_evaluation.to_param, :assistant_evaluation => @params}
         # TODO should use @super_professor, but for some reason that does not work
-        response.should redirect_to(assistant_roles_for_professor_path(professor_id: super_professor.id))
+        it { expect(response).to redirect_to(assistant_roles_for_professor_path(professor_id: super_professor.id)) }
       end
     end
 
@@ -161,7 +161,7 @@ describe AssistantEvaluationsController do
         # Trigger the behavior that occurs when invalid params are submitted
         AssistantEvaluation.any_instance.stub(:save).and_return(false)
         put :update, {:id => assistant_evaluation.to_param, :assistant_evaluation => { "index_for_student" => "invalid value" }}
-        assigns(:assistant_evaluation).should eq(assistant_evaluation)
+        it { expect(assigns(:assistant_evaluation)).to eq(assistant_evaluation) }
       end
 
       it "re-renders the 'edit' template" do
@@ -169,9 +169,8 @@ describe AssistantEvaluationsController do
         # Trigger the behavior that occurs when invalid params are submitted
         AssistantEvaluation.any_instance.stub(:save).and_return(false)
         put :update, {:id => assistant_evaluation.to_param, :assistant_evaluation => { "index_for_student" => "invalid value" }}
-        response.should render_template("edit")
+        it { expect(response).to render_template("edit") }
       end
     end
   end
-
 end
