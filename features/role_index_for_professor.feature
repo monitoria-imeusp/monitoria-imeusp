@@ -38,13 +38,16 @@ Feature: Assistant roles table visualization
 
 
     Scenario: Professor sees the correct frequencies
+        Given it's currently month 5
         And I'm logged in as professor "Gold"
         And I visit my assistant roles page
         Then I should see "John MAC0431 Gold Sim Avaliar • Março: Marcar presença Marcar ausência • Abril: Ausente • Maio: Marcar presença Marcar ausência"
         Then I should see "Wil MAC0431 Gold Sim Avaliar • Março: Presente • Abril: Presente • Maio: Presente"
         And I should not see "Junho"
+        Then I'm back to current time
 
     Scenario: Professor marks frequency
+        Given it's currently month 5
         And I'm logged in as professor "Gold"
         And I visit my assistant roles page
         And I click the first "Marcar presença" link
@@ -53,5 +56,5 @@ Feature: Assistant roles table visualization
         And I click the first "Marcar ausência" link
         Then I should see "John MAC0431 Gold Sim Avaliar • Março: Presente • Abril: Ausente • Maio: Ausente"
         Then I should see "Wil MAC0431 Gold Sim Avaliar • Março: Presente • Abril: Presente • Maio: Presente"
-
+        Then I'm back to current time
 
