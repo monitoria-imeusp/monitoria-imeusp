@@ -55,6 +55,7 @@ Feature: Assistant roles table visualization
         Then I should see "ACESSO NEGADO"
 
     Scenario: Secretary sees the correct frequencies
+        Given it's currently month 5
         Given I'm logged in as a secretary
         And I visit the assistant roles page
         Then I should see "Bob MAC0110 Dude Desativar • Março: Ausente • Abril: Presente • Maio: Presente"
@@ -62,8 +63,10 @@ Feature: Assistant roles table visualization
         Then I should see "Wil MAC0431 Gold Desativar • Março: Presente • Abril: Presente • Maio: Presente"
         Then I should see "Mary MAT0125 Silver Desativar • Março: Pendente • Abril: Pendente • Maio: Pendente"
         And I should not see "Junho"
+        Then I'm back to current time
 
     Scenario: Super professor sees the correct frequencies
+        Given it's currently month 5
         Given I'm logged in as a super professor
         And I visit the assistant roles page
         Then I should see "Bob MAC0110 Dude Desativar • Março: Ausente • Abril: Presente • Maio: Presente"
@@ -71,8 +74,10 @@ Feature: Assistant roles table visualization
         Then I should see "Wil MAC0431 Gold Desativar • Março: Presente • Abril: Presente • Maio: Presente"
         Then I should see "Mary MAT0125 Silver Desativar • Março: Marcar presença Marcar ausência • Abril: Marcar presença Marcar ausência • Maio: Marcar presença Marcar ausência"
         And I should not see "Junho"
+        Then I'm back to current time
 
     Scenario: Super professor marks frequency
+        Given it's currently month 5
         Given I'm logged in as a super professor
         And I visit the assistant roles page
         And I click the first "Marcar presença" link
@@ -86,6 +91,7 @@ Feature: Assistant roles table visualization
         Then I should see "Wil MAC0431 Gold Desativar • Março: Presente • Abril: Presente • Maio: Presente"
         Then I should see "Mary MAT0125 Silver Desativar • Março: Ausente • Abril: Marcar presença Marcar ausência • Maio: Marcar presença Marcar ausência"
         And I should not see "Junho"
+        Then I'm back to current time
 
     Scenario: Frequency request emails are delivered
         Given I'm logged in as a secretary
@@ -98,19 +104,22 @@ Feature: Assistant roles table visualization
         And I should see "Pedidos enviados com sucesso"
 
     Scenario: Frequency reminder emails are delivered to super professors
+        Given it's currently month 5
         Given I'm logged in as a secretary
         And I visit the assistant roles page
         And I'm ready to receive email
         And I click the "Pedir frequências" link
         Then the frequency reminder email should have been delivered properly to "ninadev@ime.usp.br" with student "John" as pending
+        Then I'm back to current time
 
 
     Scenario: Frequency reminder emails are delivered to hiper professors
+        Given it's currently month 5
         Given I'm logged in as a secretary
         And I visit the assistant roles page
         And I'm ready to receive email
         And I click the "Pedir frequências" link
         Then the frequency reminder email should have been delivered properly to "zaradev@ime.usp.br" with student "Mary" as pending
-
+        Then I'm back to current time
 
 

@@ -11,8 +11,8 @@ When(/^I confirm the (.*?) edition with nusp "(.*?)" and password "(.*?)" and em
 	user = klass.find_by_nusp(nusp)
   user.should_not be_nil
 	email = ActionMailer::Base.deliveries.first
-  email.from.should == ["monitoria@ime.usp.br"]
-  email.to.should == [user_email]
+  expect(email.from).to eq(["monitoria@ime.usp.br"])
+  expect(email.to).to eq([user_email])
   m = email.body.match(/href="http:\/\/localhost:3000(\/.*?)"/)
   confirmation_link = m[1]
   visit confirmation_link
@@ -54,7 +54,7 @@ Then(/^the frequency request email should have been delivered properly to "(.*?)
   received = false
   ActionMailer::Base.deliveries.each do |mail|
     if mail.to == [professor_email]
-      expect(mail.from).to be ["sistemamonitoria@ime.usp.br"]
+      expect(mail.from).to eq(["sistemamonitoria@ime.usp.br"])
       expect(mail.body).to match(/Precisamos que você indique a frequência/)
       received = true
     end    
@@ -67,7 +67,7 @@ Then(/^the frequency reminder email should have been delivered properly to "(.*?
   received = false
   ActionMailer::Base.deliveries.each do |mail|
     if mail.to == [professor_email]
-      expect(mail.from).to be ["sistemamonitoria@ime.usp.br"]
+      expect(mail.from).to eq(["sistemamonitoria@ime.usp.br"])
       expect(mail.body).to match(/#{student_name}/)
       received = true
     end    
