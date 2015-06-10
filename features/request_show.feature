@@ -11,7 +11,8 @@ Feature: Show a request for teaching assistant
         And there is a student with name "Caio" with nusp "123457" and email "eu2@usp.br"
         And there is a course with name "Introdução" and code "MAC0110" and department "MAC"
         And there is a course with name "LabXP" and code "MAC0666" and department "MAC"
-        And there is a request for teaching assistant by professor "zara" for the course "MAC0110"
+        And there is a request for teaching assistant with professor "zara" and course "MAC0110" and requested_number "3" and priority "1" and student_assistance "false" and work_correction "false" and test_oversight "false"
+        
         And there is a request for teaching assistant by professor "zara" for the course "MAC0666"
         And there is a candidature by student "Rogerio" for course "MAC0110"
         And there is a candidature by student "Caio" for course "MAC0666"
@@ -37,3 +38,13 @@ Feature: Show a request for teaching assistant
         Then "123456" elected status should be "Sim"
         Then "123457" elected status should be "Não"
 
+    Scenario: Repeated candidates
+        And I should see "LabXP"
+        Then I click the first "Ver" link
+        And I should see "Disciplina: MAC0110 - Introdução"
+        And I should not see "Ver dados"
+        Then I click the first "Eleger" link
+        Then I click the first "Eleger" link
+        Then I should not see "Eleger"
+        And I should see "Ver dados"
+        
