@@ -32,15 +32,28 @@ class RequestForTeachingAssistantsController < ApplicationController
     authorization_sprofessor
     authorization_professor
     @chosen_roles = AssistantRole.where(request_for_teaching_assistant_id: @request_for_teaching_assistant.id, active: true)
+    chosen_student_ids = @chosen_roles.all.map do |role| role.student.id end
     # Available candidates should be available for this request while there are places to take
     if @chosen_roles.count < @request_for_teaching_assistant.requested_number
       # Valid candidatures for this request
       course = @request_for_teaching_assistant.course
       semester = @request_for_teaching_assistant.semester
-      @first_option_candidatures_for_this_request = Candidature.for_course_in_semester course, semester, true
-      @other_option_candidatures_for_this_request = Candidature.for_course_in_semester course, semester, false
+      @first_option_candidatures_for_this_request = ((Candidature.for_course_in_semester course, semester, true).all.map do
+        |candidature| candidature
+        end).delete_if do |candidature|
+            chosen_student_ids.include?(candidature.student.id)
+      end
+      @other_option_candidatures_for_this_request = ((Candidature.for_course_in_semester course, semester, false).all.map do
+        |candidature| candidature
+        end).delete_if do |candidature|
+            chosen_student_ids.include?(candidature.student.id)
+      end
       # Valid candidatures for the same department
-      @candidatures_for_this_department = Candidature.for_same_department_in_semester course, semester
+      @candidatures_for_this_department = ((Candidature.for_same_department_in_semester course, semester).all.map do
+        |candidature| candidature
+        end).delete_if do |candidature|
+            chosen_student_ids.include?(candidature.student.id)
+      end
     end
   end
 
