@@ -69,10 +69,10 @@ Feature: Assistant roles table visualization
         Given it's currently month 5
         Given I'm logged in as a super professor
         And I visit the assistant roles page
-        Then I should see "Bob MAC0110 Dude Desativar • Março: Ausente • Abril: Presente • Maio: Presente"
-        Then I should see "John MAC0431 Gold Desativar • Março: Presente • Abril: Ausente • Maio: Marcar presença Marcar ausência"
-        Then I should see "Wil MAC0431 Gold Desativar • Março: Presente • Abril: Presente • Maio: Presente"
-        Then I should see "Mary MAT0125 Silver Desativar • Março: Marcar presença Marcar ausência • Abril: Marcar presença Marcar ausência • Maio: Marcar presença Marcar ausência"
+        Then I should see "Bob MAC0110 Dude • Março: Ausente • Abril: Presente • Maio: Presente"
+        Then I should see "John MAC0431 Gold • Março: Presente • Abril: Ausente • Maio: Marcar presença Marcar ausência"
+        Then I should see "Wil MAC0431 Gold • Março: Presente • Abril: Presente • Maio: Presente"
+        Then I should see "Mary MAT0125 Silver • Março: Marcar presença Marcar ausência • Abril: Marcar presença Marcar ausência • Maio: Marcar presença Marcar ausência"
         And I should not see "Junho"
         Then I'm back to current time
 
@@ -81,15 +81,15 @@ Feature: Assistant roles table visualization
         Given I'm logged in as a super professor
         And I visit the assistant roles page
         And I click the first "Marcar presença" link
-        Then I should see "Bob MAC0110 Dude Desativar • Março: Ausente • Abril: Presente • Maio: Presente"
-        Then I should see "John MAC0431 Gold Desativar • Março: Presente • Abril: Ausente • Maio: Presente"
-        Then I should see "Wil MAC0431 Gold Desativar • Março: Presente • Abril: Presente • Maio: Presente"
-        Then I should see "Mary MAT0125 Silver Desativar • Março: Marcar presença Marcar ausência • Abril: Marcar presença Marcar ausência • Maio: Marcar presença Marcar ausência"
+        Then I should see "Bob MAC0110 Dude • Março: Ausente • Abril: Presente • Maio: Presente"
+        Then I should see "John MAC0431 Gold • Março: Presente • Abril: Ausente • Maio: Presente"
+        Then I should see "Wil MAC0431 Gold • Março: Presente • Abril: Presente • Maio: Presente"
+        Then I should see "Mary MAT0125 Silver • Março: Marcar presença Marcar ausência • Abril: Marcar presença Marcar ausência • Maio: Marcar presença Marcar ausência"
         And I click the first "Marcar ausência" link
-        Then I should see "Bob MAC0110 Dude Desativar • Março: Ausente • Abril: Presente • Maio: Presente"
-        Then I should see "John MAC0431 Gold Desativar • Março: Presente • Abril: Ausente • Maio: Presente"
-        Then I should see "Wil MAC0431 Gold Desativar • Março: Presente • Abril: Presente • Maio: Presente"
-        Then I should see "Mary MAT0125 Silver Desativar • Março: Ausente • Abril: Marcar presença Marcar ausência • Maio: Marcar presença Marcar ausência"
+        Then I should see "Bob MAC0110 Dude • Março: Ausente • Abril: Presente • Maio: Presente"
+        Then I should see "John MAC0431 Gold • Março: Presente • Abril: Ausente • Maio: Presente"
+        Then I should see "Wil MAC0431 Gold • Março: Presente • Abril: Presente • Maio: Presente"
+        Then I should see "Mary MAT0125 Silver • Março: Ausente • Abril: Marcar presença Marcar ausência • Maio: Marcar presença Marcar ausência"
         And I should not see "Junho"
         Then I'm back to current time
 
