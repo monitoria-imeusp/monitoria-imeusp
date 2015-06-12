@@ -26,6 +26,7 @@
             <td><%= link_to "Avaliar", new_assistant_evaluation_path(role) %></td>
           <% end %>
         </tr>        
+        <% if !(Rails.env.production?) %>
         <tr>
           <td colspan=5>
             <table border=1>
@@ -68,6 +69,7 @@
             </table>
           </td>
         </tr>
+        <% end %>
       <% end %>
     </tbody>
   </table>

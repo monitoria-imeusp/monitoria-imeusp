@@ -43,6 +43,7 @@
             </td>
           <% end %>
         </tr>
+        <% if !(Rails.env.production?) %>
         <tr>
           <% if secretary_signed_in? %>
             <td colspan=5>
@@ -89,6 +90,7 @@
             </table>
           </td>
         </tr>
+        <% end %>
       <% end %>
     </tbody>
   </table>
