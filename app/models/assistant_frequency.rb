@@ -26,11 +26,14 @@ class AssistantFrequency < ActiveRecord::Base
       professors.push(assistant.professor)
     end
     professors.uniq.each do |professor|   
-      NotificationMailer.frequency_request_notification(professor).deliver      
+      NotificationMailer.frequency_request_notification(professor).deliver
     end
-    Delayed::Job.enqueue(FrequencyReminderJob.new, priority: 0, run_at: 3.days.from_now.getutc)
+    if !Rails.env.production?
+      Delayed::Job.enqueue(FrequencyReminderJob.new, priority: 0, run_at: 3.days.from_now.getutc)
+    end
     if (Time.now.month != 6 && Time.now.month != 11)
-      Delayed::Job.enqueue(FrequencyMailJob.new,priority: 0, run_at: 1.months.from_now.getutc)
+      Delayed::Job.enqueue(FrequencyMailJob.new, priority: 0, run_at: 1.months.from_now.getutc)
+    end
   end
 
   def self.notify_frequency_reminder
@@ -42,8 +45,8 @@ class AssistantFrequency < ActiveRecord::Base
         if !AssistantFrequency.where(month: Time.now.month, assistant_role_id: assistant.id).any?
           if assistant.course.department == super_professor.department
               pending_roles.push(assistant)
-            end
           end
+        end
       end        
       if !pending_roles.empty?
           NotificationMailer.pending_frequencies_notification(pending_roles, super_professor).deliver         
