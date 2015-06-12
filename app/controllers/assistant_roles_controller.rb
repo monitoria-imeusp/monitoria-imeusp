@@ -99,6 +99,23 @@ class AssistantRolesController < ApplicationController
     end
   end   
 
+  def certificate
+    if AssistantRole.exists? params[:id]
+      @assistant = AssistantRole.find params[:id]
+      if @assistant.student.is_female?
+        @genderfied_title = "aluna-monitora"
+      else
+        @genderfied_title = "aluno-monitor"
+      end      
+      render pdf: "Certificado #{@assistant.student.name}"
+    else 
+      respond_to do |format|
+        format.html { redirect_to assistant_roles_path, notice: "Erro ao gerar atestado."}
+        format.json { render action: 'index'}
+      end
+    end
+  end
+
   private
 
   # Never trust parameters from the scary internet, only allow the white list through.
