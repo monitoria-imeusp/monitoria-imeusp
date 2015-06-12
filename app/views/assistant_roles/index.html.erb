@@ -38,6 +38,8 @@
                 Desativado
               <% end %>
             </td>
+          <% end %>
+          <% if secretary_signed_in? or admin_signed_in? %>
             <td>
               <%= link_to "Atestado", certificate_path(role.id, :format => :pdf), method: :get, target: "_blank" %>
             </td>
