@@ -4,59 +4,64 @@ describe AssistantRolesController do
 
   include Devise::TestHelpers
 
-  let(:user) { FactoryGirl.create :user }
-  let(:prof_user) { FactoryGirl.create :another_user }
+  let!(:semester) { FactoryGirl.create :semester }
+  let!(:department) { FactoryGirl.create :department }
+  let!(:user) { FactoryGirl.create :user }
+  let!(:student) { FactoryGirl.create :student, user_id: user.id }
+  let!(:prof_user) { FactoryGirl.create :another_user }
   let!(:super_professor) { FactoryGirl.create :super_professor, user_id: prof_user.id }
+  let!(:course1) { FactoryGirl.create :course1 }
+  let!(:request_for_teaching_assistant) { FactoryGirl.create :request_for_teaching_assistant, professor_id: super_professor.id }
+  let!(:assistant_role) { FactoryGirl.create :assistant_role }
 
   before :each do
-    @semester   = FactoryGirl.create :semester
-    @department = FactoryGirl.create :department
-    @course1    = FactoryGirl.create :course1
-    @student    = FactoryGirl.create :student, user_id: user.id
-    @request_for_teaching_assistant = FactoryGirl.create :request_for_teaching_assistant, professor_id: super_professor.id
-    @assistant_role = FactoryGirl.create :assistant_role
     sign_in prof_user
   end
 
-  describe "GET 'index'" do
-    it "returns http success" do
-      get :index
-      response.should be_success
-    end
-
-    it "indexes roles by semester" do
-      pending "TODO"
-    end
-  end
-
-  describe "POST 'create'" do
-    describe "with valid parameters" do
-      before :each do
-        @params = {
-          "request_for_teaching_assistant_id" => @request_for_teaching_assistant.id.to_s,
-          "student_id" => @student.id.to_s
-        }
-        #@assistant_role = FactoryGirl.create :assistant_role
-        #AssistantRole.should_receive(:new).with(@params).and_return(@assistant_role)
-        post 'create', @params
-      end
-
-      it "redirects back to the request" do
-        response.should redirect_to @request_for_teaching_assistant
-      end
-    end
-
-    describe "with invalid parameters" do
-      it "redirects back to the request?" do
-        pending "what should happen here?"
-      end
-    end
-  end
-
-  describe "POST 'deactivate'" do
+  describe ".index" do
     before :each do
-      @params = {"id" => @assistant_role.id.to_s}
-      post 'deactivate_assistant_role', @params
+      get :index
+    end
+      
+    context "when http success" do
+      it { is_expected.to respond_with(:success) }
+    end
+
+    context "with roles by semester" do
+      subject { assigns(:assistant_roles_by_semester)[0] }
+      it { expect(subject[:semester]).to eq(semester) }
+      it { expect(subject[:role][0]).to eq(assistant_role) }
+    end
+  end
+
+  describe ".create" do
+    context "with valid parameters" do
+      before :each do
+        post 'create', { "request_for_teaching_assistant_id" => request_for_teaching_assistant.id.to_s, "student_id" => student.id.to_s }
+      end
+
+      it { is_expected.to redirect_to(request_for_teaching_assistant) }
+    end
+
+    context "with invalid request" do 
+      before :each do
+        post 'create', { "request_for_teaching_assistant_id" => "666", "student_id" => student.id.to_s }
+      end
+      
+      it { is_expected.to redirect_to('/') }
+    end
+    context "with invalid student" do 
+      before :each do
+        post 'create', { "request_for_teaching_assistant_id" => request_for_teaching_assistant.id.to_s, "student_id" => "666" }
+      end
+      
+      it { is_expected.to redirect_to(request_for_teaching_assistant) }
+    end
+  end
+
+  describe ".deactivate" do
+    before :each do
+      post 'deactivate_assistant_role', {"id" => assistant_role.id.to_s}
     end
 
     context "response" do
@@ -66,28 +71,39 @@ describe AssistantRolesController do
 
     context "assistant role" do
       subject { assigns(:assistant_role) }
-      its(:active) { should be_false }
+
+      describe '#active' do
+        subject { super().active }
+        it { is_expected.to be_falsey }
+      end
     end
 
   end
 
-  describe "DELETE 'destroy'" do
+  describe ".certificate" do
     before :each do
-      @assistant_role = FactoryGirl.create :assistant_role
-      @id = @assistant_role.id.to_s
-      @params = { "id" => @id }
+      get 'certificate', {"id" => assistant_role.id.to_s}
     end
 
-    it "should be destroyed" do
-      AssistantRole.should_receive(:exists?).with(@id).and_return(true)
-      AssistantRole.should_receive(:find).with(@id).and_return(@assistant_role)
-      @assistant_role.should_receive(:destroy)
-      delete 'destroy', @params
+    context "assistant role" do
+      subject { assigns(:assistant) }
     end
 
-    it "returns http success" do
-      delete 'destroy', @params
-      response.should redirect_to assistant_roles_path
+  end
+
+  describe ".destroy" do
+    before :each do
+      delete 'destroy', {"id" => assistant_role.id.to_s}
+    end
+
+    context "when should be destroyed" do
+      subject { AssistantRole.exists? @id }
+      it { is_expected.to be_falsey }
+    end
+
+    context "when http return success" do
+      subject { response }
+      it { is_expected.to redirect_to(assistant_roles_path) }
     end
   end
 

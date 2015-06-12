@@ -115,6 +115,22 @@ rake db:migrate RAILS_ENV=test
 rspec
 ```
 
+## Tarefas agendadas em produção
+Para rodar a thread que verifica tarefas agendadas e as executa no
+tempo correto, é necessário rodar o script:
+RAILS_ENV=production bin/delayed_job start
+OU
+rake jobs:work
+Se acontecerem problemas, https://github.com/collectiveidea/delayed_job/wiki/Common-problems
+tem troubleshooting. 
+
+## Conversao para pdf
+Precisa instalar o binario em produção
+https://github.com/mileszs/wicked_pdf/wiki/Getting-Started-Installing-wkhtmltopdf
+e em /config/initializers/wicked_pdf.rb mudar o path se nao ficar em /usr/bin/
+
+
+
 ## Coisas antigas do README
 
 Deixei aqui algumas informações do Jack que não precisei usar, mas podem vir a ser relevantes.

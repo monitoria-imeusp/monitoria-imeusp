@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Certificado <%= @assistant.student.name %></title>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />    
+    <%= wicked_pdf_stylesheet_link_tag "pdf" -%>
+    <%= wicked_pdf_javascript_include_tag "number_pages" %>
+  </head>
+  <body onload='number_pages'>
+    <div style="margin:0.5in; line-height:250%; font-family:'Arial'" id="content">
+      <div align="center">
+        <h1>A T E S T A D O</h1>
+      </div>
+      <br>
+      <br>
+      <p align="justify" style="text-indent:40px">
+        Atestamos para os devidos fins que <b><%= @assistant.student.name %></b> foi 
+        <%= @genderfied_title %> do Instituto de Matemática e Estatística da 
+        Universidade de São Paulo, sem vínculo empregatício no 
+        <%= @assistant.semester.as_s %>, na disciplina <b><%= @assistant.course.full_name %></b>,
+        sob a responsabilidade do(a) professor(a) <%= @assistant.professor.name %>.
+      </p>
+      <br><br>
+      <div align="right">
+          São Paulo, <%= format('%02d', Time.now.day) %> de <%= months_to_names[Time.now.month] %> de <%= Time.now.year %>. 
+      </div>
+      <br><br><br>
+      <div style="float:right" align="center">
+          Zara Issa Abud
+          <br>
+          <b><i>Comissão de Monitoria</b></i>
+          <br>
+          <b><i>Coordenadora</b></i>
+      </div>
+    </div>
+  </body>
+</html>

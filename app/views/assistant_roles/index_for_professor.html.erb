@@ -1,5 +1,5 @@
 <h1>Meus monitores</h1>
-
+ 
 <% @assistant_roles_by_semester.each do |entry| %>
   <h2><%= entry[:semester].as_s %></h2>
   <table>
@@ -15,7 +15,7 @@
 
     <tbody>
       <% entry[:role].each do |role| %>
-        <tr>
+        <tr class="studentRow">
           <td><%= role.student.name %></td>
           <td><%= role.request_for_teaching_assistant.course.course_code %></td>
           <td><%= role.request_for_teaching_assistant.professor.name %></td>
@@ -25,7 +25,51 @@
           <% else %>
             <td><%= link_to "Avaliar", new_assistant_evaluation_path(role) %></td>
           <% end %>
+        </tr>        
+        <% if !(Rails.env.production?) %>
+        <tr>
+          <td colspan=5>
+            <table border=1>
+              <tbody>
+                <tr>
+                  <% @months.each do |month| %>
+                  <td>
+                    <% status = role.frequency_status_for_month(month) %>
+                    <% color = "black" %>
+                    <%= "&nbsp;&bull;".html_safe %>
+                    <%= " #{months_to_names[month]}: " %>  
+                    <% if status == "Pendente" && !secretary_signed_in? %>
+                      <br>
+                      <%= content_tag :span, style: "" do -%>
+                      <%= link_to "Marcar presença", 
+                      mark_assistant_role_frequency_path(role: role.id, month: month, presence: true, pid: role.professor.id), method: :post, data: { confirm: 'Deseja mesmo marcar presença para este monitor?' }  %>
+                      <% end -%>
+                      <br>
+                      <%= content_tag :span, style: "" do -%>
+                      <%= link_to "Marcar ausência",
+                      mark_assistant_role_frequency_path(role: role.id, month: month, presence: false, pid: role.professor.id), method: :post, data: { confirm: 'Deseja mesmo marcar ausência para este monitor?' }  %>
+                      <% end -%>
+                    <% else %>
+                      <% if status == "Presente"
+                            color = "green"
+                         elsif status == "Ausente"
+                            color = "red"
+                         else
+                            color = "darkgoldenrod"
+                         end
+                      %>
+                      <%= content_tag :span, style: "color:#{color}" do -%>
+                      <%= status %>
+                      <% end -%>
+                    <% end %>    
+                  </td>
+                  <% end %>
+                </tr>
+              </tbody>
+            </table>
+          </td>
         </tr>
+        <% end %>
       <% end %>
     </tbody>
   </table>

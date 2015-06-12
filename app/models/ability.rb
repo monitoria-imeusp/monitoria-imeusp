@@ -230,6 +230,9 @@ class Ability
     if user.is_a? Admin or user.is_a? Secretary or (user.is_a? User and user.super_professor?)
       can :index, AssistantRole
     end
+    if user.is_a? Admin or user.is_a? Secretary
+      can :certificate, AssistantRole
+    end
     if user.is_a? Secretary
       can :notify_for_semester, AssistantRole
       can :request_evaluations_for_semester, AssistantRole
@@ -239,9 +242,11 @@ class Ability
       can :update, AssistantRole
       can :destroy, AssistantRole
       can :deactivate_assistant_role, AssistantRole
+      can :mark_assistance_role_frequency, AssistantRole
     end
     if user.is_a? User and user.professor?
       can :index_for_professor, AssistantRole
+      can :mark_assistance_role_frequency, AssistantRole
     end
 
     # Assistant evaluation management permissions

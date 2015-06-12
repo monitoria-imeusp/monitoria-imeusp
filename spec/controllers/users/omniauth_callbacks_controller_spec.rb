@@ -23,14 +23,12 @@ describe Users::OmniauthCallbacksController do
     describe ".usp" do
 
       before :each do
-        info.should_receive(:nusp).at_least(1).times.and_return(11111)
-        #info.should_receive(:name).at_least(1).times.and_return("Wil")
-        #info.should_receive(:email).at_least(1).times.and_return("kazuo@ime.usp.br")
-        info.should_receive(:link).at_least(1).times.and_return(:student)
+        expect(info).to receive(:nusp).at_least(1).times.and_return(11111)
+        expect(info).to receive(:link).at_least(1).times.and_return(:student)
         OmniAuth.config.mock_auth[:usp] = OmniAuth::AuthHash.new({})
-        OmniAuth.config.mock_auth[:usp].should_receive(:provider).at_least(1).times.and_return(:usp)
-        OmniAuth.config.mock_auth[:usp].should_receive(:uid).at_least(1).times.and_return('1')
-        OmniAuth.config.mock_auth[:usp].should_receive(:info).at_least(1).times.and_return(info)
+        expect(OmniAuth.config.mock_auth[:usp]).to receive(:provider).at_least(1).times.and_return(:usp)
+        expect(OmniAuth.config.mock_auth[:usp]).to receive(:uid).at_least(1).times.and_return('1')
+        expect(OmniAuth.config.mock_auth[:usp]).to receive(:info).at_least(1).times.and_return(info)
         request.env["omniauth.auth"] = OmniAuth.config.mock_auth[:usp] 
         get :usp
       end
@@ -44,12 +42,20 @@ describe Users::OmniauthCallbacksController do
         subject { assigns(:user) }
         it { expect(subject).to be_persisted }
         it { expect(subject).to eq(current_user) }
-        its(:nusp) { should be(11111) }
+
+        describe '#nusp' do
+          subject { super().nusp }
+          it { is_expected.to be(11111) }
+        end
       end
 
       context 'user count' do
         subject { User }
-        its(:count) { should be(count) }
+
+        describe '#count' do
+          subject { super().count }
+          it { is_expected.to be(count) }
+        end
       end
     end
   end
@@ -62,14 +68,12 @@ describe Users::OmniauthCallbacksController do
     describe ".usp" do
 
       before :each do
-        info.should_receive(:nusp).at_least(1).times.and_return(11112)
-        info.should_receive(:name).at_least(1).times.and_return("Bruno Sesso")
-        info.should_receive(:email).at_least(1).times.and_return("sesso@neverforget.com")
-        info.should_receive(:link).at_least(1).times.and_return(:student)
+        expect(info).to receive(:nusp).at_least(1).times.and_return(11112)
+        expect(info).to receive(:name).at_least(1).times.and_return("Bruno Sesso")
+        expect(info).to receive(:email).at_least(1).times.and_return("sesso@neverforget.com")
+        expect(info).to receive(:link).at_least(1).times.and_return(:student)
         OmniAuth.config.mock_auth[:usp] = OmniAuth::AuthHash.new({})
-        #OmniAuth.config.mock_auth[:usp].should_receive(:provider).at_least(1).times.and_return(:usp)
-        #OmniAuth.config.mock_auth[:usp].should_receive(:uid).at_least(1).times.and_return('2')
-        OmniAuth.config.mock_auth[:usp].should_receive(:info).at_least(1).times.and_return(info)
+        expect(OmniAuth.config.mock_auth[:usp]).to receive(:info).at_least(1).times.and_return(info)
         request.env["omniauth.auth"] = OmniAuth.config.mock_auth[:usp] 
         get :usp
       end
@@ -83,12 +87,20 @@ describe Users::OmniauthCallbacksController do
         subject { assigns(:user) }
         it { expect(subject).to be_persisted }
         it { expect(subject).to eq(current_user) }
-        its(:nusp) { should be(11112) }
+
+        describe '#nusp' do
+          subject { super().nusp }
+          it { is_expected.to be(11112) }
+        end
       end
 
       context 'user count' do
         subject { User }
-        its(:count) { should be(count + 1) }
+
+        describe '#count' do
+          subject { super().count }
+          it { is_expected.to be(count + 1) }
+        end
       end
 		end
 
@@ -103,14 +115,12 @@ describe Users::OmniauthCallbacksController do
     describe ".usp" do
 
       before :each do
-        info.should_receive(:nusp).at_least(1).times.and_return(22222)
-        #info.should_receive(:name).at_least(1).times.and_return("Wil")
-        #info.should_receive(:email).at_least(1).times.and_return("kazuo@ime.usp.br")
-        info.should_receive(:link).at_least(1).times.and_return(:teacher)
+        expect(info).to receive(:nusp).at_least(1).times.and_return(22222)
+        expect(info).to receive(:link).at_least(1).times.and_return(:teacher)
         OmniAuth.config.mock_auth[:usp] = OmniAuth::AuthHash.new({})
-        OmniAuth.config.mock_auth[:usp].should_receive(:provider).at_least(1).times.and_return(:usp)
-        OmniAuth.config.mock_auth[:usp].should_receive(:uid).at_least(1).times.and_return('2')
-        OmniAuth.config.mock_auth[:usp].should_receive(:info).at_least(1).times.and_return(info)
+        expect(OmniAuth.config.mock_auth[:usp]).to receive(:provider).at_least(1).times.and_return(:usp)
+        expect(OmniAuth.config.mock_auth[:usp]).to receive(:uid).at_least(1).times.and_return('2')
+        expect(OmniAuth.config.mock_auth[:usp]).to receive(:info).at_least(1).times.and_return(info)
         request.env["omniauth.auth"] = OmniAuth.config.mock_auth[:usp] 
         get :usp
       end
@@ -124,12 +134,20 @@ describe Users::OmniauthCallbacksController do
         subject { assigns(:user) }
         it { expect(subject).to be_persisted }
         it { expect(subject).to eq(current_user) }
-        its(:nusp) { should be(22222) }
+
+        describe '#nusp' do
+          subject { super().nusp }
+          it { is_expected.to be(22222) }
+        end
       end
 
       context 'user count' do
         subject { User }
-        its(:count) { should be(count) }
+
+        describe '#count' do
+          subject { super().count }
+          it { is_expected.to be(count) }
+        end
       end
     end
   end
@@ -143,14 +161,12 @@ describe Users::OmniauthCallbacksController do
     describe ".usp" do
 
       before :each do
-        info.should_receive(:nusp).at_least(1).times.and_return(22223)
-        info.should_receive(:name).at_least(1).times.and_return("Pindamoiangaba")
-        info.should_receive(:email).at_least(1).times.and_return("sesso4eva@neverforget.com")
-        info.should_receive(:link).at_least(1).times.and_return(:teacher)
+        expect(info).to receive(:nusp).at_least(1).times.and_return(22223)
+        expect(info).to receive(:name).at_least(1).times.and_return("Pindamoiangaba")
+        expect(info).to receive(:email).at_least(1).times.and_return("sesso4eva@neverforget.com")
+        expect(info).to receive(:link).at_least(1).times.and_return(:teacher)
         OmniAuth.config.mock_auth[:usp] = OmniAuth::AuthHash.new({})
-        #OmniAuth.config.mock_auth[:usp].should_receive(:provider).at_least(1).times.and_return(:usp)
-        #OmniAuth.config.mock_auth[:usp].should_receive(:uid).at_least(1).times.and_return('2')
-        OmniAuth.config.mock_auth[:usp].should_receive(:info).at_least(1).times.and_return(info)
+        expect(OmniAuth.config.mock_auth[:usp]).to receive(:info).at_least(1).times.and_return(info)
         request.env["omniauth.auth"] = OmniAuth.config.mock_auth[:usp] 
         get :usp
       end
@@ -164,12 +180,20 @@ describe Users::OmniauthCallbacksController do
         subject { assigns(:user) }
         it { expect(subject).to be_persisted }
         it { expect(subject).to eq(current_user) }
-        its(:nusp) { should be(22223) }
+
+        describe '#nusp' do
+          subject { super().nusp }
+          it { is_expected.to be(22223) }
+        end
       end
 
       context 'user count' do
         subject { User }
-        its(:count) { should be(count + 1) }
+
+        describe '#count' do
+          subject { super().count }
+          it { is_expected.to be(count + 1) }
+        end
       end
 		end
 

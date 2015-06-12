@@ -3,7 +3,9 @@ class AssistantRolesController < ApplicationController
 
   # GET /assistant_roles
   def index
-    separate_by_semester AssistantRole.all
+    separate_by_semester AssistantRole.all    
+    @current_semester_frequencies = AssistantFrequency.current_frequencies
+    create_current_months
   end
 
   # GET /assistant_roles/for_professor/1
@@ -11,19 +13,28 @@ class AssistantRolesController < ApplicationController
     @professor = Professor.find(params[:professor_id])
     requests = RequestForTeachingAssistant.where(professor: @professor)
     separate_by_semester AssistantRole.where(request_for_teaching_assistant: requests)
+    @current_semester_frequencies = AssistantFrequency.current_frequencies
+    create_current_months
   end
 
   def create
     @assistant_role = AssistantRole.new assistant_role_params
-    if @assistant_role.save
+    student_exists = Student.exists? @assistant_role.student_id
+    request_exists = RequestForTeachingAssistant.exists? @assistant_role.request_for_teaching_assistant_id
+    if student_exists and request_exists and @assistant_role.save
       respond_to do |format|
         BackupMailer.new_assistant_role(@assistant_role, current_creator).deliver
         format.html { redirect_to @assistant_role.request_for_teaching_assistant, notice: 'Monitor eleito com sucesso.' }
-        format.json { render action: 'show', status: :created, location: @assistant_role.request }
+        format.json { render action: 'show', status: :created, location: @assistant_role.request_for_teaching_assistant }
       end
+    elsif request_exists
+      respond_to do |format|
+        format.html { redirect_to @assistant_role.request_for_teaching_assistant, notice: 'Erro ao criar monitor.' }
+        format.json { render json: @assistant_role.errors, status: :unprocessable_entity }
+      end  
     else
       respond_to do |format|
-        format.html { redirect_to @assistant_role.request }
+        format.html { redirect_to '/', notice: 'Erro ao criar monitor.' }
         format.json { render json: @assistant_role.errors, status: :unprocessable_entity }
       end
     end
@@ -86,7 +97,24 @@ class AssistantRolesController < ApplicationController
         format.json { head :no_content }
       end
     end
-  end    
+  end   
+
+  def certificate
+    if AssistantRole.exists? params[:id]
+      @assistant = AssistantRole.find params[:id]
+      if @assistant.student.is_female?
+        @genderfied_title = "aluna-monitora"
+      else
+        @genderfied_title = "aluno-monitor"
+      end      
+      render pdf: "Certificado #{@assistant.student.name}"
+    else 
+      respond_to do |format|
+        format.html { redirect_to assistant_roles_path, notice: "Erro ao gerar atestado."}
+        format.json { render action: 'index'}
+      end
+    end
+  end
 
   private
 
@@ -106,6 +134,15 @@ class AssistantRolesController < ApplicationController
         end
       }
     end
+  end
+
+  def create_current_months
+    @months = [Time.now.month]
+    @current_semester_frequencies.each do |freq|
+      @months.push(freq.month)
+    end
+    @months.uniq!
+    @months.sort!
   end
 
   def current_creator

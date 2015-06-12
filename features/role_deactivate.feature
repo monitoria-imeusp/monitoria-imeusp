@@ -13,19 +13,10 @@ Feature: Assistant roles deactivation
         And there is a candidature by student "Bob" for course "MAC0110"
         And there is an assistant role for student "Bob" with professor "Dude" at course "MAC0110"
 
-    Scenario: Super professor deactivates an assistant role
+    Scenario: Super professor tries to deactivate an assistant role
         Given I'm logged in as a super professor
         And I visit the assistant roles page
-        And I click the "Desativar" link
-        Then I should see "Bob"
-        And I should see "Dude"
-        And I should see "MAC0110"
-        And I should see "Desativado"
-        Then I click the "Pedidos de monitoria" link
-        And I should see "Introdução"
-        And I click the first "Ver" link
-        And I should see "Disciplina: MAC0110 - Introdução"
-        And "123456" elected status should be "Não"
+        And I should not see "Desativar"
         
     Scenario: Secretary deactivates an assistant role
         Given I'm logged in as a secretary

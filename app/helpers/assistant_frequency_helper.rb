@@ -1,0 +1,2 @@
+module AssistantFrequencyHelper
+end

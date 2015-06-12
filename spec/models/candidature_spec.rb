@@ -1,8 +1,7 @@
 require 'spec_helper'
 
 describe Candidature do
-
-
+  
   let(:prof_user) { FactoryGirl.create :another_user }
   let!(:super_professor) { FactoryGirl.create :super_professor, user_id: prof_user.id }
   let(:semester)   { FactoryGirl.create :semester   }

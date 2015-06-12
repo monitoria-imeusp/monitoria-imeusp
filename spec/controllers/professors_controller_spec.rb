@@ -95,12 +95,16 @@ describe ProfessorsController do
           put :update, { id: professor.id, professor: { department_id: 2 } }
         end
 
-        it { should respond_with :redirect }
+        it { is_expected.to respond_with :redirect }
 
         context 'professor' do
           subject { assigns(:professor) }
           it { expect(subject).to eq professor }
-          its(:department_id) { should be 2 }
+
+          describe '#department_id' do
+            subject { super().department_id }
+            it { is_expected.to be 2 }
+          end
         end
       end
 

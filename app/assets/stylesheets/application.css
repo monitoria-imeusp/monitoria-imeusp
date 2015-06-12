@@ -178,6 +178,9 @@ td > a:hover {
   background-color: #b55;
   color: #eee;
 }
+tr.studentRow > td {
+  padding-top: 30px;
+}
 
 select {
   max-width: 60%;
