@@ -2,11 +2,9 @@
 <html>
   <head>
     <title>Certificado <%= @assistant.student.name %></title>
-    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />    
-    <%= wicked_pdf_stylesheet_link_tag "pdf" -%>
-    <%= wicked_pdf_javascript_include_tag "number_pages" %>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
   </head>
-  <body onload='number_pages'>
+  <body>
     <div style="margin:0.5in; line-height:250%; font-family:'Arial'" id="content">
       <div align="center">
         <h1>A T E S T A D O</h1>
