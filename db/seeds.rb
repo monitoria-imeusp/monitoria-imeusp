@@ -194,7 +194,7 @@ if Rails.env.development?
       },
       student: {
         institute: "IME",
-        gender: "0",
+        gender: "1",
         rg: "456",
         cpf: "654",
         address: "R. Matão",
@@ -355,7 +355,7 @@ if Rails.env.development?
       },
       student: {
         institute: "IME",
-        gender: "0",
+        gender: "1",
         rg: "123",
         cpf: "321",
         address: "R. Matão",

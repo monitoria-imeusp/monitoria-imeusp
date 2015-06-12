@@ -19,6 +19,7 @@
         <th><%= t('activerecord.attributes.request_for_teaching_assistant.professor_id') %> </th>
         <% if secretary_signed_in? %>
           <th></th>
+          <th></th>
         <% end %>
       </tr>
     </thead>
@@ -32,14 +33,22 @@
           <% if secretary_signed_in? %>
             <td>
               <%if role.active %>
-                <%= link_to "Desativar", deactivate_assistant_role_path(role.id), method: :post, data: { confirm: 'Deseja mesmo desativar este monitor?' } %></td>
+                <%= link_to "Desativar", deactivate_assistant_role_path(role.id), method: :post, data: { confirm: 'Deseja mesmo desativar este monitor?' } %>
               <% else %>
                 Desativado
               <% end %>
+            </td>
+            <td>
+              <%= link_to "Atestado", certificate_path(role.id, :format => :pdf), method: :get, target: "_blank" %>
+            </td>
           <% end %>
         </tr>
         <tr>
-          <td colspan=4>
+          <% if secretary_signed_in? %>
+            <td colspan=5>
+          <% else %>
+            <td colspan=4>
+          <% end %>
             <table border=1>
               <tbody>
                 <tr>

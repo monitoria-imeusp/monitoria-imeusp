@@ -80,6 +80,17 @@ describe AssistantRolesController do
 
   end
 
+  describe ".certificate" do
+    before :each do
+      get 'certificate', {"id" => assistant_role.id.to_s}
+    end
+
+    context "assistant role" do
+      subject { assigns(:assistant) }
+    end
+
+  end
+
   describe ".destroy" do
     before :each do
       delete 'destroy', {"id" => assistant_role.id.to_s}

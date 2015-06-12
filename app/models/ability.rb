@@ -233,6 +233,7 @@ class Ability
     if user.is_a? Secretary
       can :notify_for_semester, AssistantRole
       can :request_evaluations_for_semester, AssistantRole
+      can :certificate, AssistantRole
     end
     if user.is_a? Secretary or (user.is_a? User and user.super_professor?)
       can :create, AssistantRole

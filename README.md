@@ -124,6 +124,11 @@ rake jobs:work
 Se acontecerem problemas, https://github.com/collectiveidea/delayed_job/wiki/Common-problems
 tem troubleshooting. 
 
+## Conversao para pdf
+Precisa instalar o binario em produção
+https://github.com/mileszs/wicked_pdf/wiki/Getting-Started-Installing-wkhtmltopdf
+e em /config/initializers/wicked_pdf.rb mudar o path se nao ficar em /usr/bin/
+
 
 
 ## Coisas antigas do README
