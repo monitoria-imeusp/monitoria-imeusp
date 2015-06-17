@@ -34,6 +34,7 @@ Feature: Assistant roles table visualization
         And there is an assistant frequency with month "3" with presence "true" for student "Wil" and professor "Gold" at course "MAC0431"
         And there is an assistant frequency with month "4" with presence "true" for student "Wil" and professor "Gold" at course "MAC0431"
         And there is an assistant frequency with month "5" with presence "true" for student "Wil" and professor "Gold" at course "MAC0431"
+        And there is an assistant frequency with month "3" with presence "false" for student "Mary" and professor "Silver" at course "MAT0125"
 
     Scenario: Super professor sees all assistant roles
         Given I'm logged in as a super professor
@@ -61,7 +62,7 @@ Feature: Assistant roles table visualization
         Then I should see "Bob MAC0110 Dude Desativar Atestado • Março: Ausente • Abril: Presente • Maio: Presente"
         Then I should see "John MAC0431 Gold Desativar Atestado • Março: Presente • Abril: Ausente • Maio: Pendente"
         Then I should see "Wil MAC0431 Gold Desativar Atestado • Março: Presente • Abril: Presente • Maio: Presente"
-        Then I should see "Mary MAT0125 Silver Desativar Atestado • Março: Pendente • Abril: Pendente • Maio: Pendente"
+        Then I should see "Mary MAT0125 Silver Desativar Atestado • Março: Ausente • Abril: Pendente • Maio: Pendente"
         And I should not see "Junho"
         Then I'm back to current time
 
@@ -72,7 +73,7 @@ Feature: Assistant roles table visualization
         Then I should see "Bob MAC0110 Dude • Março: Ausente • Abril: Presente • Maio: Presente"
         Then I should see "John MAC0431 Gold • Março: Presente • Abril: Ausente • Maio: Marcar presença Marcar ausência"
         Then I should see "Wil MAC0431 Gold • Março: Presente • Abril: Presente • Maio: Presente"
-        Then I should see "Mary MAT0125 Silver • Março: Marcar presença Marcar ausência • Abril: Marcar presença Marcar ausência • Maio: Marcar presença Marcar ausência"
+        Then I should see "Mary MAT0125 Silver • Março: Ausente • Abril: Marcar presença Marcar ausência • Maio: Marcar presença Marcar ausência"
         And I should not see "Junho"
         Then I'm back to current time
 
@@ -84,12 +85,56 @@ Feature: Assistant roles table visualization
         Then I should see "Bob MAC0110 Dude • Março: Ausente • Abril: Presente • Maio: Presente"
         Then I should see "John MAC0431 Gold • Março: Presente • Abril: Ausente • Maio: Presente"
         Then I should see "Wil MAC0431 Gold • Março: Presente • Abril: Presente • Maio: Presente"
-        Then I should see "Mary MAT0125 Silver • Março: Marcar presença Marcar ausência • Abril: Marcar presença Marcar ausência • Maio: Marcar presença Marcar ausência"
+        Then I should see "Mary MAT0125 Silver • Março: Ausente • Abril: Marcar presença Marcar ausência • Maio: Marcar presença Marcar ausência"
         And I click the first "Marcar ausência" link
         Then I should see "Bob MAC0110 Dude • Março: Ausente • Abril: Presente • Maio: Presente"
         Then I should see "John MAC0431 Gold • Março: Presente • Abril: Ausente • Maio: Presente"
         Then I should see "Wil MAC0431 Gold • Março: Presente • Abril: Presente • Maio: Presente"
-        Then I should see "Mary MAT0125 Silver • Março: Ausente • Abril: Marcar presença Marcar ausência • Maio: Marcar presença Marcar ausência"
+        Then I should see "Mary MAT0125 Silver • Março: Ausente • Abril: Ausente • Maio: Marcar presença Marcar ausência"
         And I should not see "Junho"
         Then I'm back to current time
+
+    @javascript
+    Scenario: Secretary filters roles
+        Given it's currently month 5
+        Given I'm logged in as a secretary
+        And I visit the assistant roles page
+        And I select the department option "MAC"
+        Then I should see "Bob"
+        And I should see "John"
+        And I should see "Wil"
+        And I should not see "Mary"
+        Then I select the department option "MAT"
+        Then I should see "Mary"
+        And I should not see "Bob"
+        And I should not see "John"
+        And I should not see "Wil"
+        Then I select the department option "ALL"
+        Then I should see "Mary"
+        And I should see "Bob"
+        And I should see "John"
+        And I should see "Wil"
+        Then I select "Abril" on the "month_select"
+        Then I select "Presentes" on the "status_select"
+        Then I should see "Bob"
+        And I should see "Wil"
+        And I should not see "John"
+        And I should not see "Mary"
+        Then I select "Ausentes" on the "status_select"
+        Then I should see "John"
+        And I should not see "Mary"
+        And I should not see "Bob"
+        And I should not see "Wil"
+        Then I select "Pendentes" on the "status_select"
+        Then I should see "Mary"
+        And I should not see "Bob"
+        And I should not see "Wil"
+        And I should not see "John"
+        Then I select "Março" on the "month_select"
+        Then I should not see "Mary"
+        And I should not see "Bob"
+        And I should not see "Wil"
+        And I should not see "John"
+        Then I'm back to current time
+
 
