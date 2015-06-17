@@ -93,31 +93,3 @@ Feature: Assistant roles table visualization
         And I should not see "Junho"
         Then I'm back to current time
 
-    Scenario: Frequency request emails are delivered
-        Given I'm logged in as a secretary
-        And I visit the assistant roles page
-        And I'm ready to receive email
-        And I click the "Pedir frequências" link
-        Then the frequency request email should have been delivered properly to "prof@ime.usp.br" 
-        Then the frequency request email should have been delivered properly to "golddev@ime.usp.br" 
-        Then the frequency request email should have been delivered properly to "silver@ime.usp.br" 
-        And I should see "Pedidos enviados com sucesso"
-
-    Scenario: Frequency reminder emails are delivered to super professors
-        Given it's currently month 5
-        Given I'm logged in as a secretary
-        And I visit the assistant roles page
-        And I'm ready to receive email
-        And I click the "Pedir frequências" link
-        Then the frequency reminder email should have been delivered properly to "ninadev@ime.usp.br" with student "John" as pending
-        Then I'm back to current time
-
-
-    Scenario: Frequency reminder emails are delivered to hiper professors
-        Given it's currently month 5
-        Given I'm logged in as a secretary
-        And I visit the assistant roles page
-        And I'm ready to receive email
-        And I click the "Pedir frequências" link
-        Then the frequency reminder email should have been delivered properly to "zaradev@ime.usp.br" with student "Mary" as pending
-        Then I'm back to current time

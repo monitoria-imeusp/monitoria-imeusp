@@ -1,9 +1,8 @@
-class FrequencyMailJob 
+class FrequencyReminderJob 
 
 	def perform
-		AssistantFrequency.notify_frequency
+		AssistantFrequency.notify_frequency_reminder
 	end
-
 
 	def max_run_time
 		300 #seconds
@@ -14,7 +13,7 @@ class FrequencyMailJob
   	end
 
   	def queue_name
-  		'notify_frequencies_queue'
+  		'pending_frequencies_queue'
   	end
 
 end

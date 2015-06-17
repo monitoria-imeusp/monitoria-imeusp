@@ -18,4 +18,40 @@ class AssistantFrequency < ActiveRecord::Base
   	full_list.select { |frequency| frequency.semester == active_semester }
   end
 
+  def self.notify_frequency
+    professors = []
+    semester = Semester.current
+    requests = RequestForTeachingAssistant.where(semester: semester)
+    AssistantRole.where(request_for_teaching_assistant: requests).each do |assistant|
+      professors.push(assistant.professor)
+    end
+    professors.uniq.each do |professor|   
+      NotificationMailer.frequency_request_notification(professor).deliver
+    end
+    if !Rails.env.production?
+      Delayed::Job.enqueue(FrequencyReminderJob.new, priority: 0, run_at: 3.days.from_now.getutc)
+    end
+    if (Time.now.month != 6 && Time.now.month != 11)
+      Delayed::Job.enqueue(FrequencyMailJob.new, priority: 0, run_at: 1.months.from_now.getutc)
+    end
+  end
+
+  def self.notify_frequency_reminder
+    semester = Semester.current
+    requests = RequestForTeachingAssistant.where(semester: semester)
+    Professor.where(:professor_rank => [1, 2]).each do |super_professor|
+      pending_roles = []
+      AssistantRole.where(request_for_teaching_assistant: requests).each do |assistant|
+        if !AssistantFrequency.where(month: Time.now.month, assistant_role_id: assistant.id).any?
+          if assistant.course.department == super_professor.department
+              pending_roles.push(assistant)
+          end
+        end
+      end        
+      if !pending_roles.empty?
+          NotificationMailer.pending_frequencies_notification(pending_roles, super_professor).deliver         
+      end
+    end
+  end
+
 end
