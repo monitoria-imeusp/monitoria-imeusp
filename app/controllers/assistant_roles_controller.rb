@@ -57,6 +57,13 @@ class AssistantRolesController < ApplicationController
     end
   end
 
+  def update
+    @assistant_role = AssistantRole.find params[:id]
+    @assistant_role.active = params[:assistant_role][:active]
+    @assistant_role.save
+    redirect_to candidatures_path
+  end
+
   # POST /assistant_roles/notify_for_semester/1
   def notify_for_semester
     @semester = Semester.find(params[:semester_id])
@@ -114,6 +121,10 @@ class AssistantRolesController < ApplicationController
         format.json { render action: 'index'}
       end
     end
+  end
+
+  def report_form
+    @role = AssistantRole.find params[:id]
   end
 
   private

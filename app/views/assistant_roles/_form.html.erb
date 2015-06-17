@@ -1,0 +1,7 @@
+<%= form_for(@role, url: {action: "update"}) do |f| %>
+  <%= f.label :active, "Ativo" %>
+  <%= f.check_box :active %>
+  <div class="actions">
+    <%= f.submit "Enviar" %>
+  </div>
+<% end %>
