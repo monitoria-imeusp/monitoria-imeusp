@@ -40,4 +40,21 @@ class AssistantRole < ActiveRecord::Base
     end
   end
 
+  def frequency_status_for_month_as_number month
+    found = false
+    assistant_frequency.each do |freq|
+      if month == freq.month
+        found = true
+        if freq.presence
+          return 3
+        else
+          return 1
+        end        
+      end
+    end
+    if !found
+      return 2
+    end    
+  end
+
 end
