@@ -36,7 +36,11 @@ class AssistantRole < ActiveRecord::Base
       end
     end
     if !found
-      return "Pendente"
+      if active
+        return "Pendente"
+      else
+        return "---"
+      end
     end
   end
 
