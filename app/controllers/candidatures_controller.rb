@@ -56,6 +56,7 @@ class CandidaturesController < ApplicationController
   # GET /candidatures/1.json
   def show
     authorization_student
+    @history_table = build_pretty_history_table(@candidature.student.history_table)
   end
 
   def download_transcript
@@ -168,6 +169,19 @@ class CandidaturesController < ApplicationController
 
   def already_for_semester? student_id, semester_id
     Candidature.where(student_id: student_id, semester_id: semester_id).any?
+  end
+
+  def build_pretty_history_table history_json
+    history_items = []
+    history_json["historico"].each do |item|
+      course_code = item["coddis"]
+      grade = item["nota"]
+      status = item["rstfim"]
+      year_semester = item["codtur"][0..4]
+      history_item = HistoryItem.new(course_code, grade, status, year_semester)
+      history_items.push(history_item)
+    end
+    history_items.sort
   end
 
 end

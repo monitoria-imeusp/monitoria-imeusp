@@ -37,4 +37,11 @@ class Student < ActiveRecord::Base
 	def user
 		User.find(user_id)
 	end
+
+	def history_table
+		auth = {:username => ENV["HISTORY_AUTH_USERNAME"], :password => ENV["HISTORY_AUTH_PASSWORD"]}
+		JSON.parse(HTTParty.get("#{ENV['HISTORY_REQUEST_URL']}#{nusp}", :basic_auth => auth).body.encode("UTF-8"))
+	end
+
+
 end
