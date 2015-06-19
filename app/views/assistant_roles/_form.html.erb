@@ -1,7 +1,40 @@
 <%= form_for(@role, url: {action: "update"}) do |f| %>
-  <%= f.label :active, "Ativo" %>
-  <%= f.check_box :active %>
+  <%= f.label :student_amount, "Quantos alunos em média você atendeu durante o plantão de monitores?" %>
+  <br>
+  <%= f.number_field :student_amount %>
+  <br>
+  <br>
+  <%= f.label :homework_amount, "Quantas listas de exercícios você corrigiu por mês (em média?)" %>
+  <br>
+  <%= f.number_field :homework_amount %>
+  <br>
+  <br>
+  <%= f.label :secondary_activity, "Você exerceu outra atividade além de atendimento a alunos e/ou 
+  correção de listas de exercícios?"%>
+  <br>
+  <%= f.text_field :secondary_activity %>
+  <br>
+  <br>
+  <%= f.label :workload, "O que você achou do trabalho de monitoria?" %>
+  <br>  
+  <% workloads.each do | option | %>
+    <%= f.radio_button :workload, option[1] %>
+    <%= f.label option[0] %>
+  <% end %>
+  <br>
+  <br>
+  <%= f.label :workload_reason, "Por quê?" %>
+  <br>
+  <%= f.text_field :workload_reason %>
+  <br>
+  <br>
+  <%= f.label :comment, "Observações, sugestões e reclamações: " %>
+  <br>
+  <%= f.text_area :comment %>
+  <%= f.hidden_field :report_creation_date, :value => DateTime.now %>
+  <br>
+  <br>
   <div class="actions">
-    <%= f.submit "Enviar" %>
+    <%= f.submit "Enviar", data: { confirm: 'Deseja mesmo enviar o relatório? Não será possível modificá-lo após o envio.' } %>
   </div>
 <% end %>

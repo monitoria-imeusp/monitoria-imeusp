@@ -237,6 +237,7 @@ class Ability
     if user.is_a? Secretary
       can :notify_for_semester, AssistantRole
       can :request_evaluations_for_semester, AssistantRole
+      can :print_report, AssistantRole
     end
     if user.is_a? Secretary or (user.is_a? User and user.super_professor?)
       can :create, AssistantRole
@@ -252,6 +253,7 @@ class Ability
 
     if user.is_a? User and user.student?
       can :report_form, AssistantRole
+      can :print_report, AssistantRole
     end
 
     # Assistant evaluation management permissions

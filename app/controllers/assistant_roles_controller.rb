@@ -59,7 +59,13 @@ class AssistantRolesController < ApplicationController
 
   def update
     @assistant_role = AssistantRole.find params[:id]
-    @assistant_role.active = params[:assistant_role][:active]
+    @assistant_role.student_amount = params[:assistant_role][:student_amount]
+    @assistant_role.homework_amount = params[:assistant_role][:homework_amount]
+    @assistant_role.secondary_activity = params[:assistant_role][:secondary_activity]
+    @assistant_role.workload = params[:assistant_role][:workload]
+    @assistant_role.workload_reason = params[:assistant_role][:workload_reason]
+    @assistant_role.comment = params[:assistant_role][:comment]
+    @assistant_role.report_creation_date = params[:assistant_role][:report_creation_date]
     @assistant_role.save
     redirect_to candidatures_path
   end
@@ -125,6 +131,13 @@ class AssistantRolesController < ApplicationController
 
   def report_form
     @role = AssistantRole.find params[:id]
+  end
+
+  def print_report
+    if AssistantRole.exists? params[:id]
+      @assistant = AssistantRole.find params[:id]
+      render pdf: "Relatório #{@assistant.student.name}"
+    end
   end
 
   private

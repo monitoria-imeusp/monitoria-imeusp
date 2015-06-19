@@ -23,6 +23,10 @@ class AssistantRole < ActiveRecord::Base
     update_column(:active, false)
   end
 
+  def report_filled?
+    !(report_creation_date.nil?)
+  end
+
   def frequency_status_for_month month
     found = false
     assistant_frequency.each do |freq|
