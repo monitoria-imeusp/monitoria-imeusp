@@ -32,6 +32,11 @@ When(/^I fill the assistant evaluation fields$/) do
   choose "assistant_evaluation_reliability_1"
   choose "assistant_evaluation_overall_1"
   fill_in "Comentários", :with => "Sbrubles"
-
 end
+
+When(/^I choose the "(.*?)" workload option$/) do |workload|
+  choose "assistant_role_workload_#{workload}"
+end
+
+
 
