@@ -33,10 +33,10 @@ class SemestersController < ApplicationController
 
   def activate
     if !Delayed::Job.where(queue: "notify_frequencies_queue").any?
-      if Time.now.getutc > DateTime.new(this.year, this.month, 20, 0, 0, -3).getutc
-        Delayed::Job.enqueue(FrequencyMailJob.new,priority: 0, run_at: DateTime.new(this.year, this.month+1, 20, 0, 0, -3).getutc)
+      if Time.now.getutc > DateTime.new(Time.now.year, Time.now.month, 20, 0, 0, -3).getutc
+        Delayed::Job.enqueue(FrequencyMailJob.new,priority: 0, run_at: DateTime.new(Time.now.year, Time.now.month+1, 20, 0, 0, -3).getutc)
       else
-        Delayed::Job.enqueue(FrequencyMailJob.new,priority: 0, run_at: DateTime.new(this.year, this.month, 20, 0, 0, -3).getutc)            
+        Delayed::Job.enqueue(FrequencyMailJob.new,priority: 0, run_at: DateTime.new(Time.now.year, Time.now.month, 20, 0, 0, -3).getutc)            
       end
     end
 

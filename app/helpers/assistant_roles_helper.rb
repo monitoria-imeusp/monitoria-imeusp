@@ -16,4 +16,11 @@ module AssistantRolesHelper
       'Dezembro'
     ]
   end
+  def workloads
+    [
+      ["Pesado", 0],
+      ["Razoável", 1],
+      ["Leve", 2]
+    ]
+  end
 end

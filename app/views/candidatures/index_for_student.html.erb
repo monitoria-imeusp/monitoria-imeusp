@@ -55,7 +55,7 @@
           </tr>
         <% end %>
         <tr>
-          <td colspan="2"><%= link_to 'Mais informações', candidature %></th>
+          <td colspan="2"><%= link_to 'Mais informações', candidature %></td>
         </tr>
       </tbody>
     </table>
@@ -64,6 +64,53 @@
 <% else %>
   <h2><i>Você não tem nenhuma candidatura</i></h2>
 <% end %>
+
+<h1>Minhas monitorias</h1>
+
+<% if @roles.any? %>
+  <% @roles.each do |role| %>
+    <table>
+      <thead>
+        <tr>
+          <th colspan="2">
+            <%= role.semester.period_as_s %>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="title">
+            Curso
+          </td>
+          <td class="name">
+            <%= role.course.full_name %>
+          </td>
+        </tr>
+        <tr>
+          <td class="title">
+            Professor
+          </td>
+          <td class="name">
+            <%= role.professor.name %>
+          </td>
+        </tr>
+        <% if role.report_filled? %>
+          <tr>
+            <td colspan="2"><%= link_to 'Ver relatório', print_report_path(role.id, :format => :pdf), target: "_blank" %></td>
+          </tr>
+        <% else %>
+          <tr>
+            <td colspan="2"><%= link_to 'Preencher relatório', report_form_path(role.id) %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+    <br>
+  <% end %>
+<% else %>
+  <h2><i>Você não tem nenhuma monitoria</i></h2>
+<% end %>
+
 
 <br>
 

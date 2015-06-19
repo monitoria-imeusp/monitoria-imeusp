@@ -42,6 +42,7 @@
         <% if secretary_signed_in? %>
           <th></th>
           <th></th>
+          <th></th>
         <% end %>
       </tr>
     </thead>
@@ -60,6 +61,11 @@
                 Desativado
               <% end %>
             </td>
+            <td>
+              <% if role.report_filled? %>
+              <%= link_to 'Ver relatório', print_report_path(role.id, :format => :pdf), target: "_blank" %>
+              <% end %>
+            </td>
           <% end %>
           <% if secretary_signed_in? or admin_signed_in? %>
             <td>
@@ -70,7 +76,7 @@
         <% if !(Rails.env.production?) %>
         <tr>
           <% if secretary_signed_in? %>
-            <td colspan=5>
+            <td colspan=6>
           <% else %>
             <td colspan=4>
           <% end %>

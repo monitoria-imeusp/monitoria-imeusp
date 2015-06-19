@@ -59,6 +59,41 @@ describe AssistantRolesController do
     end
   end
 
+  describe ".update" do
+    context "with valid parameters" do
+      before :each do
+        date = DateTime.now
+        patch 'update', { :id => assistant_role.id.to_s, :assistant_role =>
+          {
+            :student_amount => 3,
+            :homework_amount => 4,
+            :secondary_activity => "Não",
+            :workload => 1,
+            :workload_reason => "bla",
+            :comment => "blabla",
+            :report_creation_date => date
+          }
+        }
+      end
+
+
+
+      it {
+        role = AssistantRole.find(assistant_role.id)
+        expect(role.student_amount).to eq(3)
+        expect(role.homework_amount).to eq(4)
+        expect(role.secondary_activity).to eq("Não")
+        expect(role.workload).to eq(1)
+        expect(role.workload_reason).to eq("bla")
+        expect(role.comment).to eq("blabla")
+        expect(role.report_creation_date.day).to eq(DateTime.now.day)
+        expect(role.report_creation_date.month).to eq(DateTime.now.month)
+        expect(role.report_creation_date.year).to eq(DateTime.now.year)
+        is_expected.to redirect_to(candidatures_path)
+       }
+    end
+  end
+
   describe ".deactivate" do
     before :each do
       post 'deactivate_assistant_role', {"id" => assistant_role.id.to_s}
