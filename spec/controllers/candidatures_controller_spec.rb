@@ -88,6 +88,15 @@ describe CandidaturesController do
       "active" => true
   }}
 
+  let(:valid_history) {{
+    "historico" => [{"coddis" => "MAC0315","nota" => "5.0","rstfim" => "A ","codtur" => "20151"},
+                    {"coddis" => "MAC0300","nota" => "0.0","rstfim" => "MA","codtur" => "20152"},
+                    {"coddis" => "MAC0323","nota" => "0.0","rstfim" => "T ","codtur" => "20151"},
+                    {"coddis" => "MAC0420","nota" => "9.0","rstfim" => "RF","codtur" => "20151"},
+                    {"coddis" => "MAC0420","nota" => "4.9","rstfim" => "RN","codtur" => "20141"},
+                    {"coddis" => "MAT0111","nota" => "3.0","rstfim" => "RA","codtur" => "20121"}]
+    }}
+
   let(:valid_session) { {} }
 
   let(:user) { FactoryGirl.create :user, name: "Wilson Kazuo Mizutani" }
@@ -194,10 +203,45 @@ describe CandidaturesController do
   end
 
   describe "GET show" do
+    before :each do
+      @candidature = Candidature.create! valid_attributes
+      student = double(Student)
+      expect_any_instance_of(Student).to receive(:history_table).and_return(valid_history)
+      get :show, {:id => @candidature.to_param}, valid_session
+    end
+
     it "assigns the requested candidature as @candidature" do
-      candidature = Candidature.create! valid_attributes
-      get :show, {:id => candidature.to_param}, valid_session
-      expect(assigns(:candidature)).to eq(candidature)
+      expect(assigns(:candidature)).to eq(@candidature)
+    end
+
+    it "returns correct history from json" do      
+      history = assigns(:history_table)  
+      expect(history[0].course_name).to eq("MAT0111")
+      expect(history[0].grade).to eq("3.0")
+      expect(history[0].full_status).to eq("Reprovado por nota e frequência")
+      expect(history[0].year_semester).to eq("20121")
+      expect(history[0].year).to eq("2012")
+      expect(history[0].semester).to eq("1")
+
+      expect(history[1].full_status).to eq("Reprovado por nota")
+      expect(history[1].year).to eq("2014")
+      expect(history[1].semester).to eq("1")
+
+      expect(history[2].full_status).to eq("Reprovado por frequência")
+      expect(history[2].year).to eq("2015")
+      expect(history[2].semester).to eq("1")
+
+      expect(history[3].full_status).to eq("Trancado")
+      expect(history[3].year).to eq("2015")
+      expect(history[3].semester).to eq("1")
+
+      expect(history[4].full_status).to eq("Aprovado")
+      expect(history[4].year).to eq("2015")
+      expect(history[4].semester).to eq("1")
+
+      expect(history[5].full_status).to eq("Matriculado")
+      expect(history[5].year).to eq("2015")
+      expect(history[5].semester).to eq("2")
     end
   end
 

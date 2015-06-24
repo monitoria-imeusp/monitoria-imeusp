@@ -5,6 +5,7 @@ Feature: Creating Request for Teaching Assistant
 
     Background:
         Given there is an open semester "2014" "1"
+        And I can do real web requests
         And there is a department with code "MAC"
         And there is a department with code "MAE"
         And there is a department with code "MAT"
