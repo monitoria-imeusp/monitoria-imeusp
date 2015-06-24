@@ -43,6 +43,8 @@
           <th></th>
           <th></th>
           <th></th>
+        <% elsif (user_signed_in? and current_user.super_professor?) or admin_signed_in? %>
+          <th></th>
         <% end %>
       </tr>
     </thead>
@@ -53,14 +55,20 @@
           <td><%= role.student.name %></td>
           <td><%= role.request_for_teaching_assistant.course.course_code %></td>
           <td><%= role.request_for_teaching_assistant.professor.name %></td>
-          <% if secretary_signed_in? %>
+          <% if secretary_signed_in? or (user_signed_in? and current_user.super_professor?) %>
             <td>
               <%if role.active %>
-                <%= link_to "Desativar", deactivate_assistant_role_path(role.id), method: :post, data: { confirm: 'Deseja mesmo desativar este monitor?' } %>
+                <% if secretary_signed_in? %>
+                    <%= link_to "Desativar", deactivate_assistant_role_path(role.id), method: :post, data: { confirm: 'Deseja mesmo desativar este monitor?' } %>
+                <% else %>
+                    Ativo
+                <% end %>
               <% else %>
                 Desativado
               <% end %>
             </td>
+          <% end %>
+          <% if secretary_signed_in? %>
             <td>
               <% if role.report_filled? %>
               <%= link_to 'Ver relatório', print_report_path(role.id, :format => :pdf), target: "_blank" %>
