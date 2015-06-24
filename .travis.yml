@@ -5,6 +5,9 @@ rvm:
 before_script:
   - "bundle exec rake db:migrate RAILS_ENV=test"
 
+env: 
+  - HISTORY_REQUEST_URL=http://abc/
+
 notifications:
   email:
     recipients:
