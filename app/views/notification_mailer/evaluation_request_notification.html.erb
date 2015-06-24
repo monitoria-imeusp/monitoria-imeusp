@@ -5,18 +5,29 @@
   </head>
   <body>
     <p>
-      Prezado(a) <%= @assistant.professor.name %>,
+      Caro(a) professor(a):
     </p>
     <p>
-      TODO
+      Está disponível no sistema de monitoria o Formulário para Avaliação dos Monitores do IME no <%= @semester.as_s %>.
     </p>
     <p>
-      Estamos a disposição em caso de dúvidas.
+      Tais avaliações são importantes porque ajudam os docentes da Comissão de Monitoria na seleção dos monitores do semestre seguinte.
+    </p>
+    <p>
+      Neste sentido, contamos com a sua gentileza e colaboração para acessar o sistema de monitoria (<%= link_to "monitoria.ime.usp.br", "http://monitoria.ime.usp.br"%>), 
+      logar-se através do seu número USP e a mesma senha dos Sistemas USP e preencher o referido formulário. É bem simples e rápido.
+    </p>
+    <p>
+      Havendo qualquer dúvida sobre o preenchimento do formulário, por favor, entre em contato com a Seção de Monitoria, através do e-mail monitoria@ime.usp.br .
+    </p>
+    <p>
+      Problemas sistêmicos devem ser sinalizados diretamente ao e-mail sistemamonitoria@ime.usp.br .
+    </p>
+    <p>
+      Atenciosamente,
     </p>
     <p>
       Comissão de Monitoria IME/USP<br>
-      E-mail: monitoria@ime.usp.br<br>
-      Telefone: 11 3091-6107<br>
     </p>
   </body>
 </html>

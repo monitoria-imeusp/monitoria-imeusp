@@ -144,4 +144,13 @@ Feature: Assistant roles table visualization
         And I should not see "John"
         Then I'm back to current time
 
-
+    Scenario: Secretary requests assistant evaluations
+        Given I'm ready to receive email
+        Given I'm logged in as a secretary
+        And I visit the assistant roles page
+        And I click the "Pedir avaliações dos professores" link
+        Then the assistant evaluation reminder email for semester "2" of year "2014" should have been delivered properly to "prof@ime.usp.br"
+        And the assistant evaluation reminder email for semester "2" of year "2014" should have been delivered properly to "golddev@ime.usp.br"
+        And the assistant evaluation reminder email for semester "2" of year "2014" should have been delivered properly to "silver@ime.usp.br"
+        And I should see "Solicitações enviadas aos professores"
+        
