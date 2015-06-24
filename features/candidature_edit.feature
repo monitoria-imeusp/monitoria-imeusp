@@ -5,6 +5,7 @@ Feature: Upddating a candidature
 
     Background:
         When there is an open semester "2014" "1"
+        And I can do real web requests
         And there is a student with name "carlinhos" with nusp "123456" and email "eu@usp.br"
         And there is a department with code "MAC"
         And there is a course with name "labxp" and code "MAC0342" and department "MAC"

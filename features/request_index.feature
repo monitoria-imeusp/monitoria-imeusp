@@ -5,6 +5,7 @@ Feature: Index of the Requests for Teaching Assistant
 
     Background:
         Given there is an open semester "2014" "1"
+        And I can do real web requests
         And there is a department with code "MAC"
         And there is a department with code "MAE"
         And there is a professor with name "Bob" and password "prof-123" nusp "12333" department "MAC" and email "bob@bob.bob"

@@ -56,7 +56,11 @@ class CandidaturesController < ApplicationController
   # GET /candidatures/1.json
   def show
     authorization_student
-    @history_table = build_pretty_history_table(@candidature.student.history_table)
+    begin
+      @history_table = build_pretty_history_table(@candidature.student.history_table)
+    rescue
+      @history_table = ""
+    end
   end
 
   def download_transcript
