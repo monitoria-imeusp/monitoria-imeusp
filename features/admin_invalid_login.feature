@@ -11,7 +11,7 @@ Feature: Invalid login
         And I press the "Entrar" button
         Then I should see "Credenciais inválidas."
 
-    Scenario: Invalid Senha
+    Scenario: Invalid password
         Given I'm at the login page
         And there is an admin user with email "kazuo@ime.usp.br" and password "admin123"
         When I fill the "Email" field with "kazuo@ime.usp.br"

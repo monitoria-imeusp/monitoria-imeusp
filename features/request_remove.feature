@@ -3,6 +3,9 @@ Feature: Removing Requests for Teaching Assistant
   As a professor
   I want to remove requests of teaching assistant
 
+    Background:
+        Given I can do real web requests
+
     @javascript
     Scenario: Valid professor deleting a request
         Given there is an open semester "2014" "1"

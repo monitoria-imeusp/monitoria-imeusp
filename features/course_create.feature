@@ -3,6 +3,9 @@ Feature: Course creation
     As a superprofessor or admin
     I want to create a course
 
+    Background:
+        Given I can do real web requests
+
     @javascript
     Scenario: Admin creating a course
         Given I'm at the login page
