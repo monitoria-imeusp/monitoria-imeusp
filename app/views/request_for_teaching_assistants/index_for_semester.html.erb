@@ -25,7 +25,7 @@
 
 <h2>Pedidos do <%= @semester.as_s %></h2> 
 <% if @should_have_department_sort %>
-  <div style="text-align:center">
+  <div style="text-align:center" class="biggerText">
     <input type="radio" name="disc" onchange="update_table(this.value)" id="MAC" value="MAC"> MAC
     <input type="radio" name="disc" onchange="update_table(this.value)" id="MAE" value="MAE"> MAE
     <input type="radio" name="disc" onchange="update_table(this.value)" id="MAP" value="MAP"> MAP

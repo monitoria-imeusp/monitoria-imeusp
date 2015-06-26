@@ -11,7 +11,7 @@
     <%= link_to "Notificar monitores", notify_assistant_roles_for_semester_path(entry[:semester]), method: :post %>
     <br><br>
     <% if !Rails.env.production? %>
-    <div>
+    <div class="biggerText">
     Filtrar por mês: 
     <select id="month_select" onchange="update_month(this)">
       <% @months.reverse.each do |month| %>

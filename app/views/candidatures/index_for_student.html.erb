@@ -94,7 +94,7 @@
             <%= role.professor.name %>
           </td>
         </tr>
-        <% if role.report_filled? %>
+        <% if (!(Rails.env.production?) and role.report_filled?) %>
           <tr>
             <td colspan="2"><%= link_to 'Ver relatório', print_report_path(role.id, :format => :pdf), target: "_blank" %></td>
           </tr>

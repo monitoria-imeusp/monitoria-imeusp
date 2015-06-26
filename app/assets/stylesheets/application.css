@@ -326,3 +326,9 @@ p.alert {
   background-color: #e99;
   border: 2px solid #b55;
 }
+
+/*********************************************************/
+
+.biggerText {
+  font-size: 17px;
+}

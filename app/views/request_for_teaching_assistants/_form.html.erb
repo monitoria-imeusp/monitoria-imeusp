@@ -22,11 +22,13 @@
       <%= f.select :professor_id, professor_options, :include_blank => false %><br>
     </div>
   <% end %>
+  <div class="biggerText">
   <input type="radio" name="disc" onchange="updateList(this.value)" id="MAC" value="MAC"> MAC
   <input type="radio" name="disc" onchange="updateList(this.value)" id="MAE" value="MAE"> MAE
   <input type="radio" name="disc" onchange="updateList(this.value)" id="MAP" value="MAP"> MAP
   <input type="radio" name="disc" onchange="updateList(this.value)" id="MAT" value="MAT"> MAT
   <input type="radio" name="disc" onchange="updateList(this.value)" id="ALL" value="ALL" checked> Todas
+</div>
   <div class="field">
     <%= f.label :course_id, t('activerecord.attributes.request_for_teaching_assistant.course_id') %><br>
     <%= f.select :course_id, course_options %><br>

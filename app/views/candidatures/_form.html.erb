@@ -12,6 +12,7 @@
   <% end %>
   
   <% (1..4).each do |i| %>
+  <div class="biggerText">
     <div class="field">
       <% cid = "course#{i}_id".to_sym %>
       <%= f.label cid, t("activerecord.attributes.candidature.course#{i}_id") %><br>
@@ -22,6 +23,7 @@
       <input type="radio" name="<%="disc#{i}"%>" onchange="<%="updateList(this.value, #{i}, true)"%>" id="<%="ALL#{i}"%>" value="ALL" checked> Todas<br>
       <%= f.select cid, course_options, {}, {:onchange => "removeFromOthers(#{i})"} %><br>
     </div>
+  </div>
   <% end %>
   
   <div class="field">
