@@ -469,7 +469,7 @@ if Rails.env.development?
       student_id: "9",
       course1_id: "2",
       course2_id: "4",
-      course3_id: "1",
+      course3_id: "3",
       course4_id: "6",
       daytime_availability: true,
       nighttime_availability: false,
@@ -559,6 +559,9 @@ if Rails.env.development?
     {
       request_for_teaching_assistant_id: "5",
       student_id: "7"
+    }, {
+      request_for_teaching_assistant_id: "6",
+      student_id: "9"
     }
   ].each do |assistant_role|
       AssistantRole.create(assistant_role)
