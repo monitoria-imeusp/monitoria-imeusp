@@ -24,9 +24,9 @@ Given(/^the graduate student with nusp "(.*?)" has valid history$/) do |nusp|
 end
 
 Given(/^I can do real web requests$/) do
-  WebMock.allow_net_connect!(:net_http_connect_on_start => true)
+  WebMock.disable!
 end
 
 Given(/^I can't do real web requests$/) do
-  WebMock.disable_net_connect!
+  WebMock.enable!
 end

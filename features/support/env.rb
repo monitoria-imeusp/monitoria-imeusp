@@ -12,16 +12,13 @@ require 'cucumber/rails'
 
 require 'capybara/poltergeist'
 
-require'capybara-webkit'
-#Capybara.default_driver = :poltergeist
-
-Capybara.javascript_driver = :webkit
-
 require 'webmock/cucumber'
 
-WebMock.allow_net_connect!
-Capybara.default_wait_time = 120
+require'capybara-webkit'
+#Capybara.default_driver = :poltergeist
+Capybara.javascript_driver = :webkit
 
+WebMock.disable!
 
 # Capybara defaults to CSS3 selectors rather than XPath.
 # If you'd prefer to use XPath, just uncomment this line and adjust any
