@@ -28,9 +28,7 @@ class AssistantFrequency < ActiveRecord::Base
     professors.uniq.each do |professor|   
       NotificationMailer.frequency_request_notification(professor).deliver
     end
-    if !Rails.env.production?
-      Delayed::Job.enqueue(FrequencyReminderJob.new, priority: 0, run_at: 3.days.from_now.getutc)
-    end
+    Delayed::Job.enqueue(FrequencyReminderJob.new, priority: 0, run_at: 11.days.from_now.getutc)
     if (Time.now.month != 6 && Time.now.month != 11)
       Delayed::Job.enqueue(FrequencyMailJob.new, priority: 0, run_at: 1.months.from_now.getutc)
     end

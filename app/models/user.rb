@@ -42,6 +42,11 @@ class User < ActiveRecord::Base
     query.any? and query.take.super_professor?
   end
 
+  def hiper_professor?
+    query = Professor.where(user_id: id)
+    query.any? and query.take.hiper_professor?
+  end
+
   def self.from_omniauth auth
     registered = where nusp: auth.info.nusp
     if registered.any?

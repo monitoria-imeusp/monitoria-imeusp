@@ -5,7 +5,7 @@ RSpec::Matchers.define :is_time do |t1|
 end
 
 describe AssistantFrequency do
-  let(:params) {{ priority: 0, run_at: is_time(3.days.from_now.getutc) }}
+  let(:params) {{ priority: 0, run_at: is_time(11.days.from_now.getutc) }}
   let(:params2) {{ priority: 0, run_at: is_time(1.months.from_now.getutc) }}
   let!(:semester) { FactoryGirl.create :semester }
   let!(:department) { FactoryGirl.create :department }

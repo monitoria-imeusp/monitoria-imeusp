@@ -10,6 +10,7 @@
     <% end %>
     <%= link_to "Notificar monitores", notify_assistant_roles_for_semester_path(entry[:semester]), method: :post %>
     <br><br>
+  <% end %>
     <% if !Rails.env.production? %>
     <div class="biggerText">
     Filtrar por mês: 
@@ -25,13 +26,14 @@
       <option value="2">Pendentes</option>
       <option value="3">Presentes</option>
     </select>
+    <% if secretary_signed_in? or (user_signed_in? and current_user.hiper_professor?) %>
     <input type="radio" name="disc" onchange="update_dep(this.value)" id="MAC" value="MAC"> MAC
     <input type="radio" name="disc" onchange="update_dep(this.value)" id="MAE" value="MAE"> MAE
     <input type="radio" name="disc" onchange="update_dep(this.value)" id="MAP" value="MAP"> MAP
     <input type="radio" name="disc" onchange="update_dep(this.value)" id="MAT" value="MAT"> MAT
     <input type="radio" name="disc" onchange="update_dep(this.value)" id="ALL" value="ALL" checked> Todas
+    <% end %>
   </div>
-  <% end %>
   <% end %>
   <table id="roles_table">
     <thead>
@@ -39,13 +41,9 @@
         <th>Aluno(a)</th>
         <th>Disciplina</th>
         <th>Professor(a)</th>
-        <% if secretary_signed_in? %>
-          <th></th>
-          <th></th>
-          <th></th>
-        <% elsif (user_signed_in? and current_user.super_professor?) or admin_signed_in? %>
-          <th></th>
-        <% end %>
+        <th></th>
+        <th></th>
+        <th></th>
       </tr>
     </thead>
 
@@ -68,26 +66,22 @@
               <% end %>
             </td>
           <% end %>
-          <% if secretary_signed_in? %>
-            <td>
-              <% if role.report_filled? %>
-              <%= link_to 'Ver relatório', print_report_path(role.id, :format => :pdf), target: "_blank" %>
-              <% end %>
-            </td>
-          <% end %>
+          <td>
+            <% if role.report_filled? %>
+            <%= link_to 'Ver relatório', print_report_path(role.id, :format => :pdf), target: "_blank" %>
+            <% end %>
+          </td>
           <% if secretary_signed_in? or admin_signed_in? %>
             <td>
               <%= link_to "Atestado", certificate_path(role.id, :format => :pdf), method: :get, target: "_blank" %>
             </td>
+          <% else %>
+              <td></td>
           <% end %>
         </tr>
         <% if !(Rails.env.production?) %>
         <tr>
-          <% if secretary_signed_in? %>
             <td colspan=6>
-          <% else %>
-            <td colspan=4>
-          <% end %>
             <table border=1>
               <tbody>
                 <tr>
