@@ -3,13 +3,9 @@ Feature: Removing Requests for Teaching Assistant
   As a professor
   I want to remove requests of teaching assistant
 
-    Background:
-        Given I can do real web requests
-
     @javascript
     Scenario: Valid professor deleting a request
         Given there is an open semester "2014" "1"
-        And I can do real web requests
         And there is a department with code "MAC"
         And there is a professor with name "Bob" and password "prof-123" nusp "123456" department "MAC" and email "bob@bob.bob"
         And there is a course with name "Mascarenhas" and code "MAC0110" and department "MAC"

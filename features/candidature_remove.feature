@@ -5,7 +5,6 @@ Feature: Deleting a candidature
 
     Background:
         When there is an open semester "2014" "1"
-        And I can do real web requests
 
     @javascript
     Scenario: Student deleting a candidature

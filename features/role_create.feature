@@ -13,7 +13,6 @@ Feature: Assistant roles creation
         And there is a request for teaching assistant by professor "Dude" for the course "MAC0110"
         And there is a candidature by student "Bob" for course "MAC0110"
         And there is a candidature by student "John" for course "MAC0110"
-        And I can do real web requests
 
 
     Scenario: Super professor creates an assistant role
@@ -37,6 +36,7 @@ Feature: Assistant roles creation
         And I should see "MAC0323 0.0 Trancado"
         And I should see "MAC0315 5.0 Aprovado"
         And I should see "MAC0300 0.0 Matriculado"
+        Then I can do real web requests
 
     Scenario: Graduate student history is displayed correctly
         Given I'm logged in as a super professor
@@ -50,6 +50,7 @@ Feature: Assistant roles creation
         And I should see "MAC5786 A"
         And I should see "MAC5716 A"
         And I should see "MAC5714 B"
+        Then I can do real web requests
 
     Scenario: Secretary sees creates an assistant role
         Given I'm logged in as a secretary

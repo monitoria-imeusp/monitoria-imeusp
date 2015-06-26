@@ -3,13 +3,9 @@ Feature: Course creation
     As a superprofessor or admin
     I want to create a course
 
-    Background:
-        Given I can do real web requests
-
     @javascript
     Scenario: Admin creating a course
         Given I'm at the login page
-        And I can do real web requests
         And there is an admin user with email "kazuo@ime.usp.br" and password "admin123"
         And there is a department with code "MAC"
         When I fill the "Email" field with "kazuo@ime.usp.br"
