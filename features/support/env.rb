@@ -20,7 +20,7 @@ Capybara.javascript_driver = :webkit
 require 'webmock/cucumber'
 
 WebMock.allow_net_connect!
-Capybara.default_max_wait_time = 120
+Capybara.default_wait_time = 120
 
 
 # Capybara defaults to CSS3 selectors rather than XPath.
