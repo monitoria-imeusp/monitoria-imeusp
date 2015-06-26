@@ -136,7 +136,6 @@
   </table>
 <% end %>
 
-
 <script>
 var table = document.getElementById("roles_table");
 var roles_by_dep = {};
@@ -154,7 +153,7 @@ function add_role_to_list(i, freq_list) {
     var row = table.rows[i];
     var course_name = row.cells[1].innerHTML;
     var freq_table = table.rows[i+1].cells[0].innerHTML;
-    var data = {student_name: row.cells[0].innerHTML, course: course_name, professor_name: row.cells[2].innerHTML, deactivate_button: row.cells[3].innerHTML, certificate_button: row.cells[4].innerHTML, freq: freq_table, freq_by_month: freq_list };
+    var data = {student_name: row.cells[0].innerHTML, course: course_name, professor_name: row.cells[2].innerHTML, deactivate_button: row.cells[3].innerHTML, report_button: row.cells[4].innerHTML, certificate_button: row.cells[5].innerHTML, freq: freq_table, freq_by_month: freq_list };
     roles_by_dep[course_name.substring(0, 3)].push(data);
     roles_by_dep["ALL"].push(data);
 }
@@ -193,7 +192,8 @@ function update_table() {
       table.rows[j].cells[1].innerHTML = roles_by_dep[current_dep][i].course;
       table.rows[j].cells[2].innerHTML = roles_by_dep[current_dep][i].professor_name;
       table.rows[j].cells[3].innerHTML = roles_by_dep[current_dep][i].deactivate_button;
-      table.rows[j].cells[4].innerHTML = roles_by_dep[current_dep][i].certificate_button;
+      table.rows[j].cells[4].innerHTML = roles_by_dep[current_dep][i].report_button;
+      table.rows[j].cells[5].innerHTML = roles_by_dep[current_dep][i].certificate_button;
       table.rows[j+1].cells[0].innerHTML = roles_by_dep[current_dep][i].freq;
       j += 2;
     }

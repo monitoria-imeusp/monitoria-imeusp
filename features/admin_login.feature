@@ -11,7 +11,7 @@ Feature: Login
         And I press the "Entrar" button
         Then I should see "Acesso efetuado com sucesso."
 
-    Scenario: After exitting the page and entering it again
+    Scenario: After exiting the page and entering it again
         Given I'm at the login page
         And there is an admin user with email "kazuo@ime.usp.br" and password "admin123"
         When I fill the "Email" field with "kazuo@ime.usp.br"

@@ -21,8 +21,3 @@ Feature: Showing a professor
         And I click the "Bob" link
         Then I should see "Nome Completo: Bob"
         And I should see "Nível de acesso: Membro da comissão de monitoria"
-
-	#Scenario: Professor does not exist
-		#When I'm at the "professors/1000" page
-		#Then I should see "Bob"
-		#And I should see "Gold"
