@@ -51,8 +51,6 @@ gem 'wicked_pdf'
 # To simplify external http requests
 gem 'httparty'
 
-# To mock web responses with cucumber
-gem 'webmock'
 
 group :test do
   # Easier test writing
@@ -60,6 +58,9 @@ group :test do
 
   # Test coverage
   gem 'simplecov', require: false
+
+  # To mock web responses with cucumber
+  gem 'webmock'
 end
 
 group :development do
