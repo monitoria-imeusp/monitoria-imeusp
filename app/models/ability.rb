@@ -244,11 +244,23 @@ class Ability
       can :update, AssistantRole
       can :destroy, AssistantRole
       can :deactivate_assistant_role, AssistantRole
-      can :mark_assistance_role_frequency, AssistantRole
+      can :mark_assistant_role_frequency, AssistantFrequency
+      can :update, AssistantFrequency
+      can :create, AssistantFrequency
+      can :read, AssistantFrequency
     end
     if user.is_a? User and user.professor?
       can :index_for_professor, AssistantRole
-      can :mark_assistance_role_frequency, AssistantRole
+      can :mark_assistant_role_frequency, AssistantFrequency
+      can :update, AssistantFrequency
+      can :create, AssistantFrequency
+      can :read, AssistantFrequency
+    end
+    if user.is_a? User and user.hiper_professor?
+      can :mark_assistant_role_frequency, AssistantFrequency
+      can :update, AssistantFrequency
+      can :create, AssistantFrequency
+      can :read, AssistantFrequency
     end
 
     if user.is_a? User and user.student?

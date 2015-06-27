@@ -1,4 +1,6 @@
 class AssistantFrequencyController < ApplicationController
+
+  authorize_resource
  
   def mark_assistant_role_frequency
     presence = params[:presence]
@@ -6,7 +8,7 @@ class AssistantFrequencyController < ApplicationController
     role = params[:role]
     id = params[:pid]
     red_path = '/assistant_roles/for_professor/'+id
-    if id.to_i < 0
+    if params[:redirect_to_index] == "not_for_professor"
       red_path = '/assistant_roles'
     end
     @assistant_frequency = AssistantFrequency.new(month: month, presence: presence, assistant_role_id: role)

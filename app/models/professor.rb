@@ -19,6 +19,10 @@ class Professor < ActiveRecord::Base
     self[:nusp] or user.nusp
   end
 
+  def dep_code
+    department.code
+  end
+
   def normal_professor?
     return professor_rank == 0
   end
