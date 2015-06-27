@@ -1,6 +1,6 @@
 
 Given(/^the undergraduate student with nusp "(.*?)" has valid history$/) do |nusp|
-  stub_request(:any, ENV["HISTORY_REQUEST_URL"]+"#{nusp}").to_return(:status => 200, :body => 
+  stub_request(:any, (ENV["HISTORY_REQUEST_URL"].to_s)+"#{nusp}").to_return(:status => 200, :body => 
   {
     "historico" => [{"coddis" => "MAC0315","nota" => "5.0","rstfim" => "A ","codtur" => "20151"},
                     {"coddis" => "MAC0300","nota" => "0.0","rstfim" => "MA","codtur" => "20152"},
@@ -12,7 +12,7 @@ Given(/^the undergraduate student with nusp "(.*?)" has valid history$/) do |nus
 end
 
 Given(/^the graduate student with nusp "(.*?)" has valid history$/) do |nusp|
-  stub_request(:any, ENV["HISTORY_REQUEST_URL"]+"#{nusp}").to_return(:status => 200, :body => 
+  stub_request(:any, (ENV["HISTORY_REQUEST_URL"].to_s)+"#{nusp}").to_return(:status => 200, :body => 
   {
     "historico" => [{"coddis" => "MAC5786","nota" => "A ","codtur" => "20151"},
                     {"coddis" => "MAC5714","nota" => "B ","codtur" => "20152"},

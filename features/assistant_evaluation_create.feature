@@ -16,6 +16,7 @@ Feature: Assistant evaluation creation
     Scenario: Professor creates assistant evaluation
         Given I'm logged in as professor "Dude"
         And I visit my assistant roles page
+        And I should see "Avaliar"
         When I click the "Avaliar" link
         And I fill the assistant evaluation fields
         And I press the "Enviar avaliação" button

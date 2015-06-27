@@ -95,12 +95,12 @@
                       <br>
                       <%= content_tag :span, style: "" do -%>
                       <%= link_to "Marcar presença", 
-                      mark_assistant_role_frequency_path(role: role.id, month: month, presence: true, pid: -1), method: :post, data: { confirm: 'Deseja mesmo marcar presença para este monitor?' }  %>
+                      mark_assistant_role_frequency_path(role: role.id, month: month, presence: true, pid: -1, redirect_to_index: "not_for_professor"), method: :post, data: { confirm: 'Deseja mesmo marcar presença para este monitor?' }  %>
                       <% end -%>
                       <br>
                       <%= content_tag :span, style: "" do -%>
                       <%= link_to "Marcar ausência",
-                      mark_assistant_role_frequency_path(role: role.id, month: month, presence: false, pid: -1), method: :post, data: { confirm: 'Deseja mesmo marcar ausência para este monitor?' }  %>
+                      mark_assistant_role_frequency_path(role: role.id, month: month, presence: false, pid: -1, redirect_to_index: "not_for_professor"), method: :post, data: { confirm: 'Deseja mesmo marcar ausência para este monitor?' }  %>
                       <% end -%>
                     <% else %>
                       <% if status == "Presente"
@@ -207,6 +207,13 @@ function update_status(select) {
 function update_month(select) {
   current_month = select.options[select.selectedIndex].value;
   update_table();
+}
+
+function sort_by_key(array, key) {
+  return array.sort(function(a, b) {
+      var x = a[key]; var y = b[key];
+      return ((x < y) ? -1 : ((x > y) ? 1 : 0));
+  });
 }
 
 

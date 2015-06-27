@@ -158,9 +158,14 @@ class AssistantRolesController < ApplicationController
       {
         semester: semester,
         role: record.map { |x| x }.keep_if do |role|
-          role.request_for_teaching_assistant.semester == semester
+          ((role.request_for_teaching_assistant.semester == semester) and 
+            (((user_signed_in? and current_user.hiper_professor?) or secretary_signed_in?) or
+             (user_signed_in? and (current_user.super_professor? or current_user.professor?) and (role.course.dep_code == current_user.professor.dep_code))))
         end
       }
+    end
+    @assistant_roles_by_semester.each do |entry|
+      entry[:role].sort! { |a, b| a.student.name <=> b.student.name }
     end
   end
 

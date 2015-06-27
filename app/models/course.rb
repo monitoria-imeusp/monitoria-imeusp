@@ -10,6 +10,10 @@ class Course < ActiveRecord::Base
     course_code + " - " + name
   end
 
+  def dep_code
+    department.code
+  end
+
   def self.gather_undergraduate_courses
     department = Mechanize.new
     course = Mechanize.new
