@@ -19,6 +19,7 @@ Feature: Assistant roles table visualization
         And there is a professor with name "Gold" and nusp "87777" and department "MAC" and email "golddev@ime.usp.br"
         And there is a professor with name "Silver" and nusp "77778" and department "MAT" and email "silver@ime.usp.br"
         And there is a super_professor with name "Nina" and nusp "99987" and department "MAC" and email "ninadev@ime.usp.br"
+        And there is a super_professor with name "Eloi" and nusp "78546" and department "MAT" and email "eloidev@ime.usp.br"
         And there is a hiper_professor with name "Zara" and password "changeme!" nusp "99986" department "MAT" and email "zaradev@ime.usp.br"
         And there is a request for teaching assistant by professor "Dude" for the course "MAC0110"
         And there is a request for teaching assistant by professor "Gold" for the course "MAC0431"
@@ -39,12 +40,14 @@ Feature: Assistant roles table visualization
         And there is an assistant frequency with month "3" with presence "false" for student "Mary" and professor "Silver" at course "MAT0125"
         And there is an assistant frequency with month "4" with presence "true" for student "Alfredo" and professor "Gold" at course "MAC0431"
 
-    Scenario: Super professor sees all assistant roles
+    Scenario: Super professor sees his department assistant roles
         Given I'm logged in as a super professor
         And I visit the assistant roles page
         Then I should see "Bob"
         And I should see "Dude"
         And I should see "MAC0110"
+        And I should not see "Mary"
+        And I should not see "MAT0125"
 
     Scenario: Secretary sees all assistant roles
         Given I'm logged in as a secretary
@@ -52,6 +55,14 @@ Feature: Assistant roles table visualization
         Then I should see "Bob"
         And I should see "Dude"
         And I should see "MAC0110"
+        And I should see "Mary"
+
+    Scenario: Hiperprofessor sees all assistant roles
+        Given I'm logged in as professor "Zara"
+        And I visit the assistant roles page
+        Then I should see "Bob"
+        And I should see "Dude"
+        And I should see "Mary"
 
     Scenario: Common professor cannot see all assistant roles
         Given I'm logged in as a professor
@@ -143,6 +154,74 @@ Feature: Assistant roles table visualization
         And I should not see "Wil"
         And I should not see "John"
         Then I'm back to current time
+
+    @javascript
+    Scenario: Hiper professor filters roles
+        Given it's currently month 5
+        Given I'm logged in as professor "Zara"
+        And I visit the assistant roles page
+        And I select the department option "MAC"
+        Then I should see "Bob"
+        And I should see "John"
+        And I should see "Wil"
+        And I should not see "Mary"
+        Then I select the department option "MAT"
+        Then I should see "Mary"
+        And I should not see "Bob"
+        And I should not see "John"
+        And I should not see "Wil"
+        Then I select the department option "ALL"
+        Then I should see "Mary"
+        And I should see "Bob"
+        And I should see "John"
+        And I should see "Wil"
+        Then I select "Abril" on the "month_select"
+        Then I select "Presentes" on the "status_select"
+        Then I should see "Bob"
+        And I should see "Wil"
+        And I should not see "John"
+        And I should not see "Mary"
+        Then I select "Ausentes" on the "status_select"
+        Then I should see "John"
+        And I should not see "Mary"
+        And I should not see "Bob"
+        And I should not see "Wil"
+        Then I select "Pendentes" on the "status_select"
+        Then I should see "Mary"
+        And I should not see "Bob"
+        And I should not see "Wil"
+        And I should not see "John"
+        Then I select "Março" on the "month_select"
+        Then I should not see "Mary"
+        And I should not see "Bob"
+        And I should not see "Wil"
+        And I should not see "John"
+        Then I'm back to current time
+
+    @javascript
+    Scenario: Super professor filters roles
+        Given it's currently month 5
+        Given I'm logged in as a super professor
+        And I visit the assistant roles page
+        Then I select "Abril" on the "month_select"
+        Then I select "Presentes" on the "status_select"
+        Then I should see "Bob"
+        And I should see "Wil"
+        And I should not see "John"
+        Then I select "Ausentes" on the "status_select"
+        Then I should see "John"
+        And I should not see "Bob"
+        And I should not see "Wil"
+        Then I select "Pendentes" on the "status_select"
+        And I should not see "Bob"
+        And I should not see "Wil"
+        And I should not see "John"
+        Then I select "Março" on the "month_select"
+        And I should not see "Bob"
+        And I should not see "Wil"
+        And I should not see "John"
+        Then I'm back to current time
+
 
     Scenario: Secretary requests assistant evaluations
         Given I'm ready to receive email
