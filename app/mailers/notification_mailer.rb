@@ -8,9 +8,9 @@ class NotificationMailer < ActionMailer::Base
     mail(to: assistant.student.email, subject: "Inscrição monitoria")
   end
 
-  def evaluation_request_notification assistant
-    @assistant = assistant
-    mail(to: assistant.professor.email, subject: "Avaliação de monitor(a)")
+  def evaluation_request_notification professor, semester
+    @semester = semester
+    mail(to: professor.email, subject: "Avaliação de monitor(a)")
   end
 
   def frequency_request_notification professor

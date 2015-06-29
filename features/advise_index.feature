@@ -3,7 +3,7 @@ Feature: Seeing an advise
 	As anyone
 	I want to be sure I can see the advises
 
-	Scenario: Anyone can see an advises
+	Scenario: Anyone can see advises
 		Given there is an advise with title "Aviso 1" and message "Teste1" and urgency "false"
 		When I'm at the home page
 		Then I should see "Aviso 1"

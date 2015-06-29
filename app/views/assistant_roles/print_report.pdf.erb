@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Relatório <%= @assistant.student.name %></title>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <div style="margin:0.5in; font-family:'Arial'" id="content">
+      <div align="center">
+        <h1>RELATÓRIO DE MONITOR</h1>
+      </div>
+      <br>
+      <br>
+      Nome do(a) Monitor(a): <%= @assistant.student.name %>
+      <br>
+      <br>
+      Prestou sua colaboração junto à disciplina: <%= @assistant.course.full_name %>
+      <br>
+      <br>
+      Sob a coordenação do(a) professor(a): <%= @assistant.professor.name %>
+      <br><br>
+      <div align="center">
+        <h2>TAREFAS CUMPRIDAS</h2>
+      </div>
+      Número de alunos atendidos em média durante o plantão de monitores: <%= @assistant.student_amount %>
+      <br>
+      <br>
+      Listas de exercícios corrigidas em média por mês: <%= @assistant.homework_amount %>
+      <br>
+      <br>
+      Outras atividades além de atendimento a alunos e/ou correção de listas de exercícios: <%= @assistant.secondary_activity %>
+      <br>
+      <br>
+      O que achou do trabalho de monitoria: <%= workloads[@assistant.workload.to_i][0] %>
+      <br>
+      <br>
+      Motivo: <%= @assistant.workload_reason %>
+      <br>
+      <br>
+      Observações, sugestões e reclamações:
+      <br>
+      <br>
+      <%= @assistant.comment %>
+      <br>
+      <br>
+      <br>
+      <div align="center">
+      São Paulo, <%= format('%02d', @assistant.report_creation_date.day) %> de <%= months_to_names[@assistant.report_creation_date.month] %> de <%= @assistant.report_creation_date.year %>. 
+      <br>
+          <%= @assistant.student.name %>
+      </div>
+    </div>
+  </body>
+</html>

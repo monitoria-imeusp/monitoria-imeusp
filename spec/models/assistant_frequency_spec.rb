@@ -5,8 +5,8 @@ RSpec::Matchers.define :is_time do |t1|
 end
 
 describe AssistantFrequency do
-	let(:params) {{ priority: 0, run_at: is_time(3.days.from_now.getutc) }}
-	let(:params2) {{ priority: 0, run_at: is_time(1.months.from_now.getutc) }}
+  let(:params) {{ priority: 0, run_at: is_time(11.days.from_now.getutc) }}
+  let(:params2) {{ priority: 0, run_at: is_time(1.months.from_now.getutc) }}
   let!(:semester) { FactoryGirl.create :semester }
   let!(:department) { FactoryGirl.create :department }
   let!(:user) { FactoryGirl.create :user }
@@ -22,9 +22,8 @@ describe AssistantFrequency do
 			expect(Delayed::Job).to receive(:enqueue).with(instance_of(FrequencyReminderJob), params)
 			if (Time.now.month != 6 && Time.now.month != 11)
 				expect(Delayed::Job).to receive(:enqueue).with(instance_of(FrequencyMailJob), params2)
-		  end
-    
-    	mail = double("mail", :deliver => nil)
+		  	end    
+    		mail = double("mail", :deliver => nil)
 			expect(NotificationMailer).to receive(:frequency_request_notification).with(professor).and_return( mail )
 		end
 		
@@ -36,7 +35,7 @@ describe AssistantFrequency do
 	
 	describe ".notify_frequency_reminder" do
 		before :each do
-    	mail = double("mail", :deliver => nil)
+    		mail = double("mail", :deliver => nil)
 			expect(NotificationMailer).to receive(:pending_frequencies_notification).with(array_including(assistant_role), professor).and_return( mail )
 		end
 		

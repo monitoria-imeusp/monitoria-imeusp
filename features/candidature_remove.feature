@@ -6,7 +6,6 @@ Feature: Deleting a candidature
     Background:
         When there is an open semester "2014" "1"
 
-    @javascript
     Scenario: Student deleting a candidature
         And there is a student with name "carlinhos" with nusp "123456" and email "eu@usp.br"
         And there is a department with code "MAC"
@@ -18,6 +17,4 @@ Feature: Deleting a candidature
         And I click the "Minhas candidaturas" link
         And I click the "Mais informações" link
         And I click the "Remover" link
-        And I should see "Você tem certeza?" in the alert
-        And I confirm the alert
         Then I should see "Você não tem nenhuma candidatura"

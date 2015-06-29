@@ -48,12 +48,19 @@ gem 'daemons'
 # To generate pdfs
 gem 'wicked_pdf'
 
+# To simplify external http requests
+gem 'httparty'
+
+
 group :test do
   # Easier test writing
   gem "shoulda-matchers", require: false # not requiring is necessary to avoid warnings from minitest 5, with version 2.6 this might get fixed
 
   # Test coverage
   gem 'simplecov', require: false
+
+  # To mock web responses with cucumber
+  gem 'webmock'
 end
 
 group :development do

@@ -46,6 +46,7 @@ class CandidaturesController < ApplicationController
     authorization_same_student params[:student_id]
     student = Student.find(params[:student_id])
     @candidatures = Candidature.where(student_id: student.id).order(:semester_id)
+    @roles = AssistantRole.where(student_id: student.id)
     @semesters = Semester.all_open.map do |semester|
       { get: semester, valid: (not already_for_semester?(student.id, semester.id)) }
     end
@@ -55,6 +56,11 @@ class CandidaturesController < ApplicationController
   # GET /candidatures/1.json
   def show
     authorization_student
+    begin
+      @history_table = build_pretty_history_table(@candidature.student.history_table)
+    rescue
+      @history_table = ""
+    end
   end
 
   def download_transcript
@@ -167,6 +173,19 @@ class CandidaturesController < ApplicationController
 
   def already_for_semester? student_id, semester_id
     Candidature.where(student_id: student_id, semester_id: semester_id).any?
+  end
+
+  def build_pretty_history_table history_json
+    history_items = []
+    history_json["historico"].each do |item|
+      course_code = item["coddis"]
+      grade = item["nota"]
+      status = item["rstfim"]
+      year_semester = item["codtur"][0..4]
+      history_item = HistoryItem.new(course_code, grade, status, year_semester)
+      history_items.push(history_item)
+    end
+    history_items.sort
   end
 
 end

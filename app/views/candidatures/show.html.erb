@@ -89,7 +89,50 @@
 <% end %>
 <span style="height: 2em; display: block;"></span>
 
-<!-- FIM DE AMAGAD GAMBZ -->
+<% if !(user_signed_in? and current_user.student?)%>
+  <h2> Histórico escolar </h2>
+  <% if @history_table == "" %>
+  <div class="biggerText">
+  Não foi possível acessar o histórico do estudante nos sistemas USP.
+  <br>
+  Por favor, consulte diretamente o Júpiter ou o Janus.
+</div> 
+  <% else %>
+  <div class="biggerText">
+  Obs.: O histórico apresenta apenas a última vez que o aluno 
+  cursou cada disciplina. Reprovações de matérias que foram 
+  cursadas novamente não aparecem. Caso necessário,
+  consulte o Júpiter para o histórico completo. 
+ </div> 
+    <% curr_year_semester = "" %>
+    <% @history_table.each do |item| %>
+    <% if (curr_year_semester != item.year_semester) %>
+      <% if (curr_year_semester != "") %>
+        </tbody>
+        </table> 
+      <% end %>
+      <% curr_year_semester = item.year_semester %>
+      <h3><%= item.semester %>º semestre de <%= item.year %></h3>
+      <table> 
+      <thead>
+        <th>Curso</th>
+        <th>Nota</th>
+        <th>Status</th>
+      </thead>
+      <tbody>
+    <% end %>
+      <tr>
+        <td><%= item.course_name %></td>
+        <td><%= item.grade %></td>
+        <td><%= item.full_status %></td>
+      </tr>
+    <% end %>
+    </tbody>
+    </table>
+  <% end %>
+
+  <span style="height: 2em; display: block;"></span>
+<% end %>
 
 <h2>Dados da candidatura</h2>
 

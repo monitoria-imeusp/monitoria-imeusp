@@ -23,6 +23,10 @@ class AssistantRole < ActiveRecord::Base
     update_column(:active, false)
   end
 
+  def report_filled?
+    !(report_creation_date.nil?)
+  end
+
   def frequency_status_for_month month
     found = false
     assistant_frequency.each do |freq|
@@ -36,8 +40,29 @@ class AssistantRole < ActiveRecord::Base
       end
     end
     if !found
-      return "Pendente"
+      if active
+        return "Pendente"
+      else
+        return "---"
+      end
     end
+  end
+
+  def frequency_status_for_month_as_number month
+    found = false
+    assistant_frequency.each do |freq|
+      if month == freq.month
+        found = true
+        if freq.presence
+          return 3
+        else
+          return 1
+        end        
+      end
+    end
+    if !found
+      return 2
+    end    
   end
 
 end

@@ -12,6 +12,11 @@ describe AssistantFrequencyController do
   let!(:request_for_teaching_assistant) { FactoryGirl.create :request_for_teaching_assistant, professor_id: super_professor.id }
   let!(:assistant_role) { FactoryGirl.create :assistant_role }
 
+  before :each do
+    sign_in prof_user
+  end
+
+
   describe ".mark_assistant_role_frequency" do
   
     context "when marking presence" do
@@ -50,7 +55,7 @@ describe AssistantFrequencyController do
     
     context "when marking absence" do
       before :each do
-        @params = { "presence" => "false", "month" => "5", "role" => assistant_role.id.to_s, "pid" => "-2"}
+        @params = { "presence" => "false", "month" => "5", "role" => assistant_role.id.to_s, "pid" => "-2", "redirect_to_index" => "not_for_professor"}
         post 'mark_assistant_role_frequency', @params
       end
       

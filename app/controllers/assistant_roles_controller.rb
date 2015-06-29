@@ -57,6 +57,19 @@ class AssistantRolesController < ApplicationController
     end
   end
 
+  def update
+    @assistant_role = AssistantRole.find params[:id]
+    @assistant_role.student_amount = params[:assistant_role][:student_amount]
+    @assistant_role.homework_amount = params[:assistant_role][:homework_amount]
+    @assistant_role.secondary_activity = params[:assistant_role][:secondary_activity]
+    @assistant_role.workload = params[:assistant_role][:workload]
+    @assistant_role.workload_reason = params[:assistant_role][:workload_reason]
+    @assistant_role.comment = params[:assistant_role][:comment]
+    @assistant_role.report_creation_date = params[:assistant_role][:report_creation_date]
+    @assistant_role.save
+    redirect_to candidatures_path
+  end
+
   # POST /assistant_roles/notify_for_semester/1
   def notify_for_semester
     @semester = Semester.find(params[:semester_id])
@@ -73,9 +86,13 @@ class AssistantRolesController < ApplicationController
   # POST /assistant_roles/request_for_teaching_assistant_id/1
   def request_evaluations_for_semester
     @semester = Semester.find(params[:semester_id])
+    professors = []
     requests = RequestForTeachingAssistant.where(semester: @semester)
     AssistantRole.where(request_for_teaching_assistant: requests).each do |assistant|
-      NotificationMailer.evaluation_request_notification(assistant).deliver
+      professors.push(assistant.professor)
+    end
+    professors.uniq.each do |professor|
+        NotificationMailer.evaluation_request_notification(professor, @semester).deliver
     end
     respond_to do |format|
       format.html { redirect_to assistant_roles_path, notice: "Solicitações enviadas aos professores do #{@semester.as_s} com sucesso." }
@@ -116,6 +133,17 @@ class AssistantRolesController < ApplicationController
     end
   end
 
+  def report_form
+    @role = AssistantRole.find params[:id]
+  end
+
+  def print_report
+    if AssistantRole.exists? params[:id]
+      @assistant = AssistantRole.find params[:id]
+      render pdf: "Relatório #{@assistant.student.name}"
+    end
+  end
+
   private
 
   # Never trust parameters from the scary internet, only allow the white list through.
@@ -130,9 +158,14 @@ class AssistantRolesController < ApplicationController
       {
         semester: semester,
         role: record.map { |x| x }.keep_if do |role|
-          role.request_for_teaching_assistant.semester == semester
+          ((role.request_for_teaching_assistant.semester == semester) and 
+            (((user_signed_in? and current_user.hiper_professor?) or secretary_signed_in?) or
+             (user_signed_in? and (current_user.super_professor? or current_user.professor?) and (role.course.dep_code == current_user.professor.dep_code))))
         end
       }
+    end
+    @assistant_roles_by_semester.each do |entry|
+      entry[:role].sort! { |a, b| a.student.name <=> b.student.name }
     end
   end
 

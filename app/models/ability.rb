@@ -165,6 +165,7 @@ class Ability
       can :read, Candidature #, :student_id => user.id #Only his own
       can :update, Candidature #, :student_id => user.id #Only his own
       can :destroy, Candidature #, :student_id => user.id #Only his own
+      can :update, AssistantRole
     else # 'ghost' User (usuario que não completou cadastro)
       cannot :read, Admin
       cannot :update, Admin
@@ -236,17 +237,35 @@ class Ability
     if user.is_a? Secretary
       can :notify_for_semester, AssistantRole
       can :request_evaluations_for_semester, AssistantRole
+      can :print_report, AssistantRole
     end
     if user.is_a? Secretary or (user.is_a? User and user.super_professor?)
       can :create, AssistantRole
       can :update, AssistantRole
       can :destroy, AssistantRole
       can :deactivate_assistant_role, AssistantRole
-      can :mark_assistance_role_frequency, AssistantRole
+      can :mark_assistant_role_frequency, AssistantFrequency
+      can :update, AssistantFrequency
+      can :create, AssistantFrequency
+      can :read, AssistantFrequency
     end
     if user.is_a? User and user.professor?
       can :index_for_professor, AssistantRole
-      can :mark_assistance_role_frequency, AssistantRole
+      can :mark_assistant_role_frequency, AssistantFrequency
+      can :update, AssistantFrequency
+      can :create, AssistantFrequency
+      can :read, AssistantFrequency
+    end
+    if user.is_a? User and user.hiper_professor?
+      can :mark_assistant_role_frequency, AssistantFrequency
+      can :update, AssistantFrequency
+      can :create, AssistantFrequency
+      can :read, AssistantFrequency
+    end
+
+    if user.is_a? User and user.student?
+      can :report_form, AssistantRole
+      can :print_report, AssistantRole
     end
 
     # Assistant evaluation management permissions

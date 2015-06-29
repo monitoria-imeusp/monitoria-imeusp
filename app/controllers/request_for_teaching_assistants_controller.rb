@@ -54,6 +54,9 @@ class RequestForTeachingAssistantsController < ApplicationController
         end).delete_if do |candidature|
             chosen_student_ids.include?(candidature.student.id)
       end
+      @first_option_candidatures_for_this_request.sort! { |a, b| a.student.name <=> b.student.name }
+      @other_option_candidatures_for_this_request.sort! { |a, b| a.student.name <=> b.student.name }
+      @candidatures_for_this_department.sort! { |a, b| a.student.name <=> b.student.name }
     end
   end
 

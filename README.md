@@ -129,6 +129,13 @@ Precisa instalar o binario em produção
 https://github.com/mileszs/wicked_pdf/wiki/Getting-Started-Installing-wkhtmltopdf
 e em /config/initializers/wicked_pdf.rb mudar o path se nao ficar em /usr/bin/
 
+## Execução de testes do cucumber
+Devido à requisição de histórico escolar para um serviço externo, para rodar 
+os testes de cucumber deve-se utilizar
+```
+HISTORY_REQUEST_URL=http://abc/ rake cucumber
+```
+
 
 
 ## Coisas antigas do README

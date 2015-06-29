@@ -74,3 +74,15 @@ Then(/^the frequency reminder email should have been delivered properly to "(.*?
   end
   expect(received).to be true
 end
+
+Then(/^the assistant evaluation reminder email for semester "(.*?)" of year "(.*?)" should have been delivered properly to "(.*?)"$/) do |semester_parity, year, professor_email|
+  received = false
+  ActionMailer::Base.deliveries.each do |mail|
+    if mail.to == [professor_email]
+      expect(mail.from).to eq(["sistemamonitoria@ime.usp.br"])
+      expect(mail.body).to match(/Está disponível no sistema de monitoria o Formulário para Avaliação dos Monitores do IME no #{semester_parity}º semestre de #{year}./)
+      received = true
+    end    
+  end
+  expect(received).to be true
+end

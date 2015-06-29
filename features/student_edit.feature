@@ -38,7 +38,3 @@ Feature: edit a student
         When I try to access the "students" page with id "2" to "edit"
         Then I should see "ACESSO NEGADO"
 
-	#Scenario: Student trying to update a student that doesn't exist
-		#When I try to update the student with id "44"
-		#And I click the "redirected" link
-		#Then I should see "Bem-vindo ao sistema de monitoria do IME-USP!"
