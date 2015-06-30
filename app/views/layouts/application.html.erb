@@ -130,9 +130,11 @@
                   <li>
                     <%= link_to "Meus monitores", assistant_roles_for_professor_path(professor) %>
                   </li>
-                  <li>
-                    <%= link_to "Guia de uso", help_professors_path('home') %>
-                  </li>
+                  <% unless Rails.env.production? %>
+                    <li>
+                      <%= link_to "Guia de uso", help_professors_path('home') %>
+                    </li>
+                  <% end %>
                 </ul>
                 <% if professor.super_professor? %>
                   <hr>
