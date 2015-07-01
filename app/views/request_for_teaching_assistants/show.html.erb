@@ -85,7 +85,7 @@
   <p>Nenhum</p>
 <% end %>
 
-<% if (not @first_option_candidatures_for_this_request.nil? or not @other_option_candidatures_for_this_request.nil? or not @candidatures_for_this_department.nil?) and (secretary_signed_in? or (user_signed_in? and current_user.super_professor?)) %>
+<% if (not @first_option_candidatures_for_this_request.nil? or not @other_option_candidatures_for_this_request.nil? or not @candidatures_for_this_department.nil?) and (secretary_signed_in? or (current_super_professor?)) %>
 
   <h2>Alunos que se candidataram para essa disciplina</h2>
 

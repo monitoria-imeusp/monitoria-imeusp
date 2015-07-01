@@ -84,12 +84,12 @@
   <%= @candidature.student.cel %>
 </p>
 
-<% if (user_signed_in? and current_user.super_professor?) or admin_signed_in? or secretary_signed_in? %>
+<% if current_super_professor? or admin_signed_in? or secretary_signed_in? %>
   <%= link_to 'Ver avaliações como monitor(a)', assistant_evaluations_for_student_path(@candidature.student) %>
 <% end %>
 <span style="height: 2em; display: block;"></span>
 
-<% if !(user_signed_in? and current_user.student?)%>
+<% if !(current_student?)%>
   <h2> Histórico escolar </h2>
   <% if @history_table == "" %>
   <div class="biggerText">
@@ -202,7 +202,7 @@
   <%= (@candidature.observation) %>
 </p>
 
-<% if user_signed_in? and current_user.student? %>
+<% if current_student? %>
   <% if @candidature.semester.open %>
     <%= link_to 'Editar', edit_candidature_path(@candidature) %>
     <%= link_to 'Remover', @candidature, method: :delete, data: { confirm: 'Tem certeza?' } %>

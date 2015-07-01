@@ -66,7 +66,7 @@ class StudentsController < ApplicationController
 
 
   def authorization_student
-    if user_signed_in? and current_user.student? and @student.user.id != current_user.id
+    if current_student? and @student.user.id != current_user.id
       raise CanCan::AccessDenied.new()
     end
   end

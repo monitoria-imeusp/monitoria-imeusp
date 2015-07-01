@@ -159,8 +159,7 @@ class AssistantRolesController < ApplicationController
         semester: semester,
         role: record.map { |x| x }.keep_if do |role|
           ((role.request_for_teaching_assistant.semester == semester) and 
-            (((user_signed_in? and current_user.hiper_professor?) or secretary_signed_in?) or
-             (user_signed_in? and (current_user.super_professor? or current_user.professor?) and (role.course.dep_code == current_user.professor.dep_code))))
+            (should_see_all_roles? or should_see_the_role(role)))
         end
       }
     end
@@ -169,6 +168,14 @@ class AssistantRolesController < ApplicationController
     end
   end
 
+  def should_see_all_roles?
+    current_hiper_professor? or secretary_signed_in?
+  end
+
+  def should_see_the_role role
+    ((current_super_professor? or current_professor?) and (role.course.dep_code == current_user.professor.dep_code))
+  end
+  
   def create_current_months
     @months = [Time.now.month]
     @current_semester_frequencies.each do |freq|

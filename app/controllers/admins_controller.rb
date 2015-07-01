@@ -30,7 +30,7 @@ class AdminsController < ApplicationController
   end
 
   def control_panel
-    puts 'hey'
+    
   end
 
   def register_undergraduate_courses
