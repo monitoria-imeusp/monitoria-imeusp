@@ -1,7 +1,7 @@
 require "spec_helper"
 
 describe CandidaturesController do
-  describe "routing" do
+  context "when routing" do
 
     it "routes to #index" do
       expect(get("/candidatures")).to route_to("candidatures#index")

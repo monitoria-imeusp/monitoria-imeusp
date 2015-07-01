@@ -120,9 +120,7 @@ describe StudentsController do
 
   context 'when signed in as student' do
     let(:user) { FactoryGirl.create :user }
-    let(:user2) { FactoryGirl.create :user, id: 2 }
     let(:student) { FactoryGirl.create :student, user_id: user.id }
-    let(:student2) { FactoryGirl.create :student, user_id: user2.id }
     before :each do
       @request.env["devise.mapping"] = Devise.mappings[:user]
       sign_in user
@@ -148,15 +146,12 @@ describe StudentsController do
 
     describe '#update' do
       context 'when trying to update himself or herself' do
-        context 'with valid params' do
+        before :each do
           put :update, {:id => student.id, :student => { address: "New address" } }
+        end
+        context 'with valid params' do
           subject { assigns(:student) }
           it { is_expected.to eq(student) }
-        end
-        context 'with invalid institute parameters' do
-          put :update, {:id => student.id, :student => { address: "New address" }, :institute => "Outros" }
-          subject { assigns(:student) }
-          it { is_expected.not_to eq(student) }
         end
       end
     end

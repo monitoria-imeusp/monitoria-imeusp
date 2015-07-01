@@ -1,7 +1,7 @@
 require "spec_helper"
 
 describe RequestForTeachingAssistantsController do
-  describe "routing" do
+  context "when routing" do
 
     it "routes to #index" do
       expect(get("/request_for_teaching_assistants")).to route_to("request_for_teaching_assistants#index")
