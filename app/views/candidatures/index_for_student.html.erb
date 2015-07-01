@@ -116,7 +116,7 @@
 
 <br>
 
-<% if user_signed_in? and current_user.student? %>
+<% if current_student? %>
   <% @semesters.each do |semester| %>
     <% if semester[:valid] %>
       <%= link_to "Candidatar-se para #{semester[:get].as_s}",

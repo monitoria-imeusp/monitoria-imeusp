@@ -11,7 +11,7 @@
     </div>
   <% end %>
 
-  <% if user_signed_in? and current_user.super_professor? %>
+  <% if current_super_professor? %>
     <div class="field">
       <%= f.label :professor_id, t('activerecord.attributes.candidature.professor_id') %><br>
       <%= f.select :professor_id, professor_options, :selected => (f.object.id or current_user.professor.id), :include_blank => false %><br>

@@ -26,7 +26,7 @@
       <option value="2">Pendentes</option>
       <option value="3">Presentes</option>
     </select>
-    <% if secretary_signed_in? or (user_signed_in? and current_user.hiper_professor?) %>
+    <% if secretary_signed_in? or current_hiper_professor? %>
     <input type="radio" name="disc" onchange="update_dep(this.value)" id="MAC" value="MAC"> MAC
     <input type="radio" name="disc" onchange="update_dep(this.value)" id="MAE" value="MAE"> MAE
     <input type="radio" name="disc" onchange="update_dep(this.value)" id="MAP" value="MAP"> MAP
@@ -53,7 +53,7 @@
           <td><%= role.student.name %></td>
           <td><%= role.request_for_teaching_assistant.course.course_code %></td>
           <td><%= role.request_for_teaching_assistant.professor.name %></td>
-          <% if secretary_signed_in? or (user_signed_in? and current_user.super_professor?) %>
+          <% if secretary_signed_in? or current_super_professor? %>
             <td>
               <%if role.active %>
                 <% if secretary_signed_in? %>
