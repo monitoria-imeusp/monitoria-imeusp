@@ -5,7 +5,7 @@ describe UsersController do
   context 'when signed as admin' do
     login_admin
     
-    describe '.destroy' do
+    describe '#destroy' do
     
       context 'student user' do
         let(:user) { FactoryGirl.create :user }
@@ -16,14 +16,14 @@ describe UsersController do
           get :destroy, { id: user.id }
         end
         
-        context 'response' do
+        context 'when receiveing response' do
           it { is_expected.to redirect_to "/" }
         end
-        context 'user' do
+        context 'when assigning user' do
           subject { assigns(:user) }
           it { is_expected.to eq(user) }
         end
-        context 'database' do
+        context 'when verifying its existence in database' do
           it { expect(User.exists? (user.id)).to eq(false) }
         end
       end
@@ -33,9 +33,9 @@ describe UsersController do
   context 'when signed as secretary' do
     login_secretary
     
-    describe '.destroy' do
+    describe '#destroy' do
     
-      context 'student user' do
+      context 'when destroying student user' do
         let(:user) { FactoryGirl.create :user }
         let(:student) { FactoryGirl.create :student, user_id: user.id }
         
@@ -60,9 +60,9 @@ describe UsersController do
       sign_in user
     end
     
-    describe '.destroy' do
+    describe '#destroy' do
     
-      context 'himself' do
+      context 'when destroying himself' do
         
         before :each do
           expect(User.exists? (user.id)).to eq(true)
@@ -70,12 +70,12 @@ describe UsersController do
         end
         
         it { is_expected.to redirect_to('/403') }
-        context 'database check' do
+        context 'when checking database integrity' do
           it { expect(User.exists? (user.id)).to eq(true) }
         end
       end
       
-      context 'others' do
+      context 'when destroying others' do
         let(:user2) { FactoryGirl.create :another_user }
         let(:student2) { FactoryGirl.create :student, user_id: user2.id, id: 2 }
         
@@ -85,7 +85,7 @@ describe UsersController do
         end
         
         it { is_expected.to redirect_to('/403') }
-        context 'database check' do
+        context 'when checking database integrity' do
           it { expect(User.exists? (user2.id)).to eq(true) }
         end
       end
@@ -99,9 +99,9 @@ describe UsersController do
       sign_in user
     end
     
-    describe '.destroy' do
+    describe '#destroy' do
       
-      context 'student user' do
+      context 'when destroying student user' do
         let(:user2) { FactoryGirl.create :another_user }
         let(:student2) { FactoryGirl.create :student, user_id: user2.id }
         
@@ -111,7 +111,7 @@ describe UsersController do
         end
         
         it { is_expected.to redirect_to('/403') }
-        context 'database check' do
+        context 'when checking database integrity' do
           it { expect(User.exists? (user2.id)).to eq(true) }
         end
       end

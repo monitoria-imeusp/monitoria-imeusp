@@ -7,7 +7,7 @@ describe SecretariesController do
 
     let(:valid_attributes) { { "nusp" => "MyString", "email" => "secretaria@ime.usp.br", "password" => "12345678", "confirmed_at" => Time.now } }
 
-    describe "GET index" do
+    describe "#index" do
       it "assigns all secretaries as @secretaries" do
         secretary = Secretary.create! valid_attributes
         get :index, {}
@@ -15,7 +15,7 @@ describe SecretariesController do
       end
     end
 
-    describe "GET show" do
+    describe "#show" do
       it "assigns the requested secretary as @secretary" do
         secretary = Secretary.create! valid_attributes
         get :show, {:id => secretary.to_param}
@@ -23,14 +23,14 @@ describe SecretariesController do
       end
     end
 
-    describe "GET new" do
+    describe "#new" do
       it "assigns a new secretary as @secretary" do
         get :new, {}
         expect(assigns(:secretary)).to be_a_new(Secretary)
       end
     end
 
-    describe "GET edit" do
+    describe "#edit" do
       it "assigns the requested secretary as @secretary" do
         secretary = Secretary.create! valid_attributes
         get :edit, {:id => secretary.to_param}
@@ -38,8 +38,8 @@ describe SecretariesController do
       end
     end
 
-    describe "POST create" do
-      describe "with valid params" do
+    describe "#create" do
+      context "with valid params" do
         it "creates a new Secretary" do
           expect {
             post :create, {:secretary => valid_attributes}
@@ -58,7 +58,7 @@ describe SecretariesController do
         end
       end
 
-      describe "with invalid params" do
+      context "with invalid params" do
         it "assigns a newly created but unsaved secretary as @secretary" do
           allow_any_instance_of(Secretary).to receive(:save).and_return(false)
           post :create, {:secretary => { "nusp" => "invalid value" }}
@@ -73,7 +73,7 @@ describe SecretariesController do
       end
     end
 
-    describe "DELETE destroy" do
+    describe "#destroy" do
       it "destroys the requested secretary" do
         secretary = Secretary.create! valid_attributes
         expect {
@@ -97,29 +97,29 @@ describe SecretariesController do
       sign_in @secretary
     end
 
-    describe "GET index" do
+    describe "#index" do
       it "assigns all secretaries as @secretaries" do
         get :index, {}
         expect(assigns(:secretaries)).to eq([@secretary])
       end
     end
 
-    describe "GET show" do
+    describe "#show" do
       it "assigns the requested secretary as @secretary" do
         get :show, {:id => @secretary.to_param}
         expect(assigns(:secretary)).to eq(@secretary)
       end
     end
 
-    describe "GET edit" do
+    describe "#edit" do
       it "assigns the requested secretary as @secretary" do
         get :edit, {:id => @secretary.to_param}
         expect(assigns(:secretary)).to eq(@secretary)
       end
     end
   
-    describe "PUT update" do
-      describe "with valid params" do
+    describe "#update" do
+      context "with valid params" do
         it "updates the requested secretary" do
           expect_any_instance_of(Secretary).to receive(:update).with({ "nusp" => "MyString" })
           put :update, {:id => @secretary.to_param, :secretary => { "nusp" => "MyString" }}
@@ -137,7 +137,7 @@ describe SecretariesController do
         #end
       end
 
-      describe "with invalid params" do
+      context "with invalid params" do
         it "assigns the secretary as @secretary" do
           allow_any_instance_of(Secretary).to receive(:save).and_return(false)
           put :update, {:id => @secretary.to_param, :secretary => { "nusp" => "invalid value" }}

@@ -6,14 +6,14 @@ describe AdvisesController do
   let(:valid_attributes) { { "title" => "MyString", "message" => "MyText", "order" => "1" } }
   let(:valid_session) { {} }
 
-  describe "GET new" do
+  describe "#new" do
     it "assigns a new advise as @advise" do
       get :new, {}, valid_session
       expect(assigns(:advise)).to be_a_new(Advise)
     end
   end
 
-  describe "GET edit" do
+  describe "#edit" do
     it "assigns the requested advise as @advise" do
       advise = Advise.create! valid_attributes
       get :edit, {:id => advise.to_param}, valid_session
@@ -21,8 +21,8 @@ describe AdvisesController do
     end
   end
 
-  describe "POST create" do
-    describe "with valid params" do
+  describe "#create" do
+    context "with valid params" do
       before :each do
         @advise = Advise.create! valid_attributes
         expect(Advise).to receive(:new).and_return(@advise)
@@ -43,7 +43,7 @@ describe AdvisesController do
       end
     end
 
-    describe "with invalid params" do
+    context "with invalid params" do
       before :each do
         @advise = Advise.create! valid_attributes
         expect(Advise).to receive(:new).and_return(@advise)
@@ -61,8 +61,8 @@ describe AdvisesController do
     end
   end
 
-  describe "PUT update" do
-    describe "with valid params" do
+  describe "#update" do
+    context "with valid params" do
       it "updates the requested advise" do
         advise = Advise.create! valid_attributes
         expect_any_instance_of(Advise).to receive(:update).with({ "title" => "MyString" })
@@ -82,7 +82,7 @@ describe AdvisesController do
       end
     end
 
-    describe "with invalid params" do
+    context "with invalid params" do
       it "assigns the advise as @advise" do
         advise = Advise.create! valid_attributes
         allow_any_instance_of(Advise).to receive(:save).and_return(false)
@@ -99,7 +99,7 @@ describe AdvisesController do
     end
   end
 
-  describe "DELETE destroy" do
+  describe "#destroy" do
     it "destroys the requested advise" do
       advise = Advise.create! valid_attributes
       expect {
@@ -113,5 +113,4 @@ describe AdvisesController do
       expect(response).to redirect_to(root_url)
     end
   end
-
 end 

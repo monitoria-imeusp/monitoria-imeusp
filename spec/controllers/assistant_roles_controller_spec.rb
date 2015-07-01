@@ -18,7 +18,7 @@ describe AssistantRolesController do
     sign_in prof_user
   end
 
-  describe ".index" do
+  describe "#{}index" do
     before :each do
       get :index
     end
@@ -34,7 +34,7 @@ describe AssistantRolesController do
     end
   end
 
-  describe ".create" do
+  describe "#create" do
     context "with valid parameters" do
       before :each do
         post 'create', { "request_for_teaching_assistant_id" => request_for_teaching_assistant.id.to_s, "student_id" => student.id.to_s }
@@ -59,7 +59,7 @@ describe AssistantRolesController do
     end
   end
 
-  describe ".update" do
+  describe "#update" do
     context "with valid parameters" do
       before :each do
         date = DateTime.now
@@ -75,8 +75,6 @@ describe AssistantRolesController do
           }
         }
       end
-
-
 
       it {
         role = AssistantRole.find(assistant_role.id)
@@ -94,17 +92,17 @@ describe AssistantRolesController do
     end
   end
 
-  describe ".deactivate" do
+  describe "#deactivate" do
     before :each do
       post 'deactivate_assistant_role', {"id" => assistant_role.id.to_s}
     end
 
-    context "response" do
+    context "when getting response" do
       subject { response }
       it { expect(subject).to redirect_to('/assistant_roles') }
     end
 
-    context "assistant role" do
+    describe "#assistant_role" do
       subject { assigns(:assistant_role) }
 
       describe '#active' do
@@ -115,18 +113,18 @@ describe AssistantRolesController do
 
   end
 
-  describe ".certificate" do
+  describe "#certificate" do
     before :each do
       get 'certificate', {"id" => assistant_role.id.to_s}
     end
 
-    context "assistant role" do
+    describe "#assistant_role" do
       subject { assigns(:assistant) }
     end
 
   end
 
-  describe ".destroy" do
+  describe "#destroy" do
     before :each do
       delete 'destroy', {"id" => assistant_role.id.to_s}
     end
@@ -141,5 +139,4 @@ describe AssistantRolesController do
       it { is_expected.to redirect_to(assistant_roles_path) }
     end
   end
-
 end

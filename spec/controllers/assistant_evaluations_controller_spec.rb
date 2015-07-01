@@ -17,7 +17,7 @@ describe AssistantEvaluationsController do
     sign_in prof_user
   end
 
-  describe "GET index" do
+  describe "#index" do
     before :each do
       @assistant_evaluation = FactoryGirl.create :assistant_evaluation
       expect(Student).to receive(:find).with(@student.id.to_s).and_return(@student)
@@ -35,22 +35,22 @@ describe AssistantEvaluationsController do
     end
   end
 
-  describe ".new" do
+  describe "#new" do
     before :each do
       get :new, { assistant_role_id: @assistant_role.id }
     end
-    context 'assistant evaluation' do
+    describe '#assistant evaluation' do
       subject { assigns(:assistant_evaluation) }
       it { expect(subject).to be_a_new(AssistantEvaluation) }
 
-      describe '#assistant_role_id' do
-        subject { super().assistant_role_id }
-        it { is_expected.to eq @assistant_role.id }
+    describe '#assistant_role_id' do
+      subject { super().assistant_role_id }
+      it { is_expected.to eq @assistant_role.id }
       end
     end
   end
 
-  describe "GET edit" do
+  describe "#edit" do
     it "assigns the requested assistant_evaluation as @assistant_evaluation" do
       assistant_evaluation = FactoryGirl.create :assistant_evaluation
       expect(AssistantEvaluation).to receive(:find).with(assistant_evaluation.id.to_s).and_return(assistant_evaluation)
@@ -60,7 +60,7 @@ describe AssistantEvaluationsController do
   end
 
   describe "POST create" do
-    describe "with valid params" do
+    context "with valid params" do
       before :each do
         @params = {
           "assistant_role_id" => "1",
@@ -82,21 +82,18 @@ describe AssistantEvaluationsController do
       end
 
       it "redirects to the created assistant_evaluation" do
-        # TODO should use @super_professor, but for some reason that does not work
         expect(response).to redirect_to(assistant_roles_for_professor_path(professor_id: super_professor.id))
       end
     end
 
-    describe "with invalid params" do
+    context "with invalid params" do
       it "assigns a newly created but unsaved assistant_evaluation as @assistant_evaluation" do
-        # Trigger the behavior that occurs when invalid params are submitted
         allow_any_instance_of(AssistantEvaluation).to receive(:save).and_return(false)
         post :create, {:assistant_evaluation => { "index_for_student" => "invalid value" }}
         expect(assigns(:assistant_evaluation)).to be_a_new(AssistantEvaluation)
       end
 
       it "re-renders the 'new' template" do
-        # Trigger the behavior that occurs when invalid params are submitted
         allow_any_instance_of(AssistantEvaluation).to receive(:save).and_return(false)
         post :create, {:assistant_evaluation => { "index_for_student" => "invalid value" }}
         expect(response).to render_template("new")
@@ -104,8 +101,8 @@ describe AssistantEvaluationsController do
     end
   end
 
-  describe "PUT update" do
-    describe "with valid params" do
+  describe "#update" do
+    context "with valid params" do
       before :each do
         @params = {
           "assistant_role_id" => "1",
@@ -136,7 +133,7 @@ describe AssistantEvaluationsController do
       end
     end
 
-    describe "with invalid params" do
+    context "with invalid params" do
       it "assigns the assistant_evaluation as @assistant_evaluation" do
         assistant_evaluation = FactoryGirl.create :assistant_evaluation
         allow_any_instance_of(AssistantEvaluation).to receive(:save).and_return(false)

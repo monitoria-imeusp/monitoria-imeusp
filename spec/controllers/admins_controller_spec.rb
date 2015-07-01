@@ -18,8 +18,8 @@ describe AdminsController do
       sign_in @admin
     end
 
-    describe 'show' do
-      context 'see its own account' do
+    describe '#show' do
+      context 'wheen seeing its own account' do
         before :each do
           get :show, {:id => @admin.to_param}
         end
@@ -28,8 +28,8 @@ describe AdminsController do
       end
     end
 
-    describe 'edit' do
-      describe 'a request made by the signed admin' do
+    describe '#edit' do
+      context 'when a request is made by the signed admin' do
         it "can edit its own account" do
           get :edit, {:id => @admin.to_param}
           expect(assigns(:admin)).to eq(@admin)
@@ -37,18 +37,18 @@ describe AdminsController do
       end
     end
 
-    describe 'update' do
-      describe 'a request made by the signed admin' do
-        describe 'with valid params' do
+    describe '#update' do
+      context 'when a request is made by the signed admin' do
+        context 'with valid params' do
           it {
             put :update, {:id => @admin.to_param, :admin => changed_valid_attributes}
             expect(assigns(:admin)).to eq(@admin)
           }
         end
       end
-      describe "with invalid params" do
+
+      context "with invalid params" do
         it "assigns the admin as @admin" do
-          # Trigger the behavior that occurs when invalid params are submitted
           allow_any_instance_of(Admin).to receive(:save).and_return(false)
           put :update, {:id => @admin.to_param, :admin => { "email" => "" }}
           expect(assigns(:admin)).to eq(@admin)

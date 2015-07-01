@@ -119,14 +119,14 @@ describe CandidaturesController do
     Course.create! valid_third_course_attributes
   end
 
-  describe ".index" do
-    context 'as student' do
+  describe "#index" do
+    context 'when seeing index as student' do
       before :each do
         get :index, {}
       end
       it { is_expected.to redirect_to action: :index_for_student, student_id: student }
     end
-    context 'as super professor' do
+    context 'when seeing index as super professor' do
       let!(:semester) { FactoryGirl.create :semester }
       let(:prof_user) { FactoryGirl.create :another_user }
       let!(:super_professor) { FactoryGirl.create :super_professor, user_id: prof_user.id }
@@ -137,7 +137,7 @@ describe CandidaturesController do
       end
       it { is_expected.to redirect_to action: :index_for_department, semester_id: semester.id, department_id: super_professor.department }
     end
-    context 'as hiper professor' do
+    context 'when seeing index as hiper professor' do
       let(:prof_user) { FactoryGirl.create :another_user }
       let!(:hiper_professor) { FactoryGirl.create :hiper_professor, user_id: prof_user.id }
       before :each do
@@ -150,8 +150,8 @@ describe CandidaturesController do
     end
   end
 
-  describe ".index_for_student" do
-    context 'response' do
+  describe "#index_for_student" do
+    context 'when receveing response' do
       before :each do
         get :index_for_student, {student_id: student.id}
       end
@@ -159,7 +159,7 @@ describe CandidaturesController do
       it { expect(subject).to render_template(:index_for_student) }
     end
 
-    context 'candidatures' do
+    context 'when seeing candidatures' do
       let(:candidatures) { [Candidature.create!(valid_attributes)] }
       before :each do
         Candidature.create! valid_second_candidature_attributes
@@ -171,7 +171,7 @@ describe CandidaturesController do
     end
   end
 
-  describe ".index_for_department" do
+  describe "#index_for_department" do
     let!(:semester) { FactoryGirl.create :semester }
     let(:prof_user) { FactoryGirl.create :another_user }
     let!(:super_professor) { FactoryGirl.create :super_professor, user_id: prof_user.id }
@@ -187,12 +187,12 @@ describe CandidaturesController do
       get :index_for_department, { semester_id: semester.id, department_id: @mac.id}
     end
 
-    context 'response' do
+    context 'when receiving response' do
       subject { response }
       it { expect(response).to render_template(:index_for_department) }
     end
 
-    context 'filtered candidatures' do
+    context 'when filtering candidatures' do
       subject { assigns(:candidatures_filtered) }
       it { 
           expect(subject).not_to eq(candidatures)             
@@ -202,7 +202,7 @@ describe CandidaturesController do
 
   end
 
-  describe "GET show" do
+  describe "#show" do
     before :each do
       @candidature = Candidature.create! valid_attributes
       student = double(Student)
@@ -245,7 +245,7 @@ describe CandidaturesController do
     end
   end
 
-  describe "GET new" do
+  describe "#new" do
     it "assigns a new candidature as @candidature" do
       expect(Semester).to receive(:find).with("1").and_return(42)
       get :new, {:semester_id => "1"}, valid_session
@@ -254,7 +254,7 @@ describe CandidaturesController do
     end
   end
 
-  describe "GET edit" do
+  describe "#edit" do
     it "assigns the requested candidature as @candidature" do
       candidature = Candidature.create! valid_attributes
       get :edit, {:id => candidature.to_param}, valid_session
@@ -262,7 +262,7 @@ describe CandidaturesController do
     end
   end
 
-  describe "POST create" do
+  describe "#create" do
     describe "with valid params" do
       before :each do
         mail = double(Object)
@@ -288,7 +288,7 @@ describe CandidaturesController do
       end
     end
 
-    describe "with invalid params" do
+    context "with invalid params" do
       it "assigns a newly created but unsaved candidature as @candidature" do
         # Trigger the behavior that occurs when invalid params are submitted
         allow_any_instance_of(Candidature).to receive(:save).and_return(false)
@@ -306,8 +306,8 @@ describe CandidaturesController do
     end
   end
 
-  describe "PUT update" do
-    describe "with valid params" do
+  describe "#update" do
+    context "with valid params" do
       before :each do
         @candidature = Candidature.create! valid_attributes
         mail = double(Object)
@@ -353,7 +353,7 @@ describe CandidaturesController do
     end
   end
 
-  describe "DELETE destroy" do
+  describe "#destroy" do
     before :each do
       @candidature = Candidature.create! valid_attributes
       mail = double(Object)
@@ -372,5 +372,4 @@ describe CandidaturesController do
       expect(response).to redirect_to(candidatures_url)
     end
   end
-
 end

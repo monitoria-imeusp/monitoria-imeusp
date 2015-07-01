@@ -141,7 +141,7 @@ describe RequestForTeachingAssistantsController do
     sign_in prof_user
   end
 
-  describe "GET index" do
+  describe "#index" do
     it "assigns all request_for_teaching_assistants as @request_for_teaching_assistants" do
       request_for_teaching_assistant = RequestForTeachingAssistant.create! valid_attributes
       get :index_for_semester, { :semester_id => @semester.id }
@@ -149,7 +149,7 @@ describe RequestForTeachingAssistantsController do
     end
   end
 
-  describe "GET show" do
+  describe "#show" do
     it "assigns the requested request_for_teaching_assistant as @request_for_teaching_assistant" do
       request_for_teaching_assistant = RequestForTeachingAssistant.create! valid_attributes
       get :show, {:id => request_for_teaching_assistant.to_param}
@@ -157,15 +157,15 @@ describe RequestForTeachingAssistantsController do
     end
   end
 
-  describe "GET new" do
+  describe "#new" do
     it "assigns a new request_for_teaching_assistant as @request_for_teaching_assistant" do
       get :new, {:semester_id => "1"}
       expect(assigns(:request_for_teaching_assistant)).to be_a_new(RequestForTeachingAssistant)
     end
   end
 
-  describe "GET edit" do
-    describe "a request from the signed professor" do
+  describe "#edit" do
+    context "when editing a request from the signed professor" do
       it "assigns the requested request_for_teaching_assistant as @request_for_teaching_assistant" do
         request_for_teaching_assistant = RequestForTeachingAssistant.create! valid_attributes
         get :edit, {:id => request_for_teaching_assistant.to_param}
@@ -173,7 +173,7 @@ describe RequestForTeachingAssistantsController do
       end
     end
 
-    describe "edit a request not from the signed professor" do
+    context "when editing a request not from the signed professor" do
       it "redirects back to the request list" do
         request_for_teaching_assistant = RequestForTeachingAssistant.create! not_owned_attributes
         get :edit, {:id => request_for_teaching_assistant.to_param}
@@ -182,14 +182,13 @@ describe RequestForTeachingAssistantsController do
     end
   end
 
-  describe "POST create" do
-
+  describe "#create" do
     it "uses the current signed professor's id" do
       post :create, {:request_for_teaching_assistant => valid_attributes}, valid_session
       expect(assigns(:request_for_teaching_assistant).professor_id).to be(valid_professor["id"])
     end
 
-    describe "with valid params" do
+    context "with valid params" do
       it "creates a new RequestForTeachingAssistant" do
         count_before = RequestForTeachingAssistant.count
         assert(!RequestForTeachingAssistant.exists?(valid_attributes[:id]))
@@ -210,16 +209,14 @@ describe RequestForTeachingAssistantsController do
       end
     end
 
-    describe "with invalid params" do
+    context "with invalid params" do
       it "assigns a newly created but unsaved request_for_teaching_assistant as @request_for_teaching_assistant" do
-        # Trigger the behavior that occurs when invalid params are submitted
         allow_any_instance_of(RequestForTeachingAssistant).to receive(:save).and_return(false)
         post :create, {:request_for_teaching_assistant => {}}
         expect(assigns(:request_for_teaching_assistant)).to be_a_new(RequestForTeachingAssistant)
       end
 
       it "re-renders the 'new' template" do
-        # Trigger the behavior that occurs when invalid params are submitted
         allow_any_instance_of(RequestForTeachingAssistant).to receive(:save).and_return(false)
         post :create, {:request_for_teaching_assistant => { "professor_id" => "invalid value" }}
         expect(response).to render_template :new
@@ -227,8 +224,8 @@ describe RequestForTeachingAssistantsController do
     end
   end
 
-  describe "PUT update" do
-    describe "with valid params" do
+  describe "#update" do
+    context "with valid params" do
       it "updates the requested request_for_teaching_assistant" do
         request_for_teaching_assistant = RequestForTeachingAssistant.create! valid_attributes
         expect_any_instance_of(RequestForTeachingAssistant).to receive(:update).with({ "professor_id" => "1" })
@@ -248,7 +245,7 @@ describe RequestForTeachingAssistantsController do
       end
     end
 
-    describe "with invalid params" do
+    context "with invalid params" do
       it "assigns the request_for_teaching_assistant as @request_for_teaching_assistant" do
         request_for_teaching_assistant = RequestForTeachingAssistant.create! valid_attributes
         allow_any_instance_of(RequestForTeachingAssistant).to receive(:save).and_return(false)
@@ -265,9 +262,8 @@ describe RequestForTeachingAssistantsController do
     end
   end
 
-  describe "DELETE destroy" do
-
-    describe "a request from the signed professor" do
+  describe "#destroy" do
+    context "when destroying a request from the signed professor" do
       it "destroys the requested request_for_teaching_assistant" do
         request_for_teaching_assistant = RequestForTeachingAssistant.create! valid_attributes
         expect {
@@ -282,7 +278,7 @@ describe RequestForTeachingAssistantsController do
       end
     end
 
-    describe "a request not from the signed professor" do
+    context "when destroying a request not from the signed professor" do
       it "gives access denied" do
         request_for_teaching_assistant = RequestForTeachingAssistant.create! not_owned_attributes
         delete :destroy, {:id => request_for_teaching_assistant.to_param}
@@ -291,7 +287,7 @@ describe RequestForTeachingAssistantsController do
     end
   end
 
-  describe ".index_for_semester" do
+  describe "#index_for_semester" do
 
     let(:valid_request1) { {
       "professor_id" => "4",
@@ -347,7 +343,7 @@ describe RequestForTeachingAssistantsController do
       get :index_for_semester, { :semester_id => @semester.id }
       expect(assigns(:request_for_teaching_assistants)).to eq([request_for_teaching_assistant])
     end
-    context 'as super professor' do
+    context 'when seeing index for semester as super professor' do
       let!(:courses) {
         Course.create! valid_second_course_attributes
         Course.create! valid_third_course_attributes
@@ -368,7 +364,7 @@ describe RequestForTeachingAssistantsController do
       it { expect(subject).to eq(shown_requests) }
     end
 
-    context 'as hiper professor' do
+    context 'when seeing index for semester as hiper professor' do
       let!(:courses) {
         Course.create! valid_second_course_attributes
         Course.create! valid_third_course_attributes
@@ -384,6 +380,5 @@ describe RequestForTeachingAssistantsController do
       subject { assigns(:request_for_teaching_assistants) }
       it { expect(subject).to eq(shown_requests) }
     end
-
   end
 end
