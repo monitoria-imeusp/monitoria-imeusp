@@ -1,7 +1,7 @@
 require "spec_helper"
 
 describe AssistantEvaluationsController do
-  describe "routing" do
+  context "when routing" do
 
     it "routes to #index_for_student" do
       expect(get("/assistant_evaluations/for_student/1")).to route_to("assistant_evaluations#index_for_student", :student_id => "1")

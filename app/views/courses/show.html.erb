@@ -8,7 +8,7 @@
   <%= @course.name %>
 </p>
 
-<% if (user_signed_in? && current_user.professor? && current_user.present? && current_user.super_professor?) || secretary_signed_in? %>
+<% if current_super_professor? || secretary_signed_in? %>
 <table>
   <thead>
     <tr>
@@ -87,7 +87,7 @@
 
 <% end %>
 
-<% if admin_signed_in? or (user_signed_in? and current_user.super_professor?) %>
+<% if admin_signed_in? or current_super_professor? %>
   <p>
     <%= link_to 'Editar', edit_course_path(@course) %>
     <%= link_to 'Remover', course_path(@course), method: :delete, data: { confirm: 'Tem certeza?' } %>

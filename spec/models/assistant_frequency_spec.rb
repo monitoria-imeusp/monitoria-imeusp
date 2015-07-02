@@ -17,7 +17,7 @@ describe AssistantFrequency do
   let!(:request_for_teaching_assistant) { FactoryGirl.create :request_for_teaching_assistant, professor_id: professor.id }
   let!(:assistant_role) { FactoryGirl.create :assistant_role }
 
-	describe ".notify_frequency" do
+	describe "#notify_frequency" do
 		before :each do
 			expect(Delayed::Job).to receive(:enqueue).with(instance_of(FrequencyReminderJob), params)
 			if (Time.now.month != 6 && Time.now.month != 11)
@@ -33,7 +33,7 @@ describe AssistantFrequency do
 		
 	end
 	
-	describe ".notify_frequency_reminder" do
+	describe "#notify_frequency_reminder" do
 		before :each do
     		mail = double("mail", :deliver => nil)
 			expect(NotificationMailer).to receive(:pending_frequencies_notification).with(array_including(assistant_role), professor).and_return( mail )

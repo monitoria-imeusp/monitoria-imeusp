@@ -19,7 +19,7 @@ describe User do
     let!(:auth4) {{ }}
 
 
-	describe "student authentication" do 
+	context "when authenticating as a student" do 
 
 
 		it "return an user if the authenticated student already exists" do
@@ -47,7 +47,7 @@ describe User do
 
 	end
 
-	describe "professor authentication" do 
+	context "when authenticating as a professor" do 
 
 
 		it "return an user if the authenticated professor already exists" do

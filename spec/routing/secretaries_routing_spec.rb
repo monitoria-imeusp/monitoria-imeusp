@@ -1,7 +1,7 @@
 require "spec_helper"
 
 describe SecretariesController do
-  describe "routing" do
+  context "when routing" do
 
     it "routes to #index" do
       expect(get("/secretaries")).to route_to("secretaries#index")

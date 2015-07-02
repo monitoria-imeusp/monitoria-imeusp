@@ -14,25 +14,25 @@ describe ProfessorsController do
   context 'when signed in as admin' do
     login_admin
 
-    describe '.new' do
+    describe '#new' do
       before :each do
         get :new
       end
-      context 'response' do
+      context 'when receiving response' do
         subject { response }
         it { expect(subject).to render_template(:new) }
       end
-      context 'user' do
+      context 'when subject is an user' do
         subject { assigns(:user) }
         it { expect(subject).to be_a_new(User) }
       end
-      context 'professor' do
+      context 'when subject is a professor' do
         subject { assigns(:professor) }
         it { expect(subject).to be_a_new(Professor) }
       end
     end
 
-    describe '.create' do
+    describe '#create' do
       context 'with invalid params' do
         let(:params) { { user: { name: 'teste' }, professor: { department_id: 1 } } }
         before :each do
@@ -42,7 +42,7 @@ describe ProfessorsController do
         it { expect(subject).to render_template :new }
       end
 
-      context 'succeeds to save' do
+      context 'when it succeeds to save' do
         let(:params) { {
           user: FactoryGirl.attributes_for(:user),
           professor: FactoryGirl.attributes_for(:professor)
@@ -55,7 +55,7 @@ describe ProfessorsController do
       end
     end
 
-    describe '.index' do
+    describe '#index' do
       before :each do
         get :index
       end
@@ -73,7 +73,7 @@ describe ProfessorsController do
       sign_in :user, user
     end
 
-    describe '.index' do
+    describe '#index' do
       before :each do
         get :index, {}
       end
@@ -81,7 +81,7 @@ describe ProfessorsController do
       it { expect(subject).to render_template :index }
     end
 
-    describe ".edit" do
+    describe "#edit" do
       before :each do
         get :edit, { :id => professor.id }
       end
@@ -89,7 +89,7 @@ describe ProfessorsController do
       it { expect(subject).to eq(professor) }
     end
 
-    describe ".update" do
+    describe "#update" do
       context "with valid params" do
         before :each do
           put :update, { id: professor.id, professor: { department_id: 2 } }
@@ -97,7 +97,7 @@ describe ProfessorsController do
 
         it { is_expected.to respond_with :redirect }
 
-        context 'professor' do
+        context 'when updating professor' do
           subject { assigns(:professor) }
           it { expect(subject).to eq professor }
 
@@ -113,13 +113,11 @@ describe ProfessorsController do
           put :update, { id: professor.id, professor: { professor_ran: 1 } }
         end
 
-        context 'professor' do
+        context 'when updating professor' do
           subject { assigns(:professor) }
           it { expect(subject).to eq professor }
         end
       end
     end
-
-
   end
 end

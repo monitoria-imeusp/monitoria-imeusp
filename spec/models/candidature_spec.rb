@@ -13,7 +13,7 @@ describe Candidature do
   let!(:candidature3) { FactoryGirl.create :candidature3 }
   let!(:candidature4) { FactoryGirl.create :candidature4 }
 
-  describe "create a list of candidatures for a course in a semester" do
+  context "when creating a list of candidatures for a course in a semester" do
 
   	it "returns a list of first option candidatures when only_first_option is true" do
   		first_option_list = Candidature.for_course_in_semester course1, semester, true

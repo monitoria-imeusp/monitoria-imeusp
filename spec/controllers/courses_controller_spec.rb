@@ -19,7 +19,7 @@ describe CoursesController do
   context 'when logged in as admin' do
     login_admin
 
-    describe 'new' do
+    describe '#new' do
       it {
         expect(Course).to receive(:new).and_return(@course)
         get :new
@@ -27,13 +27,13 @@ describe CoursesController do
       }
     end
 
-    describe 'create' do
+    describe '#create' do
       before :each do
         @params = { course: {name: 'materia', course_code: 'MAC'}}
         expect(Course).to receive(:new).with(any_args).and_return(@course)
       end
 
-      context 'fails to save' do
+      context 'when it fails to save' do
         before :each do
           expect(Department).to receive(:find_by).with(:id => @course.department_id).and_return(@department)
           expect(@department).to receive(:code).and_return("MAC")
@@ -43,7 +43,7 @@ describe CoursesController do
         it { is_expected.to render_template :new }
       end
 
-      context 'succeeds to save' do
+      context 'when it succeeds to save' do
         before :each do
           expect(Department).to receive(:find_by).with(:id => @course.department_id).and_return(@department)
           expect(@department).to receive(:code).and_return("MAC")
@@ -54,8 +54,8 @@ describe CoursesController do
       end
     end
 
-    describe 'show' do
-      context 'course does exist' do
+    describe '#show' do
+      context 'when course does exist' do
         before :each do
           expect(Course).to receive(:exists?).with(@id).and_return(true)
           expect(Course).to receive(:find).with(@id).and_return(@course)
@@ -64,7 +64,7 @@ describe CoursesController do
         end
         it { is_expected.to render_template :show}
       end
-      context 'course does not exist' do
+      context 'when course does not exist' do
         before :each do
           expect(Course).to receive(:exists?).with(@id).and_return(false)
           get :show, id: @id
@@ -74,15 +74,15 @@ describe CoursesController do
     end
 
 
-    describe 'index' do
+    describe '#index' do
       before :each do
         get :index
       end
       it { is_expected.to render_template :index }
     end
 
-    describe 'edit' do
-      context 'course does exist' do
+    describe '#edit' do
+      context 'when course does exist' do
         before :each do
           expect(Department).to receive(:find_by).with(:id => @course.department_id).and_return(@department)
           expect(@course).to receive(:course_code).and_return("MAC")
@@ -95,7 +95,7 @@ describe CoursesController do
         it { is_expected.to render_template :edit }
       end
 
-      context "course does not exist"  do
+      context "when course does not exist"  do
         before :each do
           expect(Course).to receive(:exists?).with(@id).and_return(false)
           get :edit, id: @id
@@ -104,8 +104,8 @@ describe CoursesController do
       end
     end
 
-    describe 'update' do
-      context 'a course that does not exist' do
+    describe '#update' do
+      context 'when updating a course that does not exist' do
         before :each do
           expect(Course).to receive(:exists?).with(@id).and_return(false)
           put :update, id: @id, course: { id: @id }
@@ -113,13 +113,13 @@ describe CoursesController do
         it { is_expected.to redirect_to course_path }
       end
 
-      context 'a course that does exist' do
+      context 'when updating a course that does exist' do
         before do
           expect(Course).to receive(:exists?).with(@id).and_return(true)
           expect(Course).to receive(:find).with(@id).and_return(@course)
         end
 
-        context 'but fails to update' do
+        context 'when update fails' do
           before :each do
             expect(@course).to receive(:update).with(any_args).and_return(false)
             expect(Department).to receive(:find_by).with(:id => @course.department_id).and_return(@department)
@@ -130,7 +130,7 @@ describe CoursesController do
           it { is_expected.to render_template :edit }
         end
 
-        context 'and succeeds to update' do
+        context 'when update succeeds' do
           before :each do
             expect(Department).to receive(:find_by).with(:id => @course.department_id).and_return(@department)
             expect(@department).to receive(:code).and_return("MAC")
@@ -143,9 +143,9 @@ describe CoursesController do
       end
     end
 
-    describe "destroy" do
+    describe "#destroy" do
 
-      describe "destroy a course" do
+      describe "when destroying a course" do
         before :each do
           expect(Course).to receive(:find).with(@id).and_return(@course)
           expect(@course).to receive(:destroy)

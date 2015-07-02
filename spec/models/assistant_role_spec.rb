@@ -16,7 +16,7 @@ describe AssistantRole do
   let!(:assistant_frequency1) { FactoryGirl.create :assistant_frequency, month: 3, presence: true}
   let!(:assistant_frequency2) { FactoryGirl.create :assistant_frequency, month: 4, presence: false}
   
-  describe ".frequency_status_for_month" do
+  describe "#frequency_status_for_month" do
 		
 		context "when presence is true" do
 		  subject { assistant_role.frequency_status_for_month 3 }
