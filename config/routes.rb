@@ -92,6 +92,8 @@ Rails.application.routes.draw do
   patch 'assistant_roles/:id/' => 'assistant_roles#update', as: :update_assistant_role
   delete 'assistant_roles/:id/' => 'assistant_roles#destroy', as: :destroy_assistant_role
 
+  post 'secretaries/pay_all_assistants/' => 'secretaries#pay_all_assistants', as: :pay_all_assistants
+
 
   resources :assistant_evaluations, except: [:index, :show, :new, :destroy]
   get 'assistant_evaluations/for_student/:student_id/' => 'assistant_evaluations#index_for_student', as: :assistant_evaluations_for_student

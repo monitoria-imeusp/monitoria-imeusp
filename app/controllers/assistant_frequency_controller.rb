@@ -11,7 +11,7 @@ class AssistantFrequencyController < ApplicationController
     if params[:redirect_to_index] == "not_for_professor"
       red_path = '/assistant_roles'
     end
-    @assistant_frequency = AssistantFrequency.new(month: month, presence: presence, assistant_role_id: role)
+    @assistant_frequency = AssistantFrequency.new(month: month, presence: presence, assistant_role_id: role, payment: false)
     if @assistant_frequency.save
       if presence
         respond_to do |format|
@@ -28,4 +28,5 @@ class AssistantFrequencyController < ApplicationController
         end      
     end
   end
+
 end

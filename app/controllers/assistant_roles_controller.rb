@@ -83,6 +83,7 @@ class AssistantRolesController < ApplicationController
     end
   end
 
+
   # POST /assistant_roles/request_for_teaching_assistant_id/1
   def request_evaluations_for_semester
     @semester = Semester.find(params[:semester_id])

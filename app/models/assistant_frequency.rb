@@ -52,4 +52,8 @@ class AssistantFrequency < ActiveRecord::Base
     end
   end
 
+  def pay_assistant_frequency_for_month
+    update_column(:payment, true)
+  end
+
 end
