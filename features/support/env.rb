@@ -14,8 +14,8 @@ require 'capybara/poltergeist'
 
 require 'webmock/cucumber'
 
-#require'capybara-webkit'
-Capybara.default_driver = :poltergeist
+require'capybara-webkit'
+
 Capybara.javascript_driver = :poltergeist
 
 WebMock.disable!

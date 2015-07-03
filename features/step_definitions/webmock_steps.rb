@@ -24,9 +24,9 @@ Given(/^the graduate student with nusp "(.*?)" has valid history$/) do |nusp|
 end
 
 Given(/^I can do real web requests$/) do
-  #WebMock.disable!
+  WebMock.disable!
 end
 
 Given(/^I can't do real web requests$/) do
-  #WebMock.enable!
+  WebMock.enable!
 end
