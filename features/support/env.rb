@@ -18,6 +18,10 @@ require'capybara-webkit'
 
 Capybara.javascript_driver = :poltergeist
 
+Capybara.register_driver :poltergeist do |app|
+  Capybara::Poltergeist::Driver.new(app, js_errors: false)
+end
+
 WebMock.disable!
 
 # Capybara defaults to CSS3 selectors rather than XPath.
