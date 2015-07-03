@@ -6,4 +6,4 @@ end
 
 task 'konacha:run' => 'konacha:message'
 
-task :default => 'konacha:run'
+#task :default => 'konacha:run'
