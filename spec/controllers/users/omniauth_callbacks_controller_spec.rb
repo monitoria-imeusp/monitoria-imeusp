@@ -115,11 +115,9 @@ describe Users::OmniauthCallbacksController do
     describe ".usp" do
 
       before :each do
-        expect(info).to receive(:nusp).at_least(1).times.and_return(22222)
-        expect(info).to receive(:link).at_least(1).times.and_return(:teacher)
+        expect(info).to receive(:nusp).at_least(1).times.and_return(user2.nusp)
+        expect(info).to receive(:link).at_least(1).times.and_return(:not_student)
         OmniAuth.config.mock_auth[:usp] = OmniAuth::AuthHash.new({})
-        expect(OmniAuth.config.mock_auth[:usp]).to receive(:provider).at_least(1).times.and_return(:usp)
-        expect(OmniAuth.config.mock_auth[:usp]).to receive(:uid).at_least(1).times.and_return('2')
         expect(OmniAuth.config.mock_auth[:usp]).to receive(:info).at_least(1).times.and_return(info)
         request.env["omniauth.auth"] = OmniAuth.config.mock_auth[:usp] 
         get :usp
@@ -137,7 +135,7 @@ describe Users::OmniauthCallbacksController do
 
         describe '#nusp' do
           subject { super().nusp }
-          it { is_expected.to be(22222) }
+          it { is_expected.to be(user2.nusp) }
         end
       end
 
