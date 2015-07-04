@@ -120,6 +120,7 @@ class Ability
       can :update, Secretary
       can :change_password, Secretary #, :id => user.id #Only himself
       can :destroy, Secretary
+      can :pay_all_assistants, Secretary
       cannot :create, Student
       can :read, Student
       cannot :update, Student
@@ -137,6 +138,8 @@ class Ability
       can :read, Candidature
       can :update, Candidature
       can :destroy, Candidature
+      #can :pay_assistant_frequency_for_month, AssistantFrequency
+
     elsif user.is_a? User and user.student?
       cannot :read, Admin
       cannot :update, Admin

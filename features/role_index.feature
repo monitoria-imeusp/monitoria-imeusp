@@ -138,6 +138,22 @@ Feature: Assistant roles table visualization
         And I should not see "Junho"
         Then I'm back to current time
 
+    Scenario: Secretary pays assistant roles for last month
+        Given it's currently month 5
+        Given I'm logged in as a secretary
+        And I visit the assistant roles page
+        And I click the "Pagar monitores" link
+        Then I should see "Bob MAC0110 Dude Desativar Atestado • Março: Ausente • Abril: Pago • Maio: Presente"
+        Then I should see "John MAC0431 Gold Desativar Atestado • Março: Presente • Abril: Ausente • Maio: Pendente"
+        Then I should see "Wil MAC0431 Gold Desativar Atestado • Março: Presente • Abril: Pago • Maio: Presente"
+        Then I should see "Mary MAT0125 Silver Desativar Atestado • Março: Ausente • Abril: Pendente • Maio: Pendente"
+        Then I should see "Jude MAC0431 Gold Desativar Atestado • Março: Pendente • Abril: Pendente • Maio: Pendente"
+        Then I should see "Alfredo MAC0431 Gold Desativado Atestado • Março: --- • Abril: Pago • Maio: ---"
+        And I should not see "Junho"
+        Then I'm back to current time
+
+
+
     @javascript
     Scenario: Secretary filters roles
         Given it's currently month 5

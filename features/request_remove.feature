@@ -15,7 +15,5 @@ Feature: Removing Requests for Teaching Assistant
         Then I click the "Pedidos de monitoria" link
         And I click the "Ver" link
         And I click the "Remover" link
-        And I should see "Você tem certeza?" in the alert
-        And I confirm the alert
         Then I should not see "MAC0122"
 

@@ -5,5 +5,6 @@ FactoryGirl.define do
     month 1
     presence false
     assistant_role_id 1
+    payment false
   end
 end

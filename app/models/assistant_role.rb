@@ -33,6 +33,9 @@ class AssistantRole < ActiveRecord::Base
       if month == freq.month
         found = true
         if freq.presence
+          if freq.payment
+            return "Pago"
+          end
           return "Presente"
         else
           return "Ausente"
