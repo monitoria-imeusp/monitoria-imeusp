@@ -13,6 +13,8 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
       sign_in @user
       redirect_to edit_professor_path(@user.professor)
     else
+      p "===> Unknown link! <==="
+      p auth
       raise
     end
   end
