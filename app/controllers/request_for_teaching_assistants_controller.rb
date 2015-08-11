@@ -49,7 +49,7 @@ class RequestForTeachingAssistantsController < ApplicationController
             chosen_student_ids.include?(candidature.student.id)
       end
       # Valid candidatures for the same department
-      @candidatures_for_this_department = ((Candidature.for_same_department_in_semester course, semester).all.map do
+      @candidatures_for_this_department = ((Candidature.for_same_department_in_semester course, semester).map do
         |candidature| candidature
         end).delete_if do |candidature|
             chosen_student_ids.include?(candidature.student.id)
