@@ -53,7 +53,11 @@ class Candidature < ActiveRecord::Base
 
   def self.for_same_department_in_semester course, semester
     courses_in_same_department = Course.where "department_id = ? and id != ?", course.department_id, course.id
-    candidatures_in_same_department = Candidature.where(course1_id: courses_in_same_department).where(semester: semester)
+    candidatures_in_same_department1 = Candidature.where(course1_id: courses_in_same_department).where(semester: semester)
+    candidatures_in_same_department2 = Candidature.where(course2_id: courses_in_same_department).where(semester: semester)
+    candidatures_in_same_department3 = Candidature.where(course3_id: courses_in_same_department).where(semester: semester)
+    candidatures_in_same_department4 = Candidature.where(course4_id: courses_in_same_department).where(semester: semester)
+    candidatures_in_same_department = find_by_sql("#{candidatures_in_same_department1.to_sql} UNION #{candidatures_in_same_department2.to_sql} UNION #{candidatures_in_same_department3.to_sql} UNION #{candidatures_in_same_department4.to_sql}")
   end
 
   def self.courses_num
