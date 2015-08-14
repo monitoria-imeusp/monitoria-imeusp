@@ -52,7 +52,7 @@
   <%= (@request_for_teaching_assistant.observation) %>
 </p>
 
-<% if @request_for_teaching_assistant.semester.open %>
+<% if @request_for_teaching_assistant.semester.open or (@request_for_teaching_assistant.semester.active and secretary_signed_in?) %>
   <%= link_to 'Editar', edit_request_for_teaching_assistant_path(@request_for_teaching_assistant) %>
   <%= link_to 'Remover', @request_for_teaching_assistant, method: :delete, data: { confirm: 'Tem certeza?' } %>
 <% end %>
