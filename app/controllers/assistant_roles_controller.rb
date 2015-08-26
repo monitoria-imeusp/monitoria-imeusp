@@ -174,7 +174,9 @@ class AssistantRolesController < ApplicationController
   end
 
   def should_see_the_role role
-    ((current_super_professor? or current_professor?) and (role.course.dep_code == current_user.professor.dep_code))
+    (current_super_professor? and role.course.dep_code == current_user.professor.dep_code) \
+    or \
+    (current_professor? and role.request_for_teaching_assistant.professor == current_user.professor)
   end
   
   def create_current_months
