@@ -24,4 +24,3 @@ Feature: Candidature report
         And I'm logged in as student "Bob"
         And I click the "Minhas candidaturas" link
         Then I should not see "Preencher relatório"
-

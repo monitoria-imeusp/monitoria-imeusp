@@ -151,6 +151,7 @@ describe CandidaturesController do
   end
 
   describe "#index_for_student" do
+    let!(:semester) { FactoryGirl.create :semester }
     context 'when receveing response' do
       before :each do
         get :index_for_student, {student_id: student.id}
