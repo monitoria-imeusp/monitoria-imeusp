@@ -3,8 +3,17 @@ class AssistantRolesController < ApplicationController
 
   # GET /assistant_roles
   def index
-    separate_by_semester AssistantRole.all    
-    @current_semester_frequencies = AssistantFrequency.current_frequencies
+    if params[:semester_id].present?
+      @semester = Semester.find params[:semester_id]
+    else
+      @semester = Semester.current
+    end
+    @assistant_roles = AssistantRole.for_semester @semester
+    unless should_see_all_roles?
+      @assistant_roles = @assistant_roles.map { |x| x }.keep_if do |role|
+        should_see_the_role role
+      end
+    end
     create_current_months
   end
 
@@ -154,6 +163,16 @@ class AssistantRolesController < ApplicationController
     )
   end
 
+  def should_see_all_roles?
+    current_hiper_professor? or secretary_signed_in?
+  end
+
+  def should_see_the_role role
+    (current_super_professor? and role.course.dep_code == current_user.professor.dep_code) \
+    or \
+    (current_professor? and role.request_for_teaching_assistant.professor == current_user.professor)
+  end
+
   def separate_by_semester record
     @assistant_roles_by_semester = Semester.all.reverse_order.map do |semester|
       {
@@ -169,20 +188,19 @@ class AssistantRolesController < ApplicationController
     end
   end
 
-  def should_see_all_roles?
-    current_hiper_professor? or secretary_signed_in?
-  end
-
-  def should_see_the_role role
-    (current_super_professor? and role.course.dep_code == current_user.professor.dep_code) \
-    or \
-    (current_professor? and role.request_for_teaching_assistant.professor == current_user.professor)
-  end
   
   def create_current_months
     @months = [Time.now.month]
-    @current_semester_frequencies.each do |freq|
-      @months.push(freq.month)
+    if @current_semester_frequencies
+      @current_semester_frequencies.each do |freq|
+        @months.push(freq.month)
+      end
+    else
+      @assistant_roles.each do |role|
+        role.assistant_frequency.each do |freq|
+          @months.push(freq.month)
+        end
+      end
     end
     @months.uniq!
     @months.sort!

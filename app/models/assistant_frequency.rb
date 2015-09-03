@@ -13,9 +13,7 @@ class AssistantFrequency < ActiveRecord::Base
   end
 
   def self.current_frequencies
-  	full_list = AssistantFrequency.all
-  	active_semester = Semester.current
-  	full_list.select { |frequency| frequency.semester == active_semester }
+    AssistantFrequency.where assistant_role: (AssistantRole.for_semester Semester.current)
   end
 
   def self.notify_frequency
