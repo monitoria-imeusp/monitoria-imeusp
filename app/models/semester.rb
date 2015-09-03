@@ -40,6 +40,10 @@ class Semester < ActiveRecord::Base
     "#{parity+1}º semestre de #{year}"
   end
 
+  def current?
+    self == Semester.current
+  end
+
   def self.all_open
     Semester.where(open: true).all
   end

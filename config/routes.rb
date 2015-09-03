@@ -80,7 +80,9 @@ Rails.application.routes.draw do
   get 'candidatures/for_department/:semester_id/:department_id/' => 'candidatures#index_for_department', as: :candidatures_for_department
   get 'candidatures/for_student/:student_id/' => 'candidatures#index_for_student', as: :candidatures_for_student
 
+
   get 'assistant_roles/' => 'assistant_roles#index', as: :assistant_roles
+  get 'assistant_roles/:semester_id' => 'assistant_roles#index', as: :assistant_roles_for_semester
   get 'assistant_roles/for_professor/:professor_id' => 'assistant_roles#index_for_professor', as: :assistant_roles_for_professor  
   get 'assistant_roles/certificate/:id' => 'assistant_roles#certificate', as: :certificate
   get 'assistant_roles/report_form/:id' => 'assistant_roles#report_form', as: :report_form
