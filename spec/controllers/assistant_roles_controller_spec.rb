@@ -18,23 +18,46 @@ describe AssistantRolesController do
     sign_in prof_user
   end
 
-  describe "#{}index" do
-    before :each do
-      get :index
-    end
-      
-    context "when http success" do
-      it { is_expected.to respond_with(:success) }
+  describe "#index" do
+    let!(:another_semester) { FactoryGirl.create :semester, id: 2, year: 2010 }
+    context "for specific semester" do
+      before :each do
+        get :index, semester_id: semester.id
+      end
+        
+      context "when http success" do
+        it { is_expected.to respond_with(:success) }
+      end
+
+      context "with roles" do
+        subject { assigns(:assistant_roles) }
+        it { is_expected.to eq [assistant_role] }
+      end
+
+      context "with current semester" do
+        subject { assigns(:semester) }
+        it { is_expected.to eq(semester) }
+      end
     end
 
-    context "with roles" do
-      subject { assigns(:assistant_roles)[0] }
-      it { is_expected.to eq(assistant_role) }
-    end
+    context "for default semester" do
+      before :each do
+        get :index
+      end
+        
+      context "when http success" do
+        it { is_expected.to respond_with(:success) }
+      end
 
-    context "with current semester" do
-      subject { assigns(:semester) }
-      it { is_expected.to eq(semester) }
+      context "with roles" do
+        subject { assigns(:assistant_roles) }
+        it { is_expected.to eq [] }
+      end
+
+      context "with current semester" do
+        subject { assigns(:semester) }
+        it { is_expected.to eq(another_semester) }
+      end
     end
   end
 
