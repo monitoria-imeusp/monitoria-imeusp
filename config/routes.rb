@@ -23,7 +23,7 @@ Rails.application.routes.draw do
   get '/professors/sign_in/' => 'home#index'  
   get "/users/sign_in/" => "home#index"
 
-  resources :users
+  resources :users, except: :edit
 
   resources :admins do
     collection do

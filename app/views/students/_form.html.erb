@@ -1,9 +1,5 @@
 <%= form_for(@student) do |f| %>
 
-  <% unless @user.nil? %>
-    <%= render template: "users/_inner_form" %>
-  <% end %>
-
   <% if @student.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@student.errors.count, "erro impediu", "erros impediram") %> esse aluno de ser salvo:</h2>
