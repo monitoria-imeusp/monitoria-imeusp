@@ -13,7 +13,7 @@ class AssistantFrequency < ActiveRecord::Base
   end
 
   def self.current_frequencies
-    AssistantFrequency.where semester: Semester.current
+    AssistantFrequency.where assistant_role: (AssistantRole.for_semester Semester.current)
   end
 
   def self.notify_frequency

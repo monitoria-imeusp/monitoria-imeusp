@@ -9,6 +9,11 @@ class AssistantRolesController < ApplicationController
       @semester = Semester.current
     end
     @assistant_roles = AssistantRole.for_semester @semester
+    unless should_see_all_roles?
+      @assistant_roles = @assistant_roles.map { |x| x }.keep_if do |role|
+        should_see_the_role role
+      end
+    end
     create_current_months
   end
 
@@ -167,12 +172,34 @@ class AssistantRolesController < ApplicationController
     or \
     (current_professor? and role.request_for_teaching_assistant.professor == current_user.professor)
   end
+
+  def separate_by_semester record
+    @assistant_roles_by_semester = Semester.all.reverse_order.map do |semester|
+      {
+        semester: semester,
+        role: record.map { |x| x }.keep_if do |role|
+          ((role.request_for_teaching_assistant.semester == semester) and 
+            (should_see_all_roles? or should_see_the_role(role)))
+        end
+      }
+    end
+    @assistant_roles_by_semester.each do |entry|
+      entry[:role].sort! { |a, b| a.student.name <=> b.student.name }
+    end
+  end
+
   
   def create_current_months
     @months = [Time.now.month]
-    @assistant_roles.each do |role|
-      role.assistant_frequency.each do |freq|
+    if @current_semester_frequencies
+      @current_semester_frequencies.each do |freq|
         @months.push(freq.month)
+      end
+    else
+      @assistant_roles.each do |role|
+        role.assistant_frequency.each do |freq|
+          @months.push(freq.month)
+        end
       end
     end
     @months.uniq!
