@@ -28,10 +28,6 @@
   <%= link_to 'Remover', user_path(@user), method: :delete, data: { confirm: 'Tem certeza?' } %>
 <% end %>
 
-<% if user_signed_in? and current_user.id == @user.id %>
-  <%= link_to 'Editar', edit_user_path(@user) %>
-<% end %>
-
 <span style="height: 2em; display: block;"></span>
 
 <% @user.student do |student| %>
