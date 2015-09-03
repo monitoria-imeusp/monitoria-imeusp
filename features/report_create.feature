@@ -27,7 +27,8 @@ Feature: Assistant role report creation
 
 	Scenario: Student creates his assistant report
 		Given I'm logged in as student "Bob"
-		And I click the "Minhas candidaturas" link
+                And it's currently month 6
+                And I click the "Minhas candidaturas" link
 		And I click the "Preencher relatório" link
 		And I fill the "Quantos alunos em média você atendeu durante o plantão de monitores?" field with "2"
 		And I fill the "Quantas listas de exercícios você corrigiu por mês (em média)?" field with "3"
