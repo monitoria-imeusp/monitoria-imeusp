@@ -27,10 +27,14 @@ describe AssistantRolesController do
       it { is_expected.to respond_with(:success) }
     end
 
-    context "with roles by semester" do
-      subject { assigns(:assistant_roles_by_semester)[0] }
-      it { expect(subject[:semester]).to eq(semester) }
-      it { expect(subject[:role][0]).to eq(assistant_role) }
+    context "with roles" do
+      subject { assigns(:assistant_roles)[0] }
+      it { is_expected.to eq(assistant_role) }
+    end
+
+    context "with current semester" do
+      subject { assigns(:semester) }
+      it { is_expected.to eq(semester) }
     end
   end
 
