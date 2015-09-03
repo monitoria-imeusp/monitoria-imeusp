@@ -19,6 +19,7 @@ notifications:
       - lucasdario.dariolucas@gmail.com
       - matbarrosrodrigues@gmail.com
       - ogawa.gabriel@gmail.com
+      - gorobaum@gmail.com
     on_success: change
     on_failure: always
 
