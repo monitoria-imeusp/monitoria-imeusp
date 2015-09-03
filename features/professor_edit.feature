@@ -20,7 +20,7 @@ Feature: Edit Professor
     Scenario: Professor editing itself
         Given I'm logged in as a professor
         When I click the "Perfil" link
-        And I click the second "Editar" link
+        And I click the "Editar" link
         And I select "MAE" on the "Departamento"
         And I press the "Enviar" button
         Then I should see "Departamento: MAE"

@@ -17,7 +17,7 @@
   <h2>
     Ver pedidos de:
   </h2>
-  <% @semesters.reverse.each do |semester| %>
+  <% @active_semesters.each do |semester| %>
     <%= link_to semester.period_as_s, request_for_teaching_assistants_for_semester_path(semester) %>
   <% end %>
   <span style="height: 2em; display: block;"></span>

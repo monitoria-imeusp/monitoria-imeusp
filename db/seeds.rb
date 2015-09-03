@@ -163,29 +163,6 @@ if Rails.env.development?
   [
     {
       user: {
-        name: "Wilson Kazuo Mizutani",
-        nusp: 100000,
-        email: "kazuo@ime.usp.br",
-        password: "changeme!",
-        confirmed_at: Time.now
-      },
-      student: {
-        institute: "IME",
-        gender: "1",
-        rg: "123",
-        cpf: "321",
-        address: "R. Matão",
-        district: "Butantã",
-        zipcode: "000",
-        city: "São Paulo",
-        state: "São Paulo",
-        tel: "1111111111",
-        cel: "11122233344",
-        has_bank_account: true
-      }
-    },
-    {
-      user: {
         name: "Jackção Souza",
         nusp: "242424",
         email: "jacks@ime.usp.br",
