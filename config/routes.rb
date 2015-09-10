@@ -83,7 +83,8 @@ Rails.application.routes.draw do
 
   get 'assistant_roles/' => 'assistant_roles#index', as: :assistant_roles
   get 'assistant_roles/:semester_id' => 'assistant_roles#index', as: :assistant_roles_for_semester
-  get 'assistant_roles/for_professor/:professor_id' => 'assistant_roles#index_for_professor', as: :assistant_roles_for_professor  
+  get 'assistant_roles/for_professor/:professor_id/' => 'assistant_roles#index_for_professor', as: :assistant_roles_for_professor
+  get 'assistant_roles/for_professor/:professor_id/:semester_id' => 'assistant_roles#index_for_professor', as: :assistant_roles_for_professor_and_semester
   get 'assistant_roles/certificate/:id' => 'assistant_roles#certificate', as: :certificate
   get 'assistant_roles/report_form/:id' => 'assistant_roles#report_form', as: :report_form
   get 'assistant_roles/print_report/:id' => 'assistant_roles#print_report', as: :print_report
