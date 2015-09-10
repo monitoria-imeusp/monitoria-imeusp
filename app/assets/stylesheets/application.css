@@ -47,6 +47,23 @@ p, form, a, a:hover, a:visited, a:active, td, th {
   background-color: inherit;
 }
 
+input[type="submit"] {
+  display: block;
+  background-color: #368;
+  border-radius: 4px;
+  min-width: 128px;
+  margin-left: 4px;
+  margin-right: 4px;
+  margin-bottom: 0px;
+  margin-top: 0px;
+  padding: 4px 6px;
+  color: #eee;
+  font-weight: bold;
+  text-align: center;
+  border-width: 0;
+  transition: background-color 0.2s;
+}
+
 a, a:visited {
   text-decoration: none;
   color: #368;
