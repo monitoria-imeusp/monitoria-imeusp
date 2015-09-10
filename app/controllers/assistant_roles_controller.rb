@@ -3,11 +3,7 @@ class AssistantRolesController < ApplicationController
 
   # GET /assistant_roles
   def index
-    if params[:semester_id].present?
-      @semester = Semester.find params[:semester_id]
-    else
-      @semester = Semester.current
-    end
+    get_semester
     @assistant_roles = AssistantRole.for_semester @semester
     unless should_see_all_roles?
       @assistant_roles = @assistant_roles.map { |x| x }.keep_if do |role|
@@ -19,10 +15,10 @@ class AssistantRolesController < ApplicationController
 
   # GET /assistant_roles/for_professor/1
   def index_for_professor
+    get_semester
     @professor = Professor.find(params[:professor_id])
-    requests = RequestForTeachingAssistant.where(professor: @professor)
-    separate_by_semester AssistantRole.where(request_for_teaching_assistant: requests)
-    @current_semester_frequencies = AssistantFrequency.current_frequencies
+    raise CanCan::AccessDenied.new unless current_user.professor == @professor
+    @assistant_roles = AssistantRole.for_professor_and_semester @professor, @semester
     create_current_months
   end
 
@@ -161,6 +157,14 @@ class AssistantRolesController < ApplicationController
     params.permit(
       :student_id, :request_for_teaching_assistant_id
     )
+  end
+
+  def get_semester
+    if params[:semester_id].present?
+      @semester = Semester.find params[:semester_id]
+    else
+      @semester = Semester.current
+    end
   end
 
   def should_see_all_roles?
