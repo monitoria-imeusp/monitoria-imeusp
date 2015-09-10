@@ -12,6 +12,10 @@ class Semester < ActiveRecord::Base
     parity == 0 ? "Ímpar" : "Par"
   end
 
+  def last_month
+    parity == 0 ? 11 : 6
+  end
+
   def parity_as_i
     parity+1
   end
