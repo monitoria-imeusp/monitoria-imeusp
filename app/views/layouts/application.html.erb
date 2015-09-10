@@ -22,8 +22,8 @@
   <body>
     <nav class="navbar navbar-default">
       <div class="container-fuild">
-        <div class="col-xs-3"></div>
-        <div class="col-xs-6">
+        <div class="col-xs-1"></div>
+        <div class="col-xs-10">
           <div class="navbar-header">
             <%= link_to "Sistema de Monitoria", "/", class: "navbar-brand" %>
           </div>
@@ -42,104 +42,108 @@
               <% end %>
             </ul>
           </div>
-        <div class="col-xs-3"></div>
+        <div class="col-xs-1"></div>
         </div>
       </div>
     </nav>
-    <div class="shell">
-      <nav>
-
-        <% if signed_in? %>
-          <p>
-            Acessando como
-            <b><%=admin_signed_in? ? current_signed.email : current_signed.name %></b>
-          </p>
-        <% else %>
-          <p>
-            Você ainda não fez acesso
-          </p>
-          <% unless Rails.env.production? %>
-            <ul>
+    <div class="container-fluid">
+      <div class="row">
+      <div class="col-xs-1"></div>
+        <div class="col-xs-10">
+          <% if signed_in? %>
+            <p>
+              Acessando como
+              <b><%=admin_signed_in? ? current_signed.email : current_signed.name %></b>
+            </p>
+          <% else %>
+            <p>
+              Você ainda não fez acesso
+            </p>
+          <% end %>
+          <hr>
+        </div>
+        <div class="col-xs-1"></div>
+      </div>
+      <div class="row">
+        <div class="col-xs-1"></div>
+        <div class="col-xs-2">
+          <% unless signed_in? %>
+            <ul class="nav nav-pills nav-stacked">
+              <li><%= link_to "Acesso USP", user_omniauth_authorize_path(:usp) %></li>
+              <% unless Rails.env.production? %>
+                <li><%= link_to "Guia de uso (alunos)", help_students_path('home') %></li>
+              <% end %>
+            </ul>
+          <% end %>
+          <!-- Painel do admin -->
+          <% if admin_signed_in? %>
+            <h3>Administrador(a)</h3>
+            <ul class="nav nav-pills nav-stacked">
               <li>
-                <%= link_to "Guia de uso (alunos)", help_students_path('home') %>
+                <%= link_to "Cadastrar disciplina", new_course_path %>
+              </li>
+              <li>
+                <%= link_to "Cadastrar funcionário", new_secretary_path %>
+              </li>
+              <li>
+                 <%= link_to "Candidaturas", candidatures_path %>
+              </li>
+              <li>
+                <%= link_to "Monitores eleitos", assistant_roles_path %>
+              </li>
+              <li>
+                <%= link_to "Gerenciar semestres", semesters_path %>
+              </li>
+              <li>
+                <%= link_to "Usuários", users_path %>
+              </li>
+              <li>
+                <%= link_to "Painel de controle", control_panel_admins_path %>
               </li>
             </ul>
           <% end %>
-        <% end %>
-
-        <!-- Painel do admin -->
-        <% if admin_signed_in? %>
-          <hr>
-          <h2>Administrador(a)</h2>
-          <ul>
-            <li>
-              <%= link_to "Cadastrar disciplina", new_course_path %>
-            </li>
-            <li>
-              <%= link_to "Cadastrar funcionário", new_secretary_path %>
-            </li>
-            <li>
-               <%= link_to "Candidaturas", candidatures_path %>
-            </li>
-            <li>
-              <%= link_to "Monitores eleitos", assistant_roles_path %>
-            </li>
-            <li>
-              <%= link_to "Gerenciar semestres", semesters_path %>
-            </li>
-            <li>
-              <%= link_to "Usuários", users_path %>
-            </li>
-            <li>
-              <%= link_to "Painel de controle", control_panel_admins_path %>
-            </li>
-          </ul>
-        <% end %>
-        <!-- Painel dos funcionários -->
-        <% if secretary_signed_in? %>
-          <hr>
-          <h2>Funcionário(a)</h2>
-          <ul>
-            <li>
-              <%= link_to "Gerenciar semestres", semesters_path %>
-            </li>
-            <li>
-              <%= link_to "Pedidos de monitoria", request_for_teaching_assistants_path %>
-            </li>
-            <li>
-              <%= link_to "Monitores eleitos", assistant_roles_path %>
-            </li>
-            <li>
-               <%= link_to "Candidaturas", candidatures_path %>
-            </li>
-            <li>
-              <%= link_to "Usuários", users_path %>
-            </li>
-          </ul>
-        <% else %>
-          <% if user_signed_in? %>
-            <!-- Painel dos professores -->
-            <% current_user.professor do |professor| %>
-              <hr>
-              <h2>Professor(a)</h2>
-              <% if not professor.dirty %>
-                <ul>
-                  <li>
-                    <%= link_to "Pedidos de monitoria", request_for_teaching_assistants_path %>
-                  </li>
-                  <li>
-                    <%= link_to "Meus monitores", assistant_roles_for_professor_path(professor) %>
-                  </li>
-                  <% unless Rails.env.production? %>
+          <!-- Painel dos funcionários -->
+          <% if secretary_signed_in? %>
+            <h3>Funcionário(a)</h3>
+            <ul class="nav nav-pills nav-stacked">
+              <li>
+                <%= link_to "Gerenciar semestres", semesters_path %>
+              </li>
+              <li>
+                <%= link_to "Pedidos de monitoria", request_for_teaching_assistants_path %>
+              </li>
+              <li>
+                <%= link_to "Monitores eleitos", assistant_roles_path %>
+              </li>
+              <li>
+                 <%= link_to "Candidaturas", candidatures_path %>
+              </li>
+              <li>
+                <%= link_to "Usuários", users_path %>
+              </li>
+            </ul>
+          <% else %>
+            <% if user_signed_in? %>
+              <!-- Painel dos professores -->
+              <% current_user.professor do |professor| %>
+                <h3>Professor(a)</h3>
+                <% if not professor.dirty %>
+                  <ul class="nav nav-pills nav-stacked">
                     <li>
-                      <%= link_to "Guia de uso", help_professors_path('home') %>
+                      <%= link_to "Pedidos de monitoria", request_for_teaching_assistants_path %>
                     </li>
-                  <% end %>
-                </ul>
-                <% if professor.super_professor? %>
-                  <hr>
-                  <h2>Comissão de monitoria</h2>
-                  <ul>
+                    <li>
+                      <%= link_to "Meus monitores", assistant_roles_for_professor_path(professor) %>
+                    </li>
+                    <% unless Rails.env.production? %>
+                      <li>
+                        <%= link_to "Guia de uso", help_professors_path('home') %>
+                      </li>
+                    <% end %>
+                  </ul>
+                  <% if professor.super_professor? %>
+                    <h3>Comissão de monitoria</h3>
+                    <ul class="nav nav-pills nav-stacked">
                       <li>
                         <%= link_to "Cadastrar disciplina", new_course_path %>
                       </li>
@@ -152,39 +156,40 @@
                       <li>
                         <%= link_to "Usuários", users_path %>
                       </li>
-                  </ul>
+                    </ul>
+                  <% end %>
                 <% end %>
               <% end %>
-            <% end %>
-            <!-- Painel dos alunos -->
-            <% current_user.student do |student| %>
-              <hr>
-              <h2>Aluno(a)</h2>
-              <ul>
-                <li>
-                   <%= link_to "Minhas candidaturas", candidatures_path %>
-                </li>
-                <% unless Rails.env.production? %>
+              <!-- Painel dos alunos -->
+              <% current_user.student do |student| %>
+                <h3>Aluno(a)</h3>
+                <ul class="nav nav-pills nav-stacked">
                   <li>
-                     <%= link_to "Guia de uso", help_students_path('home') %>
+                     <%= link_to "Minhas candidaturas", candidatures_path %>
                   </li>
-                <% end %>
-              </ul>
+                  <% unless Rails.env.production? %>
+                    <li>
+                       <%= link_to "Guia de uso", help_students_path('home') %>
+                    </li>
+                  <% end %>
+                </ul>
+              <% end %>
             <% end %>
           <% end %>
-        <% end %>
 
-        <% if flash[:notice] %>
-          <p class="notice"><%= notice %></p>
-        <% end %>
-        <% if flash[:alert] %>
-          <p class="alert"><%= alert %></p>
-        <% end %>
-
-      </nav>
-      <section>
-        <%= yield %>
-      </section>
+          <% if flash[:notice] %>
+            <p class="notice"><%= notice %></p>
+          <% end %>
+          <% if flash[:alert] %>
+            <p class="alert"><%= alert %></p>
+          <% end %>
+        </div>
+        <div class="col-xs-8">
+          <%= yield %>
+        </div>
+        <div class="col-xs-1"></div>
+      </div>
+    </div>
     <footer>
       <p><strong>Dúvidas sobre o processo de inscrição</strong>: monitoria@ime.usp.br</p>
       <p><strong>Problemas com o sistema</strong>: sistemamonitoria@ime.usp.br</p>
