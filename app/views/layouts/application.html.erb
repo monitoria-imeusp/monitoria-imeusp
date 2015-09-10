@@ -22,29 +22,35 @@
   <body>
     <% if signed_in? and (admin_signed_in? or secretary_signed_in? or current_signed.student? or (current_signed.professor? and not current_signed.professor.dirty)) %>
     <!-- Header dos usuarios normais -->
-        <header>
-          <div>
-            <div class="toptitle"><%= link_to "Sistema de Monitoria", "/" %></div>
-            <%= link_to "Sair", destroy_session_path, method: :delete %>
-            <%= link_to "Perfil", current_signed %>
+        <nav class="navbar navbar-default">
+          <div class="container-fuild">
+            <div class="navbar-header">
+              <%= link_to "Sistema de Monitoria", "/", class: "navbar-brand" %>
+            </div>
+            <div>
+              <ul class="nav navbar-nav">
+                <li><%= link_to "Perfil", current_signed %></li>
+                <li><%= link_to "Sair", destroy_session_path, method: :delete %></li>
+              </ul>
+            </div>
           </div>
-        </header>
+        </nav>
     <% elsif signed_in? and (not current_signed.student? or (current_signed.professor? and current_signed.professor.dirty)) %>
     <!-- Header dos fantasmas -->
-        <header>
+        <nav class="navbar navbar-default">
           <div>
             <div class="toptitle"><%= link_to "Sistema de Monitoria", "#" %></div>
             <%= link_to "Sair", destroy_session_path, method: :delete %>
           </div>
-        </header>
+        </nav>
     <% else %>
     <!-- Header dos nao logados -->
-        <header>
+        <nav class="navbar navbar-default">
             <div>
               <div class="toptitle"><%= link_to "Sistema de Monitoria", "/" %></div>
               <%= link_to "Acesso USP", user_omniauth_authorize_path(:usp) %>
             </div>
-        </header>
+        </nav>
     <% end %>
     <div class="shell">
       <nav>

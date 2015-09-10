@@ -19,6 +19,11 @@
 
 /*********************************************************/
 
+/* "bootstrap-sprockets" must be imported before "bootstrap" and "bootstrap/variables" */
+@import "bootstrap-sprockets";
+@import "bootstrap";
+
+/*
 html, body {
   height: 100%;
   margin: 0;
@@ -115,6 +120,7 @@ tr:hover {
 
 /*********************************************************/
 
+/*
 div.shell {
   width: 1024px;
   margin: auto;
@@ -124,8 +130,6 @@ div.shell {
 }
 
 footer {
-  /*
-  */
   margin-bottom: 0;
   height: 1em;
   padding-top: 1.5em;
@@ -144,6 +148,7 @@ footer > p {
 
 /*********************************************************/
 
+/*
 section {
   width: 75%;
   padding: 1em 2em;
@@ -209,6 +214,7 @@ select {
 
 /*********************************************************/
 
+/*
 header {
   padding: .1em 1em;
   background-color: #eee;
@@ -273,6 +279,7 @@ header > ul > li {
 
 /*********************************************************/
 
+/*
 nav {
   float: right;
   margin: 0em 0em;
@@ -326,6 +333,7 @@ nav > ul > li > a:active {
 
 /*********************************************************/
 
+/*
 p.notice, p.alert {
   display: block;
   border-radius: 16px;
@@ -346,6 +354,9 @@ p.alert {
 
 /*********************************************************/
 
+/*
 .biggerText {
   font-size: 17px;
 }
+
+*/
