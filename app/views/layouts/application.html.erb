@@ -20,38 +20,32 @@
   </head>
 
   <body>
-    <% if signed_in? and (admin_signed_in? or secretary_signed_in? or current_signed.student? or (current_signed.professor? and not current_signed.professor.dirty)) %>
-    <!-- Header dos usuarios normais -->
-        <nav class="navbar navbar-default">
-          <div class="container-fuild">
-            <div class="navbar-header">
-              <%= link_to "Sistema de Monitoria", "/", class: "navbar-brand" %>
-            </div>
-            <div>
-              <ul class="nav navbar-nav">
-                <li><%= link_to "Perfil", current_signed %></li>
-                <li><%= link_to "Sair", destroy_session_path, method: :delete %></li>
-              </ul>
-            </div>
+    <nav class="navbar navbar-default">
+      <div class="container-fuild">
+        <div class="col-xs-3"></div>
+        <div class="col-xs-6">
+          <div class="navbar-header">
+            <%= link_to "Sistema de Monitoria", "/", class: "navbar-brand" %>
           </div>
-        </nav>
-    <% elsif signed_in? and (not current_signed.student? or (current_signed.professor? and current_signed.professor.dirty)) %>
-    <!-- Header dos fantasmas -->
-        <nav class="navbar navbar-default">
           <div>
-            <div class="toptitle"><%= link_to "Sistema de Monitoria", "#" %></div>
-            <%= link_to "Sair", destroy_session_path, method: :delete %>
+            <ul class="nav navbar-nav navbar-right">
+              <!-- Header dos usuarios normais -->
+              <% if signed_in? and (admin_signed_in? or secretary_signed_in? or current_signed.student? or (current_signed.professor? and not current_signed.professor.dirty)) %>
+                  <li><%= link_to "Perfil", current_signed %></li>
+                  <li><%= link_to "Sair", destroy_session_path, method: :delete %></li>
+              <!-- Header dos fantasmas -->
+              <% elsif signed_in? and (not current_signed.student? or (current_signed.professor? and current_signed.professor.dirty)) %>
+                  <li><%= link_to "Sair", destroy_session_path, method: :delete %></li>
+              <!-- Header dos nao logados -->
+              <% else %>
+                  <li><%= link_to "Acesso USP", user_omniauth_authorize_path(:usp) %></li>
+              <% end %>
+            </ul>
           </div>
-        </nav>
-    <% else %>
-    <!-- Header dos nao logados -->
-        <nav class="navbar navbar-default">
-            <div>
-              <div class="toptitle"><%= link_to "Sistema de Monitoria", "/" %></div>
-              <%= link_to "Acesso USP", user_omniauth_authorize_path(:usp) %>
-            </div>
-        </nav>
-    <% end %>
+        <div class="col-xs-3"></div>
+        </div>
+      </div>
+    </nav>
     <div class="shell">
       <nav>
 
