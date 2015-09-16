@@ -70,6 +70,7 @@ pt-BR:
       student:
         student: 'Aluno'
         institute: 'Unidade de origem'
+        other_institute: 'Digite abaixo o nome do instituto'
         gender: 'Sexo'
         rg: 'RG/RNE'
         cpf: 'CPF'

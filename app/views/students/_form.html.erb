@@ -1,4 +1,17 @@
-<%= form_for(@student) do |f| %>
+<script type="text/javascript">
+  function institute_selected() {
+    select_box = document.getElementById("student_institute")
+    if (select_box.selectedIndex == (select_box.length-1)) {
+      $("#other_institute").removeClass("hidden")
+      $("#institute_note").removeClass("hidden")
+    } else {
+      $("#other_institute").addClass("hidden")
+      $("#institute_note").addClass("hidden")
+    }
+  }
+</script>
+
+<%= form_for @student, html: { role: "form" } do |f| %>
 
   <% if @student.errors.any? %>
     <div id="error_explanation">
@@ -12,79 +25,88 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <strong><%= f.label :institute, t('activerecord.attributes.student.institute') %></strong><br>
-    <% institute_options.each do | option | %>
-      <%= f.radio_button :institute, option %>
-      <%= f.label option %>
-      </br>
-    <% end %>
-    <%= f.radio_button :institute, "Outros" %>
-    <%= f.label "Outros" %>
-    <%= f.text_field :institute_text %>
+  <div class="row">
+    <div class="col-xs-5 col-sm-5 col-xs-5 col-md-5">
+      <!-- RG -->
+      <div class="form-group">
+        <%= f.label :rg, t('activerecord.attributes.student.rg') %> 
+        <%= f.text_field :rg, class: "form-control" %>
+      </div>
+      <!-- CPF -->
+      <div class="form-group">
+        <%= f.label :cpf, t('activerecord.attributes.student.cpf') %> 
+        <%= f.text_field :cpf, class: "form-control" %>
+      </div>
+      <!-- Gênero -->
+      <p <%= t('activerecord.attributes.student.gender') %> </p>
+      <% genderOptions.each do | option | %>
+        <div class="radio">
+          <%= f.label :gender do %>
+            <%= f.radio_button :gender, option[1] %>
+            <%= option[0] %>
+          <% end %>
+        </div>
+      <% end %>
+      <!-- Telefones -->
+      <div class="form-group">
+        <%= f.label :tel, t('activerecord.attributes.student.tel') %> 
+        <%= f.telephone_field :tel, class: "form-control" %>
+        <span class="help-block"><%= t('activerecord.attributes.student.tel_note') %></span>
+      </div>
+      <div class="form-group">
+        <%= f.label :cel, t('activerecord.attributes.student.cel') %>
+        <%= f.telephone_field :cel, class: "form-control" %>
+        <span class="help-block"> <%= t('activerecord.attributes.student.cel_note') %></span>
+      </div>
+      <!-- Conta no BB -->
+      <p><%= f.label :has_bank_account, t('activerecord.attributes.student.has_bank_account') %></p>
+      <% yesOrNo.each do | option | %>
+        <%= f.label :has_bank_account, class: "radio-inline" do %>
+          <%= f.radio_button :has_bank_account, option[1] %>
+          <%= option[0] %>
+        <% end %>
+      <% end %>
+    </div>
+    <div class="col-xs-5 col-sm-5 col-xs-5 col-md-5">
+      <div class="form-group">
+        <%= f.label :institute, t('activerecord.attributes.student.institute') %>
+        <%= f.select :institute, institute_options, {}, { class: "form-control", onchange: "institute_selected()" } %>
+        <span class="help-block hidden" id="institute_note"> <%= t('activerecord.attributes.student.other_institute') %></span>
+      </div>
+      <div class="form-group hidden" id="other_institute">
+        <%= f.text_field :institute_text, class: "form-control" %>
+      </div>
+      <div class="form-group">
+        <%= f.label :address, t('activerecord.attributes.student.address') %> <br>
+        <%= f.text_field :address, class: "form-control" %>
+      </div>
+      <div class="form-group">
+        <%= f.label :complement, t('activerecord.attributes.student.complement') %> 
+        <%= f.text_field :complement, class: "form-control" %>
+      </div>
+      <div class="form-group">
+        <%= f.label :district, t('activerecord.attributes.student.district') %> 
+        <%= f.text_field :district, class: "form-control" %>
+      </div>
+      <div class="form-group">
+        <%= f.label :zipcode, t('activerecord.attributes.student.zipcode') %> 
+        <%= f.text_field :zipcode, class: "form-control" %>
+      </div>
+      <div class="form-group">
+        <%= f.label :city, t('activerecord.attributes.student.city') %> 
+        <%= f.text_field :city, class: "form-control" %>
+      </div>
+      <div class="form-group">
+        <%= f.label :state, t('activerecord.attributes.student.state') %> 
+        <%= f.text_field :state, class: "form-control" %>
+      </div>
+    </div>
   </div>
-  <div class="field">
-    <strong><%= f.label :gender, t('activerecord.attributes.student.gender') %></strong><br>
-    <% genderOptions.each do | option | %>
-      <%= f.radio_button :gender, option[1] %>
-      <%= f.label option[0] %>
-      </br>
-    <% end %>
-  </div>
-  <div class="field">
-    <strong><%= f.label :rg, t('activerecord.attributes.student.rg') %></strong><br>
-    <%= f.text_field :rg %>
-  </div>
-  <div class="field">
-    <strong><%= f.label :cpf, t('activerecord.attributes.student.cpf') %></strong><br>
-    <%= f.text_field :cpf %>
-  </div>
-  <div class="field">
-    <strong><%= f.label :address, t('activerecord.attributes.student.address') %></strong><br>
-    <%= f.text_field :address %>
-  </div>
-  <div class="field">
-    <strong><%= f.label :complement, t('activerecord.attributes.student.complement') %></strong><br>
-    <%= f.text_field :complement %>
-  </div>
-  <div class="field">
-    <strong><%= f.label :district, t('activerecord.attributes.student.district') %></strong><br>
-    <%= f.text_field :district %>
-  </div>
-  <div class="field">
-    <strong><%= f.label :zipcode, t('activerecord.attributes.student.zipcode') %></strong><br>
-    <%= f.text_field :zipcode %>
-  </div>
-  <div class="field">
-    <strong><%= f.label :city, t('activerecord.attributes.student.city') %></strong><br>
-    <%= f.text_field :city %>
-  </div>
-  <div class="field">
-    <strong><%= f.label :state, t('activerecord.attributes.student.state') %></strong><br>
-    <%= f.text_field :state %>
-  </div>
-  <div class="field">
-    <strong><%= f.label :tel, t('activerecord.attributes.student.tel') %></strong><br>
-    <span class="note"><%= t('activerecord.attributes.student.tel_note') %></span><br>
-    <%= f.text_field :tel %>
-  </div>
-  <div class="field">
-    <strong><%= f.label :cel, t('activerecord.attributes.student.cel') %></strong><br>
-    <span class="note"> <%= t('activerecord.attributes.student.cel_note') %></span><br>
-    <%= f.text_field :cel %>
-  </div>
- <div class="field">
-    <strong><%= f.label :has_bank_account, t('activerecord.attributes.student.has_bank_account') %></strong><br>
-    <% yesOrNo.each do | option | %>
-      <%= f.radio_button :has_bank_account, option[1] %>
-      <%= f.label option[0] %>
-      </br>
-    <% end %>
-  </div>
-  <p>
-    Qualquer dúvida, entre em contato com sistemamonitoria@ime.usp.br.
-  </p>
-  <div class="field">
-    <%= f.submit "Salvar" %>
+  <div class="row">
+    <div class="col-xs-8 text-center">
+      <div class="field">
+        <%= f.submit "Salvar", class: "btn btn-primary btn-md" %>
+      </div>
+    </div>
   </div>
 <% end %>

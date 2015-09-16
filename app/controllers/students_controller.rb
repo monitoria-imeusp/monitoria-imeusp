@@ -13,7 +13,7 @@ class StudentsController < ApplicationController
     if @student.valid?
       @student.user_id = current_user.id
 
-      if (params[:student][:institute] == "Outros") and params[:student][:institute_text].empty?
+      if (params[:student][:institute] == "Outro") and params[:student][:institute_text].empty?
         render 'new'
       elsif @student.save
         redirect_to current_user
