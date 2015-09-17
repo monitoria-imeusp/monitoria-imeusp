@@ -14,7 +14,11 @@ class StudentsController < ApplicationController
       @student.user_id = current_user.id
 
       if (params[:student][:institute] == "Outro") and params[:student][:institute_text].empty?
-        render 'new'
+        @student.errors.add(:student_id, t('errors.models.student.toofew'))
+        respond_to do |format|
+          format.html { render action: 'new' }
+          format.json { render json: @student.errors, status: :unprocessable_entity }
+        end
       elsif @student.save
         redirect_to current_user
       else

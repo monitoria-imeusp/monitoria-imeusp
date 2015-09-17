@@ -26,6 +26,14 @@ class Student < ActiveRecord::Base
 		self[:email] or user.email
 	end
 
+	def institute
+		if self[:institute] == "Outro"
+			self[:institute_text]
+		else
+			self[:institute]
+		end
+	end
+
 	def is_female?
 		gender == 0
 	end

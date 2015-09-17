@@ -3,10 +3,8 @@
     select_box = document.getElementById("student_institute")
     if (select_box.selectedIndex == (select_box.length-1)) {
       $("#other_institute").removeClass("hidden")
-      $("#institute_note").removeClass("hidden")
     } else {
       $("#other_institute").addClass("hidden")
-      $("#institute_note").addClass("hidden")
     }
   }
 </script>
@@ -68,14 +66,16 @@
       <% end %>
     </div>
     <div class="col-xs-5 col-sm-5 col-xs-5 col-md-5">
+      <!-- Unidade de origem -->
       <div class="form-group">
         <%= f.label :institute, t('activerecord.attributes.student.institute') %>
         <%= f.select :institute, institute_options, {}, { class: "form-control", onchange: "institute_selected()" } %>
-        <span class="help-block hidden" id="institute_note"> <%= t('activerecord.attributes.student.other_institute') %></span>
       </div>
       <div class="form-group hidden" id="other_institute">
+        <%= f.label :institute_text, "" %>
         <%= f.text_field :institute_text, class: "form-control" %>
       </div>
+      <!-- Endereço -->
       <div class="form-group">
         <%= f.label :address, t('activerecord.attributes.student.address') %> <br>
         <%= f.text_field :address, class: "form-control" %>

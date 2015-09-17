@@ -70,6 +70,7 @@ pt-BR:
       student:
         student: 'Aluno'
         institute: 'Unidade de origem'
+        institute_text: 'Digite abaixo o nome do instituto'
         other_institute: 'Digite abaixo o nome do instituto'
         gender: 'Sexo'
         rg: 'RG/RNE'
@@ -144,4 +145,4 @@ pt-BR:
         toomany: 'Você já tem uma candidatura nesse semestre'
         repeated: 'Você não pode selecionar a mesma matéria mais de uma vez'
       student:
-        toofew: 'Digite o nome do seu instituto no campo outros'
+        toofew: 'Digite o nome do instituto específico'
