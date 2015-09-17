@@ -48,22 +48,22 @@
     </nav>
     <div class="container-fluid">
       <div class="row">
-      <div class="col-xs-1"></div>
-        <div class="col-xs-10">
-          <% if signed_in? %>
-            <p>
-              Acessando como
-              <b><%=admin_signed_in? ? current_signed.email : current_signed.name %></b>
-            </p>
-          <% else %>
-            <p>
-              Você ainda não fez acesso
-            </p>
-          <% end %>
-          <hr>
-        </div>
         <div class="col-xs-1"></div>
-      </div>
+          <div class="col-xs-10">
+            <% if signed_in? %>
+              <p>
+                Acessando como
+                <b><%=admin_signed_in? ? current_signed.email : current_signed.name %></b>
+              </p>
+            <% else %>
+              <p>
+                Você ainda não fez acesso
+              </p>
+            <% end %>
+            <hr>
+          </div>
+          <div class="col-xs-1"></div>
+        </div>
       <div class="row">
         <div class="col-xs-1"></div>
         <div class="col-xs-2">
