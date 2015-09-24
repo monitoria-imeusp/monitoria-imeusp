@@ -24,6 +24,8 @@ describe User do
 
 		it "return an user if the authenticated student already exists" do
 			expect(info1).to receive(:nusp).at_least(1).times.and_return(student.nusp)
+			expect(info1).to receive(:name).at_least(1).times.and_return("Nome")
+			expect(info1).to receive(:email).at_least(1).times.and_return("nome@ime.usp.br")
 			expect(info1).to receive(:link).and_return(:student)
 			expect(auth1).to receive(:info).at_least(1).times.and_return(info1)
 			expect(auth1).to receive(:provider).and_return("bla")
@@ -52,6 +54,8 @@ describe User do
 
 		it "return an user if the authenticated professor already exists" do
 			expect(info3).to receive(:nusp).at_least(1).times.and_return(professor.nusp)
+			expect(info3).to receive(:name).at_least(1).times.and_return("Nome")
+			expect(info3).to receive(:email).at_least(1).times.and_return("nome@ime.usp.br")
 			expect(info3).to receive(:link).at_least(1).times.and_return(:teacher)
 			expect(auth3).to receive(:info).at_least(1).times.and_return(info3)
 			expect(auth3).to receive(:provider).and_return("bla")
