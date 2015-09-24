@@ -51,14 +51,12 @@ class User < ActiveRecord::Base
     registered = where nusp: auth.info.nusp
     if registered.any?
       user = registered.take
-      if auth.info.link == :student
+      if auth.info.link == :student or auth.info.link == :teacher
+        user.name = auth.info.name
+        user.email = auth.info.email
         user.provider = auth.provider
         user.uid = auth.uid
         user.save
-      elsif auth.info.link == :teacher
-        user.provider = auth.provider
-        user.uid = auth.uid
-        user.save    
       end
       user
     else
