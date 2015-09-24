@@ -24,6 +24,8 @@ describe Users::OmniauthCallbacksController do
 
       before :each do
         expect(info).to receive(:nusp).at_least(1).times.and_return(11111)
+        expect(info).to receive(:name).at_least(1).times.and_return("Name")
+        expect(info).to receive(:email).at_least(1).times.and_return("name@ime.usp.br")
         expect(info).to receive(:link).at_least(1).times.and_return(:student)
         OmniAuth.config.mock_auth[:usp] = OmniAuth::AuthHash.new({})
         expect(OmniAuth.config.mock_auth[:usp]).to receive(:provider).at_least(1).times.and_return(:usp)
