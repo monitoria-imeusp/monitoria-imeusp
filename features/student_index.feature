@@ -11,6 +11,6 @@ Feature: Seeing information of the students
     	And I click the "Ver perfil" link
     	And I should see "Nome Completo: carlinhos"
         And I should see "Número USP: 123456"
-    	And I should see "RG: 1"
+    	And I should see "RG/RNE: 1"
 
 
