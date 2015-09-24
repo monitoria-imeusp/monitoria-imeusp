@@ -71,7 +71,7 @@ pt-BR:
         student: 'Aluno'
         institute: 'Unidade de origem'
         gender: 'Sexo'
-        rg: 'RG'
+        rg: 'RG/RNE'
         cpf: 'CPF'
         address: 'Endereço'
         complement: 'Complemento'
