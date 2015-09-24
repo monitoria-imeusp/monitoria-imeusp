@@ -17,7 +17,7 @@ Feature: Seeing information of a student
         And I click the "Ver perfil" link
     	And I should see "Nome Completo: carlinhos"
         And I should see "Número USP: 123456"
-    	And I should see "RG: 1"
+    	And I should see "RG/RNE: 1"
 
     Scenario: Secretary look for student information
         Given I'm at the secretary login page
@@ -29,7 +29,7 @@ Feature: Seeing information of a student
         And I click the "Ver perfil" link
         And I should see "Nome Completo: carlinhos"
         And I should see "Número USP: 123456"
-        And I should see "RG: 1"
+        And I should see "RG/RNE: 1"
 
     Scenario: Admin look for student that doesn't exist
 		Given I'm at the login page
