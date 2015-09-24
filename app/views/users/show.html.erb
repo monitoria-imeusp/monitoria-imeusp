@@ -1,42 +1,85 @@
-<h1>Perfil</h1>
 
-<h2>Dados de usuário</h2>
+<div class="container-fluid">
+  <h1>Perfil</h1>
 
-<p>
-  <strong><%= t('activerecord.attributes.user.complete_name') + ':' %></strong>
-  <%= @user.name %>
-</p>
+  <div class="row" style="height:2em;"></div>
 
-<p>
-  <strong><%= t('activerecord.attributes.user.nusp') + ':' %></strong>
-  <%= @user.nusp %>
-</p>
+  <div class="row">
 
-<p>
-  <strong><%= t('activerecord.attributes.user.email') + ':' %></strong>
-  <%= @user.email %>
-</p>
+    <div class="col-sm-12 col-lg-6">
 
-<% if admin_signed_in? || secretary_signed_in? %>
-  <p>
-    <strong><%= t('activerecord.attributes.user.confirmed_at') + ':' %></strong>
-    <%= @user.confirmed_at ? @user.confirmed_at : t('activerecord.attributes.user.unconfirmed') %>
-  </p>
-<% end %>
+      <div class="panel panel-default">
+        <div class="panel-heading text-center">Dados de usuário</div>
+        <div class="panel-body">
+          <form class="form-horizontal" role="form">
 
-<% if can? :destroy, @user and can_be_removed? @user %>
-  <%= link_to 'Remover', user_path(@user), method: :delete, data: { confirm: 'Tem certeza?' } %>
-<% end %>
+            <div class="form-group">
+              <label class="control-label col-sm-4" for="name">
+                <%= t('activerecord.attributes.user.name') + ':' %>
+              </label>
+              <div class="col-sm-8">
+                <p class="form-control-static"><%= @user.name %></p>
+              </div>
+            </div>
 
-<span style="height: 2em; display: block;"></span>
+            <div class="form-group">
+              <label class="control-label col-sm-4" for="nusp">
+                <%= t('activerecord.attributes.user.nusp') + ':' %>
+              </label>
+              <div class="col-sm-8">
+                <p class="form-control-static"><%= @user.nusp %></p>
+              </div>
+            </div>
 
-<% @user.student do |student| %>
-  <% @student = student %>
-  <%= render template: "students/_show" %>
-<% end %>
+            <div class="form-group">
+              <label class="control-label col-sm-4" for="email">
+                <%= t('activerecord.attributes.user.email') + ':' %>
+              </label>
+              <div class="col-sm-8">
+                <p class="form-control-static"><%= @user.email %></p>
+              </div>
+            </div>
 
-<% @user.professor do |professor| %>
-  <% @professor = professor %>
-  <%= render template: "professors/_show" %>
-<% end %>
 
+            <% if admin_signed_in? || secretary_signed_in? %>
+              <div class="form-group">
+                <label class="control-label col-sm-4" for="confirmed_at">
+                  <%= t('activerecord.attributes.user.confirmed_at') + ':' %>
+                </label>
+                <div class="col-sm-8">
+                  <p class="form-control-static">
+                    <%= @user.confirmed_at ? @user.confirmed_at : t('activerecord.attributes.user.unconfirmed') %>
+                  </p>
+                </div>
+              </div>
+            <% end %>
+            
+            <% if can? :destroy, @user and can_be_removed? @user %>
+              <p class="text-center">
+                <%= link_to 'Remover', user_path(@user), method: :delete, class: "btn btn-primary btn-lg", data: { confirm: 'Tem certeza?'} %>
+              </p>
+            <% end %>
+
+          </form>
+        </div>
+      </div>
+
+    </div>
+
+    <% @user.student do |student| %>
+      <div class="col-sm-12 col-lg-6">
+        <% @student = student %>
+        <%= render template: "students/_show" %>
+      </div>
+    <% end %>
+
+    <% @user.professor do |professor| %>
+      <div class="col-sm-12 col-lg-6">
+        <% @professor = professor %>
+        <%= render template: "professors/_show" %>
+      </div>
+    <% end %>
+
+  </div>
+
+</div>

@@ -88,6 +88,7 @@ pt-BR:
         has_bank_account: 'Possui conta no Banco do Brasil? '
       user:
         user: 'Usuário'
+        name: 'Nome'
         complete_name: 'Nome Completo'
         nusp: 'Número USP'
         password: 'Senha'

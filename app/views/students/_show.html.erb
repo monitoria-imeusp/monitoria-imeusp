@@ -1,77 +1,139 @@
 
-<h2>Dados de aluno</h2>
+<div class="panel panel-default">
+  <div class="panel-heading text-center">Dados de aluno</div>
+  <div class="panel-body">
+    <form class="form-horizontal" role="form">
 
-<p>
-  <strong><%= t('activerecord.attributes.student.gender') + ':' %></strong>
-  <% if (@student.gender == 0) %>
-    <%="Feminino"%>
-  <%else%>
-    <%="Masculino"%>
-  <%end%>
-</p>
+      <div class="form-group">
+        <label class="control-label col-sm-4" for="gender">
+          <%= t('activerecord.attributes.student.gender') + ':' %>
+        </label>
+        <div class="col-sm-8">
+          <p class="form-control-static"><%= @student.gender_as_s %></p>
+        </div>
+      </div>
 
-<p>
-  <strong><%= t('activerecord.attributes.student.institute') + ':' %></strong>
-  <%= @student.institute %>
-</p>
+      <div class="form-group">
+        <label class="control-label col-sm-4" for="institute">
+          <%= t('activerecord.attributes.student.institute') + ':' %>
+        </label>
+        <div class="col-sm-8">
+          <p class="form-control-static"><%= @student.institute %></p>
+        </div>
+      </div>
 
-<p>
-  <strong><%= t('activerecord.attributes.student.rg') + ':' %></strong>
-  <%= @student.rg %>
-</p>
+      <div class="form-group">
+        <label class="control-label col-sm-4" for="rg">
+          <%= t('activerecord.attributes.student.rg') + ':' %>
+        </label>
+        <div class="col-sm-8">
+          <p class="form-control-static"><%= @student.rg %></p>
+        </div>
+      </div>
 
-<p>
-  <strong><%= t('activerecord.attributes.student.cpf') + ':' %></strong>
-  <%= @student.cpf %>
-</p>
+      <div class="form-group">
+        <label class="control-label col-sm-4" for="cpf">
+          <%= t('activerecord.attributes.student.cpf') + ':' %>
+        </label>
+        <div class="col-sm-8">
+          <p class="form-control-static"><%= @student.cpf %></p>
+        </div>
+      </div>
 
-<p>
-  <strong><%= t('activerecord.attributes.student.address') + ':' %></strong>
- 	<%= @student.address %>
-</p>
+      <div class="form-group">
+        <label class="control-label col-sm-4" for="tel">
+          <%= t('activerecord.attributes.student.tel') + ':' %>
+        </label>
+        <div class="col-sm-8">
+          <p class="form-control-static"><%= @student.tel %></p>
+        </div>
+      </div>
 
-<p>
-  <strong><%= t('activerecord.attributes.student.complement') + ':' %></strong>
-  <%= @student.complement %>
-</p>
+      <div class="form-group">
+        <label class="control-label col-sm-4" for="cel">
+          <%= t('activerecord.attributes.student.cel') + ':' %>
+        </label>
+        <div class="col-sm-8">
+          <p class="form-control-static"><%= @student.cel %></p>
+        </div>
+      </div>
 
-<p>
-  <strong><%= t('activerecord.attributes.student.district') + ':' %></strong>
-  <%= @student.district %>
-</p>
-<p>
-  <strong><%= t('activerecord.attributes.student.cep') + ':' %></strong>
-  <%= @student.zipcode %>
-</p>
+      <div class="form-group">
+        <label class="control-label col-sm-4" for="has_bank_account">
+          <%= t('activerecord.attributes.student.has_bank_account') %>
+        </label>
+        <div class="col-sm-8">
+          <p class="form-control-static"><%= show_yes_or_no @student.has_bank_account %></p>
+        </div>
+      </div>
 
-<p>
-  <strong><%= t('activerecord.attributes.student.city') + ':' %></strong>
-  <%= @student.city %>
-</p>
-<p>
-  <strong><%= t('activerecord.attributes.student.state') + ':' %></strong>
-  <%= @student.state %>
-</p>
-<p>
-  <strong><%= t('activerecord.attributes.student.tel') + ':' %></strong>
-  <%= @student.tel %>
-</p>
-<p>
-  <strong><%= t('activerecord.attributes.student.cel') + ':' %></strong>
-  <%= @student.cel %>
-</p>
+      <div class="form-group">
+        <label class="control-label col-sm-4" for="address">
+          <%= t('activerecord.attributes.student.address') + ':' %>
+        </label>
+        <div class="col-sm-8">
+          <p class="form-control-static"><%= @student.address %></p>
+        </div>
+      </div>
 
-<p>
-  <strong><%= t('activerecord.attributes.student.has_bank_account') + ':' %></strong>
-  <%= show_yes_or_no @student.has_bank_account %>
-</p>
+      <div class="form-group">
+        <label class="control-label col-sm-4" for="complement">
+          <%= t('activerecord.attributes.student.complement') + ':' %>
+        </label>
+        <div class="col-sm-8">
+          <p class="form-control-static"><%= @student.complement %></p>
+        </div>
+      </div>
 
-<% if can? :edit, @student %>
-  <%= link_to 'Editar', edit_student_path(@student) %>
-<% end %>
+      <div class="form-group">
+        <label class="control-label col-sm-4" for="district">
+          <%= t('activerecord.attributes.student.district') + ':' %>
+        </label>
+        <div class="col-sm-8">
+          <p class="form-control-static"><%= @student.district %></p>
+        </div>
+      </div>
 
-<% if current_super_professor? or admin_signed_in? or secretary_signed_in? %>
-  <%= link_to 'Ver avaliações como monitor(a)', assistant_evaluations_for_student_path(@student) %>
-<% end %>
+      <div class="form-group">
+        <label class="control-label col-sm-4" for="cep">
+          <%= t('activerecord.attributes.student.cep') + ':' %>
+        </label>
+        <div class="col-sm-8">
+          <p class="form-control-static"><%= @student.zipcode %></p>
+        </div>
+      </div>
 
-<span style="height: 2em; display: block;"></span>
+      <div class="form-group">
+        <label class="control-label col-sm-4" for="city">
+          <%= t('activerecord.attributes.student.city') + ':' %>
+        </label>
+        <div class="col-sm-8">
+          <p class="form-control-static"><%= @student.city %></p>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="control-label col-sm-4" for="state">
+          <%= t('activerecord.attributes.student.state') + ':' %>
+        </label>
+        <div class="col-sm-8">
+          <p class="form-control-static"><%= @student.state %></p>
+        </div>
+      </div>
+
+      <% if can? :edit, @student %>
+        <p class="text-center">
+          <%= link_to 'Editar', edit_student_path(@student), class: "btn btn-primary btn-lg" %>
+        </p>
+      <% end %>
+
+      <% if current_super_professor? or admin_signed_in? or secretary_signed_in? %>
+        <p class="text-center">
+          <%= link_to 'Ver avaliações como monitor(a)', assistant_evaluations_for_student_path(@student),
+              class: "btn btn-primary btn-lg" %>
+        </p>
+      <% end %>
+
+    </form>
+  </div>
+</div>

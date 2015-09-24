@@ -42,6 +42,14 @@ class Student < ActiveRecord::Base
 		gender == 1
 	end
 
+	def gender_as_s
+		if gender == 0
+			"Feminino"
+		else
+			"Masculino"
+		end
+	end
+
 	def user
 		User.find(user_id)
 	end

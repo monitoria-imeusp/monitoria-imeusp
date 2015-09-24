@@ -23,14 +23,14 @@
 <%= form_for @student, html: { role: "form" } do |f| %>
 
   <div class="row">
-    <div class="col-xs-4 col-sm-4 col-xs-4 col-md-4">
+    <div class="col-sm-4">
       <!-- RG -->
       <div class="form-group">
         <%= f.label :rg, t('activerecord.attributes.student.rg') %> 
         <%= f.text_field :rg, class: "form-control" %>
       </div>
     </div>
-    <div class="col-xs-6 col-sm-6 col-xs-6 col-md-6">
+    <div class="col-sm-6">
       <!-- Endereço -->
       <div class="form-group">
         <%= f.label :address, t('activerecord.attributes.student.address') %> <br>
@@ -39,7 +39,7 @@
     </div>
   </div>
   <div class="row">
-    <div class="col-xs-4 col-sm-4 col-xs-4 col-md-4">
+    <div class="col-sm-4">
       <!-- CPF -->
       <div class="form-group">
         <%= f.label :cpf, t('activerecord.attributes.student.cpf') %> 
@@ -76,7 +76,7 @@
         <% end %>
       </div>
     </div>
-    <div class="col-xs-3 col-sm-3 col-xs-3 col-md-3">
+    <div class="col-sm-3">
       <!-- CEP -->
       <div class="form-group">
         <%= f.label :zipcode, t('activerecord.attributes.student.zipcode') %> 
@@ -94,7 +94,7 @@
         <span class="help-block"> <%= t('activerecord.attributes.student.cel_note') %></span>
       </div>
     </div>
-    <div class="col-xs-3 col-sm-3 col-xs-3 col-md-3">
+    <div class="col-sm-3">
       <div class="form-group">
         <%= f.label :complement, t('activerecord.attributes.student.complement') %> 
         <%= f.text_field :complement, class: "form-control" %>
@@ -115,7 +115,7 @@
   </div>
   <div class="row" style="height:2em;"></div>
   <div class="row">
-    <div class="col-xs-10 text-center">
+    <div class="col-sm-10 text-center">
       <div class="field">
         <%= f.submit "Salvar", class: "btn btn-primary btn-lg" %>
       </div>
