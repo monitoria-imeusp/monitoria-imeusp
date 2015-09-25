@@ -4,10 +4,10 @@
 
 <% if secretary_signed_in? and @semester.current? %>
   <% unless Rails.env.production? %>
-    <%= link_to "Pedir avaliações dos professores", request_assistant_evaluations_for_semester_path(@semester), method: :post %>
+    <%= button_link_to "Pedir avaliações dos professores", request_assistant_evaluations_for_semester_path(@semester), method: :post %>
   <% end %>
-  <%= link_to "Notificar monitores", notify_assistant_roles_for_semester_path(@semester), method: :post %>
-  <%= link_to "Pagar monitores" , pay_all_assistants_path, method: :post %>
+  <%= button_link_to "Notificar monitores", notify_assistant_roles_for_semester_path(@semester), method: :post %>
+  <%= button_link_to "Pagar monitores" , pay_all_assistants_path, method: :post %>
   <br><br>
 <% end %>
 
@@ -34,7 +34,7 @@
   <% end %>
 </div>
 
-<table id="roles_table">
+<table id="roles_table" class="table table-hover">
   <thead>
     <tr>
       <th>Aluno(a)</th>
@@ -56,7 +56,7 @@
           <td>
             <%if role.active %>
               <% if secretary_signed_in? %>
-                  <%= link_to "Desativar", deactivate_assistant_role_path(role.id), method: :post, data: { confirm: 'Deseja mesmo desativar este monitor?' } %>
+                  <%= button_link_to "Desativar", deactivate_assistant_role_path(role.id), method: :post, data: { confirm: 'Deseja mesmo desativar este monitor?' } %>
               <% else %>
                   Ativo
               <% end %>
@@ -67,12 +67,12 @@
         <% end %>
         <td>
           <% if role.report_filled? %>
-          <%= link_to 'Ver relatório', print_report_path(role.id, :format => :pdf), target: "_blank" %>
+          <%= button_link_to 'Ver relatório', print_report_path(role.id, :format => :pdf), target: "_blank" %>
           <% end %>
         </td>
         <% if secretary_signed_in? or admin_signed_in? %>
           <td>
-            <%= link_to "Atestado", certificate_path(role.id, :format => :pdf), method: :get, target: "_blank" %>
+            <%= button_link_to "Atestado", certificate_path(role.id, :format => :pdf), method: :get, target: "_blank" %>
           </td>
         <% else %>
             <td></td>
@@ -80,7 +80,7 @@
       </tr>
       <tr>
         <td colspan=6>
-          <table border=1>
+          <table border=1 class="table">
             <tbody>
               <tr>
                 <% @months.each do |month| %>
@@ -92,12 +92,12 @@
                     <% if status == "Pendente" && !secretary_signed_in? %>
                       <br>
                       <%= content_tag :span, style: "" do -%>
-                        <%= link_to "Marcar presença", 
+                        <%= button_link_to "Marcar presença", 
                         mark_assistant_role_frequency_path(role: role.id, month: month, presence: true, pid: -1, redirect_to_index: "not_for_professor"), method: :post, data: { confirm: 'Deseja mesmo marcar presença para este monitor?' }  %>
                       <% end -%>
                       <br>
                       <%= content_tag :span, style: "" do -%>
-                        <%= link_to "Marcar ausência",
+                        <%= button_link_to "Marcar ausência",
                         mark_assistant_role_frequency_path(role: role.id, month: month, presence: false, pid: -1, redirect_to_index: "not_for_professor"), method: :post, data: { confirm: 'Deseja mesmo marcar ausência para este monitor?' }  %>
                       <% end -%>
                     <% else %>

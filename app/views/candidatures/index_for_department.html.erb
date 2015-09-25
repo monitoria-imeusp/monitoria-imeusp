@@ -2,7 +2,7 @@
 <h1>Candidaturas do departamento <%= @current_department.code.upcase %> no <%= @semester.as_s %>:</h1>
 <hr>
 <% @active_semesters.reverse.each do |semester| %>
-  <%= link_to semester.as_s, candidatures_for_department_path(semester, @current_department) %>
+  <%= button_link_to semester.as_s, candidatures_for_department_path(semester, @current_department) %>
 <% end %>
 <span style="height: 2em; display: block;"></span>
 <hr>
@@ -11,7 +11,7 @@
   <h2>Como <%= priority+1 %>ª opção:</h2>
   <% candidatures.each do |candidature| %>
     <% if candidature.student %>
-      <table>
+      <table class="table table-hover">
         <thead>
           <tr>
             <th>
@@ -68,7 +68,7 @@
             </tr>
           <% end %>
           <tr>
-            <td colspan="2"><%= link_to 'Mais informações', candidature %></th>
+            <td colspan="2"><%= button_link_to 'Mais informações', candidature %></th>
           </tr>
         </tbody>
       </table>

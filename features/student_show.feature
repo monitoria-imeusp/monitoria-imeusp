@@ -15,7 +15,7 @@ Feature: Seeing information of a student
         And I press the "Entrar" button
     	And I go to the students index
         And I click the "Ver perfil" link
-    	And I should see "Nome Completo: carlinhos"
+    	And I should see "Nome: carlinhos"
         And I should see "Número USP: 123456"
     	And I should see "RG/RNE: 1"
 
@@ -27,7 +27,7 @@ Feature: Seeing information of a student
         And I press the "Entrar" button
         And I go to the students index
         And I click the "Ver perfil" link
-        And I should see "Nome Completo: carlinhos"
+        And I should see "Nome: carlinhos"
         And I should see "Número USP: 123456"
         And I should see "RG/RNE: 1"
 

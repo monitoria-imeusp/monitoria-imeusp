@@ -9,7 +9,7 @@ Feature: Seeing information of the students
         And there is a student with name "carlinhos" with nusp "123456" and email "eu@usp.br"
     	And I go to the students index
     	And I click the "Ver perfil" link
-    	And I should see "Nome Completo: carlinhos"
+    	And I should see "Nome: carlinhos"
         And I should see "Número USP: 123456"
     	And I should see "RG/RNE: 1"
 

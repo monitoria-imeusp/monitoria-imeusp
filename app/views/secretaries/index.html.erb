@@ -1,6 +1,6 @@
 <h1>Funcionários</h1>
 
-<table>
+<table class="table table-hover">
   <thead>
     <tr>
       <th><%= t('activerecord.attributes.secretary.name') %></th>
@@ -11,7 +11,7 @@
   <tbody>
     <% @secretaries.each do |secretary| %>
       <tr>
-        <td><%= link_to secretary.name, secretary %></td>
+        <td><%= button_link_to secretary.name, secretary %></td>
         <td><%= secretary.email %></td>
       </tr>
     <% end %>

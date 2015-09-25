@@ -1,7 +1,7 @@
 <h1>
   Avisos
   <% if secretary_signed_in? %>
-    <%= link_to "Adicionar aviso", new_advise_path %>
+    <%= button_link_to "Adicionar aviso", new_advise_path %>
   <% end %>
 </h1>
 
@@ -17,14 +17,12 @@
       <%= advise.message %>
       </p>
       <% if secretary_signed_in? %>
-        <%= link_to 'Deletar', advise, method: :delete, data: { confirm: 'Você tem certeza?' } %> </p>
-        <%= link_to 'Para baixo', movedown_advise_path(advise), method: :post %>
-        <%= link_to 'Para cima', moveup_advise_path(advise), method: :post %>
-        <%= link_to 'Modificar', edit_advise_path(advise) %>
+        <%= button_link_to 'Deletar', advise, method: :delete, data: { confirm: 'Você tem certeza?' } %> </p>
+        <%= button_link_to 'Para baixo', movedown_advise_path(advise), method: :post %>
+        <%= button_link_to 'Para cima', moveup_advise_path(advise), method: :post %>
+        <%= button_link_to 'Modificar', edit_advise_path(advise) %>
       <% end %>
       <br>
   <% end %>
-<% else %>
-  <hr>
 <% end %>
 

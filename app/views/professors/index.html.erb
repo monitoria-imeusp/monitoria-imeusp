@@ -1,17 +1,20 @@
 <h1>Professores</h1>
 
-<table>
+<table class="table table-hover">
+  <thead>
     <tr>
 		<th><%= t('activerecord.attributes.professor.name') %></th>
 		<th><%= t('activerecord.attributes.professor.email') %></th>
 		<th><%= t('activerecord.attributes.department.department') %></th>
     </tr>
-
+  </thead>
+  <tbody>
     <% @professors.each do |professor| %>
         <tr>
-            <td><%= link_to professor.name, professor.user %></td>
+            <td><%= button_link_to professor.name, professor.user %></td>
             <td><%= professor.email %></td>
             <td><%= professor.department.code %></td>
         </tr>
     <% end %>
+  </tbody>
 </table>

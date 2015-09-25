@@ -21,7 +21,8 @@ module StudentsHelper
       "Escola Politécnica",
       "Instituto de Astronomia, Geofísica e Ciências Atmosféricas",
       "Instituto de Oceanografia",
-      "Faculdade de Economia e Administração"
+      "Faculdade de Economia e Administração",
+      "Outro"
     ]
   end
 
