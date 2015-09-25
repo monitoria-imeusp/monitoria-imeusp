@@ -1,17 +1,17 @@
 <h1>Administração do sistema</h1>
 
-<%= link_to "Disciplinas", courses_path %>
-<%= link_to "Professores", professors_path %>
-<%= link_to "Funcionários", secretaries_path %>
-<%= link_to "Alunos", students_path %>
+<%= button_link_to "Disciplinas", courses_path %>
+<%= button_link_to "Professores", professors_path %>
+<%= button_link_to "Funcionários", secretaries_path %>
+<%= button_link_to "Alunos", students_path %>
 
 <div>
   <h3>Cadastro de disciplinas oferecidas no semestre</h3>
-  <%= button_to "Cadastrar disciplinas de graduação", controller: "admins", :action => "register_undergraduate_courses", :method => 'post' %>
+  <%= button_to "Cadastrar disciplinas de graduação", {controller: "admins", :action => "register_undergraduate_courses", :method => 'post'}, {class:"btn btn-primary"} %>
   <br>
-  <%= button_to "Cadastrar disciplinas de pós-graduação", controller: "admins", :action => "register_postgraduate_courses", :method => 'post' %>
+  <%= button_to "Cadastrar disciplinas de pós-graduação", {controller: "admins", :action => "register_postgraduate_courses", :method => 'post'}, {class:"btn btn-primary"} %>
   <br>
-  <%= button_to "Detectar alunos duplicados", controller: "admins", :action => "duplicate_students", :method => 'get' %>
+  <%= button_to "Detectar alunos duplicados", {controller: "admins", :action => "duplicate_students", :method => 'get'}, {class:"btn btn-primary"} %>
 </div>
 
 <% if @duplicates then %>
@@ -21,7 +21,7 @@
       <p>
         <%= entry[0].nusp %>:
         <% entry.each_with_index do |student, i| %>
-          <%= link_to i.to_s, student %>
+          <%= button_link_to i.to_s, student %>
         <% end %>
       </p>
     <% end %>

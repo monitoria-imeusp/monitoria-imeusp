@@ -56,7 +56,7 @@
             
             <% if can? :destroy, @user and can_be_removed? @user %>
               <p class="text-center">
-                <%= link_to 'Remover', user_path(@user), method: :delete, class: "btn btn-primary btn-lg", data: { confirm: 'Tem certeza?'} %>
+                <%= button_link_to 'Remover', user_path(@user), method: :delete, data: { confirm: 'Tem certeza?'} %>
               </p>
             <% end %>
 

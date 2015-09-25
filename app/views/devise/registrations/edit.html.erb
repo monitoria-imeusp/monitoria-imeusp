@@ -22,8 +22,4 @@
   <div><%= f.submit "Atualizar" %></div>
 <% end %>
 
-<h3>Apagar minha conta</h3>
-
-<p><%= button_to "Apagar minha conta", registration_path(resource_name), data: { confirm: "Tem certeza?" }, method: :delete %></p>
-
-<%= link_to "Voltar", :back %>
+<%= button_to "Apagar minha conta", registration_path(resource_name), {data: { confirm: "Tem certeza?" }, method: :delete}, {class: "btn btn-primary"} %>

@@ -53,11 +53,11 @@
 </p>
 
 <% if @request_for_teaching_assistant.semester.open or (@request_for_teaching_assistant.semester.active and secretary_signed_in?) %>
-  <%= link_to 'Editar', edit_request_for_teaching_assistant_path(@request_for_teaching_assistant) %>
-  <%= link_to 'Remover', @request_for_teaching_assistant, method: :delete, data: { confirm: 'Tem certeza?' } %>
+  <%= button_link_to 'Editar', edit_request_for_teaching_assistant_path(@request_for_teaching_assistant) %>
+  <%= button_link_to 'Remover', @request_for_teaching_assistant, method: :delete, data: { confirm: 'Tem certeza?' } %>
 <% end %>
 
-<%= link_to 'Voltar', request_for_teaching_assistants_path %>
+<%= button_link_to 'Voltar', request_for_teaching_assistants_path %>
 <span style="height: 2em; display: block;"></span>
 
 <h2>Monitores eleitos para essa solicitação</h2>
@@ -75,7 +75,7 @@
         <tr>
           <td class="name"><%= role.student.name %></td>
           <td><%= role.student.nusp %></td>
-          <td><%= link_to 'Ver dados', role.student.user %></td>
+          <td><%= button_link_to 'Ver dados', role.student.user %></td>
         </tr>
       <% end %>
     </tbody>

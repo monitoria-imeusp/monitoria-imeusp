@@ -55,7 +55,7 @@
           </tr>
         <% end %>
         <tr>
-          <td colspan="2"><%= link_to 'Mais informações', candidature %></td>
+          <td colspan="2"><%= button_link_to 'Mais informações', candidature %></td>
         </tr>
       </tbody>
     </table>
@@ -97,12 +97,12 @@
         <% if(!(Rails.env.production?)) %>
           <% if (role.report_filled?) %>
             <tr>
-              <td colspan="2"><%= link_to 'Ver relatório', print_report_path(role.id, :format => :pdf), target: "_blank" %></td>
+              <td colspan="2"><%= button_link_to 'Ver relatório', print_report_path(role.id, :format => :pdf), target: "_blank" %></td>
             </tr>
           <% else %>
             <% if @enable_report == true %>
               <tr>
-                <td colspan="2"><%= link_to 'Preencher relatório', report_form_path(role.id) %></td>
+                <td colspan="2"><%= button_link_to 'Preencher relatório', report_form_path(role.id) %></td>
               </tr>
             <% end %>
           <% end %>
@@ -121,7 +121,7 @@
 <% if current_student? %>
   <% @semesters.each do |semester| %>
     <% if semester[:valid] %>
-      <%= link_to "Candidatar-se para #{semester[:get].as_s}",
+      <%= button_link_to "Candidatar-se para #{semester[:get].as_s}",
                   new_candidature_path(semester[:get]) %>
     <% end %>
   <% end %>

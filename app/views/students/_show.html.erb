@@ -123,14 +123,13 @@
 
       <% if can? :edit, @student %>
         <p class="text-center">
-          <%= link_to 'Editar', edit_student_path(@student), class: "btn btn-primary btn-lg" %>
+          <%= button_link_to 'Editar', edit_student_path(@student) %>
         </p>
       <% end %>
 
       <% if current_super_professor? or admin_signed_in? or secretary_signed_in? %>
         <p class="text-center">
-          <%= link_to 'Ver avaliações como monitor(a)', assistant_evaluations_for_student_path(@student),
-              class: "btn btn-primary btn-lg" %>
+          <%= button_link_to 'Ver avaliações como monitor(a)', assistant_evaluations_for_student_path(@student) %>
         </p>
       <% end %>
 

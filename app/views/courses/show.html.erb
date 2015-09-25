@@ -22,7 +22,7 @@
       <tr>
         <td><%= candidature.student.name %></td>
         <td><%= candidature.student.nusp %></td>
-        <td><%= link_to 'Ver candidatura', candidature, class: "btn btn-primary" %></td>
+        <td><%= button_link_to 'Ver candidatura', candidature %></td>
       </tr>
     <% end %>
   </tbody>
@@ -41,7 +41,7 @@
       <tr>
         <td><%= candidature.student.name %></td>
         <td><%= candidature.student.nusp %></td>
-        <td><%= link_to 'Ver candidatura', candidature, class: "btn btn-primary" %></td>
+        <td><%= button_link_to 'Ver candidatura', candidature %></td>
       </tr>
     <% end %>
   </tbody>
@@ -60,7 +60,7 @@
       <tr>
         <td><%= candidature.student.name %></td>
         <td><%= candidature.student.nusp %></td>
-        <td><%= link_to 'Ver candidatura', candidature, class: "btn btn-primary" %></td>
+        <td><%= button_link_to 'Ver candidatura', candidature %></td>
       </tr>
     <% end %>
   </tbody>
@@ -79,7 +79,7 @@
       <tr>
         <td><%= candidature.student.name %></td>
         <td><%= candidature.student.nusp %></td>
-        <td><%= link_to 'Ver candidatura', candidature, class: "btn btn-primary" %></td>
+        <td><%= button_link_to 'Ver candidatura', candidature %></td>
       </tr>
     <% end %>
   </tbody>
@@ -89,7 +89,7 @@
 
 <% if admin_signed_in? or current_super_professor? %>
   <p>
-    <%= link_to 'Editar', edit_course_path(@course) %>
-    <%= link_to 'Remover', course_path(@course), method: :delete, data: { confirm: 'Tem certeza?' } %>
+    <%= button_link_to 'Editar', edit_course_path(@course) %>
+    <%= button_link_to 'Remover', course_path(@course), method: :delete, data: { confirm: 'Tem certeza?' } %>
   </p>
 <% end %>

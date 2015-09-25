@@ -17,14 +17,14 @@
 
 <% if secretary_signed_in? and current_secretary == @secretary %>
   <p>
-    <%= link_to 'Editar', edit_secretary_path(@secretary) %>
+    <%= button_link_to 'Editar', edit_secretary_path(@secretary) %>
   </p>
   <p>
-      <%= link_to 'Mudar senha', change_secretary_password_path(@secretary) %>
+      <%= button_link_to 'Mudar senha', change_secretary_password_path(@secretary) %>
   </p>
 <% end %>
 <% if admin_signed_in? %>
   <p>
-    <%= link_to 'Remover', @secretary, method: :delete, data: { confirm: 'Tem certeza?' } %>
+    <%= button_link_to 'Remover', @secretary, method: :delete, data: { confirm: 'Tem certeza?' } %>
   </p>
 <% end %>

@@ -11,7 +11,7 @@
   <tbody>
     <% @secretaries.each do |secretary| %>
       <tr>
-        <td><%= link_to secretary.name, secretary %></td>
+        <td><%= button_link_to secretary.name, secretary %></td>
         <td><%= secretary.email %></td>
       </tr>
     <% end %>

@@ -11,7 +11,7 @@
   <tbody>
     <% @professors.each do |professor| %>
         <tr>
-            <td><%= link_to professor.name, professor.user %></td>
+            <td><%= button_link_to professor.name, professor.user %></td>
             <td><%= professor.email %></td>
             <td><%= professor.department.code %></td>
         </tr>

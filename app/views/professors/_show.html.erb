@@ -14,7 +14,7 @@
 <% end %>
 
 <% if user_signed_in? and current_user.professor == @professor %>
-  <%= link_to 'Editar', edit_professor_path(@professor) %>
+  <%= button_link_to 'Editar', edit_professor_path(@professor) %>
   <span style="height: 2em; display: block;"></span>
 <% end %>
 

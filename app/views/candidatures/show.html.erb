@@ -85,7 +85,7 @@
 </p>
 
 <% if current_super_professor? or admin_signed_in? or secretary_signed_in? %>
-  <%= link_to 'Ver avaliações como monitor(a)', assistant_evaluations_for_student_path(@candidature.student) %>
+  <%= button_link_to 'Ver avaliações como monitor(a)', assistant_evaluations_for_student_path(@candidature.student) %>
 <% end %>
 <span style="height: 2em; display: block;"></span>
 
@@ -207,9 +207,7 @@
 
 <% if current_student? %>
   <% if @candidature.semester.open %>
-    <%= link_to 'Editar', edit_candidature_path(@candidature) %>
-    <%= link_to 'Remover', @candidature, method: :delete, data: { confirm: 'Tem certeza?' } %>
+    <%= button_link_to 'Editar', edit_candidature_path(@candidature) %>
+    <%= button_link_to 'Remover', @candidature, method: :delete, data: { confirm: 'Tem certeza?' } %>
   <% end %>
 <% end %>
-<%= link_to 'Voltar', candidatures_path %>
-<span style="height: 2em; display: block;"></span>

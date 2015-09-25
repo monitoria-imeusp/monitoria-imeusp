@@ -27,17 +27,17 @@
         <td><%= semester.state_as_s %></td>
         <% if semester.open %>
           <td>
-            <%= link_to "Desativar", deactivate_semester_path(semester), :method => 'post', class: "btn btn-primary" %>
-            <%= link_to "Fechar inscrições", close_semester_path(semester), :method => 'post', class: "btn btn-primary" %>
+            <%= button_link_to "Desativar", deactivate_semester_path(semester), :method => 'post' %>
+            <%= button_link_to "Fechar inscrições", close_semester_path(semester), :method => 'post' %>
           </td>
         <% elsif semester.active %>
           <td>
-            <%= link_to "Desativar", deactivate_semester_path(semester), :method => 'post', class: "btn btn-primary" %>
-            <%= link_to "Abrir inscrições", open_semester_path(semester), :method => 'post', class: "btn btn-primary" %>
+            <%= button_link_to "Desativar", deactivate_semester_path(semester), :method => 'post' %>
+            <%= button_link_to "Abrir inscrições", open_semester_path(semester), :method => 'post' %>
           </td>
         <% else %>
           <td>
-            <%= link_to "Ativar", activate_semester_path(semester), :method => 'post', class: "btn btn-primary" %>
+            <%= button_link_to "Ativar", activate_semester_path(semester), :method => 'post' %>
           </td>
         <% end %>
       </tr>
