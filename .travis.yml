@@ -13,13 +13,6 @@ notifications:
   email:
     recipients:
       - kazuo256@gmail.com
-      - rewasvat@gmail.com
-      - bsesso@gmail.com
-      - gabrielguilhoto@gmail.com
-      - lucasdario.dariolucas@gmail.com
-      - matbarrosrodrigues@gmail.com
-      - ogawa.gabriel@gmail.com
-      - gorobaum@gmail.com
     on_success: change
     on_failure: always
 
