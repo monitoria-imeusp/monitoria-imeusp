@@ -3,7 +3,7 @@
 <ul>
 <% @departments.each do |dep| %>
   <li>
-    <%= link_to dep.code, candidatures_for_department_path(Semester.current, dep) %>
+    <%= button_link_to dep.code, candidatures_for_department_path(Semester.current, dep) %>
   </li>
 <% end %>
 </ul>
@@ -13,7 +13,7 @@
   <% unless @candidatures_filtered[dep].empty? %>
     <h1><%= dep.upcase %></h2>
     <% @candidatures_filtered[dep].each do |candidature| %>
-      <table>
+      <table class="table table-hover">
         <thead>
           <tr>
             <th>
@@ -74,7 +74,7 @@
             </tr>
           <% end %>
           <tr>
-            <td colspan="2"><%= link_to 'Mais informações', candidature %></th>
+            <td colspan="2"><%= button_link_to 'Mais informações', candidature %></th>
           </tr>
         </tbody>
       </table>
@@ -88,7 +88,7 @@
 <% if current_student? %>
   <% @semesters.each do |semester| %>
     <% if semester[:valid] %>
-      <%= link_to "Candidatar-se para #{semester[:get].year}/#{semester[:get].parity_as_i}",
+      <%= button_link_to "Candidatar-se para #{semester[:get].year}/#{semester[:get].parity_as_i}",
                   new_candidature_path(semester[:get]) %>
     <% end %>
   <% end %>

@@ -19,5 +19,5 @@ Feature: Showing a professor
         And I press the "Entrar" button
         And I'm at the "professors" page
         And I click the "Bob" link
-        Then I should see "Nome Completo: Bob"
+        Then I should see "Nome: Bob"
         And I should see "Nível de acesso: Membro da comissão de monitoria"

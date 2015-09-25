@@ -10,7 +10,7 @@
       Pedir monitor para:
     </h2>
     <% @active_semesters.each do |semester| %>
-      <%= link_to semester.period_as_s, new_request_for_teaching_assistant_path(semester) %>
+      <%= button_link_to semester.period_as_s, new_request_for_teaching_assistant_path(semester) %>
     <% end %>
     <span style="height: 2em; display: block;"></span>
   <% end %>
@@ -18,7 +18,7 @@
     Ver pedidos de:
   </h2>
   <% @active_semesters.each do |semester| %>
-    <%= link_to semester.period_as_s, request_for_teaching_assistants_for_semester_path(semester) %>
+    <%= button_link_to semester.period_as_s, request_for_teaching_assistants_for_semester_path(semester) %>
   <% end %>
   <span style="height: 2em; display: block;"></span>
 <% end %>
@@ -34,7 +34,7 @@
   </div>
 <% end %>
 
-<table id="requests_table">
+<table id="requests_table" class="table table-hover">
   <thead>
     <tr>
     <th><%= t('activerecord.attributes.professor.professor') %> </th>
@@ -52,7 +52,7 @@
         <td><%= request_for_teaching_assistant.course.course_code + " - " + request_for_teaching_assistant.course.name %></td>
         <td><%= request_for_teaching_assistant.requested_number %></td>
         <td><%= request_for_teaching_assistant.semester.period_as_s %></td>
-        <td><%= link_to 'Ver', request_for_teaching_assistant %></td>
+        <td><%= button_link_to 'Ver', request_for_teaching_assistant %></td>
       </tr>
     <% end %>
   </tbody>

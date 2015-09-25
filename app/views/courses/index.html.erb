@@ -1,15 +1,19 @@
 <h1>Disciplinas</h1>
 
-<table>
-  <tr>
-    <th><%= t('activerecord.attributes.course.course_code') %></th>
-    <th><%= t('activerecord.attributes.course.name') %></th>
-  </tr>
-
-  <% @courses.each do |course| %>
+<table class="table table-hover">
+  <thead>
     <tr>
-      <td><%= link_to course.course_code, course %></td>
-      <td><%= course.name %></td>
+      <th><%= t('activerecord.attributes.course.course_code') %></th>
+      <th><%= t('activerecord.attributes.course.name') %></th>
     </tr>
-  <% end %>
+  </thead>
+
+  <tbody>
+    <% @courses.each do |course| %>
+      <tr>
+        <td><%= button_link_to course.course_code, course %></td>
+        <td><%= course.name %></td>
+      </tr>
+    <% end %>
+  </tbody>
 </table>

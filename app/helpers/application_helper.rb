@@ -32,4 +32,10 @@ module ApplicationHelper
       destroy_user_session_path
     end
   end
+
+  def button_link_to name, options, html_options=nil
+    link_to name, options, {class: "btn btn-primary"}.merge((html_options or {}))
+  end
+
 end
+

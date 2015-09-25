@@ -1,6 +1,6 @@
 <%= form_for(@course) do |f| %>
   <script type="text/javascript">
-    function department_selected(ev) {
+    function department_selected() {
         select_box = document.getElementById("course_department_id")
         idx = select_box.value;
         if (idx == "") {
@@ -20,7 +20,7 @@
 
   <div class="field">
       <%= f.label :department_id, t('activerecord.attributes.department.department') %><br>
-      <%= f.select :department_id, department_options, {}, {:onchange => 'department_selected(event)'} %>
+      <%= f.select :department_id, department_options, {}, {:onchange => 'department_selected()'} %>
   </div>
   <div>
       <%= f.label :course_code, t('activerecord.attributes.course.course_code') %><br>

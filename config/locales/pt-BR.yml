@@ -70,6 +70,8 @@ pt-BR:
       student:
         student: 'Aluno'
         institute: 'Unidade de origem'
+        institute_text: 'Digite abaixo o nome do instituto'
+        other_institute: 'Digite abaixo o nome do instituto'
         gender: 'Sexo'
         rg: 'RG/RNE'
         cpf: 'CPF'
@@ -83,9 +85,10 @@ pt-BR:
         tel_note: 'Use apenas dígitos e inclua o DDD (exemplo: 1144556677)'
         cel: 'Celular'
         cel_note: 'Use apenas dígitos e inclua o DDD (exemplo: 11988776655)'
-        has_bank_account: 'Possui conta no Banco do Brasil'
+        has_bank_account: 'Possui conta no Banco do Brasil? '
       user:
         user: 'Usuário'
+        name: 'Nome'
         complete_name: 'Nome Completo'
         nusp: 'Número USP'
         password: 'Senha'
@@ -143,4 +146,4 @@ pt-BR:
         toomany: 'Você já tem uma candidatura nesse semestre'
         repeated: 'Você não pode selecionar a mesma matéria mais de uma vez'
       student:
-        toofew: 'Digite o nome do seu instituto no campo outros'
+        toofew: 'Digite o nome do instituto específico'

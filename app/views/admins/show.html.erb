@@ -4,6 +4,6 @@
 </p>
 <% if admin_signed_in? %>
   <p>
-      <%= link_to 'Editar', edit_admin_path(@admin) %>
+      <%= button_link_to 'Editar', edit_admin_path(@admin) %>
   </p>
 <% end %>

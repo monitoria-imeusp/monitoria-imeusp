@@ -1,15 +1,18 @@
 <h1>Alunos</h1>
 
-<table>
-  <tr>
-    <th colspan="3"><%= t('activerecord.attributes.student.student') %></th>
-  </tr>
-
-  <% @students.each do |student| %>
+<table class="table table-hover">
+  <thead>
     <tr>
-      <td class="name"><%= student.name %></td>
-      <td><%= "#{student.nusp}" %></td>
-      <td><%= link_to "Ver perfil", student.user %></td>
+      <th colspan="3"><%= t('activerecord.attributes.student.student') %></th>
     </tr>
-  <% end %>
+  </thead>
+  <tbody>
+    <% @students.each do |student| %>
+      <tr>
+        <td class="name"><%= student.name %></td>
+        <td><%= "#{student.nusp}" %></td>
+        <td><%= button_link_to "Ver perfil", student.user %></td>
+      </tr>
+    <% end %>
+  </tbody>
 </table>
