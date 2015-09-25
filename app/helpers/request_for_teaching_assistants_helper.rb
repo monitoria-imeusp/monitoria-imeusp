@@ -20,7 +20,7 @@ module RequestForTeachingAssistantsHelper
   end
   
   def candidatures_table candidates, title
-    table = "<table>
+    table = "<table class=\"table table-hover\">
     <thead>
       <tr>
         <th>Nome</th>

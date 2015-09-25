@@ -3,7 +3,7 @@
 
 <% @assistant_evaluations.each do |assistant_evaluation| %>
   <% request = assistant_evaluation.assistant_role.request_for_teaching_assistant %>
-  <table>
+  <table class="table table-hover">
     <thead>
       <tr>
         <th colspan="2"><%= request.course.full_name %></th>

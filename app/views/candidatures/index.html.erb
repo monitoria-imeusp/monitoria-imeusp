@@ -13,7 +13,7 @@
   <% unless @candidatures_filtered[dep].empty? %>
     <h1><%= dep.upcase %></h2>
     <% @candidatures_filtered[dep].each do |candidature| %>
-      <table>
+      <table class="table table-hover">
         <thead>
           <tr>
             <th>

@@ -1,6 +1,6 @@
 <h1>Meus monitores do <%= @semester.as_s %></h1>
  
-<table>
+<table class="table table-hover">
   <thead>
     <tr>
       <th><%= t('activerecord.attributes.student.name') %> </th>
@@ -26,7 +26,7 @@
       </tr>        
       <tr>
         <td colspan=5>
-          <table border=1>
+          <table class="table" border=1>
             <tbody>
               <tr>
                 <% @months.each do |month| %>
