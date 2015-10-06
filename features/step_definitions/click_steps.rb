@@ -16,6 +16,10 @@ When(/^I press the "(.*?)" button$/) do |button_name|
   click_button(button_name)
 end
 
+When(/^I press the first "(.*?)" button$/) do |button_name|
+  click_button(button_name, match: :first )
+end
+
 When(/^I click the "(.*?)" link$/) do |link|
   click_link(link)
 end
