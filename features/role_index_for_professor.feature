@@ -46,7 +46,7 @@ Feature: Assistant roles table visualization
         Given it's currently month 5
         And I'm logged in as professor "Gold"
         And I visit my assistant roles page
-        Then I should see "John MAC0431 Gold Sim Avaliar • Março: Marcar presença Marcar ausência • Abril: Ausente • Maio: Marcar presença Marcar ausência"
+        Then I should see "John MAC0431 Gold Sim Avaliar • Março: • Abril: Ausente • Maio:"
         Then I should see "Wil MAC0431 Gold Sim Avaliar • Março: Presente • Abril: Presente • Maio: Presente"
         Then I should see "Alfredo MAC0431 Gold Não Avaliar • Março: Ausente • Abril: Presente • Maio: ---"
         And I should not see "Junho"
@@ -56,11 +56,11 @@ Feature: Assistant roles table visualization
         Given it's currently month 5
         And I'm logged in as professor "Gold"
         And I visit my assistant roles page
-        And I click the first "Marcar presença" link
-        Then I should see "John MAC0431 Gold Sim Avaliar • Março: Presente • Abril: Ausente • Maio: Marcar presença Marcar ausência"
+        And I press the first "Marcar presença" button
+        Then I should see "John MAC0431 Gold Sim Avaliar • Março: Presente • Abril: Ausente • Maio:"
         Then I should see "Wil MAC0431 Gold Sim Avaliar • Março: Presente • Abril: Presente • Maio: Presente"
         Then I should see "Alfredo MAC0431 Gold Não Avaliar • Março: Ausente • Abril: Presente • Maio: ---"
-        And I click the first "Marcar ausência" link
+        And I press the first "Marcar ausência" button
         Then I should see "John MAC0431 Gold Sim Avaliar • Março: Presente • Abril: Ausente • Maio: Ausente"
         Then I should see "Wil MAC0431 Gold Sim Avaliar • Março: Presente • Abril: Presente • Maio: Presente"
         Then I should see "Alfredo MAC0431 Gold Não Avaliar • Março: Ausente • Abril: Presente • Maio: ---"

@@ -38,13 +38,11 @@
                     <% if status == "Pendente" && !secretary_signed_in? %>
                       <br>
                       <%= content_tag :span, style: "" do -%>
-                        <%= button_link_to "Marcar presença", 
-                        mark_assistant_role_frequency_path(role: role.id, month: month, presence: true, pid: role.professor.id, redirect_to_index: "for_professor"), method: :post, data: { confirm: 'Deseja mesmo marcar presença para este monitor?' }  %>
+                        <%= button_to "Marcar presença", { controller: "assistant_frequency", action: "mark_assistant_role_frequency", role: role.id, month: month, presence: true, pid: role.professor.id, redirect_to_index: "for_professor"}, method: :post, class: "btn btn-primary", data: { confirm: 'Deseja mesmo marcar presença para este monitor?' }  %>
                       <% end -%>
                       <br>
                       <%= content_tag :span, style: "" do -%>
-                        <%= button_link_to "Marcar ausência",
-                        mark_assistant_role_frequency_path(role: role.id, month: month, presence: false, pid: role.professor.id, redirect_to_index: "for_professor"), method: :post, data: { confirm: 'Deseja mesmo marcar ausência para este monitor?' }  %>
+                        <%= button_to "Marcar ausência", { controller: "assistant_frequency", action: "mark_assistant_role_frequency", role: role.id, month: month, presence: false, pid: role.professor.id, redirect_to_index: "for_professor"}, method: :post, class: "btn btn-primary", data: { confirm: 'Deseja mesmo marcar ausência para este monitor?' }  %>
                       <% end -%>
                     <% else %>
                       <% if status == "Presente"
