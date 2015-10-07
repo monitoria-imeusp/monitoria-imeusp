@@ -18,10 +18,12 @@
         <td><%= role.request_for_teaching_assistant.course.course_code %></td>
         <td><%= role.request_for_teaching_assistant.professor.name %></td>
         <td><%= show_yes_or_no(role.active) %></td>
-        <% if role.assistant_evaluation %>
-          <td><%= button_link_to "Mudar avaliação", edit_assistant_evaluation_path(role.assistant_evaluation) %></td>
-        <% else %>
-          <td><%= button_link_to "Avaliar", new_assistant_evaluation_path(role) %></td>
+        <% unless Rails.env.production? %>
+          <% if role.assistant_evaluation %>
+            <td><%= button_link_to "Mudar avaliação", edit_assistant_evaluation_path(role.assistant_evaluation) %></td>
+          <% else %>
+            <td><%= button_link_to "Avaliar", new_assistant_evaluation_path(role) %></td>
+          <% end %>
         <% end %>
       </tr>        
       <tr>
