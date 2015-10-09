@@ -14,7 +14,7 @@
 <div class="biggerText">
   Filtrar por mês:
   <select id="month_select" onchange="update_month(this)">
-    <% @months.reverse.each do |month| %>
+    <% @semester.months.reverse.each do |month| %>
       <option value=<%="#{month}"%>><%= "#{months_to_names[month]}"%></option>
     <% end %>
   </select>
@@ -83,7 +83,7 @@
           <table border=1 class="table">
             <tbody>
               <tr>
-                <% @months.each do |month| %>
+                <% @semester.months.each do |month| %>
                   <td>
                     <% status = role.frequency_status_for_month(month) %>
                     <% color = "black" %>
@@ -130,7 +130,7 @@
 var table = document.getElementById("roles_table");
 var roles_by_dep = {};
 var current_dep = "ALL";
-var current_month = <%="#{@months.length - 1}"%>;
+var current_month = <%="#{@semester.months.length - 1}"%>;
 var current_status = 0;
 
 roles_by_dep["MAC"] = [];
@@ -151,7 +151,7 @@ function add_role_to_list(i, freq_list) {
 <% j = 1 %>
 <% @assistant_roles.each do |role|%>
   var freq_list = [];
-  <% @months.each do |month| %>
+  <% @semester.months.each do |month| %>
     status = <%= role.frequency_status_for_month_as_number(month) %>;
     freq_list[<%="#{month}"%>] = status;
   <% end %>

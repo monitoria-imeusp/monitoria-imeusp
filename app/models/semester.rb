@@ -60,6 +60,14 @@ class Semester < ActiveRecord::Base
     (frequency_period & (1 << which)) != 0
   end
 
+  def months
+    if parity == 0
+      [3, 4, 5, 6]
+    else
+      [8, 9, 10, 11]
+    end
+  end
+
   def self.all_open
     Semester.where(open: true).all
   end

@@ -1,75 +1,64 @@
 <h1>Meus monitores do <%= @semester.as_s %></h1>
- 
-<table class="table table-hover">
-  <thead>
-    <tr>
-      <th><%= t('activerecord.attributes.student.name') %> </th>
-      <th><%= t('activerecord.attributes.request_for_teaching_assistant.course_id') %> </th>
-      <th><%= t('activerecord.attributes.request_for_teaching_assistant.professor_id') %> </th>
-      <th><%= t('activerecord.attributes.request_for_teaching_assistant.active') %> </th>
-      <th></th>
-    </tr>
-  </thead>
 
-  <tbody>
-    <% @assistant_roles.each do |role| %>
-      <tr class="studentRow">
-        <td><%= role.student.name %></td>
-        <td><%= role.request_for_teaching_assistant.course.course_code %></td>
-        <td><%= role.request_for_teaching_assistant.professor.name %></td>
-        <td><%= show_yes_or_no(role.active) %></td>
-        <% unless Rails.env.production? %>
-          <% if role.assistant_evaluation %>
-            <td><%= button_link_to "Mudar avaliação", edit_assistant_evaluation_path(role.assistant_evaluation) %></td>
-          <% else %>
-            <td><%= button_link_to "Avaliar", new_assistant_evaluation_path(role) %></td>
-          <% end %>
-        <% end %>
-      </tr>        
-      <tr>
-        <td colspan=5>
-          <table class="table" border=1>
-            <tbody>
-              <tr>
-                <% @months.each do |month| %>
-                  <td>
-                    <% status = role.frequency_status_for_month(month) %>
-                    <% color = "black" %>
-                    <%= "&nbsp;&bull;".html_safe %>
-                    <%= " #{months_to_names[month]}: " %>  
-                    <% if status == "Pendente" && !secretary_signed_in? %>
-                      <br>
-                      <%= content_tag :span, style: "" do -%>
-                        <%= button_to "Marcar presença", { controller: "assistant_frequency", action: "mark_assistant_role_frequency", role: role.id, month: month, presence: true, pid: role.professor.id, redirect_to_index: "for_professor"}, method: :post, class: "btn btn-primary", data: { confirm: 'Deseja mesmo marcar presença para este monitor?' }  %>
-                      <% end -%>
-                      <br>
-                      <%= content_tag :span, style: "" do -%>
-                        <%= button_to "Marcar ausência", { controller: "assistant_frequency", action: "mark_assistant_role_frequency", role: role.id, month: month, presence: false, pid: role.professor.id, redirect_to_index: "for_professor"}, method: :post, class: "btn btn-primary", data: { confirm: 'Deseja mesmo marcar ausência para este monitor?' }  %>
-                      <% end -%>
-                    <% else %>
-                      <% if status == "Presente"
-                            color = "green"
-                         elsif status == "Ausente"
-                            color = "red"
-                         elsif status == "---"
-                            color = "gray"
-                          elsif status == "Pago"
-                            color = "blue"
-                         else
-                            color = "darkgoldenrod"
-                         end
-                      %>
-                        <%= content_tag :span, style: "color:#{color}" do -%>
+<% @assistant_roles.each do |role| %>
+  <div class="col-sm-6">
+    <div class="panel panel-default">
+      <div class="panel-heading text-center"><%= role.student.name %> - <%= role.request_for_teaching_assistant.course.course_code %></div>
+      <div class="panel-body">
+        <table class="table">
+          <thead>
+            <tr>
+              <% @semester.months.each do |month| %>
+                <td class="text-center">
+                  <strong><%= "#{months_to_names[month]}" %></strong>
+                </td>
+              <% end %>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <% @semester.months.each do |month| %>
+                <td class="text-center">
+                  <% status = role.frequency_status_for_month(month) %>
+                  <% color = "black" %>
+                  <% if status == "Pendente" && !secretary_signed_in? %>
+                    <%= button_to "Presente", { controller: "assistant_frequency", action: "mark_assistant_role_frequency", role: role.id, month: month, presence: true, pid: role.professor.id, redirect_to_index: "for_professor"}, method: :post, class: "btn btn-primary", data: { confirm: 'Deseja mesmo marcar presença para este monitor?' }  %>
+                    <%= button_to "Ausente", { controller: "assistant_frequency", action: "mark_assistant_role_frequency", role: role.id, month: month, presence: false, pid: role.professor.id, redirect_to_index: "for_professor"}, method: :post, class: "btn btn-primary", data: { confirm: 'Deseja mesmo marcar ausência para este monitor?' }  %>
+                  <% else %>
+                    <% if status == "Presente"
+                          color = "green"
+                       elsif status == "Ausente"
+                          color = "red"
+                       elsif status == "---"
+                          color = "gray"
+                        elsif status == "Pago"
+                          color = "blue"
+                       else
+                          color = "darkgoldenrod"
+                       end
+                    %>
+                      <%= content_tag :span, style: "color:#{color}" do -%>
                         <%= status %>
                       <% end -%>
-                    <% end %>    
-                  </td>
-                <% end %>
-              </tr>
-            </tbody>
-          </table>
-        </td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+                    <% end %>
+                </td>
+              <% end %>
+            </tr>
+          </tbody>
+        </table>
+        <div class="col-sm-4"></div>
+        <div class="col-sm-4">
+          <% unless Rails.env.production? %>
+            <% if role.assistant_evaluation %>
+              <td><%= button_link_to "Mudar avaliação", edit_assistant_evaluation_path(role.assistant_evaluation) %></td>
+            <% else %>
+              <td><%= button_link_to "Avaliar", new_assistant_evaluation_path(role) %></td>
+            <% end %>
+          <% end %>
+        </div>
+        <div class="col-sm-4"></div>
+      </div>
+    </div>
+  </div>
+<% end %>
+ 

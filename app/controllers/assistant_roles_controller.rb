@@ -10,7 +10,6 @@ class AssistantRolesController < ApplicationController
         should_see_the_role role
       end
     end
-    create_current_months @assistant_roles
   end
 
   # GET /assistant_roles/for_professor/1
@@ -19,7 +18,6 @@ class AssistantRolesController < ApplicationController
     @professor = Professor.find(params[:professor_id])
     raise CanCan::AccessDenied.new unless current_user.professor == @professor
     @assistant_roles = AssistantRole.for_professor_and_semester @professor, @semester
-    create_current_months AssistantRole.for_semester @semester
   end
 
   def create
