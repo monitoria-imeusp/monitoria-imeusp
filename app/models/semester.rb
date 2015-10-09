@@ -48,6 +48,18 @@ class Semester < ActiveRecord::Base
     self == Semester.current
   end
 
+  def open_frequency_period which
+    frequency_period |= (1 << which)
+  end
+
+  def close_frequency_period which
+    frequency_period &= ~(1 << which)
+  end
+
+  def frequency_open? which
+    (frequency_period & (1 << which)) != 0
+  end
+
   def self.all_open
     Semester.where(open: true).all
   end
