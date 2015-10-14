@@ -1,64 +1,72 @@
-<h1>Meus monitores do <%= @semester.as_s %></h1>
-
-<% @assistant_roles.each do |role| %>
-  <div class="col-sm-6">
-    <div class="panel panel-default">
-      <div class="panel-heading text-center"><%= role.student.name %> - <%= role.request_for_teaching_assistant.course.course_code %></div>
-      <div class="panel-body">
-        <table class="table">
-          <thead>
-            <tr>
+<h1>Meus monitores</h1>
+<ul class="list-group">
+  <li class="list-group-item list-group-item-info">
+    <h2 class="list-group-item-heading"><%= @semester.as_s %></h3>
+  </li>
+  <% @assistant_roles.each do |role| %>
+    <li class="list-group-item">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-sm-4">
+            <h4 class="list-group-item-heading"><%= role.student.name %></h4>
+            <p class="list-group-item-text">
+              Monitor(a) de <%= role.request_for_teaching_assistant.course.course_code %>
+            </p>
+          </div>
+          <div class="col-sm-6">
+            <div class="row">
               <% @semester.months.each do |month| %>
-                <td class="text-center">
-                  <strong><%= "#{months_to_names[month]}" %></strong>
-                </td>
-              <% end %>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <% @semester.months.each do |month| %>
-                <td class="text-center">
-                  <% status = role.frequency_status_for_month(month) %>
-                  <% color = "black" %>
-                  <% if status == "Pendente" && !secretary_signed_in? %>
-                    <%= button_to "Presente", { controller: "assistant_frequency", action: "mark_assistant_role_frequency", role: role.id, month: month, presence: true, pid: role.professor.id, redirect_to_index: "for_professor"}, method: :post, class: "btn btn-primary", data: { confirm: 'Deseja mesmo marcar presença para este monitor?' }  %>
-                    <%= button_to "Ausente", { controller: "assistant_frequency", action: "mark_assistant_role_frequency", role: role.id, month: month, presence: false, pid: role.professor.id, redirect_to_index: "for_professor"}, method: :post, class: "btn btn-primary", data: { confirm: 'Deseja mesmo marcar ausência para este monitor?' }  %>
-                  <% else %>
-                    <% if status == "Presente"
-                          color = "green"
-                       elsif status == "Ausente"
-                          color = "red"
-                       elsif status == "---"
-                          color = "gray"
-                        elsif status == "Pago"
-                          color = "blue"
-                       else
-                          color = "darkgoldenrod"
-                       end
-                    %>
-                      <%= content_tag :span, style: "color:#{color}" do -%>
+                <div class="col-sm-3 text-center">
+                  <div class="row">
+                    <%= "#{months_to_names[month]}" %>:
+                  </div>
+                  <div class="row">
+                    <% status = role.frequency_status_for_month(month) %>
+                    <% color = "black" %>
+                    <% if status == "Pendente" && !secretary_signed_in? %>
+                      <div class="col-sm-6">
+                        <%= button_to "Presente", { controller: "assistant_frequency", action: "mark_assistant_role_frequency", role: role.id, month: month, presence: true, pid: role.professor.id, redirect_to_index: "for_professor"}, method: :post, class: "btn btn-primary btn-xs", data: { confirm: 'Deseja mesmo marcar presença para este monitor?' } %>
+                      </div>
+                      <div class="col-sm-6">
+                        <%= button_to "Ausente", { controller: "assistant_frequency", action: "mark_assistant_role_frequency", role: role.id, month: month, presence: false, pid: role.professor.id, redirect_to_index: "for_professor"}, method: :post, class: "btn btn-primary btn-xs", data: { confirm: 'Deseja mesmo marcar ausência para este monitor?' }  %>
+                      </div>
+                    <% else %>
+                      <% if status == "Presente"
+                            color = "green"
+                         elsif status == "Ausente"
+                            color = "red"
+                         elsif status == "---"
+                            color = "gray"
+                          elsif status == "Pago"
+                            color = "blue"
+                         else
+                            color = "darkgoldenrod"
+                         end
+                      %>
+                      <%= content_tag :span, style: "color:#{color};" do -%>
                         <%= status %>
                       <% end -%>
                     <% end %>
-                </td>
+                  </div>
+                </div>
               <% end %>
-            </tr>
-          </tbody>
-        </table>
-        <div class="col-sm-4"></div>
-        <div class="col-sm-4">
-          <% unless Rails.env.production? %>
-            <% if role.assistant_evaluation %>
-              <td><%= button_link_to "Mudar avaliação", edit_assistant_evaluation_path(role.assistant_evaluation) %></td>
+            </div>
+          </div>
+          <div class="col-sm-2 text-right">
+            <% unless Rails.env.production? %>
+              <% if role.assistant_evaluation %>
+                <%= button_link_to "Mudar avaliação", edit_assistant_evaluation_path(role.assistant_evaluation), class: "btn btn-lg btn-primary" %>
+              <% else %>
+                <%= button_link_to "Avaliar", new_assistant_evaluation_path(role), class: "btn btn-lg btn-primary" %>
+              <% end %>
             <% else %>
-              <td><%= button_link_to "Avaliar", new_assistant_evaluation_path(role) %></td>
+              <%= button_link_to "Avaliar", new_assistant_evaluation_path(role), class: "btn btn-lg btn-primary disabled" %>
             <% end %>
-          <% end %>
+          </div>
         </div>
-        <div class="col-sm-4"></div>
       </div>
-    </div>
-  </div>
-<% end %>
+    </li>
+  <% end %>
+</ul>
+
  
