@@ -68,6 +68,12 @@ class Semester < ActiveRecord::Base
     end
   end
 
+  def self.month_to_period month
+    [-1, -1, -1,
+      0, 1, 2, 3, -1,
+      0, 1, 2, 3, -1][month]
+  end
+
   def self.all_open
     Semester.where(open: true).all
   end

@@ -55,7 +55,7 @@ class AssistantRole < ActiveRecord::Base
       end
     end
     if !found
-      if active and semester.frequency_open?(month)
+      if active and semester.frequency_open?(Semester.month_to_period month)
         return "Pendente"
       else
         return "---"
