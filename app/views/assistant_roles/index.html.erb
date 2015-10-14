@@ -10,19 +10,6 @@
   <br><br>
 <% end %>
 
-<ul class="list-group">
-  <li class="list-group-item list-group-item-info">
-    <h2 class="list-group-item-heading">Monitores</h3>
-  </li>
-  <% @assistant_roles.each do |role| %>
-    <li class="list-group-item">
-      <div class="container-fluid">
-        <%= role.student.name %>
-      </div>
-    </li>
-  <% end %>
-</ul>
-
 <div class="biggerText">
   Filtrar por mês:
   <select id="month_select" onchange="update_month(this)">
