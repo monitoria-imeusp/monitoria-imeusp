@@ -1,4 +1,6 @@
+
 <h1>Meus monitores</h1>
+
 <ul class="list-group">
   <li class="list-group-item list-group-item-info">
     <h2 class="list-group-item-heading"><%= @semester.as_s %></h3>
@@ -17,7 +19,7 @@
               <% end %>
             </p>
           </div>
-          <div class="col-sm-6">
+          <div class="col-sm-8">
             <% if role.active %>
               <div class="row">
                 <% @semester.months.each do |month| %>
@@ -29,10 +31,10 @@
                       <% status = role.frequency_status_for_month(month) %>
                       <% color = "black" %>
                       <% if status == "Pendente" %>
-                        <div class="col-sm-6">
+                        <div class="col-sm-12 col-lg-6 text-center">
                           <%= button_to "Presente", { controller: "assistant_frequency", action: "mark_assistant_role_frequency", role: role.id, month: month, presence: true, pid: role.professor.id, redirect_to_index: "for_professor"}, method: :post, class: "btn btn-primary btn-xs", data: { confirm: 'Deseja mesmo marcar presença para este monitor?' } %>
                         </div>
-                        <div class="col-sm-6">
+                        <div class="col-sm-12 col-lg-6 text-center">
                           <%= button_to "Ausente", { controller: "assistant_frequency", action: "mark_assistant_role_frequency", role: role.id, month: month, presence: false, pid: role.professor.id, redirect_to_index: "for_professor"}, method: :post, class: "btn btn-primary btn-xs", data: { confirm: 'Deseja mesmo marcar ausência para este monitor?' }  %>
                         </div>
                       <% else %>
@@ -60,17 +62,15 @@
               <p class="text-center">Desativado</p>
             <% end %>
           </div>
-          <div class="col-sm-2 text-right">
-            <% unless Rails.env.production? %>
-              <% if role.assistant_evaluation %>
-                <%= button_link_to "Mudar avaliação", edit_assistant_evaluation_path(role.assistant_evaluation), class: "btn btn-lg btn-primary" %>
-              <% else %>
-                <%= button_link_to "Avaliar", new_assistant_evaluation_path(role), class: "btn btn-lg btn-primary" %>
-              <% end %>
+        </div>
+        <div class="row text-center">
+          <% unless Rails.env.production? %>
+            <% if role.assistant_evaluation %>
+              <%= button_link_to "Mudar avaliação", edit_assistant_evaluation_path(role.assistant_evaluation), class: "btn btn-lg btn-primary" %>
             <% else %>
-              <%= button_link_to "Avaliar", new_assistant_evaluation_path(role), class: "btn btn-lg btn-primary disabled" %>
+              <%= button_link_to "Avaliar", new_assistant_evaluation_path(role), class: "btn btn-lg btn-primary" %>
             <% end %>
-          </div>
+          <% end %>
         </div>
       </div>
     </li>
