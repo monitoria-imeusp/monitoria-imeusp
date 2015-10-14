@@ -23,7 +23,7 @@
                   <div class="row">
                     <% status = role.frequency_status_for_month(month) %>
                     <% color = "black" %>
-                    <% if status == "Pendente" && !secretary_signed_in? %>
+                    <% if status == "Pendente" && @semester.frequency_open?(month) %>
                       <div class="col-sm-6">
                         <%= button_to "Presente", { controller: "assistant_frequency", action: "mark_assistant_role_frequency", role: role.id, month: month, presence: true, pid: role.professor.id, redirect_to_index: "for_professor"}, method: :post, class: "btn btn-primary btn-xs", data: { confirm: 'Deseja mesmo marcar presença para este monitor?' } %>
                       </div>
