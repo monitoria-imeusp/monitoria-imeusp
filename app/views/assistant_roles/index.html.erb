@@ -1,7 +1,6 @@
 
 <h1>Monitores eleitos para <%= @semester.as_s %></h1>
 
-
 <% if secretary_signed_in? and @semester.current? %>
   <% unless Rails.env.production? %>
     <%= button_link_to "Pedir avaliações dos professores", request_assistant_evaluations_for_semester_path(@semester), method: :post %>
@@ -10,6 +9,19 @@
   <%= button_link_to "Pagar monitores" , pay_all_assistants_path, method: :post %>
   <br><br>
 <% end %>
+
+<ul class="list-group">
+  <li class="list-group-item list-group-item-info">
+    <h2 class="list-group-item-heading">Monitores</h3>
+  </li>
+  <% @assistant_roles.each do |role| %>
+    <li class="list-group-item">
+      <div class="container-fluid">
+        <%= role.student.name %>
+      </div>
+    </li>
+  <% end %>
+</ul>
 
 <div class="biggerText">
   Filtrar por mês:
