@@ -19,5 +19,5 @@ Then (/^"(.*)" elected status should be "(.*)"/) do |nusp, elected|
 end
 
 Then (/^"(.*)" active status should be "(.*)"/) do |name, active|
-  expect(page.body).to match(/#{name}[^r]*#{active}/)
+  expect(page.body).to match(/#{name}[^\r]*#{active}/)
 end

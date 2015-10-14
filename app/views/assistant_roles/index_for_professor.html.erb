@@ -10,47 +10,55 @@
           <div class="col-sm-4">
             <h4 class="list-group-item-heading"><%= role.student.name %></h4>
             <p class="list-group-item-text">
-              Monitor(a) de <%= role.request_for_teaching_assistant.course.course_code %>
+              <% if role.student.is_male? %>
+                Monitor <%= role.active ? "ativo" : "desativado" %> de <%= role.request_for_teaching_assistant.course.course_code %>
+              <% else %>
+                Monitora <%= role.active ? "ativa" : "desativada" %> de <%= role.request_for_teaching_assistant.course.course_code %>
+              <% end %>
             </p>
           </div>
           <div class="col-sm-6">
-            <div class="row">
-              <% @semester.months.each do |month| %>
-                <div class="col-sm-3 text-center">
-                  <div class="row">
-                    <%= "#{months_to_names[month]}" %>:
+            <% if role.active %>
+              <div class="row">
+                <% @semester.months.each do |month| %>
+                  <div class="col-sm-3 text-center">
+                    <div class="row">
+                      <%= "#{months_to_names[month]}" %>:
+                    </div>
+                    <div class="row">
+                      <% status = role.frequency_status_for_month(month) %>
+                      <% color = "black" %>
+                      <% if status == "Pendente" %>
+                        <div class="col-sm-6">
+                          <%= button_to "Presente", { controller: "assistant_frequency", action: "mark_assistant_role_frequency", role: role.id, month: month, presence: true, pid: role.professor.id, redirect_to_index: "for_professor"}, method: :post, class: "btn btn-primary btn-xs", data: { confirm: 'Deseja mesmo marcar presença para este monitor?' } %>
+                        </div>
+                        <div class="col-sm-6">
+                          <%= button_to "Ausente", { controller: "assistant_frequency", action: "mark_assistant_role_frequency", role: role.id, month: month, presence: false, pid: role.professor.id, redirect_to_index: "for_professor"}, method: :post, class: "btn btn-primary btn-xs", data: { confirm: 'Deseja mesmo marcar ausência para este monitor?' }  %>
+                        </div>
+                      <% else %>
+                        <% if status == "Presente"
+                              color = "green"
+                           elsif status == "Ausente"
+                              color = "red"
+                           elsif status == "---"
+                              color = "gray"
+                            elsif status == "Pago"
+                              color = "blue"
+                           else
+                              color = "darkgoldenrod"
+                           end
+                        %>
+                        <%= content_tag :span, style: "color:#{color};" do -%>
+                          <%= status %>
+                        <% end -%>
+                      <% end %>
+                    </div>
                   </div>
-                  <div class="row">
-                    <% status = role.frequency_status_for_month(month) %>
-                    <% color = "black" %>
-                    <% if status == "Pendente" && @semester.frequency_open?(month) %>
-                      <div class="col-sm-6">
-                        <%= button_to "Presente", { controller: "assistant_frequency", action: "mark_assistant_role_frequency", role: role.id, month: month, presence: true, pid: role.professor.id, redirect_to_index: "for_professor"}, method: :post, class: "btn btn-primary btn-xs", data: { confirm: 'Deseja mesmo marcar presença para este monitor?' } %>
-                      </div>
-                      <div class="col-sm-6">
-                        <%= button_to "Ausente", { controller: "assistant_frequency", action: "mark_assistant_role_frequency", role: role.id, month: month, presence: false, pid: role.professor.id, redirect_to_index: "for_professor"}, method: :post, class: "btn btn-primary btn-xs", data: { confirm: 'Deseja mesmo marcar ausência para este monitor?' }  %>
-                      </div>
-                    <% else %>
-                      <% if status == "Presente"
-                            color = "green"
-                         elsif status == "Ausente"
-                            color = "red"
-                         elsif status == "---"
-                            color = "gray"
-                          elsif status == "Pago"
-                            color = "blue"
-                         else
-                            color = "darkgoldenrod"
-                         end
-                      %>
-                      <%= content_tag :span, style: "color:#{color};" do -%>
-                        <%= status %>
-                      <% end -%>
-                    <% end %>
-                  </div>
-                </div>
-              <% end %>
-            </div>
+                <% end %>
+              </div>
+            <% else %>
+              <p class="text-center">Desativado</p>
+            <% end %>
           </div>
           <div class="col-sm-2 text-right">
             <% unless Rails.env.production? %>
