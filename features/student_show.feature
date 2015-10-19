@@ -2,9 +2,10 @@ Feature: Seeing information of a student
 	In order to see the complete student information
 	As a professor or admin
 	I want to see a student information
-
+    
     Background:
-        Given there is a student with name "carlinhos" with nusp "123456" and email "eu@usp.br"
+        Given there is a closed but active semester 2015/2
+        And there is a student with name "carlinhos" with nusp "123456" and email "eu@usp.br"
 
 
     Scenario: Admin look for student information

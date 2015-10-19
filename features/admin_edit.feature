@@ -3,8 +3,9 @@ Feature: Editing the admin
 	As admin
 	I want to edit my account
 
-	Background:
-		Given there is an admin user with email "kazuo@ime.usp.br" and password "admin123"
+  Background:
+    Given there is an admin user with email "kazuo@ime.usp.br" and password "admin123"
+    And there is a closed but active semester 2015/2
 
 	Scenario: Admin edits its own information
 		Given I'm at the system access page

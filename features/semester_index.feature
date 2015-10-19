@@ -4,9 +4,9 @@ Feature: Semester list visualization
     I want to see all existing semesters
 
     Background:
-        When there is a closed semester "2014" "1"
-        And there is a closed semester "2015" "0"
-        And there is an open semester "2015" "1"
+        When there is a closed semester "2014" "2"
+        And there is a closed semester "2015" "1"
+        And there is an open semester "2015" "2"
 
     Scenario: Admin seeing all semesters
         Given I'm logged in as the admin

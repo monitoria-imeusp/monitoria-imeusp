@@ -4,7 +4,7 @@ Feature: Assistant roles table visualization
     I want to see my assistant roles
 
     Background:
-        When there is an open semester "2014" "0"
+        When there is an open semester "2014" "1"
         And there is a department with code "MAC"
         And there is a department with code "MAT"
         And there is a course with name "Introdução à Ciência da Computação" and code "MAC0110" and department "MAC"

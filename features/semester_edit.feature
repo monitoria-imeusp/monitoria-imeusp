@@ -15,7 +15,7 @@ Feature: Semester edition
         And I press the "Entrar" button
         And I click the "Gerenciar semestres" link
         And I click the "Fechar inscrições" link
-        Then I should see "2014/2"
+        Then I should see "2014/1"
         And I should see "Ativo"
 
 
@@ -28,5 +28,5 @@ Feature: Semester edition
         And I press the "Entrar" button
         And I click the "Gerenciar semestres" link
         And I click the "Fechar inscrições" link
-        Then I should see "2014/2"
+        Then I should see "2014/1"
         And I should see "Ativo"

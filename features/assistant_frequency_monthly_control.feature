@@ -208,16 +208,4 @@ Feature: Assistant frequency monthly control
         Then I should see "Alfredo MAC0431 Gold Desativado"
         And I should not see "Setembro"
         Then I'm back to current time
-
-    Scenario: Secretary requests assistant evaluations
-        Given it's currently month 5
-        And I'm ready to receive email
-        And I'm logged in as a secretary
-        And I visit the monthly control page for month 5
-        When I click the "Pedir avaliações dos professores" link
-        Then the assistant evaluation reminder email for semester "2" of year "2014" should have been delivered properly to "prof@ime.usp.br"
-        And the assistant evaluation reminder email for semester "2" of year "2014" should have been delivered properly to "golddev@ime.usp.br"
-        And the assistant evaluation reminder email for semester "2" of year "2014" should have been delivered properly to "silver@ime.usp.br"
-        And I should see "Solicitações enviadas aos professores"
-        And I'm back to current time
         

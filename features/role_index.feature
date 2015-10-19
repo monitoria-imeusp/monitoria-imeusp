@@ -94,66 +94,6 @@ Feature: Assistant roles table visualization
         And I visit the assistant roles page
         Then I should see "ACESSO NEGADO"
 
-    Scenario: Secretary sees the correct frequencies
-        Given it's currently month 5
-        Given I'm logged in as a secretary
-        And I visit the assistant roles page
-        Then I should see "Bob MAC0110 Dude Desativar Atestado • Março: Ausente • Abril: Presente • Maio: Presente"
-        Then I should see "John MAC0431 Gold Desativar Atestado • Março: Presente • Abril: Ausente • Maio: Pendente"
-        Then I should see "Wil MAC0431 Gold Desativar Atestado • Março: Presente • Abril: Presente • Maio: Presente"
-        Then I should see "Mary MAT0125 Silver Desativar Atestado • Março: Ausente • Abril: Pendente • Maio: Pendente"
-        Then I should see "Jude MAC0431 Gold Desativar Atestado • Março: Pendente • Abril: Pendente • Maio: Pendente"
-        Then I should see "Alfredo MAC0431 Gold Desativado Atestado • Março: --- • Abril: Presente • Maio: ---"
-        And I should not see "Junho"
-        Then I'm back to current time
-
-    Scenario: Super professor sees the correct frequencies
-        Given it's currently month 5
-        Given I'm logged in as a super professor
-        And I visit the assistant roles page
-        Then I should see "Bob MAC0110 Dude Ativo • Março: Ausente • Abril: Presente • Maio: Presente"
-        Then I should see "John MAC0431 Gold Ativo • Março: Presente • Abril: Ausente • Maio: Marcar presença Marcar ausência"
-        Then I should see "Wil MAC0431 Gold Ativo • Março: Presente • Abril: Presente • Maio: Presente"
-        Then I should see "Jude MAC0431 Gold Ativo • Março: Marcar presença Marcar ausência • Abril: Marcar presença Marcar ausência • Maio: Marcar presença Marcar ausência"
-        Then I should see "Alfredo MAC0431 Gold Desativado • Março: --- • Abril: Presente • Maio: ---"
-        And I should not see "Junho"
-        Then I'm back to current time
-
-    Scenario: Super professor marks frequency
-        Given it's currently month 5
-        Given I'm logged in as a super professor
-        And I visit the assistant roles page
-        And I click the first "Marcar presença" link
-        Then I should see "Bob MAC0110 Dude Ativo • Março: Ausente • Abril: Presente • Maio: Presente"
-        Then I should see "John MAC0431 Gold Ativo • Março: Presente • Abril: Ausente • Maio: Presente"
-        Then I should see "Wil MAC0431 Gold Ativo • Março: Presente • Abril: Presente • Maio: Presente"
-        Then I should see "Jude MAC0431 Gold Ativo • Março: Marcar presença Marcar ausência • Abril: Marcar presença Marcar ausência • Maio: Marcar presença Marcar ausência"
-        Then I should see "Alfredo MAC0431 Gold Desativado • Março: --- • Abril: Presente • Maio: ---"
-        And I click the first "Marcar ausência" link
-        Then I should see "Bob MAC0110 Dude Ativo • Março: Ausente • Abril: Presente • Maio: Presente"
-        Then I should see "John MAC0431 Gold Ativo • Março: Presente • Abril: Ausente • Maio: Presente"
-        Then I should see "Wil MAC0431 Gold Ativo • Março: Presente • Abril: Presente • Maio: Presente"
-        Then I should see "Jude MAC0431 Gold Ativo • Março: Ausente • Abril: Marcar presença Marcar ausência • Maio: Marcar presença Marcar ausência"
-        Then I should see "Alfredo MAC0431 Gold Desativado • Março: --- • Abril: Presente • Maio: ---"
-        And I should not see "Junho"
-        Then I'm back to current time
-
-    Scenario: Secretary pays assistant roles for last month
-        Given it's currently month 5
-        Given I'm logged in as a secretary
-        And I visit the assistant roles page
-        And I click the "Pagar monitores" link
-        Then I should see "Bob MAC0110 Dude Desativar Atestado • Março: Ausente • Abril: Pago • Maio: Presente"
-        Then I should see "John MAC0431 Gold Desativar Atestado • Março: Presente • Abril: Ausente • Maio: Pendente"
-        Then I should see "Wil MAC0431 Gold Desativar Atestado • Março: Presente • Abril: Pago • Maio: Presente"
-        Then I should see "Mary MAT0125 Silver Desativar Atestado • Março: Ausente • Abril: Pendente • Maio: Pendente"
-        Then I should see "Jude MAC0431 Gold Desativar Atestado • Março: Pendente • Abril: Pendente • Maio: Pendente"
-        Then I should see "Alfredo MAC0431 Gold Desativado Atestado • Março: --- • Abril: Pago • Maio: ---"
-        And I should not see "Junho"
-        Then I'm back to current time
-
-
-
     @javascript
     Scenario: Secretary filters roles
         Given it's currently month 5
@@ -270,8 +210,8 @@ Feature: Assistant roles table visualization
         Given I'm logged in as a secretary
         And I visit the assistant roles page
         And I click the "Pedir avaliações dos professores" link
-        Then the assistant evaluation reminder email for semester "2" of year "2014" should have been delivered properly to "prof@ime.usp.br"
-        And the assistant evaluation reminder email for semester "2" of year "2014" should have been delivered properly to "golddev@ime.usp.br"
-        And the assistant evaluation reminder email for semester "2" of year "2014" should have been delivered properly to "silver@ime.usp.br"
+        Then the assistant evaluation reminder email for semester "1" of year "2014" should have been delivered properly to "prof@ime.usp.br"
+        And the assistant evaluation reminder email for semester "1" of year "2014" should have been delivered properly to "golddev@ime.usp.br"
+        And the assistant evaluation reminder email for semester "1" of year "2014" should have been delivered properly to "silver@ime.usp.br"
         And I should see "Solicitações enviadas aos professores"
         

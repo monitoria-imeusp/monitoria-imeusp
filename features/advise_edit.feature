@@ -5,6 +5,7 @@ Feature: Editing an advisecontroller
 
 	Background:
 		Given there is an advise with title "Aviso 1" and message "Teste1" and urgency "false"
+    And there is a closed but active semester 2015/2
 
 	Scenario: Secretary editing an advise
 		Given I'm logged in as a secretary
