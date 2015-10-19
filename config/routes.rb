@@ -68,6 +68,7 @@ Rails.application.routes.draw do
   post 'assistant_frequency/request_frequency/' => 'assistant_frequency#request_frequency', as: :request_frequency
   post 'assistant_frequency/mark_generic_assistant_role_frequency/' => 'assistant_frequency#mark_generic_assistant_role_frequency', as: :mark_generic_assistant_role_frequency
   post 'assistant_frequency/mark_assistant_role_frequency/' => 'assistant_frequency#mark_assistant_role_frequency', as: :mark_assistant_role_frequency
+  post 'assistant_frequency/pay_all_assistants/:semester_id/:month' => 'assistant_frequency#pay_all_assistants', as: :pay_all_assistants
 
   resources :semesters
   post 'semesters/:id/open' => 'semesters#open', as: :open_semester
@@ -96,8 +97,6 @@ Rails.application.routes.draw do
   post 'assistant_roles/deactivate_assistant_role/:id' => 'assistant_roles#deactivate_assistant_role', as: :deactivate_assistant_role
   patch 'assistant_roles/:id/' => 'assistant_roles#update', as: :update_assistant_role
   delete 'assistant_roles/:id/' => 'assistant_roles#destroy', as: :destroy_assistant_role
-
-  post 'secretaries/pay_all_assistants/' => 'secretaries#pay_all_assistants', as: :pay_all_assistants
 
 
   resources :assistant_evaluations, except: [:index, :show, :new, :destroy]

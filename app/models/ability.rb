@@ -120,7 +120,6 @@ class Ability
       can :update, Secretary
       can :change_password, Secretary #, :id => user.id #Only himself
       can :destroy, Secretary
-      can :pay_all_assistants, Secretary
       cannot :create, Student
       can :read, Student
       cannot :update, Student
@@ -241,6 +240,7 @@ class Ability
       can :notify_for_semester, AssistantRole
       can :request_evaluations_for_semester, AssistantRole
       can :print_report, AssistantRole
+      can :pay_all_assistants, AssistantFrequency
     end
     if user.is_a? Secretary or (user.is_a? User and user.super_professor?)
       can :create, AssistantRole

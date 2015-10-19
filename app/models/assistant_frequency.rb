@@ -12,6 +12,12 @@ class AssistantFrequency < ActiveRecord::Base
     assistant_role.professor
   end
 
+  def pay_if_present
+    if presence == true and payment != true
+      update_column(:payment, true)
+    end
+  end
+
   def self.current_frequencies
     AssistantFrequency.where assistant_role: (AssistantRole.for_semester Semester.current)
   end
@@ -50,8 +56,10 @@ class AssistantFrequency < ActiveRecord::Base
     end
   end
 
-  def pay_assistant_frequency_for_month
-    update_column(:payment, true)
+  def self.for_semester_and_month semester, month
+    requests_for_semester = RequestForTeachingAssistant.where(semester: semester)
+    roles_for_semester = AssistantRole.where(request_for_teaching_assistant: requests_for_semester)
+    where(assistant_role: roles_for_semester, month: month)
   end
 
 end

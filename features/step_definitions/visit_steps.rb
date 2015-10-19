@@ -66,6 +66,10 @@ Given(/^I visit the assistant roles page$/) do
   visit assistant_roles_path
 end
 
+Given(/^I visit the monthly control page for month (\d+)$/) do |month|
+  visit assistant_frequency_monthly_control_path(Semester.current, month)
+end
+
 Given(/^I visit my assistant roles page$/) do
   visit assistant_roles_for_professor_path(Professor.first.id)
 end

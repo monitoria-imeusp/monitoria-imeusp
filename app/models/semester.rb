@@ -13,7 +13,7 @@ class Semester < ActiveRecord::Base
   end
 
   def last_month
-    parity == 0 ? 11 : 6
+    parity == 0 ? 6 : 11
   end
 
   def parity_as_i

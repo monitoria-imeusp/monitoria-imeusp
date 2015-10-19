@@ -59,4 +59,13 @@ class AssistantFrequencyController < ApplicationController
     end
   end
 
+  def pay_all_assistants
+    semester = Semester.find params[:semester_id]
+    month = params[:month]
+    AssistantFrequency.for_semester_and_month(semester, month).each do |freq|
+      freq.pay_if_present
+    end
+    redirect_to assistant_frequency_monthly_control_path(semester, month)
+  end
+
 end
