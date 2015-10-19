@@ -1,7 +1,31 @@
 
 <h1>Controle de frequência</h1>
 
-<h3><%= month_name(@month) %> de <%= @semester.year %></h3>
+<div class="row" style="height:1em;"></div>
+
+<div class="dropdown">
+  <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">
+  <%= @semester.as_s %>
+    <span class="caret"></span>
+  </button>
+  <ul class="dropdown-menu">
+    <% Semester.all.reverse.each do |semester| %>
+      <li><%= link_to semester.as_s, assistant_frequency_monthly_control_path(semester, @month)%></li>
+    <% end %>
+  </ul>
+</div>
+
+<div class="row" style="height:1em;"></div>
+
+<ul class="nav nav-tabs">
+  <% for i in 0..3 do %>
+    <% if i == Semester.month_to_period(@month) %>
+      <li class="active"><a><%= month_name(@month) %></a></li>
+    <% else %>
+      <li><%= link_to month_name(@semester.months[i]), assistant_frequency_monthly_control_path(@semester, @semester.months[i]) %></li>
+    <% end %>
+  <% end %>
+</ul>
 
 <table class="table table-hover">
   <thead>
@@ -22,6 +46,11 @@
           <% if role.active %>
             <% status = role.frequency_status_for_month(@month) %>
             <% if secretary_signed_in? %>
+              <% css = "text-center" %>
+              <% if status == "Pendente" then css += " text-danger" end %>
+              <p class="<%= css %>">
+                <%= status %>
+              </p>
             <% else # assume professor because of cancan %>
               <% if status == "Pendente" %>
                 <div class="col-sm-12 col-lg-6 text-center">

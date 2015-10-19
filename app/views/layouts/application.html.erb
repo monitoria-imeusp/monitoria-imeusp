@@ -113,6 +113,9 @@
                 <%= link_to "Pedidos de monitoria", request_for_teaching_assistants_path %>
               </li>
               <li>
+                <%= link_to "Controle de frequência", assistant_frequency_monthly_control_path(Semester.current, Time.now.month) %>
+              </li>
+              <li>
                 <%= link_to "Monitores eleitos", assistant_roles_path %>
               </li>
               <li>
@@ -145,16 +148,16 @@
                     <h3>Comissão de monitoria</h3>
                     <ul class="nav nav-pills nav-stacked">
                       <li>
-                        <%= link_to "Cadastrar disciplina", new_course_path %>
-                      </li>
-                      <li>
-                         <%= link_to "Candidaturas", candidatures_path %>
+                        <%= link_to "Controle de frequência", assistant_frequency_monthly_control_path(Semester.current, Time.now.month) %>
                       </li>
                       <li>
                         <%= link_to "Monitores eleitos", assistant_roles_path %>
                       </li>
                       <li>
-                        <%= link_to "Controle de frequência", assistant_frequency_monthly_control_path(Semester.current, Time.now.month) %>
+                        <%= link_to "Cadastrar disciplina", new_course_path %>
+                      </li>
+                      <li>
+                         <%= link_to "Candidaturas", candidatures_path %>
                       </li>
                       <li>
                         <%= link_to "Usuários", users_path %>
