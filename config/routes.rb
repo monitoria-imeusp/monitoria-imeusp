@@ -64,7 +64,9 @@ Rails.application.routes.draw do
   #resources :dumps
   get 'dumps/' => 'dumps#index', as: :dumps
 
+  get 'assistant_frequency/monthly_control/:semester_id/:month' => 'assistant_frequency#monthly_control', as: :assistant_frequency_monthly_control
   post 'assistant_frequency/request_frequency/' => 'assistant_frequency#request_frequency', as: :request_frequency
+  post 'assistant_frequency/mark_generic_assistant_role_frequency/' => 'assistant_frequency#mark_generic_assistant_role_frequency', as: :mark_generic_assistant_role_frequency
   post 'assistant_frequency/mark_assistant_role_frequency/' => 'assistant_frequency#mark_assistant_role_frequency', as: :mark_assistant_role_frequency
 
   resources :semesters

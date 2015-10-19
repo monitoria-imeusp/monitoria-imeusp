@@ -154,6 +154,9 @@
                         <%= link_to "Monitores eleitos", assistant_roles_path %>
                       </li>
                       <li>
+                        <%= link_to "Controle de frequência", assistant_frequency_monthly_control_path(Semester.current, Time.now.month) %>
+                      </li>
+                      <li>
                         <%= link_to "Usuários", users_path %>
                       </li>
                     </ul>

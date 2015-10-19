@@ -63,6 +63,30 @@ class AssistantRole < ActiveRecord::Base
     end
   end
 
+  def frequency_status_for_period period
+    found = false
+    assistant_frequency.each do |freq|
+      if freq.semester.months[period] == freq.month
+        found = true
+        if freq.presence
+          if freq.payment
+            return "Pago"
+          end
+          return "Presente"
+        else
+          return "Ausente"
+        end        
+      end
+    end
+    if !found
+      if active and semester.frequency_open?(period)
+        return "Pendente"
+      else
+        return "---"
+      end
+    end
+  end
+
   def frequency_status_for_month_as_number month
     found = false
     assistant_frequency.each do |freq|
