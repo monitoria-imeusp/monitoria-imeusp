@@ -248,7 +248,6 @@ class Ability
       can :destroy, AssistantRole
       can :monthly_control, AssistantFrequency
       can :deactivate_assistant_role, AssistantRole
-      can :mark_assistant_role_frequency, AssistantFrequency
       can :mark_generic_assistant_role_frequency, AssistantFrequency
       can :update, AssistantFrequency
       can :create, AssistantFrequency
@@ -256,9 +255,10 @@ class Ability
     end
     if user.is_a? User and user.professor?
       can :index_for_professor, AssistantRole
-      can :update, AssistantFrequency
-      can :create, AssistantFrequency
-      can :read, AssistantFrequency
+      can :mark_assistant_role_frequency, AssistantFrequency
+      if user.super_professor?
+        can :mark_generic_assistant_role_frequency, AssistantFrequency
+      end
     end
 
     if user.is_a? User and user.student?

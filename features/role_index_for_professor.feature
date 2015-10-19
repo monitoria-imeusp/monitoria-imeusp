@@ -52,16 +52,16 @@ Feature: Assistant roles table visualization
 
     Scenario: Professor marks frequency
         Given it's currently month 5
-        And I'm logged in as professor "Gold"
         And month 5 of semester 1/2014 is open for frequency
+        And I'm logged in as professor "Gold"
         And I visit my assistant roles page
-        And I press the first "Presente" button
+        When I press the first "Presente" button
         Then I should see "John Monitor ativo de MAC0431 Março: --- Abril: Ausente Maio: Presente Junho: --- Avaliar"
-        Then I should see "Wil Monitor ativo de MAC0431 Março: Presente Abril: Presente Maio: Junho: --- Avaliar"
-        Then I should see "Alfredo Monitor desativado de MAC0431 Desativado Avaliar"
+        And I should see "Wil Monitor ativo de MAC0431 Março: Presente Abril: Presente Maio: Junho: --- Avaliar"
+        And I should see "Alfredo Monitor desativado de MAC0431 Desativado Avaliar"
         And I press the first "Ausente" button
-        Then I should see "John Monitor ativo de MAC0431 Março: --- Abril: Ausente Maio: Presente Junho: --- Avaliar"
-        Then I should see "Wil Monitor ativo de MAC0431 Março: Presente Abril: Presente Maio: Ausente Junho: --- Avaliar"
-        Then I should see "Alfredo Monitor desativado de MAC0431 Desativado Avaliar"
-        Then I'm back to current time
+        And I should see "John Monitor ativo de MAC0431 Março: --- Abril: Ausente Maio: Presente Junho: --- Avaliar"
+        And I should see "Wil Monitor ativo de MAC0431 Março: Presente Abril: Presente Maio: Ausente Junho: --- Avaliar"
+        And I should see "Alfredo Monitor desativado de MAC0431 Desativado Avaliar"
+        And I'm back to current time
 

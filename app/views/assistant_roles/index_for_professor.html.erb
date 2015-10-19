@@ -32,10 +32,10 @@
                       <% color = "black" %>
                       <% if status == "Pendente" %>
                         <div class="col-sm-12 col-lg-6 text-center">
-                          <%= button_to "Presente", { controller: "assistant_frequency", action: "mark_assistant_role_frequency", role: role.id, month: month, presence: true, pid: role.professor.id, redirect_to_index: "for_professor"}, method: :post, class: "btn btn-primary btn-xs", data: { confirm: 'Deseja mesmo marcar presença para este monitor?' } %>
+                          <%= button_to "Presente", { controller: "assistant_frequency", action: "mark_assistant_role_frequency", role: role.id, month: month, presence: true, pid: role.professor.id}, method: :post, class: "btn btn-primary btn-xs", data: { confirm: 'Deseja mesmo marcar presença para este monitor?' } %>
                         </div>
                         <div class="col-sm-12 col-lg-6 text-center">
-                          <%= button_to "Ausente", { controller: "assistant_frequency", action: "mark_assistant_role_frequency", role: role.id, month: month, presence: false, pid: role.professor.id, redirect_to_index: "for_professor"}, method: :post, class: "btn btn-primary btn-xs", data: { confirm: 'Deseja mesmo marcar ausência para este monitor?' }  %>
+                          <%= button_to "Ausente", { controller: "assistant_frequency", action: "mark_assistant_role_frequency", role: role.id, month: month, presence: false, pid: role.professor.id}, method: :post, class: "btn btn-primary btn-xs", data: { confirm: 'Deseja mesmo marcar ausência para este monitor?' }  %>
                         </div>
                       <% else %>
                         <% if status == "Presente"

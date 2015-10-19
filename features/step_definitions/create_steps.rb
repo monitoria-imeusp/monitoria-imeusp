@@ -104,6 +104,10 @@ When(/^there is a closed semester "(.*?)" "(.*?)"$/) do |year, parity|
   Semester.create(year: year, parity: parity, open: false, active: true)
 end
 
+When(/^there is a closed but active semester (\d+)\/(\d+)$/) do |year, parity|
+  Semester.create(year: year, parity: (parity.to_i-1), open: false, active: true)
+end
+
 When(/^there is an open semester "(.*?)" "(.*?)"$/) do |year, parity|
   Semester.create(year: year, parity: parity, open: true, active: true)
 end

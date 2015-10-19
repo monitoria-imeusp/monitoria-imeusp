@@ -5,6 +5,7 @@ Feature: Edit Professor
 
     Background:
         Given there is an admin user with email "kazuo@ime.usp.br" and password "admin123"
+        And there is a closed but active semester 2015/2
         And there is a professor with name "Bob" and password "prof-123" nusp "123456" department "MAC" and email "bob@bob.bob"
         And there is a department with code "MAE"
 
