@@ -3,13 +3,36 @@
 
 <div class="row" style="height:1em;"></div>
 
-<% if secretary_signed_in? and @semester.current? %>
-  <% unless Rails.env.production? %>
-    <%= button_link_to "Pedir avaliações dos professores", request_assistant_evaluations_for_semester_path(@semester), method: :post %>
+<div class="row">
+  <div class="col-sm-2">
+    <div class="dropdown">
+      <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">
+      <%= @semester.as_s %>
+        <span class="caret"></span>
+      </button>
+      <ul class="dropdown-menu">
+        <% Semester.all.reverse.each do |semester| %>
+          <li><%= link_to semester.as_s, assistant_roles_for_semester_path(semester)%></li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+  <% if secretary_signed_in? and @semester.current? %>
+    <div class="col-sm-2">
+      <%= button_link_to "Notificar monitores", notify_assistant_roles_for_semester_path(@semester), method: :post %>
+    </div>
+    <div class="col-sm-2">
+      <% unless Rails.env.production? %>
+        <%= button_link_to "Pedir avaliações dos professores", request_assistant_evaluations_for_semester_path(@semester), method: :post %>
+      <% end %>
+    </div>
+    <div class="col-sm-8"></div>
+  <% else %>
+    <div class="col-sm-10"></div>
   <% end %>
-  <%= button_link_to "Notificar monitores", notify_assistant_roles_for_semester_path(@semester), method: :post %>
-  <br><br>
-<% end %>
+</div>
+
+<div class="row" style="height:1em;"></div>
 
 <table id="roles_table" class="table table-hover">
   <thead>
