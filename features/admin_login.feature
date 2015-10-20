@@ -2,6 +2,9 @@ Feature: Login
     In order to manage the system
     As an administrator
     I want to login to the system
+    
+    Background:
+        Given there is a closed but active semester 2015/2
 
     Scenario: Valid credentials
         Given I'm at the login page

@@ -1,38 +1,38 @@
 
 <h1>Monitores eleitos para <%= @semester.as_s %></h1>
 
+<div class="row" style="height:1em;"></div>
 
-<% if secretary_signed_in? and @semester.current? %>
-  <% unless Rails.env.production? %>
-    <%= button_link_to "Pedir avaliações dos professores", request_assistant_evaluations_for_semester_path(@semester), method: :post %>
-  <% end %>
-  <%= button_link_to "Notificar monitores", notify_assistant_roles_for_semester_path(@semester), method: :post %>
-  <%= button_link_to "Pagar monitores" , pay_all_assistants_path, method: :post %>
-  <br><br>
-<% end %>
-
-<div class="biggerText">
-  Filtrar por mês:
-  <select id="month_select" onchange="update_month(this)">
-    <% @months.reverse.each do |month| %>
-      <option value=<%="#{month}"%>><%= "#{months_to_names[month]}"%></option>
-    <% end %>
-  </select>
-  Com status:
-  <select id="status_select" onchange="update_status(this)">
-    <option value="0">Todos</option>
-    <option value="1">Ausentes</option>
-    <option value="2">Pendentes</option>
-    <option value="3">Presentes</option>
-  </select>
-  <% if secretary_signed_in? or current_hiper_professor? %>
-    <input type="radio" name="disc" onchange="update_dep(this.value)" id="MAC" value="MAC"> MAC
-    <input type="radio" name="disc" onchange="update_dep(this.value)" id="MAE" value="MAE"> MAE
-    <input type="radio" name="disc" onchange="update_dep(this.value)" id="MAP" value="MAP"> MAP
-    <input type="radio" name="disc" onchange="update_dep(this.value)" id="MAT" value="MAT"> MAT
-    <input type="radio" name="disc" onchange="update_dep(this.value)" id="ALL" value="ALL" checked> Todas
+<div class="row">
+  <div class="col-sm-2">
+    <div class="dropdown">
+      <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">
+      <%= @semester.as_s %>
+        <span class="caret"></span>
+      </button>
+      <ul class="dropdown-menu">
+        <% Semester.all.reverse.each do |semester| %>
+          <li><%= link_to semester.as_s, assistant_roles_for_semester_path(semester)%></li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+  <% if secretary_signed_in? and @semester.current? %>
+    <div class="col-sm-2">
+      <%= button_link_to "Notificar monitores", notify_assistant_roles_for_semester_path(@semester), method: :post %>
+    </div>
+    <div class="col-sm-2">
+      <% unless Rails.env.production? %>
+        <%= button_link_to "Pedir avaliações dos professores", request_assistant_evaluations_for_semester_path(@semester), method: :post %>
+      <% end %>
+    </div>
+    <div class="col-sm-8"></div>
+  <% else %>
+    <div class="col-sm-10"></div>
   <% end %>
 </div>
+
+<div class="row" style="height:1em;"></div>
 
 <table id="roles_table" class="table table-hover">
   <thead>
@@ -40,15 +40,12 @@
       <th>Aluno(a)</th>
       <th>Disciplina</th>
       <th>Professor(a)</th>
-      <th></th>
-      <th></th>
-      <th></th>
+      <th colspan="3"></th>
     </tr>
   </thead>
-
   <tbody>
     <% @assistant_roles.each do |role| %>
-      <tr class="studentRow">
+      <tr>
         <td><%= role.student.name %></td>
         <td><%= role.request_for_teaching_assistant.course.course_code %></td>
         <td><%= role.request_for_teaching_assistant.professor.name %></td>
@@ -78,137 +75,6 @@
             <td></td>
         <% end %>
       </tr>
-      <tr>
-        <td colspan=6>
-          <table border=1 class="table">
-            <tbody>
-              <tr>
-                <% @months.each do |month| %>
-                  <td>
-                    <% status = role.frequency_status_for_month(month) %>
-                    <% color = "black" %>
-                    <%= "&nbsp;&bull;".html_safe %>
-                    <%= " #{months_to_names[month]}: " %>  
-                    <% if status == "Pendente" && !secretary_signed_in? %>
-                      <br>
-                      <%= content_tag :span, style: "" do -%>
-                        <%= button_link_to "Marcar presença", 
-                        mark_assistant_role_frequency_path(role: role.id, month: month, presence: true, pid: -1, redirect_to_index: "not_for_professor"), method: :post, data: { confirm: 'Deseja mesmo marcar presença para este monitor?' }  %>
-                      <% end -%>
-                      <br>
-                      <%= content_tag :span, style: "" do -%>
-                        <%= button_link_to "Marcar ausência",
-                        mark_assistant_role_frequency_path(role: role.id, month: month, presence: false, pid: -1, redirect_to_index: "not_for_professor"), method: :post, data: { confirm: 'Deseja mesmo marcar ausência para este monitor?' }  %>
-                      <% end -%>
-                    <% else %>
-                      <% if status == "Presente"
-                            color = "green"
-                         elsif status == "Ausente"
-                            color = "red"
-                         elsif status == "---"
-                            color = "gray"
-                         else
-                            color = "darkgoldenrod"
-                         end
-                      %>
-                      <%= content_tag :span, style: "color:#{color}" do -%>
-                        <%= status %>
-                      <% end -%>
-                    <% end %>    
-                  </td>
-                <% end %>
-              </tr>
-            </tbody>
-          </table>
-        </td>
-      </tr>
     <% end %>
   </tbody>
 </table>
-
-<script>
-var table = document.getElementById("roles_table");
-var roles_by_dep = {};
-var current_dep = "ALL";
-var current_month = <%="#{@months.length - 1}"%>;
-var current_status = 0;
-
-roles_by_dep["MAC"] = [];
-roles_by_dep["MAE"] = [];
-roles_by_dep["MAT"] = [];
-roles_by_dep["MAP"] = [];
-roles_by_dep["ALL"] = [];
-
-function add_role_to_list(i, freq_list) {
-    var row = table.rows[i];
-    var course_name = row.cells[1].innerHTML;
-    var freq_table = table.rows[i+1].cells[0].innerHTML;
-    var data = {student_name: row.cells[0].innerHTML, course: course_name, professor_name: row.cells[2].innerHTML, deactivate_button: row.cells[3].innerHTML, report_button: row.cells[4].innerHTML, certificate_button: row.cells[5].innerHTML, freq: freq_table, freq_by_month: freq_list };
-    roles_by_dep[course_name.substring(0, 3)].push(data);
-    roles_by_dep["ALL"].push(data);
-}
-
-<% j = 1 %>
-<% @assistant_roles.each do |role|%>
-  var freq_list = [];
-  <% @months.each do |month| %>
-    status = <%= role.frequency_status_for_month_as_number(month) %>;
-    freq_list[<%="#{month}"%>] = status;
-  <% end %>
-  add_role_to_list(<%= j %>, freq_list);
-  <% j = j + 2 %>   
-<% end %>
-
-document.getElementById("month_select").selectedIndex = 0;
-document.getElementById("status_select").selectedIndex = 0;
-document.getElementById("ALL").checked = true;
-update_table();
-
-function update_table() {
-
-  for (var i = 1; i < table.rows.length; i++) {
-    for (var j = 0; j < table.rows[i].cells.length; j++) {
-      table.rows[i].cells[j].innerHTML = "";
-    }
-  }
-
-  var j = 1;
-
-  for (var i = 0; i < roles_by_dep[current_dep].length; i++) {
-    if (current_status == 0 || (roles_by_dep[current_dep][i].freq_by_month[current_month] == current_status)) {
-      table.rows[j].cells[0].innerHTML = roles_by_dep[current_dep][i].student_name;
-      table.rows[j].cells[1].innerHTML = roles_by_dep[current_dep][i].course;
-      table.rows[j].cells[2].innerHTML = roles_by_dep[current_dep][i].professor_name;
-      table.rows[j].cells[3].innerHTML = roles_by_dep[current_dep][i].deactivate_button;
-      table.rows[j].cells[4].innerHTML = roles_by_dep[current_dep][i].report_button;
-      table.rows[j].cells[5].innerHTML = roles_by_dep[current_dep][i].certificate_button;
-      table.rows[j+1].cells[0].innerHTML = roles_by_dep[current_dep][i].freq;
-      j += 2;
-    }
-  }
-}
-
-function update_dep(dep) {
-  current_dep = dep;
-  update_table();
-}
-
-function update_status(select) {
-  current_status = select.selectedIndex;
-  update_table();
-}
-
-function update_month(select) {
-  current_month = select.options[select.selectedIndex].value;
-  update_table();
-}
-
-function sort_by_key(array, key) {
-  return array.sort(function(a, b) {
-      var x = a[key]; var y = b[key];
-      return ((x < y) ? -1 : ((x > y) ? 1 : 0));
-  });
-}
-
-
-</script>

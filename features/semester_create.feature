@@ -15,7 +15,7 @@ Feature: Semester creation
         And I press the "Entrar" button
         And I click the "Gerenciar semestres" link
         And I press the "Adicionar semestre" button
-        Then I should see "2015/1"
+        Then I should see "2014/2"
 
     Scenario: Professor can't create a semester
         And there is a professor with name "Bob" and password "prof-123" nusp "123" department "MAC" and email "bob@bob.bob"
@@ -31,4 +31,4 @@ Feature: Semester creation
         And I press the "Entrar" button
         And I click the "Gerenciar semestres" link
         And I press the "Adicionar semestre" button
-        Then I should see "2015/1"
+        Then I should see "2014/2"

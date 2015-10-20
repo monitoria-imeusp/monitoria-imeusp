@@ -2,10 +2,11 @@
 
 FactoryGirl.define do
   factory :semester do
-    id      1
-    year    2014
-    parity  1
-    open    true
-    active  true
+    id                1
+    year              2014
+    parity            1
+    open              true
+    active            true
+    frequency_period  0
   end
 end

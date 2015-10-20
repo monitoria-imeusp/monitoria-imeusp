@@ -2,6 +2,9 @@ Feature: Secretary creation
     In order to create a secretary
     As an admin
     I want to create a secretary
+    
+    Background:
+        Given there is a closed but active semester 2015/2
 
     Scenario: Admin creating a secretary
         Given I'm at the login page

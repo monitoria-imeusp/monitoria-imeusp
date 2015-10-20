@@ -60,7 +60,7 @@ Feature: Candidature table visualization
     Scenario: Student seeing candidatures
         Given I'm logged in as student "Rogerio"
         And I click the "Minhas candidaturas" link
-		Then I should see "2014/2"
+		Then I should see "2014/1"
         And I should see "MAT0111 - Cálculo I"
         And I should see "MAE0438 - Estatística Concorrente"
         And I should not see "MAC0110 - Introdução à Ciência da Computação"

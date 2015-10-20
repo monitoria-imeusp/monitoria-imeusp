@@ -37,5 +37,10 @@ module ApplicationHelper
     link_to name, options, {class: "btn btn-primary"}.merge((html_options or {}))
   end
 
+  def month_name month
+    ["", "Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho",
+     "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"][month]
+  end
+
 end
 

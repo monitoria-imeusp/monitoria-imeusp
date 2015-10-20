@@ -73,13 +73,6 @@ class SecretariesController < ApplicationController
     end
   end
 
-  def pay_all_assistants
-    AssistantFrequency.where(month: Time.now.month-1).each do |freq|
-      freq.pay_assistant_frequency_for_month
-    end
-    redirect_to assistant_roles_path
-  end
-
 
   private
   # Use callbacks to share common setup or constraints between actions.

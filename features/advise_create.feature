@@ -2,6 +2,9 @@ Feature: Adding new messages
 	In order to post new messages
 	As a secretary
 	I want to write new messages
+    
+  Background:
+      Given there is a closed but active semester 2015/2
 
 	Scenario: Secretary creating an advise
 		Given I'm logged in as a secretary

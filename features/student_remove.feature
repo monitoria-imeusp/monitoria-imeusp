@@ -2,9 +2,10 @@ Feature: delete a student
 	In order to delete a student
 	As an admin or as a secretary
 	I want to delete a student
-
+    
     Background:
-        Given there is a student with name "carlinhos" with nusp "123456" and email "eu@usp.br"
+        Given there is a closed but active semester 2015/2
+        And there is a student with name "carlinhos" with nusp "123456" and email "eu@usp.br"
 
 
     Scenario: Admin deletes a student

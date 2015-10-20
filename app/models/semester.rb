@@ -13,7 +13,7 @@ class Semester < ActiveRecord::Base
   end
 
   def last_month
-    parity == 0 ? 11 : 6
+    parity == 0 ? 6 : 11
   end
 
   def parity_as_i
@@ -46,6 +46,32 @@ class Semester < ActiveRecord::Base
 
   def current?
     self == Semester.current
+  end
+
+  def open_frequency_period which
+    update(frequency_period: frequency_period | (1 << which))
+  end
+
+  def close_frequency_period which
+    update(frequency_period: frequency_period & ~(1 << which))
+  end
+
+  def frequency_open? which
+    (frequency_period & (1 << which)) != 0
+  end
+
+  def months
+    if parity == 0
+      [3, 4, 5, 6]
+    else
+      [8, 9, 10, 11]
+    end
+  end
+
+  def self.month_to_period month
+    [-1, -1, -1,
+      0, 1, 2, 3, -1,
+      0, 1, 2, 3, -1][month]
   end
 
   def self.all_open

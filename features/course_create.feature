@@ -2,6 +2,9 @@ Feature: Course creation
     In order to create a course
     As a superprofessor or admin
     I want to create a course
+    
+    Background:
+        Given there is a closed but active semester 2015/2
 
     @javascript
     Scenario: Admin creating a course

@@ -55,13 +55,13 @@ describe AssistantFrequencyController do
     
     context "when marking absence" do
       before :each do
-        @params = { "presence" => "false", "month" => "5", "role" => assistant_role.id.to_s, "pid" => "-2", "redirect_to_index" => "not_for_professor"}
+        @params = { "presence" => "false", "month" => "5", "role" => assistant_role.id.to_s, "pid" => "2"}
         post 'mark_assistant_role_frequency', @params
       end
       
       context "when redirected" do
         subject { response }
-        it { expect(subject).to redirect_to('/assistant_roles') }
+        it { expect(subject).to redirect_to('/assistant_roles/for_professor/2') }
       end
 
       context "with correct attributes" do

@@ -4,7 +4,8 @@ Feature: Forgot the password secretary
     I want to see the message that an email was sent
 
     Background:
-        Given I'm at the secretary login page
+        Given there is a closed but active semester 2015/2
+        And I'm at the secretary login page
         And there is a secretary with name "secretaria" and password "12345678" nusp "1111111" and email "secretaria@ime.usp.br"
         And I click the "Esqueceu sua senha?" link
 
