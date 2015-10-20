@@ -18,6 +18,30 @@ class AssistantFrequency < ActiveRecord::Base
     end
   end
 
+  def self.FILTER_ALL
+    0
+  end
+
+  def self.FILTER_PENDING
+    1
+  end
+
+  def self.FILTER_PRESENT
+    2
+  end
+
+  def self.FILTER_ABSENT
+    3
+  end
+
+  def self.FILTER_PAID
+    4
+  end
+
+  def self.FILTERS
+    ["Todo", "Pendente", "Presente", "Ausente", "Pago"]
+  end
+
   def self.current_frequencies
     AssistantFrequency.where assistant_role: (AssistantRole.for_semester Semester.current)
   end
