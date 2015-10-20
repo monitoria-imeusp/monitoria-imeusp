@@ -3,27 +3,28 @@
 
 <div class="row" style="height:1em;"></div>
 
-<div class="dropdown">
-  <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">
-  <%= @semester.as_s %>
-    <span class="caret"></span>
-  </button>
-  <ul class="dropdown-menu">
-    <% Semester.all.reverse.each do |semester| %>
-      <li><%= link_to semester.as_s, assistant_frequency_monthly_control_path(semester, @month)%></li>
+<div class="row">
+  <div class="col-sm-2">
+    <div class="dropdown">
+      <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">
+      <%= @semester.as_s %>
+        <span class="caret"></span>
+      </button>
+      <ul class="dropdown-menu">
+        <% Semester.all.reverse.each do |semester| %>
+          <li><%= link_to semester.as_s, assistant_frequency_monthly_control_path(semester, @month)%></li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+  <div class="col-sm-2">
+    <% if secretary_signed_in? and @semester.current? %>
+      <%= button_link_to "Pagar monitores" , pay_all_assistants_path(@semester, @month), method: :post %>
+      <br><br>
     <% end %>
-  </ul>
+  </div>
+  <div class="col-sm-8"></div>
 </div>
-
-<div class="row" style="height:1em;"></div>
-
-<% if secretary_signed_in? and @semester.current? %>
-  <% unless Rails.env.production? %>
-    <%= button_link_to "Pedir avaliações dos professores", request_assistant_evaluations_for_semester_path(@semester), method: :post %>
-  <% end %>
-  <%= button_link_to "Pagar monitores" , pay_all_assistants_path(@semester, @month), method: :post %>
-  <br><br>
-<% end %>
 
 <div class="row" style="height:1em;"></div>
 
