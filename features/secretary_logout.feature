@@ -2,6 +2,9 @@ Feature: Secretary logout
     In order to leave the system
     As an secretary
     I want to logout of the system
+    
+    Background:
+        Given there is a closed but active semester 2015/2
 
     Scenario: Successful Logout
         Given I'm at the secretary login page

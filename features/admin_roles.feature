@@ -2,6 +2,9 @@ Feature: Accessing the page
     In order to create new professors
     As an administrator
     I want to access the create professors page
+    
+    Background:
+        Given there is a closed but active semester 2015/2
 
     Scenario: Verify if non-admins can't create a professors
         Given I'm at the create_professors page

@@ -1,0 +1,94 @@
+
+<h1>Controle de frequência</h1>
+
+<div class="row" style="height:1em;"></div>
+
+<div class="row">
+  <div class="col-sm-2">
+    <div class="dropdown">
+      <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">
+      <%= @semester.as_s %>
+        <span class="caret"></span>
+      </button>
+      <ul class="dropdown-menu">
+        <% Semester.all.reverse.each do |semester| %>
+          <li><%= link_to semester.as_s, assistant_frequency_monthly_control_path(semester, @month)%></li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+  <div class="col-sm-2">
+    <% if secretary_signed_in? and @semester.current? %>
+      <%= button_link_to "Pagar monitores" , pay_all_assistants_path(@semester, @month), method: :post %>
+    <% end %>
+  </div>
+  <div class="col-sm-2">
+    <% if secretary_signed_in? and @semester.current? %>
+      <% if @semester.frequency_open?(Semester.month_to_period @month) %>
+        <%= button_link_to "Fechar período de frequência" , close_frequency_period_path(@semester, @month), method: :post %>
+      <% else %>
+        <%= button_link_to "Abrir período de frequência" , open_frequency_period_path(@semester, @month), method: :post %>
+      <% end %>
+    <% end %>
+  </div>
+  <div class="col-sm-6"></div>
+</div>
+
+<div class="row" style="height:1em;"></div>
+
+<ul class="nav nav-tabs">
+  <% for i in 0..3 do %>
+    <% if i == Semester.month_to_period(@month) %>
+      <li class="active"><a><%= month_name(@month) %></a></li>
+    <% else %>
+      <li><%= link_to month_name(@semester.months[i]), assistant_frequency_monthly_control_path(@semester, @semester.months[i]) %></li>
+    <% end %>
+  <% end %>
+</ul>
+
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th>Monitor(a)</th>
+      <th>Disciplina</th>
+      <th>Professor(a)</th>
+      <th>Presença</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @assistant_roles.each do |role| %>
+      <tr>
+        <td><%= role.student.name %></td>
+        <td><%= role.request_for_teaching_assistant.course.course_code %></td>
+        <td><%= role.request_for_teaching_assistant.professor.name %></td>
+        <td>
+          <% if role.active %>
+            <% status = role.frequency_status_for_month(@month) %>
+            <% if secretary_signed_in? %>
+              <% css = "text-center" %>
+              <% if status == "Pendente" then css += " text-danger" end %>
+              <p class="<%= css %>">
+                <%= status %>
+              </p>
+            <% else # assume professor because of cancan %>
+              <% if status == "Pendente" %>
+                <div class="col-sm-12 col-lg-6 text-center">
+                  <%= button_to "Presente", { controller: "assistant_frequency", action: "mark_generic_assistant_role_frequency", role: role.id, month: @month, presence: true, pid: role.professor.id}, method: :post, class: "btn btn-primary btn-xs", data: { confirm: 'Deseja mesmo marcar presença para este monitor?' } %>
+                </div>
+                <div class="col-sm-12 col-lg-6 text-center">
+                  <%= button_to "Ausente", { controller: "assistant_frequency", action: "mark_generic_assistant_role_frequency", role: role.id, month: @month, presence: false, pid: role.professor.id}, method: :post, class: "btn btn-primary btn-xs", data: { confirm: 'Deseja mesmo marcar ausência para este monitor?' }  %>
+                </div>
+              <% else %>
+                <%= content_tag :span, class: "text-center" do -%>
+                  <%= status %>
+                <% end %>
+              <% end %>
+            <% end %>
+          <% else %>
+            Desativado
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

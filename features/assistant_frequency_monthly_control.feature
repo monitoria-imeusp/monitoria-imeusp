@@ -1,7 +1,7 @@
-Feature: Assistant roles table visualization
-    In order to manage the assistant roles
+Feature: Assistant frequency monthly control
+    In order to manage assistant's roles
     As a superprofessor or secretary
-    I want to see the list of all assistant roles
+    I want to control the monthly frequency of assistants
 
     Background:
         When there is an open semester "2014" "1"
@@ -42,10 +42,10 @@ Feature: Assistant roles table visualization
         And there is an assistant frequency with month "3" with presence "false" for student "Mary" and professor "Silver" at course "MAT0125"
         And there is an assistant frequency with month "4" with presence "true" for student "Alfredo" and professor "Gold" at course "MAC0431"
 
-    Scenario: Super professor sees his department assistant roles
+    Scenario: Super professor sees his department assistants
         Given it's currently month 5
         Given I'm logged in as a super professor
-        And I visit the assistant roles page
+        And I visit the monthly control page for month 5
         Then I should see "Bob"
         And I should see "Dude"
         And I should see "MAC0110"
@@ -61,7 +61,7 @@ Feature: Assistant roles table visualization
     Scenario: Secretary sees all assistant roles
         Given it's currently month 5
         Given I'm logged in as a secretary
-        And I visit the assistant roles page
+        And I visit the monthly control page for month 5
         Then I should see "Bob"
         And I should see "Dude"
         And I should see "MAC0110"
@@ -77,7 +77,7 @@ Feature: Assistant roles table visualization
     Scenario: Hiperprofessor sees all assistant roles
         Given it's currently month 5
         Given I'm logged in as professor "Zara"
-        And I visit the assistant roles page
+        And I visit the monthly control page for month 5
         Then I should see "Bob"
         And I should see "Dude"
         And I should see "Mary"
@@ -91,17 +91,121 @@ Feature: Assistant roles table visualization
 
     Scenario: Common professor cannot see all assistant roles
         Given I'm logged in as a professor
-        And I visit the assistant roles page
+        And I visit the monthly control page for month 5
         Then I should see "ACESSO NEGADO"
 
-
-    Scenario: Secretary requests assistant evaluations
-        Given I'm ready to receive email
+    Scenario: Secretary sees the correct frequencies in March
+        Given it's currently month 5
         Given I'm logged in as a secretary
-        And I visit the assistant roles page
-        And I click the "Pedir avaliações dos professores" link
-        Then the assistant evaluation reminder email for semester "1" of year "2014" should have been delivered properly to "prof@ime.usp.br"
-        And the assistant evaluation reminder email for semester "1" of year "2014" should have been delivered properly to "golddev@ime.usp.br"
-        And the assistant evaluation reminder email for semester "1" of year "2014" should have been delivered properly to "silver@ime.usp.br"
-        And I should see "Solicitações enviadas aos professores"
+        And I visit the monthly control page for month 3
+        Then I should see "Bob MAC0110 Dude Ausente"
+        Then I should see "John MAC0431 Gold Presente"
+        Then I should see "Wil MAC0431 Gold Presente"
+        Then I should see "Mary MAT0125 Silver Ausente"
+        Then I should see "Jude MAC0431 Gold ---"
+        Then I should see "Alfredo MAC0431 Gold Desativado"
+        And I should not see "Setembro"
+        Then I'm back to current time
+
+    Scenario: Secretary sees the correct frequencies in April
+        Given it's currently month 5
+        Given I'm logged in as a secretary
+        And I visit the monthly control page for month 4
+        Then I should see "Bob MAC0110 Dude Presente"
+        Then I should see "John MAC0431 Gold Ausente"
+        Then I should see "Wil MAC0431 Gold Presente"
+        Then I should see "Mary MAT0125 Silver ---"
+        Then I should see "Jude MAC0431 Gold ---"
+        Then I should see "Alfredo MAC0431 Gold Desativado"
+        And I should not see "Setembro"
+        Then I'm back to current time
+
+
+    Scenario: Secretary sees the correct frequencies in May
+        Given it's currently month 5
+        And month 5 of semester 1/2014 is open for frequency
+        And I'm logged in as a secretary
+        And I visit the monthly control page for month 5
+        Then I should see "Bob MAC0110 Dude Presente"
+        Then I should see "John MAC0431 Gold Pendente"
+        Then I should see "Wil MAC0431 Gold Presente"
+        Then I should see "Mary MAT0125 Silver Pendente"
+        Then I should see "Jude MAC0431 Gold Pendente"
+        Then I should see "Alfredo MAC0431 Gold Desativado"
+        And I should not see "Setembro"
+        Then I'm back to current time
+
+    Scenario: Super professor sees the correct frequencies in March
+        Given it's currently month 5
+        And I'm logged in as a super professor
+        And I visit the monthly control page for month 3
+        Then I should see "Bob MAC0110 Dude Ausente"
+        Then I should see "John MAC0431 Gold Presente"
+        Then I should see "Wil MAC0431 Gold Presente"
+        Then I should see "Jude MAC0431 Gold ---"
+        Then I should see "Alfredo MAC0431 Gold Desativado"
+        And I should not see "Setembro"
+        Then I'm back to current time
+
+    Scenario: Super professor sees the correct frequencies in April
+        Given it's currently month 5
+        And I'm logged in as a super professor
+        And I visit the monthly control page for month 4
+        Then I should see "Bob MAC0110 Dude Presente"
+        Then I should see "John MAC0431 Gold Ausente"
+        Then I should see "Wil MAC0431 Gold Presente"
+        Then I should see "Jude MAC0431 Gold ---"
+        Then I should see "Alfredo MAC0431 Gold Desativado"
+        And I should not see "Setembro"
+        Then I'm back to current time
+
+    Scenario: Super professor sees the correct frequencies in May
+        Given it's currently month 5
+        And month 5 of semester 1/2014 is open for frequency
+        And I'm logged in as a super professor
+        And I visit the monthly control page for month 5
+        Then I should see "Bob MAC0110 Dude Presente"
+        Then I should see "John MAC0431 Gold"
+        Then I should not see "John MAC0431 Gold Ausente"
+        Then I should see "Wil MAC0431 Gold Presente"
+        Then I should see "Jude MAC0431 Gold"
+        Then I should not see "Jude MAC0431 Gold Presente"
+        Then I should see "Alfredo MAC0431 Gold Desativado"
+        And I should not see "Setembro"
+        Then I'm back to current time
+
+    Scenario: Super professor marks frequency
+        Given it's currently month 5
+        And month 5 of semester 1/2014 is open for frequency
+        And I'm logged in as a super professor
+        And I visit the monthly control page for month 5
+        And I press the first "Presente" button
+        Then I should see "Bob MAC0110 Dude Presente"
+        Then I should see "John MAC0431 Gold Presente"
+        Then I should see "Wil MAC0431 Gold Presente"
+        Then I should see "Jude MAC0431 Gold"
+        Then I should not see "Jude MAC0431 Gold Presente"
+        Then I should see "Alfredo MAC0431 Gold Desativado"
+        And I press the first "Ausente" button
+        Then I should see "Bob MAC0110 Dude Presente"
+        Then I should see "John MAC0431 Gold Presente"
+        Then I should see "Wil MAC0431 Gold Presente"
+        Then I should see "Jude MAC0431 Gold Ausente"
+        Then I should see "Alfredo MAC0431 Gold Desativado"
+        And I should not see "Setembro"
+        Then I'm back to current time
+
+    Scenario: Secretary pays assistant roles for last month
+        Given it's currently month 5
+        Given I'm logged in as a secretary
+        And I visit the monthly control page for month 5
+        And I click the "Pagar monitores" link
+        Then I should see "Bob MAC0110 Dude Pago"
+        Then I should see "John MAC0431 Gold ---"
+        Then I should see "Wil MAC0431 Gold Pago"
+        Then I should see "Mary MAT0125 Silver ---"
+        Then I should see "Jude MAC0431 Gold ---"
+        Then I should see "Alfredo MAC0431 Gold Desativado"
+        And I should not see "Setembro"
+        Then I'm back to current time
         

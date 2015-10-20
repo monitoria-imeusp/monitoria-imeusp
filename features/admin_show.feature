@@ -3,8 +3,9 @@ Feature: Showing the admin
 	As admin
 	I want to see my account
 
-	Background:
-		Given there is an admin user with email "kazuo@ime.usp.br" and password "admin123"
+  Background:
+    Given there is an admin user with email "kazuo@ime.usp.br" and password "admin123"
+    And there is a closed but active semester 2015/2
 
 	Scenario: Admin seeing its own detailed information
 		When I'm at the system access page

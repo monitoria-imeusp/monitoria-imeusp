@@ -2,9 +2,10 @@ Feature: edit a student
 	In order to edit a student
 	As a student
 	I want to edit my profile
-
+    
     Background:
-		Given I'm at the user login page
+        Given there is a closed but active semester 2015/2
+		And I'm at the user login page
         And there is a student with name "carlinhos" with nusp "123456" and email "eu@usp.br"
         And there is a student with name "carlinhos2" with nusp "1234567" and email "eu2@usp.br"
         And I'm logged in as student "carlinhos"

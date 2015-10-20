@@ -4,7 +4,8 @@ Feature: User logging in
 	I want to see the appropriate first-access pages and links.
 
 	Background:
-        Given there is a student with name "carlinhos" with nusp "123456" and email "eu@usp.br"
+        Given there is a closed but active semester 2015/2
+        And there is a student with name "carlinhos" with nusp "123456" and email "eu@usp.br"
         And there is a department with code "MAC"
 
     Scenario: Professor logging in for the first time

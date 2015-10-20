@@ -120,7 +120,6 @@ class Ability
       can :update, Secretary
       can :change_password, Secretary #, :id => user.id #Only himself
       can :destroy, Secretary
-      can :pay_all_assistants, Secretary
       cannot :create, Student
       can :read, Student
       cannot :update, Student
@@ -241,13 +240,17 @@ class Ability
       can :notify_for_semester, AssistantRole
       can :request_evaluations_for_semester, AssistantRole
       can :print_report, AssistantRole
+      can :pay_all_assistants, AssistantFrequency
+      can :open_frequency_period, AssistantFrequency
+      can :close_frequency_period, AssistantFrequency
     end
     if user.is_a? Secretary or (user.is_a? User and user.super_professor?)
       can :create, AssistantRole
       can :update, AssistantRole
       can :destroy, AssistantRole
+      can :monthly_control, AssistantFrequency
       can :deactivate_assistant_role, AssistantRole
-      can :mark_assistant_role_frequency, AssistantFrequency
+      can :mark_generic_assistant_role_frequency, AssistantFrequency
       can :update, AssistantFrequency
       can :create, AssistantFrequency
       can :read, AssistantFrequency
@@ -255,15 +258,9 @@ class Ability
     if user.is_a? User and user.professor?
       can :index_for_professor, AssistantRole
       can :mark_assistant_role_frequency, AssistantFrequency
-      can :update, AssistantFrequency
-      can :create, AssistantFrequency
-      can :read, AssistantFrequency
-    end
-    if user.is_a? User and user.hiper_professor?
-      can :mark_assistant_role_frequency, AssistantFrequency
-      can :update, AssistantFrequency
-      can :create, AssistantFrequency
-      can :read, AssistantFrequency
+      if user.super_professor?
+        can :mark_generic_assistant_role_frequency, AssistantFrequency
+      end
     end
 
     if user.is_a? User and user.student?

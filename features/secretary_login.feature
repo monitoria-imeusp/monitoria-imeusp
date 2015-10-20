@@ -3,6 +3,9 @@ Feature: Login Secretary
     As an secretary
     I want to login to the system
 
+    Background:
+        Given there is a closed but active semester 2015/2
+        
     Scenario: Valid credentials
         Given I'm at the secretary login page
         And there is a secretary with name "secretaria" and password "12345678" nusp "1111111" and email "secretaria@ime.usp.br"

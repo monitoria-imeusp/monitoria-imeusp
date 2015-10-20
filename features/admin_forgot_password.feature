@@ -2,6 +2,9 @@ Feature: Forgot the password
     In order to test the forgot your password
     As an administrator
     I want to see the message that an email was sent
+    
+    Background:
+        Given there is a closed but active semester 2015/2
 
     Scenario: Clicking forgot password
         Given I'm at the login page

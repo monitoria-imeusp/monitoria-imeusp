@@ -2,6 +2,9 @@ Feature: Invalid login
     In order to test the login
     As an administrator
     I want to fail the login
+    
+    Background:
+        Given there is a closed but active semester 2015/2
 
     Scenario: Invalid email
         Given I'm at the login page

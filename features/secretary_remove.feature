@@ -2,9 +2,10 @@ Feature: Secretary remove
     In order to delete a secretary
     As an admin
     I want to delete a secretary
-
+    
     Background:
-        Given there is a secretary with name "Marcia" and password "12345678" nusp "1111111" and email "marcia@ime.usp.br"
+        Given there is a closed but active semester 2015/2
+        And there is a secretary with name "Marcia" and password "12345678" nusp "1111111" and email "marcia@ime.usp.br"
 
     Scenario: Admin removing a secretary
     	Given I'm at the login page

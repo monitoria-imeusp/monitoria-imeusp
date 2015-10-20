@@ -47,6 +47,19 @@ class User < ActiveRecord::Base
     query.any? and query.take.hiper_professor?
   end
 
+  def should_see_role role
+    professor do |prof|
+      if prof.super_professor? and role.course.dep_code == prof.dep_code
+        # Membros da comissão de monitoria vêm monitores do seu departamento inteiro
+        return true
+      elsif role.request_for_teaching_assistant.professor == prof
+        # Professores normais vêem apenas seus próprios monitores
+        return true
+      end
+    end
+    return false
+  end
+
   def self.from_omniauth auth
     registered = where nusp: auth.info.nusp
     if registered.any?

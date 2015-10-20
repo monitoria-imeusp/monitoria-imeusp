@@ -3,6 +3,9 @@ Feature: Course edit
     As a superprofessor or admin
     I want to edit a course
 
+    Background:
+        Given there is a closed but active semester 2015/2
+
     Scenario: Admin editing a course
     	Given I'm at the login page
         And there is an admin user with email "kazuo@ime.usp.br" and password "admin123"

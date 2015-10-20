@@ -3,6 +3,9 @@ Feature: Course deletion
 	As a superprofessor or admin
     I want to remove a course
 
+    Background:
+        Given there is a closed but active semester 2015/2
+
     Scenario: Admin removing a course
     	Given I'm at the login page
         And there is a department with code "MAC"
