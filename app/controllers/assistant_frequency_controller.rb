@@ -5,8 +5,15 @@ class AssistantFrequencyController < ApplicationController
   def monthly_control
     @semester = Semester.find params[:semester_id]
     @month = params[:month].to_i
-    @assistant_roles = AssistantRole.for_semester @semester
-    unless current_hiper_professor? or secretary_signed_in?
+    if current_hiper_professor? or secretary_signed_in?
+      if params[:department_id].present?
+        @department = Department.find params[:department_id]
+        @assistant_roles = AssistantRole.for_department_and_semester @department, @semester
+      else
+        @assistant_roles = AssistantRole.for_semester @semester
+      end
+    else
+      @assistant_roles = AssistantRole.for_semester @semester
       @assistant_roles = @assistant_roles.map { |x| x }.keep_if do |role|
         @current_user.should_see_role role
       end

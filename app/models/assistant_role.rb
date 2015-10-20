@@ -39,6 +39,12 @@ class AssistantRole < ActiveRecord::Base
     end
   end
 
+  def self.for_department_and_semester department, semester
+    (where request_for_teaching_assistant: (RequestForTeachingAssistant.where course: (Course.where department: department))).sort do |role1, role2|
+      role1.student.name <=> role2.student.name
+    end
+  end
+
   def frequency_status_for_month month
     found = false
     assistant_frequency.each do |freq|
