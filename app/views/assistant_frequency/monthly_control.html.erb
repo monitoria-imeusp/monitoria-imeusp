@@ -22,7 +22,16 @@
       <%= button_link_to "Pagar monitores" , pay_all_assistants_path(@semester, @month), method: :post %>
     <% end %>
   </div>
-  <div class="col-sm-8"></div>
+  <div class="col-sm-2">
+    <% if secretary_signed_in? and @semester.current? %>
+      <% if @semester.frequency_open?(Semester.month_to_period @month) %>
+        <%= button_link_to "Fechar período de frequência" , close_frequency_period_path(@semester, @month), method: :post %>
+      <% else %>
+        <%= button_link_to "Abrir período de frequência" , open_frequency_period_path(@semester, @month), method: :post %>
+      <% end %>
+    <% end %>
+  </div>
+  <div class="col-sm-6"></div>
 </div>
 
 <div class="row" style="height:1em;"></div>

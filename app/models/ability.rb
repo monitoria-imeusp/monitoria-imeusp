@@ -241,6 +241,8 @@ class Ability
       can :request_evaluations_for_semester, AssistantRole
       can :print_report, AssistantRole
       can :pay_all_assistants, AssistantFrequency
+      can :open_frequency_period, AssistantFrequency
+      can :close_frequency_period, AssistantFrequency
     end
     if user.is_a? Secretary or (user.is_a? User and user.super_professor?)
       can :create, AssistantRole
