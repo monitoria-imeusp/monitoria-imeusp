@@ -34,4 +34,11 @@ class Professor < ActiveRecord::Base
 	def hiper_professor?
 		return professor_rank == 2
   end
+
+  def currently_pending_frequencies
+    roles = AssistantRole.for_professor_and_semester self, Semester.current
+    roles.map { |x| x }.keep_if do |role|
+      (role.frequency_status_for_month Time.now.month) == "Pendente"
+    end
+  end
 end
