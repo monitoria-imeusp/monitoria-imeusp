@@ -64,7 +64,7 @@
           </div>
         </div>
         <div class="row text-center">
-          <% unless Rails.env.production? %>
+          <% if @semester.evaluation_period %>
             <% if role.assistant_evaluation %>
               <%= button_link_to "Mudar avaliação", edit_assistant_evaluation_path(role.assistant_evaluation), class: "btn btn-lg btn-primary" %>
             <% else %>
