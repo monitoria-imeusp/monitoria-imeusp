@@ -13,16 +13,19 @@ class AssistantEvaluationsController < ApplicationController
   def new
     @assistant_evaluation = AssistantEvaluation.new
     @assistant_evaluation.assistant_role = AssistantRole.find(params[:assistant_role_id])
+    check_evaluation_period
   end
 
   # GET /assistant_evaluations/1/edit
   def edit
+    check_evaluation_period
   end
 
   # POST /assistant_evaluations
   # POST /assistant_evaluations.json
   def create
     @assistant_evaluation = AssistantEvaluation.new(assistant_evaluation_params)
+    check_evaluation_period
 
     respond_to do |format|
       if @assistant_evaluation.save
@@ -38,6 +41,7 @@ class AssistantEvaluationsController < ApplicationController
   # PATCH/PUT /assistant_evaluations/1
   # PATCH/PUT /assistant_evaluations/1.json
   def update
+    check_evaluation_period
     respond_to do |format|
       if @assistant_evaluation.update(assistant_evaluation_params)
         format.html { redirect_to assistant_roles_for_professor_path(current_user.professor), notice: 'Avaliação atualizada com sucesso.' }
@@ -50,6 +54,11 @@ class AssistantEvaluationsController < ApplicationController
   end
 
   private
+
+    def check_evaluation_period
+      raise CanCan::AccessDenied.new unless @assistant_evaluation.assistant_role.semester.evaluation_period
+    end
+
     # Use callbacks to share common setup or constraints between actions.
     def set_assistant_evaluation
       @assistant_evaluation = AssistantEvaluation.find(params[:id])

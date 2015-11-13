@@ -17,29 +17,50 @@
     <tr>
       <th><%= t('activerecord.attributes.semester.name') %></th>
       <th><%= t('activerecord.attributes.semester.open') %></th>
-      <th colspan="1"></th>
+      <th><%= t('activerecord.attributes.semester.evaluation_period') %></th>
     </tr>
   </thead>
   <tbody>
     <% @semesters.each do |semester| %>
       <tr>
         <td><%= semester.year %>/<%= semester.parity_as_i %></td>
-        <td><%= semester.state_as_s %></td>
-        <% if semester.open %>
-          <td>
-            <%= button_link_to "Desativar", deactivate_semester_path(semester), :method => 'post' %>
-            <%= button_link_to "Fechar inscrições", close_semester_path(semester), :method => 'post' %>
-          </td>
-        <% elsif semester.active %>
-          <td>
-            <%= button_link_to "Desativar", deactivate_semester_path(semester), :method => 'post' %>
-            <%= button_link_to "Abrir inscrições", open_semester_path(semester), :method => 'post' %>
-          </td>
-        <% else %>
-          <td>
-            <%= button_link_to "Ativar", activate_semester_path(semester), :method => 'post' %>
-          </td>
-        <% end %>
+        <td>
+          <div class="row">
+            <div class="col-sm-3">
+              <%= semester.state_as_s %>
+            </div>
+            <div class="col-sm-9">
+              <% if semester.open %>
+                <%= small_button_link_to "Desativar", deactivate_semester_path(semester), :method => 'post' %>
+                <%= small_button_link_to "Fechar inscrições", close_semester_path(semester), :method => 'post' %>
+              <% elsif semester.active %>
+                <%= small_button_link_to "Desativar", deactivate_semester_path(semester), :method => 'post' %>
+                <%= small_button_link_to "Abrir inscrições", open_semester_path(semester), :method => 'post' %>
+              <% else %>
+                <%= small_button_link_to "Ativar", activate_semester_path(semester), :method => 'post' %>
+              <% end %>
+            </div>
+          </div>
+        </td>
+        <td>
+          <div class="row">
+            <% if semester.evaluation_period %>
+              <div class="col-sm-3">
+                Aberto
+              </div>            
+              <div class="col-sm-9">
+                <%= small_button_link_to "Fechar", close_semester_evaluation_period_path(semester), method: :post if semester.active %>
+              </div>
+            <% else %>
+              <div class="col-sm-3">
+                Fechado
+              </div>
+              <div class="col-sm-9">
+                <%= small_button_link_to "Abrir", open_semester_evaluation_period_path(semester), method: :post if semester.active %>
+              </div>
+            <% end %>
+          </div>
+        </td>
       </tr>
     <% end %>
   </tbody>

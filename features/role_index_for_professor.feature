@@ -45,9 +45,9 @@ Feature: Assistant roles table visualization
         Given it's currently month 5
         And I'm logged in as professor "Gold"
         And I visit my assistant roles page
-        Then I should see "John Monitor ativo de MAC0431 Março: --- Abril: Ausente Maio: --- Junho: --- Avaliar"
-        Then I should see "Wil Monitor ativo de MAC0431 Março: Presente Abril: Presente Maio: --- Junho: --- Avaliar"
-        Then I should see "Alfredo Monitor desativado de MAC0431 Desativado Avaliar"
+        Then I should see "John Monitor ativo de MAC0431 Março: --- Abril: Ausente Maio: --- Junho: ---"
+        Then I should see "Wil Monitor ativo de MAC0431 Março: Presente Abril: Presente Maio: --- Junho: ---"
+        Then I should see "Alfredo Monitor desativado de MAC0431 Desativado"
         Then I'm back to current time
 
     Scenario: Professor marks frequency
@@ -56,12 +56,12 @@ Feature: Assistant roles table visualization
         And I'm logged in as professor "Gold"
         And I visit my assistant roles page
         When I press the first "Presente" button
-        Then I should see "John Monitor ativo de MAC0431 Março: --- Abril: Ausente Maio: Presente Junho: --- Avaliar"
-        And I should see "Wil Monitor ativo de MAC0431 Março: Presente Abril: Presente Maio: Junho: --- Avaliar"
-        And I should see "Alfredo Monitor desativado de MAC0431 Desativado Avaliar"
+        Then I should see "John Monitor ativo de MAC0431 Março: --- Abril: Ausente Maio: Presente Junho: ---"
+        And I should see "Wil Monitor ativo de MAC0431 Março: Presente Abril: Presente Maio: Junho: ---"
+        And I should see "Alfredo Monitor desativado de MAC0431 Desativado"
         And I press the first "Ausente" button
-        And I should see "John Monitor ativo de MAC0431 Março: --- Abril: Ausente Maio: Presente Junho: --- Avaliar"
-        And I should see "Wil Monitor ativo de MAC0431 Março: Presente Abril: Presente Maio: Ausente Junho: --- Avaliar"
-        And I should see "Alfredo Monitor desativado de MAC0431 Desativado Avaliar"
+        And I should see "John Monitor ativo de MAC0431 Março: --- Abril: Ausente Maio: Presente Junho: ---"
+        And I should see "Wil Monitor ativo de MAC0431 Março: Presente Abril: Presente Maio: Ausente Junho: ---"
+        And I should see "Alfredo Monitor desativado de MAC0431 Desativado"
         And I'm back to current time
 

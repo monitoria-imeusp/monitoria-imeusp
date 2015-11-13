@@ -8,5 +8,6 @@ FactoryGirl.define do
     open              true
     active            true
     frequency_period  0
+    evaluation_period false
   end
 end

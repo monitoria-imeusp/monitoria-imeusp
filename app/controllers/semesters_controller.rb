@@ -52,6 +52,18 @@ class SemestersController < ApplicationController
     change_state false, false
   end
 
+  def open_evaluation_period
+    semester = Semester.find params[:id]
+    semester.open_evaluation_period
+    redirect_to semesters_path
+  end
+
+  def close_evaluation_period
+    semester = Semester.find params[:id]
+    semester.close_evaluation_period
+    redirect_to semesters_path
+  end
+
   private
 
   def change_state state_open, state_active

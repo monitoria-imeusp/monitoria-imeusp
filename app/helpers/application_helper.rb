@@ -33,6 +33,10 @@ module ApplicationHelper
     end
   end
 
+  def small_button_link_to name, options, html_options=nil
+    link_to name, options, {class: "btn btn-primary btn-xs"}.merge((html_options or {}))
+  end
+
   def button_link_to name, options, html_options=nil
     link_to name, options, {class: "btn btn-primary"}.merge((html_options or {}))
   end
