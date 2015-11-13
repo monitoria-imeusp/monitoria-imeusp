@@ -67,6 +67,8 @@ pt-BR:
         year: 'Ano'
         parity: 'Paridade'
         open: 'Estado'
+        registration: 'Inscrições'
+        evaluation_period: 'Período de avaliação'
       student:
         student: 'Aluno'
         institute: 'Unidade de origem'
