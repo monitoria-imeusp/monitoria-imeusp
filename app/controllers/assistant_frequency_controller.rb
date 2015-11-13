@@ -29,15 +29,17 @@ class AssistantFrequencyController < ApplicationController
   def open_frequency_period
     @semester = Semester.find params[:semester_id]
     @month = params[:month].to_i
+    @filter = params[:last_filter].to_i
     @semester.open_frequency_period(Semester.month_to_period @month)
-    redirect_to assistant_frequency_monthly_control_path(@semester, @month)
+    redirect_to assistant_frequency_monthly_control_path(@semester, @month, @filter)
   end
 
   def close_frequency_period
     @semester = Semester.find params[:semester_id]
     @month = params[:month].to_i
+    @filter = params[:last_filter].to_i
     @semester.close_frequency_period(Semester.month_to_period @month)
-    redirect_to assistant_frequency_monthly_control_path(@semester, @month)
+    redirect_to assistant_frequency_monthly_control_path(@semester, @month, @filter)
   end
  
   def mark_assistant_role_frequency
