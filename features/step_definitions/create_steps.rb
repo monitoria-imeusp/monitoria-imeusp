@@ -112,6 +112,10 @@ When(/^there is an open semester "(.*?)" "(.*?)"$/) do |year, parity|
   Semester.create(year: year, parity: (parity.to_i-1), open: true, active: true)
 end
 
+Given(/^there is an active semester "(.*?)" "(.*?)" during evaluation period$/) do |year, parity|
+  Semester.create(year: year, parity: (parity.to_i-1), open: false, active: true, evaluation_period: true)
+end
+
 When(/^there is an assistant role for student "(.*?)" with professor "(.*?)" at course "(.*?)"$/) do |student_name, professor_name, course_code|
   professor_id = User.where(name: professor_name).take.professor.id
   course_id = Course.where(course_code: course_code).take.id

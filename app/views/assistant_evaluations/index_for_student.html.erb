@@ -6,33 +6,29 @@
   <table class="table table-hover">
     <thead>
       <tr>
-        <th colspan="2"><%= request.course.full_name %></th>
+        <th colspan="2"><%= request.course.full_name %> no <%= request.semester.as_s %></th>
       </tr>
     </thead>
     <tbody>
-        <tr>
-          <td class="longtitle"><%= t'activerecord.attributes.assistant_evaluation.semester' %></td>
-          <td><%= request.semester.period_as_s %></td>
-        </tr>
         <tr>
           <td class="longtitle"><%= t'activerecord.attributes.assistant_evaluation.professor_name' %></td>
           <td><%= request.professor.name %></td>
         </tr>
         <tr>
           <td class="longtitle"><%= t'activerecord.attributes.assistant_evaluation.ease_of_contact' %></td>
-          <td><%= assistant_evaluation.ease_of_contact %></td>
+          <td><%= evaluation_grades[assistant_evaluation.ease_of_contact][0] %></td>
         </tr>
         <tr>
           <td class="longtitle"><%= t'activerecord.attributes.assistant_evaluation.efficiency' %></td>
-          <td><%= assistant_evaluation.efficiency %></td>
+          <td><%= evaluation_grades[assistant_evaluation.efficiency][0] %></td>
         </tr>
         <tr>
           <td class="longtitle"><%= t'activerecord.attributes.assistant_evaluation.reliability' %></td>
-          <td><%= assistant_evaluation.reliability %></td>
+          <td><%= evaluation_grades[assistant_evaluation.reliability][0] %></td>
         </tr>
         <tr>
           <td class="longtitle"><%= t'activerecord.attributes.assistant_evaluation.overall' %></td>
-          <td><%= assistant_evaluation.overall %></td>
+          <td><%= evaluation_grades[assistant_evaluation.overall][0] %></td>
         </tr>
         <tr>
           <td class="longtitle"><%= t'activerecord.attributes.assistant_evaluation.comment' %></td>

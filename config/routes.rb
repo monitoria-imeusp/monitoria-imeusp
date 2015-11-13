@@ -78,6 +78,8 @@ Rails.application.routes.draw do
   post 'semesters/:id/activate' => 'semesters#activate', as: :activate_semester
   post 'semesters/:id/close' => 'semesters#close', as: :close_semester
   post 'semesters/:id/deactivate' => 'semesters#deactivate', as: :deactivate_semester
+  post 'semesters/:id/open_evaluation_period' => 'semesters#open_evaluation_period', as: :open_semester_evaluation_period
+  post 'semesters/:id/close_evaluation_period' => 'semesters#close_evaluation_period', as: :close_semester_evaluation_period
 
   resources :candidatures, except: :new
   get 'candidatures/:id/download_transcript' => 'candidatures#download_transcript', as: :download_candidature_transcript

@@ -68,6 +68,14 @@ class Semester < ActiveRecord::Base
     end
   end
 
+  def open_evaluation_period
+    update(evaluation_period: true)
+  end
+
+  def close_evaluation_period
+    update(evaluation_period: false)
+  end
+
   def self.month_to_period month
     [-1, -1, -1,
       0, 1, 2, 3, -1,
@@ -83,6 +91,6 @@ class Semester < ActiveRecord::Base
   end
 
   def self.current
-    all_active.last
+    all_active.last or Semester.last
   end
 end

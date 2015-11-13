@@ -8,7 +8,7 @@ describe AssistantEvaluationsController do
   let!(:super_professor) { FactoryGirl.create :super_professor, user_id: prof_user.id }
 
   before :each do
-    @semester   = FactoryGirl.create :semester
+    @semester   = FactoryGirl.create :semester, evaluation_period: true
     @department = FactoryGirl.create :department
     @course1    = FactoryGirl.create :course1
     @student    = FactoryGirl.create :student
@@ -87,15 +87,16 @@ describe AssistantEvaluationsController do
     end
 
     context "with invalid params" do
-      it "assigns a newly created but unsaved assistant_evaluation as @assistant_evaluation" do
+      before :each do
         allow_any_instance_of(AssistantEvaluation).to receive(:save).and_return(false)
-        post :create, {:assistant_evaluation => { "index_for_student" => "invalid value" }}
+        post :create, {:assistant_evaluation => { assistant_role_id: "1", index_for_student: "invalid value" }}
+      end
+
+      it "assigns a newly created but unsaved assistant_evaluation as @assistant_evaluation" do
         expect(assigns(:assistant_evaluation)).to be_a_new(AssistantEvaluation)
       end
 
       it "re-renders the 'new' template" do
-        allow_any_instance_of(AssistantEvaluation).to receive(:save).and_return(false)
-        post :create, {:assistant_evaluation => { "index_for_student" => "invalid value" }}
         expect(response).to render_template("new")
       end
     end
