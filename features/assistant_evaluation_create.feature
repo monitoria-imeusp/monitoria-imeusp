@@ -4,7 +4,7 @@ Feature: Assistant evaluation creation
     I want to create assistant evaluations
 
     Background:
-        When there is an open semester "2014" "1"
+        When there is an active semester "2014" "1" during evaluation period
         And there is a department with code "MAC"
         And there is a course with name "Introdução à Ciência da Computação" and code "MAC0110" and department "MAC"
         And there is a student with name "Bob" with nusp "123456" and email "aluno@usp.br"
