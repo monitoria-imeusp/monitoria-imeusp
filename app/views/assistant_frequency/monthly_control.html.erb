@@ -50,9 +50,9 @@
     </div>
     <div class="col-sm-2">
       <% if @semester.frequency_open?(Semester.month_to_period @month) %>
-        <%= button_link_to "Fechar período de frequência" , close_frequency_period_path(@semester, @month), method: :post %>
+        <%= button_link_to "Fechar período de frequência" , close_frequency_period_path(@semester, @month, @filter), method: :post %>
       <% else %>
-        <%= button_link_to "Abrir período de frequência" , open_frequency_period_path(@semester, @month), method: :post %>
+        <%= button_link_to "Abrir período de frequência" , open_frequency_period_path(@semester, @month, @filter), method: :post %>
       <% end %>
     </div>
   <% end %>

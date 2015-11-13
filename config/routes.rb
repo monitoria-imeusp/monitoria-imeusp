@@ -66,8 +66,8 @@ Rails.application.routes.draw do
 
   get 'assistant_frequency/monthly_control/:semester_id/:month/:filter' => 'assistant_frequency#monthly_control', as: :assistant_frequency_monthly_control
   get 'assistant_frequency/monthly_control/:semester_id/:month/:department_id/:filter' => 'assistant_frequency#monthly_control', as: :assistant_frequency_monthly_control_for_department
-  post 'assistant_frequency/open_period/:semester_id/:month' => 'assistant_frequency#open_frequency_period', as: :open_frequency_period
-  post 'assistant_frequency/close_period/:semester_id/:month' => 'assistant_frequency#close_frequency_period', as: :close_frequency_period
+  post 'assistant_frequency/open_period/:semester_id/:month/:last_filter' => 'assistant_frequency#open_frequency_period', as: :open_frequency_period
+  post 'assistant_frequency/close_period/:semester_id/:month/:last_filter' => 'assistant_frequency#close_frequency_period', as: :close_frequency_period
   post 'assistant_frequency/request_frequency/' => 'assistant_frequency#request_frequency', as: :request_frequency
   post 'assistant_frequency/mark_generic_assistant_role_frequency/' => 'assistant_frequency#mark_generic_assistant_role_frequency', as: :mark_generic_assistant_role_frequency
   post 'assistant_frequency/mark_assistant_role_frequency/' => 'assistant_frequency#mark_assistant_role_frequency', as: :mark_assistant_role_frequency
