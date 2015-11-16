@@ -112,6 +112,10 @@ When(/^there is an open semester "(.*?)" "(.*?)"$/) do |year, parity|
   Semester.create(year: year, parity: (parity.to_i-1), open: true, active: true)
 end
 
+Given(/^there is an active semester "(.*?)" "(.*?)"$/) do |year, parity|
+  Semester.create(year: year, parity: (parity.to_i-1), open: false, active: true)
+end
+
 Given(/^there is an active semester "(.*?)" "(.*?)" during evaluation period$/) do |year, parity|
   Semester.create(year: year, parity: (parity.to_i-1), open: false, active: true, evaluation_period: true)
 end

@@ -50,7 +50,7 @@ class CandidaturesController < ApplicationController
     @semesters = Semester.all_open.map do |semester|
       { get: semester, valid: (not already_for_semester?(student.id, semester.id)) }
     end
-    @enable_report = (Semester.current.last_month == Time.now.month)
+    @enable_report = Semester.current.evaluation_period
   end
 
   # GET /candidatures/1

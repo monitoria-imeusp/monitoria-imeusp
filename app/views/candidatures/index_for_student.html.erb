@@ -94,18 +94,14 @@
             <%= role.professor.name %>
           </td>
         </tr>
-        <% if(!(Rails.env.production?)) %>
-          <% if (role.report_filled?) %>
-            <tr>
-              <td colspan="2"><%= button_link_to 'Ver relatório', print_report_path(role.id, :format => :pdf), target: "_blank" %></td>
-            </tr>
-          <% else %>
-            <% if @enable_report == true %>
-              <tr>
-                <td colspan="2"><%= button_link_to 'Preencher relatório', report_form_path(role.id) %></td>
-              </tr>
-            <% end %>
-          <% end %>
+        <% if (role.report_filled?) %>
+          <tr>
+            <td colspan="2"><%= button_link_to 'Ver relatório', print_report_path(role.id, :format => :pdf), target: "_blank" %></td>
+          </tr>
+        <% elsif @enable_report == true %>
+          <tr>
+            <td colspan="2"><%= button_link_to 'Preencher relatório', report_form_path(role.id) %></td>
+          </tr>
         <% end %>
       </tbody>
     </table>

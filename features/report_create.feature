@@ -4,7 +4,7 @@ Feature: Assistant role report creation
 	I want to have assistant role reports
 
 	Background:
-		When there is an open semester "2014" "1"
+		When there is an active semester "2014" "1"
                 And there is a department with code "MAC"
                 And there is a department with code "MAT"
                 And there is a course with name "Introdução à Ciência da Computação" and code "MAC0110" and department "MAC"
@@ -27,7 +27,7 @@ Feature: Assistant role report creation
 
 	Scenario: Student creates his assistant report
 		Given I'm logged in as student "Bob"
-                And it's currently month 6
+                And it's currently evaluation period
                 And I click the "Minhas candidaturas" link
 		And I click the "Preencher relatório" link
 		And I fill the "Quantos alunos em média você atendeu durante o plantão de monitores?" field with "2"
