@@ -139,6 +139,7 @@ class AssistantRolesController < ApplicationController
 
   def report_form
     @role = AssistantRole.find params[:id]
+    check_evaluation_period @role
   end
 
   def print_report
@@ -149,6 +150,10 @@ class AssistantRolesController < ApplicationController
   end
 
   private
+
+  def check_evaluation_period role
+    raise CanCan::AccessDenied.new unless role.semester.evaluation_period
+  end
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def assistant_role_params
