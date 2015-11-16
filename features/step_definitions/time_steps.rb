@@ -10,3 +10,7 @@ end
 Then(/I'm back to current time/) do
 	travel_back
 end
+
+Given(/^it's currently evaluation period$/) do
+  Semester.current.open_evaluation_period
+end
