@@ -44,7 +44,7 @@
   <% else %>
     <div class="col-sm-6"></div>
   <% end %>
-  <% if secretary_signed_in? and @semester.current? %>
+  <% if secretary_signed_in? and @semester.active %>
     <div class="col-sm-2">
       <%= button_link_to "Pagar monitores" , pay_all_assistants_path(@semester, @month), method: :post %>
     </div>
