@@ -29,7 +29,9 @@
       <div class="container-fluid">
         <div class="row">
           <div class="col-sm-4">
-            <h4 class="list-group-item-heading"><%= role.student.name %></h4>
+            <h4 class="list-group-item-heading">
+              <%= link_to role.student.name, role.student.user %>
+            </h4>
             <p class="list-group-item-text">
               <% if role.student.is_male? %>
                 Monitor <%= role.active ? "ativo" : "desativado" %> de <%= role.request_for_teaching_assistant.course.course_code %>
@@ -89,6 +91,8 @@
             <% else %>
               <%= button_link_to "Avaliar", new_assistant_evaluation_path(role), class: "btn btn-lg btn-primary" %>
             <% end %>
+          <% elsif role.assistant_evaluation %>
+            <%= button_link_to "Ver avaliações", assistant_evaluations_for_student_path(role.student) %>
           <% end %>
         </div>
       </div>

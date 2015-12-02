@@ -11,7 +11,7 @@
         <span class="caret"></span>
       </button>
       <ul class="dropdown-menu">
-        <% Semester.all.reverse.each do |semester| %>
+        <% Semester.all.order(created_at: :desc).each do |semester| %>
           <li><%= link_to semester.as_s, assistant_roles_for_semester_path(semester)%></li>
         <% end %>
       </ul>

@@ -18,5 +18,5 @@ Feature: Assistant evaluation index
         Given I'm logged in as super professor from the "MAC" department
         When I visit student "Bob"'s page
         And I click the "Ver avaliações como monitor(a)" link
-        Then I should see "Avaliações de Bob"
+        Then I should see "Bob Avaliações"
         And I should see "ok"

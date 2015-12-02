@@ -6,7 +6,7 @@ class AssistantEvaluationsController < ApplicationController
   def index_for_student
     @student = Student.find(params[:student_id])
     student_roles = AssistantRole.where(student: @student)
-    @assistant_evaluations = AssistantEvaluation.where(assistant_role_id: student_roles).reverse
+    @assistant_evaluations = AssistantEvaluation.where(assistant_role_id: student_roles).order(created_at: :desc)
   end
 
   # GET /assistant_evaluations/1/new
