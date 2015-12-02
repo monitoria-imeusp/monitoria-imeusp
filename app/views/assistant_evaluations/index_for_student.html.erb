@@ -1,5 +1,4 @@
-<h1>Avaliações de <%= @student.name %></h1>
-<hr>
+<h1><%= @student.name %> <br><small>Avaliações como monitor(a)</small></h1>
 
 <% @assistant_evaluations.each do |assistant_evaluation| %>
   <% request = assistant_evaluation.assistant_role.request_for_teaching_assistant %>
