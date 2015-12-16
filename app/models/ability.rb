@@ -84,7 +84,7 @@ class Ability
       can :read, RequestForTeachingAssistant #, :professor_id => user.id #Only his own
       can :update, RequestForTeachingAssistant #, :professor_id => user.id #Only his own
       can :destroy, RequestForTeachingAssistant #, :professor_id => user.id #Only his own
-      can :index_for_semester, RequestForTeachingAssistant
+      can :index_for_professor, RequestForTeachingAssistant #, :professor_id => user.id #Only his own
       if user.super_professor?
         can :read, Dump
         can :create, Professor
@@ -96,6 +96,7 @@ class Ability
         can :update, Candidature
         can :destroy, Candidature
         can :make_superprofessor, Professor
+        can :index_for_semester, RequestForTeachingAssistant
       else
         cannot :read, Dump
         cannot :create, Professor
