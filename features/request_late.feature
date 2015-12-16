@@ -11,26 +11,23 @@ Feature: Late Requests for Teaching Assistant
         And there is a super_professor with name "Mandel" and password "prof-123" nusp "12344" department "MAC" and email "kira@bob.bob"
         And there is a hiper_professor with name "Claudia" and password "prof-123" nusp "12355" department "MAE" and email "claudia@ime.br"
 
-    Scenario: Normal professor should not see closed semester
+    Scenario: Normal professor should see closed semester
     	Given there is a closed semester "2014" "1"
     	And I'm logged in as professor "Bob"
         And I should see "Pedidos de monitoria"
         Then I click the "Pedidos de monitoria" link
-        Then I should see "Nenhum semestre aberto à requisição de monitores no momento"
-        And "2014/1" should not appear before "Ver pedidos de:"
+        And I should not see "Pedir monitor(es)"
 
     Scenario: Super professor should see closed semester
     	Given there is a closed semester "2014" "1"
     	And I'm logged in as professor "Mandel"
         And I should see "Pedidos de monitoria"
         Then I click the "Pedidos de monitoria" link
-		Then I should not see "Nenhum semestre aberto à requisição de monitores no momento"
-		And "2014/1" should appear before "Ver pedidos de:"
+        And I should not see "Pedir monitor(es)"
 
 	Scenario: Hiper professor should see closed semester
     	Given there is a closed semester "2014" "1"
         And I'm logged in as professor "Claudia"
         And I should see "Pedidos de monitoria"
         Then I click the "Pedidos de monitoria" link
-		Then I should not see "Nenhum semestre aberto à requisição de monitores no momento"
-		And "2014/1" should appear before "Ver pedidos de:"
+        And I should not see "Pedir monitor(es)"

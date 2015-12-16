@@ -25,23 +25,23 @@ Feature: Index of the Requests for Teaching Assistant
         And I should see "MAC0110 - Mascarenhas"
         And I should not see "MAC0122 - Coisas"
         And I should see "1"
-        And I click the "Ver" link
+        And I click the "Detalhes" link
         And I should see "Atendimento aos alunos: Não"
         And I should see "Correção de trabalhos: Sim"
         And I should see "Fiscalização de provas: Sim"
 
     Scenario: Superprofessor see only requests of his department
         Given I'm logged in as professor "Mandel"
-        And I should see "Pedidos de monitoria"
-        Then I click the "Pedidos de monitoria" link
+        And I should see "Controle de pedidos"
+        Then I click the "Controle de pedidos" link
         And I should see "MAC0110 - Mascarenhas"
         And I should see "MAC0122 - Coisas"
         And I should not see "MAE0438 - Estatística Concorrente"
 
     Scenario: Hiperprofessor can see all requests
         Given I'm logged in as professor "Zara"
-        And I should see "Pedidos de monitoria"
-        Then I click the "Pedidos de monitoria" link
+        And I should see "Controle de pedidos"
+        Then I click the "Controle de pedidos" link
         And I should see "MAC0110 - Mascarenhas"
         And I should see "MAC0122 - Coisas"
         And I should see "MAE0438 - Estatística Concorrente"
@@ -49,8 +49,8 @@ Feature: Index of the Requests for Teaching Assistant
     @javascript
     Scenario: Hiperprofessor list of all requests is ordered by professor name
         Given I'm logged in as professor "Zara"
-        And I should see "Pedidos de monitoria"
-        Then I click the "Pedidos de monitoria" link
+        And I should see "Controle de pedidos"
+        Then I click the "Controle de pedidos" link
         And I should see "MAC0110 - Mascarenhas"
         And I should see "MAC0122 - Coisas"
         And I should see "MAE0438 - Estatística Concorrente"
@@ -60,8 +60,8 @@ Feature: Index of the Requests for Teaching Assistant
     @javascript
     Scenario: Hiperprofessor can sort requests by department
         Given I'm logged in as professor "Zara"
-        And I should see "Pedidos de monitoria"
-        Then I click the "Pedidos de monitoria" link
+        And I should see "Controle de pedidos"
+        Then I click the "Controle de pedidos" link
         And I should see "MAC0110 - Mascarenhas"
         And I should see "MAC0122 - Coisas"
         And I should see "MAE0438 - Estatística Concorrente"

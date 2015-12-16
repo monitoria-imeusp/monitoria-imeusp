@@ -26,14 +26,17 @@
       <th colspan="1"></th>
       </tr>
     </thead>
-
     <tbody>
-      <% @request_for_teaching_assistants.each do |request_for_teaching_assistant| %>
-        <tr>
-          <td><%= request_for_teaching_assistant.course.course_code + " - " + request_for_teaching_assistant.course.name %></td>
-          <td><%= request_for_teaching_assistant.requested_number %></td>
-          <td><%= button_link_to 'Detalhes', request_for_teaching_assistant %></td>
-        </tr>
+      <% if @request_for_teaching_assistants.empty? %>
+        <tr><td colspan="3" class="text-center"><em>Nenhum pedido de monitor realizado</em></td></tr>
+      <% else %>
+        <% @request_for_teaching_assistants.each do |request_for_teaching_assistant| %>
+          <tr>
+            <td><%= request_for_teaching_assistant.course.course_code + " - " + request_for_teaching_assistant.course.name %></td>
+            <td><%= request_for_teaching_assistant.requested_number %></td>
+            <td><%= button_link_to 'Detalhes', request_for_teaching_assistant %></td>
+          </tr>
+        <% end %>
       <% end %>
     </tbody>
   </table>

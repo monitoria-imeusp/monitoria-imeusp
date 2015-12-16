@@ -13,7 +13,7 @@ Feature: Removing Requests for Teaching Assistant
         And I'm logged in as professor "Bob"
         And I should see "Pedidos de monitoria"
         Then I click the "Pedidos de monitoria" link
-        And I click the "Ver" link
+        And I click the "Detalhes" link
         And I click the "Remover" link
         Then I should not see "MAC0122"
 

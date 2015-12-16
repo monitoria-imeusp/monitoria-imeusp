@@ -14,7 +14,7 @@ Feature: Edit Request for Teaching Assistant
         And I should see "Pedidos de monitoria"
         And I click the "Pedidos de monitoria" link
         And I should see "MAC0110"
-        And I click the "Ver" link
+        And I click the "Detalhes" link
         And I click the "Editar" link
         And I should see "Edição de Pedido por Monitor"
         And I select "MAC0122 - Coisas" on the "Disciplina"

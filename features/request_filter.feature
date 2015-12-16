@@ -21,7 +21,7 @@ Feature: Filtering requests for teaching assistant
         And there is a request for teaching assistant with professor "Bob3" and course "MAE0114" and requested_number "2" and priority "1" and student_assistance "true" and work_correction "true" and test_oversight "true"
         And there is a request for teaching assistant with professor "Bob3" and course "MAE0115" and requested_number "4" and priority "1" and student_assistance "true" and work_correction "true" and test_oversight "true"
         And I'm logged in as professor "Bob"
-        And I click the "Pedidos de monitoria" link
+        And I click the "Controle de pedidos" link
 
 
     Scenario: Another professor from the same department
