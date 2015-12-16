@@ -130,161 +130,171 @@ describe RequestForTeachingAssistantsController do
 
 
   let(:valid_session) { {} }
+  let!(:semester) { FactoryGirl.create :semester }
 
-  let(:prof_user) { FactoryGirl.create :user }
-  let!(:professor) { FactoryGirl.create :professor, user_id: prof_user.id }
   before :each do
     Department.create! {{"id" => 1, "code" => "MAC"}}
     Department.create! {{"id" => 2, "code" => "MAE"}}
-    @semester = Semester.create! (valid_semester)
     Course.create! valid_course_attributes
-    sign_in prof_user
   end
 
-  describe "#index" do
-    it "assigns all request_for_teaching_assistants as @request_for_teaching_assistants" do
-      request_for_teaching_assistant = RequestForTeachingAssistant.create! valid_attributes
-      get :index_for_semester, { :semester_id => @semester.id }
-      expect(assigns(:request_for_teaching_assistants)).to eq([request_for_teaching_assistant])
+  context "normal professor" do
+
+    let!(:prof_user) { FactoryGirl.create :user }
+    let!(:professor) { FactoryGirl.create :professor, user_id: prof_user.id }
+    before :each do
+      sign_in prof_user
     end
-  end
 
-  describe "#show" do
-    it "assigns the requested request_for_teaching_assistant as @request_for_teaching_assistant" do
-      request_for_teaching_assistant = RequestForTeachingAssistant.create! valid_attributes
-      get :show, {:id => request_for_teaching_assistant.to_param}
-      expect(assigns(:request_for_teaching_assistant)).to eq(request_for_teaching_assistant)
+    describe "#index_for_professor" do
+      context "all requests are visible" do
+        let!(:request_for_teaching_assistant) { RequestForTeachingAssistant.create! valid_attributes }
+        before :each do
+          get :index_for_professor, { professor_id: professor.id, semester_id: semester.id }
+        end
+        subject { assigns(:request_for_teaching_assistants) }
+        it { is_expected.to eq([request_for_teaching_assistant]) }
+      end
     end
-  end
 
-  describe "#new" do
-    it "assigns a new request_for_teaching_assistant as @request_for_teaching_assistant" do
-      get :new, {:semester_id => "1"}
-      expect(assigns(:request_for_teaching_assistant)).to be_a_new(RequestForTeachingAssistant)
-    end
-  end
-
-  describe "#edit" do
-    context "when editing a request from the signed professor" do
+    describe "#show" do
       it "assigns the requested request_for_teaching_assistant as @request_for_teaching_assistant" do
         request_for_teaching_assistant = RequestForTeachingAssistant.create! valid_attributes
-        get :edit, {:id => request_for_teaching_assistant.to_param}
+        get :show, {:id => request_for_teaching_assistant.to_param}
         expect(assigns(:request_for_teaching_assistant)).to eq(request_for_teaching_assistant)
       end
     end
 
-    context "when editing a request not from the signed professor" do
-      it "redirects back to the request list" do
-        request_for_teaching_assistant = RequestForTeachingAssistant.create! not_owned_attributes
-        get :edit, {:id => request_for_teaching_assistant.to_param}
-        is_expected.to redirect_to('/403')
-      end
-    end
-  end
-
-  describe "#create" do
-    it "uses the current signed professor's id" do
-      post :create, {:request_for_teaching_assistant => valid_attributes}, valid_session
-      expect(assigns(:request_for_teaching_assistant).professor_id).to be(valid_professor["id"])
-    end
-
-    context "with valid params" do
-      it "creates a new RequestForTeachingAssistant" do
-        count_before = RequestForTeachingAssistant.count
-        assert(!RequestForTeachingAssistant.exists?(valid_attributes[:id]))
-        post :create, {:request_for_teaching_assistant => valid_attributes}
-        count_after = RequestForTeachingAssistant.count
-        expect(count_before+1).to equal(count_after)
-      end
-
-      it "assigns a newly created request_for_teaching_assistant as @request_for_teaching_assistant" do
-        post :create, {:request_for_teaching_assistant => valid_attributes}
-        expect(assigns(:request_for_teaching_assistant)).to be_a(RequestForTeachingAssistant)
-        expect(assigns(:request_for_teaching_assistant)).to be_persisted
-      end
-
-      it "redirects to the created request_for_teaching_assistant" do
-        post :create, {:request_for_teaching_assistant => valid_attributes}
-        expect(response).to redirect_to(RequestForTeachingAssistant.last)
-      end
-    end
-
-    context "with invalid params" do
-      it "assigns a newly created but unsaved request_for_teaching_assistant as @request_for_teaching_assistant" do
-        allow_any_instance_of(RequestForTeachingAssistant).to receive(:save).and_return(false)
-        post :create, {:request_for_teaching_assistant => {}}
+    describe "#new" do
+      it "assigns a new request_for_teaching_assistant as @request_for_teaching_assistant" do
+        get :new, {:semester_id => "1"}
         expect(assigns(:request_for_teaching_assistant)).to be_a_new(RequestForTeachingAssistant)
       end
-
-      it "re-renders the 'new' template" do
-        allow_any_instance_of(RequestForTeachingAssistant).to receive(:save).and_return(false)
-        post :create, {:request_for_teaching_assistant => { "professor_id" => "invalid value" }}
-        expect(response).to render_template :new
-      end
     end
-  end
 
-  describe "#update" do
-    context "with valid params" do
-      it "updates the requested request_for_teaching_assistant" do
-        request_for_teaching_assistant = RequestForTeachingAssistant.create! valid_attributes
-        expect_any_instance_of(RequestForTeachingAssistant).to receive(:update).with({ "professor_id" => "1" })
-        put :update, {:id => request_for_teaching_assistant.to_param, :request_for_teaching_assistant => { "professor_id" => "1" }}
+    describe "#edit" do
+      context "when editing a request from the signed professor" do
+        it "assigns the requested request_for_teaching_assistant as @request_for_teaching_assistant" do
+          request_for_teaching_assistant = RequestForTeachingAssistant.create! valid_attributes
+          get :edit, {:id => request_for_teaching_assistant.to_param}
+          expect(assigns(:request_for_teaching_assistant)).to eq(request_for_teaching_assistant)
+        end
       end
 
-      it "assigns the requested request_for_teaching_assistant as @request_for_teaching_assistant" do
-        request_for_teaching_assistant = RequestForTeachingAssistant.create! valid_attributes
-        put :update, {:id => request_for_teaching_assistant.to_param, :request_for_teaching_assistant => valid_attributes}
-        expect(assigns(:request_for_teaching_assistant)).to eq(request_for_teaching_assistant)
-      end
-
-      it "redirects to the request_for_teaching_assistant" do
-        request_for_teaching_assistant = RequestForTeachingAssistant.create! valid_attributes
-        put :update, {:id => request_for_teaching_assistant.to_param, :request_for_teaching_assistant => valid_attributes}
-        expect(response).to redirect_to(request_for_teaching_assistant)
+      context "when editing a request not from the signed professor" do
+        it "redirects back to the request list" do
+          request_for_teaching_assistant = RequestForTeachingAssistant.create! not_owned_attributes
+          get :edit, {:id => request_for_teaching_assistant.to_param}
+          is_expected.to redirect_to('/403')
+        end
       end
     end
 
-    context "with invalid params" do
-      it "assigns the request_for_teaching_assistant as @request_for_teaching_assistant" do
-        request_for_teaching_assistant = RequestForTeachingAssistant.create! valid_attributes
-        allow_any_instance_of(RequestForTeachingAssistant).to receive(:save).and_return(false)
-        put :update, {:id => request_for_teaching_assistant.to_param, :request_for_teaching_assistant => { "professor_id" => "invalid value" }}
-        expect(assigns(:request_for_teaching_assistant)).to eq(request_for_teaching_assistant)
+    describe "#create" do
+      it "uses the current signed professor's id" do
+        post :create, {:request_for_teaching_assistant => valid_attributes}, valid_session
+        expect(assigns(:request_for_teaching_assistant).professor_id).to be(valid_professor["id"])
       end
 
-      it "re-renders the 'edit' template" do
-        request_for_teaching_assistant = RequestForTeachingAssistant.create! valid_attributes
-        allow_any_instance_of(RequestForTeachingAssistant).to receive(:save).and_return(false)
-        put :update, {:id => request_for_teaching_assistant.to_param, :request_for_teaching_assistant => { "professor_id" => "invalid value" }}
-        expect(response).to render_template("edit")
+      context "with valid params" do
+        it "creates a new RequestForTeachingAssistant" do
+          count_before = RequestForTeachingAssistant.count
+          assert(!RequestForTeachingAssistant.exists?(valid_attributes[:id]))
+          post :create, {:request_for_teaching_assistant => valid_attributes}
+          count_after = RequestForTeachingAssistant.count
+          expect(count_before+1).to equal(count_after)
+        end
+
+        it "assigns a newly created request_for_teaching_assistant as @request_for_teaching_assistant" do
+          post :create, {:request_for_teaching_assistant => valid_attributes}
+          expect(assigns(:request_for_teaching_assistant)).to be_a(RequestForTeachingAssistant)
+          expect(assigns(:request_for_teaching_assistant)).to be_persisted
+        end
+
+        it "redirects to the created request_for_teaching_assistant" do
+          post :create, {:request_for_teaching_assistant => valid_attributes}
+          expect(response).to redirect_to(RequestForTeachingAssistant.last)
+        end
+      end
+
+      context "with invalid params" do
+        it "assigns a newly created but unsaved request_for_teaching_assistant as @request_for_teaching_assistant" do
+          allow_any_instance_of(RequestForTeachingAssistant).to receive(:save).and_return(false)
+          post :create, {:request_for_teaching_assistant => {}}
+          expect(assigns(:request_for_teaching_assistant)).to be_a_new(RequestForTeachingAssistant)
+        end
+
+        it "re-renders the 'new' template" do
+          allow_any_instance_of(RequestForTeachingAssistant).to receive(:save).and_return(false)
+          post :create, {:request_for_teaching_assistant => { "professor_id" => "invalid value" }}
+          expect(response).to render_template :new
+        end
       end
     end
-  end
 
-  describe "#destroy" do
-    context "when destroying a request from the signed professor" do
-      it "destroys the requested request_for_teaching_assistant" do
-        request_for_teaching_assistant = RequestForTeachingAssistant.create! valid_attributes
-        expect {
+    describe "#update" do
+      context "with valid params" do
+        it "updates the requested request_for_teaching_assistant" do
+          request_for_teaching_assistant = RequestForTeachingAssistant.create! valid_attributes
+          expect_any_instance_of(RequestForTeachingAssistant).to receive(:update).with({ "professor_id" => "1" })
+          put :update, {:id => request_for_teaching_assistant.to_param, :request_for_teaching_assistant => { "professor_id" => "1" }}
+        end
+
+        it "assigns the requested request_for_teaching_assistant as @request_for_teaching_assistant" do
+          request_for_teaching_assistant = RequestForTeachingAssistant.create! valid_attributes
+          put :update, {:id => request_for_teaching_assistant.to_param, :request_for_teaching_assistant => valid_attributes}
+          expect(assigns(:request_for_teaching_assistant)).to eq(request_for_teaching_assistant)
+        end
+
+        it "redirects to the request_for_teaching_assistant" do
+          request_for_teaching_assistant = RequestForTeachingAssistant.create! valid_attributes
+          put :update, {:id => request_for_teaching_assistant.to_param, :request_for_teaching_assistant => valid_attributes}
+          expect(response).to redirect_to(request_for_teaching_assistant)
+        end
+      end
+
+      context "with invalid params" do
+        it "assigns the request_for_teaching_assistant as @request_for_teaching_assistant" do
+          request_for_teaching_assistant = RequestForTeachingAssistant.create! valid_attributes
+          allow_any_instance_of(RequestForTeachingAssistant).to receive(:save).and_return(false)
+          put :update, {:id => request_for_teaching_assistant.to_param, :request_for_teaching_assistant => { "professor_id" => "invalid value" }}
+          expect(assigns(:request_for_teaching_assistant)).to eq(request_for_teaching_assistant)
+        end
+
+        it "re-renders the 'edit' template" do
+          request_for_teaching_assistant = RequestForTeachingAssistant.create! valid_attributes
+          allow_any_instance_of(RequestForTeachingAssistant).to receive(:save).and_return(false)
+          put :update, {:id => request_for_teaching_assistant.to_param, :request_for_teaching_assistant => { "professor_id" => "invalid value" }}
+          expect(response).to render_template("edit")
+        end
+      end
+    end
+
+    describe "#destroy" do
+      context "when destroying a request from the signed professor" do
+        it "destroys the requested request_for_teaching_assistant" do
+          request_for_teaching_assistant = RequestForTeachingAssistant.create! valid_attributes
+          expect {
+            delete :destroy, {:id => request_for_teaching_assistant.to_param}
+          }.to change(RequestForTeachingAssistant, :count).by(-1)
+        end
+
+        it "redirects to the request_for_teaching_assistants list" do
+          request_for_teaching_assistant = RequestForTeachingAssistant.create! valid_attributes
           delete :destroy, {:id => request_for_teaching_assistant.to_param}
-        }.to change(RequestForTeachingAssistant, :count).by(-1)
+          expect(response).to redirect_to(request_for_teaching_assistants_url)
+        end
       end
 
-      it "redirects to the request_for_teaching_assistants list" do
-        request_for_teaching_assistant = RequestForTeachingAssistant.create! valid_attributes
-        delete :destroy, {:id => request_for_teaching_assistant.to_param}
-        expect(response).to redirect_to(request_for_teaching_assistants_url)
+      context "when destroying a request not from the signed professor" do
+        it "gives access denied" do
+          request_for_teaching_assistant = RequestForTeachingAssistant.create! not_owned_attributes
+          delete :destroy, {:id => request_for_teaching_assistant.to_param}
+          is_expected.to redirect_to('/403')
+        end
       end
     end
 
-    context "when destroying a request not from the signed professor" do
-      it "gives access denied" do
-        request_for_teaching_assistant = RequestForTeachingAssistant.create! not_owned_attributes
-        delete :destroy, {:id => request_for_teaching_assistant.to_param}
-        is_expected.to redirect_to('/403')
-      end
-    end
   end
 
   describe "#index_for_semester" do
@@ -336,13 +346,6 @@ describe RequestForTeachingAssistantsController do
     let!(:request2) { RequestForTeachingAssistant.create! valid_request2 }
     let!(:request3) { RequestForTeachingAssistant.create! valid_request3 }
 
-    it "filters the requests of other professors" do
-      Course.create! valid_second_course_attributes
-      request_for_teaching_assistant = RequestForTeachingAssistant.create! valid_attributes
-      RequestForTeachingAssistant.create! not_owned_attributes
-      get :index_for_semester, { :semester_id => @semester.id }
-      expect(assigns(:request_for_teaching_assistants)).to eq([request_for_teaching_assistant])
-    end
     context 'when seeing index for semester as super professor' do
       let!(:courses) {
         Course.create! valid_second_course_attributes
@@ -356,9 +359,8 @@ describe RequestForTeachingAssistantsController do
         RequestForTeachingAssistant.create! other_department_attributes
       }
       before :each do
-        sign_out :prof_user
         sign_in super_prof_user
-        get :index_for_semester, { :semester_id => @semester.id }
+        get :index_for_semester, { :semester_id => semester.id }
       end
       subject { assigns(:request_for_teaching_assistants) }
       it { expect(subject).to eq(shown_requests) }
@@ -373,9 +375,8 @@ describe RequestForTeachingAssistantsController do
       let!(:hiper_professor) { FactoryGirl.create :hiper_professor, user_id: hiper_prof_user.id }
       let!(:shown_requests) { [ request2, request1, request3 ] }   
       before :each do
-        sign_out :prof_user
         sign_in hiper_prof_user
-        get :index_for_semester, { :semester_id => @semester.id }
+        get :index_for_semester, { :semester_id => semester.id }
       end
       subject { assigns(:request_for_teaching_assistants) }
       it { expect(subject).to eq(shown_requests) }
