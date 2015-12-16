@@ -19,11 +19,19 @@ class RequestForTeachingAssistantsController < ApplicationController
     end
     @request_for_teaching_assistants.sort! { |a,b| a.professor.name.downcase <=> b.professor.name.downcase }
     @semesters = Semester.where(active: true)
-    @open_semesters = @semesters.where(open: true)
-    @active_semesters = Semester.all_active
     if (admin_signed_in?) or (secretary_signed_in?) or (current_user.professor.hiper_professor?)
       @should_have_department_sort = true
     end
+  end
+
+  def index_for_professor
+    if params[:semester_id].present?
+      @semester = Semester.find(params[:semester_id])
+    else
+      @semester = Semester.current
+    end
+    @professor = Professor.find(params[:professor_id])
+    @request_for_teaching_assistants = RequestForTeachingAssistant.where(semester: @semester, professor: @professor)
   end
 
   # GET /request_for_teaching_assistants/1

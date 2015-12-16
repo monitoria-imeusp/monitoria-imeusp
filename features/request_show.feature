@@ -29,7 +29,7 @@ Feature: Show a request for teaching assistant
 
     Scenario: No elected candidatures
         And I should see "LabXP"
-        Then I click the first "Ver" link
+        Then I click the first "Detalhes" link
         And I should see "Disciplina: MAC0110 - Introdução"
         Then "123456" elected status should be "Não"
         Then "123457" elected status should be "Não"
@@ -41,18 +41,18 @@ Feature: Show a request for teaching assistant
         
     Scenario: Some elected candidatures
         And I should see "LabXP"
-        Then I click the first "Ver" link
+        Then I click the first "Detalhes" link
         And I should see "Disciplina: MAC0110 - Introdução"
         Then I click the first "Eleger" link
-        Then I click the "Voltar" link
-        Then I click the second "Ver" link
+        Then I click the "Pedidos de monitoria" link
+        Then I click the second "Detalhes" link
         And I should see "Disciplina: MAC0666 - LabXP"
         Then "123587" elected status should be "Sim"
         Then "123457" elected status should be "Não"
 
     Scenario: Repeated candidates
         And I should see "LabXP"
-        Then I click the first "Ver" link
+        Then I click the first "Detalhes" link
         And I should see "Disciplina: MAC0110 - Introdução"
         And I should not see "Ver dados"
         Then I click the first "Eleger" link
