@@ -58,7 +58,7 @@ module OmniAuth
       def userlink
         raw_info['vinculo'].each do |link|
           type = link['tipoVinculo']
-          if type == "ALUNOGR" or type == "ALUNOPOS" or type == "ALUNOESPGR"
+          if type == "ALUNOGR" or type == "ALUNOPOS" or type == "ALUNOESPGR" or type == "ALUNOPD"
             return :student
           elsif type == "SERVIDOR" 
             return :teacher
