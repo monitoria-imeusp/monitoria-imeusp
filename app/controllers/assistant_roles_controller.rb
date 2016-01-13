@@ -166,7 +166,7 @@ class AssistantRolesController < ApplicationController
     if params[:semester_id].present?
       @semester = Semester.find params[:semester_id]
     else
-      @semester = Semester.current
+      @semester = Semester.last_active_but_closed
     end
   end
 
