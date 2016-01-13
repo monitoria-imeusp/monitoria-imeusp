@@ -93,4 +93,12 @@ class Semester < ActiveRecord::Base
   def self.current
     all_active.last or Semester.last
   end
+
+  def self.last_with active, open
+    Semester.where(active: active, open: open).last
+  end
+
+  def self.last_active_but_closed
+    last_with true, false
+  end
 end
