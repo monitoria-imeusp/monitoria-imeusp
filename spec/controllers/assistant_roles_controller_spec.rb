@@ -19,7 +19,7 @@ describe AssistantRolesController do
   end
 
   describe "#index" do
-    let!(:another_semester) { FactoryGirl.create :semester, id: 2, year: 2010 }
+    let!(:another_semester) { FactoryGirl.create :semester, id: 2, year: 2010, open: false }
     context "for specific semester" do
       before :each do
         get :index, semester_id: semester.id
