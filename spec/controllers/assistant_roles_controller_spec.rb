@@ -51,7 +51,7 @@ describe AssistantRolesController do
 
       context "with roles" do
         subject { assigns(:assistant_roles) }
-        it { is_expected.to eq [assistant_role] }
+        it { is_expected.to eq [] }
       end
 
       context "with current semester" do

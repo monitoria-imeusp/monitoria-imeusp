@@ -5,8 +5,10 @@ class AssistantRolesController < ApplicationController
   def index
     get_semester
     get_department
-    @assistant_roles = AssistantRole.for_department_and_semester @department, @semester
-    unless should_see_all_roles?
+    if should_see_all_roles?
+      @assistant_roles = AssistantRole.for_department_and_semester @department, @semester
+    else
+      @assistant_roles = AssistantRole.for_semester @semester
       @assistant_roles = @assistant_roles.map { |x| x }.keep_if do |role|
         should_see_the_role role
       end
@@ -178,9 +180,6 @@ class AssistantRolesController < ApplicationController
     if params[:department_id].present?
       @department = Department.find params[:department_id]
     else
-      if user_signed_in? and current_user.professor?
-        @department = current_user.professor.department
-      end
       @department = Department.first
     end
   end
