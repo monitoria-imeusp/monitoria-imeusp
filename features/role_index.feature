@@ -65,13 +65,12 @@ Feature: Assistant roles table visualization
         Then I should see "Bob"
         And I should see "Dude"
         And I should see "MAC0110"
-        And I should see "Mary"
+        And I should not see "Mary"
         And "Bob" should appear before "John"
         And "John" should appear before "Wil"
         And "Alfredo" should appear before "Bob"
         And "Jude" should appear before "Wil"
         And "John" should appear before "Jude"
-        And "Mary" should appear before "Wil"
         And I'm back to current time
 
     Scenario: Hiperprofessor sees all assistant roles
@@ -80,13 +79,12 @@ Feature: Assistant roles table visualization
         And I visit the assistant roles page
         Then I should see "Bob"
         And I should see "Dude"
-        And I should see "Mary"
+        And I should not see "Mary"
         And "Bob" should appear before "John"
         And "John" should appear before "Wil"
         And "Alfredo" should appear before "Bob"
         And "Jude" should appear before "Wil"
         And "John" should appear before "Jude"
-        And "Mary" should appear before "Wil"
         And I'm back to current time
 
     Scenario: Common professor cannot see all assistant roles

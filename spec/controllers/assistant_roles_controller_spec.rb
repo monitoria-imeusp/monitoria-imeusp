@@ -40,7 +40,7 @@ describe AssistantRolesController do
       end
     end
 
-    context "for default semester" do
+    context "for default semester and default department" do
       before :each do
         get :index
       end
@@ -51,7 +51,7 @@ describe AssistantRolesController do
 
       context "with roles" do
         subject { assigns(:assistant_roles) }
-        it { is_expected.to eq [] }
+        it { is_expected.to eq [assistant_role] }
       end
 
       context "with current semester" do
