@@ -40,7 +40,7 @@ class AssistantRole < ActiveRecord::Base
   end
 
   def self.for_department_and_semester department, semester
-    (where request_for_teaching_assistant: (RequestForTeachingAssistant.where course: (Course.where department: department))).sort do |role1, role2|
+    (where request_for_teaching_assistant: (RequestForTeachingAssistant.where semester: semester, course: (Course.where department: department))).sort do |role1, role2|
       role1.student.name <=> role2.student.name
     end
   end
