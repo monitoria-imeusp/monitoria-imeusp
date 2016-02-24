@@ -4,7 +4,8 @@ class AssistantRolesController < ApplicationController
   # GET /assistant_roles
   def index
     get_semester
-    @assistant_roles = AssistantRole.for_semester @semester
+    get_department
+    @assistant_roles = AssistantRole.for_department_and_semester @department, @semester
     unless should_see_all_roles?
       @assistant_roles = @assistant_roles.map { |x| x }.keep_if do |role|
         should_see_the_role role
@@ -170,6 +171,14 @@ class AssistantRolesController < ApplicationController
       if @semester.nil?
         @semester = Semester.last
       end
+    end
+  end
+
+  def get_department
+    if params[:department_id].present?
+      @department = Department.find params[:department_id]
+    else
+      @department = Department.first
     end
   end
 
