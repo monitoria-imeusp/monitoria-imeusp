@@ -178,6 +178,9 @@ class AssistantRolesController < ApplicationController
     if params[:department_id].present?
       @department = Department.find params[:department_id]
     else
+      if user_signed_in? and current_user.professor?
+        @department = current_user.professor.department
+      end
       @department = Department.first
     end
   end
