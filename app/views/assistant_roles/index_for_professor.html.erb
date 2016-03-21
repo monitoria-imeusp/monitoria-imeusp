@@ -32,6 +32,13 @@
             <h4 class="list-group-item-heading">
               <%= link_to role.student.name, role.student.user %>
             </h4>
+            <p class="list-group-item-text">
+              <% if role.student.is_male? %>
+                Monitor de <%= role.request_for_teaching_assistant.course.course_code %>
+              <% else %>
+                Monitora de <%= role.request_for_teaching_assistant.course.course_code %>
+              <% end %>
+            </p>
           </div>
           <div class="col-sm-8">
             <% if role.active %>
