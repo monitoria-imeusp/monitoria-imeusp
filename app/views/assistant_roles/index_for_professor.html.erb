@@ -34,9 +34,9 @@
             </h4>
             <p class="list-group-item-text">
               <% if role.student.is_male? %>
-                Monitor <%= role.active ? "ativo" : "desativado" %> de <%= role.request_for_teaching_assistant.course.course_code %>
+                Monitor de <%= role.request_for_teaching_assistant.course.course_code %>
               <% else %>
-                Monitora <%= role.active ? "ativa" : "desativada" %> de <%= role.request_for_teaching_assistant.course.course_code %>
+                Monitora de <%= role.request_for_teaching_assistant.course.course_code %>
               <% end %>
             </p>
           </div>
@@ -87,12 +87,19 @@
         <div class="row text-center">
           <% if @semester.evaluation_period %>
             <% if role.assistant_evaluation %>
-              <%= button_link_to "Mudar avaliação", edit_assistant_evaluation_path(role.assistant_evaluation), class: "btn btn-lg btn-primary" %>
+              <%= button_link_to "Mudar avaliação", edit_assistant_evaluation_path(role.assistant_evaluation) %>
             <% else %>
-              <%= button_link_to "Avaliar", new_assistant_evaluation_path(role), class: "btn btn-lg btn-primary" %>
+              <%= button_link_to "Avaliar", new_assistant_evaluation_path(role) %>
             <% end %>
           <% elsif role.assistant_evaluation %>
             <%= button_link_to "Ver avaliações", assistant_evaluations_for_student_path(role.student) %>
+          <% else %>
+            <%= button_link_to "Avaliar", "#", class: "btn btn-info disabled"%>
+          <% end %>
+          <% if role.report_filled? %>
+            <%= button_link_to "Imprimir relatório", print_report_path(role.id, :format => :pdf), target: "_blank" %>
+          <% else %>
+            <%= button_link_to "Imprimir relatório", "#", class: "btn btn-info disabled"%>
           <% end %>
         </div>
       </div>

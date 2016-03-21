@@ -18,6 +18,10 @@ Then (/^"(.*)" elected status should be "(.*)"/) do |nusp, elected|
   expect(page.body).to match(/#{nusp}[^r]*#{elected}/)
 end
 
-Then (/^"(.*)" active status should be "(.*)"/) do |name, active|
-  expect(page.body).to match(/#{name}[^\r]*#{active}/)
+Then (/^"(.*)" active status should be active/) do |name|
+  expect(page.body).not_to have_css('li', text: /#{name}.*Desativado/m)
+end
+
+Then (/^"(.*)" active status should be deactivated/) do |name|
+  expect(page.body).to have_css('li', text: /#{name}.*Desativado/m)
 end

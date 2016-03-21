@@ -1,3 +1,4 @@
+
 def handle_js_confirm
   page.evaluate_script 'window.confirmMsg = null'
   page.evaluate_script 'window.confirm = function(msg) { window.confirmMsg = msg; return true; }'
@@ -25,7 +26,7 @@ When(/^I click the "(.*?)" link$/) do |link|
 end
 
 When(/^I click the first "(.*?)" link$/) do |link|
-  click_link(link, :match => :first)
+  click_link(link, match: :first)
 end
 
 When(/^I click the second "(.*?)" link$/) do |link|

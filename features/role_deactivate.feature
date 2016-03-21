@@ -32,5 +32,5 @@ Feature: Assistant roles deactivation
         And there is a student with name "Blarg" with nusp "123459" and email "aluani@usp.br"
         And there is a deactivated assistant role for student "Blarg" with professor "Dude" at course "MAC0110"
         And I visit my assistant roles page
-        And "Bob" active status should be "ativo"
-        And "Blarg" active status should be "desativado"
+        And "Bob" active status should be active
+        And "Blarg" active status should be deactivated
