@@ -4,6 +4,7 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :recoverable, :rememberable, :trackable, :validatable, :confirmable, :omniauthable, :authentication_keys => [:nusp], :omniauth_providers => [:usp]
 
   include ActiveModel::Validations
+  #include Devise::Controllers::Helpers
 
   validates :name , presence: true
   validates :nusp , presence: true, inclusion: { in: 0..100000000 }, uniqueness: true
