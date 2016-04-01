@@ -1,5 +1,6 @@
 class RequestForTeachingAssistant < ActiveRecord::Base
   include ActiveModel::Validations
+  #include Devise::Controllers::Helpers
   validates :professor_id, presence: true
   validates :requested_number, presence: true, inclusion: { in: 1..32 }
   validates :priority, presence: true, inclusion: { in: 0..2 }
@@ -8,4 +9,8 @@ class RequestForTeachingAssistant < ActiveRecord::Base
   belongs_to :course
   belongs_to :professor
   belongs_to :semester
+
+  def can_be_changed_by? user
+    semester.open or (semester.active and (user.is_a? Secretary or user.super_professor?))
+  end
 end
