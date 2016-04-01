@@ -54,7 +54,7 @@
       <th>Aluno(a)</th>
       <th>Disciplina</th>
       <th>Professor(a)</th>
-      <th colspan="3"></th>
+      <th colspan="4"></th>
     </tr>
   </thead>
   <tbody>
@@ -86,7 +86,11 @@
           <td>
             <%= small_button_link_to "Atestado", certificate_path(role.id, :format => :pdf), method: :get, target: "_blank" %>
           </td>
+          <td>
+            <%= small_button_link_to "Remover", destroy_assistant_role_path(role), method: :delete, data: { confirm: 'Deseja mesmo remover PERMANENTEMENTE esse monitor?'} %>
+          </td>
         <% else %>
+            <td></td>
             <td></td>
         <% end %>
       </tr>
