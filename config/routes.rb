@@ -103,6 +103,7 @@ Rails.application.routes.draw do
   post 'assistant_roles/request_evaluations_for_semester/:semester_id' => 'assistant_roles#request_evaluations_for_semester', as: :request_assistant_evaluations_for_semester
   post 'assistant_roles/:request_for_teaching_assistant_id/:student_id/create' => 'assistant_roles#create', as: :create_assistant_role
   post 'assistant_roles/deactivate_assistant_role/:id' => 'assistant_roles#deactivate_assistant_role', as: :deactivate_assistant_role
+  post 'assistant_roles/reactivate_assistant_role/:id' => 'assistant_roles#reactivate_assistant_role', as: :reactivate_assistant_role
   patch 'assistant_roles/:id/' => 'assistant_roles#update', as: :update_assistant_role
   delete 'assistant_roles/:id/' => 'assistant_roles#destroy', as: :destroy_assistant_role
 
