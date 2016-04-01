@@ -2,7 +2,7 @@
 <h1>Minhas candidaturas</h1>
 
 <% if @candidatures.any? %>
-  <% @candidatures.each do |candidature| %>
+  <% @candidatures.reverse.each do |candidature| %>
     <table class="table table-hover">
       <thead>
         <tr>
@@ -72,7 +72,7 @@
     <table class="table table-hover">
       <thead>
         <tr>
-          <th colspan="2">
+          <th colspan="5">
             <%= role.semester.period_as_s %>
           </th>
         </tr>
@@ -82,7 +82,7 @@
           <td class="title">
             Curso
           </td>
-          <td class="name">
+          <td class="name" colspan="4">
             <%= role.course.full_name %>
           </td>
         </tr>
@@ -90,17 +90,40 @@
           <td class="title">
             Professor
           </td>
-          <td class="name">
+          <td class="name" colspan="4">
             <%= role.professor.name %>
           </td>
         </tr>
+        <tr>
+          <td class="title">
+            Presenças marcadas
+          </td>
+          <% role.request_for_teaching_assistant.semester.months.each do |month| %>
+            <td>
+              <%= month_name month %>:
+              <% status = role.frequency_status_for_month(month) %>
+              <% if status == "Presente" %>
+                <% style = "text-success" %>
+              <% elsif status == "Pendente" %>
+                <% style = "text-warning" %>
+              <% elsif status == "Ausente" %>
+                <% style = "text-danger" %>
+              <% else %>
+                <% style = "text-muted" %>
+              <% end %>
+              <strong class="<%= style %>">
+                <%= status %>
+              </strong>
+            </td>
+          <% end %>
+        </tr>
         <% if (role.report_filled?) %>
           <tr>
-            <td colspan="2"><%= button_link_to 'Ver relatório', print_report_path(role.id, :format => :pdf), target: "_blank" %></td>
+            <td colspan="5"><%= button_link_to 'Ver relatório', print_report_path(role.id, :format => :pdf), target: "_blank" %></td>
           </tr>
         <% elsif @enable_report == true %>
           <tr>
-            <td colspan="2"><%= button_link_to 'Preencher relatório', report_form_path(role.id) %></td>
+            <td colspan="5"><%= button_link_to 'Preencher relatório', report_form_path(role.id) %></td>
           </tr>
         <% end %>
       </tbody>
