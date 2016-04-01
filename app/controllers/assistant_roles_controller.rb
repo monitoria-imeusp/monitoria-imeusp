@@ -121,7 +121,23 @@ class AssistantRolesController < ApplicationController
         format.json { head :no_content }
       end
     end
-  end   
+  end
+
+  def reactivate_assistant_role
+    if AssistantRole.exists? params[:id]
+      @assistant_role = AssistantRole.find params[:id]
+      @assistant_role.reactivate
+      respond_to do |format|
+        format.html { redirect_to assistant_roles_path }
+        format.json { head :no_content }
+      end
+    else
+      respond_to do |format|
+        format.html { redirect_to assistant_roles_path }
+        format.json { head :no_content }
+      end
+    end
+  end
 
   def certificate
     if AssistantRole.exists? params[:id]
