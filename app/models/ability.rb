@@ -251,6 +251,7 @@ class Ability
       can :destroy, AssistantRole
       can :monthly_control, AssistantFrequency
       can :deactivate_assistant_role, AssistantRole
+      can :reactivate_assistant_role, AssistantRole
       can :print_report, AssistantRole
       can :mark_generic_assistant_role_frequency, AssistantFrequency
       can :update, AssistantFrequency

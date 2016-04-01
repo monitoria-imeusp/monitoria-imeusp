@@ -46,7 +46,7 @@ class CandidaturesController < ApplicationController
     authorization_same_student params[:student_id]
     student = Student.find(params[:student_id])
     @candidatures = Candidature.where(student_id: student.id).order(:semester_id)
-    @roles = AssistantRole.where(student_id: student.id)
+    @roles = AssistantRole.where(student_id: student.id).order(:created_at).reverse
     @semesters = Semester.all_open.map do |semester|
       { get: semester, valid: (not already_for_semester?(student.id, semester.id)) }
     end

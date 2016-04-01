@@ -22,6 +22,10 @@ class AssistantRole < ActiveRecord::Base
   def deactivate
     update_column(:active, false)
   end
+  
+  def reactivate
+    update_column(:active, true)
+  end
 
   def report_filled?
     !(report_creation_date.nil?)

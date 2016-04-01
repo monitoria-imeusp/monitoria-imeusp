@@ -54,7 +54,7 @@
       <th>Aluno(a)</th>
       <th>Disciplina</th>
       <th>Professor(a)</th>
-      <th colspan="3"></th>
+      <th colspan="4"></th>
     </tr>
   </thead>
   <tbody>
@@ -67,25 +67,30 @@
           <td>
             <%if role.active %>
               <% if secretary_signed_in? %>
-                  <%= button_link_to "Desativar", deactivate_assistant_role_path(role.id), method: :post, data: { confirm: 'Deseja mesmo desativar este monitor?' } %>
+                  <%= small_button_link_to "Desativar", deactivate_assistant_role_path(role.id), method: :post, data: { confirm: 'Deseja mesmo desativar este monitor?' } %>
               <% else %>
                   Ativo
               <% end %>
             <% else %>
               Desativado
+              <%= small_button_link_to "Reativar", reactivate_assistant_role_path(role.id), method: :post, data: { confirm: 'Deseja mesmo reativar este monitor?' } %>
             <% end %>
           </td>
         <% end %>
         <td>
           <% if role.report_filled? %>
-          <%= button_link_to 'Ver relatório', print_report_path(role.id, :format => :pdf), target: "_blank" %>
+          <%= small_button_link_to 'Ver relatório', print_report_path(role.id, :format => :pdf), target: "_blank" %>
           <% end %>
         </td>
         <% if secretary_signed_in? or admin_signed_in? %>
           <td>
-            <%= button_link_to "Atestado", certificate_path(role.id, :format => :pdf), method: :get, target: "_blank" %>
+            <%= small_button_link_to "Atestado", certificate_path(role.id, :format => :pdf), method: :get, target: "_blank" %>
+          </td>
+          <td>
+            <%= small_button_link_to "Remover", destroy_assistant_role_path(role), method: :delete, data: { confirm: 'Deseja mesmo remover PERMANENTEMENTE esse monitor?'} %>
           </td>
         <% else %>
+            <td></td>
             <td></td>
         <% end %>
       </tr>
