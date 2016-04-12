@@ -95,25 +95,31 @@
           </td>
         </tr>
         <tr>
-          <td class="title">
-            Presenças marcadas
-          </td>
-          <% role.request_for_teaching_assistant.semester.months.each do |month| %>
-            <td>
-              <%= month_name month %>:
-              <% status = role.frequency_status_for_month(month) %>
-              <% if status == "Presente" %>
-                <% style = "text-success" %>
-              <% elsif status == "Pendente" %>
-                <% style = "text-warning" %>
-              <% elsif status == "Ausente" %>
-                <% style = "text-danger" %>
-              <% else %>
-                <% style = "text-muted" %>
-              <% end %>
-              <strong class="<%= style %>">
-                <%= status %>
-              </strong>
+          <% if role.active %>
+            <td class="title">
+              Presenças marcadas
+            </td>
+            <% role.request_for_teaching_assistant.semester.months.each do |month| %>
+              <td>
+                <%= month_name month %>:
+                <% status = role.frequency_status_for_month(month) %>
+                <% if status == "Presente" %>
+                  <% style = "text-success" %>
+                <% elsif status == "Pendente" %>
+                  <% style = "text-warning" %>
+                <% elsif status == "Ausente" %>
+                  <% style = "text-danger" %>
+                <% else %>
+                  <% style = "text-muted" %>
+                <% end %>
+                <strong class="<%= style %>">
+                  <%= status %>
+                </strong>
+              </td>
+            <% end %>
+          <% else %>
+            <td colspan="5" class="text-center">
+              <strong>DESATIVADO(A)</strong>
             </td>
           <% end %>
         </tr>
