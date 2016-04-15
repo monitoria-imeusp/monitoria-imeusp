@@ -33,14 +33,7 @@ class SemestersController < ApplicationController
 
   def activate
     @semester = Semester.find params[:id]
-    if !Delayed::Job.where(queue: "notify_frequencies_queue").any?
-      if @semester.parity == 0
-        Delayed::Job.enqueue(FrequencyMailJob.new,priority: 0, run_at: DateTime.new(Time.now.year, 3, 20, 0, 0, -3).getutc)
-      else
-        Delayed::Job.enqueue(FrequencyMailJob.new,priority: 0, run_at: DateTime.new(Time.now.year, 8, 20, 0, 0, -3).getutc)            
-      end
-    end
-
+    AssistantFrequency.schedule_notifications 1
     change_state false, true
   end
 
