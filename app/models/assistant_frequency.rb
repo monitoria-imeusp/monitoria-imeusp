@@ -47,13 +47,11 @@ class AssistantFrequency < ActiveRecord::Base
   end
 
   def self.schedule_notifications period
-    if !Delayed::Job.where(queue: "notify_frequencies_queue").any?
-      if @semester.parity == 0
-        Delayed::Job.enqueue(FrequencyMailJob.new,priority: 0, run_at: DateTime.new(Time.now.year, 2+period, 20, 0, 0, -3).getutc)
-      else
-        Delayed::Job.enqueue(FrequencyMailJob.new,priority: 0, run_at: DateTime.new(Time.now.year, 7+period, 20, 0, 0, -3).getutc)            
-      end
-    end
+    month = Semester.current.months[period-1]
+    Delayed::Job.enqueue(FrequencyMailJob.new, priority: 0, run_at: DateTime.new(Time.now.year, month, 20, 0, 0, -3).getutc)
+    Delayed::Job.enqueue(FrequencyReminderJob.new, priority: 0, run_at: DateTime.new(Time.now.year, month, 26, 0, 0, -3).getutc)
+    #Delayed::Job.enqueue(FrequencyReminderJob.new, priority: 0, run_at: DateTime.new(Time.now.year, month, 30, 0, 0, -3).getutc)
+    # NOTE: February is never included as for frequency, so there will always be a 30th day of the current onth
   end
 
   def self.notify_frequency
@@ -66,9 +64,8 @@ class AssistantFrequency < ActiveRecord::Base
     professors.uniq.each do |professor|   
       NotificationMailer.frequency_request_notification(professor).deliver
     end
-    Delayed::Job.enqueue(FrequencyReminderJob.new, priority: 0, run_at: 11.days.from_now.getutc)
     if (Time.now.month != 6 && Time.now.month != 11)
-      Delayed::Job.enqueue(FrequencyMailJob.new, priority: 0, run_at: 1.months.from_now.getutc)
+      schedule_notifications Semester.month_to_period(Time.now.month + 1)
     end
   end
 
