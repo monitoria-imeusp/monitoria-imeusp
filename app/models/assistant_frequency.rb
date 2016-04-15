@@ -46,6 +46,16 @@ class AssistantFrequency < ActiveRecord::Base
     AssistantFrequency.where assistant_role: (AssistantRole.for_semester Semester.current)
   end
 
+  def self.schedule_notifications period
+    if !Delayed::Job.where(queue: "notify_frequencies_queue").any?
+      if @semester.parity == 0
+        Delayed::Job.enqueue(FrequencyMailJob.new,priority: 0, run_at: DateTime.new(Time.now.year, 2+period, 20, 0, 0, -3).getutc)
+      else
+        Delayed::Job.enqueue(FrequencyMailJob.new,priority: 0, run_at: DateTime.new(Time.now.year, 7+period, 20, 0, 0, -3).getutc)            
+      end
+    end
+  end
+
   def self.notify_frequency
     professors = []
     semester = Semester.current
