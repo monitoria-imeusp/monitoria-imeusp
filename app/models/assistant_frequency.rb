@@ -47,7 +47,7 @@ class AssistantFrequency < ActiveRecord::Base
   end
 
   def self.schedule_notifications period
-    month = Semester.current.months[period-1]
+    month = Semester.current.months[period]
     Delayed::Job.enqueue(FrequencyMailJob.new, priority: 0, run_at: DateTime.new(Time.now.year, month, 20, 0, 0, -3).getutc)
     Delayed::Job.enqueue(FrequencyReminderJob.new, priority: 0, run_at: DateTime.new(Time.now.year, month, 26, 0, 0, -3).getutc)
     #Delayed::Job.enqueue(FrequencyReminderJob.new, priority: 0, run_at: DateTime.new(Time.now.year, month, 30, 0, 0, -3).getutc)
@@ -64,8 +64,9 @@ class AssistantFrequency < ActiveRecord::Base
     professors.uniq.each do |professor|   
       NotificationMailer.frequency_request_notification(professor).deliver
     end
-    if (Time.now.month != 6 && Time.now.month != 11)
-      schedule_notifications Semester.month_to_period(Time.now.month + 1)
+    month = Time.now.month
+    if (month != 6 && month != 11)
+      schedule_notifications Semester.month_to_period(month + 1)
     end
   end
 
