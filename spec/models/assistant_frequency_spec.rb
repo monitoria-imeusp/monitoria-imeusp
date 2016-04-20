@@ -6,8 +6,8 @@ end
 
 describe AssistantFrequency do
   let(:now) { DateTime.new(2016, 4, 20, 1, 0, 0) }
-  let(:frequency_mail_params) {{ priority: 0, run_at: DateTime.new(2016, 5, 20, 0, 0, -3).getutc }}
-  let(:remainder_mail_params) {{ priority: 0, run_at: DateTime.new(2016, 5, 26, 0, 0, -3).getutc }}
+  let(:frequency_mail_params) {{ priority: 0, run_at: DateTime.new(2016, 5, 20, 8, 0, 0).getutc }}
+  let(:remainder_mail_params) {{ priority: 0, run_at: DateTime.new(2016, 5, 26, 8, 0, 0).getutc }}
   let!(:semester) { FactoryGirl.create :semester, parity: 0 }
   let!(:department) { FactoryGirl.create :department }
   let!(:user) { FactoryGirl.create :user }

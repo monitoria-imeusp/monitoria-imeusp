@@ -48,8 +48,8 @@ class AssistantFrequency < ActiveRecord::Base
 
   def self.schedule_notifications period
     month = Semester.current.months[period]
-    Delayed::Job.enqueue(FrequencyMailJob.new, priority: 0, run_at: DateTime.new(Time.now.year, month, 20, 0, 0, -3).getutc)
-    Delayed::Job.enqueue(FrequencyReminderJob.new, priority: 0, run_at: DateTime.new(Time.now.year, month, 26, 0, 0, -3).getutc)
+    Delayed::Job.enqueue(FrequencyMailJob.new, priority: 0, run_at: DateTime.new(Time.now.year, month, 20, 8, 0, 0).getutc)
+    Delayed::Job.enqueue(FrequencyReminderJob.new, priority: 0, run_at: DateTime.new(Time.now.year, month, 26, 8, 0, 0).getutc)
     #Delayed::Job.enqueue(FrequencyReminderJob.new, priority: 0, run_at: DateTime.new(Time.now.year, month, 30, 0, 0, -3).getutc)
     # NOTE: February is never included as for frequency, so there will always be a 30th day of the current onth
   end
