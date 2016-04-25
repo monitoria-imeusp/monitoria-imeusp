@@ -49,6 +49,24 @@ class AssistantRole < ActiveRecord::Base
     end
   end
 
+  def self.all_current
+    semester = Semester.current
+    requests = RequestForTeachingAssistant.where(semester: semester)
+    AssistantRole.where(request_for_teaching_assistant: requests).each do |role|
+      yield role
+    end
+  end
+
+  def self.pending_for_month month
+    semester = Semester.current
+    requests = RequestForTeachingAssistant.where(semester: semester)
+    AssistantRole.where(request_for_teaching_assistant: requests).each do |role|
+      if !AssistantFrequency.where(month: month, assistant_role: role).any?
+        yield role
+      end
+    end
+  end
+
   def frequency_status_for_month month
     found = false
     assistant_frequency.each do |freq|

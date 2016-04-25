@@ -10,8 +10,24 @@
 
     <p>
       Precisamos que você indique a frequência de 
-      seu(s) monitor(es) para o mês atual. 
+      seu(s) monitor(es) para o mês atual:
     </p>
+    <table border=1 class="table">
+      <thead>
+        <tr>
+          <th> Monitor </th>
+          <th> Disciplina </th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @roles.each do |role| %>
+          <tr>
+            <td align="center"> <%= role.student.name %> </td>
+            <td align="center"> <%= role.course.full_name %> </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
     <p>
       Por favor, acesse a página <%= button_link_to "monitoria.ime.usp.br", "http://monitoria.ime.usp.br"%>, faça login pelo "Acesso USP" e acesse a seção "Meus monitores", 
       na qual poderá marcar a(s) frequência(s).

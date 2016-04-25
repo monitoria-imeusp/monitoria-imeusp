@@ -13,12 +13,19 @@ class NotificationMailer < ActionMailer::Base
     mail(to: professor.email, subject: "Avaliação de monitor(a)")
   end
 
-  def frequency_request_notification professor
+  def frequency_request_notification professor, roles
     @professor = professor
+    @roles = roles
     mail(to: professor.email, subject: "Frequência de monitor(es)")
   end
 
-  def pending_frequencies_notification pending_roles, super_professor
+  def pending_frequencies_notification student, roles
+    @student = student
+    @roles = roles
+    mail(to: super_professor.email, subject: "Frequência(s) pendente(s) de monitor(es)")
+  end
+
+  def last_pending_frequencies_notification pending_roles, super_professor
     @super_professor = super_professor
     @pending_roles = pending_roles
     mail(to: super_professor.email, subject: "Frequência(s) pendente(s) de monitor(es)")
