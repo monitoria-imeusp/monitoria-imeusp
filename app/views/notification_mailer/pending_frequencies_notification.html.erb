@@ -5,12 +5,10 @@
   </head>
   <body>
     <p>
-      Prezado(a) <%= @student.name %>,
+      Caro(a) monitor(a) <%= @student.name %>,
     </p>
-
     <p>
-      Estamos enviando essa mensagem para lhe avisar que sua frequência como
-      monitor para o mês atual nas disciplinas:
+      Até o presente momento a sua frequência referente a este mês não consta como cadastrada no Sistema de Monitoria para as seguintes disciplinas:
     </p>
     <table border=1 class="table">
       <thead>
@@ -20,23 +18,22 @@
         </tr>
       </thead>
       <tbody>
-        <% @pending_roles.each do |role| %>
+        <% @roles.each do |role| %>
         <tr>
           <td align="center"> <%= role.course.full_name %> </td>
           <td align="center"> <%= role.professor.name %> </td>
         </tr>
         <% end %>
       </tbody>
-   </table>
+    </table>
     <p>
-      Ainda não foi marcada pelo(s) docente(s) responsável(is). Sugerimos tratar
-      essa pendência diretamente com ele(a).
+      Nós enviamos um e-mail lembrete ao(s) docente(s) responsável(is) pela sua monitoria, mas, de toda forma, gostaríamos de solicitar a você a gentileza de procurá-los(as) para recordá-los(as) de que a frequência deve ser cadastrada até o último dia do mês de referência.
+    <p>
+      Agradecemos antecipadamente e, em caso de dúvidas, por favor contate a Seção de Monitoria do IME.
     </p>
     <p>
-      Caso não existam mais pendências, por favor desconsidere esta mensagem.
-    </p>
-    <p>
-      Estamos a disposição em caso de dúvidas.
+      Att.<br/>
+      Sistema de Monitoria
     </p>
     <p>
       Comissão de Monitoria IME/USP<br>
