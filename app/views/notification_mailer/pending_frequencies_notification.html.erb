@@ -5,41 +5,35 @@
   </head>
   <body>
     <p>
-      Prezado(a) <%= @super_professor.name %>,
+      Caro(a) monitor(a) <%= @student.name %>,
     </p>
-
     <p>
-      Precisamos que você indique a frequência do(s) 
-      seguinte(s) monitor(es) que ainda estão com 
-      frequência pendente para o mês atual:
+      Até o presente momento a sua frequência referente a este mês não consta como cadastrada no Sistema de Monitoria para as seguintes disciplinas:
     </p>
     <table border=1 class="table">
       <thead>
         <tr>
-          <th> Monitor </th>
-          <th> Professor </th>
           <th> Disciplina </th>
+          <th> Professor </th>
         </tr>
       </thead>
       <tbody>
-        <% @pending_roles.each do |role| %>
+        <% @roles.each do |role| %>
         <tr>
-          <td align="center"> <%= role.student.name %> </td>
-          <td align="center"> <%= role.professor.name %> </td>
           <td align="center"> <%= role.course.full_name %> </td>
+          <td align="center"> <%= role.professor.name %> </td>
         </tr>
         <% end %>
       </tbody>
-   </table>
+    </table>
     <p>
-      Por favor, acesse a página <%= button_link_to "monitoria.ime.usp.br", "http://monitoria.ime.usp.br"%>, faça login pelo "Acesso USP" e acesse a seção "Monitores eleitos", 
-      na qual poderá marcar a(s) frequência(s).
+      Nós enviamos um e-mail lembrete ao(s) docente(s) responsável(is) pela sua monitoria, mas, de toda forma, gostaríamos de solicitar a você a gentileza de procurá-los(as) para recordá-los(as) de que a frequência deve ser cadastrada até o último dia do mês de referência.
+    <p>
+      Agradecemos antecipadamente e, em caso de dúvidas, por favor contate a Seção de Monitoria do IME.
     </p>
     <p>
-      Caso não existam mais pendências, por favor desconsidere esta mensagem.
-    </p>
-    <p>
-      Estamos a disposição em caso de dúvidas.
+      Att.<br/>
+      Sistema de Monitoria
     </p>
     <p>
       Comissão de Monitoria IME/USP<br>

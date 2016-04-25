@@ -55,14 +55,13 @@ class AssistantFrequency < ActiveRecord::Base
   end
 
   def self.notify_frequency
-    professors = []
-    semester = Semester.current
-    requests = RequestForTeachingAssistant.where(semester: semester)
-    AssistantRole.where(request_for_teaching_assistant: requests).each do |assistant|
-      professors.push(assistant.professor)
+    professors = {}
+    AssistantRole.all_current do |role|
+      professors[role.professor] = [] unless professors.key? role.professor
+      professors[role.professor].push role
     end
-    professors.uniq.each do |professor|   
-      NotificationMailer.frequency_request_notification(professor).deliver
+    professors.each do |professor, roles|
+      NotificationMailer.frequency_request_notification(professor, roles).deliver
     end
     month = Time.now.month
     if (month != 6 && month != 11)
@@ -71,6 +70,23 @@ class AssistantFrequency < ActiveRecord::Base
   end
 
   def self.notify_frequency_reminder
+    professors = {}
+    students = {}
+    AssistantRole.pending_for_month(Time.now.month) do |role|
+      professors[role.professor] = [] unless professors.key? role.professor
+      professors[role.professor].push role
+      students[role.student] = [] unless students.key? role.student
+      students[role.student].push role
+    end
+    professors.each do |professor, roles|
+      NotificationMailer.frequency_request_notification(professor, roles).deliver
+    end
+    students.each do |student, roles|
+      NotificationMailer.pending_frequencies_notification(student, roles).deliver
+    end
+  end
+
+  def self.notify_last_frequency_reminder
     semester = Semester.current
     requests = RequestForTeachingAssistant.where(semester: semester)
     Professor.where(:professor_rank => [1, 2]).each do |super_professor|

@@ -24,7 +24,7 @@ describe AssistantFrequency do
       expect(Delayed::Job).to receive(:enqueue).with(instance_of(FrequencyMailJob), frequency_mail_params)
 			expect(Delayed::Job).to receive(:enqueue).with(instance_of(FrequencyReminderJob), remainder_mail_params)
     	mail = double("mail", :deliver => nil)
-			expect(NotificationMailer).to receive(:frequency_request_notification).with(professor).and_return( mail )
+			expect(NotificationMailer).to receive(:frequency_request_notification).with(professor, array_including(assistant_role)).and_return( mail )
 		end
 		
 		it "calls the appropriate gem method" do
@@ -35,8 +35,8 @@ describe AssistantFrequency do
 	
 	describe "#notify_frequency_reminder" do
 		before :each do
-    		mail = double("mail", :deliver => nil)
-			expect(NotificationMailer).to receive(:pending_frequencies_notification).with(array_including(assistant_role), professor).and_return( mail )
+    	mail = double("mail", :deliver => nil)
+			expect(NotificationMailer).to receive(:pending_frequencies_notification).with(student, array_including(assistant_role)).and_return( mail )
 		end
 		
 		it "calls the appropriate gem method" do
