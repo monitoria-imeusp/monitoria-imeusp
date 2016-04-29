@@ -8,6 +8,7 @@ describe AssistantFrequency do
   let(:now) { DateTime.new(2016, 4, 20, 1, 0, 0) }
   let(:frequency_mail_params) {{ priority: 0, run_at: DateTime.new(2016, 5, 20, 8, 0, 0).getutc }}
   let(:remainder_mail_params) {{ priority: 0, run_at: DateTime.new(2016, 5, 26, 8, 0, 0).getutc }}
+  let(:last_remainder_mail_params) {{ priority: 0, run_at: DateTime.new(2016, 5, 30, 8, 0, 0).getutc }}
   let!(:semester) { FactoryGirl.create :semester, parity: 0 }
   let!(:department) { FactoryGirl.create :department }
   let!(:user) { FactoryGirl.create :user }
@@ -23,6 +24,7 @@ describe AssistantFrequency do
       expect(Time).to receive(:now).and_return(now).at_least(:once)
       expect(Delayed::Job).to receive(:enqueue).with(instance_of(FrequencyMailJob), frequency_mail_params)
 			expect(Delayed::Job).to receive(:enqueue).with(instance_of(FrequencyReminderJob), remainder_mail_params)
+      expect(Delayed::Job).to receive(:enqueue).with(instance_of(LastFrequencyReminderJob), last_remainder_mail_params)
     	mail = double("mail", :deliver => nil)
 			expect(NotificationMailer).to receive(:frequency_request_notification).with(professor, array_including(assistant_role)).and_return( mail )
 		end
