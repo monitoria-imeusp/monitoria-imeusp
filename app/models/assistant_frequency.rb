@@ -56,7 +56,7 @@ class AssistantFrequency < ActiveRecord::Base
 
   def self.notify_frequency
     professors = {}
-    AssistantRole.all_current do |role|
+    AssistantRole.all_current.each do |role|
       professors[role.professor] = [] unless professors.key? role.professor
       professors[role.professor].push role
     end
@@ -72,7 +72,7 @@ class AssistantFrequency < ActiveRecord::Base
   def self.notify_frequency_reminder
     professors = {}
     students = {}
-    AssistantRole.pending_for_month(Time.now.month) do |role|
+    AssistantRole.pending_for_month(Time.now.month).each do |role|
       professors[role.professor] = [] unless professors.key? role.professor
       professors[role.professor].push role
       students[role.student] = [] unless students.key? role.student
