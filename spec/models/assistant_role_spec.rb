@@ -20,15 +20,16 @@ describe AssistantRole do
 
     let!(:course2) { FactoryGirl.create :course2 }
     let!(:request_for_teaching_assistant2) { FactoryGirl.create :request_for_teaching_assistant, id: 2, professor_id: professor.id, course_id: course2.id }
-    let!(:assistant_role2) { FactoryGirl.create :assistant_role, request_for_teaching_assistant_id: request_for_teaching_assistant2.id, active: false }
 
     describe ".all_current" do
+      let!(:assistant_role2) { FactoryGirl.create :assistant_role, request_for_teaching_assistant_id: request_for_teaching_assistant2.id, active: false }
       subject { AssistantRole.all_current }
       it { is_expected.to include(assistant_role) }
       it { is_expected.not_to include(assistant_role2) }
     end
 
     describe ".pending_for_month" do
+      let!(:assistant_role2) { FactoryGirl.create :assistant_role, request_for_teaching_assistant_id: request_for_teaching_assistant2.id }
       subject { AssistantRole.pending_for_month 4 }
       it { is_expected.to include(assistant_role2) }
       it { is_expected.not_to include(assistant_role) }

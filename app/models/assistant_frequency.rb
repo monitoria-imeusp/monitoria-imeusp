@@ -50,7 +50,7 @@ class AssistantFrequency < ActiveRecord::Base
     month = Semester.current.months[period]
     Delayed::Job.enqueue(FrequencyMailJob.new, priority: 0, run_at: DateTime.new(Time.now.year, month, 20, 8, 0, 0).getutc)
     Delayed::Job.enqueue(FrequencyReminderJob.new, priority: 0, run_at: DateTime.new(Time.now.year, month, 26, 8, 0, 0).getutc)
-    #Delayed::Job.enqueue(FrequencyReminderJob.new, priority: 0, run_at: DateTime.new(Time.now.year, month, 30, 0, 0, -3).getutc)
+    Delayed::Job.enqueue(LastFrequencyReminderJob.new, priority: 0, run_at: DateTime.new(Time.now.year, month, 30, 0, 0, -3).getutc)
     # NOTE: February is never included as for frequency, so there will always be a 30th day of the current onth
   end
 
@@ -87,19 +87,16 @@ class AssistantFrequency < ActiveRecord::Base
   end
 
   def self.notify_last_frequency_reminder
-    semester = Semester.current
-    requests = RequestForTeachingAssistant.where(semester: semester)
+    notify_frequency_reminder
     Professor.where(:professor_rank => [1, 2]).each do |super_professor|
       pending_roles = []
-      AssistantRole.where(request_for_teaching_assistant: requests).each do |assistant|
-        if !AssistantFrequency.where(month: Time.now.month, assistant_role_id: assistant.id).any?
-          if assistant.course.department == super_professor.department
-              pending_roles.push(assistant)
-          end
+      AssistantRole.pending_for_month(Time.now.month).each do |role|
+        if role.course.department == super_professor.department
+            pending_roles.push(role)
         end
-      end        
-      if !pending_roles.empty?
-          NotificationMailer.pending_frequencies_notification(pending_roles, super_professor).deliver         
+      end
+      if pending_roles.any?
+        NotificationMailer.last_pending_frequencies_notification(pending_roles, super_professor).deliver         
       end
     end
   end

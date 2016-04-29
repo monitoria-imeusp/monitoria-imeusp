@@ -28,7 +28,7 @@ class NotificationMailer < ActionMailer::Base
   def last_pending_frequencies_notification pending_roles, super_professor
     @super_professor = super_professor
     @pending_roles = pending_roles
-    mail(to: super_professor.email, subject: "Frequência(s) pendente(s) de monitor(es)")
+    mail(to: super_professor.email, subject: "Professores com frequência pendente de monitor(es)")
   end
 
 end
