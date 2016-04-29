@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <p>
+      Caro membro da comissão de monitoria,
+    </p>
+    <p>
+      Os seguintes docentes ainda não registraram a frequência de monitores este mês:
+    </p>
+    <table border=1 class="table">
+      <thead>
+        <tr>
+          <th> Docente </th>
+          <th> Disciplina </th>
+          <th> Monitor(a) </th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @pending_roles.each do |role| %>
+        <tr>
+          <td align="center"> <%= role.professor.name %> </td>
+          <td align="center"> <%= role.course.full_name %> </td>
+          <td align="center"> <%= role.student.name %> </td>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+    <p>
+      Nós enviamos um e-mail lembrete ao(s) docente(s) listados, mas, de toda forma, gostaríamos de solicitar a você a gentileza de procurá-los(as) para recordá-los(as) de que a frequência deve ser cadastrada até o último dia do mês de referência ou de registrar a frequência dos monitores em nome do(s) docente(s).
+    <p>
+      Agradecemos antecipadamente e, em caso de dúvidas, por favor contate a Seção de Monitoria do IME.
+    </p>
+    <p>
+      Att.<br/>
+      Sistema de Monitoria
+    </p>
+    <p>
+      Comissão de Monitoria IME/USP<br>
+      E-mail: monitoria@ime.usp.br<br>
+      Telefone: 11 3091-6107<br>
+    </p>
+  </body>
+</html>

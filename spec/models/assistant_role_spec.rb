@@ -16,6 +16,27 @@ describe AssistantRole do
   let!(:assistant_frequency1) { FactoryGirl.create :assistant_frequency, month: 3, presence: true}
   let!(:assistant_frequency2) { FactoryGirl.create :assistant_frequency, month: 4, presence: false}
   
+  context "more than one assistant" do
+
+    let!(:course2) { FactoryGirl.create :course2 }
+    let!(:request_for_teaching_assistant2) { FactoryGirl.create :request_for_teaching_assistant, id: 2, professor_id: professor.id, course_id: course2.id }
+
+    describe ".all_current" do
+      let!(:assistant_role2) { FactoryGirl.create :assistant_role, request_for_teaching_assistant_id: request_for_teaching_assistant2.id, active: false }
+      subject { AssistantRole.all_current }
+      it { is_expected.to include(assistant_role) }
+      it { is_expected.not_to include(assistant_role2) }
+    end
+
+    describe ".pending_for_month" do
+      let!(:assistant_role2) { FactoryGirl.create :assistant_role, request_for_teaching_assistant_id: request_for_teaching_assistant2.id }
+      subject { AssistantRole.pending_for_month 4 }
+      it { is_expected.to include(assistant_role2) }
+      it { is_expected.not_to include(assistant_role) }
+    end
+
+  end
+
   describe "#frequency_status_for_month" do
     
     context "when presence is true" do

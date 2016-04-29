@@ -9,11 +9,11 @@ class FrequencyReminderJob
 	end
 
 	def destroy_failed_jobs?
-    	false
-  	end
+  	false
+	end
 
-  	def queue_name
-  		'pending_frequencies_queue'
-  	end
+	def queue_name
+		'pending_frequencies_queue'
+	end
 
 end

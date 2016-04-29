@@ -52,18 +52,12 @@ class AssistantRole < ActiveRecord::Base
   def self.all_current
     semester = Semester.current
     requests = RequestForTeachingAssistant.where(semester: semester)
-    AssistantRole.where(request_for_teaching_assistant: requests).each do |role|
-      yield role
-    end
+    AssistantRole.where(request_for_teaching_assistant: requests, active: true)
   end
 
   def self.pending_for_month month
-    semester = Semester.current
-    requests = RequestForTeachingAssistant.where(semester: semester)
-    AssistantRole.where(request_for_teaching_assistant: requests).each do |role|
-      if !AssistantFrequency.where(month: month, assistant_role: role).any?
-        yield role
-      end
+    all_current.select do |role|
+      AssistantFrequency.where(month: month, assistant_role: role).empty?
     end
   end
 
