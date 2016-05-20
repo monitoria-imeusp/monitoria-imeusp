@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-RSpec::Matchers.define :is_time do |t1| 
+RSpec::Matchers.define :is_time do |t1|
 	match { |t2| t1.to_s == t2.to_s }
 end
 
@@ -9,6 +9,7 @@ describe AssistantFrequency do
   let(:frequency_mail_params) {{ priority: 0, run_at: DateTime.new(2016, 5, 20, 8, 0, 0).getutc }}
   let(:remainder_mail_params) {{ priority: 0, run_at: DateTime.new(2016, 5, 26, 8, 0, 0).getutc }}
   let(:last_remainder_mail_params) {{ priority: 0, run_at: DateTime.new(2016, 5, 30, 8, 0, 0).getutc }}
+  let(:close_frequency_period_params) {{ priority: 0, run_at: DateTime.new(2016, 6, 2, 8, 0, 0).getutc }}
   let!(:semester) { FactoryGirl.create :semester, parity: 0 }
   let!(:department) { FactoryGirl.create :department }
   let!(:user) { FactoryGirl.create :user }
@@ -25,26 +26,27 @@ describe AssistantFrequency do
       expect(Delayed::Job).to receive(:enqueue).with(instance_of(FrequencyMailJob), frequency_mail_params)
 			expect(Delayed::Job).to receive(:enqueue).with(instance_of(FrequencyReminderJob), remainder_mail_params)
       expect(Delayed::Job).to receive(:enqueue).with(instance_of(LastFrequencyReminderJob), last_remainder_mail_params)
+      expect(Delayed::Job).to receive(:enqueue).with(instance_of(CloseFrequencyPeriodJob), close_frequency_period_params)
     	mail = double("mail", :deliver => nil)
 			expect(NotificationMailer).to receive(:frequency_request_notification).with(professor, array_including(assistant_role)).and_return( mail )
 		end
-		
+
 		it "calls the appropriate gem method" do
 			AssistantFrequency.notify_frequency
 		end
-		
+
 	end
-	
+
 	describe "#notify_frequency_reminder" do
 		before :each do
     	mail = double("mail", :deliver => nil)
 			expect(NotificationMailer).to receive(:pending_frequencies_notification).with(student, array_including(assistant_role)).and_return( mail )
 		end
-		
+
 		it "calls the appropriate gem method" do
 			AssistantFrequency.notify_frequency_reminder
 		end
-		
+
 	end
 
 end
