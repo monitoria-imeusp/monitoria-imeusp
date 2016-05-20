@@ -55,7 +55,10 @@ class AssistantFrequency < ActiveRecord::Base
   end
 
   def self.notify_frequency
+    # FIXME: use period instead of month
+    month = Time.now.month
     professors = {}
+    Semester.current.open_frequency_month month
     AssistantRole.all_current.each do |role|
       professors[role.professor] = [] unless professors.key? role.professor
       professors[role.professor].push role
@@ -63,7 +66,6 @@ class AssistantFrequency < ActiveRecord::Base
     professors.each do |professor, roles|
       NotificationMailer.frequency_request_notification(professor, roles).deliver
     end
-    month = Time.now.month
     if (month != 6 && month != 11)
       schedule_notifications Semester.month_to_period(month + 1)
     end
@@ -96,7 +98,7 @@ class AssistantFrequency < ActiveRecord::Base
         end
       end
       if pending_roles.any?
-        NotificationMailer.last_pending_frequencies_notification(pending_roles, super_professor).deliver         
+        NotificationMailer.last_pending_frequencies_notification(pending_roles, super_professor).deliver
       end
     end
   end
