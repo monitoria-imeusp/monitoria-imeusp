@@ -1,12 +1,19 @@
 
 <h1>Candidaturas por departamento:</h2>
-<ul>
-<% @departments.each do |dep| %>
-  <li>
-    <%= button_link_to dep.code, candidatures_for_department_path(Semester.current, dep) %>
-  </li>
-<% end %>
-</ul>
+
+<div class="row" style="height:5em">
+  <%= button_link_to "Realizar candidatura em nome de aluno(a)", new_candidature_path(Semester.current) %>
+</div>
+
+<div class "row">
+  <ul>
+  <% @departments.each do |dep| %>
+    <li>
+      <%= button_link_to dep.code, candidatures_for_department_path(Semester.current, dep) %>
+    </li>
+  <% end %>
+  </ul>
+</div>
 
 <% if @current_department %>
   <% dep = @current_department.code %>

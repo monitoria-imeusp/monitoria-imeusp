@@ -16,19 +16,25 @@ class NotificationMailer < ActionMailer::Base
   def frequency_request_notification professor, roles
     @professor = professor
     @roles = roles
-    mail(to: professor.email, subject: "Frequência de monitor(es)")
+    mail(to: professor.email, bcc: [log_mail], subject: "Frequência de monitor(es)")
   end
 
   def pending_frequencies_notification student, roles
     @student = student
     @roles = roles
-    mail(to: student.email, subject: "Frequência(s) pendente(s) na monitoria")
+    mail(to: student.email, bcc: [log_mail], subject: "Frequência(s) pendente(s) na monitoria")
   end
 
   def last_pending_frequencies_notification pending_roles, super_professor
     @super_professor = super_professor
     @pending_roles = pending_roles
-    mail(to: super_professor.email, subject: "Professores com frequência pendente de monitor(es)")
+    mail(to: super_professor.email, bcc: [log_mail], subject: "Professores com frequência pendente de monitor(es)")
+  end
+
+  private
+
+  def log_mail
+    "monitoria.log.imeusp@gmail.com"
   end
 
 end

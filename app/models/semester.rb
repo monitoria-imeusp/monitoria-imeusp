@@ -56,6 +56,14 @@ class Semester < ActiveRecord::Base
     update(frequency_period: frequency_period & ~(1 << which))
   end
 
+  def open_frequency_month which
+    open_frequency_period(Semester.month_to_period which)
+  end
+
+  def close_frequency_month which
+    close_frequency_period(Semester.month_to_period which)
+  end
+
   def frequency_open? which
     (frequency_period & (1 << which)) != 0
   end

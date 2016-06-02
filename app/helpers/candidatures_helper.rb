@@ -13,4 +13,10 @@ module CandidaturesHelper
       [course.course_code + " - " + course.name, course.id]
     end
   end
+
+  def student_options
+    (Student.all.map do |student|
+      [student.name, student.id]
+    end).sort
+  end
 end
