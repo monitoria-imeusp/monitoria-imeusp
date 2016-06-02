@@ -10,7 +10,14 @@
       </ul>
     </div>
   <% end %>
-  
+
+  <% if secretary_signed_in? %>
+    <div class="field">
+      <%= f.label :student_id, t('activerecord.attributes.student.student') %><br>
+      <%= f.select :student_id, student_options, :include_blank => false %><br>
+    </div>
+  <% end %>
+
   <% (1..4).each do |i| %>
   <div class="biggerText">
     <div class="field">
@@ -25,7 +32,7 @@
     </div>
   </div>
   <% end %>
-  
+
   <div class="field">
     <%= f.label :daytime_availability, t('activerecord.attributes.candidature.daytime_availability') %><br>
     <%= f.check_box :daytime_availability %>
@@ -87,17 +94,17 @@ for (var i = 0; i < courseList.length; i++) {
   coursesByDep[dep].push(courseList[i]);
 }
 
-for (var i = 1; i <= 4; i++) 
+for (var i = 1; i <= 4; i++)
   updateList("ALL", i, false);
 
 function removeFromOthers(listId) {
   var select = document.getElementById("candidature_course" + listId + "_id");
   var selectedOption = select.options[select.selectedIndex];
-  if (selectedOption.text != "") removedOptions.push(selectedOption.value);  
-  
+  if (selectedOption.text != "") removedOptions.push(selectedOption.value);
+
   clearBanList(false, listId);
   oldSelectionValue[listId - 1] = select.options[select.selectedIndex].value;
-} 
+}
 
 function clearBanList(wasRadio, listId) {
 
@@ -113,7 +120,7 @@ function clearBanList(wasRadio, listId) {
       if (j != listId) {
         updateList(currDep[j-1], j, false);
       }
-    } 
+    }
   }
 
 }
