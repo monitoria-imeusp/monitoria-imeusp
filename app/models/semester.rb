@@ -99,7 +99,14 @@ class Semester < ActiveRecord::Base
   end
 
   def self.current
-    all_active.last or Semester.last
+    now = Date.today
+    result = all_active.last or Semester.last
+    Semester.where(year: now.year, active: true).each do |semester|
+      if semester.months.include? now.month
+        result = semester
+      end
+    end
+    result
   end
 
   def self.last_with active, open
