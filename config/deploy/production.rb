@@ -15,7 +15,7 @@
 # server list. The second argument is a, or duck-types, Hash and is
 # used to set extended properties on the server.
 
-server '200.144.254.81:50622', user: 'monitoria', roles: %w{web app db}
+server '143.107.45.126:10118', user: 'monitoria', roles: %w{web app db}
 
 # Custom SSH Options
 # ==================
