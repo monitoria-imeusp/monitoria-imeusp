@@ -17,30 +17,30 @@ Feature: Create a candidature
         And there is a course with name "Mascarenhas" and code "MAC0300" and department "MAC"
         And there is a course with name "Estocasticos" and code "MAE0238" and department "MAE"
         And there is a course with name "Algebra" and code "MAT0110" and department "MAT"
-        And there is a course with name "Aplicacoes" and code "MAP0456" and department "MAP" 
+        And there is a course with name "Aplicacoes" and code "MAP0456" and department "MAP"
         And I'm logged in as a student
         And I go to the new candidature form
 
 	Scenario: Student creating a candidature
 		And I select "MAC0342 - labxp" on the "Curso: 1ª opção"
 		And I select "MAC0438 - concorrente" on the "Curso: 2ª opção"
-        And I select "MAC0448 - redes" on the "Curso: 3ª opção"
-        And I select "MAC0446 - ihc" on the "Curso: 4ª opção"
-        And I mark the "Disponibilidade para trabalhar de dia" checkbox
-        And I select the preference option "Diurno"
-        And I write on the "Observações" text area "teste observações"
-        And I press the "Enviar" button
-        Then I should see "Candidatura criada com sucesso."
-        And I should see "Aluno: Joao"
-        And I should see "Curso: 1ª opção: MAC0342 - labxp"
-        And I should see "Curso: 2ª opção: MAC0438 - concorrente"
-        And I should see "Curso: 3ª opção: MAC0448 - redes"
-        And I should see "Curso: 4ª opção: MAC0446 - ihc"
-        And I should see "Disponibilidade para trabalhar de dia: Sim"
-        And I should see "Disponibilidade para trabalhar de noite: Não"
-        And I should see "Aceita ser monitor voluntário (sem bolsa): Não"
-        And I should see "Preferência de trabalhar no período: Diurno"
-        And I should see "Observações: teste observações"
+    And I select "MAC0448 - redes" on the "Curso: 3ª opção"
+    And I select "MAC0446 - ihc" on the "Curso: 4ª opção"
+    And I mark the "Disponibilidade para trabalhar de dia" checkbox
+    And I select the preference option "Diurno"
+    And I write on the "Observações" text area "teste observações"
+    And I press the "Enviar" button
+    Then I should see "Candidatura criada com sucesso."
+    And I should see "Aluno: Joao"
+    And I should see "Curso: 1ª opção: MAC0342 - labxp"
+    And I should see "Curso: 2ª opção: MAC0438 - concorrente"
+    And I should see "Curso: 3ª opção: MAC0448 - redes"
+    And I should see "Curso: 4ª opção: MAC0446 - ihc"
+    And I should see "Disponibilidade para trabalhar de dia: Sim"
+    And I should see "Disponibilidade para trabalhar de noite: Não"
+    And I should see "Aceita ser monitor voluntário (sem bolsa): Não"
+    And I should see "Preferência de trabalhar no período: Diurno"
+    And I should see "Observações: teste observações"
 
     @javascript
     Scenario: Student misses a field pattern
@@ -89,7 +89,7 @@ Feature: Create a candidature
         And "Curso: 1ª opção" should contain "MAT0110 - Algebra"
         And "Curso: 1ª opção" should contain "MAE0238 - Estocasticos"
         And "Curso: 1ª opção" should contain "MAP0456 - Aplicacoes"
-        
+
     @javascript
     Scenario: Second option courses are sorted by department
         Then "Curso: 2ª opção" should contain "MAC0342 - labxp"
@@ -121,7 +121,7 @@ Feature: Create a candidature
         And "Curso: 2ª opção" should contain "MAT0110 - Algebra"
         And "Curso: 2ª opção" should contain "MAE0238 - Estocasticos"
         And "Curso: 2ª opção" should contain "MAP0456 - Aplicacoes"
-        
+
     @javascript
     Scenario: Third option courses are sorted by department
         Then "Curso: 3ª opção" should contain "MAC0342 - labxp"
@@ -153,7 +153,7 @@ Feature: Create a candidature
         And "Curso: 3ª opção" should contain "MAT0110 - Algebra"
         And "Curso: 3ª opção" should contain "MAE0238 - Estocasticos"
         And "Curso: 3ª opção" should contain "MAP0456 - Aplicacoes"
-        
+
     @javascript
     Scenario: Fourth option courses are sorted by department
         Then "Curso: 4ª opção" should contain "MAC0342 - labxp"
