@@ -9,8 +9,8 @@ module CandidaturesHelper
   end
 
   def course_options
-    Course.all.map do |course|
-      [course.course_code + " - " + course.name, course.id]
+    Course.all.order(:course_code).map do |course|
+      [course.course_code + " - " + course.name, course.department.code, course.id]
     end
   end
 

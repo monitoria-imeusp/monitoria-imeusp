@@ -85,6 +85,7 @@ class CandidaturesController < ApplicationController
     if params[:candidature][:student_id].nil?
       params[:candidature][:student_id] = current_user.student.id
     end
+    p candidature_params
     @candidature = Candidature.new(candidature_params)
     respond_to do |format|
       if already_for_semester? @candidature.student_id, @candidature.semester_id
