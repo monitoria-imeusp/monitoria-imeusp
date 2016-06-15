@@ -68,16 +68,8 @@ class CoursesController < ApplicationController
   end
 
   private
-  def complete_course_code
-    course = params.require(:course)
-    department_code = Department.find_by(:id => course[:department_id]).code
-    unless course[:course_code].starts_with?(department_code)
-      course[:course_code] = department_code + course[:course_code]
-    end
-  end
 
   def course_params
-    complete_course_code
     params.require(:course).permit(:name, :course_code, :department_id)
   end
 end
