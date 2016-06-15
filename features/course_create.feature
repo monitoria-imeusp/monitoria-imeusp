@@ -2,7 +2,7 @@ Feature: Course creation
     In order to create a course
     As a superprofessor or admin
     I want to create a course
-    
+
     Background:
         Given there is a closed but active semester 2015/2
 
@@ -17,7 +17,7 @@ Feature: Course creation
         And I click the "Cadastrar disciplina" link
         And I fill the "Nome da Disciplina" field with "proglin"
         And I select "MAC" on the "Departamento"
-        And I fill the "Código da Disciplina" field with "0315"
+        And I fill the "Código da Disciplina" field with "MAC0315"
         And I press the "Enviar" button
         Then I should see "Nome da Disciplina: proglin"
         And I should see "Código da Disciplina: MAC0315"
@@ -31,7 +31,7 @@ Feature: Course creation
         And I click the "Cadastrar disciplina" link
         And I fill the "Nome da Disciplina" field with "proglin"
         And I select "MAC" on the "Departamento"
-        And I fill the "Código da Disciplina" field with "0315"
+        And I fill the "Código da Disciplina" field with "MAC0315"
         And I press the "Enviar" button
         Then I should see "Nome da Disciplina: proglin"
         And I should see "Código da Disciplina: MAC0315"
