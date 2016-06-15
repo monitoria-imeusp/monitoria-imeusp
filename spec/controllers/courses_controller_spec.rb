@@ -35,8 +35,6 @@ describe CoursesController do
 
       context 'when it fails to save' do
         before :each do
-          expect(Department).to receive(:find_by).with(:id => @course.department_id).and_return(@department)
-          expect(@department).to receive(:code).and_return("MAC")
           expect(@course).to receive(:save).and_return(false)
           post :create, @params
         end
@@ -45,8 +43,6 @@ describe CoursesController do
 
       context 'when it succeeds to save' do
         before :each do
-          expect(Department).to receive(:find_by).with(:id => @course.department_id).and_return(@department)
-          expect(@department).to receive(:code).and_return("MAC")
           expect(@course).to receive(:save).and_return(true)
           post :create, @params
         end
@@ -122,8 +118,6 @@ describe CoursesController do
         context 'when update fails' do
           before :each do
             expect(@course).to receive(:update).with(any_args).and_return(false)
-            expect(Department).to receive(:find_by).with(:id => @course.department_id).and_return(@department)
-            expect(@department).to receive(:code).and_return("MAC")
             put :update, id: @id, course: { id: @id, course_code: "MAC" }
             expect(assigns(:course)).to eq(@course)
           end
@@ -132,8 +126,6 @@ describe CoursesController do
 
         context 'when update succeeds' do
           before :each do
-            expect(Department).to receive(:find_by).with(:id => @course.department_id).and_return(@department)
-            expect(@department).to receive(:code).and_return("MAC")
             expect(@course).to receive(:update).with(any_args).and_return(true)
             put :update, id: @id, course: { id: @id, course_code: "MAC" }
             expect(assigns(:course)).to eq(@course)

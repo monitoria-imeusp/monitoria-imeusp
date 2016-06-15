@@ -4,7 +4,7 @@ class RequestForTeachingAssistant < ActiveRecord::Base
   validates :professor_id, presence: true
   validates :requested_number, presence: true, inclusion: { in: 1..32 }
   validates :priority, presence: true, inclusion: { in: 0..2 }
-  validates :course_id, presence: true
+  validates :course_id, presence: true, exclusion: { in: 0..0, message: "Por favor, escolha uma disciplina válida." }
   validates :semester_id, presence: true
   belongs_to :course
   belongs_to :professor
