@@ -32,7 +32,7 @@
   <div class="field">
     <%= f.label :course_id, t('activerecord.attributes.request_for_teaching_assistant.course_id') %><br>
     <%= f.select :course_id, course_options %><br>
-  </div>  
+  </div>
   <div class="field">
     <%= f.label :requested_number, t('activerecord.attributes.request_for_teaching_assistant.requested_number') %><br>
     <%= f.number_field :requested_number %>
@@ -80,8 +80,8 @@ var name;
 var id;
 <% course_options.each do |course| %>
   name = "<%= course[0] %>";
-  id = "<%= course[1] %>";
-  courseList.push({display: name, value: id});
+  id = "<%= course[2] %>";
+  courseList.push({display: name, value: id, dep: "<%= course[1] %>"});
 <% end %>
 
 coursesByDep["MAC"] = [];
@@ -91,8 +91,7 @@ coursesByDep["MAP"] = [];
 coursesByDep["ALL"] = courseList;
 
 for (var i = 0; i < courseList.length; i++) {
-  var dep = courseList[i].display.substring(0, 3);
-  coursesByDep[dep].push(courseList[i]);
+  coursesByDep[courseList[i].dep].push(courseList[i]);
 }
 
 updateList("ALL");
