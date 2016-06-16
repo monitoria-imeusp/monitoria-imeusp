@@ -1,19 +1,25 @@
 <h1>Disciplinas</h1>
 
-<table class="table table-hover">
-  <thead>
-    <tr>
-      <th><%= t('activerecord.attributes.course.course_code') %></th>
-      <th><%= t('activerecord.attributes.course.name') %></th>
-    </tr>
-  </thead>
+<div class="row">
+  <%= button_link_to "Cadastrar disciplina", new_course_path %>
+</div>
 
-  <tbody>
-    <% @courses.each do |course| %>
+<div class="row">
+  <table class="table table-hover">
+    <thead>
       <tr>
-        <td><%= button_link_to course.course_code, course %></td>
-        <td><%= course.name %></td>
+        <th><%= t('activerecord.attributes.course.course_code') %></th>
+        <th><%= t('activerecord.attributes.course.name') %></th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
+
+    <tbody>
+      <% @courses.each do |course| %>
+        <tr>
+          <td><%= button_link_to course.course_code, course %></td>
+          <td><%= course.name %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
