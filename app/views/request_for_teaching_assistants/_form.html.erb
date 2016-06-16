@@ -23,12 +23,12 @@
     </div>
   <% end %>
   <div class="biggerText">
-  <input type="radio" name="disc" onchange="updateList(this.value)" id="MAC" value="MAC"> MAC
-  <input type="radio" name="disc" onchange="updateList(this.value)" id="MAE" value="MAE"> MAE
-  <input type="radio" name="disc" onchange="updateList(this.value)" id="MAP" value="MAP"> MAP
-  <input type="radio" name="disc" onchange="updateList(this.value)" id="MAT" value="MAT"> MAT
-  <input type="radio" name="disc" onchange="updateList(this.value)" id="ALL" value="ALL" checked> Todas
-</div>
+    <input type="radio" name="disc" onchange="updateList(this.value)" id="MAC" value="MAC"> MAC
+    <input type="radio" name="disc" onchange="updateList(this.value)" id="MAE" value="MAE"> MAE
+    <input type="radio" name="disc" onchange="updateList(this.value)" id="MAP" value="MAP"> MAP
+    <input type="radio" name="disc" onchange="updateList(this.value)" id="MAT" value="MAT"> MAT
+    <input type="radio" name="disc" onchange="updateList(this.value)" id="ALL" value="ALL" checked> Todas
+  </div>
   <div class="field">
     <h4><%= f.label :course_id, t('activerecord.attributes.request_for_teaching_assistant.course_id') %></h4>
     <%= f.select :course_id, course_options %><br>
@@ -96,6 +96,17 @@ for (var i = 0; i < courseList.length; i++) {
 }
 
 updateList("ALL");
+<% if @request_for_teaching_assistant.id != nil %>
+  (function () {
+    var select = document.getElementById("request_for_teaching_assistant_course_id");
+    var id = "<%= @request_for_teaching_assistant.course_id %>"
+    for (var i = 0; i < select.length; ++i)
+      if (select.options[i].value == id) {
+        select.selectedIndex = i;
+        break;
+      }
+  }) ();
+<% end %>
 
 function updateList(dep) {
   var select = document.getElementById("request_for_teaching_assistant_course_id");
