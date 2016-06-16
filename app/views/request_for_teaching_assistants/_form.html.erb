@@ -13,12 +13,12 @@
 
   <% if current_super_professor? %>
     <div class="field">
-      <%= f.label :professor_id, t('activerecord.attributes.candidature.professor_id') %><br>
+      <h4><%= f.label :professor_id, t('activerecord.attributes.candidature.professor_id') %></h4>
       <%= f.select :professor_id, professor_options, :selected => (f.object.id or current_user.professor.id), :include_blank => false %><br>
     </div>
   <% elsif secretary_signed_in? %>
     <div class="field">
-      <%= f.label :professor_id, t('activerecord.attributes.candidature.professor_id') %><br>
+      <h4><%= f.label :professor_id, t('activerecord.attributes.candidature.professor_id') %></h4>
       <%= f.select :professor_id, professor_options, :include_blank => false %><br>
     </div>
   <% end %>
@@ -30,32 +30,33 @@
   <input type="radio" name="disc" onchange="updateList(this.value)" id="ALL" value="ALL" checked> Todas
 </div>
   <div class="field">
-    <%= f.label :course_id, t('activerecord.attributes.request_for_teaching_assistant.course_id') %><br>
+    <h4><%= f.label :course_id, t('activerecord.attributes.request_for_teaching_assistant.course_id') %></h4>
     <%= f.select :course_id, course_options %><br>
   </div>
   <div class="field">
-    <%= f.label :requested_number, t('activerecord.attributes.request_for_teaching_assistant.requested_number') %><br>
+    <h4><%= f.label :requested_number, t('activerecord.attributes.request_for_teaching_assistant.requested_number') %></h4>
     <%= f.number_field :requested_number %>
   </div>
   <div class="field">
-    <%= f.label :priority, t('activerecord.attributes.request_for_teaching_assistant.priority') %><br>
+    <h4><%= f.label :priority, t('activerecord.attributes.request_for_teaching_assistant.priority') %></h4>
     <% priorityOptions.each do | option | %>
       <%= f.radio_button :priority, option[1] %>
       <%= f.label option[0] %>
       </br>
     <% end %>
   </div>
+  <h4><strong>Exigências</strong></h4>
   <div class="field">
-    <%= f.label :student_assistance, t('activerecord.attributes.request_for_teaching_assistant.student_assistance') %><br>
     <%= f.check_box :student_assistance %>
+    <%= f.label :student_assistance, t('activerecord.attributes.request_for_teaching_assistant.student_assistance') %>
   </div>
   <div class="field">
-    <%= f.label :work_correction, t('activerecord.attributes.request_for_teaching_assistant.work_correction') %><br>
     <%= f.check_box :work_correction %>
+    <%= f.label :work_correction, t('activerecord.attributes.request_for_teaching_assistant.work_correction') %>
   </div>
   <div class="field">
-    <%= f.label :test_oversight, t('activerecord.attributes.request_for_teaching_assistant.test_oversight') %><br>
     <%= f.check_box :test_oversight %>
+    <%= f.label :test_oversight, t('activerecord.attributes.request_for_teaching_assistant.test_oversight') %>
   </div>
   <div class="field">
     <%= f.label :observation, t('activerecord.attributes.request_for_teaching_assistant.observation') %><br>
