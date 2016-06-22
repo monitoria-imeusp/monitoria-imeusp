@@ -13,7 +13,7 @@ module OmniAuth
       if Rails.env.development?
         site = "https://labs.uspdigital.usp.br/wsusuario"
         id = "8"
-      end      
+      end
 
       option :client_options, {
         site: site
@@ -58,9 +58,9 @@ module OmniAuth
       def userlink
         raw_info['vinculo'].each do |link|
           type = link['tipoVinculo']
-          if type == "ALUNOGR" or type == "ALUNOPOS" or type == "ALUNOESPGR" or type == "ALUNOPD"
+          if type == "ALUNOGR" or type == "ALUNOPOS" or type == "ALUNOESPGR" or type == "ALUNOPD" or type == "ALUNOPOSESP"
             return :student
-          elsif type == "SERVIDOR" 
+          elsif type == "SERVIDOR"
             return :teacher
           end
         end
