@@ -18,17 +18,31 @@ class AssistantRole < ActiveRecord::Base
   def course
     request_for_teaching_assistant.course
   end
-  
+
   def deactivate
     update_column(:active, false)
   end
-  
+
   def reactivate
     update_column(:active, true)
   end
 
   def report_filled?
     !(report_creation_date.nil?)
+  end
+
+  def standard_first_day
+    DateTime.new(semester.year, semester.months[0], 1)
+  end
+
+  def month_presence month
+    first = DateTime.new(semester.year, month, 1)
+    last = DateTime.new(semester.year, month, -1)
+    if started_at > first and started_at < last then
+      100*((last - started_at.to_datetime)/(last - first)).to_f
+    else
+      nil
+    end
   end
 
   def self.for_semester semester
@@ -73,7 +87,7 @@ class AssistantRole < ActiveRecord::Base
           return "Presente"
         else
           return "Ausente"
-        end        
+        end
       end
     end
     if !found
@@ -97,7 +111,7 @@ class AssistantRole < ActiveRecord::Base
           return "Presente"
         else
           return "Ausente"
-        end        
+        end
       end
     end
     if !found
@@ -118,12 +132,12 @@ class AssistantRole < ActiveRecord::Base
           return 3
         else
           return 1
-        end        
+        end
       end
     end
     if !found
       return 2
-    end    
+    end
   end
 
 end
