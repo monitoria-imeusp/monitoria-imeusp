@@ -124,7 +124,7 @@ When(/^there is an assistant role for student "(.*?)" with professor "(.*?)" at 
   professor_id = User.where(name: professor_name).take.professor.id
   course_id = Course.where(course_code: course_code).take.id
   request_id = RequestForTeachingAssistant.where(professor_id: professor_id, course_id: course_id).take.id
-  AssistantRole.create(student_id: User.where(name: student_name).take.student.id, request_for_teaching_assistant_id: request_id)
+  AssistantRole.create(student_id: User.where(name: student_name).take.student.id, request_for_teaching_assistant_id: request_id, started_at: DateTime.new(2014,3,1))
 end
 
 When(/^there is an assistant role for student "(.*?)" with professor "(.*?)" at course "(.*?)" with a report$/) do |student_name, professor_name, course_code|
