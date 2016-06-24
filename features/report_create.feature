@@ -43,5 +43,5 @@ Feature: Assistant role report creation
                 Given I'm logged in as a secretary
                 And there is an assistant role for student "John" with professor "Gold" at course "MAC0431" with a report
                 And I click the "Monitores eleitos" link
-                Then I should see "Bob MAC0110 Dude Desativar Atestado"
-                Then I should see "John MAC0431 Gold Desativar Ver relatório Atestado"
+                Then I should see "Bob MAC0110 Dude 01/03/2014 Desativar Atestado"
+                Then I should see "John MAC0431 Gold 01/03/2014 Desativar Ver relatório Atestado"
