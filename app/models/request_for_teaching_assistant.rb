@@ -13,4 +13,13 @@ class RequestForTeachingAssistant < ActiveRecord::Base
   def can_be_changed_by? user
     semester.open or (semester.active and (user.is_a? Secretary or user.super_professor?))
   end
+
+  def chosen_roles
+    AssistantRole.where(request_for_teaching_assistant: self, active: true)
+  end
+
+  def chosen_student_ids
+    chosen_roles.all.map do |role| role.student.id end
+  end
+
 end

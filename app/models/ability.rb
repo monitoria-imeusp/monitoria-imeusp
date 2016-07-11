@@ -68,7 +68,7 @@ class Ability
       cannot :update, Admin
       can :read, Professor
       can :update, Professor #, :id => user.id #Only himself
-      can :create, Professor 
+      can :create, Professor
       can :change_password, Professor #, :id => user.id #Only himself
       can :destroy, Professor #, :id => user.id #Only Himself
       cannot :create, Secretary
@@ -246,6 +246,7 @@ class Ability
       can :close_frequency_period, AssistantFrequency
     end
     if user.is_a? Secretary or (user.is_a? User and user.super_professor?)
+      can :new, AssistantRole
       can :create, AssistantRole
       can :update, AssistantRole
       can :destroy, AssistantRole

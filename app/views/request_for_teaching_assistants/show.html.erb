@@ -60,7 +60,7 @@
 <span style="height: 2em; display: block;"></span>
 
 <h2>Monitores eleitos para essa solicitação</h2>
-<% if @chosen_roles.any? %>
+<% if @request_for_teaching_assistant.chosen_roles.any? %>
   <table class="table table-hover">
     <thead>
       <tr>
@@ -92,7 +92,8 @@
   <%= candidatures_table(@other_option_candidatures_for_this_request, "Como 2ª, 3ª ou 4ª opção") %>
 
   <h2>Alunos que se candidataram para disciplinas deste mesmo departamento</h2>
-  
+
   <%= candidatures_table(@candidatures_for_this_department, nil) %>
-  <hr>
+
+  <h2>Seleção por número USP</h2>
 <% end %>

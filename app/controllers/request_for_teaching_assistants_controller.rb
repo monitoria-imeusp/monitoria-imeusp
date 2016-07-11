@@ -39,32 +39,13 @@ class RequestForTeachingAssistantsController < ApplicationController
   def show
     authorization_sprofessor
     authorization_professor
-    @chosen_roles = AssistantRole.where(request_for_teaching_assistant_id: @request_for_teaching_assistant.id, active: true)
-    chosen_student_ids = @chosen_roles.all.map do |role| role.student.id end
     # Available candidates should be available for this request while there are places to take
-    if @chosen_roles.count < @request_for_teaching_assistant.requested_number
+    if @request_for_teaching_assistant.chosen_student_ids.size < @request_for_teaching_assistant.requested_number
       # Valid candidatures for this request
-      course = @request_for_teaching_assistant.course
-      semester = @request_for_teaching_assistant.semester
-      @first_option_candidatures_for_this_request = ((Candidature.for_course_in_semester course, semester, true).all.map do
-        |candidature| candidature
-        end).delete_if do |candidature|
-            chosen_student_ids.include?(candidature.student.id)
-      end
-      @other_option_candidatures_for_this_request = ((Candidature.for_course_in_semester course, semester, false).all.map do
-        |candidature| candidature
-        end).delete_if do |candidature|
-            chosen_student_ids.include?(candidature.student.id)
-      end
+      @first_option_candidatures_for_this_request = sort_candidates(Candidature.all_first_options_for_request @request_for_teaching_assistant)
+      @other_option_candidatures_for_this_request = sort_candidates(Candidature.all_nonfirst_options_for_request @request_for_teaching_assistant)
       # Valid candidatures for the same department
-      @candidatures_for_this_department = ((Candidature.for_same_department_in_semester course, semester).map do
-        |candidature| candidature
-        end).delete_if do |candidature|
-            chosen_student_ids.include?(candidature.student.id)
-      end
-      @first_option_candidatures_for_this_request.sort! { |a, b| a.student.name <=> b.student.name }
-      @other_option_candidatures_for_this_request.sort! { |a, b| a.student.name <=> b.student.name }
-      @candidatures_for_this_department.sort! { |a, b| a.student.name <=> b.student.name }
+      @candidatures_for_this_department = sort_candidates(Candidature.all_for_same_department_request @request_for_teaching_assistant)
     end
   end
 
@@ -138,6 +119,11 @@ class RequestForTeachingAssistantsController < ApplicationController
   end
 
   private
+
+  def sort_candidates candidates
+    candidates.map{ |x| x }.sort! { |a, b| a.student.name <=> b.student.name }
+  end
+
   # Use callbacks to share common setup or constraints between actions.
   def set_request_for_teaching_assistant
     if RequestForTeachingAssistant.exists?(params[:id])

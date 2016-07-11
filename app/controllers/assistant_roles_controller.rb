@@ -23,6 +23,16 @@ class AssistantRolesController < ApplicationController
     @assistant_roles = AssistantRole.for_professor_and_semester @professor, @semester
   end
 
+  # GET /assistant_roles/new
+  def new
+    @request = RequestForTeachingAssistant.find(assistant_role_params[:request_for_teaching_assistant_id])
+    @first_option_candidatues = []
+    @other_option_candidatues = []
+    @same_department_candidatues = []
+  rescue RecordNotFound
+    raise ActionController::RoutingError.new('Not Found')
+  end
+
   def create
     @assistant_role = AssistantRole.new assistant_role_params
     student_exists = Student.exists? @assistant_role.student_id
