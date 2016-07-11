@@ -111,6 +111,10 @@
               <% if status == "Pendente" then css += " text-danger" end %>
               <p class="<%= css %>">
                 <%= status %>
+                <% percentage = role.month_presence @month %>
+                <% if status == "Presente" and not percentage.nil? %>
+                  (<%= "#{'%.2f' % percentage}" %>%)
+                <% end %>
               </p>
             <% else # assume professor because of cancan %>
               <% if status == "Pendente" %>

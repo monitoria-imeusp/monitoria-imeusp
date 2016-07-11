@@ -23,21 +23,43 @@ class AssistantRolesController < ApplicationController
     @assistant_roles = AssistantRole.for_professor_and_semester @professor, @semester
   end
 
+  # GET /assistant_roles/new
+  def new
+    @request = RequestForTeachingAssistant.find(assistant_role_params[:request_for_teaching_assistant_id])
+    if @request.incomplete?
+      @first_option_candidatures = sort_candidates(Candidature.all_first_options_for_request @request)
+      @nonfirst_option_candidatures = sort_candidates(Candidature.all_nonfirst_options_for_request @request)
+      @same_department_candidatures = sort_candidates(Candidature.all_for_same_department_request @request)
+      if search_params[:nusp].present?
+        @other_candidatures = sort_candidates(Candidature.for_nusp_and_semester search_params[:nusp], @request.semester)
+      else
+        @other_candidatures = []
+      end
+    else
+      redirect_to @request
+    end
+  rescue ActiveRecord::RecordNotFound
+    raise ActionController::RoutingError.new('Not Found')
+  end
+
   def create
     @assistant_role = AssistantRole.new assistant_role_params
     student_exists = Student.exists? @assistant_role.student_id
     request_exists = RequestForTeachingAssistant.exists? @assistant_role.request_for_teaching_assistant_id
-    if student_exists and request_exists and @assistant_role.save
-      respond_to do |format|
-        BackupMailer.new_assistant_role(@assistant_role, current_creator).deliver
-        format.html { redirect_to @assistant_role.request_for_teaching_assistant, notice: 'Monitor eleito com sucesso.' }
-        format.json { render action: 'show', status: :created, location: @assistant_role.request_for_teaching_assistant }
+    if student_exists and request_exists
+      @assistant_role.started_at = [Time.now, @assistant_role.standard_first_day].max
+      if @assistant_role.save
+        respond_to do |format|
+          BackupMailer.new_assistant_role(@assistant_role, current_creator).deliver
+          format.html { redirect_to @assistant_role.request_for_teaching_assistant, notice: 'Monitor eleito com sucesso.' }
+          format.json { render action: 'show', status: :created, location: @assistant_role.request_for_teaching_assistant }
+        end
       end
     elsif request_exists
       respond_to do |format|
         format.html { redirect_to @assistant_role.request_for_teaching_assistant, notice: 'Erro ao criar monitor.' }
         format.json { render json: @assistant_role.errors, status: :unprocessable_entity }
-      end  
+      end
     else
       respond_to do |format|
         format.html { redirect_to '/', notice: 'Erro ao criar monitor.' }
@@ -146,9 +168,9 @@ class AssistantRolesController < ApplicationController
         @genderfied_title = "aluna-monitora"
       else
         @genderfied_title = "aluno-monitor"
-      end      
+      end
       render pdf: "Certificado #{@assistant.student.name}"
-    else 
+    else
       respond_to do |format|
         format.html { redirect_to assistant_roles_path, notice: "Erro ao gerar atestado."}
         format.json { render action: 'index'}
@@ -170,6 +192,10 @@ class AssistantRolesController < ApplicationController
 
   private
 
+  def sort_candidates candidates
+    candidates.map{ |x| x }.sort! { |a, b| a.student.name <=> b.student.name }
+  end
+
   def check_evaluation_period role
     raise CanCan::AccessDenied.new unless role.semester.evaluation_period
   end
@@ -179,6 +205,10 @@ class AssistantRolesController < ApplicationController
     params.permit(
       :student_id, :request_for_teaching_assistant_id
     )
+  end
+
+  def search_params
+    params.permit(:nusp)
   end
 
   def get_semester
@@ -215,7 +245,7 @@ class AssistantRolesController < ApplicationController
       {
         semester: semester,
         role: record.map { |x| x }.keep_if do |role|
-          ((role.request_for_teaching_assistant.semester == semester) and 
+          ((role.request_for_teaching_assistant.semester == semester) and
             (should_see_all_roles? or should_see_the_role(role)))
         end
       }
@@ -225,7 +255,7 @@ class AssistantRolesController < ApplicationController
     end
   end
 
-  
+
   def create_current_months roles
     @months = [Time.now.month]
     if @current_semester_frequencies

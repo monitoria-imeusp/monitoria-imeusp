@@ -60,7 +60,7 @@
 <span style="height: 2em; display: block;"></span>
 
 <h2>Monitores eleitos para essa solicitação</h2>
-<% if @chosen_roles.any? %>
+<% if @request_for_teaching_assistant.chosen_roles.any? %>
   <table class="table table-hover">
     <thead>
       <tr>
@@ -70,7 +70,7 @@
       </tr>
     </thead>
     <tbody>
-      <% @chosen_roles.each do |role| %>
+      <% @request_for_teaching_assistant.chosen_roles.each do |role| %>
         <tr>
           <td class="name"><%= role.student.name %></td>
           <td><%= role.student.nusp %></td>
@@ -84,15 +84,6 @@
   <p>Nenhum</p>
 <% end %>
 
-<% if (not @first_option_candidatures_for_this_request.nil? or not @other_option_candidatures_for_this_request.nil? or not @candidatures_for_this_department.nil?) and (secretary_signed_in? or (current_super_professor?)) %>
-
-  <h2>Alunos que se candidataram para essa disciplina</h2>
-
-  <%= candidatures_table(@first_option_candidatures_for_this_request, "Como 1ª opção") %>
-  <%= candidatures_table(@other_option_candidatures_for_this_request, "Como 2ª, 3ª ou 4ª opção") %>
-
-  <h2>Alunos que se candidataram para disciplinas deste mesmo departamento</h2>
-  
-  <%= candidatures_table(@candidatures_for_this_department, nil) %>
-  <hr>
+<% if @request_for_teaching_assistant.incomplete? and (secretary_signed_in? or current_super_professor?) %>
+  <%= button_link_to "Eleger monitor", new_assistant_role_path(@request_for_teaching_assistant) %>
 <% end %>
