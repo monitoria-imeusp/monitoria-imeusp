@@ -1,12 +1,36 @@
 
-<h1>Eleição de monitor</h1>
+<div class="row">
+  <h1>Eleição de monitor</h1>
+</div>
 
-<h2>Alunos que se candidataram para essa disciplina</h2>
+<div class="row">
+  <div class="panel-group">
+    <div class="panel panel-default">
+      <div class="panel-heading"><h3>Candidatos para essa disciplina</h3></div>
+      <div class="panel-body">
+        <%= render "candidates", candidates: @first_option_candidatures, title: "Como 1ª opção" %>
+        <%= render "candidates", candidates: @nonfirst_option_candidatures, title: "Como 2ª, 3ª ou 4ª opção" %>
+      </div>
+    </div>
 
-<%= render "candidates", candidates: @first_option_candidatures, title: "Como 1ª opção" %>
+    <div class="panel panel-default">
+      <div class="panel-heading"><h3>Cadidatos do mesmo departamento</h3></div>
+      <div class="panel-body">
+        <%= render "candidates", candidates: @same_department_candidatures, title: nil %>
+      </div>
+    </div>
 
-<%= render "candidates", candidates: @nonfirst_option_candidatures, title: "Como 2ª, 3ª ou 4ª opção" %>
+    <div class="panel panel-default">
+      <div class="panel-heading"><h3>Outros candidatos <small>(use a busca para mostrar outras opções)</small></h3></div>
+      <div class="panel-body">
+        <%= render "candidates", candidates: @other_candidatures, title: nil %>
 
-<h2>Alunos que se candidataram para disciplinas deste mesmo departamento</h2>
-
-<%= render "candidates", candidates: @same_department_candidatures, title: nil %>
+        <%= form_tag(new_assistant_role_path(@request), method: "get") do %>
+          <%= label_tag(:nusp, "Número USP:") %>
+          <%= text_field_tag(:nusp) %>
+          <%= submit_tag("Buscar") %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

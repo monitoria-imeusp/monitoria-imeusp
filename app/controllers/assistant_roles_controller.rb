@@ -30,6 +30,11 @@ class AssistantRolesController < ApplicationController
       @first_option_candidatures = sort_candidates(Candidature.all_first_options_for_request @request)
       @nonfirst_option_candidatures = sort_candidates(Candidature.all_nonfirst_options_for_request @request)
       @same_department_candidatures = sort_candidates(Candidature.all_for_same_department_request @request)
+      if search_params[:nusp].present?
+        @other_candidatures = sort_candidates(Candidature.for_nusp_and_semester search_params[:nusp], @request.semester)
+      else
+        @other_candidatures = []
+      end
     else
       redirect_to @request
     end
@@ -200,6 +205,10 @@ class AssistantRolesController < ApplicationController
     params.permit(
       :student_id, :request_for_teaching_assistant_id
     )
+  end
+
+  def search_params
+    params.permit(:nusp)
   end
 
   def get_semester
