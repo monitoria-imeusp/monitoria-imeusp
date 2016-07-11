@@ -70,7 +70,7 @@
       </tr>
     </thead>
     <tbody>
-      <% @chosen_roles.each do |role| %>
+      <% @request_for_teaching_assistant.chosen_roles.each do |role| %>
         <tr>
           <td class="name"><%= role.student.name %></td>
           <td><%= role.student.nusp %></td>
