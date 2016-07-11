@@ -39,14 +39,6 @@ class RequestForTeachingAssistantsController < ApplicationController
   def show
     authorization_sprofessor
     authorization_professor
-    # Available candidates should be available for this request while there are places to take
-    if @request_for_teaching_assistant.chosen_student_ids.size < @request_for_teaching_assistant.requested_number
-      # Valid candidatures for this request
-      @first_option_candidatures_for_this_request = sort_candidates(Candidature.all_first_options_for_request @request_for_teaching_assistant)
-      @other_option_candidatures_for_this_request = sort_candidates(Candidature.all_nonfirst_options_for_request @request_for_teaching_assistant)
-      # Valid candidatures for the same department
-      @candidatures_for_this_department = sort_candidates(Candidature.all_for_same_department_request @request_for_teaching_assistant)
-    end
   end
 
   # GET /request_for_teaching_assistants/new
@@ -119,10 +111,6 @@ class RequestForTeachingAssistantsController < ApplicationController
   end
 
   private
-
-  def sort_candidates candidates
-    candidates.map{ |x| x }.sort! { |a, b| a.student.name <=> b.student.name }
-  end
 
   # Use callbacks to share common setup or constraints between actions.
   def set_request_for_teaching_assistant

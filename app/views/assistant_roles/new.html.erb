@@ -3,4 +3,10 @@
 
 <h2>Alunos que se candidataram para essa disciplina</h2>
 
-<%= render "candidates", candidates: @first_option_candidatues, title: "Como 1ª opção" %>
+<%= render "candidates", candidates: @first_option_candidatures, title: "Como 1ª opção" %>
+
+<%= render "candidates", candidates: @nonfirst_option_candidatures, title: "Como 2ª, 3ª ou 4ª opção" %>
+
+<h2>Alunos que se candidataram para disciplinas deste mesmo departamento</h2>
+
+<%= render "candidates", candidates: @same_department_candidatures, title: nil %>

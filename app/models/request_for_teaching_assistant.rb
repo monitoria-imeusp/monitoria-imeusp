@@ -18,6 +18,14 @@ class RequestForTeachingAssistant < ActiveRecord::Base
     AssistantRole.where(request_for_teaching_assistant: self, active: true)
   end
 
+  def complete?
+    chosen_roles.count >= requested_number
+  end
+
+  def incomplete?
+    chosen_roles.count < requested_number
+  end
+
   def chosen_student_ids
     chosen_roles.all.map do |role| role.student.id end
   end
