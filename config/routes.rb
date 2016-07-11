@@ -20,7 +20,7 @@ Rails.application.routes.draw do
   root 'home#index'
   get '/sistema' => 'home#sys'
   get '/prof' => 'home#index'
-  get '/professors/sign_in/' => 'home#index'  
+  get '/professors/sign_in/' => 'home#index'
   get "/users/sign_in/" => "home#index"
 
   resources :users, except: :edit
@@ -58,7 +58,7 @@ Rails.application.routes.draw do
   #get 'assistant_frequency/' => 'assistant_frequency#index'
   resources :assistant_frequency do
     collection do
-      get :index 
+      get :index
       post :request_frequency
     end
   end
@@ -99,6 +99,7 @@ Rails.application.routes.draw do
   get 'assistant_roles/certificate/:id' => 'assistant_roles#certificate', as: :certificate
   get 'assistant_roles/report_form/:id' => 'assistant_roles#report_form', as: :report_form
   get 'assistant_roles/print_report/:id' => 'assistant_roles#print_report', as: :print_report
+  get 'assistant_roles/:request_for_teaching_assistant_id/new' => 'assistant_roles#new', as: :new_assistant_role
   post 'assistant_roles/notify_for_semester/:semester_id' => 'assistant_roles#notify_for_semester', as: :notify_assistant_roles_for_semester
   post 'assistant_roles/request_evaluations_for_semester/:semester_id' => 'assistant_roles#request_evaluations_for_semester', as: :request_assistant_evaluations_for_semester
   post 'assistant_roles/:request_for_teaching_assistant_id/:student_id/create' => 'assistant_roles#create', as: :create_assistant_role

@@ -1,0 +1,39 @@
+
+<% if !title.nil? and !title.empty? %>
+<h4><%= title %></h4>
+<% end %>
+
+<% if candidates.any? %>
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>Nome</th>
+        <th>Nº USP</th>
+        <th>Já foi eleito?</th>
+        <th colspan=\"2\"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% candidates.each do |candidature| %>
+        <% if candidature.elected? %>
+          <tr class="elected">
+        <% else %>
+          <tr>
+        <% end %>
+        <td><%= candidature.student.name %></td>
+        <td><%= candidature.student.nusp.to_s %></td>
+        <td><%= show_yes_or_no(candidature.elected?) %></td>
+        <td><%= link_to('Detalhes', candidature, class: "btn btn-primary") %></td>
+        <% if candidature.elected? %>
+          <td><%= button_link_to('Eleger', create_assistant_role_path(@request, candidature.student, class: "btn btn-primary"),
+          method: :post, data: {confirm: "Este estudante já foi eleito para monitor(a) de outra disciplina, está certo que deseja elegê-lo(a) novamente?"}) %></td>
+        <% else %>
+          <td><%= button_link_to('Eleger', create_assistant_role_path(@request, candidature.student), method: :post, class: "btn btn-primary") %></td>
+        <% end %>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <p><i>Nenhum candidato nesta categoria</i></p>
+<% end %>

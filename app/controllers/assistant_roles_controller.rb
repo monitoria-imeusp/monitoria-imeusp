@@ -23,6 +23,25 @@ class AssistantRolesController < ApplicationController
     @assistant_roles = AssistantRole.for_professor_and_semester @professor, @semester
   end
 
+  # GET /assistant_roles/new
+  def new
+    @request = RequestForTeachingAssistant.find(assistant_role_params[:request_for_teaching_assistant_id])
+    if @request.incomplete?
+      @first_option_candidatures = sort_candidates(Candidature.all_first_options_for_request @request)
+      @nonfirst_option_candidatures = sort_candidates(Candidature.all_nonfirst_options_for_request @request)
+      @same_department_candidatures = sort_candidates(Candidature.all_for_same_department_request @request)
+      if search_params[:nusp].present?
+        @other_candidatures = sort_candidates(Candidature.for_nusp_and_semester search_params[:nusp], @request.semester)
+      else
+        @other_candidatures = []
+      end
+    else
+      redirect_to @request
+    end
+  rescue ActiveRecord::RecordNotFound
+    raise ActionController::RoutingError.new('Not Found')
+  end
+
   def create
     @assistant_role = AssistantRole.new assistant_role_params
     student_exists = Student.exists? @assistant_role.student_id
@@ -173,6 +192,10 @@ class AssistantRolesController < ApplicationController
 
   private
 
+  def sort_candidates candidates
+    candidates.map{ |x| x }.sort! { |a, b| a.student.name <=> b.student.name }
+  end
+
   def check_evaluation_period role
     raise CanCan::AccessDenied.new unless role.semester.evaluation_period
   end
@@ -182,6 +205,10 @@ class AssistantRolesController < ApplicationController
     params.permit(
       :student_id, :request_for_teaching_assistant_id
     )
+  end
+
+  def search_params
+    params.permit(:nusp)
   end
 
   def get_semester
