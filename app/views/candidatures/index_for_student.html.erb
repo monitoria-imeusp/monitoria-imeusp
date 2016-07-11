@@ -127,7 +127,7 @@
           <tr>
             <td colspan="5"><%= button_link_to 'Ver relatório', print_report_path(role.id, :format => :pdf), target: "_blank" %></td>
           </tr>
-        <% elsif @enable_report == true %>
+        <% elsif role.semester.evaluation_period %>
           <tr>
             <td colspan="5"><%= button_link_to 'Preencher relatório', report_form_path(role.id) %></td>
           </tr>
