@@ -18,6 +18,7 @@ Feature: Assistant roles creation
     Scenario: Super professor creates an assistant role
         Given I'm logged in as a super professor
         And I visit a request page
+        And I click the "Eleger monitor" link
         And I click the first "Eleger" link
         And I visit the assistant roles page
         Then I should see "Bob"
@@ -29,6 +30,7 @@ Feature: Assistant roles creation
         And I visit a request page
         Given the undergraduate student with nusp "123456" has valid history
         And I can't do real web requests
+        And I click the "Eleger monitor" link
         And I click the first "Detalhes" link
         Then I should see "MAT0111 3.0 Reprovado por nota e frequência"
         And I should see "MAC0420 4.9 Reprovado por nota"
@@ -43,6 +45,7 @@ Feature: Assistant roles creation
         And I visit a request page
         Given the graduate student with nusp "654321" has valid history
         And I can't do real web requests
+        And I click the "Eleger monitor" link
         And I click the second "Detalhes" link
         Then I should see "MAT4578 A"
         And I should see "MAC6711 A"
@@ -55,6 +58,7 @@ Feature: Assistant roles creation
     Scenario: Secretary sees creates an assistant role
         Given I'm logged in as a secretary
         And I visit a request page
+        And I click the "Eleger monitor" link
         And I click the first "Eleger" link
         And I visit the assistant roles page
         Then I should see "Bob"
