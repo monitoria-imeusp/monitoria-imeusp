@@ -115,14 +115,7 @@ class AssistantRolesController < ApplicationController
   # POST /assistant_roles/request_for_teaching_assistant_id/1
   def request_evaluations_for_semester
     @semester = Semester.find(params[:semester_id])
-    professors = []
-    requests = RequestForTeachingAssistant.where(semester: @semester)
-    AssistantRole.where(request_for_teaching_assistant: requests).each do |assistant|
-      professors.push(assistant.professor)
-    end
-    professors.uniq.each do |professor|
-        NotificationMailer.evaluation_request_notification(professor, @semester).deliver
-    end
+    AssistantEvaluation.request_evaluations_for_semester @semester
     respond_to do |format|
       format.html { redirect_to assistant_roles_path, notice: "Solicitações enviadas aos professores do #{@semester.as_s} com sucesso." }
       format.json { render action: 'index' }

@@ -23,5 +23,16 @@ class AssistantEvaluation < ActiveRecord::Base
     assistant_role.course
   end
 
+  def self.request_evaluations_for_semester semester
+    semester.open_evaluation_period
+    professors = []
+    requests = RequestForTeachingAssistant.where(semester: semester)
+    AssistantRole.where(request_for_teaching_assistant: requests).each do |assistant|
+      professors.push(assistant.professor)
+    end
+    professors.uniq.each do |professor|
+        NotificationMailer.evaluation_request_notification(professor, semester).deliver
+    end
+  end
 
 end
