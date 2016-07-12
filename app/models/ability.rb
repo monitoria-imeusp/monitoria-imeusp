@@ -262,6 +262,8 @@ class Ability
     if user.is_a? User and user.professor?
       can :index_for_professor, AssistantRole
       can :mark_assistant_role_frequency, AssistantFrequency
+      can :edit_comment, AssistantFrequency
+      can :update_comment, AssistantFrequency
       if user.super_professor?
         can :mark_generic_assistant_role_frequency, AssistantFrequency
       end

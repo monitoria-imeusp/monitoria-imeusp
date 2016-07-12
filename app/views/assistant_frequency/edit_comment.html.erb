@@ -1,0 +1,23 @@
+
+<h1>Meus monitores</h1>
+
+<ul class="list-group">
+  <li class="list-group-item">
+    <strong>Monitor(a):</strong> <%= @frequency.assistant_role.student.name %>
+  </li>
+  <li class="list-group-item">
+    <strong>Disciplina:</strong> <%= @frequency.assistant_role.course.full_name %>
+  </li>
+  <li class="list-group-item">
+    <strong>Período:</strong> <%= month_name(@frequency.month) %>, <%= @frequency.semester.as_s %>
+  </li>
+</ul>
+
+<p>
+  Escreva abaixo quaisquer observações a respeito da presença deste(a) monitor(a) na disciplina e mês indicados. Este campo não é obrigatório.
+</p>
+
+<%= form_tag(update_assistant_frequency_comment_path(@frequency), method: :post) do %>
+  <p><%= text_area_tag :comment, @frequency.comment %></p>
+  <%= submit_tag("Finalizar") %>
+<% end %>
