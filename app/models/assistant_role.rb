@@ -31,6 +31,10 @@ class AssistantRole < ActiveRecord::Base
     !(report_creation_date.nil?)
   end
 
+  def frequency_for_month month
+    assistant_frequency.where(month: month).take
+  end
+
   def standard_first_day
     DateTime.new(semester.year, semester.months[0], 1)
   end

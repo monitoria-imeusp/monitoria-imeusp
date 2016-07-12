@@ -71,9 +71,21 @@
                               color = "darkgoldenrod"
                            end
                         %>
-                        <%= content_tag :span, style: "color:#{color};" do -%>
-                          <%= status %>
-                        <% end -%>
+                        <div class="row">
+                          <%= content_tag :span, style: "color:#{color};" do -%>
+                            <%= status %>
+                          <% end -%>
+                          <% if status != "---" %>
+                            <%= link_to edit_assistant_frequency_comment_path(role.frequency_for_month(month)), "data-toggle" => "tooltip", title: "Fazer observação" do %>
+                              <span class="glyphicon glyphicon-comment"></span>
+                            <% end %>
+                          <% end %>
+                        </div>
+                        <div class="row">
+                          <% if status != "---" %>
+                            <%= role.frequency_for_month(month).comment %>
+                          <% end %>
+                        </div>
                       <% end %>
                     </div>
                   </div>
@@ -107,5 +119,3 @@
     </li>
   <% end %>
 </ul>
-
- 
