@@ -8,3 +8,4 @@ log/*
 !dumpfiles/.keep
 dumpfiles/*
 .bundle/
+*.sql

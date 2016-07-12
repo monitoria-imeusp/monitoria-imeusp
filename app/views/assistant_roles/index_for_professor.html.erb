@@ -1,6 +1,12 @@
 
 <h1>Meus monitores</h1>
 
+<% if flash[:notice] %>
+  <div class="alert alert-info">
+    <%= flash[:notice] %>
+  </div>
+<% end -%>
+
 <div class="row">
   <div class="col-sm-4">
     <div class="dropdown">
@@ -21,9 +27,6 @@
 <div class="row" style="height:1em;"></div>
 
 <ul class="list-group">
-  <li class="list-group-item list-group-item-info">
-    <h2 class="list-group-item-heading"><%= @semester.as_s %></h3>
-  </li>
   <% @assistant_roles.each do |role| %>
     <li class="list-group-item">
       <div class="container-fluid">
@@ -71,9 +74,21 @@
                               color = "darkgoldenrod"
                            end
                         %>
-                        <%= content_tag :span, style: "color:#{color};" do -%>
-                          <%= status %>
-                        <% end -%>
+                        <div class="row">
+                          <%= content_tag :span, style: "color:#{color};" do -%>
+                            <%= status %>
+                          <% end -%>
+                          <% if status != "---" %>
+                            <%= link_to edit_assistant_frequency_comment_path(role.frequency_for_month(month)), "data-toggle" => "tooltip", title: "Fazer observação" do %>
+                              <span class="glyphicon glyphicon-comment"></span>
+                            <% end %>
+                          <% end %>
+                        </div>
+                        <div class="row">
+                          <% if status != "---" %>
+                            <%= role.frequency_for_month(month).comment %>
+                          <% end %>
+                        </div>
                       <% end %>
                     </div>
                   </div>
@@ -107,5 +122,3 @@
     </li>
   <% end %>
 </ul>
-
- 

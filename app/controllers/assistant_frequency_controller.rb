@@ -41,27 +41,27 @@ class AssistantFrequencyController < ApplicationController
     @semester.close_frequency_period(Semester.month_to_period @month)
     redirect_to assistant_frequency_monthly_control_path(@semester, @month, @filter)
   end
- 
+
   def mark_assistant_role_frequency
     presence = params[:presence]
     month = params[:month]
     role = params[:role]
     id = params[:pid]
-    @assistant_frequency = AssistantFrequency.new(month: month, presence: presence, assistant_role_id: role, payment: false)
+    @assistant_frequency = AssistantFrequency.new(month: month, presence: presence, assistant_role_id: role, payment: false, comment: "")
     if @assistant_frequency.save
       if presence
         respond_to do |format|
-          format.html { redirect_to assistant_roles_for_professor_path(id), notice: 'Presença marcada com sucesso.' }      
+          format.html { redirect_to assistant_roles_for_professor_path(id), notice: 'Presença marcada com sucesso.' }
         end
-      else 
+      else
         respond_to do |format|
-          format.html { redirect_to assistant_roles_for_professor_path(id), notice: 'Ausência marcada com sucesso.' }      
+          format.html { redirect_to assistant_roles_for_professor_path(id), notice: 'Ausência marcada com sucesso.' }
         end
       end
     else
         respond_to do |format|
-          format.html { redirect_to assistant_roles_for_professor_path(id), notice: 'Erro ao marcar frequência.' }      
-        end      
+          format.html { redirect_to assistant_roles_for_professor_path(id), notice: 'Erro ao marcar frequência.' }
+        end
     end
   end
 
@@ -74,18 +74,36 @@ class AssistantFrequencyController < ApplicationController
     if @assistant_frequency.save
       if presence
         respond_to do |format|
-          format.html { redirect_to assistant_frequency_monthly_control_path(@assistant_frequency.semester, month, AssistantFrequency.FILTER_ALL), notice: 'Presença marcada com sucesso.' }      
+          format.html { redirect_to assistant_frequency_monthly_control_path(@assistant_frequency.semester, month, AssistantFrequency.FILTER_ALL), notice: 'Presença marcada com sucesso.' }
         end
-      else 
+      else
         respond_to do |format|
-          format.html { redirect_to assistant_frequency_monthly_control_path(@assistant_frequency.semester, month, AssistantFrequency.FILTER_ALL), notice: 'Ausência marcada com sucesso.' }      
+          format.html { redirect_to assistant_frequency_monthly_control_path(@assistant_frequency.semester, month, AssistantFrequency.FILTER_ALL), notice: 'Ausência marcada com sucesso.' }
         end
       end
     else
         respond_to do |format|
-          format.html { redirect_to assistant_frequency_monthly_control_path(@assistant_frequency.semester, month, AssistantFrequency.FILTER_ALL), notice: 'Erro ao marcar frequência.' }      
+          format.html { redirect_to assistant_frequency_monthly_control_path(@assistant_frequency.semester, month, AssistantFrequency.FILTER_ALL), notice: 'Erro ao marcar frequência.' }
         end
     end
+  end
+
+  # GET /assistant_frequency/1/edit_comment
+  def edit_comment
+    @frequency = AssistantFrequency.find assistant_frequency_params[:id]
+  rescue ActiveRecord::RecordNotFound
+    raise ActionController::RoutingError.new('Not Found')
+  end
+
+  # POST /assistant_frequency/1/comment
+  def update_comment
+    @frequency = AssistantFrequency.find (assistant_frequency_params[:id])
+    @frequency.update(comment: assistant_frequency_params[:comment])
+    respond_to do |format|
+      format.html { redirect_to assistant_roles_for_professor_path(@frequency.professor, @frequency.semester), notice: 'Observação realizada com sucesso.' }
+    end
+  rescue ActiveRecord::RecordNotFound
+    raise ActionController::RoutingError.new('Not Found')
   end
 
   def pay_all_assistants
@@ -95,6 +113,12 @@ class AssistantFrequencyController < ApplicationController
       freq.pay_if_present
     end
     redirect_to assistant_frequency_monthly_control_path(semester, month, AssistantFrequency.FILTER_ALL)
+  end
+
+  private
+
+  def assistant_frequency_params
+    params.permit(:id, :comment)
   end
 
 end
