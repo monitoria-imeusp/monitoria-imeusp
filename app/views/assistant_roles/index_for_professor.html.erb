@@ -1,6 +1,12 @@
 
 <h1>Meus monitores</h1>
 
+<% if flash[:notice] %>
+  <div class="alert alert-info">
+    <%= flash[:notice] %>
+  </div>
+<% end -%>
+
 <div class="row">
   <div class="col-sm-4">
     <div class="dropdown">
@@ -21,9 +27,6 @@
 <div class="row" style="height:1em;"></div>
 
 <ul class="list-group">
-  <li class="list-group-item list-group-item-info">
-    <h2 class="list-group-item-heading"><%= @semester.as_s %></h3>
-  </li>
   <% @assistant_roles.each do |role| %>
     <li class="list-group-item">
       <div class="container-fluid">
