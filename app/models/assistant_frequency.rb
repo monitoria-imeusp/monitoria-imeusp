@@ -69,6 +69,8 @@ class AssistantFrequency < ActiveRecord::Base
     end
     if (month != 6 && month != 11)
       schedule_notifications Semester.month_to_period(month + 1)
+    else
+      AssistantEvaluation.request_evaluations_for_semester Semester.current
     end
   end
 
