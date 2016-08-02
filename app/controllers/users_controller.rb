@@ -13,7 +13,7 @@ class UsersController < ApplicationController
   def index
     @users = User.all
   end
-  
+
   def destroy
     @user = User.find(params[:id])
     authorization_user_destroy
@@ -39,7 +39,7 @@ class UsersController < ApplicationController
         raise CanCan::AccessDenied.new
       end
       current_user.professor do |professor|
-        raise CanCan::AccessDenied.new unless professor.super_professor? or @user.id == current_user.id
+        raise CanCan::AccessDenied.new unless professor.super_professor? or @user.id == current_user.id or @user.student?
       end
     end
   end
