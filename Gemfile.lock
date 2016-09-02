@@ -110,7 +110,7 @@ GEM
     domain_name (0.5.24)
       unf (>= 0.0.5, < 1.0.0)
     erubis (2.7.0)
-    eventmachine (1.0.5)
+    eventmachine (1.0.9.1)
     execjs (2.5.2)
     factory_girl (4.4.0)
       activesupport (>= 3.0.0)
@@ -145,7 +145,7 @@ GEM
       colorize
       railties (>= 3.1, < 5)
       sprockets
-    libv8 (3.16.14.11)
+    libv8 (3.16.14.15)
     mail (2.5.4)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)

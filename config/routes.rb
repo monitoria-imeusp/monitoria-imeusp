@@ -20,6 +20,7 @@ Rails.application.routes.draw do
   root 'home#index'
   get '/sistema' => 'home#sys'
   get '/prof' => 'home#index'
+  get '/about' => 'home#about'
   get '/professors/sign_in/' => 'home#index'
   get "/users/sign_in/" => "home#index"
 
