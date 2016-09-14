@@ -29,6 +29,7 @@
           </div>
           <div>
             <ul class="nav navbar-nav navbar-right">
+              <li><%= link_to "Sobre", about_path %></li>
               <!-- Header dos usuarios normais -->
               <% if signed_in? and (admin_signed_in? or secretary_signed_in? or current_signed.student? or (current_signed.professor? and not current_signed.professor.dirty)) %>
                   <li><%= link_to "Perfil", current_signed %></li>
@@ -69,7 +70,6 @@
         <div class="col-sm-2">
           <% unless signed_in? %>
             <ul class="nav nav-pills nav-stacked">
-              <li><%= link_to "Sobre", about_path %></li>
               <li><%= link_to "Acesso USP", user_omniauth_authorize_path(:usp) %></li>
               <% unless Rails.env.production? %>
                 <li><%= link_to "Guia de uso (alunos)", help_students_path('home') %></li>
