@@ -1,18 +1,36 @@
-## Instalação dos prerrequisitos :
+# Sobre o repositório
 
-Antes de se intalar o rvm, é necessário que a máquina tenha os seguintes programas:
+O Sistema de Monitoria é o sistema de pedidos e candidaturas de monitores para disciplinas do Instituto de Matemática e Estatística da USP.]
 
-	- bash (versão 3.2.25 ou superior)
-	- awk
-	- sed
-	- grep
-	- which
-	- ls
-	- cp
-	- tar
-	- curl
-	- gunzip
-	- bunzip2
+Ele foi desenvolvido durante a disciplina **MAC 342/5716 (Laboratório de Programação eXtrema)**.
+
+# Conteúdo
+
+Lista de conteúdos deste *README*:
+
+* [Instruções para instalação e configuração](#instrucoes);
+    * [Instalação dos prerrequisitos](#prerrequisitos);
+    * [Instalação do ambiente Ruby](#instalaruby);
+    * [Configurando o sistema de monitoria](#configure);
+* [Possíveis erros durante a instalação](#erros);
+
+# <a name="instrucoes"></a> Instruções para instalação e configuração
+
+## <a name="prerrequisitos"></a> Instalação dos prerrequisitos:
+
+Antes de se instalar o rvm, é necessário que a máquina tenha os seguintes programas:
+
+    - bash (versão 3.2.25 ou superior)
+    - awk
+    - sed
+    - grep
+    - which
+    - ls
+    - cp
+    - tar
+    - curl
+    - gunzip
+    - bunzip2
 
 Para saber se a máquina tem os programas acima, digite no terminal:
 
@@ -20,24 +38,69 @@ Para saber se a máquina tem os programas acima, digite no terminal:
 for name in {bash,awk,sed,grep,ls,cp,tar,curl,gunzip,bunzip2} ; do which $name ;  done
 ```
 
-## Instalação do ambiente Ruby
+----
+
+**Note 1**: pode ser preciso instalar os seguintes pacotes em sistemas Linux:
+
+    -libqt4-dev
+    -libqtwebkit-dev
+    -postgresql
+    -postgresql-server-dev-all
+
+Para instalar, entre com o comando:
+
+```bash
+sudo apt-get install <pacote1> <pacote2>
+```
+
+**Note 2**: instale o webkit `phantomjs 1.9.7`. Para isso, siga os comandos:
+
+```bash
+sudo mv phantomjs-1.9.7-linux-i686.tar.bz2 /usr/local/share/.
+cd /usr/local/share/
+sudo tar xjf phantomjs-1.9.7-linux-i686.tar.bz2
+sudo ln -s /usr/local/share/phantomjs-1.9.7-linux-i686 /usr/local/share/phantomjs
+sudo ln -s /usr/local/share/phantomjs/bin/phantomjs /usr/local/bin/phantomjs
+```
+
+Finalmente, verifique se a instalação foi bem sucedida:
+
+```bash
+phantomjs -v
+```
+
+## <a name="instalaruby"></a> Instalação do ambiente Ruby
 
 ### Instalação do rvm (ruby version manager)
+
+Instalaremos o **rvm**.
+
+Inicialmente, instale a chave pública **mpapis** (talvez seja necessário `gpg2` e/ou `sudo`):
+
+```bash
+gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3
+```
+
+Em seguida, instale a última versão estável do `rvm`:
 
 ```bash
 \curl -sSL https://get.rvm.io | bash -s stable
 ```
 
-A instalação do rvm criou um grupo e é necesário adicionar ao grupo todos os usuários que
-usarão a rvm na máquina. No caso, **basta adicionar o seu usuário normal**.
-Para fazer isso digite:
+* **Possível erro**: `curl: (77) error setting certificate verify locations`. Para resolvê-lo, entre [aqui](#curl).
+
+
+----
+
+**Note:** A instalação do rvm criou um grupo e pode ser necesário adicionar ao grupo todos os usuários que usarão a rvm na máquina. No caso, **basta adicionar o seu usuário normal**. Para fazer isso digite:
 
 ```bash
 sudo adduser [username] rvm
 ```
 
 Depois, execute o seguinte comando:
-	editor-texto-preferido ~/.bashrc
+
+    editor-texto-preferido ~/.bashrc
 
 E adicione o seguinte trecho no final do arquivo e o salve:
 
@@ -45,8 +108,9 @@ E adicione o seguinte trecho no final do arquivo e o salve:
 [[ -s "usr/local/rvm/scripts/rvm" ]] && . "usr/local/rvm/scripts/rvm"
 ```
 
-Agora, *sempre que você for usar o RVM*, você precisa permitir que o RVM use o Shell
-no modo login:
+### Usando o rvm
+
+Agora, *sempre que você for usar o RVM*, você precisa permitir que o RVM use o Shell no modo login:
 
 ```bash
 /bin/bash --login
@@ -65,20 +129,12 @@ Caso o comando não dê certo digite-o em uma nova janela ou aba do terminal.
 
 Faça log out e depois faça login novamente para as alterações acima terem efeito.
 
-
 ### Adicionando uma instalação do ruby ao RVM
 
-Primeiramente, instale o ruby (versão 2.1.1):
+Primeiramente, instale o ruby. Nós vamos usar a versão 2.1.1:
 
 ```bash
-rvm install ruby
-```
-
-Agora, defina a versão do ruby que você vai usar com o comando abaixo. Nós vamos
-usar a versão 2.1.1.
-
-```bash
-rvm --default use 2.1.1
+rvm install ruby-2.1.1
 ```
 
 Certifique-se que está tudo certo com o comando:
@@ -87,65 +143,91 @@ Certifique-se que está tudo certo com o comando:
 ruby -v
 ```
 
-Instale as gemas:
+## <a name="configure"></a> Configurando o sistema de monitoria
+
+### Clonando o repositório
+
+Para clonar o repositório, entre em um diretório de preferência e em seguida execute (lembre-se que ao clonar, os arquivo do repositório serão copiado para uma pasta chamada *monitoria-imeusp*):
 
 ```bash
+git clone https://github.com/monitoria-imeusp/monitoria-imeusp
+```
+
+Ou, se preferir por `ssh`, execute:
+
+```bash
+git clone git@github.com:monitoria-imeusp/monitoria-imeusp.git
+```
+
+**Note**: para configurar uma chave `ssh`, siga este [tutorial](https://help.github.com/articles/generating-an-ssh-key/).
+
+
+### Instalação das gemas
+
+Finalizado as etapas anteriores, entre na pasta clonada.
+
+Agora, instale as gemas:
+
+```bash
+gem install bundler
+
 bundle install
 ```
 
-Pode ser preciso instalar os seguintes pacotes em um Ubuntu:
+### Configurando o servidor
 
--libqt4-dev
--libqtwebkit-dev
--postgresql
--postgresql-server-dev-all
-
-## Configurando o servidor
-
-Inicializar o banco de dados:
+Inicialize o banco de dados:
 
 ```bash
 rake db:setup
+
+rake db:migrate RAILS_ENV=test
 ```
 
-E para os testes:
+### Rodando os testes
+
+Para iniciar os testes **rspec**:
 
 ```bash
-rake db:migrate RAILS_ENV=test
 rspec
 ```
 
-## Tarefas agendadas em produção
-Para rodar a thread que verifica tarefas agendadas e as executa no
-tempo correto, é necessário rodar o script:
-RAILS_ENV=production bin/delayed_job start
-OU
-rake jobs:work
-Se acontecerem problemas, https://github.com/collectiveidea/delayed_job/wiki/Common-problems
-tem troubleshooting. 
+Para iniciar os testes **cucumber**:
 
-## Conversao para pdf
-Precisa instalar o binario em produção
-https://github.com/mileszs/wicked_pdf/wiki/Getting-Started-Installing-wkhtmltopdf
-e em /config/initializers/wicked_pdf.rb mudar o path se nao ficar em /usr/bin/
-
-## Execução de testes do cucumber
-Devido à requisição de histórico escolar para um serviço externo, para rodar 
-os testes de cucumber deve-se utilizar
-```
+```bash
 HISTORY_REQUEST_URL=http://abc/ rake cucumber
 ```
 
+### Rodando o sistema
+
+Finalmente, execute:
+
+```bash
+rails s
+```
+
+Abra o seu browser preferido e entre `http://localhost:3000/`.
+
+----
+
+**Note**:
+
+Se a porta `3000` estiver ocupada, entre como alternativa: `rails s -p <numero_da_porta>`.
 
 
-## Coisas antigas do README
+# <a name="erros"></a> Possíveis erros durante a instalação
 
-Deixei aqui algumas informações do Jack que não precisei usar, mas podem vir a ser relevantes.
+### curl
 
-- Instalação da versão 4.1 release candidate do Rails (recomendação do Manzo). (essa etapa pode demorar):
-	gem install rails --pre
-OBS: Ignorem caso apareça a mensagem "unable to convert "\x80" from ASCII-8BIT to UTF-8 for guides/assets/images/tab_info.gif, skipping"
+O seguinte erro foi encontrado em Debian 8 (Jessie):
 
-Uma das fontes usadas: http://eecs.vanderbilt.edu/research/hmtl/wp/index.php/rvm-ruby-ruby-on-rails/
+    curl: (77) error setting certificate verify locations:
+      CAfile: /etc/pki/tls/certs/ca-bundle.crt
+      CApath: none
 
-OBS: vale a pena dar uma olhada na página acima posteriormente
+Para resolver:
+
+    sudo apt-get install ca-certificates
+    sudo mkdir -p /etc/pki/tls/certs
+    sudo cp /etc/ssl/certs/ca-certificates.crt /etc/pki/tls/certs/ca-bundle.crt
+
