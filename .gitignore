@@ -9,3 +9,8 @@ log/*
 dumpfiles/*
 .bundle/
 *.sql
+
+#OSX
+.DS_Store
+Vagrantfile
+ubuntu-xenial-16.04-cloudimg-console.log
