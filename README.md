@@ -214,7 +214,6 @@ Abra o seu browser preferido e entre `http://localhost:3000/`.
 
 Se a porta `3000` estiver ocupada, entre como alternativa: `rails s -p <numero_da_porta>`.
 
-
 # <a name="erros"></a> Possíveis erros durante a instalação
 
 ### curl
