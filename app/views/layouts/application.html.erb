@@ -69,6 +69,7 @@
         <div class="col-sm-2">
           <% unless signed_in? %>
             <ul class="nav nav-pills nav-stacked">
+              <li><%= link_to "Sobre", home_path('about') %></li>
               <li><%= link_to "Acesso USP", user_omniauth_authorize_path(:usp) %></li>
               <% unless Rails.env.production? %>
                 <li><%= link_to "Guia de uso (alunos)", help_students_path('home') %></li>
