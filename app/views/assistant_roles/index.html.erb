@@ -70,7 +70,7 @@
         <td><%= role.course.course_code %></td>
         <td><%= role.professor.name %></td>
 
-        <!--  Data de incio -->
+        <!--  Data de inicio -->
         <td>
 			<% if not role.started_at.nil? %>
 				<%= role.started_at.strftime("%d/%m/%Y") %>
@@ -112,6 +112,9 @@
           </td>
           <td>
             <%= small_button_link_to "Remover", destroy_assistant_role_path(role), method: :delete, data: { confirm: 'Deseja mesmo remover PERMANENTEMENTE esse monitor?'} %>
+          </td>
+          <td>
+            <%= small_button_link_to "Editar período", assistant_roles_edit_date_path(role) %>
           </td>
         <% else %>
             <td></td>

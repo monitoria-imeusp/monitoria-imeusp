@@ -7,7 +7,6 @@ class AssistantRolesController < ApplicationController
     get_department
     if should_see_all_roles?
       @assistant_roles = AssistantRole.for_department_and_semester @department, @semester
-      p @assistant_roles
     else
       @assistant_roles = AssistantRole.for_semester @semester
       @assistant_roles = @assistant_roles.map { |x| x }.keep_if do |role|
@@ -184,6 +183,14 @@ class AssistantRolesController < ApplicationController
     end
   end
 
+
+  # funcao usada para editar as datas do periodo de monitoria
+  def edit_date
+    @assistant = AssistantRole.find(params[:id])
+    #@assistant.start_at = @started_date
+    #@assistant.finished_at = @finisheed_date
+  end
+
   private
 
   def sort_candidates candidates
@@ -274,4 +281,5 @@ class AssistantRolesController < ApplicationController
       current_user.professor
     end
   end
+
 end

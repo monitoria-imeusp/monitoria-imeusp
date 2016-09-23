@@ -169,6 +169,7 @@ class Ability
       can :update, Candidature #, :student_id => user.id #Only his own
       can :destroy, Candidature #, :student_id => user.id #Only his own
       can :update, AssistantRole
+      cannot :edit_date, AssistantRole
     else # 'ghost' User (usuario que não completou cadastro)
       cannot :read, Admin
       cannot :update, Admin
@@ -200,6 +201,7 @@ class Ability
       cannot :read, User
       cannot :update, User
       cannot :destroy, User
+      cannot :edit_date, AssistantRole
     end
 
     if user.is_a? User
@@ -241,6 +243,7 @@ class Ability
       can :notify_for_semester, AssistantRole
       can :request_evaluations_for_semester, AssistantRole
       can :print_report, AssistantRole
+      can :edit_date, AssistantRole
       can :pay_all_assistants, AssistantFrequency
       can :open_frequency_period, AssistantFrequency
       can :close_frequency_period, AssistantFrequency
@@ -254,6 +257,7 @@ class Ability
       can :deactivate_assistant_role, AssistantRole
       can :reactivate_assistant_role, AssistantRole
       can :print_report, AssistantRole
+      can :edit_date, AssistantRole
       can :mark_generic_assistant_role_frequency, AssistantFrequency
       can :update, AssistantFrequency
       can :create, AssistantFrequency
