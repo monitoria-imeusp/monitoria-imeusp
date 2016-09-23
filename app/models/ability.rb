@@ -258,6 +258,7 @@ class Ability
       can :reactivate_assistant_role, AssistantRole
       can :print_report, AssistantRole
       can :edit_date, AssistantRole
+      can :update_date, AssistantRole
       can :mark_generic_assistant_role_frequency, AssistantFrequency
       can :update, AssistantFrequency
       can :create, AssistantFrequency

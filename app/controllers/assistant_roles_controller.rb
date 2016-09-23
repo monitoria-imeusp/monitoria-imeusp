@@ -187,8 +187,15 @@ class AssistantRolesController < ApplicationController
   # funcao usada para editar as datas do periodo de monitoria
   def edit_date
     @assistant = AssistantRole.find(params[:id])
-    #@assistant.start_at = @started_date
-    #@assistant.finished_at = @finisheed_date
+  end
+
+  def update_date
+    @assistant = AssistantRole.find(params[:id])
+    @assistant.started_at = params[:assistant_role][:started_at]
+    @assistant.finished_at = params[:assistant_role][:finished_at]
+    @assistant.save
+
+    redirect_to assistant_roles_path()
   end
 
   private

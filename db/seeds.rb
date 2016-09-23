@@ -542,6 +542,7 @@ if Rails.env.development?
     }
   ].each do |assistant_role|
   	  assistant_role["started_at"] = Time.new(2014, 3, 1)
+	  assistant_role["finished_at"] = Time.new(2014, 3, 1)
       AssistantRole.create(assistant_role)
   end
 

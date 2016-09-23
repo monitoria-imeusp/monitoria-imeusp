@@ -81,8 +81,8 @@
 
         <!--  Data de fim -->
     <td>
-      <% if role.started_at? %>
-        <%= role.started_at.strftime("%d/%m/%Y") %>
+      <% if role.finished_at? %>
+        <%= role.finished_at.strftime("%d/%m/%Y") %>
       <% else %>
         Nil
       <% end %>
