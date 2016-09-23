@@ -61,10 +61,19 @@
   <tbody>
     <% @assistant_roles.each do |role| %>
       <tr>
-        <td><%= role.student.name %></td>
+        <td>
+			<% if role.student.name? role.student.name %>
+			<% else %> Nil <% end %>
+		</td>
         <td><%= role.course.course_code %></td>
         <td><%= role.professor.name %></td>
-        <td><%= role.started_at.strftime("%d/%m/%Y") %></td>
+        <td>
+			<% if role.started_at? %>
+				<%= role.started_at.strftime("%d/%m/%Y") %>
+			<% else %>
+				Nil
+			<% end %>
+		</td>
         <% if secretary_signed_in? or current_super_professor? %>
           <td>
             <%if role.active %>
