@@ -7,11 +7,15 @@ class AssistantRolesController < ApplicationController
     get_department
     if should_see_all_roles?
       @assistant_roles = AssistantRole.for_department_and_semester @department, @semester
+      #p "<<<<<<<<<<<<<<<<<<n\n\n\n\n\n"
+      #p @assistant_roles
     else
       @assistant_roles = AssistantRole.for_semester @semester
       @assistant_roles = @assistant_roles.map { |x| x }.keep_if do |role|
         should_see_the_role role
-      end
+        end
+      #p ">>>>>>>>>>>>>>>>>>>>>>>\n\n\n\n\n\n"
+      #p @assistant_roles
     end
   end
 
