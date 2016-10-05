@@ -8,16 +8,31 @@
     </tr>
   </thead>
   <tbody>
+
+    <div class="dropdown">
+      <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">
+        asdkljaskjasdasdasd
+        <br>
+        asdhuiodashdasdasd
+        <br>
+        huehue
+        <br>
+      </button>
+    </div>
+
     <% @users.order(:name).each do |user| %>
       <tr>
         <td class="name"><%= user.name %></td>
         <td><%= "#{user.nusp}" %></td>
         <td>
-          <% if user.student? %>
+          <% if user.professor? and user.student? %>
+            aluno e professor
+          <% elsif user.student? %>
             aluno
-          <% end %>
-          <% if user.professor? %>
+          <% elsif user.professor? %>
             professor
+          <% elsif !(user.professor?) and !(user.student?) %>
+            usuário sem categoria
           <% end %>
         </td>
         <td><%= button_link_to "Ver perfil", user %></td>
