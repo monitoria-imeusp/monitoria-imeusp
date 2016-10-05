@@ -9,18 +9,7 @@
   </thead>
   <tbody>
 
-    <div class="dropdown">
-      <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">
-        asdkljaskjasdasdasd
-        <br>
-        asdhuiodashdasdasd
-        <br>
-        huehue
-        <br>
-      </button>
-    </div>
-
-    <% @users.order(:name).each do |user| %>
+    <% @users.sort { |x,y| x[:name].downcase <=> y[:name].downcase }.each do |user| %>
       <tr>
         <td class="name"><%= user.name %></td>
         <td><%= "#{user.nusp}" %></td>
