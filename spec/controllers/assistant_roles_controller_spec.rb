@@ -26,7 +26,8 @@ describe AssistantRolesController do
       end
         
       context "when http success" do
-        it { is_expected.to respond_with(:success) }
+        subject { response }
+        it { is_expected.to have_http_status(:success) }
       end
 
       context "with roles" do
@@ -46,7 +47,8 @@ describe AssistantRolesController do
       end
         
       context "when http success" do
-        it { is_expected.to respond_with(:success) }
+        subject { response }
+        it { is_expected.to have_http_status(:success) }
       end
 
       context "with roles" do

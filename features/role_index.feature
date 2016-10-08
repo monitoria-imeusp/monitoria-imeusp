@@ -65,13 +65,33 @@ Feature: Assistant roles table visualization
         Then I should see "Bob"
         And I should see "Dude"
         And I should see "MAC0110"
-        And I should not see "Mary"
+        And I should see "Mary"
+        And I should see "Silver"
+        And I should see "MAT0125"
+        And "Alfredo" should appear before "Bob"
         And "Bob" should appear before "John"
         And "John" should appear before "Wil"
-        And "Alfredo" should appear before "Bob"
-        And "Jude" should appear before "Wil"
         And "John" should appear before "Jude"
+        And "Jude" should appear before "Mary"
+        And "Mary" should appear before "Wil"
         And I'm back to current time
+
+    Scenario: Secretary sees all assistant roles for department "MAC"
+        Given it's currently month 5
+        Given I'm logged in as a secretary
+        And I visit the assistant roles page
+        And I click the "MAC" link
+        Then I should see "Bob"
+        And I should see "Dude"
+        And I should see "MAC0110"
+        And I should not see "Mary"
+        And "Alfredo" should appear before "Bob"
+        And "Bob" should appear before "John"
+        And "John" should appear before "Wil"
+        And "John" should appear before "Jude"
+        And "Jude" should appear before "Wil"
+        And I'm back to current time
+
 
     Scenario: Hiperprofessor sees all assistant roles
         Given it's currently month 5
@@ -79,12 +99,28 @@ Feature: Assistant roles table visualization
         And I visit the assistant roles page
         Then I should see "Bob"
         And I should see "Dude"
+        And I should see "Mary"
+        And "Alfredo" should appear before "Bob"
+        And "Bob" should appear before "John"
+        And "John" should appear before "Jude"
+        And "Jude" should appear before "Mary"
+        And "Mary" should appear before "Wil"
+        And I'm back to current time
+
+    Scenario: Hiperprofessor sees all assistant roles for department "MAC"
+        Given it's currently month 5
+        Given I'm logged in as professor "Zara"
+        And I visit the assistant roles page
+        And I click the "MAC" link
+        Then I should see "Bob"
+        And I should see "Dude"
+        And I should see "MAC0110"
         And I should not see "Mary"
+        And "Alfredo" should appear before "Bob"
         And "Bob" should appear before "John"
         And "John" should appear before "Wil"
-        And "Alfredo" should appear before "Bob"
-        And "Jude" should appear before "Wil"
         And "John" should appear before "Jude"
+        And "Jude" should appear before "Wil"
         And I'm back to current time
 
     Scenario: Common professor cannot see all assistant roles

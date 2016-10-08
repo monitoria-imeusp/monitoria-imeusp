@@ -94,8 +94,8 @@ describe ProfessorsController do
         before :each do
           put :update, { id: professor.id, professor: { department_id: 2 } }
         end
-
-        it { is_expected.to respond_with :redirect }
+        subject { response }
+        it { is_expected.to have_http_status(:redirect) }
 
         context 'when updating professor' do
           subject { assigns(:professor) }
