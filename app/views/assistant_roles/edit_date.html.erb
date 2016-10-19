@@ -1,0 +1,77 @@
+<div class="panel-heading text-center" style='font-weight: bold'>
+Dados de usuário
+</div>
+
+<div class="panel-body">
+  <%= form_for @assistant, url: update_assistant_role_date_path(@assistant) do |f| %>
+    <!--form class="form-horizontal" role="form"-->
+
+      <div class="form-group">
+        <label class="control-label col-sm-4" for="name">
+          <%= t('activerecord.attributes.user.name') + ':' %>
+        </label>
+        <div class="col-sm-8">
+          <p class="form-control-static"><%= @assistant.student.name %></p>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="control-label col-sm-4" for="nusp">
+          <%= t('activerecord.attributes.user.nusp') + ':' %>
+        </label>
+        <div class="col-sm-8">
+          <p class="form-control-static"><%= @assistant.student.nusp %></p>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="control-label col-sm-4" for="curso">
+          <%= t('activerecord.attributes.course.name') + ':' %>
+        </label>
+        <div class="col-sm-8">
+          <p class="form-control-static"><%= @assistant.course.course_code + ' - ' + @assistant.course.name %></p>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="control-label col-sm-4" for="Professor">
+          Nome do Professor:
+          <!--%= t('activerecord.attributes.professor.name') + ':' %-->
+        </label>
+        <div class="col-sm-8">
+          <p class="form-control-static">
+            <%= @assistant.professor.name %>
+          </p>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="control-label col-sm-4" for="">
+          Data de início:
+        </label>
+        <div class="col-sm-8">
+          <%= f.date_field :started_at %> 
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="control-label col-sm-4" for="">
+          Data de término:
+        </label>
+        <div class="col-sm-8">
+          <%= f.date_field :finished_at %> 
+        </div>
+      </div>
+
+    
+      <p class="text-center">
+      <!--%= button_link_to 'Salvar', assistant_roles_path, data: { confirm: 'Tem certeza?'} %-->
+      </p>
+
+      <div class="actions">
+        <%= f.submit "Salvar" %>
+      </div>
+    
+    <!--/form-->
+  <% end %>
+</div>

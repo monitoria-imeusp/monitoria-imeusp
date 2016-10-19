@@ -27,6 +27,11 @@ class AssistantRole < ActiveRecord::Base
     update_column(:active, true)
   end
 
+  def update_date_start_end(started_date, finished_date)
+    update_column(:started_at, :started_date)
+    update_column(:finished_at, :finished_date)
+  end
+  
   def report_filled?
     !(report_creation_date.nil?)
   end
