@@ -8,7 +8,6 @@
     </tr>
   </thead>
   <tbody>
-
     <% @users.sort { |x,y| x[:name].downcase <=> y[:name].downcase }.each do |user| %>
       <tr>
         <td class="name"><%= user.name %></td>

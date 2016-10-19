@@ -26,33 +26,37 @@ When(/^there is a request for teaching assistant by professor "(.*?)" for the co
     semester_id: Semester.first.id )
 end
 
-def create_professor(name, password, nusp, department, email, professor_rank)
+def create_professor(user, department, professor_rank)
   d = Department.find_by("code" => department)
   if not d
     d = Department.create! {{"code" => department}}
   end
-  user = User.create(name: name , password: password, nusp: nusp, email: email, confirmed_at: Time.now)
   Professor.create(department_id: d.id, professor_rank: professor_rank, user_id: user.id)
 end
 
 Given(/^there is a professor with name "(.*?)" and password "(.*?)" nusp "(.*?)" department "(.*?)" and email "(.*?)"$/) do |name, password, nusp, department, email|
-  create_professor(name, password, nusp, department, email, 0)
+  user = create_user(name, password, email, nusp)
+  create_professor(user, department, 0)
 end
 
 When(/^there is a professor with name "(.*?)" and nusp "(.*?)" and department "(.*?)" and email "(.*?)"$/) do |name, nusp, department, email|
-  create_professor(name, "password", nusp, department, email, 0)
+  user = create_user(name, "password", email, nusp)
+  create_professor(user, department, 0)
 end
 
 Given(/^there is a super_professor with name "(.*?)" and password "(.*?)" nusp "(.*?)" department "(.*?)" and email "(.*?)"$/) do |name, password, nusp, department, email|
-  create_professor(name, password, nusp, department, email, 1)
+  user = create_user(name, password, email, nusp)
+  create_professor(user, department, 1)
 end
 
 Given(/^there is a super_professor with name "(.*?)" and nusp "(.*?)" and department "(.*?)" and email "(.*?)"$/) do |name, nusp, department, email|
-  create_professor(name, "password", nusp, department, email, 1)
+  user = create_user(name, "password", email, nusp)
+  create_professor(user, department, 1)
 end
 
 Given(/^there is a hiper_professor with name "(.*?)" and password "(.*?)" nusp "(.*?)" department "(.*?)" and email "(.*?)"$/) do |name, password, nusp, department, email|
-  create_professor(name, password, nusp, department, email, 2)
+  user = create_user(name, password, email, nusp)
+  create_professor(user, department, 2)
 end
 
 When(/^there is a secretary with name "(.*?)" and password "(.*?)" nusp "(.*?)" and email "(.*?)"$/) do |name, password, nusp, email|
@@ -60,13 +64,16 @@ When(/^there is a secretary with name "(.*?)" and password "(.*?)" nusp "(.*?)" 
     confirmation_token:nil, confirmed_at: Time.now)
 end
 
-
-Given(/^there is a student with name "(.*?)" with nusp "(.*?)" and email "(.*?)"$/) do |name, nusp, email|
-  user = User.create(name: name, password: "changeme!", email: email, nusp: nusp, confirmed_at: Time.now)
+def create_student(user)
   Student.create(institute: "Instituto de Matemática e Estatística", gender: "1", rg: "1", cpf: "1",
     address: "IME", city: "São Paulo", district: "Butantã", zipcode: "0", state: "SP",
     tel: "1145454545", cel: "11985858585",
     has_bank_account: "true", user_id: user.id)
+end
+
+Given(/^there is a student with name "(.*?)" with nusp "(.*?)" and email "(.*?)"$/) do |name, nusp, email|
+  user = create_user(name, "changeme!", email, nusp)
+  create_student(user)
 end
 
 Given(/^there is a department with code "(.*?)"$/) do |code|
@@ -177,4 +184,19 @@ When(/^there is an assistant frequency with month "(.*?)" with presence "(.*?)" 
     month: month,
     presence: presence
   )
+end
+
+
+def create_user(name, password, email, nusp)
+  User.create(name: name, password: password, email: email, nusp: nusp, confirmed_at: Time.now)
+end
+
+Given(/^there is a user with name "(.*?)" with nusp "(.*?)" and email "(.*?)"$/) do |name, nusp, email|
+  create_user(name, "changemepls", email, nusp)
+end
+
+When(/^there is a student_professor with name "(.*?)" and password "(.*?)" and nusp "(.*?)" and department "(.*?)" and email "(.*?)"$/) do |name, password, nusp, department, email|
+  user = create_user(name, "password", email, nusp)
+  create_professor(user, department, 0)
+  create_student(user)
 end
