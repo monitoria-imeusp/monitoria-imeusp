@@ -20,6 +20,7 @@ Rails.application.routes.draw do
   root 'home#index'
   get '/sistema' => 'home#sys'
   get '/prof' => 'home#index'
+  get '/about' => 'home#about', as: :about
   get '/professors/sign_in/' => 'home#index'
   get "/users/sign_in/" => "home#index"
 
@@ -94,6 +95,7 @@ Rails.application.routes.draw do
 
 
   get 'assistant_roles/' => 'assistant_roles#index', as: :assistant_roles
+  get 'assistant_roles/edit_date/:id' => 'assistant_roles#edit_date', as: :assistant_roles_edit_date
   get 'assistant_roles/for_semester/:semester_id' => 'assistant_roles#index', as: :assistant_roles_for_semester
   get 'assistant_roles/for_semester/:semester_id/:department_id' => 'assistant_roles#index', as: :assistant_roles_for_semester_and_department
   get 'assistant_roles/for_professor/:professor_id/' => 'assistant_roles#index_for_professor', as: :assistant_roles_for_professor
@@ -107,6 +109,7 @@ Rails.application.routes.draw do
   post 'assistant_roles/:request_for_teaching_assistant_id/:student_id/create' => 'assistant_roles#create', as: :create_assistant_role
   post 'assistant_roles/deactivate_assistant_role/:id' => 'assistant_roles#deactivate_assistant_role', as: :deactivate_assistant_role
   post 'assistant_roles/reactivate_assistant_role/:id' => 'assistant_roles#reactivate_assistant_role', as: :reactivate_assistant_role
+  patch 'assistant_roles/update_date/:id' => 'assistant_roles#update_date', as: :update_assistant_role_date
   patch 'assistant_roles/:id/' => 'assistant_roles#update', as: :update_assistant_role
   delete 'assistant_roles/:id/' => 'assistant_roles#destroy', as: :destroy_assistant_role
 

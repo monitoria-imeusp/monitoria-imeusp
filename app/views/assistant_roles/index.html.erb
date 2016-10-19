@@ -4,10 +4,10 @@
 <div class="row" style="height:1em;"></div>
 
 <div class="row">
-  <div class="col-sm-2">
+  <div class="col-sm-3">
     <div class="dropdown">
       <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">
-      <%= @semester.as_s %>
+        <%= @semester.as_s %>
         <span class="caret"></span>
       </button>
       <ul class="dropdown-menu">
@@ -17,14 +17,22 @@
       </ul>
     </div>
   </div>
+  
   <% if (secretary_signed_in? or current_hiper_professor?) %>
-    <div class="col-sm-6">
+    <div class="col-sm-1">
       <div class="dropdown">
         <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">
-        <%= @department.code %>
+          <% if @department.nil? %>
+            Todos
+          <% else %>
+            <%= @department.code %>
+          <% end %>
           <span class="caret"></span>
         </button>
         <ul class="dropdown-menu">
+          <li>
+            <%= link_to "Todos", assistant_roles_for_semester_path(@semester) %>
+          </li>
           <% Department.all.order(code: :desc).each do |department| %>
             <li><%= link_to department.code, assistant_roles_for_semester_and_department_path(@semester, department)%></li>
           <% end %>
@@ -32,6 +40,7 @@
       </div>
     </div>
   <% end %>
+  
   <% if secretary_signed_in? and @semester.current? %>
     <div class="col-sm-2">
       <%= button_link_to "Notificar monitores", notify_assistant_roles_for_semester_path(@semester), method: :post %>
@@ -54,42 +63,73 @@
       <th>Aluno(a)</th>
       <th>Disciplina</th>
       <th>Professor(a)</th>
-      <th>Começo</th>
+      <th>Início</th>
+      <th>Fim</th>
       <th colspan="4"></th>
     </tr>
   </thead>
+
   <tbody>
     <% @assistant_roles.each do |role| %>
       <tr>
-        <td><%= role.student.name %></td>
+        <td>
+    			<% if role.student.name != nil %>
+            <%=  role.student.name %>
+    			<% else %> Nil <% end %>
+		    </td>
         <td><%= role.course.course_code %></td>
         <td><%= role.professor.name %></td>
-        <td><%= role.started_at.strftime("%d/%m/%Y") %></td>
+
+        <!--  Data de inicio -->
+        <td>
+    			<% if not role.started_at.nil? %>
+    				<%= role.started_at.strftime("%d/%m/%Y") %>
+    			<% else %>
+  				  Nil
+  			   <% end %>
+  		  </td>
+
+        <!--  Data de fim -->
+        <td>
+          <% if role.started_at? %>
+            <%= role.started_at.strftime("%d/%m/%Y") %>
+          <% else %>
+            Nil
+          <% end %>
+        </td>
+
         <% if secretary_signed_in? or current_super_professor? %>
           <td>
             <%if role.active %>
               <% if secretary_signed_in? %>
-                  <%= small_button_link_to "Desativar", deactivate_assistant_role_path(role.id), method: :post, data: { confirm: 'Deseja mesmo desativar este monitor?' } %>
+                <%= small_button_link_to "Desativar", deactivate_assistant_role_path(role.id), method: :post, data: { confirm: 'Deseja mesmo desativar este monitor?' } %>
               <% else %>
-                  Ativo
+                Ativo
               <% end %>
+            
             <% else %>
               Desativado
               <%= small_button_link_to "Reativar", reactivate_assistant_role_path(role.id), method: :post, data: { confirm: 'Deseja mesmo reativar este monitor?' } %>
             <% end %>
           </td>
+          
         <% end %>
+
         <td>
           <% if role.report_filled? %>
           <%= small_button_link_to 'Ver relatório', print_report_path(role.id, :format => :pdf), target: "_blank" %>
           <% end %>
         </td>
+
         <% if secretary_signed_in? or admin_signed_in? %>
           <td>
             <%= small_button_link_to "Atestado", certificate_path(role.id, :format => :pdf), method: :get, target: "_blank" %>
           </td>
           <td>
             <%= small_button_link_to "Remover", destroy_assistant_role_path(role), method: :delete, data: { confirm: 'Deseja mesmo remover PERMANENTEMENTE esse monitor?'} %>
+          </td>
+          <td>
+            <%= small_button_link_to "Editar período", assistant_roles_edit_date_path(role) %>
           </td>
         <% else %>
             <td></td>
