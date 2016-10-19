@@ -12,6 +12,9 @@ class HomeController < ApplicationController
       @advises = Advise.all.order(:order)
     end
   end
+  
+  def about
+  end
 
   def sys
   end

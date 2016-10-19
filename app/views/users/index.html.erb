@@ -8,16 +8,19 @@
     </tr>
   </thead>
   <tbody>
-    <% @users.each do |user| %>
+    <% @users.sort { |x,y| x[:name].downcase <=> y[:name].downcase }.each do |user| %>
       <tr>
         <td class="name"><%= user.name %></td>
         <td><%= "#{user.nusp}" %></td>
         <td>
-          <% if user.student? %>
+          <% if user.professor? and user.student? %>
+            aluno e professor
+          <% elsif user.student? %>
             aluno
-          <% end %>
-          <% if user.professor? %>
+          <% elsif user.professor? %>
             professor
+          <% elsif !(user.professor?) and !(user.student?) %>
+            usuário sem categoria
           <% end %>
         </td>
         <td><%= button_link_to "Ver perfil", user %></td>
