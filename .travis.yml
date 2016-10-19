@@ -1,7 +1,7 @@
 language: ruby
 sudo: false
 rvm:
-  - ruby-2.1.1
+  - ruby-2.3.1
 
 before_script:
   - "bundle exec rake db:migrate RAILS_ENV=test"

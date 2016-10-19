@@ -89,10 +89,10 @@ describe CandidaturesController do
   }}
 
   let(:valid_history) {{
-    "historico" => [{"coddis" => "MAC0315","nota" => "5.0","rstfim" => "A ","codtur" => "20151"},
-                    {"coddis" => "MAC0300","nota" => "0.0","rstfim" => "MA","codtur" => "20152"},
+    "historico" => [{"coddis" => "MAC0315","nota" => "5.0","rstfim" => "A ","codtur" => "20152"},
+                    {"coddis" => "MAC0300","nota" => "0.0","rstfim" => "MA","codtur" => "20161"},
                     {"coddis" => "MAC0323","nota" => "0.0","rstfim" => "T ","codtur" => "20151"},
-                    {"coddis" => "MAC0420","nota" => "9.0","rstfim" => "RF","codtur" => "20151"},
+                    {"coddis" => "MAC0420","nota" => "9.0","rstfim" => "RF","codtur" => "20142"},
                     {"coddis" => "MAC0420","nota" => "4.9","rstfim" => "RN","codtur" => "20141"},
                     {"coddis" => "MAT0111","nota" => "3.0","rstfim" => "RA","codtur" => "20121"}]
     }}
@@ -184,7 +184,7 @@ describe CandidaturesController do
     let!(:unrelated_candidature) { Candidature.create! valid_third_candidature_attributes }
     before do
       sign_out user
-      sign_in prof_user      
+      sign_in prof_user
       get :index_for_department, { semester_id: semester.id, department_id: @mac.id}
     end
 
@@ -195,8 +195,8 @@ describe CandidaturesController do
 
     context 'when filtering candidatures' do
       subject { assigns(:candidatures_filtered) }
-      it { 
-          expect(subject).not_to eq(candidatures)             
+      it {
+          expect(subject).not_to eq(candidatures)
           expect(subject).to eq(orderedcandidatures)
       }
     end
@@ -215,8 +215,8 @@ describe CandidaturesController do
       expect(assigns(:candidature)).to eq(@candidature)
     end
 
-    it "returns correct history from json" do      
-      history = assigns(:history_table)  
+    it "returns correct history from json" do
+      history = assigns(:history_table)
       expect(history[0].course_name).to eq("MAT0111")
       expect(history[0].grade).to eq("3.0")
       expect(history[0].full_status).to eq("Reprovado por nota e frequência")
@@ -229,8 +229,8 @@ describe CandidaturesController do
       expect(history[1].semester).to eq("1")
 
       expect(history[2].full_status).to eq("Reprovado por frequência")
-      expect(history[2].year).to eq("2015")
-      expect(history[2].semester).to eq("1")
+      expect(history[2].year).to eq("2014")
+      expect(history[2].semester).to eq("2")
 
       expect(history[3].full_status).to eq("Trancado")
       expect(history[3].year).to eq("2015")
@@ -238,11 +238,11 @@ describe CandidaturesController do
 
       expect(history[4].full_status).to eq("Aprovado")
       expect(history[4].year).to eq("2015")
-      expect(history[4].semester).to eq("1")
+      expect(history[4].semester).to eq("2")
 
       expect(history[5].full_status).to eq("Matriculado")
-      expect(history[5].year).to eq("2015")
-      expect(history[5].semester).to eq("2")
+      expect(history[5].year).to eq("2016")
+      expect(history[5].semester).to eq("1")
     end
   end
 

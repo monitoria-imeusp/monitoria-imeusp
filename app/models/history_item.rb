@@ -22,9 +22,9 @@ class HistoryItem
 	private
 
 		def status_hash
-			{"DI" => "Dispensado", "T " => "Trancado", "MA" => "Matriculado", "P " => "Pendente", "I " => "Inscrito", 
-				"IR" => "Inscrição reservada", "IT" => "Inscrição em turma lotada", "IP" => "Inscrição em optativa preterida", 
-				"IL" => "Inscrição em lista de espera", "A " => "Aprovado", "RN" => "Reprovado por nota", 
+			{"DI" => "Dispensado", "T " => "Trancado", "MA" => "Matriculado", "P " => "Pendente", "I " => "Inscrito",
+				"IR" => "Inscrição reservada", "IT" => "Inscrição em turma lotada", "IP" => "Inscrição em optativa preterida",
+				"IL" => "Inscrição em lista de espera", "A " => "Aprovado", "RN" => "Reprovado por nota",
 				"AE" => "Aproveitamento de estudo", "RA" => "Reprovado por nota e frequência", "RF" => "Reprovado por frequência",
 				"DS" => "Dispensado por prova de suficiência"}
 		end

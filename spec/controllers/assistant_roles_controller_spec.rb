@@ -24,7 +24,7 @@ describe AssistantRolesController do
       before :each do
         get :index, semester_id: semester.id
       end
-        
+
       context "when http success" do
         it { is_expected.to respond_with(:success) }
       end
@@ -44,7 +44,7 @@ describe AssistantRolesController do
       before :each do
         get :index
       end
-        
+
       context "when http success" do
         it { is_expected.to respond_with(:success) }
       end
@@ -70,18 +70,18 @@ describe AssistantRolesController do
       it { is_expected.to redirect_to(request_for_teaching_assistant) }
     end
 
-    context "with invalid request" do 
+    context "with invalid request" do
       before :each do
         post 'create', { "request_for_teaching_assistant_id" => "666", "student_id" => student.id.to_s }
       end
-      
+
       it { is_expected.to redirect_to('/') }
     end
-    context "with invalid student" do 
+    context "with invalid student" do
       before :each do
         post 'create', { "request_for_teaching_assistant_id" => request_for_teaching_assistant.id.to_s, "student_id" => "666" }
       end
-      
+
       it { is_expected.to redirect_to(request_for_teaching_assistant) }
     end
   end
@@ -89,7 +89,7 @@ describe AssistantRolesController do
   describe "#update" do
     context "with valid parameters" do
       before :each do
-        date = DateTime.now
+        date = Time.now
         patch 'update', { :id => assistant_role.id.to_s, :assistant_role =>
           {
             :student_amount => 3,
