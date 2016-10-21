@@ -519,7 +519,7 @@ if Rails.env.development?
   [
     {
       request_for_teaching_assistant_id: "1",
-      student_id: "9"
+      student_id: "7"
     }, 
     {
       request_for_teaching_assistant_id: "2", 
@@ -538,9 +538,10 @@ if Rails.env.development?
       student_id: "7"
     }, {
       request_for_teaching_assistant_id: "6",
-      student_id: "9"
+      student_id: "7"
     }
   ].each do |assistant_role|
+  	  assistant_role["started_at"] = Time.new(2014, 3, 1)
       AssistantRole.create(assistant_role)
   end
 

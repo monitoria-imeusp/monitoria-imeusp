@@ -122,6 +122,9 @@ gem 'mechanize'
 # Cancan - for authorization
 gem 'cancan'
 
+# Trying to solve an errror in my PC (Danilo)
+gem 'sprockets-rails'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 
